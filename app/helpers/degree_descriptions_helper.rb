@@ -1,0 +1,2 @@
+module DegreeDescriptionsHelper
+end

@@ -1,0 +1,703 @@
+  [1m[36mSQL (2.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (4.5ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (4.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (4.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (4.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (4.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (4.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+Unable to load person_role, underlying cause No such file to load -- person_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:862:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:877:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:874:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:874:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:857:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+Unable to load person_role, underlying cause No such file to load -- person_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:862:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:877:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:874:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:874:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:857:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:864:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:879:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:859:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:864:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:879:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:859:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:864:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:879:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:859:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:864:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:879:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:859:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments" WHERE ("departments"."id" = 298486374) LIMIT 1[0m
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments" WHERE ("departments"."id" = 298486374) LIMIT 1[0m
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments" WHERE ("departments"."id" = 298486374) LIMIT 1[0m
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/department_test.rb:1:in `<main>'
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mDepartment Load (0.1ms)[0m  SELECT "departments".* FROM "departments" WHERE ("departments"."id" = 980190962) LIMIT 1
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+./test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+./test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+./test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+./test/unit/department_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.3/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:861:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:876:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:873:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.3/lib/active_record/fixtures.rb:856:in `fixtures'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-upgrd/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+./test/unit/department_test.rb:1:in `<main>'

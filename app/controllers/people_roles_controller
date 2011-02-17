@@ -1,0 +1,83 @@
+class PersonRolesController < ApplicationController
+  # GET /people_roles
+  # GET /people_roles.xml
+  def index
+    @people_roles = PersonRole.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @people_roles }
+    end
+  end
+
+  # GET /people_roles/1
+  # GET /people_roles/1.xml
+  def show
+    @person_role = PersonRole.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @person_role }
+    end
+  end
+
+  # GET /people_roles/new
+  # GET /people_roles/new.xml
+  def new
+    @person_role = PersonRole.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @person_role }
+    end
+  end
+
+  # GET /people_roles/1/edit
+  def edit
+    @person_role = PersonRole.find(params[:id])
+  end
+
+  # POST /people_roles
+  # POST /people_roles.xml
+  def create
+    @person_role = PersonRole.new(params[:person_role])
+
+    respond_to do |format|
+      if @person_role.save
+        format.html { redirect_to(@person_role, :notice => 'PersonRole was successfully created.') }
+        format.xml  { render :xml => @person_role, :status => :created, :location => @person_role }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @person_role.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /people_roles/1
+  # PUT /people_roles/1.xml
+  def update
+    @person_role = PersonRole.find(params[:id])
+
+    respond_to do |format|
+      if @person_role.update_attributes(params[:person_role])
+        format.html { redirect_to(@person_role, :notice => 'PersonRole was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @person_role.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /people_roles/1
+  # DELETE /people_roles/1.xml
+  def destroy
+    @person_role = PersonRole.find(params[:id])
+    @person_role.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(people_roles_url) }
+      format.xml  { head :ok }
+    end
+  end
+end

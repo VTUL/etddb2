@@ -1,0 +1,20 @@
+<h1>Listing degree_descriptions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @degree_descriptions.each do |degree_description| %>
+  <tr>
+    <td><%=h degree_description.name %></td>
+    <td><%= link_to 'Show', degree_description %></td>
+    <td><%= link_to 'Edit', edit_degree_description_path(degree_description) %></td>
+    <td><%= link_to 'Destroy', degree_description, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New degree_description', new_degree_description_path %>

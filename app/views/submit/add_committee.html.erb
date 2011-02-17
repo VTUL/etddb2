@@ -1,0 +1,38 @@
+<h1>New Committee Member</h1>
+<%= form_for :person1, :url => {:action => :create} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :role %><br />
+    <%= f.text_field :role %>
+  </p>
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :middle_name %><br />
+    <%= f.text_field :middle_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :pid %><br />
+    <%= f.text_field :pid %>
+  </p>
+  <p>
+    <%= f.label :suffix %><br />
+    <%= f.text_field :suffix %>
+  </p>
+    <%=	f.hidden_field :etd_ids , :value => "#{@etd.id}" %>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', url_for(:controller => :submit, :action => :show, :id => @etd.id)  %>

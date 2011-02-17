@@ -1,0 +1,16 @@
+<h1>Editing urn</h1>
+
+<% form_for(@urn) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :urn %><br />
+    <%= f.text_field :urn %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @urn %> |
+<%= link_to 'Back', urns_path %>

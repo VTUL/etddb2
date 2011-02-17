@@ -1,0 +1,19 @@
+<h1>Search Avaiable ETDs</h1>
+<p> Search by title</p>
+<%= form_for :etd1, :url => { :action => :search_by_title} do |form| %>
+<%= form.label :title %>
+<%= form.text_field :title, :size => 30 %>
+<%= form.submit "search"%>
+<% end %>
+<br>
+<p> Search by metadata</p>
+<%= form_for :etd2, :url => { :action => :search_by_metadata } do |form| %>
+<%= form.text_field :metadata, :size => 30 %>
+<%= submit_tag "search"%>
+<% end %>
+<br>
+<p> Search by advisor</p>
+<%= form_for :etd3, :url => { :action => :search_by_advisor } do |form| %>
+<%= form.text_field :advisor, :size => 30 %>
+<%= submit_tag "search"%>
+<% end %>

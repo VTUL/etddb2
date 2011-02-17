@@ -1,0 +1,38 @@
+<p>
+  <b>Filename:</b>
+  <%=h @content.filename %>
+</p>
+
+<p>
+  <b>Types:</b>
+  <%=h @content.types %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%=h @content.size %>
+</p>
+
+<p>
+  <b>Availability:</b>
+  <%=h @content.availability %>
+</p>
+
+<p>
+  <b>Bound:</b>
+  <%=h @content.bound %>
+</p>
+
+<p>
+  <b>Page count:</b>
+  <%=h @content.page_count %>
+</p>
+
+<p>
+  <b>Timestamp:</b>
+  <%=h @content.timestamp %>
+</p>
+
+
+<%= link_to 'Edit', edit_content_path(@content) %> |
+<%= link_to 'Back', contents_path %>
