@@ -47,8 +47,8 @@ class Person < ActiveRecord::Base
   def self.authenticate(name, submitted_password)
     puts name, submitted_password
     user = find_by_name(name)
-    return user if user.has_password?(name, submitted_password)
     return Person.authenticateByEdAuth(name, submitted_password)  if user.nil?
+    return user #if user.has_password?(name, submitted_password)
   end
 
   #separated role model
