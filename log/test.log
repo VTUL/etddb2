@@ -2270,3 +2270,14 @@ Completed   in 7ms
   [1m[36mEtd Load (0.8ms)[0m  [1mSELECT "etds".* FROM "etds"[0m
 Rendered submit/index_etd.html.erb within layouts/submit (0.4ms)
 Completed 200 OK in 84ms (Views: 3.5ms | ActiveRecord: 0.8ms)
+  Processing by SubmitController#index_etd as HTML
+  [1m[36mEtd Load (0.8ms)[0m  [1mSELECT "etds".* FROM "etds"[0m
+Rendered submit/index_etd.html.erb within layouts/submit (0.4ms)
+Completed 200 OK in 84ms (Views: 3.5ms | ActiveRecord: 0.8ms)
+  Processing by SubmitController#show_etd as HTML
+  Parameters: {"id"=>"18"}
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mEtd Load (0.1ms)[0m  [1mSELECT "etds".* FROM "etds" WHERE ("etds"."id" = 18) LIMIT 1[0m
+Completed   in 7ms
