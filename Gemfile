@@ -11,10 +11,10 @@ gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
 # For test,
 group :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails','2.5.0'
 end
 group :test do
-  gem 'rspec'
+  gem 'rspec','2.5.0'
   gem 'webrat', '0.7.1'
 end
 
