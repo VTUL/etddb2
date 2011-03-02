@@ -9,5 +9,7 @@ class UrnTest < ActiveSupport::TestCase
     urn = Urn.new
     assert !urn.valid?
     assert urn.errors.invalid?(:urn)
+    assert urn.errors.invalid?(:created_at)
+    assert urn.errors.invalid?(:updated_at)
   end
 end

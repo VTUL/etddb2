@@ -12,6 +12,8 @@ class DepartmentTest < ActiveSupport::TestCase
     puts "adld#{department.name}"
     assert !department.valid?
     assert department.errors[:name].any?
+    assert department.errors[:created_at].any?
+    assert department.errors[:updated_at].any?
  
 #    department = Department.new(:name => departments(:two).name)
     #department = Department.new

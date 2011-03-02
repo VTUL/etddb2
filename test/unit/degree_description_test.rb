@@ -9,5 +9,7 @@ class DegreeDescriptionTest < ActiveSupport::TestCase
     degree_description = DegreeDescription.new
     assert !degree_description.valid?
     assert degree_description.errors.invalid?(:name)
+    assert degree_description.errors.invalid?(:created_at)
+    assert degree_description.errors.invalid?(:updated_at)
   end
 end

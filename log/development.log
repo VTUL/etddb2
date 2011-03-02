@@ -61051,3 +61051,6 @@ DEPRECATION WARNING: ActionController::Base.cookie_verifier_secret= is deprecate
 [0m
   [1m[35mEtd Load (0.4ms)[0m  SELECT "etds".* FROM "etds" WHERE ("etds"."id" = 18) LIMIT 1
   [1m[36mEtd Load (1.1ms)[0m  [1mSELECT "etds".* FROM "etds" WHERE ("etds"."id" = 19) LIMIT 1[0m
+  [1m[35mEtd Load (2.7ms)[0m  SELECT "etds".* FROM "etds" WHERE ("etds"."id" = 1) LIMIT 1
+  [1m[36mEtd Load (2.4ms)[0m  [1mSELECT "etds".* FROM "etds" WHERE ("etds"."id" = 'one') LIMIT 1[0m
+  [1m[35mEtd Load (2.4ms)[0m  SELECT "etds".* FROM "etds" WHERE ("etds"."id" = 18) LIMIT 1

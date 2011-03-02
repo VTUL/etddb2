@@ -9,5 +9,7 @@ class DigitalObjectTest < ActiveSupport::TestCase
     digital_object = DigitalObject.new
     assert !digital_object.valid?
     assert digital_object.errors.invalid?(:name)
+    assert digital_object.errors.invalid?(:created_at)
+    assert digital_object.errors.invalid?(:updated_at)
   end
 end

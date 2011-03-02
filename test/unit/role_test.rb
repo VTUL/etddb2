@@ -9,5 +9,7 @@ class RoleTest < ActiveSupport::TestCase
     role = Role.new
     assert !role.valid?
     assert role.errors.invalid?(:name)
+    assert role.errors.invalid?(:created_at)
+    assert role.errors.invalid?(:updated_at)
   end
 end

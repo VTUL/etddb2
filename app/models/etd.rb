@@ -22,7 +22,7 @@ class Etd < ActiveRecord::Base
 #  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor" 
 #  belongs_to  :committee_cochair, :class => "Person", :foreign_key => "coadvisor"
 #  has_and_belongs_to_many :committee_members, :class => "Person", :foreign_key => "member"
-  validates_presence_of :title, :abstract, :degree, :department, :dtype, 
+  validates_presence_of :title, :abstract, :degree, :department, :dtype, :availability_description,
                         :availability, :bound, :url #, :urn
 #  validates_uniqueness_of #:urn
 
