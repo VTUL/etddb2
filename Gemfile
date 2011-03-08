@@ -6,6 +6,7 @@ gem 'rails', '3.0.5'
 
 gem 'sqlite3-ruby', '1.3.3', :require => 'sqlite3'
 gem 'net-ldap' , '0.1.1'
+
 #gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
 # For test,
