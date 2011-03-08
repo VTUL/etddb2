@@ -61054,3 +61054,3105 @@ DEPRECATION WARNING: ActionController::Base.cookie_verifier_secret= is deprecate
   [1m[35mEtd Load (2.7ms)[0m  SELECT "etds".* FROM "etds" WHERE ("etds"."id" = 1) LIMIT 1
   [1m[36mEtd Load (2.4ms)[0m  [1mSELECT "etds".* FROM "etds" WHERE ("etds"."id" = 'one') LIMIT 1[0m
   [1m[35mEtd Load (2.4ms)[0m  SELECT "etds".* FROM "etds" WHERE ("etds"."id" = 18) LIMIT 1
+DEPRECATION WARNING: ActionController::Base.cookie_verifier_secret= is deprecated. Please configure it on your application with config.secret_token=. (called from <top (required)> at /usr/home/kdweeks/etdv2/config/initializers/cookie_verification_secret.rb:7)
+
+
+Started GET "/submit/login/" for 128.173.124.217 at 2011-03-08 14:33:43 -0500
+
+AbstractController::ActionNotFound (The action 'login' could not be found for SubmitController):
+  actionpack (3.0.3) lib/abstract_controller/base.rb:115:in `process'
+  actionpack (3.0.3) lib/abstract_controller/rendering.rb:40:in `process'
+  actionpack (3.0.3) lib/action_controller/metal.rb:138:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal.rb:178:in `block in action'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:27:in `call'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:148:in `block in call'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:93:in `block in recognize'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:68:in `optimized_each'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:92:in `recognize'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:139:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:492:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/head.rb:14:in `call'
+  rack (1.2.1) lib/rack/methodoverride.rb:24:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/flash.rb:182:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/cookies.rb:295:in `call'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:32:in `block in call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:12:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:31:in `call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+  activesupport (3.0.3) lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+  rack (1.2.1) lib/rack/sendfile.rb:107:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (1.5ms)
+
+
+Started GET "/sessions/new" for 128.173.124.217 at 2011-03-08 14:34:06 -0500
+  Processing by SessionsController#new as HTML
+Rendered layouts/shared/_header.html.erb (2.0ms)
+Rendered layouts/shared/_footer.html.erb (0.6ms)
+Rendered sessions/new.html.erb within layouts/sessions (67.6ms)
+Completed 200 OK in 76ms (Views: 75.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:34:07 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started POST "/sessions/create" for 128.173.124.217 at 2011-03-08 14:34:12 -0500
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vmVb2F80fOUqzSC8LZ9NPxfJ8GGswZMtScpB5K1WsHk=", "session2"=>{"name"=>"ddfsfs", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people".* FROM "people" WHERE (last_name='ddfsfs') LIMIT 1[0m
+Redirected to http://developer.tower.lib.vt.edu:3001/submit
+Completed 302 Found in 164ms
+
+
+Started GET "/submit" for 128.173.124.217 at 2011-03-08 14:34:12 -0500
+
+AbstractController::ActionNotFound (The action 'index' could not be found for SubmitController):
+  actionpack (3.0.3) lib/abstract_controller/base.rb:115:in `process'
+  actionpack (3.0.3) lib/abstract_controller/rendering.rb:40:in `process'
+  actionpack (3.0.3) lib/action_controller/metal.rb:138:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal.rb:178:in `block in action'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:27:in `call'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:148:in `block in call'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:93:in `block in recognize'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:68:in `optimized_each'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:92:in `recognize'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:139:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:492:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/head.rb:14:in `call'
+  rack (1.2.1) lib/rack/methodoverride.rb:24:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/flash.rb:182:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/cookies.rb:295:in `call'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:32:in `block in call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:12:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:31:in `call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+  activesupport (3.0.3) lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+  rack (1.2.1) lib/rack/sendfile.rb:107:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.5ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:34:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started POST "/sessions/create" for 128.173.124.217 at 2011-03-08 14:34:25 -0500
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vmVb2F80fOUqzSC8LZ9NPxfJ8GGswZMtScpB5K1WsHk=", "session2"=>{"name"=>"kdweeks", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people".* FROM "people" WHERE (last_name='kdweeks') LIMIT 1
+Redirected to http://developer.tower.lib.vt.edu:3001/submit
+Completed 302 Found in 32ms
+
+
+Started GET "/submit" for 128.173.124.217 at 2011-03-08 14:34:25 -0500
+
+AbstractController::ActionNotFound (The action 'index' could not be found for SubmitController):
+  actionpack (3.0.3) lib/abstract_controller/base.rb:115:in `process'
+  actionpack (3.0.3) lib/abstract_controller/rendering.rb:40:in `process'
+  actionpack (3.0.3) lib/action_controller/metal.rb:138:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal.rb:178:in `block in action'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:27:in `call'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:148:in `block in call'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:93:in `block in recognize'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:68:in `optimized_each'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:92:in `recognize'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:139:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:492:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/head.rb:14:in `call'
+  rack (1.2.1) lib/rack/methodoverride.rb:24:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/flash.rb:182:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/cookies.rb:295:in `call'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:32:in `block in call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:12:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:31:in `call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+  activesupport (3.0.3) lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+  rack (1.2.1) lib/rack/sendfile.rb:107:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:34:27 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started POST "/sessions/create" for 128.173.124.217 at 2011-03-08 14:34:39 -0500
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vmVb2F80fOUqzSC8LZ9NPxfJ8GGswZMtScpB5K1WsHk=", "session2"=>{"name"=>"", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[36mPerson Load (0.5ms)[0m  [1mSELECT "people".* FROM "people" WHERE (last_name='') LIMIT 1[0m
+Redirected to http://developer.tower.lib.vt.edu:3001/submit
+Completed 302 Found in 60ms
+
+
+Started GET "/submit" for 128.173.124.217 at 2011-03-08 14:34:39 -0500
+
+AbstractController::ActionNotFound (The action 'index' could not be found for SubmitController):
+  actionpack (3.0.3) lib/abstract_controller/base.rb:115:in `process'
+  actionpack (3.0.3) lib/abstract_controller/rendering.rb:40:in `process'
+  actionpack (3.0.3) lib/action_controller/metal.rb:138:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal.rb:178:in `block in action'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:27:in `call'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:148:in `block in call'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:93:in `block in recognize'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:68:in `optimized_each'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:92:in `recognize'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:139:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:492:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/head.rb:14:in `call'
+  rack (1.2.1) lib/rack/methodoverride.rb:24:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/flash.rb:182:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/cookies.rb:295:in `call'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:32:in `block in call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:12:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:31:in `call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+  activesupport (3.0.3) lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+  rack (1.2.1) lib/rack/sendfile.rb:107:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.5ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:34:44 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started POST "/sessions/create" for 128.173.124.217 at 2011-03-08 14:34:52 -0500
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vmVb2F80fOUqzSC8LZ9NPxfJ8GGswZMtScpB5K1WsHk=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mPerson Load (0.3ms)[0m  SELECT "people".* FROM "people" WHERE (last_name='shpark') LIMIT 1
+Redirected to http://developer.tower.lib.vt.edu:3001/submit/show_etds_by_author
+Completed 302 Found in 47ms
+
+
+Started GET "/submit/show_etds_by_author" for 128.173.124.217 at 2011-03-08 14:34:52 -0500
+  Processing by SubmitController#show_etds_by_author as HTML
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT * FROM "roles" INNER JOIN "people_roles" ON "roles".id = "people_roles".role_id WHERE ("people_roles".person_id = 1 )
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mEtd Load (0.7ms)[0m  SELECT "etds".* FROM "etds" WHERE ("etds"."id" IN (18, 19))
+Rendered layouts/shared/_header.html.erb (1.0ms)
+Rendered layouts/shared/_footer.html.erb (0.3ms)
+Rendered submit/show_etds_by_author.html.erb within layouts/submit (33.6ms)
+Completed 200 OK in 170ms (Views: 38.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:34:53 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/sessions/destroy" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+  Processing by SessionsController#destroy as HTML
+Redirected to http://developer.tower.lib.vt.edu:3001/sessions/new?notice=Logged+out
+Completed 302 Found in 1ms
+
+
+Started GET "/sessions/new?notice=Logged+out" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+  Processing by SessionsController#new as HTML
+  Parameters: {"notice"=>"Logged out"}
+Rendered layouts/shared/_header.html.erb (0.9ms)
+Rendered layouts/shared/_footer.html.erb (0.3ms)
+Rendered sessions/new.html.erb within layouts/sessions (5.4ms)
+Completed 200 OK in 9ms (Views: 8.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:34:59 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/sessions/new/" for 128.173.124.217 at 2011-03-08 14:43:32 -0500
+  Processing by SessionsController#new as HTML
+Rendered layouts/shared/_header.html.erb (3.0ms)
+Rendered layouts/shared/_footer.html.erb (0.9ms)
+Rendered sessions/new.html.erb within layouts/sessions (18.1ms)
+Completed 200 OK in 31ms (Views: 30.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:43:33 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started POST "/sessions/new/create" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+  Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"skr0S4zkzk+VA1SaWFzuEX183BFinALzBMldgGvpoLc=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in", "id"=>"create"}
+Rendered layouts/shared/_header.html.erb (4.2ms)
+Rendered layouts/shared/_footer.html.erb (1.2ms)
+Rendered sessions/new.html.erb within layouts/sessions (26.0ms)
+Completed 200 OK in 45ms (Views: 43.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:43:48 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/sessions/new/create" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+  Processing by SessionsController#new as HTML
+  Parameters: {"id"=>"create"}
+Rendered layouts/shared/_header.html.erb (2.4ms)
+Rendered layouts/shared/_footer.html.erb (0.7ms)
+Rendered sessions/new.html.erb within layouts/sessions (14.3ms)
+Completed 200 OK in 24ms (Views: 23.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.8ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:43:58 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/sessions/new/create" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+  Processing by SessionsController#new as HTML
+  Parameters: {"id"=>"create"}
+Rendered layouts/shared/_header.html.erb (0.9ms)
+Rendered layouts/shared/_footer.html.erb (0.3ms)
+Rendered sessions/new.html.erb within layouts/sessions (5.3ms)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:44:00 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/sessions/new" for 128.173.124.217 at 2011-03-08 14:44:03 -0500
+  Processing by SessionsController#new as HTML
+Rendered layouts/shared/_header.html.erb (0.9ms)
+Rendered layouts/shared/_footer.html.erb (0.3ms)
+Rendered sessions/new.html.erb within layouts/sessions (5.2ms)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:03 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:44:04 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started POST "/sessions/create" for 128.173.124.217 at 2011-03-08 14:44:16 -0500
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"skr0S4zkzk+VA1SaWFzuEX183BFinALzBMldgGvpoLc=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people".* FROM "people" WHERE (last_name='shpark') LIMIT 1[0m
+Redirected to http://developer.tower.lib.vt.edu:3001/submit
+Completed 302 Found in 59ms
+
+
+Started GET "/submit" for 128.173.124.217 at 2011-03-08 14:44:16 -0500
+
+AbstractController::ActionNotFound (The action 'index' could not be found for SubmitController):
+  actionpack (3.0.3) lib/abstract_controller/base.rb:115:in `process'
+  actionpack (3.0.3) lib/abstract_controller/rendering.rb:40:in `process'
+  actionpack (3.0.3) lib/action_controller/metal.rb:138:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.0.3) lib/action_controller/metal.rb:178:in `block in action'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:27:in `call'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:148:in `block in call'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:93:in `block in recognize'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:68:in `optimized_each'
+  rack-mount (0.6.13) lib/rack/mount/code_generation.rb:92:in `recognize'
+  rack-mount (0.6.13) lib/rack/mount/route_set.rb:139:in `call'
+  actionpack (3.0.3) lib/action_dispatch/routing/route_set.rb:492:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/head.rb:14:in `call'
+  rack (1.2.1) lib/rack/methodoverride.rb:24:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/flash.rb:182:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/cookies.rb:295:in `call'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:32:in `block in call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:12:in `cache'
+  activerecord (3.0.3) lib/active_record/query_cache.rb:31:in `call'
+  activerecord (3.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+  activesupport (3.0.3) lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+  actionpack (3.0.3) lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+  rack (1.2.1) lib/rack/sendfile.rb:107:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.7ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:44:19 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started POST "/sessions/create" for 128.173.124.217 at 2011-03-08 14:44:29 -0500
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"skr0S4zkzk+VA1SaWFzuEX183BFinALzBMldgGvpoLc=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mPerson Load (0.3ms)[0m  SELECT "people".* FROM "people" WHERE (last_name='shpark') LIMIT 1
+Redirected to http://developer.tower.lib.vt.edu:3001/submit/show_etds_by_author
+Completed 302 Found in 50ms
+
+
+Started GET "/submit/show_etds_by_author" for 128.173.124.217 at 2011-03-08 14:44:29 -0500
+  Processing by SubmitController#show_etds_by_author as HTML
+  [1m[36mPerson Load (0.4ms)[0m  [1mSELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT * FROM "roles" INNER JOIN "people_roles" ON "roles".id = "people_roles".role_id WHERE ("people_roles".person_id = 1 )
+  [1m[36mEtd Load (0.9ms)[0m  [1mSELECT "etds".* FROM "etds" WHERE ("etds"."id" IN (18, 19))[0m
+Rendered layouts/shared/_header.html.erb (1.1ms)
+Rendered layouts/shared/_footer.html.erb (0.3ms)
+Rendered submit/show_etds_by_author.html.erb within layouts/submit (51.7ms)
+Completed 200 OK in 152ms (Views: 56.3ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/etd-db2-0/images/body_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/body_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/assets/image/nav_bullet_fw.gif" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/assets/image/nav_bullet_fw.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/nav_bullet_fw_white.gif" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/nav_bullet_fw_white.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/vt_header_screen.png" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/vt_header_screen.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/search_submit.gif" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/search_submit.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/img/search_bg.jpg" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/img/search_bg.jpg"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/images/dla_banner.png" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/images/dla_banner.png"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/etd-db2-0/assets/img/related_links_top.gif" for 128.173.124.217 at 2011-03-08 14:44:30 -0500
+
+ActionController::RoutingError (No route matches "/etd-db2-0/assets/img/related_links_top.gif"):
+  actionpack (3.0.3) lib/action_dispatch/middleware/show_exceptions.rb:53:in `call'
+  railties (3.0.3) lib/rails/rack/logger.rb:13:in `call'
+  rack (1.2.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.0.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.2.1) lib/rack/lock.rb:11:in `block in call'
+  <internal:prelude>:10:in `synchronize'
+  rack (1.2.1) lib/rack/lock.rb:11:in `call'
+  actionpack (3.0.3) lib/action_dispatch/middleware/static.rb:30:in `call'
+  railties (3.0.3) lib/rails/application.rb:168:in `call'
+  railties (3.0.3) lib/rails/application.rb:77:in `method_missing'
+  railties (3.0.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.2.1) lib/rack/content_length.rb:13:in `call'
+  rack (1.2.1) lib/rack/handler/webrick.rb:52:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:111:in `service'
+  /usr/local/lib/ruby/1.9/webrick/httpserver.rb:70:in `run'
+  /usr/local/lib/ruby/1.9/webrick/server.rb:183:in `block in start_thread'
+
+Rendered /usr/local/lib/ruby/gems/1.9/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
