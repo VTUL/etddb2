@@ -2419,3 +2419,18 @@ Unable to load people_role, underlying cause No such file to load -- people_role
 <internal:lib/rubygems/custom_require>:29:in `require'
 <internal:lib/rubygems/custom_require>:29:in `require'
 test/unit/etd_test.rb:1:in `<main>'
+Unable to load people_role, underlying cause No such file to load -- people_role 
+
+ /usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.5/lib/active_support/dependencies.rb:304:in `rescue in depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.5/lib/active_support/dependencies.rb:299:in `depend_on'
+/usr/local/lib/ruby/gems/1.9/gems/activesupport-3.0.5/lib/active_support/dependencies.rb:216:in `require_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.5/lib/active_record/fixtures.rb:862:in `try_to_load_dependency'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.5/lib/active_record/fixtures.rb:877:in `block in require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.5/lib/active_record/fixtures.rb:874:in `each'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.5/lib/active_record/fixtures.rb:874:in `require_fixture_classes'
+/usr/local/lib/ruby/gems/1.9/gems/activerecord-3.0.5/lib/active_record/fixtures.rb:857:in `fixtures'
+/usr/home/shpark/etd-db2-0-local/test/test_helper.rb:10:in `<class:TestCase>'
+/usr/home/shpark/etd-db2-0-local/test/test_helper.rb:5:in `<top (required)>'
+<internal:lib/rubygems/custom_require>:29:in `require'
+<internal:lib/rubygems/custom_require>:29:in `require'
+test/unit/content_test.rb:1:in `<main>'

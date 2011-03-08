@@ -38,5 +38,8 @@ module NewVtEtdUpgrd
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    # Please configure it on your application.
+    config.secret_token = 'a72ff0d0570381bb6f2ce2c1be97d3ce7ed111d177f4da013a
+2def039ee1eba9cff567262b05f54b51e163163cb9aa3299e15fd9084e4398089af78c5dd67ded';
   end
 end

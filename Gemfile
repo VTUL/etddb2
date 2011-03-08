@@ -1,13 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
-
+gem 'rails', '3.0.5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', '1.3.3', :require => 'sqlite3'
-#gem 'net-ldap' , '0.9.11'
-gem 'ruby-ldap', '0.9.10'
+gem 'net-ldap' , '0.1.1'
+#gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
 # For test,
 group :development do
@@ -25,7 +24,7 @@ gem 'cancan'
 #gem 'test_helper'
 
 # For Pure ruby ldap, one day test
-#gem rubygem-net-ldap', 0.1.1
+#gem 'rubygem-net-ldap', '0.1.1'
 
 
 # Use unicorn as the web server
