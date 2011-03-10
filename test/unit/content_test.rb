@@ -12,10 +12,10 @@ class ContentTest < ActiveSupport::TestCase
     assert content.errors[:types].any?
     assert content.errors[:size].any?
     assert content.errors[:availability].any? 
-    assert content.errors[:bound].any? 
-    assert content.errors[:page_count].any? 
-    assert content.errors[:timestamp].any? 
-    assert content.errors[:created_at].any? 
+#    assert content.errors[:bound].any? 
+#    assert content.errors[:page_count].any? 
+#    assert content.errors[:timestamp].any? 
+    #assert content.errors[:created_at].any? 
     assert content.errors[:updated_at].any? 
     assert content.errors[:file_id].any? 
     assert content.errors[:file_type].any? 
