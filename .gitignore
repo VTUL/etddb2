@@ -26,6 +26,12 @@ log/*.log
 *.log
 *.sql
 *.sqlite
+*.sqlite3
+
+# Configuration Files #
+#######################
+*.lock
+
 
 # OS generated files #
 ######################
