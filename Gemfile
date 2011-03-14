@@ -1,4 +1,4 @@
-# Fixing our Comments again - kdw - Documentation is great - kdweeks
+# Fixing our Comments again - kdw -- Documentation is great - shpark
 
 #  Added this to gemfile in branch test merge to devel to share
 source 'http://rubygems.org'
