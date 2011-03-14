@@ -27,8 +27,13 @@ log/*.log
 *.sql
 *.sqlite
 *.sqlite3
+<<<<<<< HEAD
 *.lock
 
+=======
+
+*.lock
+>>>>>>> 4d872863aed65ded165d2f867f514d90c8d84bcf
 
 # OS generated files #
 ######################
