@@ -26,6 +26,9 @@ log/*.log
 *.log
 *.sql
 *.sqlite
+*.sqlite3
+
+*.lock
 
 # OS generated files #
 ######################

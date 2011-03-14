@@ -30,7 +30,7 @@ GEM
     activesupport (3.0.5)
     arel (2.0.9)
     builder (2.1.2)
-    cancan (1.5.1)
+    cancan (1.6.0)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -41,7 +41,6 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    net-ldap (0.1.1)
     nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -76,6 +75,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.5.0)
+    ruby-ldap (0.9.10)
     sqlite3 (1.3.3)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -93,9 +93,13 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
+<<<<<<< HEAD
   net-ldap (= 0.1.1)
+=======
+>>>>>>> 6418c940d93826344ab9066f5114299b4b3a0c20
   rails (= 3.0.5)
   rspec (= 2.5.0)
   rspec-rails (= 2.5.0)
+  ruby-ldap (= 0.9.10)
   sqlite3-ruby (= 1.3.3)
   webrat (= 0.7.1)
