@@ -93,10 +93,6 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
-<<<<<<< HEAD
-  net-ldap (= 0.1.1)
-=======
->>>>>>> 6418c940d93826344ab9066f5114299b4b3a0c20
   rails (= 3.0.5)
   rspec (= 2.5.0)
   rspec-rails (= 2.5.0)
