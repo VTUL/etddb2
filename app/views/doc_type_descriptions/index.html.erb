@@ -1,0 +1,20 @@
+<h1>Listing doc_type_descriptions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @doc_type_descriptions.each do |doc_type_description| %>
+  <tr>
+    <td><%=h doc_type_description.name %></td>
+    <td><%= link_to 'Show', doc_type_description %></td>
+    <td><%= link_to 'Edit', edit_doc_type_description_path(doc_type_description) %></td>
+    <td><%= link_to 'Destroy', doc_type_description, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New doc_type_description', new_doc_type_description_path %>

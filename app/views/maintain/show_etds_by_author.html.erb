@@ -1,0 +1,53 @@
+<h1><center> Pending etds</center></h1>
+
+<table>
+  <tr>
+    <th>Degree</th>
+    <th>Department</th>
+    <th>Dtype</th>
+    <th>Title</th>
+<!--    <th>Abstract</th>
+    <th>Availability</th>
+    <th>Availability description</th>
+    <th>Copyright statement</th>
+    <th>Ddate</th>
+    <th>Sdate</th>
+    <th>Adate</th>
+    <th>Cdate</th>
+    <th>Rdate</th>
+    <th>Pid</th>
+    <th>Url</th>
+-->
+    <th>Timestamp</th>
+    <th>Bound</th>
+  </tr>
+
+<% @etdss.each do |etd| %>
+  <tr>
+    <td><%=h etd.degree %></td>
+    <td><%=h etd.department %></td>
+    <td><%=h etd.dtype %></td>
+    <td><%=h etd.title %></td>
+<!--
+    <td><%=h etd.abstract %></td>
+    <td><%=h etd.availability %></td>
+    <td><%=h etd.ddate %></td>
+    <td><%=h etd.sdate %></td>
+    <td><%=h etd.adate %></td>
+    <td><%=h etd.cdate %></td>
+    <td><%=h etd.rdate %></td>
+    <td><%=h etd.pid %></td>
+    <td><%=h etd.url %></td>
+-->
+    <td><%=h etd.timestamp %></td>
+    <td><%=h etd.bound %></td>
+    <td><%= link_to 'View', url_for(:controller => :submit, :action => :show_etd, :id => etd.id) %></td>
+    <td><%= link_to 'Edit', url_for(:controller => :submit, :action => :edit_etd, :id => etd.id) %></td>
+    <td><%= link_to 'Destroy', etd, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd, :author_id => @author.id) %>

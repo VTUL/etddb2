@@ -1,0 +1,2 @@
+module DocTypeDescriptionsHelper
+end

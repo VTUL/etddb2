@@ -1,0 +1,25 @@
+<div class="page-title"> 
+  <p>ETDs</p>
+</div>
+<table>
+  <tr>
+ <!--   <th>Urn</th> -->
+    <th>Name</th>
+ <!--    <th>Middle name</th> 
+    <th>Last name</th> -->
+    <th>Title</th>
+    <th>Degree</th>
+    <th>Department</th>
+<!--    <th>Abstract</th> -->
+  </tr>
+
+<% for etd in @etds -%>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <td><%= link_to "#{etd.people.find(:first).first_name} #{etd.people.find(:first).middle_name} #{etd.people.find(:first).last_name}", url_for(:controller => 'browse', :action => 'show', :id => etd.id) %></td> 
+    <td><%=h etd.title %></td>
+    <td><%=h etd.degree %></td>
+    <td><%=h etd.department %></td>
+<!--    <td><%=h etd.abstract %></td> -->
+  </tr>
+<% end %>
+</table>
