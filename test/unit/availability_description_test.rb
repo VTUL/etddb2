@@ -13,4 +13,5 @@ class AvailabilityDescriptionTest < ActiveSupport::TestCase
       assert availability_description.errors[:created_at].any?
       assert availability_description.errors[:updated_at].any?
       assert availability_description.errors[:etd_id].any?
+   end
 end
