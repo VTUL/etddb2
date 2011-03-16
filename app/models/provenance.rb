@@ -5,6 +5,9 @@
 #########################################################
 
 class Provenance < ActiveRecord::Base
+  # Associate tables
   belongs_to :etd
-  validates_presence_of :creator, :notice
+
+  # Validate attributes
+  validates :creator, :notice, :presence => true
 end

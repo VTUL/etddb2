@@ -6,5 +6,5 @@
 
 class CopyrightStatement < ActiveRecord::Base
   belongs_to :etd
-  validates_presence_of :description    
+  validates :description, :presence => true 
 end

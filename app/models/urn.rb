@@ -5,7 +5,9 @@
 #########################################################
 
 class Urn < ActiveRecord::Base
+  # Associates tables
   belongs_to :etd
 
-  validates_presence_of :urn, :id
+  # Validates attributes
+  validates :urn, :id, :presence => true
 end

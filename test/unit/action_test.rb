@@ -1,13 +1,17 @@
+#########################################################
+# The source codes are developed by
+# Digital Library and Archive at Virginia Tech.
+# Last updated: Mar-15-2011
+#########################################################
+
 require 'test_helper'
 
 class ActionTest < ActiveSupport::TestCase
   # Replace this with your real tests.
-#  test "the truth" do
-#    assert true
-#  end
   test "invalid with empty attributes" do
     action = Action.new
     assert !action.valid?
-    assert action.errors.invalid?(:name)
+    assert action.errors[:id].any?
+    assert action.errors[:name].any?
   end
 end

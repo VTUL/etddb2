@@ -1,3 +1,9 @@
+#########################################################
+# The source codes are developed by
+# Digital Library and Archive at Virginia Tech.
+# Last updated: Mar-15-2011
+#########################################################
+
 require 'test_helper'
 
 class PersonTest < ActiveSupport::TestCase
@@ -5,16 +11,11 @@ class PersonTest < ActiveSupport::TestCase
   test "should be invalid with empty attributes" do
     person = Person.new
    
-    assert !etd.valid?
-    assert etd.errors[:role].any? 
-    assert etd.errors[:first_name].any? 
-    assert etd.errors[:middle_name].any? 
-    assert etd.errors[:last_name].any? 
-    assert etd.errors[:email].any? 
-    assert etd.errors[:pid].any? 
-    assert etd.errors[:suffix].any? 
-    assert etd.errors[:created_at].any? 
-    assert etd.errors[:updated_at].any? 
-    assert etd.errors[:roles_mask].any? 
+    assert !person.valid?
+    assert person.errors[:role].any? 
+    assert person.errors[:first_name].any? 
+    assert person.errors[:last_name].any? 
+    assert person.errors[:email].any? 
+    assert person.errors[:pid].any? 
   end
 end

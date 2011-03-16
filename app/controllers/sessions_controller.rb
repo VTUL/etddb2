@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
        
     if user.nil?
       # Create an error message and re-render the signin form.
-      redirect_to :controller => 'submit', :action => 'index'
+      redirect_to :controller => 'sessions', :action => 'new', :notice => 'Invalid authentication'
     else
       # Sign the user in and redirect to the user's show page.
       session[:user_id] = user.pid
