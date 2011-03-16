@@ -1,4 +1,15 @@
 NewVtEtdUpgrd::Application.routes.draw do
+
+  get "pages/home"
+  get "pages/about"
+
+  root :to => 'pages#home'
+  match '/about', :to => 'pages#about'
+
+  resources :etds
+  resources :people
+  resources :roles
+
   #get 'browse/index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -6,21 +17,18 @@ NewVtEtdUpgrd::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-#  COMMENT REMOVE 2 Lines below for address to work /sessions/new/
-#  match 'submit/login' => 'sessions#new'
-#  match 'submit/create' => 'sessions#create'
+  # COMMENT REMOVE 2 Lines below for address to work /sessions/new/
+  #match 'submit/login' => 'sessions#new'
+  #match 'submit/create' => 'sessions#create'
 
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-  match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  #match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-     resources :etds
-     resources :people
-     resources :roles
 
   # Sample resource route with options:
   #   resources :products do
