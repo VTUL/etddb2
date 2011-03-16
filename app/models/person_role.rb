@@ -1,13 +1,17 @@
 #########################################################
 # The source codes are developed by
 # Digital Library and Archive at Virginia Tech.
-# Last updated: Feb-16-2011
+# Last updated: Mar-15-2011
 #########################################################
 
 class PersonRole < ActiveRecord::Base
+  #Specify irregular table names
+  self.table_name = "people_roles"
 
+  #Associate tables
   has_many :people
   has_many :roles
 
-  validates_presence_of :id
+  #Validate attributes
+  validates :id, :person_id, :role_id, :presence => true
 end

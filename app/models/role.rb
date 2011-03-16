@@ -5,13 +5,13 @@
 #########################################################
 
 class Role < ActiveRecord::Base
+  #Associate tables
   has_and_belongs_to_many :people
-
   has_and_belongs_to_many :actions
-
   has_and_belongs_to_many :digital_objects
 
-  validates_presence_of :name
+  # Validates attributes
+  validates :name, :presence => true
 
 end
 

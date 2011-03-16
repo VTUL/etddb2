@@ -6,5 +6,5 @@
 
 class AvailabilityDescription < ActiveRecord::Base
 #  belongs_to :etd 
-  validates_presence_of :availability, :description 
+  validates :availability, :description, :presence => true 
 end

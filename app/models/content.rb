@@ -1,20 +1,22 @@
 #########################################################
 # The source codes are developed by
 # Digital Library and Archive at Virginia Tech.
-# Last updated: Feb-16-2011
+# Last updated: Mar-15-2011
 #########################################################
 
 class Content < ActiveRecord::Base
   belongs_to :etd
-  validates_presence_of :filename, :size, :availability, :types, :bound
-  validates_numericality_of :size 
+  # validation
+  validates :filename, :size, :availability, :types, :bound, :presence => true
+  validates :size, :numericality => {:greater_than_or_equal_to => 0} 
  # validates_format_of :filename,
  #                     :with => %r{([A-Z]([A-Z]|[a-z])*)(_([a-z]|[A-Z])+)*(_[D|T])(_([0-9]{4}))\.(([a-z]|[A-Z]){3})},
  #                     :message => 'must have these component <Last name>_<first (and) middle initials>_T or D_<yyyy of defense' 
 
-  validates_format_of :types,
+  validates :types, :format => {
                       :with => /^image/,
                       :message => "--- you can only upload pictures"
+  }
 
   def uploaded_picture=(content_field)
     self.filename = base_part_of(content_field.original_filename)

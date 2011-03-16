@@ -7,14 +7,20 @@
 require 'edauth'
 
 class Person < ActiveRecord::Base
+  #
+  # Set multiple roles
+  #  ROLES=%w[admin author committee_chair committee_cochair committee_member reviewer manager cataloger]
 
-  # set multiple roles
-#  ROLES=%w[admin author committee_chair committee_cochair committee_member reviewer manager cataloger]
-
+  #
+  # Assicate tables
   has_and_belongs_to_many :etds
-
   has_and_belongs_to_many :roles
 
+  #
+  # Validates attributes
+  validates :role, :first_name, :last_name, :email, :pid, :presence => true
+
+  #
   # for authentication through matching the login name to the stored names.
   def self.find_by_name(name)
     return user = Person.find(:first, :conditions => "last_name='#{name}'")

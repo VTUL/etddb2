@@ -5,6 +5,7 @@
 #########################################################
 
 class SubmitController < ApplicationController
+
   def index_etd
     @etds = Etd.all
     respond_to do |format|

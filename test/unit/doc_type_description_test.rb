@@ -1,15 +1,16 @@
+#########################################################
+# The source codes are developed by
+# Digital Library and Archive at Virginia Tech.
+# Last updated: Mar-15-2011
+#########################################################
+
 require 'test_helper'
 
 class DocTypeDescriptionTest < ActiveSupport::TestCase
   # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
   test "invalid with empty attributes" do
     doc_type_desc = DocTypeDescription.new
     assert !doc_type_desc.valid?
-    assert doc_type_desc.errors.invalid?(:name)
-    assert doc_type_desc.errors.invalid?(:created_at)
-    assert doc_type_desc.errors.invalid?(:updated_at)
+    assert doc_type_desc.errors[:name].any?
   end
 end

@@ -1,7 +1,7 @@
 #########################################################
 # The source codes are developed by
 # Digital Library and Archive at Virginia Tech.
-# Last updated: Feb-16-2011
+# Last updated: Mar-15-2011
 #########################################################
 
 class Etd < ActiveRecord::Base
@@ -22,8 +22,11 @@ class Etd < ActiveRecord::Base
 #  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor" 
 #  belongs_to  :committee_cochair, :class => "Person", :foreign_key => "coadvisor"
 #  has_and_belongs_to_many :committee_members, :class => "Person", :foreign_key => "member"
-  validates_presence_of :title, :abstract, :degree, :department, :dtype, :availability_description,
-                        :availability, :bound, :url #, :urn
+  validates :abstract, :availability, :availability_description, :bound,  
+            :copyright_statement , :degree,
+            :department, :dtype,  :title, :url, :urn,
+            :adate, :cdate, :ddate, :rdate, :sdate,
+            :presence => true
 #  validates_uniqueness_of #:urn
 
   def self.find_etds_for_browsing_by_author(letter)
