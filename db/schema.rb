@@ -26,16 +26,18 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
 
   add_index "actions_roles_digital_objects", ["action_id"], :name => "index_actions_roles_digital_objects_on_action_id"
   add_index "actions_roles_digital_objects", ["digital_object_id"], :name => "index_actions_roles_digital_objects_on_digital_object_id"
+  add_index "actions_roles_digital_objects", ["role_id", "action_id", "digital_object_id"], :name => "index_actions_roles_digital_objects", :unique => true
 
   create_table "availability_descriptions", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "availability"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "etd_id"
   end
 
   create_table "contents", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "filename"
     t.string   "types"
     t.string   "size"
@@ -47,23 +49,24 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
     t.datetime "updated_at"
     t.integer  "file_id"
     t.string   "file_type"
-    t.integer  "etd_id"
   end
 
   create_table "copyright_statements", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "etd_id"
   end
 
   create_table "degree_descriptions", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "departments", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,12 +79,14 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
   end
 
   create_table "doc_type_descriptions", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "etds", :force => true do |t|
+    t.string   "urn"
     t.string   "degree"
     t.string   "department"
     t.string   "dtype"
@@ -103,7 +108,6 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
     t.datetime "updated_at"
     t.integer  "committee_chair_id"
     t.integer  "author_id"
-    t.string   "urn"
   end
 
   create_table "etds_people", :id => false, :force => true do |t|
@@ -115,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
   add_index "etds_people", ["person_id"], :name => "index_etds_people_on_person_id"
 
   create_table "keywords", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "word"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -147,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
   end
 
   create_table "provenances", :force => true do |t|
+    t.integer  "etd_id"
     t.string   "creator"
     t.string   "notice"
     t.datetime "created_at"
