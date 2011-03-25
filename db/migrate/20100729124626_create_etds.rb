@@ -8,8 +8,8 @@ class CreateEtds < ActiveRecord::Migration
       t.text :title
       t.text :abstract
       t.string :availability
-#      t.text :availability_description
-#      t.text :copyright_statement
+      t.text :availability_description
+      t.text :copyright_statement
       t.date :ddate
       t.date :sdate
       t.date :adate
