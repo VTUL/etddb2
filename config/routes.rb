@@ -7,16 +7,35 @@ NewVtEtdUpgrd::Application.routes.draw do
   get "pages/dev"
 
   root :to => 'pages#home'
-  match '/about', :to => 'pages#about'
+  match '/about',   :to => 'pages#about'
   match '/contact', :to => 'pages#contact'
-  match '/help', :to => 'pages#help'
-  match '/dev', :to => 'pages#dev'
+  match '/help',    :to => 'pages#help'
+  match '/dev',     :to => 'pages#dev'
 
   #match '/signup',  :to => 'people#new'
 
   resources :etds
   resources :people
   resources :roles
+
+  resources :urns
+  resources :departments
+  resources :doc_type_descriptions
+  resources :degree_descriptions
+  resources :permissions
+  resources :person_roles
+  resources :actions
+  resources :digital_objects
+  resources :provenances
+  resources :availability_descriptions
+  resources :copyright_statements
+  resources :keywords
+  resources :contents
+  resources :sessions, :only => [:new, :create, :destroy]
+
+  get "sessions#new"
+  match '/login',   :to => 'sessions#new'
+  match '/logout',  :to => 'sessions#destroy'
 
   #get 'browse/index'
   # The priority is based upon order of creation:
