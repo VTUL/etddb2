@@ -1,152 +1,152 @@
-<html> 
-	<head profile="http://dublincore.org/documents/2008/08/04/dc-html/"> 
-		<title>ETD collection:  Browse Available ETDs</title> 
-		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/"> 
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-		<meta name="DCTERMS.title" content="ETD collection:  Browse Available ETDs"> 
-		<meta name="DCTERMS.description" content="Information about Virginia Tech's Electronic Theses and Dissertations (ETD) initiative, implementing and maintaining the database, and the collection and its preservation"> 
-		<meta name="keywords" content="ETD, ETD-db, preservation, NDLTD, DLA, Virginia Tech"> 
-		<meta name="DCTERMS.publisher" content="Digital Library and Archives at Virginia Tech's University Libraries"> 
-		<meta name="DCTERMS.language" scheme="RFC5646" content="en"> 
-		<meta name="DCTERMS.format" scheme="IMT" content="text/html"> 
-		<!-- Generates Code: <meta name="DCTERMS.modified" scheme="W3CDTF" content="YYYY-MM-DD"> --> 
-		<!-- DCTERMS.modified - This element provides the date when the page was last modified. The date is generated in a YYYY-MM-DD format in compliance with the schema W3CDTF. --> 
-		<meta name="DCTERMS.modified" scheme="W3CDTF" content=2010-08-05> 
+<html>
+	<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+		<title>ETD collection:  Browse Available ETDs</title>
+		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="DCTERMS.title" content="ETD collection:  Browse Available ETDs">
+		<meta name="DCTERMS.description" content="Information about Virginia Tech's Electronic Theses and Dissertations (ETD) initiative, implementing and maintaining the database, and the collection and its preservation">
+		<meta name="keywords" content="ETD, ETD-db, preservation, NDLTD, DLA, Virginia Tech">
+		<meta name="DCTERMS.publisher" content="Digital Library and Archives at Virginia Tech's University Libraries">
+		<meta name="DCTERMS.language" scheme="RFC5646" content="en">
+		<meta name="DCTERMS.format" scheme="IMT" content="text/html">
+		<!-- Generates Code: <meta name="DCTERMS.modified" scheme="W3CDTF" content="YYYY-MM-DD"> -->
+		<!-- DCTERMS.modified - This element provides the date when the page was last modified. The date is generated in a YYYY-MM-DD format in compliance with the schema W3CDTF. -->
+		<meta name="DCTERMS.modified" scheme="W3CDTF" content=2010-08-05>
 		<!--<link rel="stylesheet" href="assets/css/guideprime.css" type="text/css">  -->
-		<%= stylesheet_link_tag "dlastyle" %> 
-    	</head> 
- 
-<body> 
-<!-- Header file for the fluid template. This file has to be included to provide the header, sub-header and the navigation for the Theses section. 
-Include this file after the <body> tag. The CSS styles used in this file can be found in /assets/css/guideprime.css --> 
- 
-<!-- SKIP TO SELECETED SECTION MENU --> 
-<div class="skip"> 
-	<a name="skip-menu"></a> <h2> Skip Menu </h2> 
-	<ul>		
-	    <li><a href="#skipto-search">Skip to Search</a></li> 
-		<li><a href="#skipto-main-nav">Skip to Main Navigation</a></li> 
-		<li><a href="#skipto-main-content">Skip to Main Content</a></li> 
-		<li><a href="#skipto-footer">Skip to Footer</a></li> 
-	</ul> 
-</div> 
- 
-<!--<script type="text/javascript" src="/assets/js/widgets.js"></script>--> 
-<%= javascript_include_tag 'widgets.js' %> 
- 
-<!-- BEGIN PAGE-AREA --> 
-<!--This div is closed in the footershort_theses.html file --> 
-<div id="page-area"> 
- 
-<!-- BEGIN HEADER --> 
-<div id="header"> 
-	<div id="header-inside"> 
-    	<div id="vt-header"> 
-    		<a href="http://vt.edu" title="Return to Virginia Tech" style="display:block; width:100%; height:100%"></a> 
-    	</div> 
-                                        
-		<div id="unit-header"> 
-        	<p class="unit-specific"><a href="/index.html" title="Return to DLA">Digital Library and Archives</a></p> 
-            <!--<img src="/images/unit_header_print_1.gif" alt="Virginia Tech | Unit of Your Unit" id="unit-header-print">--> 
-            <%= image_tag "unit_header_print_1.gif", :alt=>"Virginia Tech | Unit of Your Unit", :id=>"unit-header-print"%> 
-      	</div> 
-                    
- 		<div class="lib-specific"> 
-        	<p class="univlib"> <a href="http://www.lib.vt.edu" title="Return to University Libraries">University Libraries </a> </p> 
-            <ul> 
-            	<li> <a href="http://addison.vt.edu" title="Search Addison">Search Addison</a> </li> 
-                <li> <a href="https://login.ezproxy.lib.vt.edu:2443/login?qurl=http://www.lib.vt.edu/" title="Off-campus sign-in" >Off Campus Sign in </a></li> 
-                <li> <a href="http://www.lib.vt.edu/services/liveref.html" title="Ask a librarian">Ask a librarian </a></li> 
-            </ul> 
-        </div> 
- 
-	</div> <!-- Close header-inside --> 
-</div> 
-<!-- END HEADER --> 
- 
-<!-- BEGIN SUB HEADER--> 
-<div id="sub-header"> 
-	
-	<!-- BEGIN SEARCH --> 
-	<!-- The search form for the ETD pages uses the Googlemini engine. --> 
- 
-	<!-- SKIP MENU--> 
-	<div class="skip"> 
-    	<a href="#skip-menu">Return to Skip Menu</a> <a name="skipto-search"></a> <h2>Search</h2> 
-    </div> 
-    
-    <div id="search"> 
-		<form  method="get" action="http://googlemini.lib.vt.edu/search"> 
-			<fieldset id="search-entry"> 
-				<legend> 
-					<label for="search-query" class="hide">Search ETDs</label> 
-					<!-- Clears the search box TODO@ - Need to get working in imported javascript --> 
-					<input id="search-query" style="text-align:right"  name="q" type="text" value="Search ETDs" onClick="if (this.value == 'Search ETDs') { this.value = ''; }" size="25" maxlength="50" > 
-					<input name="sitesearch" type="hidden" value="scholar.lib.vt.edu" > 
-					<input name="hl" type="hidden" value="en" > 
-					<input name="btnG" type="image" src="/etd-db2-0/assets/img/search_submit.gif" alt="Go" > 
-					<input type="hidden" name="site" value="etd"> 
-					<input type="hidden" name="client" value="default_frontend"> 
-					<input type="hidden" name="proxystylesheet" value="default_frontend"> 
-					<input type="hidden" name="output" value="xml_no_dtd"> 
-					<input type="hidden" name="num" value="10"> 
-					<input type="hidden" name="proxyreload" value="1"> 
-				</legend> 
-			</fieldset> 
- 
-			<!-- Advanced Search --> 
-			<p><a href="http://googlemini.lib.vt.edu/search?entqr=0&amp;access=p&&amp;ud=1&&amp;sort=date%3AD%3AL%3Ad1&&amp;output=xml_no_dtd&&amp;site=etd&&amp;ie=UTF-8&&amp;oe=UTF-8&&amp;client=default_frontend&&amp;proxystylesheet=default_frontend&&amp;ip=128.173.124.223&&amp;proxycustom=%3CADVANCED/%3E" style="margin-left:-1.5em">Advanced Search</a></p> 
-		</form> 
-		
-		<div class="clear"> 
-			<span>&nbsp;</span> 
-		</div> 
-	</div> 
-	<!-- END SEARCH --> 
-                                    
- 	<!-- BEGIN SUB HEADER BANNER AND UNIT SECTION-->                               
- 	<div id="sub-header-inside"> 
-    	<p> <a href="/theses/indextest.html"> <strong>Electronic Theses and Dissertations at VT </strong></a></p> 
-    </div>  
-	<!-- END SUB HEADER BANNER AND UNIT SECTION-->		
-					  
-	<div class="clear"> 
-		<span> &nbsp; </span> 
-	</div> 
-</div> 
-<!-- END SUB HEADER --> 
- 
-<!-- BEGIN MAIN NAV --> 
-<div id="nav"> 
-	
-	<!-- SKIP MENU --> 
-	<div class="skip"> 
-		<a href="#skip-menu">Return to Skip Menu</a> <a name="skipto-main-nav"></a> <h2> Main Navigation </h2> 
-	</div> 
-	
-	<!-- TOP NAVIGATION --> 
-	<div id="main-nav"> 
-		 <ul> 
-			 <li><a href="/index.html">About DLA</a> </li> 
-			 <li><a href="/collections/index.html"> Collections </a></li> 
-			 <li><a href="/copyright/index.html">Copyright</a></li> 
-			 <li class="sub-nav"><a href="/theses/index.html"><strong>ETDs: Theses and Dissertations</strong></a></li> 
-             <li><a href="/ejournals/index.html">EJournals</a></li> 
-             <li><a href="/NewsOnline/index.html">News</a></li> 
-             <li class="last"><a href="http://imagebase.lib.vt.edu" target="_blank">VT ImageBase</a></li> 
-         </ul> 
-                              
-		 <div class="clear"> 
-			<span> &nbsp; </span> 
-		</div> 
-	</div> 
-	<!-- END TOP NAVIGATION--> 
-</div> 
-<!-- END MAIN NAV--> 
- 
-<br clear="all"> 
- 
-<!-- SKIP MENU --> 
-<div class="skip"> 
-	<a href="#skip-menu">Return to Skip Menu</a> <a name="skipto-main-content"></a> <h2> Main Content </h2> 
-</div> 
+		<%= stylesheet_link_tag "dlastyle" %>
+    	</head>
+
+<body>
+<!-- Header file for the fluid template. This file has to be included to provide the header, sub-header and the navigation for the Theses section.
+Include this file after the <body> tag. The CSS styles used in this file can be found in /assets/css/guideprime.css -->
+
+<!-- SKIP TO SELECETED SECTION MENU -->
+<div class="skip">
+	<a name="skip-menu"></a> <h2> Skip Menu </h2>
+	<ul>
+	    <li><a href="#skipto-search">Skip to Search</a></li>
+		<li><a href="#skipto-main-nav">Skip to Main Navigation</a></li>
+		<li><a href="#skipto-main-content">Skip to Main Content</a></li>
+		<li><a href="#skipto-footer">Skip to Footer</a></li>
+	</ul>
+</div>
+
+<!--<script type="text/javascript" src="/assets/js/widgets.js"></script>-->
+<%= javascript_include_tag 'widgets.js' %>
+
+<!-- BEGIN PAGE-AREA -->
+<!--This div is closed in the footershort_theses.html file -->
+<div id="page-area">
+
+<!-- BEGIN HEADER -->
+<div id="header">
+	<div id="header-inside">
+    	<div id="vt-header">
+    		<a href="http://vt.edu" title="Return to Virginia Tech" style="display:block; width:100%; height:100%"></a>
+    	</div>
+
+		<div id="unit-header">
+        	<p class="unit-specific"><a href="/index.html" title="Return to DLA">Digital Library and Archives</a></p>
+            <!--<img src="/images/unit_header_print_1.gif" alt="Virginia Tech | Unit of Your Unit" id="unit-header-print">-->
+            <%= image_tag "unit_header_print_1.gif", :alt=>"Virginia Tech | Unit of Your Unit", :id=>"unit-header-print"%>
+      	</div>
+
+ 		<div class="lib-specific">
+        	<p class="univlib"> <a href="http://www.lib.vt.edu" title="Return to University Libraries">University Libraries </a> </p>
+            <ul>
+            	<li> <a href="http://addison.vt.edu" title="Search Addison">Search Addison</a> </li>
+                <li> <a href="https://login.ezproxy.lib.vt.edu:2443/login?qurl=http://www.lib.vt.edu/" title="Off-campus sign-in" >Off Campus Sign in </a></li>
+                <li> <a href="http://www.lib.vt.edu/services/liveref.html" title="Ask a librarian">Ask a librarian </a></li>
+            </ul>
+        </div>
+
+	</div> <!-- Close header-inside -->
+</div>
+<!-- END HEADER -->
+
+<!-- BEGIN SUB HEADER-->
+<div id="sub-header">
+
+	<!-- BEGIN SEARCH -->
+	<!-- The search form for the ETD pages uses the Googlemini engine. -->
+
+	<!-- SKIP MENU-->
+	<div class="skip">
+    	<a href="#skip-menu">Return to Skip Menu</a> <a name="skipto-search"></a> <h2>Search</h2>
+    </div>
+
+    <div id="search">
+		<form  method="get" action="http://googlemini.lib.vt.edu/search">
+			<fieldset id="search-entry">
+				<legend>
+					<label for="search-query" class="hide">Search ETDs</label>
+					<!-- Clears the search box TODO@ - Need to get working in imported javascript -->
+					<input id="search-query" style="text-align:right"  name="q" type="text" value="Search ETDs" onClick="if (this.value == 'Search ETDs') { this.value = ''; }" size="25" maxlength="50" >
+					<input name="sitesearch" type="hidden" value="scholar.lib.vt.edu" >
+					<input name="btnG" type="image" src="/etd-db2-0/assets/img/search_submit.gif" alt="Go" >
+					<input type="hidden" name="hl" value="en" >
+					<input type="hidden" name="site" value="etd">
+					<input type="hidden" name="client" value="default_frontend">
+					<input type="hidden" name="proxystylesheet" value="default_frontend">
+					<input type="hidden" name="output" value="xml_no_dtd">
+					<input type="hidden" name="num" value="10">
+					<input type="hidden" name="proxyreload" value="1">
+				</legend>
+			</fieldset>
+
+			<!-- Advanced Search -->
+			<p><a href="http://googlemini.lib.vt.edu/search?entqr=0&amp;access=p&&amp;ud=1&&amp;sort=date%3AD%3AL%3Ad1&&amp;output=xml_no_dtd&&amp;site=etd&&amp;ie=UTF-8&&amp;oe=UTF-8&&amp;client=default_frontend&&amp;proxystylesheet=default_frontend&&amp;ip=128.173.124.223&&amp;proxycustom=%3CADVANCED/%3E" style="margin-left:-1.5em">Advanced Search</a></p>
+		</form>
+
+		<div class="clear">
+			<span>&nbsp;</span>
+		</div>
+	</div>
+	<!-- END SEARCH -->
+
+ 	<!-- BEGIN SUB HEADER BANNER AND UNIT SECTION-->
+ 	<div id="sub-header-inside">
+    	<p> <a href="/theses/indextest.html"> <strong>Electronic Theses and Dissertations at VT </strong></a></p>
+    </div>
+	<!-- END SUB HEADER BANNER AND UNIT SECTION-->
+
+	<div class="clear">
+		<span> &nbsp; </span>
+	</div>
+</div>
+<!-- END SUB HEADER -->
+
+<!-- BEGIN MAIN NAV -->
+<div id="nav">
+
+	<!-- SKIP MENU -->
+	<div class="skip">
+		<a href="#skip-menu">Return to Skip Menu</a> <a name="skipto-main-nav"></a> <h2> Main Navigation </h2>
+	</div>
+
+	<!-- TOP NAVIGATION -->
+	<div id="main-nav">
+		 <ul>
+			 <li><a href="/index.html">About DLA</a> </li>
+			 <li><a href="/collections/index.html"> Collections </a></li>
+			 <li><a href="/copyright/index.html">Copyright</a></li>
+			 <li class="sub-nav"><a href="/theses/index.html"><strong>ETDs: Theses and Dissertations</strong></a></li>
+             <li><a href="/ejournals/index.html">EJournals</a></li>
+             <li><a href="/NewsOnline/index.html">News</a></li>
+             <li class="last"><a href="http://imagebase.lib.vt.edu" target="_blank">VT ImageBase</a></li>
+         </ul>
+
+		 <div class="clear">
+			<span> &nbsp; </span>
+		</div>
+	</div>
+	<!-- END TOP NAVIGATION-->
+</div>
+<!-- END MAIN NAV-->
+
+<br clear="all">
+
+<!-- SKIP MENU -->
+<div class="skip">
+	<a href="#skip-menu">Return to Skip Menu</a> <a name="skipto-main-content"></a> <h2> Main Content </h2>
+</div>
