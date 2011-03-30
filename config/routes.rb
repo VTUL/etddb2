@@ -31,11 +31,11 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :copyright_statements
   resources :keywords
   resources :contents
-  resources :sessions, :only => [:new, :create, :destroy]
+  #resources :sessions, :only => [:new, :create, :destroy]
 
-  get "sessions#new"
-  match '/login',   :to => 'sessions#new'
-  match '/logout',  :to => 'sessions#destroy'
+  #get "sessions#new"
+  #match '/login',   :to => 'sessions#new'
+  #match '/logout',  :to => 'sessions#destroy'
 
   #get 'browse/index'
   # The priority is based upon order of creation:
