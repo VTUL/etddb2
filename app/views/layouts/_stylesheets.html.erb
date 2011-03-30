@@ -1,5 +1,7 @@
 <!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<%= stylesheet_link_tag 'custom_styles/screen', :media => 'screen' %>
-<%= stylesheet_link_tag 'custom_styles/print',  :media => 'print' %>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<%= stylesheet_link_tag 'screen', :media => 'screen' %>
+		<%= stylesheet_link_tag 'print', :media => 'print' %>
+		<%= stylesheet_link_tag 'custom_styles/screen', :media => 'screen' if File.exists?('public/stylesheets/custom_styles/screen.css')%>
+		<%= stylesheet_link_tag 'custom_styles/print',  :media => 'print' if File.exists?('public/stylesheets/custom_styles/print.css')%>
