@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
   def new
     @title = "Log in"
   end
+
   # Create a new session
   def create
     user = Person.authenticate(params[:session2][:name],

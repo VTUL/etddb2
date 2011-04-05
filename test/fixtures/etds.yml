@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-SungheePark:
+SungHeePark:
   degree: PhD
   department: Computer Science
   dtype: dissertation
@@ -19,7 +19,7 @@ SungheePark:
   timestamp: 2010-07-29 08:46:26
   bound: NO
 
-SungheePark2:
+SungHeePark2:
   degree: MS 
   department: Food Science 
   dtype: thesis 
