@@ -1,0 +1,638 @@
+
+body {
+	margin:0px;
+	padding:0px;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif;
+	background: #9D9879;
+}
+
+p {
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif;
+	color:#000000;
+	font-size:1em;
+	text-align:justify
+}
+
+div {
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif;
+	color:#000000;
+	font-size:1em;
+}
+
+h2 {
+	font-size:1.5em;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif;
+	text-align:center
+}
+
+h3 {
+	font-size:1.17em;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif
+}
+
+h4 {
+	font-size:1.12em;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif
+}
+
+h5 {
+	font-size:0.9em;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif
+}
+
+h6 {
+	font-size:0.83em;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif
+}
+
+li, ol, ul, td, tr {
+	font-size:1em;
+	font-family:Times New Roman, Verdana, Arial, Geneva, sans-serif
+}
+
+a:link {
+	color:blue;
+	text-decoration:none;
+}
+a:visited {
+	color:purple;
+	text-decoration:none;
+}
+a:hover {
+	color:gray;
+	text-decoration:underline;
+}
+
+a:active {
+	background-color:black;
+	color:white;
+	text-decoration:none;
+}
+
+a.transparent:active {
+	/* prevents black background from appearing when clicking linked images */
+	background-color:transparent;
+}
+
+.container {
+	/* controls width/margin of entire page */
+	margin-right:auto;
+	margin-left:auto;
+	margin-top:2%;
+	margin-bottom:2%;
+	width:48em;
+	font-size:1em;
+	min-width:768px;
+	border:0px solid orange;
+}
+
+.stretch {
+	/* makes header gif stretch to container width */
+	padding:0;
+	background-image:url(/images/stretcher.gif);
+	background-repeat:repeat-x;
+	border-width:0px 1px 0 1px;
+	border-style:solid;
+	border-color:black;
+	width:48em;
+	text-align:left;
+}
+
+.navbutton {
+	margin:0;
+	padding:0;
+	text-align:center;
+	white-space:nowrap;
+	width:48em;
+	margin-left:auto;
+	margin-right:auto;
+	height:1.3em;
+	border:1px solid black;
+}
+
+.navbutton ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+.navbutton ul li {
+	/* makes navbuttons lay out horizontally, etc */
+	float:left;
+	text-align:center;
+	font-family:helvetica, arial;
+	padding:0;
+	margin:0;
+	text-decoration:none;
+	color:black;
+	white-space:nowrap;
+	vertical-align:middle;
+}
+
+#body-container {
+	/* everything within main body box (including nav) */
+	clear:both;
+	border-width:1px;
+	border-style:solid;
+	border-color:black;
+	width:48em;
+	padding:0px;
+	margin-right:auto;
+	margin-left:auto;
+	background-image:url(/images/background.gif);
+	background-position:right;
+	background-repeat:repeat-y;
+	min-width:768px;
+}
+
+#content {
+	/* specific page content container */
+	float:left;
+	width:36em;
+	margin:0 0 0 .5em;
+	padding:0 0 0 0;
+	background-color:white;
+	min-width:630px;
+	border:0px solid red;
+}
+
+p.bigFirst:first-letter {
+	font-size:400%;
+	float:left;
+	padding:2px;
+	font-style:italic;
+	line-height:35pt;
+	margin-left:-5px;
+	margin-top:-20px;
+	padding:12px 6px 0 0;
+}
+
+span.bigFirst {
+	font-size:400%;
+	float:left;
+	padding:2px;
+	font-style:italic;
+	line-height:35pt;
+	margin-left:-5px;
+	margin-top:-20px;
+	padding:12px 6px 0 0;
+}
+
+.floatright {
+	float:right;
+	margin:0 0 1em 2em;
+}
+
+.floatleft {
+	float:left;
+	margin:0 2em 1em 0;
+}
+
+.sectheader {
+	float:right;
+	margin:0 0 10px 10px;
+}
+
+.indent {
+	text-indent:2.5em;
+}
+
+.outdent {
+	text-indent:-2.5em;
+}
+
+.outdentli {
+	text-indent:-1.3em;
+}
+
+img {
+	border:0;
+}
+
+img.center{
+	text-align:center;
+}
+
+a.menutab {
+	/* styling for top menu bar */
+	display:block;
+	text-decoration:none;
+	text-align:center;
+	color:black;
+	margin:0;
+	padding:0;
+	border-width:0px 1px 0px 0px;
+	border-style:solid;
+	border-color:black;
+	font-size:0.9em;
+	line-height:1.5em;
+}
+
+a.menutab:visited {
+	display:block;
+	color:black;
+}
+
+a.menutab:hover, visited:hover {
+	background-color:black;
+	color:white;
+	display:block;
+	text-decoration:none;
+}
+
+a.menutab:active {
+	background-color:black;
+	color:white;
+	display:block;
+}
+
+.center {
+	text-align:center;
+}
+
+.i {
+	font-style:italic;
+}
+
+.b {
+	font-weight:bold;
+}
+
+.bi {
+	font-weight:bold;
+	font-style:italic;
+}
+
+.u {
+	text-decoration:underline;
+}
+
+.normal {
+	font-style:normal;
+	font-weight:normal;
+}
+
+.sup {
+	vertical-align:super;
+	font-size:0.83em;
+}
+
+.sub {
+	vertical-align:sub;
+	font-size:0.83em;
+}
+
+.copy {
+	font-size:8pt;
+}
+
+.pdf {
+	font-weight:normal;
+	font-size:0.75em;
+	padding-left:20px;
+	font-style:normal;
+}
+
+.artlink {
+	/*index page link to article*/
+	font-weight:bold;
+	font-size:0.9em;
+	padding-left:20px;
+	font-style:normal;
+}
+
+.artmargin {
+	/*set left and right margins for article*/
+	margin:0em 5em;
+}
+
+
+.left {
+	text-align:left;
+}
+
+.right {
+	text-align:right;
+}
+
+.tab {
+	text-indent:2em;
+}
+
+.hang {
+	text-indent:-1em;
+	padding-left:1em;
+}
+
+.hangblock {
+	text-indent:-2.5em;
+	margin-left:2.5em;
+}
+
+.block {
+	margin-left:2.5em;
+}
+
+.negative {
+	text-indent:-.35em
+	}
+
+.deci {
+	padding-right:2em;
+	text-align:right;
+}
+
+.decihead {
+	padding-right:1em;
+	text-align:right;
+}
+
+.leftdeci {
+	padding-left:3em;
+	text-align:left;
+}
+
+.displaytd {
+	font-weight:normal;
+	text-align:left;
+}
+
+.caption {
+	font-size:.7em;
+	text-align:center
+}
+
+.mvright {
+	text-indent:.5em;
+}
+
+.mvleft {
+	text-indent:-.5em;
+}
+
+.underline {
+	border-style:solid;
+	border-width:0px 0px 1px 0px;
+}
+
+.unblock {
+	margin-left:2.5em;
+}
+
+.hidden {
+	position:absolute;
+	left:0px;
+	top:-500px;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}
+
+.voice {
+	/*  Text will be read aloud in screen readers, but not written to screen */
+	position:absolute;
+	font-size:0;
+	left:-1000px;
+}
+
+.sig {
+	text-align:right;
+	font-style:italic;
+}
+
+.sansserif {
+	font-family:Verdana, Arial, Geneva, sans-serif;
+}
+
+img {
+	border:0
+}
+
+.imgcaption {
+	text-align:center;
+	font-weight:bold;
+}
+
+div.quote {
+	width:17em;
+	line-height:1.5em;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	padding:0.5em;
+	border-top:double;
+	border-bottom:double;
+	font-family:Verdana, Arial, Geneva, sans-serif;
+	font-weight:bold;
+}
+
+div.quoteright {
+	float:right;
+	width:17em;
+	line-height:1.5em;
+	margin:1em 0 1em 2em;
+	text-align:center;
+	padding:0.5em;
+	border-top:double;
+	border-bottom:double;
+	font-family:Verdana, Arial, Geneva, sans-serif;
+	font-weight:bold;
+}
+
+span.quote_sig {
+	font-size:.75em;
+	text-align:center;
+	font-family:Verdana, Arial, Geneva, sans-serif;
+	font-weight:bold;
+}
+
+.va_caption {
+	font-style:italic;
+	font-size:.75em;
+	font-family:Verdana, Arial, Geneva, sans-serif;
+}
+
+ul.NoBullet {
+	list-style-type:none
+}
+
+.img_center {
+	margin:auto;
+}
+
+
+/* new table style */
+
+table.art{
+	width:100%;
+	border-style:solid;
+	border-width:1px 0px 1px 0px;
+	border-spacing:0px;
+	margin:0px 0px 1em 0px;
+}
+
+table.art caption {
+	text-align:left;
+	padding:0.4em 3px;
+	font-weight:bold;
+}
+
+table.art td, table.art th {
+	padding:3px 6px;
+	vertical-align:top;
+	text-align:center;
+}
+
+table.art th {
+	font-weight:bold;
+}
+
+table.art td:first-child, table.art th:first-child {
+	text-align:left;
+}
+
+table.art tfoot td, table.art tfoot th{
+	border-top:1px solid;
+}
+
+table.foot {
+	border-width:1px 0px 0px 0px;
+	border-style:solid;
+}
+
+table.grid thead td, table.grid thead th, table.grid tbody td, table.grid tbody th {
+	border-right:solid 1px;
+	border-top:solid 1px;
+}
+
+table.grid thead tr:first-child th {
+	border-top:0px solid;
+}
+
+table.grid thead td:first-child, table.grid thead th:first-child, table.grid tbody td:first-child, table.grid tbody th:first-child {
+	border-left:1px solid;
+}
+
+table.vert thead td, table.vert thead th, table.vert tbody td, table.vert tbody th {
+	border-right:1px solid;
+}
+
+table.vert thead td:first-child, table.vert thead th:first-child, table.vert tbody td:first-child, table.vert tbody th:first-child {
+	border-left:1px solid;
+}
+
+table.left td, table.left th {
+	text-align:left;
+}
+
+tr.left td, tr.left th {
+	text-align:left;
+}
+
+table.right td, table.right th {
+	text-align:right
+}
+
+tr.right td, tr.right th {
+	text-align:right;
+}
+
+tr.right th:first-child, tr.right td:first-child {
+	text-align:left;
+}
+
+tr.underline th, tr.underline td {
+	border-bottom:1px solid;
+}
+
+tr.underlinedark th, tr.underlinedark td {
+	border-bottom:2px solid;
+}
+
+.underlinedark {
+	border-bottom:2px solid;
+}
+
+/*classes for specific journals below*/
+
+.alanauthor{
+	background-color:#808080;
+	padding:1em;
+	color:#ffffff;
+	font-weight:normal;
+	font-size:1.17em;
+	font-family:Verdana, Arial, Geneva, sans-serif;
+}
+
+.interview {
+	font-size: 1.5em;
+	font-style:italic;
+	font-family: Arial Narrow;
+}
+
+/* Clear */
+
+.clear {
+	height: 0;
+	clear: both;
+	background: transparent none;
+	}
+
+.clear span {
+	display: none;
+	}
+
+/* Hide, Skip */
+
+.hide, .skip {
+	position: absolute;
+ 	left: 0px;
+ 	top: -500px;
+ 	width: 1px;
+ 	height: 1px;
+ 	overflow: hidden;
+ 	}
+
+ /* Footer - creative commons license styles */
+ .footer-float-left{
+ /*margin-left:10%;*/
+	float:left;
+	/*padding-left:28%;*/
+	text-align:right;
+	width:31%;
+	}
+
+.footer-float-right{
+    width:68%;
+    float:right;
+	text-align:left;
+	margin-top:1.5%;
+	white-space:no-wrap;
+	/*padding-right:27%*/
+	}
+
+/*LIST styles*/
+
+ol.spaced li, ul.spaced li {
+	padding:1em 0em 0em 0em;
+}
+
+ol.spaced li:first-child, ul.spaced li:first-child {
+	padding:0em 0em 0em 0em;
+}
+
+ol.A {
+list-style-type:upper-alpha;
+}
+
+ol.a {
+list-style-type:lower-alpha;
+}
+
+ol.I {
+list-style-type:upper-latin;
+}
+
+ol.i {
+list-style-type:lower-latin;
+}

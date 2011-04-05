@@ -67,7 +67,7 @@ div.quoteright {
 	float:left;
 	padding:7px 2px 10px 20px;
 	width:171px;
-	background:#3c5b6f url(../img/search_bg.jpg);
+	background:#3c5b6f url(../../images/search_bg.jpg);
 	margin:0;
 	display:block;
 }
@@ -139,7 +139,7 @@ img {
 #header-inside {
 	padding:10px;
 	width:auto;
-	background:transparent url(/images/vt_header_screen.png) no-repeat top left;
+	background:transparent url(../../images/vt_header_screen.png) no-repeat top left;
 	height:77px;
 }
 
@@ -631,7 +631,7 @@ tr.right td {
 #header li a {
 	font-size:10px;
 	font-family:Arial, Verdana, sans-serif;
-	list-style-image:url(/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	text-decoration:none;
 	padding:0;
@@ -645,7 +645,7 @@ tr.left td {
 }
 
 #sub-header {
-	background-image:url(/images/headerstone.jpg);
+	background-image:url(../../images/headerstone.jpg);
 	background-repeat:repeat-x;
 	color:#fff;
 	float:none;
@@ -812,7 +812,7 @@ table.art td:first-child {
 
 #header li {
 	font-size:10px;
-	list-style-image:url(/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -1089,7 +1089,7 @@ a:hover {
 }
 
 #body-container {
-	background-image:url(/images/background.gif);
+	background-image:url(../../images/background.gif);
 	background-repeat:repeat-y;
 	border-color:black;
 	clear:both;
@@ -1169,7 +1169,7 @@ ol.i {
 
 #header ul {
 	font-size:10px;
-	list-style-image:url(/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -1241,7 +1241,7 @@ ol.I {
 #main #search ul li a {
 	padding:0 7px;
 	color:#fff;
-	background:transparent url(../img/search_bullet.gif) no-repeat 0px 3px;
+	background:transparent url(../../images/search_bullet.gif) no-repeat 0px 3px;
 }
 
 #vt-header {
@@ -1267,7 +1267,7 @@ a.menutab:hover {
 }
 
 .stretch {
-	background-image:url(/images/stretcher.gif);
+	background-image:url(../../images/stretcher.gif);
 	background-repeat:repeat-x;
 	border-color:black;
 	border-width:0px 1px 0 1px;
@@ -1306,7 +1306,7 @@ table.right th {
 }
 
 #header {
-	background-image:url(/assets/img/bg4.png);
+	background-image:url(../../images/bg4.png);
 	font-family:Arial, Verdana, sans-serif;
 	background-repeat:repeat-x;
 	height:97px;
@@ -1316,4 +1316,3 @@ table.right th {
 	border-bottom:1px #fff solid;
 	background-color:#660000;
 }
-

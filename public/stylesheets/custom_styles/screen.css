@@ -33,7 +33,7 @@ a:link {
 	padding:7px 0px 10px 20px;
 	width:171px;
 	padding-right:0px;
-	background:#3c5b6f url(../img/search_bg.jpg);
+	background:#3c5b6f url(../../images/search_bg.jpg);
 	margin:0;
 	padding-left:3px;
 }
@@ -332,7 +332,7 @@ body {
 	margin:0 20px;
 	min-height:10in;
 	padding:0;
-	background:#9D9879 url(/etd-db2-0/images/body_bg.jpg) repeat-x top left;
+	background:#9D9879 url(../../images/body_bg.jpg) repeat-x top left;
 	font-family:Arial, Verdana, sans-serif;
 	border:0;
 	line-height:normal;  /* Peekaboo safety net for pages with broken links to ie.css. See Position is Everything */;
@@ -452,7 +452,7 @@ ul h1 {
 	color:#fff;
 	float:left;
 	display:inline;
-	background:#3c5b6f url(/etd-db2-0/assets/img/search_bg.jpg) repeat-y top left;
+	background:#3c5b6f url(../../images/search_bg.jpg) repeat-y top left;
 	border-bottom:1px #fff solid;
 }
 
@@ -668,7 +668,7 @@ hr {
 }
 
 #header {
-	background-image:url(/etd-db2-0/images/vt_header_screen.png);
+	background-image:url(../../images/vt_header_screen.png);
 	background-position:left top;
 	background-repeat:no-repeat;
 	color:#fff;
@@ -798,7 +798,7 @@ ul h3 {
 	color:#666;
 	clear:both;
 	width:758px;
-	background:#edeada url(/etd-db2-0/assets/img/related_links_top.gif) no-repeat top left;
+	background:#edeada url(../../images/related_links_top.gif) no-repeat top left;
 	padding-top:5px;
 	font-weight:bold;
 	text-align:center;
@@ -894,7 +894,7 @@ form ol {
 }
 
 #sub-header-inside {
-	background-image:url(/etd-db2-0/images/dla_banner.png);
+	background-image:url(../../images/dla_banner.png);
 	background-repeat:no-repeat;
 	float:right;
 	height:77px;
@@ -1043,4 +1043,3 @@ ul ol {
 #search-criteria input {
 	float:left;
 }
-

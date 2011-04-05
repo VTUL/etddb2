@@ -45,7 +45,7 @@ a:link {
 	padding:7px 0px 10px 20px;
 	width:171px;
 	padding-right:0px;
-	background:#3c5b6f url(../img/search_bg.jpg);
+	background:#3c5b6f url(../../images/search_bg.jpg);
 	margin:0;
 	display:none;
 	padding-left:3px;
@@ -554,7 +554,7 @@ ul h1 {
 
 #header li a {
 	font-size:10px;
-	list-style-image:url(/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	text-decoration:none;
 	padding:0;
@@ -693,7 +693,7 @@ table {
 ol ul {
 	list-style-type:none;
 	margin-right:0;
-	list-style-image:url(/assets/img/aa/list_bullet_fw.gif);
+	list-style-image:url(../../images/list_bullet_fw.gif);
 	margin-left:0;
 }
 
@@ -730,7 +730,7 @@ dl dd {
 
 #header li {
 	font-size:10px;
-	list-style-image:url(/etd-db2-0/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -815,7 +815,7 @@ hr {
 }
 
 #header {
-	background-image:url(/etd-db2-0/images/vt_header_screen.png);
+	background-image:url(../../images/vt_header_screen.png);
 	background-position:left top;
 	background-repeat:no-repeat;
 	color:#fff;
@@ -889,14 +889,14 @@ ol ol ol {
 #main #search ul li a {
 	padding:0 7px;
 	color:#fff;
-	background:transparent url(../img/search_bullet.gif) no-repeat 0px 3px;
+	background:transparent url(../../images/search_bullet.gif) no-repeat 0px 3px;
 }
 
 ul {
 	padding:0;
 	border:0;
 	margin:5px 15px 10px 10px;
-	list-style-image:url(/assets/image/nav_bullet_fw.gif);
+	list-style-image:url(../../images/nav_bullet_fw.gif);
 }
 
 ul h4 {
@@ -1078,7 +1078,7 @@ form ol {
 }
 
 #sub-header-inside {
-	background-image:url(/etd-db2-0/images/dla_banner.png);
+	background-image:url(../../images/dla_banner.png);
 	background-repeat:no-repeat;
 	float:right;
 	height:20px;
@@ -1137,7 +1137,7 @@ form ol {
 
 #header ul {
 	font-size:10px;
-	list-style-image:url(/etd-db2-0/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -1241,4 +1241,3 @@ ul ol {
 #search-criteria input {
 	float:left;
 }
-

@@ -1,0 +1,317 @@
+7c7
+< 	color:#FFFFFF;
+---
+> 	color:#000000;
+13,15c13,16
+< 	margin:0px auto;
+< 	padding:0px;
+< 	width:758px;
+---
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+17,18c18,19
+< 	background:#f5f5eB;
+< 	border:3px solid #fff;
+---
+> 	background:none;
+> 	border:0;
+28a30,40
+> #sub-content {
+> 	margin:0;
+> 	float:none;
+> 	border-top:1px #999 solid;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	margin-top:20px;
+> 	background:none;
+> 	border:0;
+> }
+> 
+37a50
+> 	display:none;
+55a69,77
+> sub-header-inside {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+67a90,93
+> #unit-header-screen {
+> 	display:none;
+> }
+> 
+81a108,112
+> tr {
+> 	color:#000000;
+> 	background:none;
+> }
+> 
+88c119
+< 	display:inline;
+---
+> 	display:none;
+106a138,142
+> th {
+> 	color:#000000;
+> 	width:auto;
+> }
+> 
+110a147,164
+> #page-wrapper2 {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+> #page-wrapper3 {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+111a166,167
+> 	color:#000000;
+> 	width:auto;
+114a171,188
+> #page-wrapper1 {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+> #page-wrapper4 {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+294a369,374
+> #sub-footer-inside ul {
+> 	border-top-style:dashed;
+> 	border-top-color:#000000;
+> 	border-top-width:thin;
+> }
+> 
+313a394,397
+> #sub-header-inside h1 a {
+> 	color:#000;
+> }
+> 
+318a403,406
+> #sub-footer-inside ul li a {
+> 	display:inline;
+> }
+> 
+328a417,422
+> .fluid #sub-header {
+> 	font-size:2.0em;
+> 	font-family:Times, 'Times New Roman', serif;
+> 	margin:0;
+> }
+> 
+330c424
+< 	font-size:90%;
+---
+> 	font-size:80%;
+332c426
+< 	margin:0 20px;
+---
+> 	margin:0px;
+334,335c428,429
+< 	padding:0;
+< 	background:#9D9879 url(/etd-db2-0/images/body_bg.jpg) repeat-x top left;
+---
+> 	padding:0px;
+> 	background:none;
+337c431
+< 	border:0;
+---
+> 	border:0px;
+361a456
+> 	display:none;
+394a490,498
+> .horizontal #sub-header {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+410,411c514,516
+< 	padding:0;
+< 	border:0;
+---
+> 	padding:2px;
+> 	color:#000000;
+> 	border:1px solid #9d9879;
+412a518
+> 	background:none;
+424a531,543
+> #main-content {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+> #vt-header-screen {
+> 	display:none;
+> }
+> 
+431a551
+> 	display:none;
+453,455c573,574
+< 	float:left;
+< 	display:inline;
+< 	background:#3c5b6f url(/etd-db2-0/assets/img/search_bg.jpg) repeat-y top left;
+---
+> 	border:0;
+> 	float:none;
+456a576,580
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	margin:0;
+> 	display:inline;
+562a687,692
+> table {
+> 	color:#000000;
+> 	width:90%;
+> 	background:none;
+> }
+> 
+583a714,717
+> #main-content .related-links {
+> 	background:none;
+> }
+> 
+592a727,730
+> #sub-footer-inside ul li {
+> 	display:inline;
+> }
+> 
+607a746,754
+> #content {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+638c785
+< 	display:block;
+---
+> 	display:none;
+675a823
+> 	margin-bottom:-50px;
+676a825
+> 	background:none;
+682a832,835
+> .style3 {
+> 	color:#000000;
+> }
+> 
+686a840,848
+> .horizontal #page-area {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+718c880,886
+< 	display:none;
+---
+> 	top:0px;
+> 	height:80px;
+> 	padding:0;
+> 	width:758px;
+> 	border:0;
+> 	display:block;
+> 	left:0px;
+799a968
+> 	border-top:1px #999 solid;
+801c970,971
+< 	background:#edeada url(/etd-db2-0/assets/img/related_links_top.gif) no-repeat top left;
+---
+> 	margin-top:20px;
+> 	background:none;
+803a974
+> 	display:inline;
+854a1026
+> 	display:inline;
+855a1028
+> 	text-align:center;
+868a1042
+> 	background:none;
+869a1044
+> 	display:inline;
+882a1058,1066
+> .horizontal #sub-header-inside {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 
+900c1084
+< 	height:77px;
+---
+> 	height:20px;
+902a1087
+> 	white-space:nowrap;
+923,925c1108,1110
+< 	top:27px;
+< 	height:44px;
+< 	width:373px;
+---
+> 	top:0px;
+> 	height:80px;
+> 	width:758px;
+929c1114
+< 	left:214px;
+---
+> 	left:0px;
+973a1159,1162
+> #unit-header p {
+> 	display:none;
+> }
+> 
+980a1170,1178
+> #main {
+> 	margin:0;
+> 	float:none;
+> 	padding:0;
+> 	width:auto; /* Hacked in global-ie.css for IE */;
+> 	background:none;
+> 	border:0;
+> }
+> 

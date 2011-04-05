@@ -1,0 +1,10 @@
+@import url('default.css');
+@import url('layout.css');
+@import url('search_box.css');
+@import url('nav.css');
+
+#search
+{
+padding-left:3px;
+padding-right:0px;
+}

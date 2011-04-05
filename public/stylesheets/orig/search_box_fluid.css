@@ -1,0 +1,87 @@
+
+
+#search {
+	margin: 0;
+	padding: 7px 2px 10px 20px;
+	background: #3c5b6f url(../img/search_bg.jpg);
+	color: #fff;
+	font-size: 85%;
+	/*width: 14%;*/
+	float: left;
+	display:block;
+	/*height:5%;*/
+	/*padding-left:20px;	*/
+	}
+
+
+	#search p{
+	margin: 0;
+	padding: 5px 5px;
+	letter-spacing: 1px;
+	text-align: center;
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color:#fff;
+	}
+
+
+
+#search-criteria input {
+	/*margin-bottom: 5px;*/
+	float: left;
+	}
+
+#search-criteria label {
+	float: left;
+	margin-top: 4px;
+	}
+
+#search form {
+	margin: 0;
+	color: #fff;
+	}
+
+#search fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	}
+
+
+
+#search input {
+	vertical-align: middle;
+	}
+
+#search input#search-query {
+	padding: 2px;
+	border: 1px solid #e3e3e3;
+	width: 125px;
+	font-size: 90%;
+	text-align: left;
+	}
+
+#search ul {
+	margin: 0;
+	padding: 5px 0 0 0;
+	height: 1.1em;
+	list-style: none;
+	}
+
+#search li {
+	margin: 0;
+	float: left;
+	line-height: 1.1em;
+	font-size: .9em;
+	}
+
+#main #search ul li a {
+	padding: 0 7px;
+	background: transparent url(../img/search_bullet.gif) no-repeat 0px 3px;
+	color: #fff;
+	}
+
+#main #search ul li a:hover {
+	text-decoration: none;
+	}
