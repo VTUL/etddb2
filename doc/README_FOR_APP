@@ -1,2 +1,21 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+OVERVIEW
+	<What it is>
+	<How>
+	<What you need to run it>
+
+CUSTOMIZATION
+
+All images should go in public/images/ and public/javascripts/ for javascript.
+
+If you want to include metadata, modify app/views/layouts/_metadata.html.erb,
+otherwise delete the file.
+
+Custom CSS stylesheets should go in the public/stylesheets/custom_styles/ folder,
+and named screen.css, and print.css for the screen sheet and the print sheet,
+respectively.
+
+Custom headers and footers go in app/views/layouts/custom_layout/ and should be
+named _header.html.erb and _footer.html.erb, respectively.
+
+The only other part of the app that should need editing are the static pages.
+They live in app/views/pages/
