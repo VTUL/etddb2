@@ -15,6 +15,10 @@ class PagesController < ApplicationController
 	@title = "Author Help"
   end
 
+  def staffhelp
+	@title = "Staff Help"
+  end
+
   def dev
 	@title = "Development"
   end
