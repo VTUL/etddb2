@@ -4,13 +4,16 @@ NewVtEtdUpgrd::Application.routes.draw do
   get "pages/about"
   get "pages/contact"
   get "pages/help"
+  get "pages/staffhelp"
   get "pages/dev"
 
+
   root :to => 'pages#home'
-  match '/about',   :to => 'pages#about'
-  match '/contact', :to => 'pages#contact'
-  match '/help',    :to => 'pages#help'
-  match '/dev',     :to => 'pages#dev'
+  match '/about',     :to => 'pages#about'
+  match '/contact',   :to => 'pages#contact'
+  match '/help',      :to => 'pages#help'
+  match '/staffhelp', :to => 'pages#staffhelp'
+  match '/dev',       :to => 'pages#dev'
 
   #match '/signup',  :to => 'people#new'
 

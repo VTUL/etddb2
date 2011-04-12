@@ -8,7 +8,7 @@
 		<%= javascript_include_tag :defaults %>
 	</head>
 	<body>
-		<div>
+		<div id="page-area">
 			<%= File.exists?("app/views/layouts/custom_layout/_header.html.erb") ? render('layouts/custom_layout/header') : render('layouts/header') %>
 			<section>
 				<% flash.each do |key, value| %>
