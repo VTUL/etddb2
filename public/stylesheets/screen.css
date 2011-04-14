@@ -1,0 +1,35 @@
+#page-area {
+	width:758px;
+	margin:0;
+	padding:0;
+}
+
+nav {
+	width:758px;
+	clear:both;
+	float:left;
+	display:block;
+	border:none;
+	padding:0;
+}
+
+nav ul li {
+	border-right:thin ridge #12252C;
+	display:inline;
+	float:left;
+	text-align:center;
+	width:auto
+}
+
+nav ul li.last {
+	border-right:none;
+}
+
+nav ul li.selected a {
+	color:#fff;
+	background-color:#660000;
+}
+
+nav ul li a {
+	padding:0 10px;
+}

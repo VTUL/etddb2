@@ -1,8 +1,13 @@
 <footer>
   <nav>
     <ul>
+<<<<<<< HEAD
       <li><%= link_to "About", '/about' %></li>
       <li><%= link_to "Contact", '/contact' %></li>
+=======
+      <li <%= "class='selected'" if params["action"] == "about" %>><%= link_to "About", '/about' %></li>
+      <li <%= "class='last selected'" if params["action"] == "contact" %>  class="last"><%= link_to "Contact Us", '/contact' %></li>
+>>>>>>> frontend
     </ul>
   </nav>
 </footer>
