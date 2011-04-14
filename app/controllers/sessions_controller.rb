@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
 
   # Create a new session
   def create
+    #user is a type Person 
     user = Person.authenticate(params[:session2][:name],
                              params[:session2][:password])
        
@@ -21,6 +22,9 @@ class SessionsController < ApplicationController
     else
       # Sign the user in and redirect to the user's show page.
       session[:user_id] = user.pid
+       
+      # Before letting a user landing on the user page, we need to check authorization
+      user.authorize() 
       redirect_to :controller => 'submit', :action => 'show_etds_by_author'
     end
   end

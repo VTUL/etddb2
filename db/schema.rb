@@ -93,8 +93,6 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
     t.text     "title"
     t.text     "abstract"
     t.string   "availability"
-    t.text     "availability_description"
-    t.text     "copyright_statement"
     t.date     "ddate"
     t.date     "sdate"
     t.date     "adate"
@@ -180,6 +178,5 @@ ActiveRecord::Schema.define(:version => 20110202183007) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> 46d2a599fb5b228a8451a5b8f7bf19e825b075d4
 
 end

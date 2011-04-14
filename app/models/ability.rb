@@ -31,7 +31,7 @@ class Ability
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
     # Defining Ability
-       user ||= User.new # guest user (not logged in)
+       user ||= Person.new # guest user (not logged in)
        if user.has_role? :admin
          can :manage, :all
        else
@@ -44,6 +44,15 @@ class Ability
     #      (subject.nil? || permission.subject_id.nil? || permission.subject_id == subject.id)
     #  end
     #end
+
+    #can do |action, subject_class, subject|
+    #  user.roles.permissions.find_all_by_action(action).any do |permission|
+    #    permission.subject_class == subject_class.to_s &&
+    #      (subject.nil? || permission.subject_id.nil? || permission.subject_id == subject.id)
+    #  end
+    #end
+
+
     # For admin
     can :manage, :all if user.has_role? :admin
     can :assign_roles, Person if user.has_role? :admin

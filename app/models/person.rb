@@ -33,19 +33,39 @@ class Person < ActiveRecord::Base
     # submitted_password.
   end
 
+
+  #for authorization
+  def self.authorization(pid)
+    roles = Person.find(pid).roles
+    if (roles.count.greater.than 2) 
+      # Re enter credentials for authorization w/ dropdown box of roles
+
+      # land on the user page
+
+
+      # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
+
+    end
+  
+  end
+
   # for authentication by EdAuth
   def self.authenticateByEdAuth(pid, submitted_password)
     x = EdAuth.new(pid, submitted_password)
-    if x.authenticate
-      x.get_primary_affiliation
-      x.get_affiliations
-      x.close
-      user = Person.new
-      user.pid = pid
-#      user.email = email
-      return user
-    else
+    if x.nil?
       return nil
+    else
+      if x.authenticate
+        x.get_primary_affiliation
+        x.get_affiliations
+        x.close
+        user = Person.new
+        user.pid = pid
+#       user.email = email
+        return user
+      else
+        return nil
+      end
     end
   end
 

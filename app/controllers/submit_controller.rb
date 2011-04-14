@@ -47,13 +47,22 @@ class SubmitController < ApplicationController
   # GET /submit/show_etds_by_author
   def show_etds_by_author
     @session_id = session[:user_id]
-    @author = Person.find(:first, :conditions => "pid='#{@session_id}'")
-    @ability = Ability.new(@author)
-    @etdss = Etd.find(id='18',id='19') # unless @author.etd_ids.empty?
+    #@author = Person.find(:first, :conditions => "pid='#{@session_id}'")
+     @author = Person.new
+     @author.pid ='#{@session_id}'
 
     respond_to do |format|
-      format.html # show_etd_by_author.html.erb
-      format.xml  { render :xml => @etd , :xml => @person }
+      if @author.nil?
+        #format.html { redirect_to(:controller=>"sessions", :action=>"new") }
+        #format.html { redirect_to(:controller=>"submit", :action => "new_etd") }
+        #format.html {render :controller => :people, :action => :new}
+      else
+        @ability = Ability.new(@author)
+        @etdss = Etd.find(id='18',id='19') unless @author.etd_ids.empty? unless @author.nil? 
+
+        format.html # show_etd_by_author.html.erb
+        format.xml  { render :xml => @etd , :xml => @person }
+      end
     end
   end
 
