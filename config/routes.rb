@@ -3,7 +3,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get "pages/home"
   get "pages/about"
   get "pages/contact"
-  get "pages/help"
+  get "pages/authorhelp"
   get "pages/staffhelp"
   get "pages/dev"
 
@@ -11,7 +11,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   root :to => 'pages#home'
   match '/about',     :to => 'pages#about'
   match '/contact',   :to => 'pages#contact'
-  match '/help',      :to => 'pages#help'
+  match '/authorhelp',:to => 'pages#authorhelp'
   match '/staffhelp', :to => 'pages#staffhelp'
   match '/dev',       :to => 'pages#dev'
 
