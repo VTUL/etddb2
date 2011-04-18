@@ -4,18 +4,19 @@ a:link {
 }
 
 .table-sub-heading {
-	color:#FFFFFF;
+	color:#000000;
 	font-weight:bold;
 	background-color:#660000;
 }
 
 #page-area {
-	margin:0px auto;
-	padding:0px;
-	width:758px;
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
 	border-top:0px;
-	background:#f5f5eB;
-	border:3px solid #fff;
+	background:none;
+	border:0;
 }
 
 #footer ul li {
@@ -26,16 +27,26 @@ a:link {
 	border-right:1px #333 solid;
 }
 
+#sub-content {
+	margin:0;
+	float:none;
+	border-top:1px #999 solid;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	margin-top:20px;
+	background:none;
+	border:0;
+}
+
 #search {
 	font-size:85%;
 	color:#fff;
 	float:left;
 	padding:7px 0px 10px 20px;
 	width:171px;
-	padding-right:0px;
 	background:#3c5b6f url(../../images/search_bg.jpg);
 	margin:0;
-	padding-left:3px;
+	display:none;
 }
 
 #univlib {
@@ -53,6 +64,15 @@ a:link {
 	vertical-align:middle;
 }
 
+sub-header-inside {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
+}
+
 #sub-footer ul li {
 	padding:0px 6px;
 	list-style:none;
@@ -63,6 +83,10 @@ a:link {
 
 #univlib a {
 	color:#fff;
+}
+
+#unit-header-screen {
+	display:none;
 }
 
 #nav .sub-nav a:hover {
@@ -79,13 +103,18 @@ img {
 	background-color:#f5f5eB;
 }
 
+tr {
+	color:#000000;
+	background:none;
+}
+
 #nav {
 	color:#fff;
 	clear:both;
 	float:none;
 	width:758px;
 	white-space:nowrap;
-	display:inline;
+	display:none;
 }
 
 li {
@@ -104,12 +133,55 @@ ul ul {
 	margin-left:0;
 }
 
+th {
+	color:#000000;
+	width:auto;
+}
+
 #sub-header a:hover {
 	text-decoration:none;
 }
 
+#page-wrapper2 {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
+}
+
+#page-wrapper3 {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
+}
+
 td {
+	color:#000000;
+	width:auto;
 	font-family:helvetica;
+}
+
+#page-wrapper1 {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
+}
+
+#page-wrapper4 {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
 }
 
 dl {
@@ -292,6 +364,12 @@ form fieldset legend {
 	text-align:center;
 }
 
+#sub-footer-inside ul {
+	border-top-style:dashed;
+	border-top-color:#000000;
+	border-top-width:thin;
+}
+
 ul h2 {
 	margin-right:0;
 	margin-left:0;
@@ -311,9 +389,17 @@ dd p {
 	margin-left:0;
 }
 
+#sub-header-inside h1 a {
+	color:#000;
+}
+
 .heading {
 	font-size:large;
 	font-weight:bold;
+}
+
+#sub-footer-inside ul li a {
+	display:inline;
 }
 
 #nav .sub-nav li a:active {
@@ -326,15 +412,21 @@ dd p {
 	margin:0;
 }
 
+.fluid #sub-header {
+	font-size:2.0em;
+	font-family:Times, 'Times New Roman', serif;
+	margin:0;
+}
+
 body {
-	font-size:90%;
+	font-size:80%;
 	color:#000;
-	margin:0 20px;
+	margin:0px;
 	min-height:10in;
-	padding:0;
-	background:#9D9879 url(../../images/body_bg.jpg) repeat-x top left;
+	padding:0px;
+	background:none;
 	font-family:Arial, Verdana, sans-serif;
-	border:0;
+	border:0px;
 	line-height:normal;  /* Peekaboo safety net for pages with broken links to ie.css. See Position is Everything */;
 	text-align:justify;
 }
@@ -359,6 +451,7 @@ form p {
 	width:1px;
 	position:absolute;
 	overflow:hidden;
+	display:none;
 	left:0px;
 }
 
@@ -392,6 +485,15 @@ form p {
 	text-indent:-0.5em;
 }
 
+.horizontal #sub-header {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
+}
+
 ol {
 	padding:0;
 	border:0;
@@ -407,9 +509,11 @@ ol {
 }
 
 #sub-header img {
-	padding:0;
-	border:0;
+	padding:2px;
+	color:#000000;
+	border:1px solid #9d9879;
 	display:block;
+	background:none;
 }
 
 #vt-header a {
@@ -422,6 +526,19 @@ ul h1 {
 	margin-left:0;
 }
 
+#main-content {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
+}
+
+#vt-header-screen {
+	display:none;
+}
+
 #vt-header {
 	top:28px;
 	height:48px;
@@ -429,12 +546,13 @@ ul h1 {
 	background:none;
 	position:absolute;
 	overflow:hidden;
+	display:none;
 	left:23px;
 }
 
 #header li a {
 	font-size:10px;
-	list-style-image:url(/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	text-decoration:none;
 	padding:0;
@@ -450,10 +568,14 @@ ul h1 {
 
 #sub-header {
 	color:#fff;
-	float:left;
-	display:inline;
-	background:#3c5b6f url(../../images/search_bg.jpg) repeat-y top left;
+	border:0;
+	float:none;
 	border-bottom:1px #fff solid;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	margin:0;
+	display:inline;
 }
 
 dd table {
@@ -560,10 +682,16 @@ h5 {
 	text-indent:2em;
 }
 
+table {
+	color:#000000;
+	width:90%;
+	background:none;
+}
+
 ol ul {
 	list-style-type:none;
 	margin-right:0;
-	list-style-image:url(/assets/img/aa/list_bullet_fw.gif);
+	list-style-image:url(../../images/list_bullet_fw.gif);
 	margin-left:0;
 }
 
@@ -581,6 +709,10 @@ dl dd {
 	margin:0 0 5px 15px;
 }
 
+#main-content .related-links {
+	background:none;
+}
+
 #main-nav {
 	font-size:14px;
 	clear:both;
@@ -590,9 +722,13 @@ dl dd {
 	background:#3c5b6f;
 }
 
+#sub-footer-inside ul li {
+	display:inline;
+}
+
 #header li {
 	font-size:10px;
-	list-style-image:url(/etd-db2-0/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -603,6 +739,15 @@ dl dd {
 dl dt {
 	margin:5px 0 0 0;
 	font-style:italic;
+}
+
+#content {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
 }
 
 #search input#search-query {
@@ -635,7 +780,7 @@ dl dt {
 	width:159px;
 	position:absolute;
 	overflow:hidden;
-	display:block;
+	display:none;
 	left:598px;
 }
 
@@ -673,15 +818,30 @@ hr {
 	background-repeat:no-repeat;
 	color:#fff;
 	height:97px;
+	margin-bottom:-50px;
 	width:758px;
+	background:none;
 	position:relative;
 	border-bottom:1px #fff solid;
 	margin:0;
 	background-color:#5e0000;
 }
 
+.style3 {
+	color:#000000;
+}
+
 #nav h4 {
 	color:#fff;
+}
+
+.horizontal #page-area {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
 }
 
 .i {
@@ -715,20 +875,26 @@ ol ol ol {
 
 #unit-header-print {
 	margin:0;
-	display:none;
+	top:0px;
+	height:80px;
+	padding:0;
+	width:758px;
+	border:0;
+	display:block;
+	left:0px;
 }
 
 #main #search ul li a {
 	padding:0 7px;
 	color:#fff;
-	background:transparent url(../img/search_bullet.gif) no-repeat 0px 3px;
+	background:transparent url(../../images/search_bullet.gif) no-repeat 0px 3px;
 }
 
 ul {
 	padding:0;
 	border:0;
 	margin:5px 15px 10px 10px;
-	list-style-image:url(/assets/image/nav_bullet_fw.gif);
+	list-style-image:url(../../images/nav_bullet_fw.gif);
 }
 
 ul h4 {
@@ -797,10 +963,13 @@ ul h3 {
 	font-size:90%;
 	color:#666;
 	clear:both;
+	border-top:1px #999 solid;
 	width:758px;
-	background:#edeada url(../../images/related_links_top.gif) no-repeat top left;
+	margin-top:20px;
+	background:none;
 	padding-top:5px;
 	font-weight:bold;
+	display:inline;
 	text-align:center;
 }
 
@@ -852,7 +1021,9 @@ form {
 
 #sub-footer-inside {
 	padding:5px 0 10px 0;
+	display:inline;
 	background:none;
+	text-align:center;
 }
 
 #nav .sub-nav ul {
@@ -866,7 +1037,9 @@ form {
 	clear:both;
 	padding:15px 0;
 	width:782px;
+	background:none;
 	margin:0 auto 0 auto;
+	display:inline;
 	text-align:center;
 }
 
@@ -878,6 +1051,15 @@ a:hover {
 #main-nav ul {
 	background:none;
 	background-color:transparent;
+}
+
+.horizontal #sub-header-inside {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
 }
 
 .main-content-right {
@@ -897,9 +1079,10 @@ form ol {
 	background-image:url(../../images/dla_banner.png);
 	background-repeat:no-repeat;
 	float:right;
-	height:77px;
+	height:20px;
 	width:566px;
 	border-left:1px solid #fff;
+	white-space:nowrap;
 }
 
 #footer li.last {
@@ -920,13 +1103,13 @@ form ol {
 }
 
 #unit-header {
-	top:27px;
-	height:44px;
-	width:373px;
+	top:0px;
+	height:80px;
+	width:758px;
 	background:none;
 	position:absolute;
 	overflow:hidden;
-	left:214px;
+	left:0px;
 }
 
 .unit-specific {
@@ -952,7 +1135,7 @@ form ol {
 
 #header ul {
 	font-size:10px;
-	list-style-image:url(/etd-db2-0/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -971,11 +1154,24 @@ form ol {
 	text-align:center;
 }
 
+#unit-header p {
+	display:none;
+}
+
 ol ol {
 	list-style-type:lower-alpha;
 	margin-right:0;
 	margin-bottom:0;
 	margin-left:0;
+}
+
+#main {
+	margin:0;
+	float:none;
+	padding:0;
+	width:auto; /* Hacked in global-ie.css for IE */;
+	background:none;
+	border:0;
 }
 
 #nav h3 {
