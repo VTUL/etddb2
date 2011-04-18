@@ -79,7 +79,7 @@ The CSS styles used in this file can be found in public/stylesheets/custom_style
 
  	<!-- BEGIN SUB HEADER BANNER AND UNIT SECTION-->
  	<div id="sub-header-inside">
-    	<p> <a href="/"> <strong>Electronic Theses and Dissertations at VT </strong></a></p>
+    	<h1><a href="/"> <strong>Electronic Theses and Dissertations at VT </strong></a></h1>
 	</div><!-- END SUB HEADER BANNER AND UNIT SECTION-->
 
 	<div class="clear">
@@ -105,6 +105,25 @@ The CSS styles used in this file can be found in public/stylesheets/custom_style
              <li><a href="http://www.scholar.com/NewsOnline/index.html">News</a></li>
              <li class="last"><a href="http://imagebase.lib.vt.edu" target="_blank">VT ImageBase</a></li>
          </ul>
+
+	<!-- SUB NAVIGATION -->
+	<!-- The code within the next div for the sub-navigation was written in order to highlight the navigation tab of
+	the selected section when the user navigates to that page. We had to put the entire if - elif - endif block within
+	a div to prevent the styles of the sub-nav class being applied to other elements of the page. -->
+	<div>
+        <div class="sub-nav">
+        	<ul>
+				<li <%= "class='selected'" if params["action"] == "home" %>> <a href="/">Home</a></li>
+				<li <%= "class='selected'" if params["action"] == "about" %>> <a href="/about">About</a></li>
+				<li <%= "class='selected'" if params["action"] == "help" %>> <a href="/help">Authors</a></li>
+				<li > <a href="http://scholar.lib.vt.edu/copyright/cprtetd.html">Copyright</a></li>
+				<li <%= "class='selected'" if params["action"] == "other" %>> <a href="/findetd">Find VT ETDs</a></li>
+				<li <%= "class='selected'" if params["action"] == "dev" %>> <a href="/dev">ETD-DB 2 Development</a></li>
+				<li <%= "class='selected'" if params["action"] == "other" %>> <a href="/ndltd">NDLTD</a></li>
+				<li class="last" <%= "class='selected'" if params["action"] == "other" %>> <a href="/preservation.html">Preservation</a></li>
+            </ul>
+        </div>
+	</div><!--END SUB NAVIGATION -->
 
 		 <div class="clear">
 			<span> &nbsp; </span>
