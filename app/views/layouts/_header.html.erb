@@ -1,10 +1,8 @@
-<header>
-  <nav>
-    <ul>
-      <li <%= "class='selected'" if params["action"] == "home" %>><%= link_to "Home", '/' %></li>
-	  <li <%= "class='selected'" if params["action"] == "help" %>><%= link_to "Author Help", '/help' %></li>
-	  <li <%= "class='selected'" if params["action"] == "staffhelp" %>><%= link_to "Staff Help", '/staffhelp' %></li>
-	  <li <%= "class='last selected'" if params["action"] == "dev" %> class="last"><%= link_to "ETD-DB Development", '/dev' %></li>
-    </ul>
-  </nav>
-</header>
+<div id="header">
+  <ul class="nav">
+	<li <%= "class='selected'" if params["action"] == "home" %>><%= link_to "Home", '/' %></li>
+	<li <%= "class='selected'" if params["action"] == "about" %>><%= link_to "About", '/about' %></li>
+	<li <%= "class='selected'" if params["action"] == "help" %>><%= link_to "Author Help", '/help' %></li>
+	<li <%= "class='selected'" if params["action"] == "staffhelp" %>><%= link_to "Staff Help", '/staffhelp' %></li>
+  </ul>
+</div>
