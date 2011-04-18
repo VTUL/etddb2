@@ -27,6 +27,8 @@ log/*.log
 *.sql
 *.sqlite
 *.sqlite3
+*.core
+*.pid
 
 # Configuration Files #
 #######################
