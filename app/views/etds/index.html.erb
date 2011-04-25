@@ -1,14 +1,18 @@
-<h1>Listing etds</h1>
+<h1>ETDs</h1>
+
+<div id="search">
+  <p>Search goes here.</p>
+</div>
 
 <table>
   <tr>
-    <th>Degree</th>
+    <!--<th>Degree</th>
     <th>Department</th>
-    <th>Dtype</th>
+    <th>Dtype</th>-->
     <th>Title</th>
     <th>Abstract</th>
     <th>Availability</th>
-    <th>Availability description</th>
+    <!--<th>Availability description</th>
     <th>Copyright statement</th>
     <th>Ddate</th>
     <th>Sdate</th>
@@ -18,18 +22,18 @@
     <th>Pid</th>
     <th>Url</th>
     <th>Timestamp</th>
-    <th>Bound</th>
+    <th>Bound</th>-->
   </tr>
 
 <% @etds.each do |etd| %>
   <tr>
-    <td><%=h etd.degree %></td>
+    <!--<td><%=h etd.degree %></td>
     <td><%=h etd.department %></td>
-    <td><%=h etd.dtype %></td>
+    <td><%=h etd.dtype %></td>-->
     <td><%=h etd.title %></td>
     <td><%=h etd.abstract %></td>
     <td><%=h etd.availability %></td>
-    <td><%=h etd.availability_description %></td>
+    <!--<td><%=h etd.availability_description %></td>
     <td><%=h etd.copyright_statement %></td>
     <td><%=h etd.ddate %></td>
     <td><%=h etd.sdate %></td>
@@ -39,7 +43,7 @@
     <td><%=h etd.pid %></td>
     <td><%=h etd.url %></td>
     <td><%=h etd.timestamp %></td>
-    <td><%=h etd.bound %></td>
+    <td><%=h etd.bound %></td>-->
     <td><%= link_to 'Show', etd %></td>
     <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
     <td><%= link_to 'Destroy', etd, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -49,4 +53,4 @@
 
 <br />
 
-<%= link_to 'New etd', new_etd_path %>
+<%= link_to 'New ETD', new_etd_path %>
