@@ -25,6 +25,7 @@ class PeopleController < ApplicationController
   # GET /people/new.xml
   def new
     @person = Person.new
+    @ability = Ability.new(@person)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,7 +59,7 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update
-    authorize! :assign_roles,@person if params[:user][:assign_roles]
+    authorize! :assign_roles, @person if params[:user][:assign_roles]
 
     @person = Person.find(params[:id])
 

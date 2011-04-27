@@ -18,7 +18,8 @@ class Person < ActiveRecord::Base
 
   #
   # Validates attributes
-  validates :role, :first_name, :last_name, :email, :pid, :presence => true
+  #validates :role, first_name, :last_name, :email, :pid, :presence => true
+  validates :role, :pid, :presence => true
 
   #
   # for authentication through matching the login name to the stored names.
@@ -35,17 +36,26 @@ class Person < ActiveRecord::Base
 
 
   #for authorization
-  def self.authorization(pid)
-    roles = Person.find(pid).roles
-    if (roles.count.greater.than 2) 
+  def authorize
+     begin
+       return @user = Person.find(:first,:conditions=> "pid='#{pid}'")
+     rescue ActiveRecord::RecordNotFound
+       return nil
+
+    # If there is no user in the `Person' table, that is, the user has only `author' role,
+    #  
+    # 
+    #  else
+     end
+    #    roles = Person.find(pid).roles
+
+
+    #if (roles.count.greater.than 2) 
       # Re enter credentials for authorization w/ dropdown box of roles
-
       # land on the user page
-
-
       # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
 
-    end
+    #end
   
   end
 

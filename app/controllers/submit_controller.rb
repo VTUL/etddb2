@@ -18,8 +18,15 @@ class SubmitController < ApplicationController
 #GET /submit/new.xml
   def new_etd 
     @etd = Etd.new
-    @author = Person.find(params[:author_id])
-
+    #begin
+      #@author = Person.find(:first,:conditions=>"pid='#{params[:author_pid]}' and role='author'")
+    #rescue 
+      @author = Person.new 
+      @author.pid = params[:author_pid].to_s
+      @author.roles << Role.find(:first,:conditions=>"name='author'")
+     
+    #end
+   
     respond_to do |format|
       format.html #=new.html.erb
       format.xml { render :xml => @etd}
@@ -31,11 +38,18 @@ class SubmitController < ApplicationController
   def create_etd
     @etd = Etd.new(params[:etdl])
     @etd.urn = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}"
+    
 
-    @author = Person.find(params[:etdl_person_ids])
+    #@author = Person.find(params[:etdl_person_ids])
+    @author = Person.new 
+    @author.pid = '#{params[:etdl_pid]}'.to_s
+    @author.roles << Role.find(:first,:conditions=>"name='author'")
+    @author.role = 'author'
+    @author.save!
+    
     respond_to do |format|
       if @etd.save
-        format.html { redirect_to(:controller => :submit, :action => :show_etd, :notice => 'Etd was successfully created.') }
+        format.html { redirect_to(:controller => :submit, :action => :show_etd, :id=> @etd.id,:user_id=>@author.pid, :notice => 'Etd was successfully created.') }
         format.xml  { render :xml => @etd, :status => :created, :location => @etd }
       else
         format.html { render :action => "new_etd" }
@@ -49,16 +63,17 @@ class SubmitController < ApplicationController
     @session_id = session[:user_id]
     #@author = Person.find(:first, :conditions => "pid='#{@session_id}'")
      @author = Person.new
-     @author.pid ='#{@session_id}'
+     @author.pid =params[:user_id]
+     @etdss = []
 
     respond_to do |format|
       if @author.nil?
-        #format.html { redirect_to(:controller=>"sessions", :action=>"new") }
+        #format.html { redirect_to(:controller=>"sessions", :action=>"new",:author_pid=>@author.pid) }
         #format.html { redirect_to(:controller=>"submit", :action => "new_etd") }
         #format.html {render :controller => :people, :action => :new}
       else
         @ability = Ability.new(@author)
-        @etdss = Etd.find(id='18',id='19') unless @author.etd_ids.empty? unless @author.nil? 
+        @etdss = @author.etds unless @author.etd_ids.empty? unless @author.nil? 
 
         format.html # show_etd_by_author.html.erb
         format.xml  { render :xml => @etd , :xml => @person }

@@ -1,13 +1,17 @@
 <h1>New etd</h1>
-  <p><b>
+ <p><b>
+    Pid</b><br />
+    <%= @author.pid %>
+  </p>
+ <!-- <p><b>
     First Name</b><br />
-    <%= @author.first_name %>
+    <%#= @author.first_name %>
   </p>
   <p>
     Last Name</b><br />
-    <%= @author.last_name %>
+    <%#= @author.last_name %>
   </p>
-
+-->
 <%= form_for :etdl, :url => { :action => :create_etd } do |f| %>
   <p>
     <%= f.label :degree %><br />
@@ -34,12 +38,12 @@
     <%= f.text_field :availability %>
   </p>
   <p>
-    <%= f.label :availability_description %><br />
-    <%= f.text_area :availability_description %>
+    <%#= f.label :availability_description %><br />
+    <%#= f.text_area :availability_description %>
   </p>
   <p>
-    <%= f.label :copyright_statement %><br />
-    <%= f.text_area :copyright_statement %>
+    <%#= f.label :copyright_statement %><br />
+    <%#= f.text_area :copyright_statement %>
   </p>
   <p>
     <%= f.label :ddate %><br />
@@ -62,8 +66,9 @@
     <%= f.date_select :rdate %>
   </p>
   <p>
-    <%= f.label :pid %><br />
-    <%= f.text_field :pid %>
+  
+    <%#= f.label :pid %><br />
+    <%#= f.text_field :pid %>
   </p>
   <p>
     <%= f.label :url %><br />
@@ -78,11 +83,11 @@
     <%= f.text_field :bound %>
   </p>
   <p>
-    <%=	f.hidden_field :person_ids , :value => "#{@author.id}" %>
+    <%=	f.hidden_field :pid , :value => '#{@author.pid}' %>
 
   <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', url_for( :controller => :submit, :action => :show_etds_by_author, :pid =>@author.pid) %>
+<%= link_to 'Back', url_for( :controller => :submit, :action => :show_etds_by_author, :author_pid =>'#{@author.pid}') %>

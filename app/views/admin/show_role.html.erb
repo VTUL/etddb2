@@ -1,0 +1,11 @@
+<% if @ability.can? :assign_roles, @person %>
+<p>
+  <b>Name:</b>
+  <%=h @role.name %>
+</p>
+
+
+<%= link_to 'Edit', url_for(:controller=>:admin, :action=>:edit_role,:id=>@role.id) %> |
+<%= link_to 'Back', url_for(:controller=>:admin, :action=>:index_role)%>
+<% end %>
+

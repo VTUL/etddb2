@@ -64,5 +64,5 @@
 <%=h @session_id %>
 <br />
 
-<%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd, :author_id => @author.id) %></br>
+<%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd, :author_pid => @author.pid.to_s) %></br>
 <%= link_to 'Log out', url_for(:controller => :sessions, :action => :destroy) %>

@@ -1,11 +1,21 @@
-<h1>New person</h1>
+<h1>Enter a new person</h1>
 
 <% form_for(@person) do |f| %>
-  <%= f.error_messages %>
-
   <p>
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
+    <!------------------------>
+    <% if @ability.can? :assign_roles, @person %>
+    <!-- role checkboxes go here -->
+      <%=h puts "here is admin mode" %>
+      <%= f.label :role %>
+      <%= f.collection_select :role, Person::ROLES, :to_s, :humanize %><br />
+      <% for role1 in Person::ROLES %>
+        <%= check_box_tag "person[roles][]", role1, @person.roles.include?(role1) %>
+        <%=h role1.humanize %><br />
+      <% end %>
+      <%= hidden_field_tag "person[roles][]", :role %>
+    <!-- role checkboxes go here -->
+    <% end %>
+    <!------------------------>
   </p>
   <p>
     <%= f.label :first_name %><br />

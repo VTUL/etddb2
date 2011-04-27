@@ -22,8 +22,8 @@ class Etd < ActiveRecord::Base
 #  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor" 
 #  belongs_to  :committee_cochair, :class => "Person", :foreign_key => "coadvisor"
 #  has_and_belongs_to_many :committee_members, :class => "Person", :foreign_key => "member"
-  validates :abstract, :availability, :availability_description, :bound,  
-            :copyright_statement , :degree,
+  validates :abstract, :availability, :bound,  
+            :degree,
             :department, :dtype,  :title, :url, :urn,
             :adate, :cdate, :ddate, :rdate, :sdate,
             :presence => true

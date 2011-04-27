@@ -34,8 +34,10 @@ class Ability
        user ||= Person.new # guest user (not logged in)
        if user.has_role? :admin
          can :manage, :all
+         puts 'a' 
        else
          can :read, :all
+         puts 'b'
        end
     # Abilities in Database
     #can do |action, subject_class, subject|
@@ -56,6 +58,7 @@ class Ability
     # For admin
     can :manage, :all if user.has_role? :admin
     can :assign_roles, Person if user.has_role? :admin
+    can :assign_permission, Permission if user.has_role? :admin
 
     # For author
     can :show_etd, Etd if user.has_role? :author
