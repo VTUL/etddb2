@@ -62,6 +62,7 @@
 </table>
 <%=h session[:user_id] %>
 <%=h @session_id %>
+<%=h @author.role %>
 <br />
 
 <%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd, :author_pid => @author.pid.to_s) %></br>

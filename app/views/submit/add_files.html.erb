@@ -2,7 +2,7 @@
 <% form_for(:content,
             :url => {:action => 'save_files'},
             :html => { :multipart => true }) do |form| %>
-             <%= form.hidden_field :etd_id , :value => "#{@etd.id}" %>
+             <%= form.hidden_field :etd_id , :value => @etd.id %>
 <!--            Comment: <%= form.text_field("comment" ) %><br/>
 -->            Upload your picture: <%= form.file_field("uploaded_picture" ) %><br/>
 

@@ -19,11 +19,11 @@ class SubmitController < ApplicationController
   def new_etd 
     @etd = Etd.new
     #begin
-      #@author = Person.find(:first,:conditions=>"pid='#{params[:author_pid]}' and role='author'")
+      @author = Person.find(:first,:conditions=>"pid='#{params[:author_pid]}' and role='author'")
     #rescue 
-      @author = Person.new 
+      @author ||= Person.new 
       @author.pid = params[:author_pid].to_s
-      @author.roles << Role.find(:first,:conditions=>"name='author'")
+      @author.roles << Role.find(:first,:conditions=>"name='author'") unless @author.roles.include? Role.find(:first, :conditions=>"name='author'")
      
     #end
    
@@ -41,11 +41,17 @@ class SubmitController < ApplicationController
     
 
     #@author = Person.find(params[:etdl_person_ids])
-    @author = Person.new 
-    @author.pid = '#{params[:etdl_pid]}'.to_s
-    @author.roles << Role.find(:first,:conditions=>"name='author'")
-    @author.role = 'author'
-    @author.save!
+    #begin
+      @author = Person.find(:first,:conditions=>"pid='#{@etd.pid}' and role='author'")
+    #rescue 
+     
+      @author ||= Person.new 
+      @author.pid =@etd.pid 
+      @author.roles << Role.find(:first,:conditions=>"name='author'") unless @author.roles.include? Role.find(:first,:conditions=>"name='author'")
+      @author.role = 'author'
+      @author.save!
+    #end
+      @etd.people<<@author
     
     respond_to do |format|
       if @etd.save
@@ -61,19 +67,22 @@ class SubmitController < ApplicationController
   # GET /submit/show_etds_by_author
   def show_etds_by_author
     @session_id = session[:user_id]
-    #@author = Person.find(:first, :conditions => "pid='#{@session_id}'")
-     @author = Person.new
-     @author.pid =params[:user_id]
-     @etdss = []
+    #begin
+      @author = Person.find(:first, :conditions => "pid='#{@session_id}' and role='author'")
+    #rescue  
+      @author ||= Person.new
+      @author.pid = session[:user_id]
+    #end
+    @etdss = []
 
     respond_to do |format|
       if @author.nil?
         #format.html { redirect_to(:controller=>"sessions", :action=>"new",:author_pid=>@author.pid) }
         #format.html { redirect_to(:controller=>"submit", :action => "new_etd") }
-        #format.html {render :controller => :people, :action => :new}
+        format.html {redirect_to( :controller => :people, :action => :new)}
       else
         @ability = Ability.new(@author)
-        @etdss = @author.etds unless @author.etd_ids.empty? unless @author.nil? 
+        @etdss = @author.etds unless @author.etds.empty? unless @author.nil? 
 
         format.html # show_etd_by_author.html.erb
         format.xml  { render :xml => @etd , :xml => @person }
@@ -167,7 +176,7 @@ class SubmitController < ApplicationController
   def show_files 
     @etd = Etd.find(params[:id])
     @contents = nil
-    @contents = Content.find(@etd.content_ids) unless @etd.contents.empty?
+    @contents = Content.find(@etd.content_ids) unless @etd.contents.nil?
   end
 
   def content
