@@ -1,18 +1,34 @@
-<h2> Log in</h2>
-<p>Enter your Virginia Tech PID (username) and password. Note that you
-must use the PID you were originally assigned, and not any aliases you
-may have created. <a href="http://www.4help.vt.edu/">Help
-with PIDs</a> (including forgotten passwords or deactivated accounts).</p>
+<h1> Re enter credintials for authorization </h1>
 
-<p><b>Your browser must accept <a href="/ETD-db/help/#cookies">cookies</a>
- to continue the submission process.</b>
-(<a href="/ETD-db/help/#browser">browser compatibility issues</a>).</p>
+<% form_for(:session,:url=>'authorize2') do |f| %>
+    <!--  -->
+  <% if @ability.can? :assign_roles, @person %>
+  <p>
+      <%=h puts "Here is Admin Mode\n"%>
+      <%= f.label :role %>
+    <!-- role selection boxes go here -->
+      <%= f.collection_select :role, @array_roles, :to_s, :humanize %><br />
+    <!-- role checkboxes go here -->
+      <% for role1 in @array_roles %>
+        <%#= check_box_tag "person[roles][]", role1, @person.roles.include?(role1) %>
+        <%#=h role1.humanize %><br />
+      <% end %>
+    <!--  -->
+      <%= hidden_field_tag "person[roles][]", :role %>
+  </p>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+  <% end %>
+  <!--  -->
+<% end %>
 
-<p style="color:red"><b>Please note:</b>
-
-If you are using Internet Explorer, and the clock on your machine is more than 15 minutes out of sync with the clock on our server, you may have problems with the cookies used by the submission software.  The current date and time on our server is <b>Tue Jul 13 10:03:33 EDT 2010
-</b>.  Be sure to reload this page before attempting to reset your clock.
-</p>
-<!--
-<p>New user? <%= link_to "Sign up now!", url_for(:action => 'new') %></p>
--->
+<%= link_to 'Submission process', url_for(:controller=>:submit,:action=>:show_etds_by_author,:user_id=>@person.pid) %>
