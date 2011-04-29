@@ -53,13 +53,16 @@ class SessionsController < ApplicationController
   end
 
   def authorize
+    #find roles who the user has
     @person=Person.find(:first,:conditions=>"pid='#{session[:user_id]}'")
+    @ability=Ability.new(@person) 
     @roles=@person.roles
 
     @array_roles = []
     for role  in @roles
       @array_roles << role.name
     end
+
   end
   def authorizationfailure
 
