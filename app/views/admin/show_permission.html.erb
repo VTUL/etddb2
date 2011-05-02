@@ -1,0 +1,23 @@
+<h1> Listing permissions</h1>
+
+<table>
+<tr>
+</tr>
+<% if @ability.can? :assign_permission, Permission %>
+<% @permission.each do |permission| %>
+  <tr>
+    <td><%=h permission.action_id %></td>
+    <td><%=h permission.role_id %></td>
+    <td><%=h permission.digital_object_id %></td>
+    <td><%= link_to 'Show', url_for(:controller=>:admin,:action=>:show_permission, :id=>role.id) %></td>
+    <td><%= link_to 'Edit', url_for(:controller=>:admin,:action=>:edit_permission, :id=>role.id) %></td>
+    <td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete_role %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New role', url_for(:controller=>:admin,:action=>:add_permission) %>
+
