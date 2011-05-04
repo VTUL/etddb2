@@ -93,16 +93,25 @@ class SubmitController < ApplicationController
   def show_etd
     @etd = Etd.find(params[:id])
     @author = @etd.people.find(:first, :conditions => "role='author'") unless @etd.people.empty?
+
     respond_to do |format|
+    # Update Etd attributes
       if @etd.update_attributes(params[:etd])
-	format.html # show.html.erb
-	format.xml  { render :xml => @etd , :xml => @person }
+        unless @etd.availability.eql? "mixed"
+          @etd.contents.each do |content| 
+            content.availability = @etd.availability
+          end
+        @etd.save!
+        end
+		format.html # show.html.erb
+		format.xml  { render :xml => @etd , :xml => @person }
       else
         format.html { render :action => "edit_etd" }
         format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
       end  
     end
   end
+
   # GET /etds/1/edit
   def edit_etd
     @etd = Etd.find(params[:id])
@@ -174,9 +183,27 @@ class SubmitController < ApplicationController
   end
 
   def show_files 
+    
     @etd = Etd.find(params[:id])
+    @author = @etd.people.find(:first, :conditions => "role='author'") unless @etd.people.empty?
     @contents = nil
     @contents = Content.find(@etd.content_ids) unless @etd.contents.nil?
+
+    respond_to do |format|
+#      if @contents.update_attribute(params[:contents])
+      if @etd.update_attributes(params[:etd])
+      	#@etd.save
+#        params[:etd][:contents].each do |content|
+#            @etd.contents[content.id].availability = content.availability
+#        end
+	    format.html # show.html.erb
+	    format.xml  { render :xml => @etd , :xml => @person }
+      else
+        format.html { render :action => "edit_etd" }
+        format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
+      end  
+    end    
+    
   end
 
   def content
@@ -194,6 +221,6 @@ class SubmitController < ApplicationController
   def change_file_availability
     @etd1 = Etd.new(params[:etd])
     @etd= Etd.find(params[:id])
-    @contents = @etd.content.find(:first, :conditions => "id = '#{params[]}'")
+    @contents = @etd.contents.find(:all)
   end
 end

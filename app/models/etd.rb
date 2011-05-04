@@ -9,6 +9,10 @@ class Etd < ActiveRecord::Base
   has_many :contents
   has_many :keywords
   has_many :provenances
+  
+  accepts_nested_attributes_for :contents
+  
+  attr_accessible :contents_attributes, :availability
 
 #  has_one  :availability_description
 #  has_one  :copyright_statement

@@ -13,10 +13,10 @@ class Content < ActiveRecord::Base
  #                     :with => %r{([A-Z]([A-Z]|[a-z])*)(_([a-z]|[A-Z])+)*(_[D|T])(_([0-9]{4}))\.(([a-z]|[A-Z]){3})},
  #                     :message => 'must have these component <Last name>_<first (and) middle initials>_T or D_<yyyy of defense' 
 
-  validates :types, :format => {
-                      :with => /^image/,
-                      :message => "--- you can only upload pictures"
-  }
+#  validates :types, :format => {
+#                      :with => /^image/,
+#                      :message => "--- you can only upload pictures"
+#  }
 
   def uploaded_picture=(content_field)
     self.filename = base_part_of(content_field.original_filename)
