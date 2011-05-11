@@ -168,15 +168,50 @@ class SubmitController < ApplicationController
     end
   end
 
+  def add_files2
+    @etd = Etd.new
+    5.times { @etd.contents.build }
+    #@content = Content.new
+    #5.times { @content.build }
+  end
+
+  def edit_files2
+    @etd = Etd.new
+    5.times { @etd.contents.build }
+    #@content = Content.new
+    #5.times { @contents.build }
+  end
+
+
   def add_files
     @picture = Content.new
     @etd = Etd.find(params[:id])
+    #@etd.contents.each do |content|
+       #content.delete if content.new_record?
+    #end
   end
 
   def save_files
     @picture = Content.new(params[:content])
-    if @picture.save
-      redirect_to(:action => 'show_files' , :id => @picture.etd_id)
+    @etd = Etd.find(params[:id])
+    #5.times { @etd.contents.build }   
+    
+    #if @picture.save
+    if @etd.update_attributes(params[:etd])
+      unless @etd.availability.eql? "mixed"
+         @etd.contents.each do |content| 
+           content.availability = @etd.availability
+         end
+      end
+      @etd.save!      
+#         params[:etd][:contents].each do |content|
+#            @etd.contents[content.id].availability = content.availability
+#        end
+#	    format.html # show.html.erb
+#	    format.xml  { render :xml => @etd , :xml => @person }
+
+      #redirect_to(:action => 'show_files' , :id => @picture.etd_id)
+      redirect_to(:action => 'show_files' , :id => @etd.id)
     else
       render(:action => :add_files)
     end
@@ -204,6 +239,18 @@ class SubmitController < ApplicationController
       end  
     end    
     
+  end
+  
+  def delete_file
+    @content = Content.find(params[:id])
+    @id = @content.etd_id
+    @content.delete
+
+    respond_to do |format|
+      #format.html
+      format.html { redirect_to(:controller=>:submit, :action=>:show_files, :id=>@id) }
+      format.xml  { head :ok }
+    end  
   end
 
   def content

@@ -1,3 +1,17 @@
+<table border>
+<p>
+  <tr><th>Filename:</th>  <th>Types:</th> <th>Size:</th> <th>Availability:</th> <th>Bound:</th></tr>
+
+<% @etd.contents.each do |content| %>
+<%# if content.filename=""  %>
+  <tr><td><%=h content.filename %></td><td> <%=h content.types %></td><td><%=h content.size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
+<td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
+<%# end %>
+<% end %>
+</p>
+</table>
+
+
 <h1>Add New Files</h1>
 
     Use this form to upload files to be associated with your ETD.
@@ -11,16 +25,21 @@
 <center>   <b> Files to be uploaded</b></center>
 </tr>
 <tr align="right">
-<% form_for(:content,
+<%   	5.times { @etd.contents.build } %>
+<% form_for(@etd,
             :url => {:action => 'save_files'},
             :html => { :multipart => true }) do |form| %>
-             <%= form.hidden_field :etd_id , :value=>@etd.id %>
+            <%=h hidden_field_tag 'id', @etd.id %>
 <!--            Comment: <%#= form.text_field("comment" ) %><br/>
--->         Upload your picture: <% 5.times { %>
-                                 <%= form.file_field("uploaded_picture" ) %><br/>
-      <% } %> 
+-->         <td>Upload your picture: </td> </tr><%                 %>
+						         <%= form.fields_for :contents do |content| %>
+							           <% if content.object.new_record? %>
+                 					  <tr><td></td><td>    <%= content.file_field :uploaded_picture %></td></tr>
+           							   <% end %>
+       							 <% end %>
+                                 
 
-</tr>
-</table>
-  <%= submit_tag("Upload file" ) %>
+
+  <tr><td></td><td align="right"><%= form.submit 'submit' %></td></tr>
 <% end %>
+</table>

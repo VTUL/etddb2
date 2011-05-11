@@ -4,7 +4,7 @@
 
 <% @etd.contents.each do |content| %>
   <tr><td><%=h content.filename %></td><td> <%=h content.types %></td><td><%=h content.size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
-<td><%= link_to 'Delete This Files', url_for(:controller => :submit, :action => :delete_files , :id => content.id)%></td></tr>
+<td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
 <% end %>
 </p>
 </table>
