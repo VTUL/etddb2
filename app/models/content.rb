@@ -8,22 +8,39 @@ class Content < ActiveRecord::Base
   belongs_to :etd
   # validation
   validates :filename, :size, :availability, :types, :bound, :presence => true
-  validates :size, :numericality => {:greater_than_or_equal_to => 0} 
+  validates :size, :numericality => {:greater_than_or_equal_to => 0}
+  
+  
+  has_attached_file :uploaded_picture,
+    :styles => {
+      :max_size => 8000.kilobytes,
+      :thumb=> "100x100#",
+      :small  => "300x300>",
+      :large => "600x600>"
+        },
+      :storage => :filesystem, 
+      :path => "/home/shpark/theses/"
+
+        
+  attr_accessor :pdf_file_name
+
+  
+  
  # validates_format_of :filename,
  #                     :with => %r{([A-Z]([A-Z]|[a-z])*)(_([a-z]|[A-Z])+)*(_[D|T])(_([0-9]{4}))\.(([a-z]|[A-Z]){3})},
  #                     :message => 'must have these component <Last name>_<first (and) middle initials>_T or D_<yyyy of defense' 
 
-  validates :types, :format => {
-                      :with => /^image/,
-                      :message => "--- you can only upload pictures"
-  }
+#  validates :types, :format => {
+#                      :with => /^image/,
+#                      :message => "--- you can only upload pictures"
+#  }
 
   def uploaded_picture=(content_field)
     self.filename = base_part_of(content_field.original_filename)
     self.types = content_field.content_type.chomp
     #self.data = picture_field.read
     self.availability = 'unrestricted'
-    self.size = 10000
+    self.size = content_field.size
     self.bound = 'no'
   end
 
@@ -36,6 +53,8 @@ class Content < ActiveRecord::Base
     @contents=@etd.contents
   end 
 end
+
+
 
 class Document < Content
   validates_presence_of :page_count

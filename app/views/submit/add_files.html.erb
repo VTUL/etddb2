@@ -1,3 +1,17 @@
+<table border>
+<p>
+  <tr><th>Filename:</th>  <th>Types:</th> <th>Size:</th> <th>Availability:</th> <th>Bound:</th></tr>
+
+<% @etd.contents.each do |content| %>
+<%# if content.filename=""  %>
+  <tr><td><%=h content.filename %></td><td> <%=h content.types %></td><td><%=h content.size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
+<td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
+<%# end %>
+<% end %>
+</p>
+</table>
+
+
 <h1>Add New Files</h1>
 <p>Use this form to upload files to be associated with your ETD.<br>
 Note: You may experience problems if your files take longer than a half hour to upload. If you are uploading large files, try adding one at a time.<br>

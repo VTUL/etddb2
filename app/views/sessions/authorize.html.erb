@@ -12,10 +12,10 @@
       <% for role1 in @array_roles %>
         <%#= check_box_tag "person[roles][]", role1, @person.roles.include?(role1) %>
         <%#=h role1.humanize %><br />
-      <% end %>
-    <!--  -->
+      <% end %> 
+    <!--  -->  
       <%= hidden_field_tag "person[roles][]", :role %>
-  </p>
+  </p> 
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>

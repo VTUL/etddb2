@@ -93,16 +93,25 @@ class SubmitController < ApplicationController
   def show_etd
     @etd = Etd.find(params[:id])
     @author = @etd.people.find(:first, :conditions => "role='author'") unless @etd.people.empty?
+
     respond_to do |format|
+    # Update Etd attributes
       if @etd.update_attributes(params[:etd])
-	format.html # show.html.erb
-	format.xml  { render :xml => @etd , :xml => @person }
+        unless @etd.availability.eql? "mixed"
+          @etd.contents.each do |content| 
+            content.availability = @etd.availability
+          end
+        @etd.save!
+        end
+		format.html # show.html.erb
+		format.xml  { render :xml => @etd , :xml => @person }
       else
         format.html { render :action => "edit_etd" }
         format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
       end  
     end
   end
+
   # GET /etds/1/edit
   def edit_etd
     @etd = Etd.find(params[:id])
@@ -159,24 +168,89 @@ class SubmitController < ApplicationController
     end
   end
 
+  def add_files2
+    @etd = Etd.new
+    5.times { @etd.contents.build }
+    #@content = Content.new
+    #5.times { @content.build }
+  end
+
+  def edit_files2
+    @etd = Etd.new
+    5.times { @etd.contents.build }
+    #@content = Content.new
+    #5.times { @contents.build }
+  end
+
+
   def add_files
     @picture = Content.new
     @etd = Etd.find(params[:id])
+    #@etd.contents.each do |content|
+       #content.delete if content.new_record?
+    #end
   end
 
   def save_files
     @picture = Content.new(params[:content])
-    if @picture.save
-      redirect_to(:action => 'show_files' , :id => @picture.etd_id)
+    @etd = Etd.find(params[:id])
+    #5.times { @etd.contents.build }   
+    
+    #if @picture.save
+    if @etd.update_attributes(params[:etd])
+      unless @etd.availability.eql? "mixed"
+         @etd.contents.each do |content| 
+           content.availability = @etd.availability
+         end
+      end
+      @etd.save!      
+#         params[:etd][:contents].each do |content|
+#            @etd.contents[content.id].availability = content.availability
+#        end
+#	    format.html # show.html.erb
+#	    format.xml  { render :xml => @etd , :xml => @person }
+
+      #redirect_to(:action => 'show_files' , :id => @picture.etd_id)
+      redirect_to(:action => 'show_files' , :id => @etd.id)
     else
       render(:action => :add_files)
     end
   end
 
   def show_files 
+    
     @etd = Etd.find(params[:id])
+    @author = @etd.people.find(:first, :conditions => "role='author'") unless @etd.people.empty?
     @contents = nil
     @contents = Content.find(@etd.content_ids) unless @etd.contents.nil?
+
+    respond_to do |format|
+#      if @contents.update_attribute(params[:contents])
+      if @etd.update_attributes(params[:etd])
+      	#@etd.save
+#        params[:etd][:contents].each do |content|
+#            @etd.contents[content.id].availability = content.availability
+#        end
+	    format.html # show.html.erb
+	    format.xml  { render :xml => @etd , :xml => @person }
+      else
+        format.html { render :action => "edit_etd" }
+        format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
+      end  
+    end    
+    
+  end
+  
+  def delete_file
+    @content = Content.find(params[:id])
+    @id = @content.etd_id
+    @content.delete
+
+    respond_to do |format|
+      #format.html
+      format.html { redirect_to(:controller=>:submit, :action=>:show_files, :id=>@id) }
+      format.xml  { head :ok }
+    end  
   end
 
   def content
@@ -194,6 +268,6 @@ class SubmitController < ApplicationController
   def change_file_availability
     @etd1 = Etd.new(params[:etd])
     @etd= Etd.find(params[:id])
-    @contents = @etd.content.find(:first, :conditions => "id = '#{params[]}'")
+    @contents = @etd.contents.find(:all)
   end
 end

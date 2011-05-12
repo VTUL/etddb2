@@ -6,9 +6,13 @@
 
 class Etd < ActiveRecord::Base
  # belongs_to :author, :class => "Person", :foreign_key => "written_by"
-  has_many :contents
+  has_many :contents, :dependent => :destroy
   has_many :keywords
   has_many :provenances
+  
+  accepts_nested_attributes_for :contents, :allow_destroy => true
+  
+  attr_accessible :contents_attributes, :availability
 
 #  has_one  :availability_description
 #  has_one  :copyright_statement

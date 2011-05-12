@@ -1,4 +1,4 @@
-<h1>Entering ETD information</h1>
+<h1>Modifying ETD information</h1>
 
 <%= form_for @etd, :url=> {:action=>:show_etd, :id => @etd.id} do |f| %>
   <p>
@@ -25,6 +25,7 @@
     <%= f.label :availability %><br />
     <%= f.text_field :availability %>
   </p>
+<!--
   <p>
     <%#= f.label :availability_description %><br />
     <%#= f.text_area :availability_description %>
@@ -33,6 +34,7 @@
     <%#= f.label :copyright_statement %><br />
     <%#= f.text_area :copyright_statement %>
   </p>
+-->
   <p>
     <%= f.label :ddate %><br />
     <%= f.date_select :ddate %>
@@ -75,7 +77,7 @@
 <% end %>
 
 <% form_for(@author) do |f| %>
-  <%= f.error_messages %>
+  <%#= f.error_messages %>
 
   <p>
     <%= f.label :role %><br />
