@@ -1,93 +1,116 @@
-<h1>New etd</h1>
- <p><b>
-    Pid</b><br />
-    <%= @author.pid %>
-  </p>
- <!-- <p><b>
-    First Name</b><br />
-    <%#= @author.first_name %>
-  </p>
-  <p>
-    Last Name</b><br />
-    <%#= @author.last_name %>
-  </p>
--->
+<h1>New ETD</h1>
+<p>
+Pid<br />
+<%= @author.pid %>
+</p>
 <%= form_for :etdl, :url => { :action => :create_etd } do |f| %>
-  <p>
-    <%= f.label :degree %><br />
-    <%= f.text_field :degree %>
-  </p>
-  <p>
-    <%= f.label :department %><br />
-    <%= f.text_field :department %>
-  </p>
-  <p>
-    <%= f.label :dtype %><br />
-    <%= f.text_field :dtype %>
-  </p>
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_area :title %>
-  </p>
-  <p>
-    <%= f.label :abstract %><br />
-    <%= f.text_area :abstract %>
-  </p>
-  <p>
-    <%= f.label :availability %><br />
-    <%= f.text_field :availability %>
-  </p>
-  <p>
-    <%#= f.label :availability_description %><br />
-    <%#= f.text_area :availability_description %>
-  </p>
-  <p>
-    <%#= f.label :copyright_statement %><br />
-    <%#= f.text_area :copyright_statement %>
-  </p>
-  <p>
-    <%= f.label :ddate %><br />
-    <%= f.date_select :ddate %>
-  </p>
-  <p>
-    <%= f.label :sdate %><br />
-    <%= f.date_select :sdate %>
-  </p>
-  <p>
-    <%= f.label :adate %><br />
-    <%= f.date_select :adate %>
-  </p>
-  <p>
-    <%= f.label :cdate %><br />
-    <%= f.date_select :cdate %>
-  </p>
-  <p>
-    <%= f.label :rdate %><br />
-    <%= f.date_select :rdate %>
-  </p>
-  <p>
-  
-    <%#= f.label :pid %><br />
-    <%#= f.text_field :pid %>
-  </p>
-  <p>
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </p>
-  <p>
-    <%= f.label :timestamp %><br />
-    <%= f.datetime_select :timestamp %>
-  </p>
-  <p>
-    <%= f.label :bound %><br />
-    <%= f.text_field :bound %>
-  </p>
-  <p>
-    <%=	f.hidden_field :pid, :value=>@author.pid %>
-
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+   <p>
+   <%= label("etdl", :email) %><br />
+   <%= check_box("etdl", :email, {:checked => true}) %>No, do not display my email address on my ETD title page.<br />
+   </p>
+   <p>
+   <%= label("etdl", :degree) %><br />
+   <%= select_tag :degree, options_for_select(["Select A Degree", "Doctor of Education", "Master of Arts",
+      "Master of Architecture", "Master of Engineering", "Master of Engineering Education", "Master of Forestry",
+      "Master of Fine Arts", "Master of Information Systems", "Master of Landscape Achitecture",
+      "Master of Natural Resources", "Master of Public and International Affairs", "Master of Science",
+      "Master of Science in Life Sciences", "Master of Urban and Regional Planning", "PhD"], ["Select A Degree"]) %>
+   </p>
+   <p>
+   <%= label("etdl", :dtype, "Document Type") %><br />
+   <%= select_tag :dtype, options_for_select(["Select A Document Type", "Dissertation", "Major Paper", "Project",
+      "Report", "Special Report", "Technical Report", "Master's Thesis"], ["Select A Document Type"]) %>
+   </p>
+   <p>
+   <%= label("etdl", :department) %><br />
+   <%= select_tag :department, options_for_select(["Select Your Department", "Accounting and Information Systems",
+      "Aerospace and Ocean Engineering", "Agricultural and Applied Economics", "Animal and Poultry Sciences",
+      "Architecture", "Art and Art History", "Biochemistry", "Biological Systems Engineering", "Biology",
+      "Business Administration", "Chemical Engineering", "Chemistry", "Civil Engineering", "Communication Studies",
+      "Computer Science", "Crop and Soil Environmental Sciences", "Dairy Science", "Economics",
+      "Educational Leadership and Policy Studies", "Electrical and Computer Engineering", "Engineering (General)",
+      "Engineering Science and Mechanics", "English", "Entomology", "Environmental Design and Planning",
+      "Environmental Engineering", "Environmental Programs", "Environmental Sciences and Engineering",
+      "Finance, Insurance, and Business Law", "Fisheries and Wildlife Sciences", "Food Science and Technology",
+      "Foreign Languages and Literatures", "Forestry", "Genetics", "Geography", "Geosciences", "Gerontology",
+      "History", "Horticulture", "Hospitality and Tourism Management", "Housing, Interior Design and Resource Management",
+      "Human-Computer Interaction", "Human Development", "Human Nutrition, Foods, and Exercise", "Humanities",
+      "Industrial and Systems Engineering", "Information Technology", "Information Systems",
+      "International Research And Development", "International Studies", "Landscape Architecture",
+      "Macromolecular and Science Engineering", "Management", "Management Science and Information Technology",
+      "Marketing", "Materials Science and Engineering", "Mathematical Physics", "Mathematics",
+      "Mechanical Engineering", "Mining and Minerals Engineering", "Molecular Cell Biology and Biotechnology",
+      "Music", "Natural Resources", "Near Environments", "Philosophy", "Physics", "Plant Pathology, Physiology, and Weed Science",
+      "Plant Physiology", "Political Science", "Public and International Affairs", "Psychology",
+      "Public Administration/Public Affairs", "Science and Technology Studies", "Sociology","Statistics",
+      "Systems Engineering", "Teaching and Learning", "Theatre Arts", "Urban Affairs and Planning",
+      "Veterinary Medical Sciences", "Women's Studies", "Wood Science and Forest Products"], ["Select Your Department"]) %>
+   </p>
+   <p>
+   <%= label("etdl", :title) %><br />
+   <%= text_field("etdl", :title) %>
+   </p>
+   <p>
+   <%= label("etdl", :keywords) %><br />
+   <%= text_field("etdl", :keywords) %>
+   </p>
+   <p>
+   <%= label("etdl", :abstract) %><br />
+   <%= text_area("etdl", :abstract) %>
+   </p>
+   <p>
+   <%= label("etdl", :ddate, "Defense Date") %><br />
+   <%= f.date_select :ddate %>
+   </p>
+   <!--<p>
+   <%= f.label :sdate %><br />
+   <%= f.date_select :sdate %>
+   </p>
+   <p>
+   <%= f.label :adate %><br />
+   <%= f.date_select :adate %>
+   </p>
+   <p>
+   <%= f.label :cdate %><br />
+   <%= f.date_select :cdate %>
+   </p>
+   <p>
+   <%= f.label :rdate %><br />
+   <%= f.date_select :rdate %>
+   </p>-->
+   <%= label("etdl", :availability) %>
+   <table>
+      <tr>
+         <td valign=top><%= radio_button("etdl", :availability, "unrestricted") %></td>
+         <td valign=top>1.</td>
+         <td>Release the entire work immediately for access worldwide.</td>
+      </tr>
+      <tr>
+         <td valign=top><%= radio_button("etdl", :availability, "restricted") %></td>
+         <td valign=top>2.</td>
+         <td>Release the entire work for Virginia Tech access only.</td>
+      </tr>
+      <tr>
+         <td valign=top><%= radio_button("etdl", :availability, "withheld") %></td>
+         <td valign=top>3.</td>
+         <td>Secure the entire work for patent and/or proprietary purposes for a period of one year. During this period the copyright owner also agrees not to exercise her/his ownership rights, including public use in works, without prior authorization from Virginia Tech. At the end of the one year period, either we or Virginia Tech may request an automatic extension for one additional year. At the end of the one year secure period (or its extension, if such is requested), the work will be handled under option 1 above, unless we request option 2 or 4 in writing.</td>
+      </tr>
+      <tr>
+         <td valign=top><%= radio_button("etdl", :availability, "mixed") %></td>
+         <td valign=top>4.</td>
+         <td>Release the entire work for Virginia Tech access only, while at the same time releasing parts of the work for worldwide access. Parts of the work may also be completely withheld from access.(You will be asked at a later point to specify the availability of each file you submit.)  <a href="/ETD-db/help/#mixed_availability">More information about &quot;mixed&quot; availability (option 4).</a></td>
+      </tr>
+   </table>
+   <p>
+   <%= label("etdl", :copyright) %><br />
+   I hereby certify that, if appropriate, I have obtained and attached hereto a written permission statement from the owner(s) of each third party copyrighted matter to be included in my thesis, dissertation, or project report, allowing distribution as specified below. I certify that the version I submitted is the same as that approved by my advisory committee.<br /><br />
+   I hereby grant to Virginia Tech or its agents the non-exclusive license to archive and make accessible, under the conditions specified below, my thesis, dissertation, or project report in whole or in part in all forms of media, now or hereafter known. I retain all other ownership rights to the copyright of the thesis, dissertation or project report. I also retain the right to use in future works (such as articles or books) all or part of this thesis, dissertation, or project report.<br /><br />
+   <%= check_box("etdl", :copyright) %>I Agree.
+   </p>
+   <%= hidden_field("etdl", :timestamp, {:value => Time.now}) %>
+   <%= hidden_field("etdl", :pid, {:value=>@author.pid}) %>
+   <%= f.submit 'Create' %>
+   </p>
 <% end %>
 
 <%= link_to 'Back', url_for( :controller => :submit, :action => :show_etds_by_author, :author_pid =>'#{@author.pid}') %>

@@ -1,26 +1,24 @@
 <h1>Add New Files</h1>
-
-    Use this form to upload files to be associated with your ETD.
-<br>
-    Note:
-    You may experience problems if your files take longer than a half hour to upload. If you are uploading large files, try adding one at a time.
-<br>
-    If you are experiencing problems uploading your files, take a look at our file uploads help.
+<p>Use this form to upload files to be associated with your ETD.<br>
+Note: You may experience problems if your files take longer than a half hour to upload. If you are uploading large files, try adding one at a time.<br>
+If you are experiencing problems uploading your files, take a look at our file uploads help.</p>
 <table>
 <tr>
-<center>   <b> Files to be uploaded</b></center>
+    <th><center>   <b> Files to be uploaded</b></center></th>
 </tr>
-<tr align="right">
-<% form_for(:content,
+<tr>
+    <td>
+        <% form_for(:content,
             :url => {:action => 'save_files'},
             :html => { :multipart => true }) do |form| %>
-             <%= form.hidden_field :etd_id , :value => @etd.id %>
-<!--            Comment: <%= form.text_field("comment" ) %><br/>
--->         Upload your picture: <% 5.times { %>
-                                 <%= form.file_field("uploaded_picture" ) %><br/>
-      <% } %> 
-
+            <%= form.hidden_field :etd_id , :value => @etd.id %>
+            <!--Comment: <%= form.text_field("comment" ) %><br/>
+            Upload your picture:-->
+            <% 5.times { %>
+                <%= form.file_field("uploaded_picture" ) %><br/>
+            <% } %>
+            <%= submit_tag("Upload file" ) %>
+        <% end %>
+    </td>
 </tr>
 </table>
-  <%= submit_tag("Upload file" ) %>
-<% end %>
