@@ -28,7 +28,7 @@
 <%   	5.times { @etd.contents.build } %>
 <% form_for(@etd,
             :url => {:action => 'save_files'},
-            :html => { :multipart => true }) do |form| %>
+            :html => { :multipart => true } ) do |form| %>
             <%=h hidden_field_tag 'id', @etd.id %>
 <!--            Comment: <%#= form.text_field("comment" ) %><br/>
 -->         <td>Upload your picture: </td> </tr><%                 %>

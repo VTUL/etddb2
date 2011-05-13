@@ -12,15 +12,17 @@ class Content < ActiveRecord::Base
   
   
   has_attached_file :uploaded_picture,
-    :styles => {
-      :max_size => 8000.kilobytes,
-      :thumb=> "100x100#",
-      :small  => "300x300>",
-      :large => "600x600>"
-        },
+    #:styles => {
+     # :max_size => 8000.kilobytes,
+     # :thumb=> "100x100#",
+     # :small  => "300x300>",
+     # :large => "600x600>"
+     #   },
       :storage => :filesystem, 
-      :path => "/home/shpark/theses/"
-
+	 # :path => ":rails_root/public/:attachment/:id/:basename.:extension"
+	 # :path => ":rails_root/public/theses/:filename"
+	 :path => "/usr/home/shpar/etddb2devel/public/theses/:filename"
+	 
         
   attr_accessor :pdf_file_name
 
@@ -34,6 +36,9 @@ class Content < ActiveRecord::Base
 #                      :with => /^image/,
 #                      :message => "--- you can only upload pictures"
 #  }
+  def get_bin_root()
+    File.join( Rails.root, 'public', 'bin' )  
+  end
 
   def uploaded_picture=(content_field)
     self.filename = base_part_of(content_field.original_filename)
@@ -42,6 +47,20 @@ class Content < ActiveRecord::Base
     self.availability = 'unrestricted'
     self.size = content_field.size
     self.bound = 'no'
+    
+    # get_bin_root() returns File.join( Rails.root, 'public', 'bin' )
+    tmp_directory = get_bin_root()+ "/submitted"
+    Dir.mkdir(tmp_directory)
+    save_as = File.join( get_bin_root(), "/submitted", content_field.original_filename )     
+      
+    File.open( save_as.to_s, 'w' ) do |file|
+      file.write(content_field.read.force_encoding("UTF-8"))
+    end
+
+    self.save!
+
+    return self   
+    
   end
 
   def base_part_of(file_name)
