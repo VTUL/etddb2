@@ -20,7 +20,7 @@
     <td><%=h person.pid %></td>
     <td><%=h person.suffix %></td>
     <td><%= link_to 'Show', url_for(:controller => 'people', :action => 'show', :id => person.id) %></td>
-    <td><%= link_to 'Edit', url_for(:conteroller => 'people', :action => 'edit_committed', :id => person.id) %></td>
+    <td><%= link_to 'Edit', url_for(:controller => 'people', :action => 'edit', :id => person.id) %></td>
     <td><%= link_to 'Destroy', url_for(:confirm => 'Are you sure?', :method => :delete, :id => person.id) %></td>
   </tr>
 <% end %>

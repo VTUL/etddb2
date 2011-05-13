@@ -1,0 +1,22 @@
+      <%= form_for @etd do |f| %>
+        <%= f.fields_for :contents do |content| %>
+           <% if content.object.new_record? %>
+                 <%= content.file_field :pdf %>
+           <% end %>
+       <% end %>
+       <%= f.submit 'submit' %>
+
+       <% f.fields_for :contents do |content| %>
+        
+          <% unless content.object.new_record? %>
+        
+                <div class="thumbnail">
+                        <%= link_to( image_tag(content.object.image.url(:thumb)), content.object.image.url(:original) ) %>
+                        <%= content.check_box :_delete %>
+                </div>
+                
+          <% end %>        
+       <% end %>
+       <%= f.submit 'submit' %>
+        
+   <% end %>
