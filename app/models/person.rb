@@ -19,7 +19,7 @@ class Person < ActiveRecord::Base
   #
   # Validates attributes
   #validates :role, first_name, :last_name, :email, :pid, :presence => true
-  validates :role, :pid, :presence => true
+  #validates :role, :pid, :presence => true
 
   #
   # for authentication through matching the login name to the stored names.

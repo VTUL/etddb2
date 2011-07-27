@@ -10,6 +10,7 @@ class Content < ActiveRecord::Base
   validates :filename, :size, :availability, :types, :bound, :presence => true
   validates :size, :numericality => {:greater_than_or_equal_to => 0}
   
+  #accepts_nested_attributes_for :recharge_contents, :allow_destory => true
   
   has_attached_file :uploaded_picture,
     #:styles => {
@@ -48,9 +49,12 @@ class Content < ActiveRecord::Base
     self.size = content_field.size
     self.bound = 'no'
     
+    # refer to the etd class from here content class
     # get_bin_root() returns File.join( Rails.root, 'public', 'bin' )
     tmp_directory = get_bin_root()+ "/submitted"
-    Dir.mkdir(tmp_directory)
+    if !File.directory?(tmp_directory)
+    	Dir.mkdir(tmp_directory)
+    end
     save_as = File.join( get_bin_root(), "/submitted", content_field.original_filename )     
       
     File.open( save_as.to_s, 'w' ) do |file|

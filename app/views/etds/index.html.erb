@@ -9,9 +9,9 @@
 
 <table>
   <tr>
-    <!--<th>Degree</th>
+    <th>Degree</th>
     <th>Department</th>
-    <th>Dtype</th>-->
+    <th>Dtype</th>
     <th>Title</th>
     <th>Abstract</th>
     <th>Availability</th>
@@ -21,32 +21,32 @@
     <th>Sdate</th>
     <th>Adate</th>
     <th>Cdate</th>
-    <th>Rdate</th>
+    <th>Rdate</th>-->
     <th>Pid</th>
-    <th>Url</th>
+    <!--<th>Url</th>
     <th>Timestamp</th>
     <th>Bound</th>-->
   </tr>
 
 <% @etds.each do |etd| %>
   <tr>
-    <!--<td><%=h etd.degree %></td>
+    <td><%=h etd.degree %></td>
     <td><%=h etd.department %></td>
-    <td><%=h etd.dtype %></td>-->
+    <td><%=h etd.dtype %></td>
     <td><%=h etd.title %></td>
     <td><%=h etd.abstract %></td>
     <td><%=h etd.availability %></td>
     <!--<td><%#=h etd.availability_description %></td>
     <td><%#=h etd.copyright_statement %></td>
-    <td><%=h etd.ddate %></td>
-    <td><%=h etd.sdate %></td>
-    <td><%=h etd.adate %></td>
-    <td><%=h etd.cdate %></td>
-    <td><%=h etd.rdate %></td>
-    <td><%=h etd.pid %></td>
-    <td><%=h etd.url %></td>
-    <td><%=h etd.timestamp %></td>
-    <td><%=h etd.bound %></td>-->
+    <td><%#=h etd.ddate %></td>
+    <td><%#=h etd.sdate %></td>
+    <td><%#=h etd.adate %></td>
+    <td><%#=h etd.cdate %></td>
+    <td><%#=h etd.rdate %></td>-->
+    <td><%#=h etd.pid %></td>
+<!--    <td><%#=h etd.url %></td>
+    <td><%#=h etd.timestamp %></td>
+    <td><%#=h etd.bound %></td>-->
     <td><%= link_to 'Show', etd %></td>
     <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
     <td><%= link_to 'Destroy', etd, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -3,10 +3,10 @@
 Pid<br />
 <%= @author.pid %>
 </p>
-<%= form_for :etdl, :url => { :action => :create_etd } do |f| %>
+<%= form_for :etd, :url => { :action => :create_etd } do |f| %>
    <p>
-   <%= f.label(:email) %><br />
-   <%= f.check_box(:email) %>Please display my email address on my ETD title page.<br />
+   <%#= f.label(:email) %><br />
+   <%#= f.check_box(:email) %>Please display my email address on my ETD title page.<br />
    </p>
    <p>
    <%= f.label(:degree) %><br />
@@ -55,8 +55,8 @@ Pid<br />
    <%= f.text_field(:title) %>
    </p>
    <p>
-   <%= f.label(:keywords) %><br />
-   <%= f.text_field(:keywords) %>
+   <%#= f.label(:keywords) %><br />
+   <%#= f.text_field(:keywords) %>
    </p>
    <p>
    <%= f.label(:abstract) %><br />
@@ -102,10 +102,10 @@ Pid<br />
       </tr>
    </table>
    <p>
-   <%= f.label(:copyright) %><br />
+   <%#= f.label(:copyright) %><br />
    I hereby certify that, if appropriate, I have obtained and attached hereto a written permission statement from the owner(s) of each third party copyrighted matter to be included in my thesis, dissertation, or project report, allowing distribution as specified below. I certify that the version I submitted is the same as that approved by my advisory committee.<br /><br />
    I hereby grant to Virginia Tech or its agents the non-exclusive license to archive and make accessible, under the conditions specified below, my thesis, dissertation, or project report in whole or in part in all forms of media, now or hereafter known. I retain all other ownership rights to the copyright of the thesis, dissertation or project report. I also retain the right to use in future works (such as articles or books) all or part of this thesis, dissertation, or project report.<br /><br />
-   <%= f.check_box(:copyright) %>I Agree.
+   <%#= f.check_box(:copyright) %>I Agree.
    </p>
    <%= f.hidden_field(:timestamp, {:value => Time.now}) %>
    <%= f.hidden_field(:pid, {:value=>@author.pid}) %>

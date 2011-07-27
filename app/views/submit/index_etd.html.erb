@@ -17,8 +17,9 @@
     <th>Rdate</th>
     <th>Pid</th>
     <th>Url</th>
--->
     <th>Timestamp</th>
+-->
+	<th>URN</th>
     <th>Bound</th>
   </tr>
 
@@ -38,8 +39,9 @@
     <td><%=h etd.rdate %></td>
     <td><%=h etd.pid %></td>
     <td><%=h etd.url %></td>
--->
     <td><%=h etd.timestamp %></td>
+-->
+    <td><%=h etd.urn %></td>    
     <td><%=h etd.bound %></td>
     <td><%= link_to 'View', url_for(:controller => :submit, :action => :show_etd, :id => etd.id) %></td>
     <td><%= link_to 'Edit', url_for(:controller => :submit, :action => :edit_etd, :id => etd.id) %></td>

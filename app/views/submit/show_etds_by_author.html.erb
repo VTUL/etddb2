@@ -17,8 +17,10 @@
     <th>Rdate</th>
     <th>Pid</th>
     <th>Url</th>
--->
     <th>Timestamp</th>
+-->
+	<th>URN</th>
+
     <th>Bound</th>
   </tr>
 
@@ -38,8 +40,10 @@
     <td><%=h etd.rdate %></td>e
     <td><%=h etd.pid %></td>
     <td><%=h etd.url %></td>
--->
     <td><%=h etd.timestamp %></td>
+-->
+    <td><%=h etd.urn %></td> 
+
     <td><%=h etd.bound %></td>
   
     <td>
@@ -65,5 +69,5 @@
 <%=h @author.role %>
 <br />
 
-<%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd, :author_pid => @author.pid.to_s) %></br>
+<%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd) %></br>
 <%= link_to 'Log out', url_for(:controller => :sessions, :action => :destroy) %>

@@ -3,10 +3,10 @@
   <tr><th>Filename:</th>  <th>Types:</th> <th>Size:</th> <th>Availability:</th> <th>Bound:</th></tr>
 
 <% @etd.contents.each do |content| %>
-<%# if content.filename=""  %>
-  <tr><td><%=h content.filename %></td><td> <%=h content.types %></td><td><%=h content.size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
+<% if content.filename != nil  %>
+  <tr><td><%=h  content.filename %></td><td> <%=h content.types %></td><td><%=h content.size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
 <td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
-<%# end %>
+<% end %>
 <% end %>
 </p>
 </table>
@@ -22,34 +22,20 @@ If you are experiencing problems uploading your files, take a look at our file u
 </tr>
 <tr>
     <td>
-        <% form_for(:content,
+        <%= form_for(:contents,
             :url => {:action => 'save_files'},
-<<<<<<< HEAD
             :html => { :multipart => true } ) do |form| %>
             <%=h hidden_field_tag 'id', @etd.id %>
 <!--            Comment: <%#= form.text_field("comment" ) %><br/>
--->         <td>Upload your picture: </td> </tr><%                 %>
+
+-->         <td>Upload your picture: </td> </tr>
+							 <%# @etd.contents.each do |contents| %>
 						         <%= form.fields_for :contents do |content| %>
-							           <% if content.object.new_record? %>
-                 					  <tr><td></td><td>    <%= content.file_field :uploaded_picture %></td></tr>
-           							   <% end %>
+							     <% if content.object.new_record? %>
+                 					  <tr><td></td><td>    <%= content.object.file_field  :uploaded_picture %></td></tr>
+           						     <% end %>
        							 <% end %>
-                                 
-
-
+							 <%# end %>
   <tr><td></td><td align="right"><%= form.submit 'submit' %></td></tr>
-<% end %>
-=======
-            :html => { :multipart => true }) do |form| %>
-            <%= form.hidden_field :etd_id , :value => @etd.id %>
-            <!--Comment: <%= form.text_field("comment" ) %><br/>
-            Upload your picture:-->
-            <% 5.times { %>
-                <%= form.file_field("uploaded_picture" ) %><br/>
-            <% } %>
-            <%= submit_tag("Upload file" ) %>
-        <% end %>
-    </td>
-</tr>
->>>>>>> 75ef604efebc5bf3a002570662e2e85d89fd63c5
+		<% end %>
 </table>

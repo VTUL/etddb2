@@ -12,7 +12,8 @@ class Etd < ActiveRecord::Base
   
   accepts_nested_attributes_for :contents, :allow_destroy => true
   
-  attr_accessible :contents_attributes, :availability
+#  attr_accessible :contents_attributes, :availability, :title, :pid, :degree, :dtype, :department,
+#                  :timestamp
 
 #  has_one  :availability_description
 #  has_one  :copyright_statement
@@ -26,11 +27,11 @@ class Etd < ActiveRecord::Base
 #  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor" 
 #  belongs_to  :committee_cochair, :class => "Person", :foreign_key => "coadvisor"
 #  has_and_belongs_to_many :committee_members, :class => "Person", :foreign_key => "member"
-  validates :abstract, :availability, :bound,  
-            :degree,
-            :department, :dtype,  :title, :url, :urn,
-            :adate, :cdate, :ddate, :rdate, :sdate,
-            :presence => true
+#validates :abstract, :availability, :bound,  
+#           :degree,
+#           :department, :dtype,  :title, :url, :urn,
+#           :adate, :cdate, :ddate, :rdate, :sdate,
+#           :presence => true
 #  validates_uniqueness_of #:urn
 
   def self.find_etds_for_browsing_by_author(letter)
