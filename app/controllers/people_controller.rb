@@ -39,6 +39,7 @@ class PeopleController < ApplicationController
     #@ability = Ability.new(@)
     #@current_user = @session.user
     @person = Person.find(params[:id])
+    @ability = Ability.new(@person)
   end
 
   # POST /people
@@ -60,7 +61,7 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update
-    authorize! :assign_roles, @person if params[:user][:assign_roles]
+    authorize! :assign_roles, @person if params[:person][:roles]
 
     @person = Person.find(params[:id])
 

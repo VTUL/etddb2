@@ -2,8 +2,10 @@
 
 Session1:
 #  bound: NO
-  name: Park
+  data: Park
+  session_id: 1
 
 Session2:
 #  bound: YES
-  bound: Weeks
+  data: Weeks
+  session_id: 2

@@ -3,12 +3,12 @@
 #  Added this to gemfile in branch test merge to devel to share
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', '1.3.3', :require => 'sqlite3'
+gem 'sqlite3', '1.3.3', :require => 'sqlite3'
 #gem 'net-ldap' , '0.1.1'
 
 gem 'ruby-ldap', '0.9.10'
