@@ -154,9 +154,10 @@ class SubmitController < ApplicationController
 
   def create_committee
     @person = Person.new(params[:person])
-    @etd = Etd.find(@person.etds.find(:last))
+    @etd = Etd.find(params[:etd][:id]) unless @person.nil?
+	@person.save!
     @etd.people << @person
-
+    @etd.save!
     respond_to do |format|
       if @person.save
         format.html { redirect_to(@person, :notice => 'Person was successfully created.') }
@@ -186,27 +187,39 @@ class SubmitController < ApplicationController
   def add_files
     @picture = Content.new
     @etd = Etd.find(params[:id])
+    @contents = @etd.contents.find(:all)
     
     #@content = Content.new
     #5.times { @content.build }
     5.times { @etd.contents.build }
-    @etd.contents.each do |content|
-       content.delete if content.new_record?
-    end
+    #@etd.contents.each do |content|
+    #   content.delete if content.new_record?
+    #end
   end
 
   def save_files
   # fetch objects to be use in the view
-    @picture = Content.new(params[:content])   
     @etd = Etd.find(params[:id])
+    @picture = Content.new(params[:content])   
     
-  # add 5 contents build?? Check up this line code
-    5.times { @etd.contents.build }   
    
     # check if there is any chanage or update of picture/etd itself
     if @picture.save
+    #    puts "this is picture.save\n"
     	@etd.contents<< @picture
+   # else
+   #     puts "this is not picture.save\n"
     end
+
+   #  @picture = Content.new(params[:etd][:contents][:uploaded_picture])
+   #      @picture.save
+   #      @etd.contents<< @picture
+   #  @etd.save
+
+  # add 5 contents build?? Check up this line code
+  # 5.times { @etd.contents.build }   
+
+
     # for mixed case of etds
     if @etd.update_attributes(params[:etd])
       # in case of changing etd avaiability
@@ -217,11 +230,14 @@ class SubmitController < ApplicationController
       end
       @etd.save!   
       # handling each content availability
-        params[:etd][:contents].each do |content|
-            @etd.contents[content.id].availability = content.availability
-        end
-	    format.html # show.html.erb
-	    format.xml  { render :xml => @etd , :xml => @person }
+      ######################################################
+      # Now I am commenting out these codes for a while. If there is no problem, these code should be removed.
+      # params[:etd][:contents].each do |content|
+      #    @etd.contents[content.id].availability = content.availability
+      #end
+      ########################################################
+      #format.html #{ render :action => "show_files.html.erb" }
+      #format.xml  { render :xml => @etd , :xml => @person }
 
       #redirect_to(:action => 'show_files' , :id => @picture.etd_id)
       redirect_to(:action => 'show_files' , :id => @etd.id)
