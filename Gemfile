@@ -3,11 +3,7 @@
 #  Added this to gemfile in branch test merge to devel to share
 source 'http://rubygems.org'
 
-<<<<<<< HEAD
 gem 'rails', '3.0.10'
-=======
-gem 'rails', '3.0.9'
->>>>>>> fc7f77d6ead1ef0cb63a83a685e3638978655eb4
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
