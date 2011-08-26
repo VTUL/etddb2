@@ -22,9 +22,9 @@ If you are experiencing problems uploading your files, take a look at our file u
 </tr>
 <tr>
     <td>
-        <%= form_for(:contents,
+        <%= form_for @etd,
             :url => {:action => 'save_files'},
-            :html => { :multipart => true } ) do |form| %>
+             :html => {:multipart => true}   do |form| %>
             <%=h hidden_field_tag 'id', @etd.id %>
 <!--            Comment: <%#= form.text_field("comment" ) %><br/>
 
@@ -32,7 +32,7 @@ If you are experiencing problems uploading your files, take a look at our file u
 							 <%# @etd.contents.each do |contents| %>
 						         <%= form.fields_for :contents do |content| %>
 							     <% if content.object.new_record? %>
-                 					  <tr><td></td><td>    <%= content.object.file_field  :uploaded_picture %></td></tr>
+                 					  <tr><td></td><td>    <%= content.file_field  :uploaded_picture %></td></tr>
            						     <% end %>
        							 <% end %>
 							 <%# end %>
