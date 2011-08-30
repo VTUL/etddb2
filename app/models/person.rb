@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
 
   #
   # Validates attributes
-  #validates :role, first_name, :last_name, :email, :pid, :presence => true
+  #validates :role, :first_name, :last_name, :email, :pid, :presence => true
   #validates :role, :pid, :presence => true
 
   #
