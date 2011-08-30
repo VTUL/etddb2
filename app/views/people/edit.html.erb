@@ -4,7 +4,7 @@
 
   <p>
     <!-- -->
-    <%# if @ability.can? :assign_roles, @person %>
+    <% if @ability.can? :assign_roles, @person %>
     <!-- role checkboxes go here -->
       <%= f.label :role %>
       <%= f.collection_select :role, Person::ROLES, :to_s, :humanize %><br />
@@ -14,7 +14,7 @@
       <% end %>
       <%= hidden_field_tag "person[roles][]", :role %>
     <!-- role checkboxes go here -->
-    <%# end %>
+    <% end %>
     <!-- -->
   </p>
   <p>
@@ -30,16 +30,16 @@
     <%= f.text_field :last_name %>
   </p>
   <p>
+    <%= f.label :suffix %><br />
+    <%= f.text_field :suffix %>
+  </p>
+  <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
   <p>
     <%= f.label :pid %><br />
     <%= f.text_field :pid %>
-  </p>
-  <p>
-    <%= f.label :suffix %><br />
-    <%= f.text_field :suffix %>
   </p>
   <p>
     <%= f.submit 'Update' %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+Session1:
+#  bound: NO
+  data: Park
+  session_id: 1
+
+Session2:
+#  bound: YES
+  data: Weeks
+  session_id: 2

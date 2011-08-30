@@ -14,4 +14,11 @@ class SessionTest < ActiveSupport::TestCase
     assert session.errors[:session_id].any?
     assert session.errors[:data].any?
   end
+
+  test "should be valid with data and session_id attributes" do
+    session = Session.new(:session_id => 1, :data => "shpark")
+    assert session.valid?
+    assert !session.errors[:session_id].any?
+    assert !session.errors[:data].any?
+  end
 end

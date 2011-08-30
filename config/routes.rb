@@ -1,6 +1,6 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
-  get "pages/home"
+  #get "pages/home"
   get "pages/about"
   get "pages/contact"
   get "pages/authorhelp"
@@ -36,9 +36,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :contents
   #resources :sessions, :only => [:new, :create, :destroy]
 
-  #get "sessions#new"
-  #match '/login',   :to => 'sessions#new'
-  #match '/logout',  :to => 'sessions#destroy'
+  #get "sessions/new"
+  match '/login',   :to => 'sessions#new'
+  match '/logout',  :to => 'sessions#destroy'
 
   #get 'browse/index'
   # The priority is based upon order of creation:
