@@ -9,9 +9,9 @@ class Etd < ActiveRecord::Base
   has_many :contents, :dependent => :destroy
   has_many :keywords
   has_many :provenances
-  
+
   accepts_nested_attributes_for :contents, :allow_destroy => true
-  
+
 #  attr_accessible :contents_attributes, :availability, :title, :pid, :degree, :dtype, :department,
 #                  :timestamp
 
@@ -21,23 +21,24 @@ class Etd < ActiveRecord::Base
 #  has_one  :doctype_description
 #  has_one  :department_list
 #  has_one  :urn_register
-  
-  has_and_belongs_to_many :people
-  
-#  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor" 
+
+#  has_and_belongs_to_many :people
+
+  has_and_belongs_to_many :people_roles
+#  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor"
 #  belongs_to  :committee_cochair, :class => "Person", :foreign_key => "coadvisor"
 #  has_and_belongs_to_many :committee_members, :class => "Person", :foreign_key => "member"
-#validates :abstract, :availability, :bound,  
-#           :degree,
-#           :department, :dtype,  :title, :url, :urn,
-#           :adate, :cdate, :ddate, :rdate, :sdate,
-#           :presence => true
-#  validates_uniqueness_of #:urn
+  validates :abstract, :availability, :bound,
+            :degree,
+            :department, :dtype,  :title, :url, :urn,
+            :adate, :cdate, :ddate, :rdate, :sdate,
+            :presence => true
+  validates_uniqueness_of :urn
 
   def self.find_etds_for_browsing_by_author(letter)
     @person = Person.find(:all, :conditions => "role='author' and last_name like '#{letter}%'", :order => 'first_name')
     @person.each do |person|
-    	return person.etds
+      return person.etds
     end
   end
 
@@ -48,12 +49,12 @@ class Etd < ActiveRecord::Base
   def self.find_etds_for_browsing_by_advisor(letter)
     @person = Person.find(:all, :conditions => "role='committee_chair' and last_name like '#{letter}%'", :order => 'first_name')
     @person.each do |person|
-    	return person.etds
+      return person.etds
     end
   end
 
-  def self.find_etds_for_view(id) 
-	Etd.find(:all, :conditions => "id='#{id}'")
-  end  
+  def self.find_etds_for_view(id)
+    Etd.find(:all, :conditions => "id='#{id}'")
+  end
 
 end

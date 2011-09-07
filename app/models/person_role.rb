@@ -11,6 +11,7 @@ class PersonRole < ActiveRecord::Base
   #Associate tables
   has_many :people
   has_many :roles
+  has_and_belongs_to_many :etds
 
   #Validate attributes
   validates :id, :person_id, :role_id, :presence => true

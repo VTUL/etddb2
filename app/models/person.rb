@@ -13,7 +13,6 @@ class Person < ActiveRecord::Base
 
   #
   # Assicate tables
-  has_and_belongs_to_many :etds
   has_and_belongs_to_many :roles
 
   #
@@ -43,20 +42,20 @@ class Person < ActiveRecord::Base
        return nil
 
     # If there is no user in the `Person' table, that is, the user has only `author' role,
-    #  
-    # 
+    #
+    #
     #  else
      end
     #    roles = Person.find(pid).roles
 
 
-    #if (roles.count.greater.than 2) 
+    #if (roles.count.greater.than 2)
       # Re enter credentials for authorization w/ dropdown box of roles
       # land on the user page
       # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
 
     #end
-  
+
   end
 
   # for authentication by EdAuth
@@ -98,7 +97,7 @@ class Person < ActiveRecord::Base
 #    end
 #  end
 
-  
+
   def has_role?(role_sym)
     roles.any? { |r| r.name.to_sym == role_sym }
   end
