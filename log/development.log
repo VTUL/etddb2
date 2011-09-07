@@ -60867,3 +60867,1028 @@ DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3
 DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /home/Moot/etddb/config/environment.rb:5)
 DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /home/Moot/etddb/config/environment.rb:5)
 DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /home/Moot/etddb/config/environment.rb:5)
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+
+
+Started GET "/submit/login" for 128.173.124.223 at 2011-09-05 15:50:35 -0400
+  Processing by SessionsController#new as HTML
+Rendered layouts/_metadata.html.erb (0.4ms)
+Rendered layouts/_stylesheets.html.erb (0.7ms)
+Rendered layouts/_header.html.erb (0.8ms)
+Rendered layouts/_footer.html.erb (0.5ms)
+Rendered sessions/new.html.erb within layouts/application (119.2ms)
+Completed 200 OK in 133ms (Views: 132.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/create" for 128.173.124.223 at 2011-09-05 15:50:44 -0400
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DNRlo0yqW32xykn+WW0f67Zn7z8HYpOOusEEPNOo9Yc=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people".* FROM "people" WHERE (last_name='shpark') LIMIT 1[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1
+Redirected to http://developer.tower.lib.vt.edu:3000/sessions/authorize
+Completed 302 Found in 304ms
+
+
+Started GET "/sessions/authorize" for 128.173.124.223 at 2011-09-05 15:50:45 -0400
+  Processing by SessionsController#authorize as HTML
+  [1m[36mPerson Load (0.9ms)[0m  [1mSELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT * FROM "roles" INNER JOIN "people_roles" ON "roles".id = "people_roles".role_id WHERE ("people_roles".person_id = 980190963 )
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_sessions_authorize_html_erb___3424644033188342442_17249941520_4367234983335581640 at /usr/home/shpark/etddb2devel/app/views/sessions/authorize.html.erb:3)
+Rendered layouts/_metadata.html.erb (0.4ms)
+Rendered layouts/_stylesheets.html.erb (0.6ms)
+Rendered layouts/_header.html.erb (0.8ms)
+Rendered layouts/_footer.html.erb (0.6ms)
+Rendered sessions/authorize.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 110ms (Views: 16.4ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/submit/show_etds_by_author" for 128.173.124.223 at 2011-09-05 15:50:49 -0400
+  Processing by SubmitController#show_etds_by_author as HTML
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people".* FROM "people" WHERE (pid='shpark' and role='author') LIMIT 1[0m
+Rendered layouts/_metadata.html.erb (0.4ms)
+Rendered layouts/_stylesheets.html.erb (0.6ms)
+Rendered layouts/_header.html.erb (0.8ms)
+Rendered layouts/_footer.html.erb (0.6ms)
+Rendered submit/show_etds_by_author.html.erb within layouts/application (33.2ms)
+Completed 200 OK in 77ms (Views: 39.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/logout" for 128.173.124.223 at 2011-09-05 15:51:01 -0400
+  Processing by SessionsController#destroy as HTML
+Redirected to http://developer.tower.lib.vt.edu:3000/login?notice=Logged+out
+Completed 302 Found in 1ms
+
+
+Started GET "/login?notice=Logged+out" for 128.173.124.223 at 2011-09-05 15:51:01 -0400
+  Processing by SessionsController#new as HTML
+  Parameters: {"notice"=>"Logged out"}
+Rendered layouts/_metadata.html.erb (0.6ms)
+Rendered layouts/_stylesheets.html.erb (1.1ms)
+Rendered layouts/_header.html.erb (34.4ms)
+Rendered layouts/_footer.html.erb (1.1ms)
+Rendered sessions/new.html.erb within layouts/application (51.7ms)
+Completed 200 OK in 62ms (Views: 61.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/create" for 128.173.124.223 at 2011-09-05 15:51:06 -0400
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rrVBdK3j8/tsm9BRZi/wawnBa3etxqc3EH/JzC43cP4=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mPerson Load (0.4ms)[0m  SELECT "people".* FROM "people" WHERE (last_name='shpark') LIMIT 1
+  [1m[36mPerson Load (1.6ms)[0m  [1mSELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1[0m
+Redirected to http://developer.tower.lib.vt.edu:3000/sessions/authorize
+Completed 302 Found in 71ms
+
+
+Started GET "/sessions/authorize" for 128.173.124.223 at 2011-09-05 15:51:06 -0400
+  Processing by SessionsController#authorize as HTML
+  [1m[35mPerson Load (1.4ms)[0m  SELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT * FROM "roles" INNER JOIN "people_roles" ON "roles".id = "people_roles".role_id WHERE ("people_roles".person_id = 980190963 )[0m
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_sessions_authorize_html_erb___3424644033188342442_17248871480_4367234983335581640 at /usr/home/shpark/etddb2devel/app/views/sessions/authorize.html.erb:3)
+Rendered layouts/_metadata.html.erb (0.7ms)
+Rendered layouts/_stylesheets.html.erb (1.1ms)
+Rendered layouts/_header.html.erb (1.4ms)
+Rendered layouts/_footer.html.erb (1.0ms)
+Rendered sessions/authorize.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 80ms (Views: 28.6ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/sessions/create" for 128.173.124.223 at 2011-09-05 16:32:27 -0400
+  Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rrVBdK3j8/tsm9BRZi/wawnBa3etxqc3EH/JzC43cP4=", "session2"=>{"name"=>"shpark", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mPerson Load (0.5ms)[0m  SELECT "people".* FROM "people" WHERE (last_name='shpark') LIMIT 1
+  [1m[36mPerson Load (3.1ms)[0m  [1mSELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1[0m
+Redirected to http://developer.tower.lib.vt.edu:3000/sessions/authorize
+Completed 302 Found in 90ms
+
+
+Started GET "/sessions/authorize" for 128.173.124.223 at 2011-09-05 16:32:27 -0400
+  Processing by SessionsController#authorize as HTML
+  [1m[35mPerson Load (0.8ms)[0m  SELECT "people".* FROM "people" WHERE (pid='shpark') LIMIT 1
+  [1m[36mRole Load (0.2ms)[0m  [1mSELECT * FROM "roles" INNER JOIN "people_roles" ON "roles".id = "people_roles".role_id WHERE ("people_roles".person_id = 980190963 )[0m
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_sessions_authorize_html_erb___3424644033188342442_17248642420_4367234983335581640 at /usr/home/shpark/etddb2devel/app/views/sessions/authorize.html.erb:3)
+Rendered layouts/_metadata.html.erb (0.4ms)
+Rendered layouts/_stylesheets.html.erb (0.6ms)
+Rendered layouts/_header.html.erb (0.8ms)
+Rendered layouts/_footer.html.erb (0.6ms)
+Rendered sessions/authorize.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 45ms (Views: 16.1ms | ActiveRecord: 4.6ms)
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mEtd Load (1.0ms)[0m  [1mSELECT "etds".* FROM "etds"[0m
+  [1m[35mPerson Load (1.2ms)[0m  SELECT "people".* FROM "people"
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mPerson Load (0.7ms)[0m  [1mSELECT "people".* FROM "people"[0m
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mPerson Load (0.7ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mEtd Load (4.3ms)[0m  SELECT "etds".* FROM "etds"
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (35.0ms)[0m  CREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (25.4ms)[0m  CREATE TABLE "actions_roles_digital_objects" ("action_id" integer, "role_id" integer, "digital_object_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (25.0ms)[0m  CREATE INDEX "index_actions_roles_digital_objects_on_action_id" ON "actions_roles_digital_objects" ("action_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (25.7ms)[0m  [1mCREATE INDEX "index_actions_roles_digital_objects_on_digital_object_id" ON "actions_roles_digital_objects" ("digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("actions_roles_digital_objects")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_actions_roles_digital_objects_on_digital_object_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (32.9ms)[0m  [1mCREATE UNIQUE INDEX "index_actions_roles_digital_objects" ON "actions_roles_digital_objects" ("role_id", "action_id", "digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.5ms)[0m  [1mCREATE TABLE "availability_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "availability" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.2ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "filename" varchar(255), "types" varchar(255), "size" varchar(255), "availability" varchar(255), "bound" varchar(255), "page_count" integer, "timestamp" datetime, "created_at" datetime, "updated_at" datetime, "file_id" integer, "file_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "copyright_statements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (27.6ms)[0m  [1mCREATE TABLE "degree_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE "digital_objects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "doc_type_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.5ms)[0m  [1mCREATE TABLE "etds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "degree" varchar(255), "department" varchar(255), "dtype" varchar(255), "title" text, "abstract" text, "availability" varchar(255), "ddate" date, "sdate" date, "adate" date, "cdate" date, "rdate" date, "pid" varchar(255), "url" varchar(255), "timestamp" datetime, "bound" varchar(255), "created_at" datetime, "updated_at" datetime, "committee_chair_id" integer, "author_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.7ms)[0m  [1mCREATE TABLE "etds_people" ("etd_id" integer, "person_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE UNIQUE INDEX "index_etds_people_on_etd_id_and_person_id" ON "etds_people" ("etd_id", "person_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_etds_people_on_etd_id_and_person_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_etds_people_on_person_id" ON "etds_people" ("person_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (22.4ms)[0m  CREATE TABLE "keywords" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "word" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.1ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "first_name" varchar(255), "middle_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "pid" varchar(255), "suffix" varchar(255), "created_at" datetime, "updated_at" datetime, "roles_mask" integer) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE TABLE "people_roles" ("person_id" integer, "role_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (25.0ms)[0m  CREATE UNIQUE INDEX "index_people_roles_on_person_id_and_role_id" ON "people_roles" ("person_id", "role_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_roles_on_person_id_and_role_id')
+  [1m[36mSQL (24.9ms)[0m  [1mCREATE INDEX "index_people_roles_on_role_id" ON "people_roles" ("role_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.3ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "action_id" integer, "role_id" integer, "digital_object_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "provenances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "creator" varchar(255), "notice" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (26.7ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.4ms)[0m  CREATE TABLE "urns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (25.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (24.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110420190416')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100818181827')
+  [1m[36mSQL (24.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005205635')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193017')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101112200129')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101111192709')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104163436')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193816')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100930064031')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101124205604')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104205931')[0m
+  [1m[35mSQL (25.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210044')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143543')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210639')
+  [1m[36mSQL (26.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929140348')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101112171259')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104195545')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100729124626')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005210303')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193444')
+  [1m[36mSQL (24.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143629')[0m
+  [1m[35mSQL (26.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143608')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110202183007')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143508')
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (39.4ms)[0m  CREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (28.1ms)[0m  CREATE TABLE "actions_roles_digital_objects" ("action_id" integer, "role_id" integer, "digital_object_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (28.2ms)[0m  CREATE INDEX "index_actions_roles_digital_objects_on_action_id" ON "actions_roles_digital_objects" ("action_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (28.9ms)[0m  [1mCREATE INDEX "index_actions_roles_digital_objects_on_digital_object_id" ON "actions_roles_digital_objects" ("digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("actions_roles_digital_objects")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_actions_roles_digital_objects_on_digital_object_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (29.2ms)[0m  [1mCREATE UNIQUE INDEX "index_actions_roles_digital_objects" ON "actions_roles_digital_objects" ("role_id", "action_id", "digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (22.4ms)[0m  [1mCREATE TABLE "availability_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "availability" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.1ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "filename" varchar(255), "types" varchar(255), "size" varchar(255), "availability" varchar(255), "bound" varchar(255), "page_count" integer, "timestamp" datetime, "created_at" datetime, "updated_at" datetime, "file_id" integer, "file_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "copyright_statements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "degree_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE "digital_objects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "doc_type_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.6ms)[0m  [1mCREATE TABLE "etds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "degree" varchar(255), "department" varchar(255), "dtype" varchar(255), "title" text, "abstract" text, "availability" varchar(255), "ddate" date, "sdate" date, "adate" date, "cdate" date, "rdate" date, "pid" varchar(255), "url" varchar(255), "timestamp" datetime, "bound" varchar(255), "created_at" datetime, "updated_at" datetime, "committee_chair_id" integer, "author_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.8ms)[0m  [1mCREATE TABLE "etds_people" ("etd_id" integer, "person_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (24.9ms)[0m  [1mCREATE UNIQUE INDEX "index_etds_people_on_etd_id_and_person_id" ON "etds_people" ("etd_id", "person_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_etds_people_on_etd_id_and_person_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_etds_people_on_person_id" ON "etds_people" ("person_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.4ms)[0m  CREATE TABLE "keywords" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "word" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.2ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "first_name" varchar(255), "middle_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "pid" varchar(255), "suffix" varchar(255), "created_at" datetime, "updated_at" datetime, "roles_mask" integer) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (25.5ms)[0m  CREATE TABLE "people_roles" ("person_id" integer, "role_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (25.0ms)[0m  CREATE UNIQUE INDEX "index_people_roles_on_person_id_and_role_id" ON "people_roles" ("person_id", "role_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_roles_on_person_id_and_role_id')
+  [1m[36mSQL (26.0ms)[0m  [1mCREATE INDEX "index_people_roles_on_role_id" ON "people_roles" ("role_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.3ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "action_id" integer, "role_id" integer, "digital_object_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "provenances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "creator" varchar(255), "notice" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.3ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (25.1ms)[0m  [1mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.4ms)[0m  CREATE TABLE "urns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (25.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (24.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110420190416')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100818181827')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005205635')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193017')
+  [1m[36mSQL (26.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101112200129')[0m
+  [1m[35mSQL (27.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101111192709')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104163436')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193816')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100930064031')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101124205604')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104205931')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210044')
+  [1m[36mSQL (24.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143543')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210639')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929140348')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101112171259')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104195545')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100729124626')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005210303')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193444')
+  [1m[36mSQL (24.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143629')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143608')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110202183007')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143508')
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (43.7ms)[0m  CREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (27.0ms)[0m  CREATE TABLE "actions_roles_digital_objects" ("action_id" integer, "role_id" integer, "digital_object_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (28.4ms)[0m  CREATE INDEX "index_actions_roles_digital_objects_on_action_id" ON "actions_roles_digital_objects" ("action_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (20.7ms)[0m  [1mCREATE INDEX "index_actions_roles_digital_objects_on_digital_object_id" ON "actions_roles_digital_objects" ("digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("actions_roles_digital_objects")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_actions_roles_digital_objects_on_digital_object_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (24.3ms)[0m  [1mCREATE UNIQUE INDEX "index_actions_roles_digital_objects" ON "actions_roles_digital_objects" ("role_id", "action_id", "digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (25.8ms)[0m  [1mCREATE TABLE "availability_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "availability" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.1ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "filename" varchar(255), "types" varchar(255), "size" varchar(255), "availability" varchar(255), "bound" varchar(255), "page_count" integer, "timestamp" datetime, "created_at" datetime, "updated_at" datetime, "file_id" integer, "file_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (22.4ms)[0m  [1mCREATE TABLE "copyright_statements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "degree_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (25.2ms)[0m  [1mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE "digital_objects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "doc_type_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (27.1ms)[0m  [1mCREATE TABLE "etds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "degree" varchar(255), "department" varchar(255), "dtype" varchar(255), "title" text, "abstract" text, "availability" varchar(255), "ddate" date, "sdate" date, "adate" date, "cdate" date, "rdate" date, "pid" varchar(255), "url" varchar(255), "timestamp" datetime, "bound" varchar(255), "created_at" datetime, "updated_at" datetime, "committee_chair_id" integer, "author_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (25.6ms)[0m  [1mCREATE TABLE "etds_people" ("etd_id" integer, "person_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (29.1ms)[0m  [1mCREATE UNIQUE INDEX "index_etds_people_on_etd_id_and_person_id" ON "etds_people" ("etd_id", "person_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_etds_people_on_etd_id_and_person_id')[0m
+  [1m[35mSQL (25.2ms)[0m  CREATE INDEX "index_etds_people_on_person_id" ON "etds_people" ("person_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.4ms)[0m  CREATE TABLE "keywords" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "word" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.2ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "first_name" varchar(255), "middle_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "pid" varchar(255), "suffix" varchar(255), "created_at" datetime, "updated_at" datetime, "roles_mask" integer) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.7ms)[0m  CREATE TABLE "people_roles" ("person_id" integer, "role_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (25.0ms)[0m  CREATE UNIQUE INDEX "index_people_roles_on_person_id_and_role_id" ON "people_roles" ("person_id", "role_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_roles_on_person_id_and_role_id')
+  [1m[36mSQL (24.9ms)[0m  [1mCREATE INDEX "index_people_roles_on_role_id" ON "people_roles" ("role_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "action_id" integer, "role_id" integer, "digital_object_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (27.2ms)[0m  [1mCREATE TABLE "provenances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "creator" varchar(255), "notice" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (27.3ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.5ms)[0m  CREATE TABLE "urns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (25.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (24.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110420190416')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100818181827')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005205635')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193017')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101112200129')[0m
+  [1m[35mSQL (26.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101111192709')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104163436')[0m
+  [1m[35mSQL (27.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193816')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100930064031')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101124205604')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104205931')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210044')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143543')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210639')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929140348')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101112171259')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104195545')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100729124626')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005210303')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193444')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143629')[0m
+  [1m[35mSQL (26.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143608')
+  [1m[36mSQL (27.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110202183007')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143508')
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (41.0ms)[0m  CREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (28.0ms)[0m  CREATE TABLE "actions_roles_digital_objects" ("action_id" integer, "role_id" integer, "digital_object_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (22.4ms)[0m  CREATE INDEX "index_actions_roles_digital_objects_on_action_id" ON "actions_roles_digital_objects" ("action_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (28.3ms)[0m  [1mCREATE INDEX "index_actions_roles_digital_objects_on_digital_object_id" ON "actions_roles_digital_objects" ("digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("actions_roles_digital_objects")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_actions_roles_digital_objects_on_digital_object_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (29.1ms)[0m  [1mCREATE UNIQUE INDEX "index_actions_roles_digital_objects" ON "actions_roles_digital_objects" ("role_id", "action_id", "digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.1ms)[0m  [1mCREATE TABLE "availability_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "availability" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.1ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "filename" varchar(255), "types" varchar(255), "size" varchar(255), "availability" varchar(255), "bound" varchar(255), "page_count" integer, "timestamp" datetime, "created_at" datetime, "updated_at" datetime, "file_id" integer, "file_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "copyright_statements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (25.6ms)[0m  [1mCREATE TABLE "degree_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE "digital_objects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "doc_type_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.5ms)[0m  [1mCREATE TABLE "etds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "degree" varchar(255), "department" varchar(255), "dtype" varchar(255), "title" text, "abstract" text, "availability" varchar(255), "ddate" date, "sdate" date, "adate" date, "cdate" date, "rdate" date, "pid" varchar(255), "url" varchar(255), "timestamp" datetime, "bound" varchar(255), "created_at" datetime, "updated_at" datetime, "committee_chair_id" integer, "author_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.8ms)[0m  [1mCREATE TABLE "etds_people" ("etd_id" integer, "person_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE UNIQUE INDEX "index_etds_people_on_etd_id_and_person_id" ON "etds_people" ("etd_id", "person_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_etds_people_on_etd_id_and_person_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_etds_people_on_person_id" ON "etds_people" ("person_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (27.1ms)[0m  CREATE TABLE "keywords" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "word" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (26.3ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "first_name" varchar(255), "middle_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "pid" varchar(255), "suffix" varchar(255), "created_at" datetime, "updated_at" datetime, "roles_mask" integer) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE TABLE "people_roles" ("person_id" integer, "role_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (25.3ms)[0m  CREATE UNIQUE INDEX "index_people_roles_on_person_id_and_role_id" ON "people_roles" ("person_id", "role_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_roles_on_person_id_and_role_id')
+  [1m[36mSQL (214.4ms)[0m  [1mCREATE INDEX "index_people_roles_on_role_id" ON "people_roles" ("role_id")[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (231.0ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "action_id" integer, "role_id" integer, "digital_object_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (44.1ms)[0m  [1mCREATE TABLE "provenances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "creator" varchar(255), "notice" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (26.5ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (26.6ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.5ms)[0m  CREATE TABLE "urns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (25.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (25.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110420190416')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100818181827')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005205635')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193017')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101112200129')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101111192709')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104163436')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193816')
+  [1m[36mSQL (23.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100930064031')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101124205604')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104205931')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210044')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143543')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210639')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929140348')[0m
+  [1m[35mSQL (23.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101112171259')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104195545')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100729124626')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005210303')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193444')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143629')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143608')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110202183007')[0m
+  [1m[35mSQL (25.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143508')
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (47.6ms)[0m  CREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (28.1ms)[0m  CREATE TABLE "actions_roles_digital_objects" ("action_id" integer, "role_id" integer, "digital_object_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (23.7ms)[0m  CREATE INDEX "index_actions_roles_digital_objects_on_action_id" ON "actions_roles_digital_objects" ("action_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (28.3ms)[0m  [1mCREATE INDEX "index_actions_roles_digital_objects_on_digital_object_id" ON "actions_roles_digital_objects" ("digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("actions_roles_digital_objects")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_actions_roles_digital_objects_on_digital_object_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (24.2ms)[0m  [1mCREATE UNIQUE INDEX "index_actions_roles_digital_objects" ON "actions_roles_digital_objects" ("role_id", "action_id", "digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (20.6ms)[0m  [1mCREATE TABLE "availability_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "availability" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.2ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "filename" varchar(255), "types" varchar(255), "size" varchar(255), "availability" varchar(255), "bound" varchar(255), "page_count" integer, "timestamp" datetime, "created_at" datetime, "updated_at" datetime, "file_id" integer, "file_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "copyright_statements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "degree_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE "digital_objects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE "doc_type_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.6ms)[0m  [1mCREATE TABLE "etds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "degree" varchar(255), "department" varchar(255), "dtype" varchar(255), "title" text, "abstract" text, "availability" varchar(255), "ddate" date, "sdate" date, "adate" date, "cdate" date, "rdate" date, "pid" varchar(255), "url" varchar(255), "timestamp" datetime, "bound" varchar(255), "created_at" datetime, "updated_at" datetime, "committee_chair_id" integer, "author_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.8ms)[0m  [1mCREATE TABLE "etds_people" ("etd_id" integer, "person_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE UNIQUE INDEX "index_etds_people_on_etd_id_and_person_id" ON "etds_people" ("etd_id", "person_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_etds_people_on_etd_id_and_person_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_etds_people_on_person_id" ON "etds_people" ("person_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.4ms)[0m  CREATE TABLE "keywords" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "word" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.1ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "first_name" varchar(255), "middle_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "pid" varchar(255), "suffix" varchar(255), "created_at" datetime, "updated_at" datetime, "roles_mask" integer) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (25.5ms)[0m  CREATE TABLE "people_roles" ("person_id" integer, "role_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (24.7ms)[0m  CREATE UNIQUE INDEX "index_people_roles_on_person_id_and_role_id" ON "people_roles" ("person_id", "role_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_people_roles_on_person_id_and_role_id')
+  [1m[36mSQL (24.9ms)[0m  [1mCREATE INDEX "index_people_roles_on_role_id" ON "people_roles" ("role_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "action_id" integer, "role_id" integer, "digital_object_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "provenances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "creator" varchar(255), "notice" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (25.1ms)[0m  [1mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [1m[35mSQL (24.9ms)[0m  CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (25.8ms)[0m  CREATE TABLE "urns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (25.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (24.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110420190416')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100818181827')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005205635')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193017')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101112200129')[0m
+  [1m[35mSQL (27.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101111192709')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104163436')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193816')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100930064031')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101124205604')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104205931')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210044')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143543')[0m
+  [1m[35mSQL (27.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210639')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929140348')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101112171259')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104195545')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100729124626')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005210303')[0m
+  [1m[35mSQL (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193444')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143629')[0m
+  [1m[35mSQL (21.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143608')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110202183007')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143508')
+DEPRECATION WARNING: config.action_view.debug_rjs will be removed in 3.1, from 3.1 onwards you will need to install prototype-rails to continue to use RJS templates . (called from <top (required)> at /usr/home/shpark/etddb2devel/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (47.1ms)[0m  CREATE TABLE "actions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (28.8ms)[0m  CREATE TABLE "actions_roles_digital_objects" ("action_id" integer, "role_id" integer, "digital_object_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (28.2ms)[0m  CREATE INDEX "index_actions_roles_digital_objects_on_action_id" ON "actions_roles_digital_objects" ("action_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("actions_roles_digital_objects")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE INDEX "index_actions_roles_digital_objects_on_digital_object_id" ON "actions_roles_digital_objects" ("digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("actions_roles_digital_objects")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_actions_roles_digital_objects_on_digital_object_id')[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_actions_roles_digital_objects_on_action_id')
+  [1m[36mSQL (22.0ms)[0m  [1mCREATE UNIQUE INDEX "index_actions_roles_digital_objects" ON "actions_roles_digital_objects" ("role_id", "action_id", "digital_object_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (27.2ms)[0m  [1mCREATE TABLE "availability_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "availability" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.0ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "filename" varchar(255), "types" varchar(255), "size" varchar(255), "availability" varchar(255), "bound" varchar(255), "page_count" integer, "timestamp" datetime, "created_at" datetime, "updated_at" datetime, "file_id" integer, "file_type" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "copyright_statements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (22.5ms)[0m  [1mCREATE TABLE "degree_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "digital_objects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "doc_type_descriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (23.3ms)[0m  [1mCREATE TABLE "etds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "degree" varchar(255), "department" varchar(255), "dtype" varchar(255), "title" text, "abstract" text, "availability" varchar(255), "ddate" date, "sdate" date, "adate" date, "cdate" date, "rdate" date, "pid" varchar(255), "url" varchar(255), "timestamp" datetime, "bound" varchar(255), "created_at" datetime, "updated_at" datetime, "committee_chair_id" integer, "author_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.7ms)[0m  [1mCREATE TABLE "etds_people" ("etd_id" integer, "person_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (117.0ms)[0m  [1mCREATE UNIQUE INDEX "index_etds_people_on_etd_id_and_person_id" ON "etds_people" ("etd_id", "person_id")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("etds_people")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_etds_people_on_etd_id_and_person_id')[0m
+  [1m[35mSQL (240.4ms)[0m  CREATE INDEX "index_etds_people_on_person_id" ON "etds_people" ("person_id")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (270.6ms)[0m  CREATE TABLE "keywords" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "word" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (184.3ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "first_name" varchar(255), "middle_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "pid" varchar(255), "suffix" varchar(255), "created_at" datetime, "updated_at" datetime, "roles_mask" integer) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.7ms)[0m  CREATE TABLE "people_roles" ("person_id" integer, "role_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (25.0ms)[0m  CREATE UNIQUE INDEX "index_people_roles_on_person_id_and_role_id" ON "people_roles" ("person_id", "role_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people_roles")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_people_roles_on_person_id_and_role_id')
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE INDEX "index_people_roles_on_role_id" ON "people_roles" ("role_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.3ms)[0m  [1mCREATE TABLE "permissions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "action_id" integer, "role_id" integer, "digital_object_id" integer) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (25.5ms)[0m  [1mCREATE TABLE "provenances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "etd_id" integer, "creator" varchar(255), "notice" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.5ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (24.4ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("sessions")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.5ms)[0m  CREATE TABLE "urns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "urn" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (24.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (24.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110420190416')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100818181827')
+  [1m[36mSQL (25.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005205635')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193017')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101112200129')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101111192709')
+  [1m[36mSQL (55.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104163436')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193816')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100930064031')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101124205604')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104205931')[0m
+  [1m[35mSQL (26.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210044')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143543')[0m
+  [1m[35mSQL (27.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005210639')
+  [1m[36mSQL (26.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929140348')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101112171259')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101104195545')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100729124626')
+  [1m[36mSQL (25.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101005210303')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101005193444')
+  [1m[36mSQL (26.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20100929143629')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143608')
+  [1m[36mSQL (25.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20110202183007')[0m
+  [1m[35mSQL (25.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20100929143508')

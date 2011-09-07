@@ -1,7 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: create
 
 two:
-  name: MyString
+  name: read
+  
+three:
+  name: update
+  
+four:
+  name: delete
