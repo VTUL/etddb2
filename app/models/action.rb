@@ -10,6 +10,6 @@ class Action < ActiveRecord::Base
   has_many :permission
   has_many :roles, :through=>:permission
   has_many :digital_objects, :through=>:permission
-
   validates :name, :presence => true
+  validates :id, :presence => true
 end

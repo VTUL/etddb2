@@ -7,7 +7,6 @@
 require 'test_helper'
 
 class ActionTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   test "invalid with empty attributes" do
     action = Action.new
     assert !action.valid?
