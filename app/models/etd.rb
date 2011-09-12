@@ -28,10 +28,10 @@ class Etd < ActiveRecord::Base
   has_many :people_roles
   has_many :roles, :through => :people_roles
   has_many :people, :through => :people_roles
-  
-  
-  
-  
+
+
+
+
 #  belongs_to  :committee_chair, :class => "Person", :foreign_key => "advisor"
 #  belongs_to  :committee_cochair, :class => "Person", :foreign_key => "coadvisor"
 #  has_and_belongs_to_many :committee_members, :class => "Person", :foreign_key => "member"

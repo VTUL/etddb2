@@ -4,7 +4,7 @@
 # Last updated: Mar-15-2011
 #########################################################
 
-class PersonRole < ActiveRecord::Base
+class PeopleRole < ActiveRecord::Base
   #Specify irregular table names
   self.table_name = "people_roles"
 
