@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
   has_many :people_roles
   has_many :roles, :through => :people_roles
   has_many :etds, :through => :people_roles
-  
+
 
   #
   # Validates attributes
