@@ -10,7 +10,6 @@ class ActionTest < ActiveSupport::TestCase
   test "invalid with empty attributes" do
     action = Action.new
     assert !action.valid?
-    assert action.errors[:id].any?
     assert action.errors[:name].any?
   end
 end
