@@ -7,13 +7,18 @@
 require 'edauth'
 
 class Person < ActiveRecord::Base
+  self.table_name = "people"
   #
   # Set multiple roles
   #  ROLES=%w[admin author committee_chair committee_cochair committee_member reviewer manager cataloger]
 
   #
   # Assicate tables
-  has_and_belongs_to_many :roles
+#  has_and_belongs_to_many :roles
+  has_many :people_roles
+  has_many :roles, :through => :people_roles
+  has_many :etds, :through => :people_roles
+  
 
   #
   # Validates attributes
