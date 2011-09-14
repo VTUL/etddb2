@@ -4,6 +4,7 @@ class AbilityTest < ActiveSupport::TestCase
   test "user can only destroy projects which he owns" do
     user = Person.create(:first_name => "Collin", :last_name => "Brittle", :email => "rotated8@vt.edu", :pid => "rotated8")
     ability = Ability.new(user)
+
     role = Role.new(:name => "Author")
     user_role = PeopleRole.new(:person_id => user.id,:role_id => role.id)
     an_etd = Etd.new
