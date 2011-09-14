@@ -34,10 +34,10 @@ class Ability
        user ||= Person.new # guest user (not logged in)
        if user.has_role? :admin
          can :manage, :all
-         puts 'a' 
+         puts 'admin role' 
        else
          can :read, :all
-         puts 'b'
+         puts 'other than admin role'
        end
     # Abilities in Database
     #can do |action, subject_class, subject|

@@ -7,7 +7,9 @@ class AbilityTest < ActiveSupport::TestCase
     role = Role.new
     role.name="Author"
     role.save
-    user_role = PeopleRole.new(:person_id => user.id,:role_id => role.id)
+    user_role = PeopleRole.new
+    user_role.people_ids<=user.id
+    user_role.roles_id<= role.id
     assert ability.can?(:destroy, Etd.new(:people_roles => user_role))
     assert ability.cannot?(:destroy, Etd.new)
   end
