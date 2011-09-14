@@ -9,4 +9,5 @@ class Permission < ActiveRecord::Base
   belongs_to :action
   belongs_to :role
 
+  validates :id, :presence => true
 end

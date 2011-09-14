@@ -8,9 +8,9 @@ class EtdTest < ActiveSupport::TestCase
     assert !etd.valid?
     assert etd.errors[:abstract].any?
     assert etd.errors[:availability].any?
-    assert etd.errors[:availability_description].any?
+    #assert etd.errors[:availability_description].any?
     assert etd.errors[:bound].any?
-    assert etd.errors[:copyright_statement].any?
+    #assert etd.errors[:copyright_statement].any?
     assert etd.errors[:degree].any?
     assert etd.errors[:department].any?
     assert etd.errors[:dtype].any?
@@ -22,5 +22,5 @@ class EtdTest < ActiveSupport::TestCase
     assert etd.errors[:sdate].any?
     assert etd.errors[:url].any?
     assert etd.errors[:urn].any?
-  end 
+  end
 end
