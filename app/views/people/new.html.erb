@@ -1,6 +1,6 @@
 <h1>Enter a new person</h1>
 
-<% form_for(@person) do |f| %>
+<%= form_for(@person) do |f| %>
   <p>
     <!------------------------>
     <% if @ability.can? :assign_roles, @person %>
