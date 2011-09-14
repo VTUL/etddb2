@@ -10,6 +10,6 @@ class PermissionTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "invalid with empty attributes" do
     permission = Permission.new
-    assert !permission.valid?
+    assert !permission.valid?, "Error: Permission not valid with empty attributes."
   end
 end

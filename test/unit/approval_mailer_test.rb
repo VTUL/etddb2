@@ -5,14 +5,14 @@ class ApprovalMailerTest < ActionMailer::TestCase
   tests ApprovalMailer
 
   def setup
-    @person = Person.new(:name => "Sung Hee Park", :email=> "hellosunghee@gmail.com")
+    @person = Person.new(:first_name => "Collin", :last_name => "Brittle", :email=> "rotated8@vt.edu")
   end
 
-  
+
   def test_confirm
-    response = ApprovalMailer.create_confirm(@person)
-    assert_equal("hellosunghee@gmail.com", response.to[0])
-    assert_equal(/Dear Sung Hee Park/, response.body)
+    response = ApprovalMailer.confirm(@person)
+    assert_equal("rotated8@vt.edu", response.to[0])
+    assert_equal('Confirmed.', response.body.to_s)
   end
 
 #  test "confirm" do

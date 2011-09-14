@@ -11,8 +11,8 @@ class ApprovalMailer < ActionMailer::Base
     recipients person.email
     from       'shpark@vt.edu'
     sent_on    Time.now
-    
-    body       :person => person
+
+    body       "Confirmed."
   end
 
   def sent(sent_at = Time.now)
@@ -20,7 +20,7 @@ class ApprovalMailer < ActionMailer::Base
     recipients person.email
     from       'shpark@vt.edu'
     sent_on    Time.now
-    
+
     body       :greeting => 'Hi,'
   end
 

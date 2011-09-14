@@ -6,10 +6,10 @@
 
 require 'test_helper'
 
-class PersonRoleTest < ActiveSupport::TestCase
+class PeopleRoleTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "invalid with empty attributes" do
-    person_role = PersonRole.new
+    person_role = PeopleRole.new
     assert !person_role.valid?
     assert person_role.errors[:person_id].any?
     assert person_role.errors[:role_id].any?
