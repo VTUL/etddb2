@@ -26,7 +26,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :doc_type_descriptions
   resources :degree_descriptions
   resources :permissions
-  resources :person_roles
+  resources :people_roles
   resources :actions
   resources :digital_objects
   resources :provenances

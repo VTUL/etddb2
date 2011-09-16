@@ -1,8 +1,7 @@
 <h1>Editing urn</h1>
 
-<% form_for(@urn) do |f| %>
-  <%= f.error_messages %>
-
+<%= form_for(@urn) do |f| %>
+  <!--<%= %>#f.error_messages %>-->
   <p>
     <%= f.label :urn %><br />
     <%= f.text_field :urn %>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class URNsControllerTest < ActionController::TestCase
+class UrnsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
@@ -13,7 +13,7 @@ class URNsControllerTest < ActionController::TestCase
   end
 
   test "should create urn" do
-    assert_difference('URN.count') do
+    assert_difference('Urn.count') do
       post :create, :urn => { }
     end
 
@@ -36,7 +36,7 @@ class URNsControllerTest < ActionController::TestCase
   end
 
   test "should destroy urn" do
-    assert_difference('URN.count', -1) do
+    assert_difference('Urn.count', -1) do
       delete :destroy, :id => urns(:one).to_param
     end
 

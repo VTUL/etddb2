@@ -5,7 +5,7 @@
     <th>Urn</th>
   </tr>
 
-<% @urns.each do |urn| %>
+<%= @urns.each do |urn| %>
   <tr>
     <td><%=h urn.urn %></td>
     <td><%= link_to 'Show', urn %></td>
