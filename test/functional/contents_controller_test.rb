@@ -14,7 +14,7 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should create content" do
     assert_difference('Content.count') do
-      post :create, :content => { }
+      post :create, :content => 'Etd'
     end
 
     assert_redirected_to content_path(assigns(:content))

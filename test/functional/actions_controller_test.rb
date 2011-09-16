@@ -14,7 +14,7 @@ class ActionsControllerTest < ActionController::TestCase
 
   test "should create action" do
     assert_difference('Action.count') do
-      post :create, :action => { }
+      post :create, :action => 'create'
     end
 
     assert_redirected_to action_path(assigns(:action))
@@ -31,7 +31,7 @@ class ActionsControllerTest < ActionController::TestCase
   end
 
   test "should update action" do
-    put :update, :id => actions(:one).to_param, :action => { }
+    put :update, :id => actions(:one).to_param, :action => 'destroy'
     assert_redirected_to action_path(assigns(:action))
   end
 

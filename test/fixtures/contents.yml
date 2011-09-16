@@ -1,19 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  filename: MyString
-  types: MyString
-  size: MyString
-  availability: MyString
-  bound: MyString
-  page_count: 1
+  filename: content1.pdf
+  types: pdf
+  size: 1234
+  availability: unrestricted
+  bound: no
+  page_count: 110
   timestamp: 2010-08-18 14:18:27
 
 two:
-  filename: MyString
-  types: MyString
-  size: MyString
-  availability: MyString
-  bound: MyString
-  page_count: 1
-  timestamp: 2010-08-18 14:18:27
+  filename: content2.ppt
+  types: ppt
+  size: 5678
+  availability: restricted
+  bound: no
+  page_count: 80
+  timestamp: 2010-08-18 14:19:27
