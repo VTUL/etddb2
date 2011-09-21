@@ -14,7 +14,7 @@ class AvailabilityDescriptionsControllerTest < ActionController::TestCase
 
   test "should create availability_description" do
     assert_difference('AvailabilityDescription.count') do
-      post :create, :availability_description => { }
+      post :create, :availability_description => {:availability=>"unrestricted",:description=>"Blah,Blah" }
     end
 
     assert_redirected_to availability_description_path(assigns(:availability_description))

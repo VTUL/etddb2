@@ -14,7 +14,7 @@ class DocTypeDescriptionsControllerTest < ActionController::TestCase
 
   test "should create doc_type_description" do
     assert_difference('DocTypeDescription.count') do
-      post :create, :doc_type_description => { }
+      post :create, :doc_type_description => {:name=>"dissertation" }
     end
 
     assert_redirected_to doc_type_description_path(assigns(:doc_type_description))

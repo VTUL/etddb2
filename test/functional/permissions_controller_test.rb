@@ -14,7 +14,7 @@ class PermissionsControllerTest < ActionController::TestCase
 
   test "should create permission" do
     assert_difference('Permission.count') do
-      post :create, :permission => { }
+      post :create, :permission => {:action_id=>"1", :role=>"1", :digital_object_id=>"1" }
     end
 
     assert_redirected_to permission_path(assigns(:permission))

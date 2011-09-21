@@ -14,7 +14,7 @@ class DigitalObjectsControllerTest < ActionController::TestCase
 
   test "should create digital_object" do
     assert_difference('DigitalObject.count') do
-      post :create, :digital_object => { }
+      post :create, :digital_object => {:name=>"etd" }
     end
 
     assert_redirected_to digital_object_path(assigns(:digital_object))

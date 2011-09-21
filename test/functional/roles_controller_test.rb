@@ -14,7 +14,7 @@ class RolesControllerTest < ActionController::TestCase
 
   test "should create role" do
     assert_difference('Role.count') do
-      post :create, :role => { }
+      post :create, :role => {:name=>"review1"}
     end
 
     assert_redirected_to role_path(assigns(:role))
@@ -31,7 +31,7 @@ class RolesControllerTest < ActionController::TestCase
   end
 
   test "should update role" do
-    put :update, :id => roles(:one).to_param, :role => { }
+    put :update, :id => roles(:one).to_param, :role =>  {:name=>"review2"}
     assert_redirected_to role_path(assigns(:role))
   end
 

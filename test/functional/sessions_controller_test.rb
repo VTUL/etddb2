@@ -9,7 +9,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
   test "should create session" do
     assert_difference('Session.count') do
-      post :create, :session => @update
+      post :create, :session => {:name=>'shpark', :password=>'Djaak4fkdgo'}
     end
     assert_redirected_to session_path(assigns(:session))
   end

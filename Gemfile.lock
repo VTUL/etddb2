@@ -100,7 +100,7 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
-  paperclip
+  paperclip (= 2.3.16)
   rails (= 3.0.10)
   rspec (= 2.5.0)
   rspec-rails (= 2.5.0)

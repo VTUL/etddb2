@@ -14,7 +14,7 @@ class ProvenancesControllerTest < ActionController::TestCase
 
   test "should create provenance" do
     assert_difference('Provenance.count') do
-      post :create, :provenance => { }
+      post :create, :provenance => {:creator=>"1", :notice=>"Your ETD is successfully submitted." }
     end
 
     assert_redirected_to provenance_path(assigns(:provenance))

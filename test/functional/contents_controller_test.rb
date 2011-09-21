@@ -1,6 +1,16 @@
 require 'test_helper'
 
 class ContentsControllerTest < ActionController::TestCase
+# called before every single test
+  def setup
+    @content = contents(:one)
+  end
+  def teardown
+    # as we are re-initializing @post before every test
+    # setting it to nil here is not essential but I hope
+    # you understand how you can use the teardown method
+    @content = nil
+  end 
   test "should get index" do
     get :index
     assert_response :success
@@ -14,7 +24,8 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should create content" do
     assert_difference('Content.count') do
-      post :create, :content => 'Etd'
+      #post :create, :content => @content
+      post :create, :id => @content.id
     end
 
     assert_redirected_to content_path(assigns(:content))
@@ -37,7 +48,7 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should destroy content" do
     assert_difference('Content.count', -1) do
-      delete :destroy, :id => contents(:one).to_param
+      delete :destroy, :id => @content.id, :file_name => @content.filename
     end
 
     assert_redirected_to contents_path
