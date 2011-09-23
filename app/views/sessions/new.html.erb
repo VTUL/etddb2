@@ -6,8 +6,8 @@ with PIDs</a> (including forgotten passwords or deactivated accounts).</p>
 
 <%= form_for(:session2, :url => '/sessions/create') do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :pid, "Username"%><br />
+    <%= f.text_field :pid%>
   </div>
 <!--  <div class="field">
     <%= f.label :email %><br />
