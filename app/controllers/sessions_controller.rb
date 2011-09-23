@@ -1,6 +1,6 @@
 #########################################################
 # The source codes are developed by
-# Digital Library and Archive at Virginia Tech. 
+# Digital Library and Archive at Virginia Tech.
 # Last updated: Feb-16-2011
 #########################################################
 class SessionsController < ApplicationController
@@ -19,10 +19,10 @@ class SessionsController < ApplicationController
     #
     # Authentication
     # user is a type of Person
-    @person = Person.authenticate(params[:session2][:name],
+    @person = Person.authenticate(params[:session2][:pid],
                              params[:session2][:password])
     respond_to do |format|
-       
+
       if @person.nil?
       # Create an error message and re-render the signin form.
         #format.html {redirect_to(:controller => 'submit', :action => 'login', :notice => 'Invalid authentication')}
@@ -30,12 +30,13 @@ class SessionsController < ApplicationController
       else
       # Sign the user in and redirect to the user's show page.
         session[:user_id] = @person.pid
-       
+
       # Authorization
       # Before letting a user landing on the user page, we need to check authorization
-        if @person.authorize.nil? 
-          @person.save!
+        if @person.authorize.nil?
+          #@person.save!
           #format.html {redirect_to(:controller => 'submit', :action => 'new_etd',:author_id=>@user.pid)}
+          format.html {redirect_to(:controller => 'people', :action => 'new', :pid=>@person.pid)}
         else
           #format.html {redirect_to(:controller => 'submit', :action => 'show_etds_by_author')}
           format.html {redirect_to(:controller => 'sessions', :action => 'authorize')}
@@ -54,7 +55,7 @@ class SessionsController < ApplicationController
   def authorize
     #find roles who the user has
     @person=Person.find(:first,:conditions=>"pid='#{session[:user_id]}'")
-    @ability=Ability.new(@person) 
+    @ability=Ability.new(@person)
     @roles=@person.roles
 
     @array_roles = []
@@ -71,7 +72,7 @@ class SessionsController < ApplicationController
     #@person=Person.find(:first,:conditions=>"pid='#{session[:user_id]}'")
     @person = Person.authenticate(params[:session][:name],
                              params[:session][:password])
-    if !@person.nil? 
+    if !@person.nil?
       @roles=@person.roles
 
       @array_roles = []
@@ -98,5 +99,3 @@ class SessionsController < ApplicationController
 
 
 end
-
-
