@@ -29,7 +29,7 @@ gem 'cancan'
 #gem 'test_helper'
 
 # For multiple file upload
-gem 'paperclip' 
+gem 'paperclip','2.3.16' 
 
 # For Pure ruby ldap, one day test
 #gem rubygem-net-ldap', 0.1.1

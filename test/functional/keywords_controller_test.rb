@@ -14,7 +14,7 @@ class KeywordsControllerTest < ActionController::TestCase
 
   test "should create keyword" do
     assert_difference('Keyword.count') do
-      post :create, :keyword => { }
+      post :create, :keyword => {:word=>"etd-db 2.0" }
     end
 
     assert_redirected_to keyword_path(assigns(:keyword))

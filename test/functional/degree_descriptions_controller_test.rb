@@ -14,7 +14,7 @@ class DegreeDescriptionsControllerTest < ActionController::TestCase
 
   test "should create degree_description" do
     assert_difference('DegreeDescription.count') do
-      post :create, :degree_description => { }
+      post :create, :degree_description => {:name=>"Master of Science" }
     end
 
     assert_redirected_to degree_description_path(assigns(:degree_description))

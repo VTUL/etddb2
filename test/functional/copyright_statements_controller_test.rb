@@ -14,7 +14,7 @@ class CopyrightStatementsControllerTest < ActionController::TestCase
 
   test "should create copyright_statement" do
     assert_difference('CopyrightStatement.count') do
-      post :create, :copyright_statement => { }
+      post :create, :copyright_statement => {:description=>"Blah,Blah" }
     end
 
     assert_redirected_to copyright_statement_path(assigns(:copyright_statement))

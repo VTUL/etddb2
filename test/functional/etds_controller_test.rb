@@ -14,7 +14,7 @@ class EtdsControllerTest < ActionController::TestCase
 
   test "should create etd" do
     assert_difference('Etd.count') do
-      post :create, :etd => { }
+      post :create, :etd => {:urn=>"123456789" }
     end
 
     assert_redirected_to etd_path(assigns(:etd))

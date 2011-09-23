@@ -14,7 +14,7 @@ class PeopleRolesControllerTest < ActionController::TestCase
 
   test "should create people_role" do
     assert_difference('PeopleRole.count') do
-      post :create, :people_role => { }
+      post :create, :people_role => {:person_id=>"1",:role_id=>"1" }
     end
 
     assert_redirected_to people_roles_path(assigns(:people_role))
