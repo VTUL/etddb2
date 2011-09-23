@@ -32,7 +32,7 @@ class PeopleRolesControllerTest < ActionController::TestCase
 
   test "should update person_role" do
     put :update, :id => people_roles(:one).to_param, :people_role => { }
-    assert_redirected_to people_roles_path(assigns(:people_role))
+    assert_redirected_to people_role_path(assigns(:people_role))
   end
 
   test "should destroy person_role" do
