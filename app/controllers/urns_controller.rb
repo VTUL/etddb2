@@ -41,6 +41,7 @@ class UrnsController < ApplicationController
   # POST /urns.xml
   def create
     @urn = Urn.new(params[:urn])
+    @urn.id = params[:urn][:id]
 
     respond_to do |format|
       if @urn.save

@@ -14,7 +14,7 @@ class UrnsControllerTest < ActionController::TestCase
 
   test "should create urn" do
     assert_difference('Urn.count') do
-      post :create, :urn => { }
+      post :create, {:urn => {:urn => "String", :id => 123456789}}
     end
 
     assert_redirected_to urn_path(assigns(:urn))

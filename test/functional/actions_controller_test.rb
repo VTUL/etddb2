@@ -14,7 +14,7 @@ class ActionsControllerTest < ActionController::TestCase
 
   test "should create action" do
     assert_difference('Action.count') do
-      post :create, :action => 'create'
+      post :create, :action => {:name => 'editt'}
     end
 
     assert_redirected_to action_path(assigns(:action))
