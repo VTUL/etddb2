@@ -56,7 +56,7 @@ class PeopleRolesController < ApplicationController
   # PUT /people_roles/1
   # PUT /people_roles/1.xml
   def update
-    @people_role = PersonRole.find(params[:id])
+    @people_role = PeopleRole.find(params[:id])
 
     respond_to do |format|
       if @people_role.update_attributes(params[:people_role])
@@ -81,4 +81,3 @@ class PeopleRolesController < ApplicationController
     end
   end
 end
-

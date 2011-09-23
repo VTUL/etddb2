@@ -137,12 +137,14 @@ ActiveRecord::Schema.define(:version => 20110420190416) do
     t.integer  "roles_mask"
   end
 
-  create_table "people_roles", :id => false, :force => true do |t|
+  create_table "people_roles", :force => true do |t|
     t.integer "person_id"
     t.integer "role_id"
+    t.integer "etd_id"
   end
 
-  add_index "people_roles", ["person_id", "role_id"], :name => "index_people_roles_on_person_id_and_role_id", :unique => true
+  add_index "people_roles", ["etd_id"], :name => "index_people_roles_on_etd_id"
+  add_index "people_roles", ["person_id", "role_id", "etd_id"], :name => "index_people_roles_on_person_id_and_role_id_and_etd_id", :unique => true
   add_index "people_roles", ["role_id"], :name => "index_people_roles_on_role_id"
 
   create_table "permissions", :force => true do |t|

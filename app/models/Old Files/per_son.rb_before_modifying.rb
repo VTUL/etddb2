@@ -1,5 +1,5 @@
 #require 'EdAuth'
-class Person < ActiveRecord::Base
+class Person2 < ActiveRecord::Base
   has_and_belongs_to_many :etds
 
   has_and_belongs_to_many :roles
