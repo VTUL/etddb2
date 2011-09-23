@@ -22,14 +22,14 @@ class Person < ActiveRecord::Base
 
   #
   # Validates attributes
-  validates :first_name, :last_name, :email, :pid, :presence => true
-  validates_uniqueness_of :pid, :email
+  #validates :first_name, :last_name, :email, :pid, :presence => true
+  #validates_uniqueness_of :pid, :email
   #validates :role, :pid, :presence => true
 
   #
   # for authentication through matching the login name to the stored names.
-  def self.find_by_name(name)
-    return user = Person.find(:first, :conditions => "last_name='#{name}'")
+  def self.find_by_pid(pid)
+    return user = Person.find(:first, :conditions => "pid='#{pid}'")
   end
 
   # Return true if the user's password matches the submitted password.
@@ -85,10 +85,10 @@ class Person < ActiveRecord::Base
   end
 
   # for regular authentiction
-  def self.authenticate(name, submitted_password)
-    puts name, submitted_password
-    user = find_by_name(name)
-    return Person.authenticateByEdAuth(name, submitted_password)  if user.nil?
+  def self.authenticate(pid, submitted_password)
+    puts pid, submitted_password
+    user = find_by_pid(pid)
+    return Person.authenticateByEdAuth(pid, submitted_password)  if user.nil?
     return user #if user.has_password?(name, submitted_password)
   end
 
