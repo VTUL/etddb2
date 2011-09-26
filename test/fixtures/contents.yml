@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  filename: content1.pdf
-  types: pdf
-  size: 1234
+  uploaded_file_name: content1.pdf
+  uploaded_content_type: pdf
+  uploaded_file_size: 1234
   availability: unrestricted
   bound: no
   page_count: 110
@@ -11,9 +11,9 @@ one:
 #  confirmed_at: <%= Time.now %>
   
 two:
-  filename: content2.ppt
-  types: ppt
-  size: 5678
+  uploaded_file_name: content2.ppt
+  uploaded_content_type: ppt
+  uploaded_file_size: 5678
   availability: restricted
   bound: no
   page_count: 80

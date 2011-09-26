@@ -4,9 +4,10 @@ class CreateContents < ActiveRecord::Migration
 
       t.integer :etd_id
 
-      t.string :filename
-      t.string :types
-      t.string :size
+      t.string :uploaded_file_name
+      t.string :uploaded_content_type
+      t.integer :uploaded_file_size
+      t.timestamp :uploaded_updated_at
       t.string :availability
       t.string :bound
       t.integer :page_count

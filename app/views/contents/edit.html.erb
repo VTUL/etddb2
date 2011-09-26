@@ -3,16 +3,16 @@
 <%= form_for(@content) do |f| %>
 
   <p>
-    <%= f.label :filename %><br />
-    <%= f.text_field :filename %>
+    <%= f.label :uploaded_file_name, "File name:" %><br />
+    <%= f.text_field :uploaded_file_name %>
   </p>
   <p>
-    <%= f.label :types %><br />
-    <%= f.text_field :types %>
+    <%= f.label :uploaded_content_type, "File type:" %><br />
+    <%= f.text_field :uploaded_content_type %>
   </p>
   <p>
-    <%= f.label :size %><br />
-    <%= f.text_field :size %>
+    <%= f.label :uploaded_file_size, "Size:" %><br />
+    <%= f.text_field :uploaded_file_size %>
   </p>
   <p>
     <%= f.label :availability %><br />
@@ -34,6 +34,5 @@
     <%= f.submit 'Update' %>
   </p>
 <% end %>
-
-<%= link_to 'Show', @content %> |
+<%= link_to 'Show', @content %>
 <%= link_to 'Back', contents_path %>

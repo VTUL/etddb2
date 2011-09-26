@@ -10,7 +10,7 @@ class ContentsControllerTest < ActionController::TestCase
     # setting it to nil here is not essential but I hope
     # you understand how you can use the teardown method
     @content = nil
-  end 
+  end
   test "should get index" do
     get :index
     assert_response :success
@@ -48,7 +48,7 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should destroy content" do
     assert_difference('Content.count', -1) do
-      delete :destroy, :id => @content.id, :file_name => @content.filename
+      delete :destroy, :id => @content.id, :file_name => @content.uploaded_file_name
     end
 
     assert_redirected_to contents_path

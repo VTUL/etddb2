@@ -11,17 +11,17 @@ class ContentTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   # Assert "validate_presence_of" attributes
 
-  # Even though page_count is in the "contents" table, 
-  # it is an attribute of the Document class 
+  # Even though page_count is in the "contents" table,
+  # it is an attribute of the Document class
   # Please see the Document class for page_count assertion.
 
   test "should be invalid with empty attributes" do
     content = Content.new
     assert content.invalid?
-    assert content.errors[:filename].any?
-    assert content.errors[:types].any?
-    assert content.errors[:size].any?
-    assert content.errors[:availability].any? 
-    assert content.errors[:bound].any? 
+    assert content.errors[:uploaded_file_name].any?
+    assert content.errors[:uploaded_content_type].any?
+    assert content.errors[:uploaded_file_size].any?
+    assert content.errors[:availability].any?
+    assert content.errors[:bound].any?
   end
 end

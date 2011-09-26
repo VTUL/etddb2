@@ -39,9 +39,10 @@ ActiveRecord::Schema.define(:version => 20110420190416) do
 
   create_table "contents", :force => true do |t|
     t.integer  "etd_id"
-    t.string   "filename"
-    t.string   "types"
-    t.string   "size"
+    t.string   "uploaded_file_name"
+    t.string   "uploaded_content_type"
+    t.integer  "uploaded_file_size"
+    t.datetime "uploaded_updated_at"
     t.string   "availability"
     t.string   "bound"
     t.integer  "page_count"
@@ -94,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20110420190416) do
     t.text     "title"
     t.text     "abstract"
     t.string   "availability"
+    t.text     "availability_description"
+    t.text     "copyright_statement"
     t.date     "ddate"
     t.date     "sdate"
     t.date     "adate"
