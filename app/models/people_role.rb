@@ -18,5 +18,5 @@ class PeopleRole < ActiveRecord::Base
   belongs_to :etd
 
   #Validate attributes
-  validates :id, :person_id, :role_id, :presence => true
+  validates :person_id, :role_id, :presence => true
 end

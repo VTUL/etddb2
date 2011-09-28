@@ -7,5 +7,5 @@
 class DocTypeDescription < ActiveRecord::Base
   belongs_to :etd
 
-  validates_presence_of :name, :id
+  validates_presence_of :name
 end
