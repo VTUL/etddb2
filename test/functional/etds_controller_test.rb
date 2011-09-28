@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class EtdsControllerTest < ActionController::TestCase
+  def setup
+    @etd = etds(:one)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +18,30 @@ class EtdsControllerTest < ActionController::TestCase
 
   test "should create etd" do
     assert_difference('Etd.count') do
-      post :create, :etd => {:urn=>"123456789" }
-    end
-
+      post :create, :etd => @etd
+	end
+	
     assert_redirected_to etd_path(assigns(:etd))
   end
 
   test "should show etd" do
-    get :show, :id => etds(:SungHeePark).to_param
+    get :show, :id => etds(:one).to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => etds(:SungHeePark).to_param
+    get :edit, :id => etds(:one).to_param
     assert_response :success
   end
 
   test "should update etd" do
-    put :update, :id => etds(:SungHeePark).to_param, :etd => {:urn=>"223456789" }
+    put :update, :id => etds(:one).to_param, :etd => {:urn=>"223456789" }
     assert_redirected_to etd_path(assigns(:etd))
   end
 
   test "should destroy etd" do
     assert_difference('Etd.count', -1) do
-      delete :destroy, :id => etds(:SungHeePark).to_param
+      delete :destroy, :id => etds(:one).to_param
     end
 
     assert_redirected_to etds_path

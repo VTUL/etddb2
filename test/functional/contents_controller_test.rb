@@ -10,7 +10,7 @@ class ContentsControllerTest < ActionController::TestCase
     # setting it to nil here is not essential but I hope
     # you understand how you can use the teardown method
     @content = nil
-  end
+  end 
   test "should get index" do
     get :index
     assert_response :success
@@ -24,8 +24,9 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should create content" do
     assert_difference('Content.count') do
-      #post :create, :content => @content
-      post :create, :id => @content.id
+      #post :create, :content => contents(:one).to_param
+      post :create, :content => {:uploaded_file_name=>"test.pdf", :uploaded_content_type => "pdf", 
+                  :uploaded_file_size => 123, :availability => "unrestricted", :bound=>"no" }
     end
 
     assert_redirected_to content_path(assigns(:content))

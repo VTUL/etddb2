@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SubmitControllerTest < ActionController::TestCase
   setup do
-  @etd = etds(:SungHeePark)
+  @etd = etds(:one)
   @update = {
     :title	=> 'This test tile 2',
     :department => 'Mechanical Engineering',
