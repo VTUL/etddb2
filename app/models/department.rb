@@ -7,5 +7,5 @@
 class Department < ActiveRecord::Base
   belongs_to :etd
 
-  validates :name, :id, :presence => true
+  validates :name, :presence => true
 end

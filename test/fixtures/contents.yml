@@ -6,7 +6,7 @@ one:
   uploaded_file_size: 1234
   availability: unrestricted
   bound: no
-  page_count: 110
+#  page_count: 110
   timestamp: 2010-08-18 14:18:27
 #  confirmed_at: <%= Time.now %>
   
@@ -16,6 +16,6 @@ two:
   uploaded_file_size: 5678
   availability: restricted
   bound: no
-  page_count: 80
+#  page_count: 80
   timestamp: 2010-08-18 14:19:27
 #  confirmed_at: <%= Time.now %>

@@ -11,7 +11,7 @@ class DegreeDescriptionTest < ActiveSupport::TestCase
   test "invalid with empty attributes" do
     degree_description = DegreeDescription.new
     assert !degree_description.valid?
-    assert degree_description.errors[:id].any?
+#    assert degree_description.errors[:id].any?
     assert degree_description.errors[:name].any?
   end
 end

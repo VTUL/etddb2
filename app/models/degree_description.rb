@@ -7,5 +7,5 @@
 class DegreeDescription < ActiveRecord::Base
   belongs_to :etd
 
-  validates_presence_of :name, :id
+  validates :name, :presence => true
 end
