@@ -7,6 +7,6 @@
 class Session < ActiveRecord::Base
 
   # Validates attributes
-  validates :session_id, :data, :presence => true
+  validates :data, :presence => true
 
 end

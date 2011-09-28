@@ -31,7 +31,7 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should update etd" do
-    put :update, :id => etds(:SungHeePark).to_param, :etd => { }
+    put :update, :id => etds(:SungHeePark).to_param, :etd => {:urn=>"223456789" }
     assert_redirected_to etd_path(assigns(:etd))
   end
 

@@ -31,7 +31,7 @@ class KeywordsControllerTest < ActionController::TestCase
   end
 
   test "should update keyword" do
-    put :update, :id => keywords(:one).to_param, :keyword => { }
+    put :update, :id => keywords(:one).to_param, :keyword => {:word=>"etd-db 2.0" }
     assert_redirected_to keyword_path(assigns(:keyword))
   end
 
