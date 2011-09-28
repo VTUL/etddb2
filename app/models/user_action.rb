@@ -4,7 +4,7 @@
 # Last updated: Feb-16-2011
 #########################################################
 
-class Action < ActiveRecord::Base
+class UserAction < ActiveRecord::Base
 #  has_and_belongs_to_many :roles
 #  has_and_belongs_to_many :digital_objects
   has_many :permission

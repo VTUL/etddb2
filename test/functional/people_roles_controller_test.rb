@@ -17,7 +17,7 @@ class PeopleRolesControllerTest < ActionController::TestCase
       post :create, :people_role => {:person_id=>"1",:role_id=>"1" }
     end
 
-    assert_redirected_to people_roles_path(assigns(:people_role))
+    assert_redirected_to people_role_path(assigns(:people_role))
   end
 
   test "should show person_role" do
@@ -31,7 +31,7 @@ class PeopleRolesControllerTest < ActionController::TestCase
   end
 
   test "should update person_role" do
-    put :update, :id => people_roles(:one).to_param, :people_role => { }
+    put :update, :id => people_roles(:one).to_param, :people_role => {:person_id => 3}
     assert_redirected_to people_role_path(assigns(:people_role))
   end
 

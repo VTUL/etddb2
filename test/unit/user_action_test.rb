@@ -6,10 +6,10 @@
 
 require 'test_helper'
 
-class ActionTest < ActiveSupport::TestCase
+class UserActionTest < ActiveSupport::TestCase
   test "invalid with empty attributes" do
-    action = Action.new
-    assert !action.valid?
-    assert action.errors[:name].any?
+    user_action = UserAction.new
+    assert !user_action.valid?
+    assert user_action.errors[:name].any?
   end
 end

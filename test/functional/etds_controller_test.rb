@@ -18,9 +18,10 @@ class EtdsControllerTest < ActionController::TestCase
 
   test "should create etd" do
     assert_difference('Etd.count') do
-      post :create, :etd => @etd
-	end
-	
+      post :create, :etd => {:degree => "PhD", :department => "Computer Science", :dtype => "dissertation", :title => "Test:", :abstract => "This is a test abstract", :urn => 0,
+                             :availability => "unrestricted", :pid => "shpark", :url => "http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/", :bound => "NO"}
+  end
+
     assert_redirected_to etd_path(assigns(:etd))
   end
 

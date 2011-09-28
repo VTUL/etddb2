@@ -18,6 +18,7 @@ one:
   url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/
   timestamp: 2010-07-29 08:46:26
   bound: NO
+  urn: 1
 
 two:
   degree: MS 
@@ -37,3 +38,4 @@ two:
   url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14039056/
   timestamp: 2010-07-29 08:46:27
   bound: YES
+  urn: 2

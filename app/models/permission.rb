@@ -6,7 +6,7 @@
 
 class Permission < ActiveRecord::Base
   belongs_to :digital_object
-  belongs_to :action
+  belongs_to :user_action
   belongs_to :role
 
 #  validates  :presence => true
