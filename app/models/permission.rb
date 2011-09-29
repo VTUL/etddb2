@@ -9,5 +9,5 @@ class Permission < ActiveRecord::Base
   belongs_to :user_action
   belongs_to :role
 
-#  validates  :presence => true
+  validates :role_id, :user_action_id, :digital_object_id, :presence => true
 end

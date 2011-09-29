@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(:version => 20110420190416) do
   create_table "permissions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "action_id"
+    t.integer  "user_action_id"
     t.integer  "role_id"
     t.integer  "digital_object_id"
   end

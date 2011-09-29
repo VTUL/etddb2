@@ -14,7 +14,7 @@ class PermissionsControllerTest < ActionController::TestCase
 
   test "should create permission" do
     assert_difference('Permission.count') do
-      post :create, :permission => {:action_id=>"1", :role_id=>"1", :digital_object_id=>"1" }
+      post :create, :permission => {:user_action_id=>"1", :role_id=>"1", :digital_object_id=>"1" }
     end
 
     assert_redirected_to permission_path(assigns(:permission))
@@ -31,7 +31,7 @@ class PermissionsControllerTest < ActionController::TestCase
   end
 
   test "should update permission" do
-    put :update, :id => permissions(:one).to_param, :permission => { }
+    put :update, :id => permissions(:one).to_param, :permission => {:role_id => 3}
     assert_redirected_to permission_path(assigns(:permission))
   end
 

@@ -11,5 +11,8 @@ class PermissionTest < ActiveSupport::TestCase
   test "invalid with empty attributes" do
     permission = Permission.new
     assert !permission.valid?, "Error: Permission not valid with empty attributes."
+    assert permission.errors[:role_id].any?
+    assert permission.errors[:user_action_id].any?
+    assert permission.errors[:digital_object_id].any?
   end
 end
