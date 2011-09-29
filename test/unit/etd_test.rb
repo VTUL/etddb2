@@ -15,11 +15,11 @@ class EtdTest < ActiveSupport::TestCase
     assert etd.errors[:department].any?
     assert etd.errors[:dtype].any?
     assert etd.errors[:title].any?
-    assert etd.errors[:adate].any?
-    assert etd.errors[:cdate].any?
-    assert etd.errors[:ddate].any?
-    assert etd.errors[:rdate].any?
-    assert etd.errors[:sdate].any?
+    #assert etd.errors[:adate].any?
+    #assert etd.errors[:cdate].any?
+    #assert etd.errors[:ddate].any?
+    #assert etd.errors[:rdate].any?
+    #assert etd.errors[:sdate].any?
     assert etd.errors[:url].any?
     assert etd.errors[:urn].any?
   end

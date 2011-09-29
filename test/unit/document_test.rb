@@ -13,13 +13,13 @@ class DocumentTest < ActiveSupport::TestCase
     assert document.invalid?
     assert document.errors[:page_count].any?
 
-  # These following attributes are inherited 
+  # These following attributes are inherited
   # from the parent class "Content"
-    assert document.errors[:filename].any?
-    assert document.errors[:types].any?
-    assert document.errors[:size].any?
+    assert document.errors[:uploaded_file_name].any?
+    assert document.errors[:uploaded_content_type].any?
+    assert document.errors[:uploaded_file_size].any?
     assert document.errors[:availability].any?
     assert document.errors[:bound].any?
+    assert document.errors[:page_count].any?
   end
 end
-

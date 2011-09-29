@@ -12,26 +12,23 @@ class DepartmentTest < ActiveSupport::TestCase
 
   test "invalid with empty attributes" do
     department = Department.new
-    puts "adld#{department.name}\n"
+    #puts "adld#{department.name}\n"
     assert !department.valid?
-    assert department.errors[:id].any?
     assert department.errors[:name].any?
- 
+
   end
 
   test "invalid with exceptional attributes" do
     department1 = Department.new(:name => departments(:one).name)
-
-    puts "adld#{department1.name}\n"
-    
-    puts "name#{department1.name}\n"
-#    assert !department1.invalid?
-#    assert !department1.errors[:name].any?
+    #puts "adld#{department1.name}\n"
+    #puts "name#{department1.name}\n"
+    #assert !department1.invalid?
+    #assert !department1.errors[:name].any?
 
     department2 = Department.new(:name => departments(:two).name)
 
-    puts "2adld#{department2.name}\n"
-#    assert department2.valid?
-#    assert department2.errors[:name].any?
+    #puts "2adld#{department2.name}\n"
+    #assert department2.valid?
+    #assert department2.errors[:name].any?
   end
 end

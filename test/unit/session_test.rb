@@ -11,14 +11,12 @@ class SessionTest < ActiveSupport::TestCase
   test "should be invalid with empty attributes" do
     session = Session.new
     assert !session.valid?
-    assert session.errors[:session_id].any?
     assert session.errors[:data].any?
   end
 
   test "should be valid with data and session_id attributes" do
-    session = Session.new(:session_id => 1, :data => "shpark")
+    session = Session.new(:data => "shpark")
     assert session.valid?
-    assert !session.errors[:session_id].any?
     assert !session.errors[:data].any?
   end
 end
