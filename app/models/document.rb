@@ -5,7 +5,6 @@
 #########################################################
 
 class Document < Content
-  belongs_to :etd
   validates_presence_of :page_count
   validates_numericality_of :page_count
 end

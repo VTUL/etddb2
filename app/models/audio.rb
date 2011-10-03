@@ -5,5 +5,6 @@
 #########################################################
 
 class Audio < Content
-  belongs_to :etd
+  validates_presence_of :duration
+  validates_numericality_of :duration
 end

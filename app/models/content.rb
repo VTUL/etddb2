@@ -7,7 +7,7 @@
 class Content < ActiveRecord::Base
   belongs_to :etd
   # validation
-  validates :uploaded_file_name, :uploaded_file_size, :availability, :uploaded_content_type, :bound, :presence => true
+  validates :uploaded_file_name, :uploaded_file_size, :uploaded_content_type, :availability, :presence => true
   validates :uploaded_file_size, :numericality => {:greater_than_or_equal_to => 0}
 
   #accepts_nested_attributes_for :recharge_contents, :allow_destory => true
@@ -75,17 +75,4 @@ class Content < ActiveRecord::Base
     @etd=Etd.find(:first, :conditions => "id= '#{id}'")
     @contents=@etd.contents
   end
-end
-
-
-
-class Document < Content
-  validates_presence_of :page_count
-  validates_numericality_of :page_count
-end
-
-class Video < Content
-end
-
-class Audio < Content
 end

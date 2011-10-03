@@ -1,10 +1,9 @@
 #########################################################
 # The source codes are developed by
 # Digital Library and Archive at Virginia Tech.
-# Last updated: Feb-16-2011
+# Last updated: Oct-03-2011
 #########################################################
 
-class Video < Content
-  validates_presence_of :duration, :dimensions
-  validates_numericality_of :duration
+class Picture < Content
+  validates_presence_of :dimensions
 end
