@@ -9,33 +9,33 @@ one:
   availability: unrestricted
 #  availability_description: Release the entire work immediately for access worldwide. 
 #  copyright_statement: I hereby grant to Virginia Tech or its agents the right to archive and to make available my thesis or dissertation in whole or in part in the University Libraries in all forms of media, now or hereafter known.  I retain all proprietary rights, such as patent rights. I also retain the right to use in future works (such as articles or books) all or part of this thesis or dissertation. 
-  ddate: 2010-07-29
-  sdate: 2010-07-29
-  adate: 2010-07-29
-  cdate: 2010-07-29
-  rdate: 2010-07-29
+  ddate: 2008-07-29
+  sdate: 2008-07-29
+  adate: 2008-07-29
+  cdate: 2008-07-29
+  rdate: 2008-07-29
   pid: shpark 
   url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/
-  timestamp: 2010-07-29 08:46:26
+  timestamp: 2011-07-29 23:54:26
   bound: NO
-  urn: 1
+  urn: etd-07292010-235426
 
 two:
   degree: MS 
-  department: Food Science 
+  department: Computer Science
   dtype: thesis 
   title: The effects of Saltness on a Pregnant Woman
   abstract: This is the second test abstract 
   availability: restricted 
 #  availability_description: Release the entire work immediately for access worldwide. 
 #  copyright_statement: I hereby grant to Virginia Tech or its agents the right to archive and to make available my thesis or dissertation in whole or in part in the University Libraries in all forms of media, now or hereafter known.  I retain all proprietary rights, such as patent rights. I also retain the right to use in future works (such as articles or books) all or part of this thesis or dissertation. 
-  ddate: 2010-07-29
-  sdate: 2010-07-29
-  adate: 2010-07-29
-  cdate: 2010-07-29
-  rdate: 2010-07-29
+  ddate: 2008-05-29
+  sdate: 2008-05-29
+  adate: 2008-05-29
+  cdate: 2008-05-29
+  rdate: 2008-05-29
   pid: certainp 
-  url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14039056/
-  timestamp: 2010-07-29 08:46:27
-  bound: YES
-  urn: 2
+  url: http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/
+  timestamp: 2008-05-21 08:46:27
+  bound: NO
+  urn: etd-05212008-084627
