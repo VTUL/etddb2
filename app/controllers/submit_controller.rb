@@ -19,11 +19,22 @@ class SubmitController < ApplicationController
   def new_etd 
     @etd = Etd.new
     #begin
-      @author = Person.find(:first,:conditions=>"pid='#{session[:user_id]}' and role='author'")
+      @author = Person.find(:first, :conditions => "pid='#{session[:user_id]}'")
+      if @author
+	      if !@author.roles.find(:first,:conditions=>"name='Author'")
+	      	@author=nil;
+	      end
+      end
+
+#      @author = Person.find(:first,:conditions=>"pid='#{session[:user_id]}' and role='author'")
     #rescue 
       @author ||= Person.new 
       @author.pid = session[:user_id].to_s
-      @author.roles << Role.find(:first,:conditions=>"name='author'") unless @author.roles.include? Role.find(:first, :conditions=>"name='author'")
+      if !Role.find(:first,:conditions=> "name='Author'")
+        role=Role.new(:name=>'Author')
+        role.save
+      end
+      @author.roles << Role.find(:first, :conditions=> "name='Author'") unless @author.roles.include? Role.find(:first, :conditions=>"name='Author'")
      
     #end
    
@@ -42,15 +53,23 @@ class SubmitController < ApplicationController
 
     #@author = Person.find(params[:etdl_person_ids])
     #begin
-      @author = Person.find(:first,:conditions=>"pid='#{session[:user_id]}' and role='author'")
-    #rescue 
+      @author = Person.find(:first, :conditions => "pid='#{session[:user_id]}'")
+      if @author
+	      if !@author.roles.find(:first,:conditions=>"name='Author'")
+	      	@author=nil;
+	      end
+      end
+      #rescue 
      
+     # create a new author less there no author exist
       @author ||= Person.new 
       @author.pid = session[:user_id]
-      @author.roles << Role.find(:first,:conditions=>"name='author'") unless @author.roles.include? Role.find(:first,:conditions=>"name='author'")
+      # the first author will save the role 'author' into the Role table
+      @author.roles << Role.find(:first,:conditions=> "name='Author'") unless @author.roles.include? Role.find(:first,:conditions=> "name='Author'")
       @author.role = 'author'
       @author.save
     #end
+      #etd has its author
       @etd.people<<@author
     
     respond_to do |format|
@@ -68,7 +87,14 @@ class SubmitController < ApplicationController
   def show_etds_by_author
     @session_id = session[:user_id]
     #begin
-      @author = Person.find(:first, :conditions => "pid='#{@session_id}' and role='author'")
+      #@author = Person.find(:first, :conditions => "pid='#{@session_id}' and role='author'")
+      @author = Person.find(:first, :conditions => "pid='#{@session_id}'")
+      if @author
+	      if @author.roles.find(:first,:conditions=> "name='Author'").nil?
+	      
+	      end
+      end
+      
     #rescue  
       @author ||= Person.new
       @author.pid = session[:user_id]
@@ -82,7 +108,7 @@ class SubmitController < ApplicationController
         format.html {redirect_to( :controller => :people, :action => :new)}
       else
         @ability = Ability.new(@author)
-        @etdss = @author.etds unless @author.etds.empty? unless @author.nil? 
+        @etdss = @author.etds unless @author.etds.empty? unless @author.nil?
 
         format.html # show_etd_by_author.html.erb
         format.xml  { render :xml => @etd , :xml => @person }

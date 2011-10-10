@@ -1,6 +1,7 @@
 <h1>New ETD</h1>
 <p>
 Pid<br />
+<% base_url="http://developer.tower.lib.vt.edu:3000/theses/available" %>
 <%= @author.pid %>
 </p>
 <%= form_for :etd, :url => { :action => :create_etd } do |f| %>
@@ -109,6 +110,11 @@ Pid<br />
    </p>
    <%= f.hidden_field(:timestamp, {:value => Time.now}) %>
    <%= f.hidden_field(:pid, {:value=>@author.pid}) %>
+   <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
+   <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
+   <%= f.hidden_field(:pid, {:value=>"#{session[:user_id]}"}) %>
+   <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/unrestricted"}) %>
+   <%= f.hidden_field(:bound, {:value=>"No"}) %>
    <%= f.submit('Create') %>
    </p>
 <% end %>

@@ -1,6 +1,11 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
   devise_for :people
+  
+  devise_for :people do
+    get "sign_in", :to => "devise/sessions#new"
+    get "sign_out", :to => "devise/sessions#destroy"
+  end
 
   #get "pages/home"
   #get "pages/about"
@@ -39,8 +44,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   #resources :sessions, :only => [:new, :create, :destroy]
 
   #get "sessions/new"
-  match '/login',   :to => 'sessions#new'
-  match '/logout',  :to => 'sessions#destroy'
+  match '/login',   :to => 'devise/sessions#new'
+  match '/logout',  :to => 'devise/sessions#destroy'
 
   #get 'browse/index'
   # The priority is based upon order of creation:
@@ -51,8 +56,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
   # COMMENT REMOVE 2 Lines below for address to work /sessions/new/
   #match 'sessions/new' => 'submit#login'
-  match 'submit/create' => 'sessions#create'
-  match 'submit/login' => 'sessions#new'
+  match 'submit/create' => 'devise/sessions#create'
+  match 'submit/login' => 'devise/sessions#new'
   #match 'submit/create' => 'sessions#create'
 
 

@@ -1,4 +1,6 @@
 class EtdsController < ApplicationController
+  skip_before_filter :authenticate_person
+  
   # GET /etds
   # GET /etds.xml
   def index

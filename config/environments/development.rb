@@ -25,5 +25,8 @@ NewVtEtdUpgrd::Application.configure do
 
   # Make sure Paperclip can use ImageMagick
   Paperclip.options[:command_path] = "/usr/bin/"
+  
+  # Set default url options for action mailer for devise
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
 

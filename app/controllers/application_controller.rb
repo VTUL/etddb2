@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-#  before_filter :authorize
+#  before_filter :authenticate_person! #:except = {:etds=>:index, :etds=>:show}
 
   protect_from_forgery
 

@@ -5,7 +5,7 @@ one:
   first_name: MyString
   middle_name: MyString
   last_name: MyString
-  email: MyString
+  email: shpark@vt.edu
   pid: MyString
   suffix: MyString
 
@@ -14,7 +14,7 @@ two:
   first_name: MyString
   middle_name: MyString
   last_name: MyString
-  email: MyString
+  email: hellosunghee@gmail.com
   pid: MyString
   suffix: MyString
 
@@ -23,6 +23,6 @@ three:
   first_name: MyString
   middle_name: MyString
   last_name: MyString
-  email: MyString
+  email: rotated8@vt.edu
   pid: MyString
   suffix: MyString
