@@ -1,10 +1,13 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
   devise_for :people
-  
+
   devise_for :people do
     get "sign_in", :to => "devise/sessions#new"
     get "sign_out", :to => "devise/sessions#destroy"
+    #get "sessions/new"
+    match '/login',   :to => 'devise/sessions#new'
+    match '/logout',  :to => 'devise/sessions#destroy'
   end
 
   #get "pages/home"
@@ -43,9 +46,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :contents
   #resources :sessions, :only => [:new, :create, :destroy]
 
-  #get "sessions/new"
-  match '/login',   :to => 'devise/sessions#new'
-  match '/logout',  :to => 'devise/sessions#destroy'
+
 
   #get 'browse/index'
   # The priority is based upon order of creation:
