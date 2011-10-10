@@ -24,10 +24,7 @@ class Content < ActiveRecord::Base
     #:path => ":rails_root/public/theses/:filename"
     :path => "/usr/home/shpar/etddb2devel/public/theses/:filename"
 
-
   attr_accessor :pdf_file_name
-
-
 
  # validates_format_of :filename,
  #                     :with => %r{([A-Z]([A-Z]|[a-z])*)(_([a-z]|[A-Z])+)*(_[D|T])(_([0-9]{4}))\.(([a-z]|[A-Z]){3})},

@@ -19,7 +19,7 @@ class DocumentTest < ActiveSupport::TestCase
     assert document.errors[:uploaded_content_type].any?
     assert document.errors[:uploaded_file_size].any?
     assert document.errors[:availability].any?
-    assert document.errors[:bound].any?
+    #assert document.errors[:bound].any?
     assert document.errors[:page_count].any?
   end
 end
