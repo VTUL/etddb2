@@ -8,22 +8,25 @@ gem 'rails', '3.0.10'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3', '1.3.3', :require => 'sqlite3'
+gem 'sqlite3', '1.3.4', :require => 'sqlite3'
 #gem 'net-ldap' , '0.1.1'
 
 gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
 # For test,
 group :development do
-  gem 'rspec-rails','2.5.0'
+  #gem 'rspec-rails','2.5.0'
 end
 group :test do
-  gem 'rspec','2.5.0'
+  #gem 'rspec','2.5.0'
   gem 'webrat', '0.7.1'
 end
 
 # For user authorization
 gem 'cancan'
+
+# For authentication
+gem 'devise'
 
 # For test,
 #gem 'test_helper'

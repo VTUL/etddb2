@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110420190416) do
+ActiveRecord::Schema.define(:version => 20111007202829) do
 
   create_table "actions_roles_digital_objects", :id => false, :force => true do |t|
     t.integer "action_id"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20110420190416) do
     t.datetime "updated_at"
     t.integer  "file_id"
     t.string   "file_type"
+    t.integer  "duration"
+    t.string   "dimensions"
   end
 
   create_table "copyright_statements", :force => true do |t|
@@ -126,13 +128,25 @@ ActiveRecord::Schema.define(:version => 20110420190416) do
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
-    t.string   "email"
     t.string   "pid"
     t.string   "suffix"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "roles_mask"
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                         :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
 
   create_table "people_roles", :force => true do |t|
     t.integer "person_id"

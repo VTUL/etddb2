@@ -1,11 +1,13 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
+  devise_for :people
+
   #get "pages/home"
-  get "pages/about"
-  get "pages/contact"
-  get "pages/authorhelp"
-  get "pages/staffhelp"
-  get "pages/dev"
+  #get "pages/about"
+  #get "pages/contact"
+  #get "pages/authorhelp"
+  #get "pages/staffhelp"
+  #get "pages/dev"
 
 
   root :to => 'pages#home'
