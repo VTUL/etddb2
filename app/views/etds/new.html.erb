@@ -69,6 +69,11 @@
     <%= f.label :bound %><br />
     <%= f.text_field :bound %>
   </p>
+    <% time=Time.current %>
+    <%= f.text_field :urn, :type=>:hidden , :value=>"etd-#{time.month}#{time.day}#{time.year}-#{time.hour}#{time.min}#{time.sec}" %>
+    <%= f.text_field :pid, :type=>:hidden , :value=>"#{session[:user_id]}" %>
+    
+  
   <p>
     <%= f.submit 'Create' %>
   </p>

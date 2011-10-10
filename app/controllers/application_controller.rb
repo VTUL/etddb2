@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+#  before_filter :authorize
+
   protect_from_forgery
 
   # define ability
@@ -11,5 +13,12 @@ class ApplicationController < ActionController::Base
     #Rails.logger.provenance "Access denied on #{exception.action} #{exception.subject.inspect}"
   # ...
   end
+#  protected
 
+#  def authorize
+#    unless Person.authenticate(params[:session2][:pid],
+#                             params[:session2][:password])
+#    	redirect_to '/login', notice: "Please log in"
+#    end
+#  end
 end
