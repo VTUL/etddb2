@@ -28,7 +28,7 @@ class Person < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  #attr_accessible :email, :password, :password_confirmation, :remember_me
 
   # for authentication through matching the login name to the stored names.
   def self.find_by_pid(pid)
