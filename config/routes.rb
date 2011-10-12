@@ -2,22 +2,6 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   devise_for :people, :skip => :all
 
-  #devise_for :people do
-  #  get "sign_in", :to => "devise/sessions#new"
-  #  get "sign_out", :to => "devise/sessions#destroy"
-  #  #get "sessions/new"
-  #  match '/login',   :to => 'devise/sessions#new'
-  #  match '/logout',  :to => 'devise/sessions#destroy'
-  #end
-
-  #get "pages/home"
-  #get "pages/about"
-  #get "pages/contact"
-  #get "pages/authorhelp"
-  #get "pages/staffhelp"
-  #get "pages/dev"
-
-
   root :to => 'pages#home'
   match '/about',     :to => 'pages#about'
   match '/contact',   :to => 'pages#contact'
@@ -59,8 +43,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
   # COMMENT REMOVE 2 Lines below for address to work /sessions/new/
   #match 'sessions/new' => 'submit#login'
-  match 'submit/create' => 'sessions#create'
-  match 'submit/login' => 'sessions#new'
+  #match 'submit/create' => 'sessions#create'
+  #match 'submit/login' => 'sessions#new'
   #match 'submit/create' => 'sessions#create'
 
 

@@ -1,6 +1,6 @@
 class EtdsController < ApplicationController
   skip_before_filter :authenticate_person
-  
+
   # GET /etds
   # GET /etds.xml
   def index
@@ -27,6 +27,9 @@ class EtdsController < ApplicationController
   # GET /etds/new.xml
   def new
     @etd = Etd.new
+
+    #Get current user from Devise.
+    @author = current_person
 
     respond_to do |format|
       format.html # new.html.erb
