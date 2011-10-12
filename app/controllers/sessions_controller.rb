@@ -19,6 +19,9 @@ class SessionsController < ApplicationController
     # Since the authentication happens in the rack layer,
     # we need to tell Devise to call the action "sessions#new"
     # in case something goes bad. Feel free to change it.
+
+    #Our EdAuth Code goes here
+
     person = authenticate_person!(:recall => "sessions#new")
     flash[:notice] = "You are now signed in!"
     sign_in person
