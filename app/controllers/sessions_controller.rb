@@ -4,11 +4,33 @@
 # Last updated: Feb-16-2011
 #########################################################
 class SessionsController < ApplicationController
-#  ssl_required :new
+  # ssl_required :new
+
+  # For security purposes, Devise just authenticates an user
+  # from the params hash if we explicitly allow it to. That's
+  # why we need to call the before filter below.
+  before_filter :allow_params_authentication!, :only => :create
 
   def new
-    @title = "Log in"
+    @person = Person.new(params[:person])
   end
+
+  def create
+    # Since the authentication happens in the rack layer,
+    # we need to tell Devise to call the action "sessions#new"
+    # in case something goes bad. Feel free to change it.
+    person = authenticate_person!(:recall => "sessions#new")
+    flash[:notice] = "You are now signed in!"
+    sign_in person
+    redirect_to root_path
+  end
+
+  def destroy
+    sign_out
+    flash[:notice] = "You are now signed out!"
+    redirect_to root_path
+  end
+
   # Notify an invalid authentication
   def loginfailure
 
@@ -30,12 +52,12 @@ class SessionsController < ApplicationController
       else
       # Sign the user in and redirect to the user's show page.
         session[:user_id] = @person.pid
-        
+
         @session3 = Session.new
         @session3.data = "sdlfsjd"
         @session3.session_id= 'sldkfsd'
-		@session3.save
-		
+        @session3.save
+
       # Authorization
       # Before letting a user landing on the user page, we need to check authorization
         if @person.authorize.nil?
