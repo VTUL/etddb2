@@ -37,47 +37,47 @@ class SessionsController < ApplicationController
   end
 
   # Create a new session
-  def create
-    #
-    # Authentication
-    # user is a type of Person
-    @person = Person.authenticate(params[:session2][:pid],
-                             params[:session2][:password])
-    respond_to do |format|
-
-      if @person.nil?
-      # Create an error message and re-render the signin form.
-        #format.html {redirect_to(:controller => 'submit', :action => 'login', :notice => 'Invalid authentication')}
-        format.html {redirect_to(:controller => 'sessions', :action => 'loginfailure', :notice => 'Invalid authentication')}
-      else
-      # Sign the user in and redirect to the user's show page.
-        session[:user_id] = @person.pid
-
-        @session3 = Session.new
-        @session3.data = "sdlfsjd"
-        @session3.session_id= 'sldkfsd'
-        @session3.save
-
-      # Authorization
-      # Before letting a user landing on the user page, we need to check authorization
-        if @person.authorize.nil?
-          #@person.save!
-          #format.html {redirect_to(:controller => 'submit', :action => 'new_etd',:author_id=>@user.pid)}
-          format.html {redirect_to(:controller => 'people', :action => 'new', :pid=>@person.pid)}
-        else
-          #format.html {redirect_to(:controller => 'submit', :action => 'show_etds_by_author')}
-          format.html {redirect_to(:controller => 'sessions', :action => 'authorize')}
-        end # if
-      end #if
-    end #respond
-  end # def create
-
-  # Destroy session
-  def destroy
-    session[:user_id] = nil
-    redirect_to :controller=>'sessions', :action=>'new', :notice => 'Logged out'
-    reset_session
-  end
+  #def create
+  #  #
+  #  # Authentication
+  #  # user is a type of Person
+  #  @person = Person.authenticate(params[:session2][:pid],
+  #                           params[:session2][:password])
+  #  respond_to do |format|
+  #
+  #    if @person.nil?
+  #    # Create an error message and re-render the signin form.
+  #      #format.html {redirect_to(:controller => 'submit', :action => 'login', :notice => 'Invalid authentication')}
+  #      format.html {redirect_to(:controller => 'sessions', :action => 'loginfailure', :notice => 'Invalid authentication')}
+  #    else
+  #    # Sign the user in and redirect to the user's show page.
+  #      session[:user_id] = @person.pid
+  #
+  #      @session3 = Session.new
+  #      @session3.data = "sdlfsjd"
+  #      @session3.session_id= 'sldkfsd'
+  #      @session3.save
+  #
+  #    # Authorization
+  #    # Before letting a user landing on the user page, we need to check authorization
+  #      if @person.authorize.nil?
+  #        #@person.save!
+  #        #format.html {redirect_to(:controller => 'submit', :action => 'new_etd',:author_id=>@user.pid)}
+  #        format.html {redirect_to(:controller => 'people', :action => 'new', :pid=>@person.pid)}
+  #      else
+  #        #format.html {redirect_to(:controller => 'submit', :action => 'show_etds_by_author')}
+  #        format.html {redirect_to(:controller => 'sessions', :action => 'authorize')}
+  #      end # if
+  #    end #if
+  #  end #respond
+  #end # def create
+  #
+  ## Destroy session
+  #def destroy
+  #  session[:user_id] = nil
+  #  redirect_to :controller=>'sessions', :action=>'new', :notice => 'Logged out'
+  #  reset_session
+  #end
 
   def authorize
     #find roles who the user has

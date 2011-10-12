@@ -1,7 +1,5 @@
 class AddDeviseToPeople< ActiveRecord::Migration
   def self.up
-    remove_column :people, :email
-
     change_table :people do |t|
       t.database_authenticatable :null => false
       t.recoverable
@@ -28,6 +26,5 @@ class AddDeviseToPeople< ActiveRecord::Migration
     remove_column :people, :rememberable
     remove_column :people, :trackable
     remove_column :people, :reset_password_token
-    add_column :people, :email
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007202829) do
+ActiveRecord::Schema.define(:version => 20111012205750) do
 
   create_table "actions_roles_digital_objects", :id => false, :force => true do |t|
     t.integer "action_id"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20111007202829) do
   end
 
   create_table "people", :force => true do |t|
-    t.string   "role"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
@@ -146,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20111007202829) do
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["pid"], :name => "index_people_on_pid", :unique => true
   add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
 
   create_table "people_roles", :force => true do |t|

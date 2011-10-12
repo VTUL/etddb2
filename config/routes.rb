@@ -46,8 +46,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :contents
   #resources :sessions, :only => [:new, :create, :destroy]
 
-  match '/login' => 'sessions#new'
-  match '/logout' => 'sessions#destroy'
+  get '/login' => 'sessions#new'
+  post "/login"    => "sessions#create"
+  match "/logout" => "sessions#destroy"
 
   #get 'browse/index'
   # The priority is based upon order of creation:
