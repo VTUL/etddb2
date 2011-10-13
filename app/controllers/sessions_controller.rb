@@ -30,11 +30,7 @@ class SessionsController < ApplicationController
       else
       # Sign the user in and redirect to the user's show page.
         session[:user_id] = @person.pid
-        
-        @session3 = Session.new
-        @session3.data = "sdlfsjd"
-        @session3.session_id= 'sldkfsd'
-		@session3.save
+        session[:passwd] = params[:session2][:password]
 		
       # Authorization
       # Before letting a user landing on the user page, we need to check authorization

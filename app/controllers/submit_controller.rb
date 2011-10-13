@@ -35,6 +35,7 @@ class SubmitController < ApplicationController
         role.save
       end
       @author.roles << Role.find(:first, :conditions=> "name='Author'") unless @author.roles.include? Role.find(:first, :conditions=>"name='Author'")
+      @author.save
      
     #end
    
@@ -48,7 +49,7 @@ class SubmitController < ApplicationController
   # POST /submit.xml
   def create_etd
     @etd = Etd.new(params[:etd])
-    @etd.urn = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}"
+    #@etd.urn = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}"
     
 
     #@author = Person.find(params[:etdl_person_ids])
@@ -66,11 +67,18 @@ class SubmitController < ApplicationController
       @author.pid = session[:user_id]
       # the first author will save the role 'author' into the Role table
       @author.roles << Role.find(:first,:conditions=> "name='Author'") unless @author.roles.include? Role.find(:first,:conditions=> "name='Author'")
-      @author.role = 'author'
+      #@author.role = 'author'
       @author.save
     #end
-      #etd has its author
+      @role = Role.find(:first, :conditions=>"name='Author'")
+      #etd has many people and roles.
       @etd.people<<@author
+      @etd.roles <<@role
+      # person has many etds and roles.
+      #@author.etds << @etd
+      # role has many etds and people.
+      #@role.people<<@author
+      #@role.etds << @etd;
     
     respond_to do |format|
       if @etd.save
