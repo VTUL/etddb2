@@ -1,5 +1,5 @@
 <h1>New ETD</h1>
-<%= form_for :etd do |f| %>
+<%= form_for @etd do |f| %>
   <%= f.hidden_field(:pid, {:value=>@author.pid}) %>
   <!--<p>
     <%#= f.label(:email) %><br />

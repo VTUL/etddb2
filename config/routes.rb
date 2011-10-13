@@ -11,6 +11,7 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   #match '/signup',  :to => 'people#new'
 
+  get '/etds/my_etds' => 'etds#my_etds'
   resources :etds
   resources :people
   resources :roles
