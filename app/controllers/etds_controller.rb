@@ -48,7 +48,7 @@ class EtdsController < ApplicationController
       # Again, this should be implemented in a before_filter
       if person_signed_in?
         # This works, but is only a hack, we should use Cancan.
-        if @etd.pid != current_person.pid
+        if !current_person.etds.include?(@etd)
           format.html { redirect_to(etds_path, :notice => "You cannot edit that ETD.") }
         else
           format.html { render :action => "edit" }
@@ -63,6 +63,11 @@ class EtdsController < ApplicationController
   # POST /etds.xml
   def create
     @etd = Etd.new(params[:etd])
+
+    pr = PeopleRole.new
+    pr.person_id = current_person.id
+    pr.role_id = Role.find(:first, :conditions => "name = 'Author'")
+    @etd.people_roles << pr
 
     respond_to do |format|
       if @etd.save
