@@ -8,7 +8,7 @@ may have created. You can get help with PIDs through <a href="http://www.4help.v
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div><%= f.label :pid %><br />
-  <%= f.email_field :pid %></div>
+  <%= f.text_field :pid %></div>
 
   <div><%= f.label :password %><br />
   <%= f.password_field :password %></div>
