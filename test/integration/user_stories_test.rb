@@ -8,19 +8,19 @@ class UserStoriesTest < ActionController::IntegrationTest
     assert true
   end
   
- test "login and browse site" do
+ test "login and new etd site" do
     # login via https
     https!
     get "/login"
     assert_response :success
  
-    post_via_redirect "/login", :username => users(:avs).username, :password => users(:avs).password
-    assert_equal '/welcome', path
-    assert_equal 'Welcome avs!', flash[:notice]
+    post_via_redirect "/login", :username => people(:shpark).pid, :password => users(:shpark).password
+    assert_equal '/page#home', path
+    assert_equal 'Welcome shpark!', flash[:notice]
  
     https!(false)
     get "/posts/all"
     assert_response :success
-    assert assigns(:products)
+    assert assigns(:etds)
   end 
 end

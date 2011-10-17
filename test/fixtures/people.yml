@@ -1,25 +1,22 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  role: MyString
   first_name: MyString
   middle_name: MyString
   last_name: MyString
   email: shpark@vt.edu
-  pid: MyString
+  pid: shpark
   suffix: MyString
 
 two:
-  role: MyString
   first_name: MyString
   middle_name: MyString
   last_name: MyString
   email: hellosunghee@gmail.com
-  pid: MyString
+  pid: rotated80
   suffix: MyString
 
 three:
-  role: 
   first_name: MyString
   middle_name: MyString
   last_name: MyString
