@@ -1,4 +1,4 @@
-<h1>New ETD</h1>
+<h1>Edit ETD</h1>
 <%= form_for @etd do |f| %>
   <!--<p>
     <%#= f.label(:email) %><br />
@@ -105,7 +105,7 @@
   </p>-->
   <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
   <% base_url="http://developer.tower.lib.vt.edu:3000/theses/available" %>
-  <%= f.hidden_field(:pid, {:value=>@etd.pid}) %>
+  <%=# f.hidden_field(:pid, {:value=>@etd.pid}) %>
   <%= f.hidden_field(:timestamp, {:value => Time.now}) %>
   <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
   <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/unrestricted"}) %>

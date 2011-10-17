@@ -1,6 +1,5 @@
 <h1>New ETD</h1>
 <%= form_for @etd do |f| %>
-  <%= f.hidden_field(:pid, {:value=>@author.pid}) %>
   <!--<p>
     <%#= f.label(:email) %><br />
     <%#= f.check_box(:email) %>Please display my email address on my ETD title page.<br />
@@ -106,6 +105,7 @@
   </p>-->
   <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
   <% base_url="http://developer.tower.lib.vt.edu:3000/theses/available" %>
+  <%=# f.hidden_field(:pid, {:value=>@author.pid}) %>
   <%= f.hidden_field(:timestamp, {:value => Time.now}) %>
   <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
   <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/unrestricted"}) %>

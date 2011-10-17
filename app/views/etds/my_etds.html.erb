@@ -40,20 +40,9 @@
     <td><%=h etd.timestamp %></td>-->
     <td><%=h etd.urn %></td>
     <td><%=h etd.bound %></td>
-    <td>
-      <% if @ability.can? :show_etd, etd %>
-      <%= link_to 'View', url_for(:controller => :submit, :action => :show_etd, :id => etd.id) %>
-      <% end %>
-    </td>
-    <td>
-      <% if @ability.can? :edit_etd, etd %>
-      <%= link_to 'Edit', url_for(:controller => :submit, :action => :edit_etd, :id => etd.id) %>
-      <% end %>
-    </td>
-    <td>
-      <% if @ability.can? :destroy, etd %>
-      <%= link_to 'Destroy', url_for(:controller => :submit, :confirm => 'Are you sure?', :method => :delete_etd) %>
-      <% end %>
+    <td><%= link_to 'Show', etd %></td>
+    <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
+    <td><%= link_to 'Destroy', etd, :confirm => 'Are you sure?', :method => :delete %></td>
     </td>
   </tr>
 <% end %>
