@@ -15,7 +15,7 @@ class Role < ActiveRecord::Base
 #  has_and_belongs_to_many :actions 
 #  has_and_belongs_to_many :digital_objects
   has_many :permission
-  has_many :actions, :through=>:permission 
+  has_many :user_actions, :through=>:permission 
   has_many :digital_objects, :through=>:permission
 
   # Validates attributes
