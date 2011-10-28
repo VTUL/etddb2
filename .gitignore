@@ -22,7 +22,7 @@
 
 # Logs and databases #
 ######################
-log/*.log
+log/*
 *.log
 *.sql
 *.sqlite
@@ -33,7 +33,7 @@ log/*.log
 # Configuration Files #
 #######################
 *.lock
-
+ETDDB.komodoproject
 
 # OS generated files #
 ######################
