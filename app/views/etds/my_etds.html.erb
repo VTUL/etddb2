@@ -52,5 +52,5 @@
 <%#=h @author.role %>
 <br />
 
-<%= link_to 'New etd', url_for(:controller => :submit, :action => :new_etd) %></br>
-<%= link_to 'Log out', url_for(:controller => :sessions, :action => :destroy) %>
+<%= link_to 'Back', etds_path %></br>
+<%= link_to 'Log out', destroy_person_session_path %>
