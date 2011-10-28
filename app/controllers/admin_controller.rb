@@ -131,7 +131,7 @@ class AdminController < ApplicationController
 
   def add_permission
     @permission = Permission.new
-    @permission.action_id = Action.new if @permission.action_id.nil?
+    @permission.user_action_id = UserAction.new if @permission.user_action_id.nil?
 
     @person = Person.new
     @person.roles << Role.find(:all,:conditions=>"name='admin'")
@@ -139,7 +139,7 @@ class AdminController < ApplicationController
 
     @roles = Role.find(:all)
     @digital_objects = DigitalObject.find(:all)
-    @actions = Action.find(:all)
+    @actions = UserAction.find(:all)
    
  
     @array_roles = []
