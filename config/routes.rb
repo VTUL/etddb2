@@ -26,8 +26,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :doc_type_descriptions
   resources :degree_descriptions
   get '/permissions/' => 'permissions#index'
-  get '/permissions/edit_all' => 'permissions#edit_all'
-  post '/permissions/edit_all' => 'permissions#update_all'
+  get '/permissions/edit' => 'permissions#edit'
+  post '/permissions/edit' => 'permissions#update'
   resources :people_roles
   resources :user_actions
   resources :digital_objects

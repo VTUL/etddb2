@@ -13,7 +13,7 @@ class PermissionsController < ApplicationController
   end
 
   # GET /permissions/edit_all
-  def edit_all
+  def edit
     @roles = Role.find(:all)
     @digital_objects = DigitalObject.find(:all)
     @actions = UserAction.find(:all)
@@ -24,7 +24,7 @@ class PermissionsController < ApplicationController
   end
 
   # POST /permissions/edit_all
-  def update_all
+  def update
     new_perms = Set[]
     for perm in params[:perms] do
       if perm[1] == "true"
