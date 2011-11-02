@@ -12,6 +12,19 @@ class PermissionsController < ApplicationController
     end
   end
 
+  # GET /permissions/edit
+  # GET /permissions/edit.xml
+  def edit_all
+    @roles = Role.find(:all)
+    @digital_objects = DigitalObject.find(:all)
+    @actions = UserAction.find(:all)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @permissions }
+    end
+  end
+
   # GET /permissions/1
   # GET /permissions/1.xml
   def show

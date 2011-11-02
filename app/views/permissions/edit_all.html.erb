@@ -1,4 +1,4 @@
-<h1>Listing permissions</h1>
+<h1>Editing Permissions</h1>
 
 <% for a_role in @roles %>
   <p><b> <%= a_role.name.humanize %> </b>
@@ -21,11 +21,11 @@
         <% for an_action in @actions %>
           <% if Permission.exists?(:user_action_id => an_action.id, :role_id => a_role.id, :digital_object_id => a_digital_object.id) %>
             <td>
-              <%= check_box_tag "TODO", "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", true, :disabled => true%>
+              <%= check_box_tag "TODO", "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", true%>
             </td>
           <% else %>
             <td>
-              <%= check_box_tag "TODO", "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", false, :disabled => true%>
+              <%= check_box_tag "TODO", "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", false%>
             </td>
           <% end %>
         <% end %>
@@ -37,4 +37,4 @@
 <% end %>
 
 
-<p><%= link_to 'Edit', '/permissions/edit_all' %></p>
+<p><%= link_to 'Back', permissions_path %></p>
