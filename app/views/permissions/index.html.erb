@@ -1,71 +1,40 @@
 <h1>Listing permissions</h1>
 
-<% for role1 in @roles %>
-<tr>
-<b> <%= role1.name.humanize %>
-</tr>
-<%# form_for @permission, :url => {:action=>"create_permission"} do |f| %>
-<table border="1">
-  <tr>
-    <td>
-    Digital Objects\Actions 
-    </td>
-    <% for action1 in @array_actions %>
-    <td>
-      <%= action1.humanize %> 
-    </td>
-    <% end %>
-  <tr>
-  
-  <%# f.label :action %>
-  <% if @ability.can? :assign_permission, Permission %>
-    <% for digital_object1 in @digital_objects %>
+<% for a_role in @roles %>
+  <p><b> <%= a_role.name.humanize %> </b>
+  <table border="1">
     <tr>
-    <td>
-    <%= digital_object1.name.humanize %>
-    </td>
-    <% for action1 in digital_object1.user_actions %>
       <td>
-      <%= check_box_tag "permission[{action1.id}][do#{digital_object1.id}]", "#{action1.id} * #{digital_object1.id}", !action1.nil?  %>
-      <%#=h "#{action1.humanize} ,#{digital_object1.humanize}"%><br />
-      <%#= hidden_field_tag 'collected_input', '', :onchange => "alert('Input collected!')" %>
-	  <%# f.label :action %>
+        Digital Objects\Actions
       </td>
-    <% end %>
+      <% for an_action in @actions %>
+        <td>
+          <%= an_action.name.humanize %>
+        </td>
+      <% end %>
     </tr>
-  <% end %>
-</table>
-  <p>
-    <%#= f.submit 'Create_Permission' %>
+    <% for a_digital_object in @digital_objects %>
+      <tr>
+        <td>
+          <%= a_digital_object.name.humanize %>
+        </td>
+        <% for an_action in @actions %>
+          <% if Permission.exists?(:user_action_id => an_action.id, :role_id => a_role.id, :digital_object_id => a_digital_object.id) %>
+            <td>
+              <%= check_box_tag "REDO", "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", true, :disabled => true%>
+            </td>
+          <% else %>
+            <td>
+              <%= check_box_tag "REDO", "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", false, :disabled => true%>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
   </p>
+  <br />
 <% end %>
-<%# end %>
-<% end %>
 
 
-<%= link_to 'Back', :permissions %>
-<%= link_to 'Edit', edit_permission_path(@permissions) %> |
-<%= link_to 'Back', permissions_path %>
-
-
-
-
-
-
-<table>
-  <tr>
-  </tr>
-
-<%# @permissions.each do |permission| %>
-  <tr>
-    <td><%#= link_to 'Show', permission %></td>
-    <td><%#= link_to 'Edit', edit_permission_path(permission) %></td>
-    <td><%#= link_to 'Destroy', permission, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<%# end %>
-</table>
-
-<br />
-
-<%#= link_to 'New permission', new_permission_path %>
-
+<p><%#= link_to 'Edit', edit_permission_path %></p>
