@@ -59,3 +59,11 @@ p.small {
 	margin:0;
 	background-color:#aaa;
 }
+
+.notice {
+    background-color:yellow;
+}
+
+.alert {
+    background-color:red;
+}
