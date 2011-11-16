@@ -45,7 +45,7 @@ class PermissionsController < ApplicationController
     for perm in xor_perms
       ids = perm.split("_")
       if new_perms.include? perm
-        Permission.create!(:role_id => ids[0], :digital_object_id => ids[1], :user_action_id => ids[2])
+        Permission.create(:role_id => ids[0], :digital_object_id => ids[1], :user_action_id => ids[2])
         new_count += 1
       else
         # The loop here is only to prevent duplicate entries. It should actually execute in O(1) time, as there should only be one entry.
