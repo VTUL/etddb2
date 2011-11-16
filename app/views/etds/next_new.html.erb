@@ -1,0 +1,33 @@
+<h1>New ETD</h1>
+<br />
+<table>
+  <tr>
+    <th>Uploaded Files:</th>
+  </tr>
+  <% for c in @etd.contents do %>
+    <tr>
+      <td><%= c.uploaded_file_name %></td>
+    </tr>
+  <% end%>
+  <tr>
+    <td>Add New Content Link</td>
+  </tr>
+</table>
+<br />
+<table>
+  <tr>
+    <th>Person ID:</th>
+    <th>Role ID:</th>
+  </tr>
+  <% for pr in @etd.people_roles do %>
+    <tr>
+      <td><%= pr.person_id %></td>
+      <td><%= pr.role_id %></td>
+    </tr>
+  <% end%>
+  <tr>
+    <td>Add New Committee Member Link</td>
+  </tr>
+</table>
+<br />
+<%= link_to 'Back to ETDs', etds_path %>

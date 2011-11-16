@@ -74,7 +74,7 @@ class EtdsController < ApplicationController
         format.html { redirect_to(@etd, :notice => 'Etd was successfully created.') }
         format.xml  { render :xml => @etd, :status => :created, :location => @etd }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :notice => 'You have errors.' }
         format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
       end
     end
@@ -126,13 +126,14 @@ class EtdsController < ApplicationController
         # This does not work. Need to get Etds from PeopleRoles table, but nothing is being stored there.
         @authors_etds = current_person.etds
 
-        format.html # show_etd_by_author.html.erb
-        format.xml  { render :xml => @etd , :xml => @person }
+        format.html # my_etds.html.erb
+        format.xml  { render :xml => @authors_etds }
       else
         format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
       end
     end
   end
+
   # GET /etds/change_availability
   def change_availability
 #    if person_signed_in?
@@ -144,5 +145,14 @@ class EtdsController < ApplicationController
 #    else
 #      format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
 #    end
+  end
+
+  # GET /etds/new_next/1
+  def next_new
+    respond_to do |format|
+      # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
+      @etd = Etd.find(params[:id])
+      format.html # new_next.html.erb
+    end
   end
 end
