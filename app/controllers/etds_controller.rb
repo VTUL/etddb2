@@ -133,4 +133,16 @@ class EtdsController < ApplicationController
       end
     end
   end
+  # GET /etds/change_availability
+  def change_availability
+#    if person_signed_in?
+#      @authors_etds = current_person.etds
+      @etd= Etd.find(params[:id])
+      
+#      format.html # show_etd_by_author.html.erb
+#      format.xml  { render :xml => @etd , :xml => @person }
+#    else
+#      format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
+#    end
+  end
 end

@@ -25,6 +25,25 @@ class ContentsController < ApplicationController
   # GET /contents/new.xml
   def new
     @content = Content.new
+    
+    
+#    @content = Content.find(params[:id])
+    
+#    @picture = Content.new
+#    @etd = Etd.find(params[:id])
+    @etd = Etd.find(params[:id])
+    @contents = @etd.contents.find(:all)
+    
+    #@content = Content.new
+    #5.times { @content.build }
+    5.times { @etd.contents.build }
+    #@etd.contents.each do |content|
+    #   content.delete if content.new_record?
+    #end    
+        
+    
+    
+    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,7 +53,23 @@ class ContentsController < ApplicationController
 
   # GET /contents/1/edit
   def edit
-    @content = Content.find(params[:id])
+#    @content = Content.find(params[:id])
+    
+#    @picture = Content.new
+#    @etd = Etd.find(params[:id])
+    @etd = Etd.find(params[:id])
+    @contents = @etd.contents.find(:all)
+    
+    #@content = Content.new
+    #5.times { @content.build }
+    5.times { @etd.contents.build }
+    #@etd.contents.each do |content|
+    #   content.delete if content.new_record?
+    #end    
+    
+    
+    
+    
   end
 
   # POST /contents
@@ -58,6 +93,58 @@ class ContentsController < ApplicationController
   def update
     @content = Content.find(params[:id])
 
+
+
+  # fetch objects to be use in the view
+    @etd = Etd.find(params[:id])
+    @picture = Content.new(params[:content])   
+    
+   
+    # check if there is any chanage or update of picture/etd itself
+    if @picture.save
+    #    puts "this is picture.save\n"
+    	@etd.contents<< @picture
+   # else
+   #     puts "this is not picture.save\n"
+    end
+
+   #  @picture = Content.new(params[:etd][:contents][:uploaded_picture])
+   #      @picture.save
+   #      @etd.contents<< @picture
+   #  @etd.save
+
+  # add 5 contents build?? Check up this line code
+  # 5.times { @etd.contents.build }   
+
+
+    # for mixed case of etds
+    if @etd.update_attributes(params[:etd])
+      # in case of changing etd avaiability
+      unless @etd.availability.eql? "mixed"
+         @etd.contents.each do |content| 
+           content.availability = @etd.availability
+         end
+      end
+      @etd.save!   
+      # handling each content availability
+      ######################################################
+      # Now I am commenting out these codes for a while. If there is no problem, these code should be removed.
+      # params[:etd][:contents].each do |content|
+      #    @etd.contents[content.id].availability = content.availability
+      #end
+      ########################################################
+      #format.html #{ render :action => "show_files.html.erb" }
+      #format.xml  { render :xml => @etd , :xml => @person }
+
+      #redirect_to(:action => 'show_files' , :id => @picture.etd_id)
+      redirect_to(:action => 'show_files' , :id => @etd.id)
+    else
+      render(:action => :add_files)
+    end
+
+
+
+
     respond_to do |format|
       if @content.update_attributes(params[:content])
         format.html { redirect_to(@content, :notice => 'Content was successfully updated.') }
@@ -80,4 +167,39 @@ class ContentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def my_contents
+    respond_to do |format|
+      # This should be implemented in a before_filter
+      if person_signed_in?
+        # This does not work. Need to get Etds from PeopleRoles table, but nothing is being stored there.
+        @authors_etds = current_person.etds
+
+        format.html # show_etd_by_author.html.erb
+        format.xml  { render :xml => @authors_etds , :xml => @person }
+      else
+        format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
+      end
+    end
+  end  
+  
+  def add_contents
+    @picture = Content.new
+    @etd = Etd.find(params[:id])
+    @contents = @etd.contents.find(:all)
+    
+    #@content = Content.new
+    #5.times { @content.build }
+    5.times { @etd.contents.build }
+    #@etd.contents.each do |content|
+    #   content.delete if content.new_record?
+    #end
+  end  
+  
+  def change_file_availability
+    @etd1 = Etd.new(params[:etd])
+    @etd= Etd.find(params[:id])
+    @contents = @etd.contents.find(:all)
+  end
+  
 end

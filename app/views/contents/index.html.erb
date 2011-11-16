@@ -1,5 +1,11 @@
 <h1>Listing contents</h1>
 
+<% if person_signed_in? %>
+  <div>
+    <h3><%= link_to "My Contents", contents_my_contents_path %></h3>
+  </div>
+<% end %>
+
 <table>
   <tr>
     <th>Filename</th>
@@ -23,6 +29,7 @@
     <td><%= link_to 'Show', content %></td>
     <td><%= link_to 'Edit', edit_content_path(content) %></td>
     <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Contents in the ETD', contents_path %></td>
   </tr>
 <% end %>
 </table>
@@ -30,3 +37,8 @@
 <br />
 
 <%= link_to 'New content', new_content_path %>
+<%= link_to 'Back', url_for(:controller=>:etds, :action=>:show ) %>
+<%= link_to 'Add files', url_for(:controller=>:contents,:action=>:add_files) %>
+<%# if @etd.availability.eql? :mixed.to_s %>
+<%= link_to 'Change availability of files', url_for(:controller=>:contents, :action=>:change_file_availability) %>
+<%# end %> 
