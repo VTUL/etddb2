@@ -9,25 +9,21 @@
       <td><%= c.uploaded_file_name %></td>
     </tr>
   <% end%>
-  <tr>
-    <td>Add New Content Link</td>
-  </tr>
 </table>
-<br />
+Add Content link
+<br /><br />
 <table>
   <tr>
-    <th>Person ID:</th>
-    <th>Role ID:</th>
+    <th>Person:</th>
+    <th>Role:</th>
   </tr>
-  <% for pr in @etd.people_roles do %>
+  <% for pr in @prs do %>
     <tr>
-      <td><%= pr.person_id %></td>
-      <td><%= pr.role_id %></td>
+      <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
+      <td><%= pr[:role] %></td>
     </tr>
   <% end%>
-  <tr>
-    <td>Add New Committee Member Link</td>
-  </tr>
 </table>
-<br />
+Add Committee Member link
+<br /><br />
 <%= link_to 'Back to ETDs', etds_path %>

@@ -139,6 +139,11 @@ class EtdsController < ApplicationController
     respond_to do |format|
       # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
       @etd = Etd.find(params[:id])
+      @prs = []
+      for pr in @etd.people_roles do
+        p = Person.find(pr.person_id)
+        @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name}
+      end
       format.html # new_next.html.erb
     end
   end
