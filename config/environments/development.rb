@@ -11,7 +11,7 @@ NewVtEtdUpgrd::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = true
+  #config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
@@ -25,8 +25,7 @@ NewVtEtdUpgrd::Application.configure do
 
   # Make sure Paperclip can use ImageMagick
   Paperclip.options[:command_path] = "/usr/bin/"
-  
+
   # Set default url options for action mailer for devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
-
