@@ -19,6 +19,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/my_etds' => 'etds#my_etds'
   get '/etds/next_new' => 'etds#next_new'
   get '/contents/my_contents' => 'contents#my_contents'
+  get '/contents/add_contents' => 'contents#add_contents'
+  get '/contents/change_availability' => 'contents#change_availability'
+  
   resources :etds
   resources :people
   resources :roles

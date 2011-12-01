@@ -62,7 +62,7 @@ If you are experiencing problems uploading your files, take a look at our file u
 <tr>
     <td>
         <%= form_for @etd,
-            :url => {:action => 'save_files'},
+            :url => {:action => 'save_contents'},
              :html => {:multipart => true}   do |form| %>
             <%=h hidden_field_tag 'id', @etd.id %>
 <!--            Comment: <%#= form.text_field("comment" ) %><br/>

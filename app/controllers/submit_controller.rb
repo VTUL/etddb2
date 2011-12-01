@@ -304,7 +304,6 @@ class SubmitController < ApplicationController
         format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
       end  
     end    
-    
   end
   
   def delete_file

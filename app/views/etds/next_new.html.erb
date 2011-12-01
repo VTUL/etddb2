@@ -10,7 +10,7 @@
     </tr>
   <% end%>
   <tr>
-    <td>Add New Content Link</td>
+    <td><%= link_to 'New content link', new_content_path %></td>
   </tr>
 </table>
 <br />
@@ -31,3 +31,6 @@
 </table>
 <br />
 <%= link_to 'Back to ETDs', etds_path %>
+
+<%= link_to 'Add contents', contents_add_contents_path(@etd.id) %>
+<%= link_to 'Change file avaiailabilty contents', contents_change_availability_path(@etd.id) %>0

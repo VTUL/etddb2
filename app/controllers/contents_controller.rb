@@ -41,10 +41,6 @@ class ContentsController < ApplicationController
     #   content.delete if content.new_record?
     #end    
         
-    
-    
-    
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @content }
@@ -65,11 +61,7 @@ class ContentsController < ApplicationController
     5.times { @etd.contents.build }
     #@etd.contents.each do |content|
     #   content.delete if content.new_record?
-    #end    
-    
-    
-    
-    
+    #end
   end
 
   # POST /contents
@@ -93,8 +85,19 @@ class ContentsController < ApplicationController
   def update
     @content = Content.find(params[:id])
 
+    respond_to do |format|
+      if @content.update_attributes(params[:content])
+        format.html { redirect_to(@content, :notice => 'Content was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 
-
+# 
+  def save_contents
   # fetch objects to be use in the view
     @etd = Etd.find(params[:id])
     @picture = Content.new(params[:content])   
@@ -102,10 +105,10 @@ class ContentsController < ApplicationController
    
     # check if there is any chanage or update of picture/etd itself
     if @picture.save
-    #    puts "this is picture.save\n"
+        puts "this is picture.save\n"
     	@etd.contents<< @picture
-   # else
-   #     puts "this is not picture.save\n"
+    else
+        puts "this is not picture.save\n"
     end
 
    #  @picture = Content.new(params[:etd][:contents][:uploaded_picture])
@@ -140,19 +143,6 @@ class ContentsController < ApplicationController
       redirect_to(:action => 'show_files' , :id => @etd.id)
     else
       render(:action => :add_files)
-    end
-
-
-
-
-    respond_to do |format|
-      if @content.update_attributes(params[:content])
-        format.html { redirect_to(@content, :notice => 'Content was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
-      end
     end
   end
 
@@ -196,7 +186,7 @@ class ContentsController < ApplicationController
     #end
   end  
   
-  def change_file_availability
+  def change_availability
     @etd1 = Etd.new(params[:etd])
     @etd= Etd.find(params[:id])
     @contents = @etd.contents.find(:all)
