@@ -1,5 +1,5 @@
 <h1>New ETD</h1>
-<%= form_for @etd do |f| %>
+<%= form_for @etd, :url => {:action => "create"} do |f| %>
   <!--<p>
     <%#= f.label(:email) %><br />
     <%#= f.check_box(:email) %>Please display my email address on my ETD title page.<br />

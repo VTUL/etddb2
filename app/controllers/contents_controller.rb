@@ -25,22 +25,22 @@ class ContentsController < ApplicationController
   # GET /contents/new.xml
   def new
     @content = Content.new
-    
-    
+
+
 #    @content = Content.find(params[:id])
-    
+
 #    @picture = Content.new
 #    @etd = Etd.find(params[:id])
-    @etd = Etd.find(params[:id])
+    @etd = Etd.find(params[:etd_id])
     @contents = @etd.contents.find(:all)
-    
+
     #@content = Content.new
     #5.times { @content.build }
     5.times { @etd.contents.build }
     #@etd.contents.each do |content|
     #   content.delete if content.new_record?
-    #end    
-        
+    #end
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @content }
@@ -50,12 +50,12 @@ class ContentsController < ApplicationController
   # GET /contents/1/edit
   def edit
 #    @content = Content.find(params[:id])
-    
+
 #    @picture = Content.new
 #    @etd = Etd.find(params[:id])
     @etd = Etd.find(params[:id])
     @contents = @etd.contents.find(:all)
-    
+
     #@content = Content.new
     #5.times { @content.build }
     5.times { @etd.contents.build }
@@ -96,13 +96,13 @@ class ContentsController < ApplicationController
     end
   end
 
-# 
+#
   def save_contents
   # fetch objects to be use in the view
     @etd = Etd.find(params[:id])
-    @picture = Content.new(params[:content])   
-    
-   
+    @picture = Content.new(params[:content])
+
+
     # check if there is any chanage or update of picture/etd itself
     if @picture.save
         puts "this is picture.save\n"
@@ -117,18 +117,18 @@ class ContentsController < ApplicationController
    #  @etd.save
 
   # add 5 contents build?? Check up this line code
-  # 5.times { @etd.contents.build }   
+  # 5.times { @etd.contents.build }
 
 
     # for mixed case of etds
     if @etd.update_attributes(params[:etd])
       # in case of changing etd avaiability
       unless @etd.availability.eql? "mixed"
-         @etd.contents.each do |content| 
+         @etd.contents.each do |content|
            content.availability = @etd.availability
          end
       end
-      @etd.save!   
+      @etd.save!
       # handling each content availability
       ######################################################
       # Now I am commenting out these codes for a while. If there is no problem, these code should be removed.
@@ -157,7 +157,7 @@ class ContentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def my_contents
     respond_to do |format|
       # This should be implemented in a before_filter
@@ -171,25 +171,25 @@ class ContentsController < ApplicationController
         format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
       end
     end
-  end  
-  
+  end
+
   def add_contents
     @picture = Content.new
     @etd = Etd.find(params[:id])
     @contents = @etd.contents.find(:all)
-    
+
     #@content = Content.new
     #5.times { @content.build }
     5.times { @etd.contents.build }
     #@etd.contents.each do |content|
     #   content.delete if content.new_record?
     #end
-  end  
-  
+  end
+
   def change_availability
     @etd1 = Etd.new(params[:etd])
     @etd= Etd.find(params[:id])
     @contents = @etd.contents.find(:all)
   end
-  
+
 end

@@ -139,7 +139,7 @@ class EtdsController < ApplicationController
 #    if person_signed_in?
 #      @authors_etds = current_person.etds
       @etd= Etd.find(params[:id])
-      
+
 #      format.html # show_etd_by_author.html.erb
 #      format.xml  { render :xml => @etd , :xml => @person }
 #    else
