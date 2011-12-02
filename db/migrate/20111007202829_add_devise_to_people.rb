@@ -1,6 +1,8 @@
 class AddDeviseToPeople< ActiveRecord::Migration
   def self.up
     change_table :people do |t|
+      t.remove :email
+
       t.database_authenticatable :null => false
       t.recoverable
       t.rememberable

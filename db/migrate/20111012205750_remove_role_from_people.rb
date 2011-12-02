@@ -4,6 +4,6 @@ class RemoveRoleFromPeople < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :people, :role
+    add_column :people, :role, :string
   end
 end
