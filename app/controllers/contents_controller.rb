@@ -68,6 +68,8 @@ class ContentsController < ApplicationController
   # POST /contents.xml
   def create
     @content = Content.new(params[:content])
+    @etd = Etd.find(params[:etd_id])
+    @etd.contents << @content
 
     respond_to do |format|
       if @content.save
