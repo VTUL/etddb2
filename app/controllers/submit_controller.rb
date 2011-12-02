@@ -281,7 +281,6 @@ class SubmitController < ApplicationController
   end
 
   def show_files 
-    
     @etd = Etd.find(params[:id])
     @author = @etd.people.find(:first, :conditions => "role='author'") unless @etd.people.empty?
     @contents = nil
@@ -290,13 +289,8 @@ class SubmitController < ApplicationController
     respond_to do |format|
 #      if @contents.update_attribute(params[:contents])
       if @etd.update_attributes(params[:etd])
-      	#@etd.save
         #params[:etd][:contents].each do |content|   # this line is commented out then a line below is added instead of this line.   
               # in case of changing etd avaiability
-#        unless @etd.availability.eql? "mixed"
-#          @etd.contents.each do |content|
-#            @etd.contents[content.id].availability = content.availability
-#          end
         unless @etd.availability.eql? "mixed"
           @etd.contents.each do |content| 
             content.availability = @etd.availability
@@ -310,7 +304,6 @@ class SubmitController < ApplicationController
         format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
       end  
     end    
-    
   end
   
   def delete_file

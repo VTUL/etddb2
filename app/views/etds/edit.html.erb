@@ -114,3 +114,6 @@
 <% end %>
 <br />
 <%= link_to 'Back to ETDs', etds_path %>
+<%= link_to 'Add contents', contents_add_contents_path(@etd.id) %>
+<%= link_to 'Change file avaiailabilty contents', contents_change_availability_path(@etd.id) %>
+

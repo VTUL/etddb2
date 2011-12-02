@@ -11,6 +11,10 @@
       <td><%= c.uploaded_file_size %></td>
     </tr>
   <% end%>
+  <tr>
+    <td><%= link_to 'New content link', new_content_path %></td>
+    <td><%= link_to 'Change file avaiailabilty contents', contents_change_availability_path(@etd.id) %></td>
+  </tr>
 </table>
 Add Content link
 </p>

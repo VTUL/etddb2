@@ -25,7 +25,8 @@
 
 <p>
   <b>Availability:</b>
-  <%=h @etd.availability %>
+  <%=h @etd.availability %> <%= link_to "Change the availability of your ETD", url_for(:action => :change_availability, :id=> @etd.id) %>
+
 </p>
 <!--
 <p>
