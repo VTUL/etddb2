@@ -107,7 +107,7 @@ class EtdsController < ApplicationController
         format.html { redirect_to etds_path, :notice => "You must log in to delete your ETDs." }
       else
         # Cancan
-        if @etd.pid == current_person.pid
+        if current_person.etds.include?(@etd)
           @etd.destroy
           format.html { redirect_to :action => 'index', :notice => "ETD Deleted." }
           format.xml  { head :ok }
