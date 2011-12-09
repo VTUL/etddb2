@@ -21,11 +21,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/contents/my_contents' => 'contents#my_contents'
   get '/contents/add_contents' => 'contents#add_contents'
   get '/contents/change_availability' => 'contents#change_availability'
-  
+
   resources :etds
   resources :people
   resources :roles
-
   resources :urns
   resources :departments
   resources :doc_type_descriptions
@@ -42,10 +41,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :keywords
   resources :contents
   #resources :sessions, :only => [:new, :create, :destroy]
-
-  #get '/login' => 'people/sessions#new'
-  #post "/login" => "people/sessions#create"
-  #match "/logout" => "people/sessions#destroy"
 
   #get 'browse/index'
   # The priority is based upon order of creation:

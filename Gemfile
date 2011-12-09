@@ -11,6 +11,21 @@ gem 'rails', '3.1.0'
 gem 'sqlite3', '1.3.4', :require => 'sqlite3'
 #gem 'net-ldap' , '0.1.1'
 
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', " ~> 3.1.0"
+  gem 'coffee-rails', " ~> 3.1.0"
+  gem 'uglifier'
+end
+
+#For AJAX:
+gem 'jquery-rails'
+
+#JS requirements
+gem 'execjs'
+gem 'therubyracer'
+
 gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
 # For test,
@@ -32,7 +47,7 @@ gem 'devise'
 #gem 'test_helper'
 
 # For multiple file upload
-gem 'paperclip','2.4.1' 
+gem 'paperclip','2.4.1'
 
 # For Pure ruby ldap, one day test
 #gem rubygem-net-ldap', 0.1.1
