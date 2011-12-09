@@ -4,11 +4,13 @@
   <tr>
     <th>Uploaded Files:</th>
     <th>File Size:</th>
+    <th></th>
   </tr>
   <% for c in @etd.contents do %>
     <tr>
       <td><%= c.uploaded_file_name %></td>
       <td><%= c.uploaded_file_size %></td>
+      <td><%= link_to 'Change File Availabilty', contents_change_availability_path(c) %></td>
     </tr>
   <% end%>
 </table>
@@ -16,7 +18,6 @@
   <%= hidden_field_tag(:etd_id, @etd.id) %>
   <%= submit_tag "Add New Content" %>
 <% end %>
-<%= link_to 'Change File Availabilty', contents_change_availability_path(@etd.id) %>
 </p>
 <p>
 <table class="outlined">
@@ -31,7 +32,10 @@
     </tr>
   <% end %>
 </table>
-Add Committee Member link
+<%= form_tag(:controller => "people", :action => "find") do %>
+  <%= hidden_field_tag(:etd_id, @etd.id) %>
+  <%= submit_tag "Add New Committee Member" %>
+<% end %>
 </p>
 <p>
 <%= link_to 'Back to ETDs', etds_path %>

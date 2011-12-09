@@ -87,4 +87,22 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  # GET /people/find/
+  def find
+    params[:etd_id]
+    #@possible_people =
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  # POST /people/add_committee
+  def add_committee
+    pr = PeopleRole.new
+    pr.etd_id = params[:etd_id]
+    #pr.role_id = # Get role name/id from form
+    # Get person from form. << pr
+  end
 end
