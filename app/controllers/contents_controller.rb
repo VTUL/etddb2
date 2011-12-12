@@ -53,7 +53,7 @@ class ContentsController < ApplicationController
 
 #    @picture = Content.new
 #    @etd = Etd.find(params[:id])
-    @etd = Etd.find(params[:id])
+    @etd = Etd.find(params[:etd_id])
     @contents = @etd.contents.find(:all)
 
     #@content = Content.new
@@ -84,24 +84,26 @@ class ContentsController < ApplicationController
 
   # PUT /contents/1
   # PUT /contents/1.xml
-  def update
-    @content = Content.find(params[:id])
+#  def update
+#  	@etd = Etd.find(params[:etd_id])
+#    @content = @etd.contents  	
+#    #@content = Content.find(params[:id])
 
-    respond_to do |format|
-      if @content.update_attributes(params[:content])
-        format.html { redirect_to(@content, :notice => 'Content was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+#    respond_to do |format|
+#      if @etd.update_attributes(params[:content])
+#        format.html { redirect_to(@content, :notice => 'Content was successfully updated.') }
+#        format.xml  { head :ok }
+#      else
+#        format.html { render :action => "edit" }
+#        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
+#      end
+#    end
+#  end
 
 #
-  def save_contents
+  def update
   # fetch objects to be use in the view
-    @etd = Etd.find(params[:id])
+    @etd = Etd.find(params[:etd_id])
     @picture = Content.new(params[:content])
 
 
@@ -142,7 +144,7 @@ class ContentsController < ApplicationController
       #format.xml  { render :xml => @etd , :xml => @person }
 
       #redirect_to(:action => 'show_files' , :id => @picture.etd_id)
-      redirect_to(:action => 'show_files' , :id => @etd.id)
+      redirect_to(:action => 'my_contents' , :id => @etd.id)
     else
       render(:action => :add_files)
     end

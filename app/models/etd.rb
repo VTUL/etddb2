@@ -12,7 +12,8 @@ class Etd < ActiveRecord::Base
 
   accepts_nested_attributes_for :contents, :allow_destroy => true
 
-#  attr_accessible :contents_attributes, :availability, :title, :pid, :degree, :dtype, :department,
+# attr_accessible :contents_attributes
+#, :availability, :title, :pid, :degree, :dtype, :department,
 #                  :timestamp
 
 #  has_one  :availability_description

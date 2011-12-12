@@ -25,6 +25,8 @@
 .sass-cache/
 log/*
 tmp/
+public/bin/submitted/*
+public/theses/*
 *.log
 *.sql
 *.sqlite
