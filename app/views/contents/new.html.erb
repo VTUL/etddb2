@@ -1,55 +1,3 @@
-<h1>New content</h1>
-
-<%= form_for(@content) do |f| %>
-
-  <p>
-    <%= f.label :uploaded_file_name, "File name:" %><br />
-    <%= f.text_field :uploaded_file_name %>
-  </p>
-  <p>
-    <%= f.label :uploaded_content_type, "File type:" %><br />
-    <%= f.text_field :uploaded_content_type %>
-  </p>
-  <p>
-    <%= f.label :uploaded_file_size, "Size:" %><br />
-    <%= f.text_field :uploaded_file_size %>
-  </p>
-  <p>
-    <%= f.label :availability %><br />
-    <%= f.text_field :availability %>
-  </p>
-  <p>
-    <%= f.label :bound %><br />
-    <%= f.text_field :bound %>
-  </p>
-  <p>
-    <%= f.label :page_count %><br />
-    <%= f.text_field :page_count %>
-  </p>
-  <p>
-    <%= f.label :timestamp %><br />
-    <%= f.datetime_select :timestamp %>
-  </p>
-  <p>
-    <%= hidden_field_tag :etd_id, params[:etd_id] %>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', contents_path %>
-
-<table>
-<p>
-  <tr><th>Filename:</th>  <th>Types:</th> <th>Size:</th> <th>Availability:</th> <th>Bound:</th></tr>
-
-<% @etd.contents.each do |content| %>
-<% if content.uploaded_file_name != nil  %>
-  <tr><td><%=h  content.uploaded_file_name %></td><td> <%=h content.uploaded_content_type %></td><td><%=h content.uploaded_file_size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
-<td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
-<% end %>
-<% end %>
-</p>
-</table>
 
 
 <h1>Add New Files</h1>
@@ -65,14 +13,14 @@ If you are experiencing problems uploading your files, take a look at our file u
         <%= form_for @etd,
             :url => {:action => 'save_contents'},
              :html => {:multipart => true}   do |form| %>
-            <%=h hidden_field_tag 'id', @etd.id %>
+            <%=h hidden_field_tag 'etd_id', @etd.id %>
 <!--            Comment: <%#= form.text_field("comment" ) %><br/>
 
 -->         <td>Upload your picture: </td> </tr>
 							 <%# @etd.contents.each do |contents| %>
 						         <%= form.fields_for :contents do |content| %>
 							     <% if content.object.new_record? %>
-                 					  <tr><td></td><td>    <%= content.file_field  :uploaded_picture %></td></tr>
+                 					  <tr><td></td><td>    <%= content.file_field  :uploaded %></td></tr>
            						     <% end %>
        							 <% end %>
 							 <%# end %>
