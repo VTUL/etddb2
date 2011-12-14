@@ -108,6 +108,12 @@ class EtdsController < ApplicationController
       else
         # Cancan
         if current_person.etds.include?(@etd)
+          for pr in @etd.people_roles do
+            pr.destroy
+          end
+          for content in @etd.contents do
+            content.destroy
+          end
           @etd.destroy
           format.html { redirect_to :action => 'index', :notice => "ETD Deleted." }
           format.xml  { head :ok }

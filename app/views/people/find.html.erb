@@ -1,13 +1,14 @@
 <h1>Find Person</h1>
-<%= form_tag(:remote => true) do %>
+<%= form_tag '/people/find', :remote => true do %>
   <%= label_tag(:lname, "Member's Last Name") %>
   <%= text_field_tag(:lname) %>
   <%= submit_tag("Find") %>
 <% end %>
 <br />
-<%= form_tag() do %>
+<%= form_tag '/people/add_committee' do %>
   <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
   <div id="candidates">
   </div>
+  <br />
   <%= submit_tag("Add to committee") %>
 <% end %>

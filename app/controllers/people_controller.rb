@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  respond_to :html, :json, :js
   # GET /people
   # GET /people.xml
   def index
@@ -90,11 +91,10 @@ class PeopleController < ApplicationController
 
   # GET /people/find/
   def find
-    params[:etd_id]
-    #@possible_people =
-
     respond_to do |format|
-      format.html
+      format.html{ render :action => "find" }
+      format.js
+      format.json { render :parital => "people/find" }
     end
   end
 
@@ -102,7 +102,11 @@ class PeopleController < ApplicationController
   def add_committee
     pr = PeopleRole.new
     pr.etd_id = params[:etd_id]
-    #pr.role_id = # Get role name/id from form
-    # Get person from form. << pr
+    pr.role_id = Role.find(:first, :conditions => "name = '" + params[:committee_type] + "'").id
+    Person.find(params[:committee]).people_roles << pr
+
+    respond_to do |format|
+      format.html{ redirect_to('/etds/next_new/' + params[:etd_id]) }
+    end
   end
 end
