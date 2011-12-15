@@ -2,31 +2,25 @@
   <b>Degree:</b>
   <%=h @etd.degree %>
 </p>
-
 <p>
   <b>Department:</b>
   <%=h @etd.department %>
 </p>
-
 <p>
   <b>Dtype:</b>
   <%=h @etd.dtype %>
 </p>
-
 <p>
   <b>Title:</b>
   <%=h @etd.title %>
 </p>
-
 <p>
   <b>Abstract:</b>
   <%=h @etd.abstract %>
 </p>
-
 <p>
   <b>Availability:</b>
   <%=h @etd.availability %> <%= link_to "Change the availability of your ETD", url_for(:action => :change_availability, :id=> @etd.id) %>
-
 </p>
 <!--
 <p>
@@ -43,47 +37,76 @@
   <b>Ddate:</b>
   <%=h @etd.ddate %>
 </p>
-
 <p>
   <b>Sdate:</b>
   <%=h @etd.sdate %>
 </p>
-
 <p>
   <b>Adate:</b>
   <%=h @etd.adate %>
 </p>
-
 <p>
   <b>Cdate:</b>
   <%=h @etd.cdate %>
 </p>
-
 <p>
   <b>Rdate:</b>
   <%=h @etd.rdate %>
 </p>
-
 <p>
   <b>Pid:</b>
   <%=h @etd.pid %>
 </p>
-
 <p>
   <b>Url:</b>
   <%=h @etd.url %>
 </p>
-
 <p>
   <b>Timestamp:</b>
   <%=h @etd.timestamp %>
 </p>
-
 <p>
   <b>Bound:</b>
   <%=h @etd.bound %>
 </p>
-
-
+<p>
+<table class="outlined">
+  <tr>
+    <th>Uploaded Files:</th>
+    <th>File Size:</th>
+    <th></th>
+  </tr>
+  <% for c in @etd.contents do %>
+    <tr>
+      <td><%= c.uploaded_file_name %></td>
+      <td><%= c.uploaded_file_size %></td>
+      <td><%= link_to 'Change File Availabilty', contents_change_availability_path(c) %></td>
+    </tr>
+  <% end%>
+</table>
+<%= form_tag(:controller => "contents", :action => "new") do %>
+  <%= hidden_field_tag(:etd_id, @etd.id) %>
+  <%= submit_tag "Add New Content" %>
+<% end %>
+</p>
+<p>
+<table class="outlined">
+  <tr>
+    <th>Person:</th>
+    <th>Role:</th>
+  </tr>
+  <% for pr in @prs do %>
+    <tr>
+      <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
+      <td><%= pr[:role] %></td>
+    </tr>
+  <% end %>
+</table>
+<%= form_tag(:controller => "people", :action => "find") do %>
+  <%= hidden_field_tag(:etd_id, @etd.id) %>
+  <%= hidden_field_tag(:origin, '/etds/') %>
+  <%= submit_tag "Add New Committee Member" %>
+<% end %>
+</p>
 <%= link_to 'Edit', edit_etd_path(@etd) %> |
 <%= link_to 'Back', etds_path %>

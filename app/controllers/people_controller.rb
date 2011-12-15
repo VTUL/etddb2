@@ -106,7 +106,7 @@ class PeopleController < ApplicationController
     Person.find(params[:committee]).people_roles << pr
 
     respond_to do |format|
-      format.html{ redirect_to('/etds/next_new/' + params[:etd_id]) }
+      format.html{ redirect_to(params[:origin] + params[:etd_id]) }
     end
   end
 end

@@ -34,9 +34,10 @@
 </table>
 <%= form_tag(:controller => "people", :action => "find") do %>
   <%= hidden_field_tag(:etd_id, @etd.id) %>
+  <%= hidden_field_tag(:origin, '/etds/next_new/') %>
   <%= submit_tag "Add New Committee Member" %>
 <% end %>
 </p>
 <p>
-<%= link_to 'Back to ETDs', etds_path %>
+<%= link_to 'View ETD', @etd %>
 </p>
