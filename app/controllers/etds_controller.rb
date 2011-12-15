@@ -71,7 +71,7 @@ class EtdsController < ApplicationController
 
     pr = PeopleRole.new
     pr.person_id = current_person.id
-    pr.role_id = Role.find(:first, :conditions => "name = 'Author'")
+    pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
     @etd.people_roles << pr
 
     respond_to do |format|

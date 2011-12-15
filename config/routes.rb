@@ -21,7 +21,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/contents/my_contents' => 'contents#my_contents'
   get '/contents/add_contents' => 'contents#add_contents'
   get '/contents/change_availability' => 'contents#change_availability'
-  get '/people/find' => 'people#find'
+  match '/people/find' => 'people#find'
+  match '/people/new_committee_member' => 'people#new_committee_member'
 
   resources :etds
   resources :people

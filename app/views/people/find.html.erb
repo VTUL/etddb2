@@ -1,5 +1,7 @@
 <h1>Find Person</h1>
 <%= form_tag '/people/find', :remote => true do %>
+  <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
+  <%= hidden_field_tag(:origin, params[:origin]) %>
   <%= label_tag(:lname, "Member's Last Name") %>
   <%= text_field_tag(:lname) %>
   <%= submit_tag("Find") %>

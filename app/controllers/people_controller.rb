@@ -89,12 +89,22 @@ class PeopleController < ApplicationController
     end
   end
 
-  # GET /people/find/
+  # POST /people/find/
   def find
     respond_to do |format|
-      format.html{ render :action => "find" }
-      format.js
-      format.json { render :parital => "people/find" }
+      if params[:lname].nil?
+        format.html { render(:action => "find") }
+      else
+        format.js { render :parital => "people/find" }
+        format.html { render(:action => "new_committee_member") }
+      end
+    end
+  end
+
+  # POST /people/new_committee_member
+  def new_committee_member
+    respond_to do |format|
+      format.html {render :action => "new_committee_member"}
     end
   end
 
