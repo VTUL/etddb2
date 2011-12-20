@@ -1,7 +1,7 @@
 <h1>New role</h1>
 
 <%= form_for(@role) do |f| %>
-
+  <% if @ability.can? :create, :role %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -9,6 +9,7 @@
   <p>
     <%= f.submit 'Create' %>
   </p>
+  <% end %>
 <% end %>
 
 <%= link_to 'Back', roles_path %>

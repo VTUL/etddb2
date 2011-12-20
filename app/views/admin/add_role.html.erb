@@ -2,7 +2,7 @@
 
 <% form_for(@role) do |f| %>
   <!------------------------>
-  <% if @ability.can? :assign_roles, @person %>
+  <% if @ability.can? :create, :person %>
   <!-- role checkboxes go here -->
     <%=h puts "Here is Admin Mode\n"%>
     <p>
