@@ -1,7 +1,7 @@
 <h1>New role</h1>
 
-<%= form_for(@role) do |f| %>
-  <% if @ability.can? :create, :role %>
+<% if @ability.can? :assign_roles, @person %>
+  <%= form_for(@role) do |f| %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
