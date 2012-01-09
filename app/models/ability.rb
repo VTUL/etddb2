@@ -13,7 +13,6 @@ class Ability
     for role in user.roles
       for permission in role.permission
         can permission.user_action.name.to_sym, permission.digital_object.name.to_sym
-        puts permission.user_action.name.to_sym,  permission.digital_object.name.to_sym
       end
     end
   end
