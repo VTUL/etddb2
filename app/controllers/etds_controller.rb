@@ -76,7 +76,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.save
-        format.html { redirect_to(@etd, :notice => 'Etd was successfully created.') }
+        format.html { redirect_to(next_new_etd_path(@etd), :notice => 'Etd was successfully created.') }
         format.xml  { render :xml => @etd, :status => :created, :location => @etd }
       else
         format.html { render :action => "new", :notice => 'You have errors.' }
@@ -134,7 +134,6 @@ class EtdsController < ApplicationController
     respond_to do |format|
       # This should be implemented in a before_filter
       if person_signed_in?
-        # This does not work. Need to get Etds from PeopleRoles table, but nothing is being stored there.
         @authors_etds = current_person.etds
 
         format.html # my_etds.html.erb
@@ -158,7 +157,7 @@ class EtdsController < ApplicationController
 #    end
   end
 
-  # GET /etds/new_next/1
+  # GET /etds/next_new/1
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
