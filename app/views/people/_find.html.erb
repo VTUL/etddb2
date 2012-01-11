@@ -1,3 +1,4 @@
+  <div id="candidates">
     <table>
       <% for candidate in Person.find_by_sql("SELECT 'people'.* FROM 'people' WHERE 'people'.'last_name' LIKE '%" + params[:lname] + "%'") do %>
         <tr>
@@ -7,3 +8,4 @@
       <% end %>
     </table>
     <%= select_tag(:committee_type, options_for_select(['Committee Member', 'Committee Chair', 'Committee Co-Chair'])) %>
+  </div>

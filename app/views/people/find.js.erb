@@ -1,1 +1,3 @@
-$("candidates").update("<%= escape_javascript(render(:partial => 'people/find')) %>");
+alert("Starting JS")
+$("#candidates").replaceWith("<%= escape_javascript(render(:partial => 'people/find')) %>");
+alert("Finished JS")
