@@ -1,13 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-firstAction:
-  name: create
+Create:
+  id: 1
+  name: Create
 
-secondAction:
-  name: read
+Read:
+  id: 2
+  name: Read
+
+Update:
+  id: 3
+  name: Update
   
-thridAction:
-  name: update
-  
-fourthAction:
-  name: delete
+Delete:
+  id: 4
+  name: Delete

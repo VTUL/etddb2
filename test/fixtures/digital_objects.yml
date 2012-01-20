@@ -1,7 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+Etd:
+  id: 1
+  name: Etd
 
-two:
-  name: MyString
+Content:
+  id: 2
+  name: Content
+
+Role:
+  id: 3
+  name: Role
