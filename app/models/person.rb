@@ -3,16 +3,12 @@
 # Digital Library and Archive at Virginia Tech.
 # Last updated: Feb-16-2011
 #########################################################
-
 require 'edauth'
 
 class Person < ActiveRecord::Base
   self.table_name = "people"
-  # Set multiple roles
-  #ROLES=%w[admin author committee_chair committee_cochair committee_member reviewer manager cataloger]
 
   # Assicate tables
-  #has_and_belongs_to_many :roles
   has_many :people_roles
   has_many :roles, :through => :people_roles
   has_many :etds, :through => :people_roles
@@ -20,7 +16,6 @@ class Person < ActiveRecord::Base
   # Validates attributes
   validates :first_name, :last_name, :email, :pid, :presence => true
   validates_uniqueness_of :pid, :email
-  #validates :role, :pid, :presence => true
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -49,22 +44,13 @@ class Person < ActiveRecord::Base
        return @user = Person.find(:first,:conditions=> "pid='#{pid}'")
      rescue ActiveRecord::RecordNotFound
        return nil
-
-    # If there is no user in the `Person' table, that is, the user has only `author' role,
-    #
-    #
-    #  else
      end
-    #    roles = Person.find(pid).roles
-
 
     #if (roles.count.greater.than 2)
       # Re enter credentials for authorization w/ dropdown box of roles
       # land on the user page
       # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
-
     #end
-
   end
 
   # for authentication by EdAuth

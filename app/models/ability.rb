@@ -9,6 +9,8 @@ class Ability
   def initialize(user, etd=nil, roles=nil, role_names=nil)
     user ||= Person.new
     if !etd.nil? and !roles.nil? and !role_names.nil?
+      # Check if the user has a specific role for this ETD, and only give them
+      # appropriate permissions.
       pr = PeopleRole.new(:person_id => user.id, :etd_id => etd.id)
       for role in roles
         pr.role_id = role.id
@@ -20,10 +22,10 @@ class Ability
           return
         end
       end
+      # Since the user did not have any of the given roles, do not give them any permissions.
       return
     end
-    # If this hasn't returned, then the user had none of the chosen roles,
-    # so fallback on the rest of their roles.
+    # Give the user all their permissions.
     for role in user.roles
       for permission in role.permission
         can permission.user_action.name.to_sym, permission.digital_object.name.to_sym
