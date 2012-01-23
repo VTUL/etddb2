@@ -5,23 +5,16 @@
 #########################################################
 
 class ApprovalMailer < ActionMailer::Base
+  default :from => 'shpark@vt.edu'
 
   def confirm(person)
-    subject    "Dear #{person.last_name}, #{person.first_name}"
-    recipients person.email
-    from       'shpark@vt.edu'
-    sent_on    Time.now
-
-    body       "Confirmed."
+    @person = person
+    mail(:to => person.email, :subject => "Confirmed.")
   end
 
   def sent(sent_at = Time.now)
-    subject    'ApprovalMailer#sent'
-    recipients person.email
-    from       'shpark@vt.edu'
-    sent_on    Time.now
-
-    body       :greeting => 'Hi,'
+    @person = person
+    mail(:to => person.email, :subject => '???')
   end
 
 end
