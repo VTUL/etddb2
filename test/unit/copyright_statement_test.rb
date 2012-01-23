@@ -7,12 +7,11 @@
 require 'test_helper'
 
 class CopyrightStatementTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   test "should be invalid with empty attributes" do
     copyright_statement = CopyrightStatement.new
 
     assert copyright_statement.invalid?
     assert copyright_statement.errors[:description].any?
-    puts copyright_statement.errors[:description]
+    #puts copyright_statement.errors[:description]
   end
 end
