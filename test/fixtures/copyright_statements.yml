@@ -1,7 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-#one:
-#  description: MyString
-#
-#two:
-#  description: MyString
+one:
+  id: 1
+  description: Open Source.
+
+two:
+  id: 2
+  description: Full Copyright

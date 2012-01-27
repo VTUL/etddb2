@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: show
+  description: Please show my email address.
+
+two:
+  id: 2
+  name: hide
+  description: Please do NOT show my email address
