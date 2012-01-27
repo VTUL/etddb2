@@ -7,10 +7,10 @@ one:
   availability_id: 2
   bound: false
   copyright_statement_id: 2
-  #degree: PhD
-  department_id: 1
+  #degree_id: 1
+  #department_id: 1
   document_type_id: 1
-  privacy_statement: 1
+  privacy_statement_id: 1
   status: Submitted
   url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/
   urn: etd-07292010-235426
@@ -22,8 +22,8 @@ two:
   availability_id: 1
   bound: false
   copyright_statement_id: 1
-  #degree: MS 
-  department_id: 2
+  #degree_id: 2
+  #department_id: 2
   document_type_id: 2
   privacy_statement_id: 2
   status: Submitted

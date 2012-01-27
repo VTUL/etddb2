@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: Masters
+  id: 1
+  name: Master
 
 two:
+  id: 2
   name: PhD
