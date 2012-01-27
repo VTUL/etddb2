@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: withheld
+  description: No one gets to see it.
+
+two:
+  id: 2
+  name: available
+  description: Everyone gets to see it.

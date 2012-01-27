@@ -2,24 +2,30 @@
 
 one:
   id: 1
-  degree: PhD
-  department: Computer Science
-  dtype: dissertation
   title: Test
   abstract: This is a test abstract
-  availability: unrestricted
-  url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/
+  availability_id: 2
   bound: false
+  copyright_statement_id: 2
+  #degree: PhD
+  department_id: 1
+  document_type_id: 1
+  privacy_statement: 1
+  status: Submitted
+  url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/
   urn: etd-07292010-235426
 
 two:
   id: 2
-  degree: MS 
-  department: Computer Science
-  dtype: thesis 
-  title: The effects of Saltness on a Pregnant Woman
+  title: Tesst
   abstract: This is the second test abstract 
-  availability: restricted 
-  url: http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/
+  availability_id: 1
   bound: false
+  copyright_statement_id: 1
+  #degree: MS 
+  department_id: 2
+  document_type_id: 2
+  privacy_statement_id: 2
+  status: Submitted
+  url: http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/
   urn: etd-05212008-084627
