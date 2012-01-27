@@ -14,6 +14,7 @@ class AddDeviseToPeople< ActiveRecord::Migration
       # t.token_authenticatable
     end
 
+    add_index :people, :pid,                  :unique => true
     add_index :people, :email,                :unique => true
     add_index :people, :reset_password_token, :unique => true
     # add_index :people, :confirmation_token,   :unique => true
@@ -22,6 +23,7 @@ class AddDeviseToPeople< ActiveRecord::Migration
   end
 
   def self.down
+    remove_index :people, :pid
     remove_index :people, :email
     remove_column :people, :database_authenticatable
     remove_column :people, :recoverable

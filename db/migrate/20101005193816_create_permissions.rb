@@ -1,6 +1,9 @@
 class CreatePermissions < ActiveRecord::Migration
   def self.up
     create_table :permissions do |t|
+      t.integer :user_action_id
+      t.integer :role_id
+      t.integer :digital_object_id
 
       t.timestamps
     end

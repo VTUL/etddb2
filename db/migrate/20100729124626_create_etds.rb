@@ -1,24 +1,23 @@
 class CreateEtds < ActiveRecord::Migration
   def self.up
     create_table :etds do |t|
-      t.string :urn
-      t.string :degree
-      t.string :department
-      t.string :dtype
       t.text :title
       t.text :abstract
-      t.string :availability
-      t.text :availability_description
-      t.text :copyright_statement
+      t.string :bound
+      t.string :status
+      t.string :urn
+      t.string :url
       t.date :ddate
       t.date :sdate
       t.date :adate
       t.date :cdate
       t.date :rdate
-      t.string :pid
-      t.string :url
-      t.timestamp :timestamp
-      t.string :bound
+
+      t.integer :availability_id
+      t.integer :copyright_statement_id
+      t.integer :department_id
+      t.integer :document_type_id
+      t.integer :privacy_statement_id
 
       t.timestamps
     end

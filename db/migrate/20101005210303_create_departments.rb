@@ -1,9 +1,8 @@
 class CreateDepartments < ActiveRecord::Migration
   def self.up
     create_table :departments do |t|
-      t.integer :etd_id
-
       t.string :name
+      t.boolean :retired
 
       t.timestamps
     end
