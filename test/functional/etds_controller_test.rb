@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EtdsControllerTest < ActionController::TestCase
-  def setup
+  setup do
     @etd = etds(:one)
   end
 
@@ -18,39 +18,30 @@ class EtdsControllerTest < ActionController::TestCase
 
   test "should create etd" do
     assert_difference('Etd.count') do
-      post :create, :etd => {:degree => "PhD", 
-                             :department => "Computer Science", 
-                             :dtype => "dissertation", 
-                             :title => "Test:", 
-                             :abstract => "This is a test abstract", 
-                             :urn => 0,
-                             :availability => "unrestricted", 
-                             :pid => "shpark", 
-                             :url => "http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/", 
-                             :bound => "NO"}
-  end
+      post :create, etd: @etd.attributes
+    end
 
     assert_redirected_to etd_path(assigns(:etd))
   end
 
   test "should show etd" do
-    get :show, :id => etds(:one).to_param
+    get :show, id: @etd.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => etds(:one).to_param
+    get :edit, id: @etd.to_param
     assert_response :success
   end
 
   test "should update etd" do
-    put :update, :id => etds(:one).to_param, :etd => {:urn=>"223456789" }
+    put :update, id: @etd.to_param, etd: @etd.attributes
     assert_redirected_to etd_path(assigns(:etd))
   end
 
   test "should destroy etd" do
     assert_difference('Etd.count', -1) do
-      delete :destroy, :id => etds(:one).to_param
+      delete :destroy, id: @etd.to_param
     end
 
     assert_redirected_to etds_path

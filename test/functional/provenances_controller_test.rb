@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ProvenancesControllerTest < ActionController::TestCase
+  setup do
+    @provenance = provenances(:one)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +18,30 @@ class ProvenancesControllerTest < ActionController::TestCase
 
   test "should create provenance" do
     assert_difference('Provenance.count') do
-      post :create, :provenance => {:creator=>"1", :notice=>"Your ETD is successfully submitted." }
+      post :create, provenance: @provenance.attributes
     end
 
     assert_redirected_to provenance_path(assigns(:provenance))
   end
 
   test "should show provenance" do
-    get :show, :id => provenances(:one).to_param
+    get :show, id: @provenance.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => provenances(:one).to_param
+    get :edit, id: @provenance.to_param
     assert_response :success
   end
 
   test "should update provenance" do
-    put :update, :id => provenances(:one).to_param, :provenance => { }
+    put :update, id: @provenance.to_param, provenance: @provenance.attributes
     assert_redirected_to provenance_path(assigns(:provenance))
   end
 
   test "should destroy provenance" do
     assert_difference('Provenance.count', -1) do
-      delete :destroy, :id => provenances(:one).to_param
+      delete :destroy, id: @provenance.to_param
     end
 
     assert_redirected_to provenances_path

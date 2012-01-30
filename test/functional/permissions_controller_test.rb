@@ -1,45 +1,24 @@
 require 'test_helper'
 
 class PermissionsControllerTest < ActionController::TestCase
+  setup do
+    @permission = permissions(:one)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:permissions)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create permission" do
-    assert_difference('Permission.count') do
-      post :create, :permission => {:user_action_id=>"1", :role_id=>"1", :digital_object_id=>"1" }
-    end
-
-    assert_redirected_to permission_path(assigns(:permission))
-  end
-
-  test "should show permission" do
-    get :show, :id => permissions(:one).to_param
-    assert_response :success
+    assert_not_nil assigns(:roles)
+    assert_not_nil assigns(:digital_objects)
+    assert_not_nil assigns(:actions)
   end
 
   test "should get edit" do
-    get :edit, :id => permissions(:one).to_param
+    get :edit, id: @permission.to_param
     assert_response :success
   end
 
   test "should update permission" do
-    put :update, :id => permissions(:one).to_param, :permission => {:role_id => 3}
-    assert_redirected_to permission_path(assigns(:permission))
-  end
-
-  test "should destroy permission" do
-    assert_difference('Permission.count', -1) do
-      delete :destroy, :id => permissions(:one).to_param
-    end
-
-    assert_redirected_to permissions_path
+    assert false, "This needs a rewrite."
   end
 end

@@ -5,13 +5,11 @@ one:
   uploaded_content_type: pdf
   uploaded_file_size: 1234
   availability_id: 2
-  bound: no
-#  page_count: 110
+  bound: false
   
 two:
   uploaded_file_name: content2.ppt
   uploaded_content_type: ppt
   uploaded_file_size: 5678
   availability_id: 1
-  bound: no
-#  page_count: 80
+  bound: false
