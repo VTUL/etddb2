@@ -4,10 +4,8 @@
 # Last updated: Feb-16-2011
 #########################################################
 
-class Permission < ActiveRecord::Base
-  belongs_to :digital_object
-  belongs_to :user_action
-  belongs_to :role
+class PrivacyStatement < ActiveRecord::Base
+  has_many :etds
 
-  validates_presence_of :role_id, :user_action_id, :digital_object_id
+  validates_presence_of :name, :description
 end

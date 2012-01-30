@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @availability.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @availability.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
+<%= link_to 'Back', availabilities_path %>

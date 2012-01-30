@@ -6,21 +6,16 @@
 
 class Role < ActiveRecord::Base
   #Associate tables
-#  has_and_belongs_to_many :people
   has_many :people_roles
   has_many :people, :through => :people_roles
   has_many :etds, :through => :people_roles
-  
-  
-#  has_and_belongs_to_many :actions 
-#  has_and_belongs_to_many :digital_objects
+
+
   has_many :permission
-  has_many :user_actions, :through=>:permission 
+  has_many :user_actions, :through=>:permission
   has_many :digital_objects, :through=>:permission
 
   # Validates attributes
-  validates :name, :presence => true
+  validates_presence_of :name
 
 end
-
-

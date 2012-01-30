@@ -50,30 +50,10 @@
     <%= f.label(:title) %><br />
     <%= f.text_field(:title) %>
   </p>
-  <!--<p>
-    <%#= f.label(:keywords) %><br />
-    <%#= f.text_field(:keywords) %>
-  </p>-->
   <p>
     <%= f.label(:abstract) %><br />
     <%= f.text_area(:abstract) %>
   </p>
-  <!--<p>
-    <%#= f.label(:sdate) %><br />
-    <%#= f.date_select(:sdate) %>
-  </p>
-  <p>
-    <%#= f.label(:adate) %><br />
-    <%#= f.date_select(:adate) %>
-  </p>
-  <p>
-    <%#= f.label(:cdate) %><br />
-    <%#= f.date_select(:cdate) %>
-  </p>
-  <p>
-    <%#= f.label(:rdate) %><br />
-    <%#= f.date_select(:rdate) %>
-  </p>-->
   <%= f.label(:availability) %>
   <table>
     <tr>
@@ -97,15 +77,8 @@
       <td>Release the entire work for Virginia Tech access only, while at the same time releasing parts of the work for worldwide access. Parts of the work may also be completely withheld from access.(You will be asked at a later point to specify the availability of each file you submit.)  <a href="/ETD-db/help/#mixed_availability">More information about &quot;mixed&quot; availability (option 4).</a></td>
     </tr>
   </table>
-  <!--<p>
-    <%#= f.label(:copyright) %><br />
-    I hereby certify that, if appropriate, I have obtained and attached hereto a written permission statement from the owner(s) of each third party copyrighted matter to be included in my thesis, dissertation, or project report, allowing distribution as specified below. I certify that the version I submitted is the same as that approved by my advisory committee.<br /><br />
-    I hereby grant to Virginia Tech or its agents the non-exclusive license to archive and make accessible, under the conditions specified below, my thesis, dissertation, or project report in whole or in part in all forms of media, now or hereafter known. I retain all other ownership rights to the copyright of the thesis, dissertation or project report. I also retain the right to use in future works (such as articles or books) all or part of this thesis, dissertation, or project report.<br /><br />
-    <%#= f.check_box(:copyright) %>I Agree.
-  </p>-->
   <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
   <% base_url = "http://developer.tower.lib.vt.edu:3000/theses/available" %>
-  <!--<%#= f.hidden_field(:pid, {:value=>@etd.pid}) %>-->
   <%= f.hidden_field(:timestamp, {:value => Time.now}) %>
   <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
   <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/unrestricted"}) %>

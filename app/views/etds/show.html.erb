@@ -1,14 +1,14 @@
 <p>
   <b>Degree:</b>
-  <%=h @etd.degree %>
+  <%=h @etd.degree_id %>
 </p>
-<p>
+<!--<p>
   <b>Department:</b>
-  <%=h @etd.department %>
-</p>
+  <%#=h @etd.department %>
+</p>-->
 <p>
-  <b>Dtype:</b>
-  <%=h @etd.dtype %>
+  <b>Document Type:</b>
+  <%=h @etd.document_type_id %>
 </p>
 <p>
   <b>Title:</b>
@@ -20,7 +20,7 @@
 </p>
 <p>
   <b>Availability:</b>
-  <%=h @etd.availability %> <%= link_to "Change the availability of your ETD", url_for(:action => :change_availability, :id=> @etd.id) %>
+  <%=h @etd.availability_id %> <%= link_to "Change the availability of your ETD", url_for(:action => :change_availability, :id=> @etd.id) %>
 </p>
 <!--
 <p>
@@ -54,16 +54,8 @@
   <%=h @etd.rdate %>
 </p>
 <p>
-  <b>Pid:</b>
-  <%=h @etd.pid %>
-</p>
-<p>
   <b>Url:</b>
   <%=h @etd.url %>
-</p>
-<p>
-  <b>Timestamp:</b>
-  <%=h @etd.timestamp %>
 </p>
 <p>
   <b>Bound:</b>
