@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126205621) do
+ActiveRecord::Schema.define(:version => 20120131205759) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -22,16 +22,14 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   end
 
   create_table "contents", :force => true do |t|
-    t.integer  "etd_id"
-    t.integer  "availability_id"
     t.string   "uploaded_file_name"
     t.string   "uploaded_content_type"
     t.integer  "uploaded_file_size"
     t.datetime "uploaded_updated_at"
-    t.string   "bound"
+    t.boolean  "bound"
+    t.integer  "etd_id"
+    t.integer  "availability_id"
     t.integer  "page_count"
-    t.integer  "file_id"
-    t.string   "file_type"
     t.integer  "duration"
     t.string   "dimensions"
     t.datetime "created_at"
@@ -57,6 +55,11 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.boolean  "retired"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "departments_etds", :id => false, :force => true do |t|
+    t.integer "etd_id"
+    t.integer "department_id"
   end
 
   create_table "digital_objects", :force => true do |t|
