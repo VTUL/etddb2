@@ -4,6 +4,7 @@ class CreateEtds < ActiveRecord::Migration
       t.text :title
       t.text :abstract
       t.boolean :bound
+      t.text :keywords
       t.string :status
       t.string :urn
       t.string :url
