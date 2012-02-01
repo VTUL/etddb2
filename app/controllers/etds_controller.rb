@@ -69,6 +69,8 @@ class EtdsController < ApplicationController
   def create
     @etd = Etd.new(params[:etd])
 
+    @etd.display_name = @etd.first_name + @etd.last_name
+
     pr = PeopleRole.new
     pr.person_id = current_person.id
     pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
