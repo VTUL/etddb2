@@ -9,5 +9,5 @@ class Provenance < ActiveRecord::Base
   belongs_to :etd
 
   # Validate attributes
-  validates :creator, :notice, :presence => true
+  validates_presence_of :creator, :notice
 end

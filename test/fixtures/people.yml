@@ -21,3 +21,9 @@ Kimberli:
   last_name: Weeks
   email: kdweeks@vt.edu
   pid: kdweeks
+  
+Gail:
+  id: 4
+  first_name: Gail
+  last_name: McMillan
+  email: gailmac

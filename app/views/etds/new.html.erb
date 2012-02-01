@@ -4,22 +4,22 @@
     <%#= f.label(:email) %><br />
     <%#= f.check_box(:email) %>Please display my email address on my ETD title page.<br />
   </p>-->
-  <p>
-    <%= f.label(:degree) %><br />
-    <%= f.select(:degree, ["Select A Degree", "Doctor of Education", "Master of Arts",
+  <!--<p>
+    <%#= f.label(:degree) %><br />
+    <%#= f.select(:degree, ["Select A Degree", "Doctor of Education", "Master of Arts",
       "Master of Architecture", "Master of Engineering", "Master of Engineering Education", "Master of Forestry",
       "Master of Fine Arts", "Master of Information Systems", "Master of Landscape Achitecture",
       "Master of Natural Resources", "Master of Public and International Affairs", "Master of Science",
       "Master of Science in Life Sciences", "Master of Urban and Regional Planning", "PhD"]) %>
   </p>
   <p>
-    <%= f.label(:dtype, "Document Type") %><br />
-    <%= f.select(:dtype, ["Select A Document Type", "Dissertation", "Major Paper", "Project",
+    <%#= f.label(:dtype, "Document Type") %><br />
+    <%#= f.select(:dtype, ["Select A Document Type", "Dissertation", "Major Paper", "Project",
       "Report", "Special Report", "Technical Report", "Master's Thesis"]) %>
   </p>
   <p>
-    <%= f.label(:department) %><br />
-    <%= f.select(:department, ["Select Your Department", "Accounting and Information Systems",
+    <%#= f.label(:department) %><br />
+    <%#= f.select(:department, ["Select Your Department", "Accounting and Information Systems",
       "Aerospace and Ocean Engineering", "Agricultural and Applied Economics", "Animal and Poultry Sciences",
       "Architecture", "Art and Art History", "Biochemistry", "Biological Systems Engineering", "Biology",
       "Business Administration", "Chemical Engineering", "Chemistry", "Civil Engineering", "Communication Studies",
@@ -41,7 +41,7 @@
       "Public Administration/Public Affairs", "Science and Technology Studies", "Sociology","Statistics",
       "Systems Engineering", "Teaching and Learning", "Theatre Arts", "Urban Affairs and Planning",
       "Veterinary Medical Sciences", "Women's Studies", "Wood Science and Forest Products"]) %>
-  </p>
+  </p>-->
   <p>
     <%= f.label(:ddate, "Defense Date") %><br />
     <%= f.date_select(:ddate, {:end_year => Time.now.year}) %>

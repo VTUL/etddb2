@@ -3,13 +3,7 @@ require 'test_helper'
 class SubmitControllerTest < ActionController::TestCase
   setup do
   @etd = etds(:one)
-  @update = {
-    :title	=> 'This test tile 2',
-    :department => 'Mechanical Engineering',
-    :dtype	=> 'thesis',
-    :degree	=> 'MS',
-    :bound	=> 'no'
-  }
+  @update = {:title => 'This test tile 2', :degree_id => 1, :document_type_id => 2, :bound => false}
   end
 
   # Replace this with your real tests.

@@ -3,7 +3,7 @@ class CreateEtds < ActiveRecord::Migration
     create_table :etds do |t|
       t.text :title
       t.text :abstract
-      t.string :bound
+      t.boolean :bound
       t.string :status
       t.string :urn
       t.string :url
@@ -15,7 +15,7 @@ class CreateEtds < ActiveRecord::Migration
 
       t.integer :availability_id
       t.integer :copyright_statement_id
-      t.integer :department_id
+      t.integer :degree_id
       t.integer :document_type_id
       t.integer :privacy_statement_id
 

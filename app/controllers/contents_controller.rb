@@ -86,7 +86,7 @@ class ContentsController < ApplicationController
   # PUT /contents/1.xml
 #  def update
 #  	@etd = Etd.find(params[:etd_id])
-#    @content = @etd.contents  	
+#    @content = @etd.contents
 #    #@content = Content.find(params[:id])
 
 #    respond_to do |format|
@@ -104,15 +104,15 @@ class ContentsController < ApplicationController
   def update
   # fetch objects to be use in the view
     @etd = Etd.find(params[:etd_id])
-    @picture = Content.new(params[:content])
+    @content = Content.new(params[:content])
 
 
-    # check if there is any chanage or update of picture/etd itself
-    if @picture.save
-        puts "this is picture.save\n"
-    	@etd.contents<< @picture
+    # check if there is any change or update of picture/etd itself
+    if @content.save
+        #puts "this is picture.save\n"
+        @etd.contents<< @content
     else
-        puts "this is not picture.save\n"
+        #puts "this is not picture.save\n"
     end
 
    #  @picture = Content.new(params[:etd][:contents][:uploaded_picture])

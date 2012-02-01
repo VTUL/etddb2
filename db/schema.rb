@@ -22,16 +22,14 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   end
 
   create_table "contents", :force => true do |t|
-    t.integer  "etd_id"
-    t.integer  "availability_id"
     t.string   "uploaded_file_name"
     t.string   "uploaded_content_type"
     t.integer  "uploaded_file_size"
     t.datetime "uploaded_updated_at"
-    t.string   "bound"
+    t.boolean  "bound"
+    t.integer  "etd_id"
+    t.integer  "availability_id"
     t.integer  "page_count"
-    t.integer  "file_id"
-    t.string   "file_type"
     t.integer  "duration"
     t.string   "dimensions"
     t.datetime "created_at"
@@ -75,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   create_table "etds", :force => true do |t|
     t.text     "title"
     t.text     "abstract"
-    t.string   "bound"
+    t.boolean  "bound"
     t.string   "status"
     t.string   "urn"
     t.string   "url"
@@ -86,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.date     "rdate"
     t.integer  "availability_id"
     t.integer  "copyright_statement_id"
-    t.integer  "department_id"
+    t.integer  "degree_id"
     t.integer  "document_type_id"
     t.integer  "privacy_statement_id"
     t.datetime "created_at"

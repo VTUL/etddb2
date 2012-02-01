@@ -5,6 +5,7 @@
 #########################################################
 
 class CopyrightStatement < ActiveRecord::Base
-  belongs_to :etd
-  validates :description, :presence => true 
+  has_many :etds
+
+  validates_presence_of :description
 end

@@ -5,29 +5,24 @@
 #########################################################
 
 class Etd < ActiveRecord::Base
-  has_many :contents, :dependent => :destroy
-  has_many :keywords
+  belongs_to :availability
+  belongs_to :copyright_statement
+  belongs_to :degree
+  belongs_to :document_type
+  belongs_to :privacy_statement
+
+  has_many :departments
   has_many :provenances
 
+  has_many :contents, :dependent => :destroy
   accepts_nested_attributes_for :contents, :allow_destroy => true
 
-# attr_accessible :contents_attributes
-#, :availability, :title, :pid, :degree, :dtype, :department,
-#                  :timestamp
-
-#  has_one  :availability_description
-#  has_one  :copyright_statement
-#  has_one  :degree_description
-#  has_one  :doctype_description
-#  has_one  :department_list
-#  has_one  :urn_register
-
-  has_many :people_roles
+  has_many :people_roles #, :dependent => :destroy
   has_many :roles, :through => :people_roles
   has_many :people, :through => :people_roles
 
-  validates :abstract, :availability, :bound, :degree, :department, :dtype, :title, :url, :urn, :presence => true
-            #:adate, :cdate, :ddate, :rdate, :sdate,
+  validates_presence_of :abstract, :availability_id, :bound, :copyright_statement_id, :degree_id,
+                        :document_type_id, :title, :privacy_statement_id, :url, :urn
   validates_uniqueness_of :urn
 
   def self.find_etds_for_browsing_by_author(letter)

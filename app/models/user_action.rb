@@ -5,11 +5,9 @@
 #########################################################
 
 class UserAction < ActiveRecord::Base
-#  has_and_belongs_to_many :roles
-#  has_and_belongs_to_many :digital_objects
   has_many :permission
   has_many :roles, :through=>:permission
   has_many :digital_objects, :through=>:permission
-  validates :name, :presence => true
-#  validates :id, :presence => true
+
+  validates_presence_of :name
 end

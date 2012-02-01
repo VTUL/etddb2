@@ -1,5 +1,13 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
+  resources :document_types
+
+  resources :degrees
+
+  resources :privacy_statements
+
+  resources :availabilities
+
   devise_for :people, :controllers => { :sessions => "people/sessions" }
   devise_for :people do
     get "/login", :to => "people/sessions#new"

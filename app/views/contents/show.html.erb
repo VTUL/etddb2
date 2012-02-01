@@ -15,7 +15,7 @@
 
 <p>
   <b>Availability:</b>
-  <%=h @content.availability %>
+  <%=h @content.availability_id %>
 </p>
 
 <p>
@@ -27,12 +27,6 @@
   <b>Page count:</b>
   <%=h @content.page_count %>
 </p>
-
-<p>
-  <b>Timestamp:</b>
-  <%=h @content.timestamp %>
-</p>
-
 
 <%= link_to 'Edit', edit_content_path(@content) %> |
 <%= link_to 'Back', contents_path %>

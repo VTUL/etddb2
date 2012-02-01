@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   has_many :etds, :through => :people_roles
 
   # Validates attributes
-  validates :first_name, :last_name, :email, :pid, :presence => true
+  validates_presence_of :first_name, :last_name, :pid, :email
   validates_uniqueness_of :pid, :email
 
   # Include default devise modules. Others available are:
@@ -33,25 +33,22 @@ class Person < ActiveRecord::Base
   # Return true if the user's password matches the submitted password.
   def has_password?(name, submitted_password)
     encrypted_password == encrypt(submitted_password)
-    # Compare encrypted_password with the encrypted version of
-    # submitted_password.
   end
 
-
-  #for authorization
-  def authorize
-     begin
-       return @user = Person.find(:first,:conditions=> "pid='#{pid}'")
-     rescue ActiveRecord::RecordNotFound
-       return nil
-     end
-
-    #if (roles.count.greater.than 2)
-      # Re enter credentials for authorization w/ dropdown box of roles
-      # land on the user page
-      # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
-    #end
-  end
+  ##for authorization
+  #def authorize
+  #   begin
+  #     return @user = Person.find(:first,:conditions=> "pid='#{pid}'")
+  #   rescue ActiveRecord::RecordNotFound
+  #     return nil
+  #   end
+  #
+  #  #if (roles.count.greater.than 2)
+  #    # Re enter credentials for authorization w/ dropdown box of roles
+  #    # land on the user page
+  #    # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
+  #  #end
+  #end
 
   # for authentication by EdAuth
   def self.authenticateByEdAuth(pid, submitted_password)
@@ -82,15 +79,14 @@ class Person < ActiveRecord::Base
   end
 
   #separated role model
-#  def roles=(roles)
-#    self.roles_mask = (roles && ROLES).map { |r| 2**ROLES.index(r) }.sum
-#  end
-
-#  def roles
-#    ROLES.reject do |r|
-#      ((roles_mask || 0) & 2**ROLES.index(r)).zero?
-#    end
-#  end
+  #def roles=(roles)
+  #  self.roles_mask = (roles && ROLES).map { |r| 2**ROLES.index(r) }.sum
+  #end
+  #
+  #def roles
+  #  ROLES.reject do |r|
+  #    ((roles_mask || 0) & 2**ROLES.index(r)).zero?
+  #end
 
 
   def has_role?(role_sym)

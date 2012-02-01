@@ -36,7 +36,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
-    @session = Session.last
+    #@session = Session.last
     #@ability = Ability.new(@)
     #@current_user = @session.user
     @person = Person.find(params[:id])
