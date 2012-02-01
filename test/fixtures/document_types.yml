@@ -6,4 +6,19 @@ one:
 
 two:
   id: 2
-  name: Thesis
+  name: Master's Thesis
+
+three:
+  name: Major Paper
+  
+four:
+  name: Project
+  
+five:
+  name: Report
+  
+six:
+  name: Special Report
+  
+seven:
+  name: Technical Report
