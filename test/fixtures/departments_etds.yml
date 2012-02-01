@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  etd_id: 1
+  department_id: 1
+
+two:
+  etd_id: 1
+  department_id: 2
+
+three:
+  etd_id: 2
+  department_id: 1
