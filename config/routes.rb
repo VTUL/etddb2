@@ -1,14 +1,6 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
-  resources :document_types
-
-  resources :degrees
-
-  resources :privacy_statements
-
-  resources :availabilities
-
-  devise_for :people, :controllers => { :sessions => "people/sessions" }
+  #devise_for :people, :controllers => { :sessions => "people/sessions" }
   devise_for :people do
     get "/login", :to => "people/sessions#new"
     post "/login", :to => "people/sessions#create"
@@ -50,7 +42,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :copyright_statements
   resources :keywords
   resources :contents
-  #resources :sessions, :only => [:new, :create, :destroy]
+  resources :document_types
+  resources :degrees
+  resources :privacy_statements
+  resources :availabilities
 
   #get 'browse/index'
   # The priority is based upon order of creation:
