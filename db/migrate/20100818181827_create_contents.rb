@@ -6,7 +6,9 @@ class CreateContents < ActiveRecord::Migration
       t.integer :uploaded_file_size
       t.timestamp :uploaded_updated_at
       t.boolean :bound
-      
+      t.string :title
+      t.text :description
+
       t.integer :etd_id
       t.integer :availability_id
 

@@ -5,7 +5,7 @@
 #########################################################
 
 class Department < ActiveRecord::Base
-  has_many :etds
+  has_and_belongs_to_many :etds
 
   validates_presence_of :name
 end

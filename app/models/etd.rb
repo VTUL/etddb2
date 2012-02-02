@@ -11,8 +11,9 @@ class Etd < ActiveRecord::Base
   belongs_to :document_type
   belongs_to :privacy_statement
 
-  has_many :departments
   has_many :provenances
+
+  has_and_belongs_to_many :departments
 
   has_many :contents, :dependent => :destroy
   accepts_nested_attributes_for :contents, :allow_destroy => true

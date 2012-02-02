@@ -1,14 +1,16 @@
 <p>
   <b>Degree:</b>
-  <%=h @etd.degree_id %>
+  <%=h @etd.degree.name %>
 </p>
-<!--<p>
-  <b>Department:</b>
-  <%#=h @etd.department %>
-</p>-->
+<p>
+  <b>Departments:</b><br />
+  <% for dept in @etd.departments do %>
+    <%=h dept.name %><br />
+  <% end %>
+</p>
 <p>
   <b>Document Type:</b>
-  <%=h @etd.document_type_id %>
+  <%=h @etd.document_type.name %>
 </p>
 <p>
   <b>Title:</b>
@@ -20,19 +22,13 @@
 </p>
 <p>
   <b>Availability:</b>
-  <%=h @etd.availability_id %> <%= link_to "Change the availability of your ETD", url_for(:action => :change_availability, :id=> @etd.id) %>
+  <%=h @etd.availability.name %> <%= link_to "Change the availability of your ETD", url_for(:action => :change_availability, :id=> @etd.id) %><br />
+  <%=h @etd.availability.description %>
 </p>
-<!--
-<p>
-  <b>Availability description:</b>
-  <%#=h @etd.availability_description %>
-</p>
-
 <p>
   <b>Copyright statement:</b>
-  <%#=h @etd.copyright_statement %>
+  <%=h @etd.copyright_statement.description %>
 </p>
--->
 <p>
   <b>Ddate:</b>
   <%=h @etd.ddate %>
@@ -74,7 +70,7 @@
       <td><%= c.uploaded_file_size %></td>
       <td><%= link_to 'Change File Availabilty', contents_change_availability_path(c) %></td>
     </tr>
-  <% end%>
+  <% end %>
 </table>
 <%= form_tag(:controller => "contents", :action => "new") do %>
   <%= hidden_field_tag(:etd_id, @etd.id) %>

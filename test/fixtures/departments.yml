@@ -7,3 +7,243 @@ one:
 two:
   id: 2
   name: English
+
+three:
+  name: Women's Studies
+  
+four:
+  name: Wood Science and Forest Products
+
+a:
+  name: Accounting and Information Systems
+  
+b:
+  name: Aerospace and Ocean Engineering
+  
+c:
+  name: Agricultural and Applied Economics
+  
+d:
+  name: Animal and Poultry Sciences
+  
+e:
+  name: Architecture
+  
+f:
+  name: Art and Art History
+  
+g:
+  name: Biochemistry
+  
+h:
+  name: Biological Systems Engineering
+  
+i:
+  name: Biology
+  
+j:
+  name: Business Administration
+  
+k:
+  name: Chemical Engineering
+  
+l:
+  name: Chemistry
+  
+m:
+  name: Civil Engineering
+  
+n:
+  name: Communication Studies
+  
+o:
+  name: Computer Science
+  
+p:
+  name: Crop and Soil Environmental Sciences
+  
+q:
+  name: Dairy Science
+  
+r:
+  name: Economics
+  
+s:
+  name: Educational Leadership and Policy Studies
+  
+t:
+  name: Electrical and Computer Engineering
+  
+u:
+  name: Engineering (General)
+  
+v:
+  name: Engineering Science and Mechanics
+  
+w:
+  name: Entomology
+  
+x:
+  name: Environmental Design and Planning
+  
+y:
+  name: Environmental Engineering
+  
+z:
+  name: Environmental Programs
+  
+aa:
+  name: Environmental Sciences and Engineering
+  
+bb:
+  name: Finance, Insurance, and Business Law
+  
+cc:
+  name: Fisheries and Wildlife Sciences
+  
+dd:
+  name: Food Science and Technology
+  
+ee:
+  name: Foreign Languages and Literatures
+  
+ff:
+  name: Genetics
+  
+gg:
+  name: Geography
+  
+hh:
+  name: Geosciences
+  
+ii:
+  name: Gerontology
+  
+jj:
+  name: History
+  
+kk:
+  name: Horticulture
+  
+ll:
+  name: Hospitality and Tourism Management
+  
+mm:
+  name: Housing, Interior Design and Resource Management
+  
+nn:
+  name: Human-Computer Interaction
+  
+oo:
+  name: Human Development
+  
+pp:
+  name: Human Nutrition, Foods, and Exercise
+  
+qq:
+  name: Humanities
+  
+rr:
+  name: Industrial and Systems Engineering
+  
+ss:
+  name: Information Technology
+  
+tt:
+  name: Information Systems
+  
+uu:
+  name: International Research And Development
+  
+vv:
+  name: International Studies
+  
+ww:
+  name: Landscape Architecture
+  
+xx:
+  name: Macromolecular and Science Engineering
+  
+yy:
+  name: Management
+  
+zz:
+  name: Management Science and Information Technology
+  
+aaa:
+  name: Marketing
+  
+bbb:
+  name: Materials Science and Engineering
+  
+ccc:
+  name: Mathematical Physics
+  
+ddd:
+  name: Mathematics
+  
+eee:
+  name: Mechanical Engineering
+  
+fff:
+  name: Mining and Minerals Engineering
+  
+ggg:
+  name: Molecular Cell Biology and Biotechnology
+  
+hhh:
+  name: Music
+  
+iii:
+  name: Natural Resources
+  
+jjj:
+  name: Near Environments
+  
+kkk:
+  name: Philosophy
+  
+lll:
+  name: Physics
+  
+mmm:
+  name: Plant Pathology, Physiology, and Weed Science
+  
+nnn:
+  name: Plant Physiology
+  
+ooo:
+  name: Political Science
+  
+ppp:
+  name: Public and International Affairs
+  
+qqq:
+  name: Psychology
+  
+rrr:
+  name: Public Administration/Public Affairs
+  
+sss:
+  name: Science and Technology Studies
+  
+ttt:
+  name: Sociology
+  
+uuu:
+  name: Statistics
+  
+vvv:
+  name: Systems Engineering
+  
+www:
+  name: Teaching and Learning
+  
+xxx:
+  name: Theatre Arts
+  
+yyy:
+  name: Urban Affairs and Planning
+
+zzz:
+  name: Veterinary Medical Sciences

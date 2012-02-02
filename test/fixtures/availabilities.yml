@@ -1,11 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
+zero:
+  name: Unrestricted
+  description: Release the entire work immediately for access worldwide.
+  retired: true
+
 one:
   id: 1
-  name: withheld
-  description: No one gets to see it.
+  name: Available
+  description: Release the entire work immediately for access worldwide.
 
 two:
   id: 2
-  name: available
-  description: Everyone gets to see it.
+  name: Restricted
+  description: Release the entire work for Virginia Tech access only.
+
+three:
+  id: 3
+  name: Withheld
+  description: Secure the entire work for patent and/or proprietary purposes for a period of one year. During this period the copyright owner also agrees not to exercise their ownership rights, including public use in works, without prior authorization from Virginia Tech. At the end of the one year period, either they or Virginia Tech may request an automatic extension for one additional year. At the end of the one year secure period, or its extension, if such is requested, the work will be handled under option 1 above, unless we request option 2 or 4 in writing.
+
+four:
+  id: 4
+  name: Mixed
+  description: Release the entire work for Virginia Tech access only, while at the same time releasing parts of the work for worldwide access. Parts of the work may also be completely withheld from access. You will be asked at a later point to specify the availability of each file you submit.
+  #<a href="/ETD-db/help/#mixed_availability">More information about &quot;mixed&quot; availability (option 4).</a>

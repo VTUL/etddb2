@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.integer  "uploaded_file_size"
     t.datetime "uploaded_updated_at"
     t.boolean  "bound"
+    t.string   "title"
+    t.text     "description"
     t.integer  "etd_id"
     t.integer  "availability_id"
     t.integer  "page_count"
@@ -57,6 +59,11 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.datetime "updated_at"
   end
 
+  create_table "departments_etds", :id => false, :force => true do |t|
+    t.integer "etd_id"
+    t.integer "department_id"
+  end
+
   create_table "digital_objects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -74,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.text     "title"
     t.text     "abstract"
     t.boolean  "bound"
+    t.text     "keywords"
     t.string   "status"
     t.string   "urn"
     t.string   "url"
@@ -92,23 +100,25 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   end
 
   create_table "people", :force => true do |t|
+    t.string   "pid"
+    t.string   "title"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
-    t.string   "pid"
     t.string   "suffix"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "display_name"
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
