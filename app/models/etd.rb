@@ -22,8 +22,8 @@ class Etd < ActiveRecord::Base
   has_many :roles, :through => :people_roles
   has_many :people, :through => :people_roles
 
-  validates_presence_of :abstract, :availability_id, :bound, :copyright_statement_id, :degree_id,
-                        :document_type_id, :title, :privacy_statement_id, :url, :urn
+  validates_presence_of :abstract, :availability_id, :copyright_statement_id, :degree_id,
+                        :document_type_id, :title, :privacy_statement_id, :url, :urn#, :bound
   validates_uniqueness_of :urn
 
   def self.find_etds_for_browsing_by_author(letter)

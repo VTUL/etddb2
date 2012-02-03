@@ -1,50 +1,5 @@
 <h1>Edit ETD</h1>
-<%= form_for @etd do |f| %>
-  <p>
-    <%= f.label(:degree_id, "Degree") %><br />
-    <%= f.collection_select(:degree_id, Degree.all, :id, :name) %>
-  </p>
-  <p>
-    <%= f.label(:document_type_id, "Document Type") %><br />
-    <%= f.collection_select(:document_type_id, DocumentType.all, :id, :name) %>
-  </p>
-  <p>
-    <%= f.label(:department) %><br />
-    <%#= f.options_from_collection_for_select(Department.all, :id, :name) %>
-  </p>
-  <p>
-    <%= f.label(:ddate, "Defense Date") %><br />
-    <%= f.date_select(:ddate, {:end_year => Time.now.year}) %>
-  </p>
-  <p>
-    <%= f.label(:title) %><br />
-    <%= f.text_field(:title) %>
-  </p>
-  <p>
-    <%= f.label(:abstract) %><br />
-    <%= f.text_area(:abstract) %>
-  </p>
-  <p>
-    <%= f.label(:availability_id, "Availability") %>
-    <table>
-      <% for avail in Availability.all do %>
-        <tr>
-          <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
-          <td valign='top' align='right'><%= avail.name %>:</td>
-          <td valign='top'><%= avail.description %></td>
-        </tr>
-      <% end %>
-    </table>
-  </p>
-  <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
-  <% base_url = "http://developer.tower.lib.vt.edu:3000/theses/available" %>
-  <%#= f.hidden_field(:timestamp, {:value => Time.now}) %>
-  <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
-  <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/unrestricted"}) %>
-  <%= f.hidden_field(:bound, {:value=>"No"}) %>
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
 <br />
 <%= link_to 'Back to ETDs', etds_path %>
-<%= link_to 'Add contents', contents_add_contents_path(@etd.id) %>
 <%= link_to 'Change file avaiailabilty contents', contents_change_availability_path(@etd.id) %>
