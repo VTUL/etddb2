@@ -7,5 +7,5 @@
 class DocumentType < ActiveRecord::Base
   has_many :etds
 
-  validates_presence_of :name
+  validates_presence_of :name, :retired
 end

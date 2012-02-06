@@ -7,5 +7,5 @@
 class PrivacyStatement < ActiveRecord::Base
   has_many :etds
 
-  validates_presence_of :name, :description
+  validates_presence_of :statement, :retired
 end

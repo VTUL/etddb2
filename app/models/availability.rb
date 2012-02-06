@@ -6,6 +6,6 @@
 
 class Availability < ActiveRecord::Base
   has_many :etds
-  
-  validates_presence_of :name, :description
+
+  validates_presence_of :name, :description, :retired
 end

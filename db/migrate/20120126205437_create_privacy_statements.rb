@@ -1,8 +1,7 @@
 class CreatePrivacyStatements < ActiveRecord::Migration
   def change
     create_table :privacy_statements do |t|
-      t.string :name
-      t.string :description
+      t.string :statement
       t.boolean :retired
 
       t.timestamps

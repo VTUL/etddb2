@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   end
 
   create_table "copyright_statements", :force => true do |t|
-    t.string   "description"
+    t.string   "statement"
     t.boolean  "retired"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -144,8 +144,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   end
 
   create_table "privacy_statements", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
+    t.string   "statement"
     t.boolean  "retired"
     t.datetime "created_at"
     t.datetime "updated_at"
