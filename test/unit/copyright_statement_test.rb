@@ -8,10 +8,20 @@ require 'test_helper'
 
 class CopyrightStatementTest < ActiveSupport::TestCase
   test "should be invalid with empty attributes" do
-    copyright_statement = CopyrightStatement.new
+    statement = CopyrightStatement.new
+    assert statement.invalid?
+    assert statement.errors[:statement].any?
+    assert statement.errors[:retired].any?
+  end
 
-    assert copyright_statement.invalid?
-    assert copyright_statement.errors[:description].any?
-    #puts copyright_statement.errors[:description]
+  test "invalid without all required attributes" do
+    attrs = {:statement => "words", :retired => false}
+
+    for key, value in attrs do
+      statement = CopyrightStatement.new(attrs)
+      statement[key] = nil
+      assert !statement.valid?
+      assert statement.errors[key].any?
+    end
   end
 end

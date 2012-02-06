@@ -20,12 +20,24 @@ class EtdTest < ActiveSupport::TestCase
   test "invalid without all required attributes" do
     attrs = {:abstract => 'abs', :availability_id => 1, :bound => false,
              :copyright_statement_id => 1, :degree_id => 1, :document_type_id => 1,
-             :title => 'test', :url => 'http://etds.edu/etd-1/', :urn => 'etd-1'}
+             :title => 'title', :privacy_statement_id => 1, :url => "/", :urn => 0}
 
     for key, value in attrs do
       etd = Etd.new(attrs)
-      etd[key] = ''
+      etd[key] = nil
       assert !etd.valid?
+      assert etd.errors[key].any?
+
+      if key == 'urn'
+        # Make sure the uniqueness condition is not the only one violated.
+        assert etd.errors[key].count("has already been taken") < etd.errors[key].count
+      end
     end
+  end
+
+  test "invalid with non-unique urn." do
+    etd = Etd.new(etds(:one).attributes)
+    assert !etd.valid?
+    assert etd.errors[:urn].include?("has already been taken")
   end
 end

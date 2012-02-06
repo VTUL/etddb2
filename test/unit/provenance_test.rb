@@ -14,4 +14,15 @@ class ProvenanceTest < ActiveSupport::TestCase
     assert provenance.errors[:creator].any?
     assert provenance.errors[:notice].any?
   end
+
+  test "invalid without all required attributes" do
+    attrs = {:creator => 'someone', :notice => 'something'}
+
+    for key, value in attrs do
+      provenance = Provenance.new(attrs)
+      provenance[key] = nil
+      assert !provenance.valid?
+      assert provenance.errors[key].any?
+    end
+  end
 end
