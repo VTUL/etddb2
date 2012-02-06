@@ -48,7 +48,7 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(params[:person])
 
-    @person.display_name = @person.first_name + @person.last_name
+    @person.display_name = @person.first_name + " " + @person.last_name
 
     respond_to do |format|
       if @person.save
