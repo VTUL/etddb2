@@ -1,7 +1,7 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
   #devise_for :people, :controllers => { :sessions => "people/sessions" }
-  devise_for :people do
+  devise_scope :people do
     get "/login", :to => "people/sessions#new"
     post "/login", :to => "people/sessions#create"
     get "/logout", :to => "people/sessions#destroy"
