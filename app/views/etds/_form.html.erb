@@ -53,7 +53,7 @@
   <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
   <% base_url = "http://developer.tower.lib.vt.edu:3000/theses/available" %>
   <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
-  <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/unrestricted"}) %>
-  <%= f.hidden_field(:bound, {:value=>"No"}) %>
+  <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/"}) %>
+  <%= f.hidden_field(:bound, {:value=>false}) %>
   <%= f.submit %>
 <% end %>
