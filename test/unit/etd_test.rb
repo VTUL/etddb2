@@ -39,5 +39,16 @@ class EtdTest < ActiveSupport::TestCase
     etd = Etd.new(etds(:one).attributes)
     assert !etd.valid?
     assert etd.errors[:urn].include?("has already been taken")
+    etd.urn = 0
+    assert etd.valid?
+  end
+
+  test "invalid with non-boolean bound attribute." do
+    etd = Etd.new(etds(:one).attributes)
+    etd.bound = nil
+    assert !etd.valid?
+    assert etd.errors[:bound].include?("must be boolean")
+    #etd.bound = false
+    #assert etd.valid?
   end
 end

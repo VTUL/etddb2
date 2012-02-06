@@ -35,13 +35,19 @@ class PersonTest < ActiveSupport::TestCase
 
   test "invalid with non-unique pid" do
     person = Person.new(people(:one).attributes)
+    person.email = "unique@example.com"
     assert !person.valid?
     assert person.errors[:pid].include?("has already been taken")
+    #person.pid = "unique1"
+    #assert person.valid?
   end
 
   test "invalid with non-unique email" do
     person = Person.new(people(:one).attributes)
+    person.pid = "unique1"
     assert !person.valid?
     assert person.errors[:email].include?("has already been taken")
+    #person.email = "unique@example.com"
+    #assert person.valid?
   end
 end

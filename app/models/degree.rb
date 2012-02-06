@@ -7,5 +7,6 @@
 class Degree < ActiveRecord::Base
   has_many :etds
 
-  validates_presence_of :name, :retired
+  validates_presence_of :name
+  validates :retired, :inclusion => {:in => [true, false], :message => "must be boolean"}
 end
