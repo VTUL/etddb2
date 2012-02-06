@@ -1,17 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 Create:
-  id: 1
   name: Create
 
 Read:
-  id: 2
   name: Read
 
 Update:
-  id: 3
   name: Update
   
 Delete:
-  id: 4
   name: Delete

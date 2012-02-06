@@ -1,13 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-Etd:
-  id: 1
+one:
   name: Etd
 
-Content:
-  id: 2
+two:
   name: Content
 
-Role:
-  id: 3
+three:
   name: Role

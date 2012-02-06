@@ -1,48 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  id: 1
-  name: Master of Science
+  name: PhD
+  retired: false
 
 two:
-  id: 2
-  name: PhD
-
-three:
-  name: Doctor of Education
-
-four:
-  name: Master of Arts
-
-five:
-  name: Master of Architecture
-
-six:
-  name: Master of Engineering
-
-seven:
-  name: Master of Engineering Education
-
-eight:
-  name: Master of Forestry
-
-nine:
-  name: Master of Fine Arts
-
-ten:
-  name: Master of Information Systems
-
-eleven:
-  name: Master of Landscape Achitecture
-  
-twelve:
-  name: Master of Natural Resources
-
-thirteen:
-  name: Master of Public and International Affairs
-  
-fourteen:
-  name: Master of Science in Life Sciences
-  
-fifteen:
-  name: Master of Urban and Regional Planning
+  name: Master of Plumbing
+  retired: true
