@@ -7,7 +7,6 @@
 require 'test_helper'
 
 class DigitalObjectTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   test "invalid with empty attributes" do
     digital_object = DigitalObject.new
     assert !digital_object.valid?

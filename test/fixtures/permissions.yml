@@ -1,72 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-    role_id: 1
-    user_action_id: 4
-    digital_object_id: 1
+  digital_object_id: 1
+  user_action_id: 1
+  role_id: 1
 
 two:
-    role_id: 1
-    user_action_id: 4
-    digital_object_id: 2
-
-three:
-    role_id: 1
-    user_action_id: 1
-    digital_object_id: 3
-
-four:
-    role_id: 1
-    user_action_id: 2
-    digital_object_id: 3
-
-five:
-    role_id: 1
-    user_action_id: 3
-    digital_object_id: 3
-
-six:
-    role_id: 1
-    user_action_id: 4
-    digital_object_id: 3
-
-seven:
-    role_id: 2
-    user_action_id: 1
-    digital_object_id: 1
-
-eight:
-    role_id: 2
-    user_action_id: 2
-    digital_object_id: 1
-
-nine:
-    role_id: 2
-    user_action_id: 3
-    digital_object_id: 1
-
-ten:
-    role_id: 2
-    user_action_id: 4
-    digital_object_id: 1
-
-
-eleven:
-    role_id: 2
-    user_action_id: 1
-    digital_object_id: 2
-
-twelve:
-    role_id: 2
-    user_action_id: 2
-    digital_object_id: 2
-
-thirteen:
-    role_id: 2
-    user_action_id: 3
-    digital_object_id: 2
-
-fourteen:
-    role_id: 2
-    user_action_id: 4
-    digital_object_id: 2
+  digital_object_id: 1
+  user_action_id: 2
+  role_id: 1

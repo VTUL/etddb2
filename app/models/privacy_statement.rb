@@ -7,5 +7,6 @@
 class PrivacyStatement < ActiveRecord::Base
   has_many :etds
 
-  validates_presence_of :name, :description
+  validates_presence_of :statement
+  validates :retired, :inclusion => {:in => [true, false], :message => "must be boolean"}
 end

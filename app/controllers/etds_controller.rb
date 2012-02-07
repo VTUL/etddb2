@@ -69,8 +69,6 @@ class EtdsController < ApplicationController
   def create
     @etd = Etd.new(params[:etd])
 
-    @etd.display_name = @etd.first_name + @etd.last_name
-
     pr = PeopleRole.new
     pr.person_id = current_person.id
     pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
@@ -148,15 +146,11 @@ class EtdsController < ApplicationController
 
   # GET /etds/change_availability
   def change_availability
-#    if person_signed_in?
-#      @authors_etds = current_person.etds
-      @etd= Etd.find(params[:id])
+    @etd = Etd.find(params[:id])
 
-#      format.html # show_etd_by_author.html.erb
-#      format.xml  { render :xml => @etd , :xml => @person }
-#    else
-#      format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
-#    end
+    respond_to do |format|
+      format.html # change_availability.html.erb
+    end
   end
 
   # GET /etds/next_new/1

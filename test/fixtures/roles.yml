@@ -1,21 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-Admin:
-  id: 1
+one:
   name: Admin
 
-Author:
-  id: 2
+two:
   name: Author
 
-ComChair:
-  id: 3
+three:
   name: Committee Chair
 
-ComCoChair:
-  id: 4
+four:
   name: Committee CoChair
 
-ComMember:
-  id: 5
-  name: committee Member
+five:
+  name: Committee Member
