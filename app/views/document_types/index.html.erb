@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Retired?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @document_types.each do |document_type| %>
   <tr>
     <td><%= document_type.name %></td>
+    <td><%= document_type.retired %></td>
     <td><%= link_to 'Show', document_type %></td>
     <td><%= link_to 'Edit', edit_document_type_path(document_type) %></td>
     <td><%= link_to 'Destroy', document_type, confirm: 'Are you sure?', method: :delete %></td>

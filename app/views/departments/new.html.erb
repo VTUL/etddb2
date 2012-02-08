@@ -1,14 +1,5 @@
 <h1>New department</h1>
 
-<%= form_for(@department) do |f| %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
 <%= link_to 'Back', departments_path %>

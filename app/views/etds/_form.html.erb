@@ -1,34 +1,46 @@
 <%= form_for @etd do |f| %>
-  <p>
+  <% if @etd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this ETD from being saved:</h2>
+
+      <ul>
+      <% @etd.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= f.label(:degree_id, "Degree") %><br />
     <%= f.collection_select(:degree_id, Degree.where(:retired => false), :id, :name) %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:document_type_id, "Document Type") %><br />
     <%= f.collection_select(:document_type_id, DocumentType.where(:retired => false), :id, :name) %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:department) %><br />
     <%#= f.options_from_collection_for_select(Department.all, :id, :name) %>
     Discuss solutions. Luckily, not required to create an ETD.
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:ddate, "Defense Date") %><br />
     <%= f.date_select(:ddate, {:end_year => Time.now.year}) %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:title) %><br />
     <%= f.text_field(:title) %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:abstract) %><br />
     <%= f.text_area(:abstract) %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:keywords) %><br />
     <%= f.text_area(:keywords, :rows => 5) %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label(:availability_id, "Availability") %>
     <table>
       <% for avail in Availability.where(:retired => false) do %>
@@ -39,17 +51,17 @@
         </tr>
       <% end %>
     </table>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= CopyrightStatement.where(:retired => false).last.statement %><br />
     <%= f.check_box(:copyright_statement_id, {}, CopyrightStatement.where(:retired => false).last.id, nil)%>
     <%= f.label(:copyright_statement_id, "I have read the above and agreed to it.")%>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= PrivacyStatement.where(:retired => false).last.statement %><br />
     <%= f.check_box(:privacy_statement_id, {}, CopyrightStatement.where(:retired => false).last.id, nil)%>
     <%= f.label(:privacy_statement_id, "I have read the above and agreed to it.")%>
-  </p>
+  </div>
   <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
   <% base_url = "http://developer.tower.lib.vt.edu:3000/theses/available" %>
   <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>

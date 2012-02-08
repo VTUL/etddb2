@@ -2,8 +2,8 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Statement</th>
+    <th>Retired?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +11,8 @@
 
 <% @privacy_statements.each do |privacy_statement| %>
   <tr>
-    <td><%= privacy_statement.name %></td>
-    <td><%= privacy_statement.description %></td>
+    <td><%= privacy_statement.statement %></td>
+    <td><%= privacy_statement.retired %></td>
     <td><%= link_to 'Show', privacy_statement %></td>
     <td><%= link_to 'Edit', edit_privacy_statement_path(privacy_statement) %></td>
     <td><%= link_to 'Destroy', privacy_statement, confirm: 'Are you sure?', method: :delete %></td>

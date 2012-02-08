@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Retired?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @degrees.each do |degree| %>
   <tr>
     <td><%= degree.name %></td>
+    <td><%= degree.retired %></td>
     <td><%= link_to 'Show', degree %></td>
     <td><%= link_to 'Edit', edit_degree_path(degree) %></td>
     <td><%= link_to 'Destroy', degree, confirm: 'Are you sure?', method: :delete %></td>

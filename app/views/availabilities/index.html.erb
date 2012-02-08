@@ -4,6 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Retired?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +14,7 @@
   <tr>
     <td><%= availability.name %></td>
     <td><%= availability.description %></td>
+    <td><%= availability.retired %></td>
     <td><%= link_to 'Show', availability %></td>
     <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
     <td><%= link_to 'Destroy', availability, confirm: 'Are you sure?', method: :delete %></td>

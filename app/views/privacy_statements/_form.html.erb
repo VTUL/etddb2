@@ -12,13 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :statement %><br />
+    <%= f.text_field :statement %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.label :retired %><br />
+    <%= f.check_box :retired, {}, true, false %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,8 +1,10 @@
 <p>
-  <b>Description:</b>
-  <%=h @copyright_statement.description %>
+  <b>Statement:</b><br />
+  <%=h @copyright_statement.statement %>
 </p>
-
-
+<p>
+  <b>Retired?</b><br />
+  <%=h @copyright_statement.retired %>
+</p>
 <%= link_to 'Edit', edit_copyright_statement_path(@copyright_statement) %> |
 <%= link_to 'Back', copyright_statements_path %>
