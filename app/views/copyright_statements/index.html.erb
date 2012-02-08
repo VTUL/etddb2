@@ -3,11 +3,13 @@
 <table>
   <tr>
     <th>Description</th>
+    <th>Retired?</th>
   </tr>
 
 <% @copyright_statements.each do |copyright_statement| %>
   <tr>
-    <td><%=h copyright_statement.description %></td>
+    <td><%=h copyright_statement.statement %></td>
+    <td><%=h copyright_statement.retired %></td>
     <td><%= link_to 'Show', copyright_statement %></td>
     <td><%= link_to 'Edit', edit_copyright_statement_path(copyright_statement) %></td>
     <td><%= link_to 'Destroy', copyright_statement, :confirm => 'Are you sure?', :method => :delete %></td>

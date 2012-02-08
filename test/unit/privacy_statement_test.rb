@@ -14,14 +14,12 @@ class PrivacyStatementTest < ActiveSupport::TestCase
     assert statement.errors[:retired].any?
   end
 
-  test "invalid without all required attributes" do
-    attrs = {:statement => 'words', :retired => false}
-
-    for key, value in attrs do
-      statement = PrivacyStatement.new(attrs)
-      statement[key] = nil
-      assert !statement.valid?
-      assert statement.errors[key].any?
-    end
+  test "invalid with non-boolean retired attribute." do
+    statement = PrivacyStatement.new(privacy_statements(:one).attributes)
+    statement.retired = nil
+    assert !statement.valid?
+    assert statement.errors[:retired].include?("must be boolean")
+    statement.retired = false
+    assert statement.valid?
   end
 end

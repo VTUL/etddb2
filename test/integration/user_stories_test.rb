@@ -23,56 +23,36 @@ class UserStoriesTest < ActionController::IntegrationTest
       sess.post "http://developer.tower.lib.vt.edu:3000/login", {:person=>{:pid => user.pid, :password => "12345789", :remember_me =>"0"}}
       assert_equal '/login', path.to_s
       
-      sess.post "http://developer.tower.lib.vt.edu:3000/etds/new", {:etd=>{\
-    		:id=>2,\
-  	  		:title=>'Tesst',\
-  	  		:abstract=>'This is the second test abstract',\
-  	  		:availability_id=>1,\
-  	  		:bound=>false,\
-  	  		:copyright_statement_id=>1,\
-  	  		:degree_id=> 2,\
-  	  		:department_id=> 2,\
-  	  		:document_type_id=>2,\
-  	  		:privacy_statement_id=>2,\
-  	  		:status=>'Submitted',\
+      sess.post "http://developer.tower.lib.vt.edu:3000/etds/new", {:etd=>{:id=>2,
+  	  		:title=>'Tesst',
+  	  		:abstract=>'This is the second test abstract',
+  	  		:availability_id=>1,
+  	  		:bound=>false,
+  	  		:copyright_statement_id=>1,
+  	  		:degree_id=> 2,
+  	  		:department_id=> 2,
+  	  		:document_type_id=>2,
+  	  		:privacy_statement_id=>2,
+  	  		:status=>'Submitted',
       		:url=>'http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/',\
-  	  		:urn=>'etd-05212008-084627',\
+  	  		:urn=>'etd-05212008-084627',
   	  		:degree=>'PhD'}}
   	  if (assert_response :redirect)
-  	  	sess.post "http://developer.tower.lib.vt.edu:3000/contents/new", {:etd=>{\
-    		:id=>2,\
-  	  		:title=>'Tesst',\
-  	  		:abstract=>'This is the second test abstract',\
-  	  		:availability_id=>1,\
-  	  		:bound=>false,\
-  	  		:copyright_statement_id=>1,\
-  	  		:degree_id=> 2,\
-  	  		:department_id=> 2,\
-  	  		:document_type_id=>2,\
-  	  		:privacy_statement_id=>2,\
-  	  		:status=>'Submitted',\
-      		:url=>'http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/',\
-  	  		:urn=>'etd-05212008-084627',\
-  	  		:degree=>'PhD'}}
+  	  	sess.post("/contents/new/1", {:etd_id=>2, :etd=>{:id=>2, :content=>{:id=>0, :uploaded=>File.new(Rails.root + 'app/assets/images/body_bg2.jpg')}}})
+  	  else 
+		puts "I am not happy:("		
+	  end
+  	  if (assert_response :redirect)
+  	  	sess.post("/people/add_committee", {:etd_id=>2, :lname=>'weeks'})
   	  else 
 		puts "I am not happy:("
-		
 	  end
+	  
+	  
+	  
       sess.https!(false)
     end
 
-    #post_via_redirect "/login", :pid => people(:SungHee).pid, :password => people(:SungHee).suffix
-    #assert_equal '/pages#home', path
-    #assert_equal '/people/sessions#new', path
-    #assert_equal 'Welcome shpark!', flash[:notice]
-
-    #get "/logout"
-    #assert_response :success
- 
-    #https!(false)
-    #get "/etds/"
-    #assert_response :success
-    #assert assigns(:etds)
   end 
 
   test "submit an existing etd" do

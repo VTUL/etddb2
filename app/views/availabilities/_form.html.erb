@@ -19,6 +19,11 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </div>
+  <div class="field">
+    <%= f.label :retired %><br />
+    <%= f.check_box :retired, {}, true, false %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

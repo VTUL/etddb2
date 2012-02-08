@@ -8,14 +8,12 @@ class DocumentTypeTest < ActiveSupport::TestCase
     assert doc_type.errors[:retired].any?
   end
 
-  test "should be invalid without all required attributes" do
-    attrs = {:name => 'name', :retired => false}
-
-    for key, value in attrs do
-      doc_type = DocumentType.new(attrs)
-      doc_type[key] = nil
-      assert !doc_type.valid?
-      assert doc_type.errors[key].any?
-    end
+  test "invalid with non-boolean retired attribute." do
+    doc_type = DocumentType.new(document_types(:one).attributes)
+    doc_type.retired = nil
+    assert !doc_type.valid?
+    assert doc_type.errors[:retired].include?("must be boolean")
+    doc_type.retired = false
+    assert doc_type.valid?
   end
 end

@@ -14,15 +14,4 @@ class PermissionTest < ActiveSupport::TestCase
     assert permission.errors[:user_action_id].any?
     assert permission.errors[:digital_object_id].any?
   end
-
-  test "should be invalid without all required attributes" do
-    attrs = {:role_id => 1, :user_action_id => 1, :digital_object_id => 1}
-
-    for key, value in attrs do
-      permission = Permission.new(attrs)
-      permission[key] = nil
-      assert !permission.valid?
-      assert permission.errors[key].any?
-    end
-  end
 end

@@ -1,0 +1,27 @@
+<%= form_for(@copyright_statement) do |f| %>
+  <% if @copyright_statement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@copyright_statement.errors.count, "error") %> prohibited this copyright statement from being saved:</h2>
+
+      <ul>
+      <% @copyright_statement.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :statement %><br />
+    <%= f.text_field :statement %>
+  </div>
+  <div class="field">
+    <%= f.label :retired %><br />
+    <%= f.check_box :retired, {}, true, false %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
