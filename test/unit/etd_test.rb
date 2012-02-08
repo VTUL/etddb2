@@ -1,5 +1,4 @@
 require 'test_helper'
-#module test_helper
 
 class EtdTest < ActiveSupport::TestCase
   test "invalid with empty attributes" do
@@ -17,24 +16,6 @@ class EtdTest < ActiveSupport::TestCase
     assert etd.errors[:urn].any?
   end
 
-  test "invalid without all required attributes" do
-    attrs = {:abstract => 'abs', :availability_id => 1, :bound => false,
-             :copyright_statement_id => 1, :degree_id => 1, :document_type_id => 1,
-             :title => 'title', :privacy_statement_id => 1, :url => "/", :urn => 0}
-
-    for key, value in attrs do
-      etd = Etd.new(attrs)
-      etd[key] = nil
-      assert !etd.valid?
-      assert etd.errors[key].any?
-
-      if key == 'urn'
-        # Make sure the uniqueness condition is not the only one violated.
-        assert etd.errors[key].count("has already been taken") < etd.errors[key].count
-      end
-    end
-  end
-
   test "invalid with non-unique urn." do
     etd = Etd.new(etds(:one).attributes)
     assert !etd.valid?
@@ -45,10 +26,12 @@ class EtdTest < ActiveSupport::TestCase
 
   test "invalid with non-boolean bound attribute." do
     etd = Etd.new(etds(:one).attributes)
+    #The urn will also cause an error, so fix it.
+    etd.urn = 0
     etd.bound = nil
     assert !etd.valid?
     assert etd.errors[:bound].include?("must be boolean")
-    #etd.bound = false
-    #assert etd.valid?
+    etd.bound = false
+    assert etd.valid?
   end
 end

@@ -14,14 +14,12 @@ class DepartmentTest < ActiveSupport::TestCase
     assert department.errors[:retired].any?
   end
 
-  test "should be invalid without all required attributes" do
-    attrs = {:name => 'name', :retired => false}
-
-    for key, value in attrs do
-      department = Department.new(attrs)
-      department[key] = nil
-      assert !department.valid?
-      assert department.errors[key].any?
-    end
+  test "invalid with non-boolean retired attribute." do
+    deparment = Department.new(departments(:one).attributes)
+    deparment.retired = nil
+    assert !deparment.valid?
+    assert deparment.errors[:retired].include?("must be boolean")
+    deparment.retired = false
+    assert deparment.valid?
   end
 end

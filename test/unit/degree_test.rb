@@ -8,14 +8,12 @@ class DegreeTest < ActiveSupport::TestCase
     assert degree.errors[:retired].any?
   end
 
-  test "should be invalid without all required attributes" do
-    attrs = {:name => 'name', :retired => false}
-
-    for key, value in attrs do
-      degree = Degree.new(attrs)
-      degree[key] = nil
-      assert !degree.valid?
-      assert degree.errors[key].any?
-    end
+  test "invalid with non-boolean retired attribute." do
+    degree = Degree.new(degrees(:one).attributes)
+    degree.retired = nil
+    assert !degree.valid?
+    assert degree.errors[:retired].include?("must be boolean")
+    degree.retired = false
+    assert degree.valid?
   end
 end
