@@ -2,6 +2,7 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   devise_for :people
 
+  # devise_scope takes the singular, devise_for takes the plural. Why?
   devise_scope :person do
     get "login", :to => "devise/sessions#new"
     post "login", :to => "devise/sessions#create"
