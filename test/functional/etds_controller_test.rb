@@ -25,7 +25,13 @@ class EtdsControllerTest < ActionController::TestCase
       post :create, etd: @etd_attrs
     end
 
-    assert_redirected_to etd_path(assigns(:etd))
+    assert_redirected_to next_new_etd_path(assigns(:etd))
+  end
+
+  test "should get next_new" do
+    get :next_new, id: @etd.to_param
+    assert_response :success
+    assert_not_nil assigns(:etd)
   end
 
   test "should show etd" do
@@ -48,6 +54,6 @@ class EtdsControllerTest < ActionController::TestCase
       delete :destroy, id: @etd.to_param
     end
 
-    assert_redirected_to etds_path
+    assert_redirected_to :controller => "etds", :action => "index", :notice => "ETD Deleted."
   end
 end

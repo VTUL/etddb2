@@ -29,5 +29,5 @@
 </p>
 
 
-<%= link_to 'Edit', url_for(:action => :edit, :id => @person.id) %> |
-<%= link_to 'Back', url_for(:controller => 'submit', :action => 'view_committee', :id=>@person.etd_ids) %>
+<%= link_to 'Edit', edit_person_path(@person) %>
+<%= link_to 'Back', people_path %>
