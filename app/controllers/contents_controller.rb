@@ -127,9 +127,9 @@ class ContentsController < ApplicationController
     # for mixed case of etds
     if @etd.update_attributes(params[:etd])
       # in case of changing etd avaiability
-      unless @etd.availability.eql? "mixed"
+      unless @etd.availability.name.eql? "Mixed"
          @etd.contents.each do |content|
-           content.availability = @etd.availability
+           content.availability_id = @etd.availability_id
          end
       end
       @etd.save!
