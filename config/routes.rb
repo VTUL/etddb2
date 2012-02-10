@@ -1,10 +1,11 @@
 NewVtEtdUpgrd::Application.routes.draw do
 
-  #devise_for :people, :controllers => { :sessions => "people/sessions" }
-  devise_scope :people do
-    get "/login", :to => "people/sessions#new"
-    post "/login", :to => "people/sessions#create"
-    get "/logout", :to => "people/sessions#destroy"
+  devise_for :people
+
+  devise_scope :person do
+    get "login", :to => "devise/sessions#new"
+    post "login", :to => "devise/sessions#create"
+    get "logout", :to => "devise/sessions#destroy"
   end
 
   root :to => 'pages#home'
@@ -14,38 +15,37 @@ NewVtEtdUpgrd::Application.routes.draw do
   match '/staffhelp', :to => 'pages#staffhelp'
   match '/dev',       :to => 'pages#dev'
 
-  #match '/signup',  :to => 'people#new'
-
-  get '/etds/my_etds' => 'etds#my_etds'
+  get '/etds/my_etds' => 'etds#my_etds', :as => :my_etds
   get '/etds/next_new/:id' => 'etds#next_new', :as => :next_new_etd
+  #get '/etds/change_availabilities' => 'etds#change_availabilities' 
+
   get '/contents/my_contents' => 'contents#my_contents'
   get '/contents/add_contents' => 'contents#add_contents'
+  #post? '/contents/save_files' => 'contents#save_files'
+  #post? '/contents/save_contents' => 'contents#save_contents'
+
   get '/contents/change_availability' => 'contents#change_availability'
+
   match '/people/find' => 'people#find'
   match '/people/new_committee_member' => 'people#new_committee_member'
 
   resources :etds
-  resources :people
   resources :roles
-  resources :urns
+  resources :people
+  resources :degrees
+  resources :contents
   resources :departments
-  resources :doc_type_descriptions
-  resources :degree_descriptions
+  resources :provenances
+  resources :document_types
+  resources :availabilities
+  resources :privacy_statements
+  resources :copyright_statements
+  resources :user_actions
+  resources :digital_objects
   get '/permissions/' => 'permissions#index'
   get '/permissions/edit' => 'permissions#edit'
   post '/permissions/edit' => 'permissions#update'
   resources :people_roles
-  resources :user_actions
-  resources :digital_objects
-  resources :provenances
-  resources :availability_descriptions
-  resources :copyright_statements
-  resources :keywords
-  resources :contents
-  resources :document_types
-  resources :degrees
-  resources :privacy_statements
-  resources :availabilities
 
   #get 'browse/index'
   # The priority is based upon order of creation:
@@ -110,5 +110,5 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  match ':controller(/:action(/:id(.:format)))'
+  #match ':controller(/:action(/:id(.:format)))'
 end
