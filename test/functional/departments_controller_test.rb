@@ -14,7 +14,7 @@ class DepartmentsControllerTest < ActionController::TestCase
 
   test "should create department" do
     assert_difference('Department.count') do
-      post :create, :department => {:name=>"Computer Science" }
+      post :create, :department => {:name=>"Computer Science", :retired=>true}
     end
 
     assert_redirected_to department_path(assigns(:department))

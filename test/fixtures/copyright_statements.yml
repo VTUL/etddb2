@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   statement: Open Source.
   retired: true
 
 two:
+  id: 2
   statement: Full Copyright
   retired: false

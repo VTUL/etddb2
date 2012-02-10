@@ -1,12 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   name: Admin
 
 two:
+  id: 2
   name: Author
 
 three:
+  id: 3
   name: Committee Chair
 
 four:
