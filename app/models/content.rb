@@ -6,6 +6,7 @@
 
 class Content < ActiveRecord::Base
   belongs_to :etd
+  belongs_to :availability
   # validation
   validates_presence_of :uploaded_file_name, :uploaded_file_size, :uploaded_content_type, :availability_id
   validates :uploaded_file_size, :numericality => {:greater_than_or_equal_to => 0}

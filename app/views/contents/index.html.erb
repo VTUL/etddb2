@@ -14,7 +14,8 @@
     <th>Availability</th>
     <th>Bound</th>
     <th>Page count</th>
-    <th>Timestamp</th>
+    <th>Duration</th>
+    <th>Dimensions</th>
   </tr>
 
 <% @contents.each do |content| %>
@@ -25,7 +26,8 @@
     <td><%=h content.availability.name %></td>
     <td><%=h content.bound %></td>
     <td><%=h content.page_count %></td>
-    <td><%=h content.timestamp %></td>
+    <td><%=h content.duration %></td>
+    <td><%=h content.dimensions %></td>
     <td><%= link_to 'Show', content %></td>
     <td><%= link_to 'Edit', edit_content_path(content) %></td>
     <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>

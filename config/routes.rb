@@ -19,12 +19,14 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   get '/etds/my_etds' => 'etds#my_etds', :as => :my_etds
   get '/etds/next_new/:id' => 'etds#next_new', :as => :next_new_etd
+  # I don't think we need a separate page for this...
   #get '/etds/change_availabilities' => 'etds#change_availabilities' 
 
   get '/contents/my_contents' => 'contents#my_contents'
   get '/contents/add_contents' => 'contents#add_contents'
-  #post? '/contents/save_files' => 'contents#save_files'
-  #post? '/contents/save_contents' => 'contents#save_contents'
+  # Are these correct? The tests pass, but I don't like it. What's the difference?
+  post '/contents/save_files' => 'contents#save_files'
+  post '/contents/save_contents' => 'contents#save_contents'
 
   get '/contents/change_availability' => 'contents#change_availability'
 

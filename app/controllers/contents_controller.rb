@@ -110,7 +110,7 @@ class ContentsController < ApplicationController
     # check if there is any change or update of picture/etd itself
     if @content.save
         #puts "this is picture.save\n"
-        @etd.contents<< @content
+        @etd.contents << @content
     else
         #puts "this is not picture.save\n"
     end
@@ -129,7 +129,7 @@ class ContentsController < ApplicationController
       # in case of changing etd avaiability
       unless @etd.availability.name.eql? "Mixed"
          @etd.contents.each do |content|
-           content.availability_id = @etd.availability_id
+           content.availability = @etd.availability
          end
       end
       @etd.save!
