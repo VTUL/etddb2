@@ -1,12 +1,13 @@
 NewVtEtdUpgrd::Application.routes.draw do
+  # Set up devise for people, and make it use our sessions controller.
+  devise_for :people, :controllers => {:sessions => "people/sessions"}
 
-  devise_for :people
-
-  # devise_scope takes the singular, devise_for takes the plural. Why?
+  # devise_scope takes the singular model name, and devise_for takes the plural. Why?
+  # Also note: route to our sessions controller rather than the devise one.
   devise_scope :person do
-    get "login", :to => "devise/sessions#new"
-    post "login", :to => "devise/sessions#create"
-    get "logout", :to => "devise/sessions#destroy"
+    get "login", :to => "people/sessions#new"
+    post "login", :to => "people/sessions#create"
+    get "logout", :to => "people/sessions#destroy"
   end
 
   root :to => 'pages#home'
