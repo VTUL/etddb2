@@ -27,3 +27,28 @@ class DocumentTest < ActiveSupport::TestCase
     assert document.errors[:page_count].any?
   end
 end
+
+class AudioTest < ActiveSupport::TestCase
+  test "should be invalid with empty attributes" do
+    audio = Audio.new
+    assert audio.invalid?
+    assert audio.errors[:duration].any?
+  end
+end
+
+class PictureTest < ActiveSupport::TestCase
+  test "should be invalid with empty attributes" do
+    picture = Picture.new
+    assert picture.invalid?
+    assert picture.errors[:dimensions].any?
+  end
+end
+
+class VideoTest < ActiveSupport::TestCase
+  test "should be invalid with empty attributes" do
+    video = Video.new
+    assert video.invalid?
+    assert video.errors[:duration].any?
+    assert video.errors[:dimensions].any?
+  end
+end

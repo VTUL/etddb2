@@ -12,6 +12,8 @@ class RolesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
+    @person = people(:one)
+    sign_in @person
     get :new
     assert_response :success
   end

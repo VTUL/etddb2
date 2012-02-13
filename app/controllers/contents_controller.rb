@@ -110,7 +110,7 @@ class ContentsController < ApplicationController
     # check if there is any change or update of picture/etd itself
     if @content.save
         #puts "this is picture.save\n"
-        @etd.contents<< @content
+        @etd.contents << @content
     else
         #puts "this is not picture.save\n"
     end
@@ -127,7 +127,7 @@ class ContentsController < ApplicationController
     # for mixed case of etds
     if @etd.update_attributes(params[:etd])
       # in case of changing etd avaiability
-      unless @etd.availability.eql? "mixed"
+      unless @etd.availability.name.eql? "Mixed"
          @etd.contents.each do |content|
            content.availability = @etd.availability
          end

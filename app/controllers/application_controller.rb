@@ -11,14 +11,13 @@ class ApplicationController < ActionController::Base
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
     #Rails.logger.access "Access denied on #{exception.action} #{exception.subject.inspect}"
     #Rails.logger.provenance "Access denied on #{exception.action} #{exception.subject.inspect}"
-  # ...
   end
-#  protected
 
-#  def authorize
-#    unless Person.authenticate(params[:session2][:pid],
-#                             params[:session2][:password])
-#    	redirect_to '/login', notice: "Please log in"
-#    end
-#  end
+  private
+
+  # Overwriting the login redirect.
+  def after_sign_in_path_for(resource_or_scope)
+    etds_path
+  end
+
 end

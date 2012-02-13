@@ -2,7 +2,8 @@ require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
   setup do
-    @person = people(:Collin)
+    @person = people(:one)
+    sign_in @person
   end
 
   test "should get index" do
@@ -18,7 +19,11 @@ class PeopleControllerTest < ActionController::TestCase
 
   test "should create person" do
     assert_difference('Person.count') do
-      post :create, person: @person.attributes
+      @person_attrs = @person.attributes
+      @person_attrs[:email] = "unique001@example.com"
+      @person_attrs[:pid] = "unique001"
+      @person_attrs[:password] = "123456"
+      post :create, person: @person_attrs
     end
 
     assert_redirected_to person_path(assigns(:person))

@@ -36,7 +36,7 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should update content" do
     put :update, id: @content.to_param, content: @content.attributes, etd_id: 1
-    assert_redirected_to content_path(assigns(:content))
+    assert_redirected_to contents_my_contents_path(id: 1)
   end
 
   test "should destroy content" do

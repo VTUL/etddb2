@@ -4,7 +4,7 @@ class ApprovalMailerTest < ActionMailer::TestCase
   tests ApprovalMailer
 
   def test_confirm
-    p = people(:Collin)
+    p = people(:one)
     email = ApprovalMailer.confirm(p).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
