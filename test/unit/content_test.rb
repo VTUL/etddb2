@@ -17,6 +17,16 @@ class ContentTest < ActiveSupport::TestCase
     assert content.errors[:uploaded_content_type].any?
     assert content.errors[:uploaded_file_size].any?
     assert content.errors[:availability_id].any?
+    assert content.errors[:bound].any?
+  end
+
+  test "invalid with non-boolean bound attribute." do
+    content = Content.new(contents(:one).attributes)
+    content.bound = nil
+    assert !content.valid?
+    assert content.errors[:bound].include?("must be boolean")
+    content.bound = false
+    assert content.valid?
   end
 end
 
