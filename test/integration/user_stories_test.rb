@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class UserStoriesTest < ActionController::IntegrationTest
-  fixtures :all
-  fixtures :people
+
+  test setup do
+  
+    fixtures :all
+    fixtures :people
+    @etd = Etd(:one)
+    @person = Person(:one)
+    signed_in @Person
+  end
 
   # Replace this with your real tests.
   test "the truth" do
@@ -43,13 +50,10 @@ class UserStoriesTest < ActionController::IntegrationTest
 		puts "I am not happy:("		
 	  end
   	  if (assert_response :redirect)
-  	  	sess.post("/people/add_committee", {:etd_id=>2, :lname=>'weeks'})
+  	  	sess.post("/people/add_committee", {:etd_id=>2, :lname=>'weeks'})	
   	  else 
 		puts "I am not happy:("
-	  end
-	  
-	  
-	  
+	  end	  
       sess.https!(false)
     end
 
@@ -91,6 +95,4 @@ class UserStoriesTest < ActionController::IntegrationTest
   
   test "submit an new etd" do
   end
-  
-
 end
