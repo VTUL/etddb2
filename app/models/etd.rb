@@ -18,7 +18,7 @@ class Etd < ActiveRecord::Base
   has_many :contents, :dependent => :destroy
   accepts_nested_attributes_for :contents, :allow_destroy => true
 
-  has_many :people_roles #, :dependent => :destroy
+  has_many :people_roles, :dependent => :destroy
   has_many :roles, :through => :people_roles
   has_many :people, :through => :people_roles
 

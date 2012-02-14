@@ -9,7 +9,7 @@ class Person < ActiveRecord::Base
   self.table_name = "people"
 
   # Assicate tables
-  has_many :people_roles
+  has_many :people_roles, :dependent => :destroy
   has_many :roles, :through => :people_roles
   has_many :etds, :through => :people_roles
 
