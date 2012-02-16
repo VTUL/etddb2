@@ -1,0 +1,14 @@
+<h1>Add New Files</h1>
+<p>Use this form to upload files to be associated with your ETD.<br>
+Note: You may experience problems if your files take longer than a half hour to upload. If you are uploading large files, try adding one at a time.<br>
+If you are experiencing problems uploading your files, take a look at our file uploads help.</p>
+<b>Files to be uploaded</b>
+<%= form_for @etd, :url => {:action => 'save_contents'}, :html => {:multipart => true} do |form| %>
+  <%=h hidden_field_tag 'etd_id', @etd.id %>
+  <%= form.fields_for :contents do |content| %>
+    <% if content.object.new_record? %>
+      <%= content.file_field  :uploaded %><br />
+    <% end %>
+  <% end %>
+  <%= form.submit %><br />
+<% end %>

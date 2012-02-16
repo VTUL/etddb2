@@ -19,16 +19,14 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   get '/etds/my_etds' => 'etds#my_etds', :as => :my_etds
   get '/etds/next_new/:id' => 'etds#next_new', :as => :next_new_etd
-  # I don't think we need a separate page for this...
-  #get '/etds/change_availabilities' => 'etds#change_availabilities' 
 
   get '/contents/my_contents' => 'contents#my_contents'
-  get '/contents/add_contents' => 'contents#add_contents'
-  # Are these correct? The tests pass, but I don't like it. What's the difference?
-  post '/contents/save_files' => 'contents#save_files'
-  post '/contents/save_contents' => 'contents#save_contents'
+  post '/contents/add_contents' => 'contents#add_contents' # Is this used? Can this be cut?
+  post '/contents/new' => 'contents#new' # Need to post the ETD ID to this route.
+  #put '/contents' => 'contents#create' # Should accept files upon creation.
+  post '/contents/save_contents' => 'contents#save_contents' # This needs to be fixed. This is handled by contents#update.
 
-  get '/contents/change_availability' => 'contents#change_availability'
+  #get '/contents/change_availability' => 'contents#change_availability' # I think this has been eliminated. We'll find out.
 
   match '/people/find' => 'people#find'
   match '/people/new_committee_member' => 'people#new_committee_member'

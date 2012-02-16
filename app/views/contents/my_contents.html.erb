@@ -1,15 +1,19 @@
 <h1><center> Pending contents</center></h1>
 
+<% @authors_etds.each do |etd| %>
+<p>
+<h3><%= etd.title %></h3>
 <table>
   <tr>
     <th>Filename</th>
     <th>Types</th>
-    <th>Size</th>
+    <th>Size (bytes)</th>
     <th>Availability</th>
     <th>Bound</th>
-    <th>Page count</th>
+    <th>Page Count</th>
+    <th>Duration</th>
+    <th>Dimensions</th> 
   </tr>
-<% @authors_etds.each do |etd| %>
   <% etd.contents.each do |content| %>
   <tr>
     <td><%=h content.uploaded_file_name %></td>
@@ -18,20 +22,15 @@
     <td><%=h content.availability.name %></td>
     <td><%=h content.bound %></td>
     <td><%=h content.page_count %></td>
+    <td><%=h content.duration %></td>
+    <td><%=h content.dimensions %></td> 
     <td><%= link_to 'Show', content %></td>
     <td><%= link_to 'Edit', edit_content_path(content) %></td>
     <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><%= link_to 'Contents in the ETD', contents_path %></td>
   </tr>
   <% end %>
-  <tr>
-    <td><%#= link_to 'New content', url_for(:controller=>:contents, :action=>:new, :id=>etd.id) %></td>
-    <td><%= link_to 'Back', url_for(:controller=>:contents, :action=>:index) %></td>
-    <td><%= link_to 'Add contents', url_for(:controller=>:contents,:action=>:add_contents, :id=>etd.id) %></td>
-    <%# if @etd.availability.eql? :mixed.to_s %>
-      <td><%#= link_to 'Change availability of contents', url_for(:controller=>:contents, :action=>:change_availability) %></td>
-    <%# end %> 
-  </tr>
-<% end %>
-
 </table>
+<%= link_to 'Add contents', url_for(:controller=>:contents,:action=>:add_contents, :id=>etd.id) %>
+</p>
+<br />
+<% end %>

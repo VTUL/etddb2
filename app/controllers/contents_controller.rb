@@ -25,9 +25,6 @@ class ContentsController < ApplicationController
   # GET /contents/new.xml
   def new
     @content = Content.new
-
-
-
     @etd = Etd.find(params[:etd_id])
     @contents = @etd.contents.find(:all)
 
@@ -40,8 +37,10 @@ class ContentsController < ApplicationController
   end
 
   # GET /contents/1/edit
+  # GET /contents/1/edit.xml
   def edit
-    @etd = Etd.find(params[:etd_id])
+    @content = Content.find(params[:id])
+    @etd = Etd.find(@content.etd_id)
     @contents = @etd.contents.find(:all)
 
     5.times { @etd.contents.build }
@@ -65,6 +64,8 @@ class ContentsController < ApplicationController
     end
   end
 
+  # POST /contents/edit
+  # POST /contents/edit.xml
   def update
   # fetch objects to be use in the view
     @etd = Etd.find(params[:etd_id])
@@ -86,7 +87,7 @@ class ContentsController < ApplicationController
       end
       @etd.save!
       # handling each content availability
-      redirect_to(:action => 'my_contents' , :id => @etd.id)
+      redirect_to(:action => 'my_contents')
     else
       render(:action => :add_files)
     end
@@ -119,8 +120,8 @@ class ContentsController < ApplicationController
   end
 
   def add_contents
-    @picture = Content.new
-    @etd = Etd.find(params[:id])
+    @content = Content.new
+    @etd = Etd.find(params[:etd_id])
     @contents = @etd.contents.find(:all)
 
     5.times { @etd.contents.build }

@@ -17,8 +17,7 @@
     <th>Duration</th>
     <th>Dimensions</th>
   </tr>
-
-<% @contents.each do |content| %>
+  <% @contents.each do |content| %>
   <tr>
     <td><%=h content.uploaded_file_name %></td>
     <td><%=h content.uploaded_content_type %></td>
@@ -32,14 +31,6 @@
     <td><%= link_to 'Edit', edit_content_path(content) %></td>
     <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
-
 <br />
-
-<%#= link_to 'New content', new_content_path %>
-<%#= link_to 'Back', url_for(:controller=>:etds, :action=>:show ) %>
-<%#= link_to 'Add files', url_for(:controller=>:contents,:action=>:add_files) %>
-<%# if @etd.availability.eql? :mixed.to_s %>
-<%#= link_to 'Change availability of files', url_for(:controller=>:contents, :action=>:change_availability, :id=@etd.id) %>
-<%# end %> 

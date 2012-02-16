@@ -1,42 +1,89 @@
-<table border>
-<p>
-  <tr><th>Filename:</th>  <th>Types:</th> <th>Size:</th> <th>Availability:</th> <th>Bound:</th></tr>
+<%= form_for @content do |f| %>
+  <% if @content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
 
-<% @etd.contents.each do |content| %>
-<% if content.uploaded_file_name != nil  %>
-  <tr><td><%=h  content.uploaded_file_name %></td><td> <%=h content.uploaded_content_type %></td><td><%=h content.uploaded_file_size %></td> <td><%=h content.availability.name %></td> <td><%=h content.bound %></td>
-<td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
+      <ul>
+      <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label(:title) %><br />
+    <%= f.text_field(:title) %>
+  </div>
+  <div class="field">
+    <%= f.label(:description) %><br />
+    <%= f.text_area(:description) %>
+  </div>
+  <div class="field">
+    <%= f.label(:page_count) %><br />
+    <%= f.text_field(:page_count) %>
+  </div>
+  <div class="field">
+    <%= f.label(:duration) %><br />
+    <%= f.text_field(:duration) %>
+  </div>
+  <div class="field">
+    <%= f.label(:dimensions) %><br />
+    <%= f.text_field(:dimensions) %>
+  </div>
+
+  <% if @etd.availability.name == "Mixed" %>
+  <div class="field">
+    <%= f.label(:availability_id, "Availability") %>
+    <table>
+      <% for avail in Availability.where(:retired => false) do %>
+        <% if avail.name != "Mixed" %>
+        <tr>
+          <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
+          <td valign='top' align='right'><%= avail.name %>:</td>
+          <td valign='top'><%= avail.description %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+  <% end %>
+
+  <%=h hidden_field_tag('etd_id', @etd.id) %>
+  <%= f.submit %>
 <% end %>
-<% end %>
-</p>
-</table>
 
-
-<h1>Add New Files</h1>
-<p>Use this form to upload files to be associated with your ETD.<br>
-Note: You may experience problems if your files take longer than a half hour to upload. If you are uploading large files, try adding one at a time.<br>
-If you are experiencing problems uploading your files, take a look at our file uploads help.</p>
+<br />
+<h3>Other contents in this ETD:</h3>
 <table>
-<tr>
-    <th><center>   <b> Files to be uploaded</b></center></th>
-</tr>
-<tr>
-    <td>
-        <%= form_for @etd,
-            :url => {:action => 'save_files'},
-             :html => {:multipart => true}   do |form| %>
-            <%=h hidden_field_tag 'id', @etd.id %>
-<!--            Comment: <%#= form.text_field("comment" ) %><br/>
-
--->         <td>Upload your picture: </td> </tr>
-							 <%# @etd.contents.each do |contents| %>
-						         <%= form.fields_for :contents do |content| %>
-							     <% if content.object.new_record? %>
-                 					  <tr><td></td><td>    <%= content.file_field  :uploaded_picture %></td></tr>
-           						     <% end %>
-       							 <% end %>
-							 <%# end %>
-  <tr><td></td><td align="right"><%= form.submit 'submit' %></td></tr>
-		<% end %>
+  <tr>
+    <th>Filename:</th>
+    <th>Type:</th>
+    <th>Size:</th>
+    <th>Availability:</th>
+    <th>Bound:</th>
+    <th>Page Count:</th>
+    <th>Duration:</th>
+    <th>Dimensions:</th>
+  </tr>
+  <% @etd.contents.each do |content| %>
+    <% if content.uploaded_file_name != nil  %>
+    <tr>
+      <td><%=h content.uploaded_file_name %></td>
+      <td><%=h content.uploaded_content_type %></td>
+      <td><%=h content.uploaded_file_size %></td>
+      <td><%=h content.availability.name %></td>
+      <td><%=h content.bound %></td>
+      <td><%=h content.page_count %></td>
+      <td><%=h content.duration %></td>
+      <td><%=h content.dimensions %></td>
+      <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% if content.id != @content.id %>
+              <td><%= link_to 'Edit', edit_content_path(content) %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  <% end %>
 </table>
 
+<%= render 'add_files'%>
