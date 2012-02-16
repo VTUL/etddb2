@@ -24,15 +24,18 @@ class Person < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  # for authentication through matching the login name to the stored names.
-  def self.find_by_pid(pid)
-    return user = Person.find(:first, :conditions => "pid='#{pid}'")
-  end
+  #################################################################################################
+  # Below this line lies buried the old authentication system. RIP.
 
-  # Return true if the user's password matches the submitted password.
-  def has_password?(name, submitted_password)
-    encrypted_password == encrypt(submitted_password)
-  end
+  ##for authentication through matching the login name to the stored names.
+  #def self.find_by_pid(pid)
+  #  return user = Person.find(:first, :conditions => "pid='#{pid}'")
+  #end
+
+  ##Return true if the user's password matches the submitted password.
+  #def has_password?(name, submitted_password)
+  #  encrypted_password == encrypt(submitted_password)
+  #end
 
   ##for authorization
   #def authorize
@@ -45,37 +48,37 @@ class Person < ActiveRecord::Base
   #  #if (roles.count.greater.than 2)
   #    # Re enter credentials for authorization w/ dropdown box of roles
   #    # land on the user page
-  #    # Prints basic user info pid, full name , email previous documents (if an rink to submit new)
+  #    # Prints basic user info pid, full name , email previous documents (if a link to submit new)
   #  #end
   #end
 
-  # for authentication by EdAuth
-  def self.authenticateByEdAuth(pid, submitted_password)
-    x = EdAuth.new(pid, submitted_password)
-    if x.nil?
-      return nil
-    else
-      if x.authenticate
-        x.get_primary_affiliation
-        x.get_affiliations
-        x.close
-        user = Person.new
-        user.pid = pid
-#       user.email = email
-        return user
-      else
-        return nil
-      end
-    end
-  end
+  ##for authentication by EdAuth
+  #def self.authenticateByEdAuth(pid, submitted_password)
+  #  x = EdAuth.new(pid, submitted_password)
+  #  if x.nil?
+  #    return nil
+  #  else
+  #    if x.authenticate
+  #      x.get_primary_affiliation
+  #      x.get_affiliations
+  #      x.close
+  #      user = Person.new
+  #      user.pid = pid
+  #      user.email = email
+  #      return user
+  #    else
+  #      return nil
+  #    end
+  #  end
+  #end
 
-  # for regular authentiction
-  def self.authenticate(pid, submitted_password)
-    puts pid, submitted_password
-    user = find_by_pid(pid)
-    return Person.authenticateByEdAuth(pid, submitted_password)  if user.nil?
-    return user #if user.has_password?(name, submitted_password)
-  end
+  ##for regular authentiction
+  #def self.authenticate(pid, submitted_password)
+  #  puts pid, submitted_password
+  #  user = find_by_pid(pid)
+  #  return Person.authenticateByEdAuth(pid, submitted_password)  if user.nil?
+  #  return user #if user.has_password?(name, submitted_password)
+  #end
 
   #separated role model
   #def roles=(roles)
@@ -88,32 +91,32 @@ class Person < ActiveRecord::Base
   #end
 
 
-  def has_role?(role_sym)
-    roles.any? { |r| r.name.to_sym == role_sym }
-  end
+  #def has_role?(role_sym)
+  #  roles.any? { |r| r.name.to_sym == role_sym }
+  #end
 
-  def is?(role)
-    roles.include?(role.to_s)
-  end
+  #def is?(role)
+  #  roles.include?(role.to_s)
+  #end
 
   private
-  def encrypt_password
-    unless password.nil?
-      self.salt = make_salt
-      self.encrypted_password = encrypt(password)
-    end
-  end
+  #def encrypt_password
+  #  unless password.nil?
+  #    self.salt = make_salt
+  #    self.encrypted_password = encrypt(password)
+  #  end
+  #end
 
-  def encrypt(string)
-    string # Only a temporary implementation!
-  end
+  #def encrypt(string)
+  #  string # Only a temporary implementation!
+  #end
 
-  def make_salt
-    secure_hash("#{Time.now.utc}#{password}")
-  end
+  #def make_salt
+  #  secure_hash("#{Time.now.utc}#{password}")
+  #end
 
-  def secure_hash(string)
-    Digest::SHA2.hexdigest(string)
-  end
+  #def secure_hash(string)
+  #  Digest::SHA2.hexdigest(string)
+  #end
 
 end
