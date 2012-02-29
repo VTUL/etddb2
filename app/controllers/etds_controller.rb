@@ -38,8 +38,6 @@ class EtdsController < ApplicationController
       end
 
       @etd = Etd.new
-      #Get current user from Devise.
-      @author = current_person
 
       format.html # new.html.erb
       format.xml  { render :xml => @etd }
@@ -160,10 +158,20 @@ class EtdsController < ApplicationController
     @prs = []
     for pr in @etd.people_roles do
       p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name}
+      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr_id => pr.id}
     end
     respond_to do |format|
       format.html # new_next.html.erb
     end
+  end
+
+  # PUT /etds/next_new/1
+  def save_contents
+    @etd = Etd.find(params[:id])
+    if @etd.update_attributes(params[:etd])
+      redirect_to :next_new_etd, :notice => "Successfully updated article."
+    else
+      render :action => 'next_new'
+    end    
   end
 end

@@ -3,12 +3,14 @@
 Note: You may experience problems if your files take longer than a half hour to upload. If you are uploading large files, try adding one at a time.<br>
 If you are experiencing problems uploading your files, take a look at our file uploads help.</p>
 <b>Files to be uploaded</b>
-<%= form_for @etd, :url => {:action => 'save_contents'}, :html => {:multipart => true} do |form| %>
+<%= nested_form_for @etd, :url => {:action => 'create'}, :html => {:multipart => true} do |form| %>
   <%=h hidden_field_tag 'etd_id', @etd.id %>
   <%= form.fields_for :contents do |content| %>
     <% if content.object.new_record? %>
       <%= content.file_field  :uploaded %><br />
+      <%= form.link_to_remove "Remove this content." %>
     <% end %>
   <% end %>
+  <%= form.link_to_add "Add Content", :contents %>
   <%= form.submit %><br />
 <% end %>

@@ -1,32 +1,38 @@
 <p>
-  <b>Filename:</b>
-  <%=h @content.uploaded_file_name %>
+  <b>ETD:</b>
+  <%=h link_to @etd.title, etd_path(@etd) %>
 </p>
-
 <p>
-  <b>Types:</b>
-  <%=h @content.uploaded_content_type %>
+  <b>Filename:</b>
+  <%=h @content.content.file.filename %>
 </p>
-
+<p>
+  <b>Type:</b>
+  <%=h @content.content.file.content_type %>
+</p>
 <p>
   <b>Size:</b>
-  <%=h @content.uploaded_file_size %>
+  <%=h @content.content.file.size %>
 </p>
-
 <p>
   <b>Availability:</b>
   <%=h @content.availability.name %>
 </p>
-
 <p>
   <b>Bound:</b>
   <%=h @content.bound %>
 </p>
-
 <p>
-  <b>Page count:</b>
+  <b>Page Count:</b>
   <%=h @content.page_count %>
 </p>
-
+<p>
+  <b>Dimensions:</b>
+  <%=h @content.dimensions %>
+</p>
+<p>
+  <b>Duration:</b>
+  <%=h @content.duration %>
+</p>
 <%= link_to 'Edit', edit_content_path(@content) %> |
 <%= link_to 'Back', contents_path %>

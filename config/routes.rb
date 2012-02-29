@@ -19,14 +19,12 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   get '/etds/my_etds' => 'etds#my_etds', :as => :my_etds
   get '/etds/next_new/:id' => 'etds#next_new', :as => :next_new_etd
+  put '/etds/next_new/:id' => 'etds#save_contents'
 
   get '/contents/my_contents' => 'contents#my_contents'
-  post '/contents/add_contents' => 'contents#add_contents' # Is this used? Can this be cut?
   post '/contents/new' => 'contents#new' # Need to post the ETD ID to this route.
-  #put '/contents' => 'contents#create' # Should accept files upon creation.
-  post '/contents/save_contents' => 'contents#save_contents' # This needs to be fixed. This is handled by contents#update.
-
-  #get '/contents/change_availability' => 'contents#change_availability' # I think this has been eliminated. We'll find out.
+  put '/contents' => 'contents#create' # Should accept files upon creation.
+  #post '/contents/save_contents' => 'contents#save_contents' # This needs to be fixed. This is handled by contents#update.
 
   match '/people/find' => 'people#find'
   match '/people/new_committee_member' => 'people#new_committee_member'

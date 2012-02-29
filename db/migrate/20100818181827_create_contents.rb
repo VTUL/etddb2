@@ -1,10 +1,8 @@
 class CreateContents < ActiveRecord::Migration
   def self.up
     create_table :contents do |t|
-      t.string :uploaded_file_name
-      t.string :uploaded_content_type
-      t.integer :uploaded_file_size
-      t.timestamp :uploaded_updated_at
+      #t.has_attached_file :content
+      t.string :content
       t.boolean :bound
       t.string :title
       t.text :description
