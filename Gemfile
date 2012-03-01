@@ -3,19 +3,19 @@
 #  Added this to gemfile in branch test merge to devel to share
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3', '1.3.4', :require => 'sqlite3'
+gem 'sqlite3', '~> 1.3.5', :require => 'sqlite3'
 #gem 'net-ldap' , '0.1.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', " ~> 3.1.0"
-  gem 'coffee-rails', " ~> 3.1.0"
+  gem 'sass-rails', " ~> 3.2.3"
+  gem 'coffee-rails', " ~> 3.2.1"
   gem 'uglifier'
 end
 
@@ -47,7 +47,9 @@ gem 'devise'
 #gem 'test_helper'
 
 # For multiple file upload
-gem 'paperclip','2.4.1'
+#gem 'paperclip','~>2.4'
+gem 'carrierwave'
+gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
 
 # For Pure ruby ldap, one day test
 #gem rubygem-net-ldap', 0.1.1

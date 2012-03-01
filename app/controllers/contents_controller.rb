@@ -14,6 +14,7 @@ class ContentsController < ApplicationController
   # GET /contents/1.xml
   def show
     @content = Content.find(params[:id])
+    @etd = Etd.find(@content.etd_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,8 +29,6 @@ class ContentsController < ApplicationController
     @etd = Etd.find(params[:etd_id])
     @contents = @etd.contents.find(:all)
 
-    5.times { @etd.contents.build }
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @content }
@@ -42,24 +41,23 @@ class ContentsController < ApplicationController
     @content = Content.find(params[:id])
     @etd = Etd.find(@content.etd_id)
     @contents = @etd.contents.find(:all)
-
-    5.times { @etd.contents.build }
   end
 
   # POST /contents
   # POST /contents.xml
   def create
-    @content = Content.new(params[:content])
     @etd = Etd.find(params[:etd_id])
-    @etd.contents << @content
+    @content = Content.new(params[:content])
+
+    @content.availability = @etd.availability
+    @content.bound = @etd.bound
 
     respond_to do |format|
       if @content.save
-        format.html { redirect_to(@content, :notice => 'Content was successfully created.') }
-        format.xml  { render :xml => @content, :status => :created, :location => @content }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
+        @etd.contents << @content
+        format.html { redirect_to(:action => "my_contents") }
+      else 
+        format.html { render :action => "new", :notice => 'You have errors.' }
       end
     end
   end
@@ -67,29 +65,16 @@ class ContentsController < ApplicationController
   # POST /contents/edit
   # POST /contents/edit.xml
   def update
-  # fetch objects to be use in the view
-    @etd = Etd.find(params[:etd_id])
-    @content = Content.new(params[:content])
+    @content = Content.find(params[:id])
 
-
-    # check if there is any change or update of picture/etd itself
-    if @content.save
-        @etd.contents << @content
-    end
-
-    # for mixed case of etds
-    if @etd.update_attributes(params[:etd])
-      # in case of changing etd avaiability
-      unless @etd.availability.name.eql? "Mixed"
-         @etd.contents.each do |content|
-           content.availability = @etd.availability
-         end
+    respond_to do |format|
+      if @content.update_attributes(params[:content])
+        format.html { redirect_to @content, notice: 'Content was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @document_type.errors, status: :unprocessable_entity }
       end
-      @etd.save!
-      # handling each content availability
-      redirect_to(:action => 'my_contents')
-    else
-      render(:action => :add_files)
     end
   end
 
@@ -117,20 +102,6 @@ class ContentsController < ApplicationController
         format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
       end
     end
-  end
-
-  def add_contents
-    @content = Content.new
-    @etd = Etd.find(params[:etd_id])
-    @contents = @etd.contents.find(:all)
-
-    5.times { @etd.contents.build }
-  end
-
-  def change_availability
-    @etd1 = Etd.new(params[:etd])
-    @etd= Etd.find(params[:id])
-    @contents = @etd.contents.find(:all)
   end
 
 end

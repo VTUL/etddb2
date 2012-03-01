@@ -2,13 +2,16 @@ require 'test_helper'
 
 class UserStoriesTest < ActionController::IntegrationTest
 
-  test setup do
-  
-    fixtures :all
-    fixtures :people
-    @etd = Etd(:one)
-    @person = Person(:one)
-    signed_in @Person
+  test "setup" do
+    open_session do |sess|
+      sess.https!
+      
+      user=Person.find(2)
+      user.update_attributes({:password=>'12345789',:password_confirmation=>'12345789'})
+      sess.post "/login", {:person=>{:pid => user.pid, :password => "12345789", :remember_me =>"0"}}
+      assert_equal '', path.to_s
+    end
+  	  		
   end
 
   # Replace this with your real tests.
@@ -16,7 +19,7 @@ class UserStoriesTest < ActionController::IntegrationTest
     assert true
   end
 
- test "login and new etd site" do
+ test "login, new an etd, new committee members, and new contents" do
     # login via https
     #https!
     get "/logout"
@@ -27,72 +30,67 @@ class UserStoriesTest < ActionController::IntegrationTest
       
       user=Person.find(2)
       user.update_attributes({:password=>'12345789',:password_confirmation=>'12345789'})
-      sess.post "http://developer.tower.lib.vt.edu:3000/login", {:person=>{:pid => user.pid, :password => "12345789", :remember_me =>"0"}}
+      sess.post "/login", {:person=>{:pid => user.pid, :password => "12345789", :remember_me =>"0"}}
       assert_equal '/login', path.to_s
       
-      sess.post "http://developer.tower.lib.vt.edu:3000/etds/new", {:etd=>{:id=>2,
+      sess.post "/etds", {:etd=>{:id=>2,
   	  		:title=>'Tesst',
   	  		:abstract=>'This is the second test abstract',
   	  		:availability_id=>1,
   	  		:bound=>false,
   	  		:copyright_statement_id=>1,
   	  		:degree_id=> 2,
-  	  		:department_id=> 2,
+  	  		:department_ids=> [2],
   	  		:document_type_id=>2,
   	  		:privacy_statement_id=>2,
   	  		:status=>'Submitted',
-      		:url=>'http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/',\
-  	  		:urn=>'etd-05212008-084627',
-  	  		:degree=>'PhD'}}
+      		:url=>'http://scholar.lib.vt.edu/tehses/available/etd-07292008-13039050/',
+  	  		:urn=>'etd-05212008-084627'}}
+      
   	  if (assert_response :redirect)
-  	  	sess.post("/contents/new/1", {:etd_id=>2, :etd=>{:id=>2, :content=>{:id=>0, :uploaded=>File.new(Rails.root + 'app/assets/images/body_bg2.jpg')}}})
-  	  else 
+  	  	sess.post("/contents", {:id=>2, :content=>{:id=>1, :uploaded=>File.new(Rails.root + 'app/assets/images/body_bg2.jpg')}}})
+  	  	assert_response :redirect
+        sess.delete "/contents/1"
+        if (assert_response :success)
+          puts "I am happy:)"
+        else 
+          puts "I am not happy, too :("
+        end
+      else 
 		puts "I am not happy:("		
 	  end
-  	  if (assert_response :redirect)
-  	  	sess.post("/people/add_committee", {:etd_id=>2, :lname=>'weeks'})	
+  	  if (assert_response :success)
+  	  	sess.post("/people", {:etd_id=>2, :lname=>'weeks'})
+  	  	assert_equal '/people', path.to_s
   	  else 
 		puts "I am not happy:("
 	  end	  
       sess.https!(false)
-    end
+    end # open_session
 
   end 
 
   test "submit an existing etd" do
-    #etd=Etd.find(1)
-    #user.update_attributes({:password=>'12345789',:password_confirmation=>'12345789'})
-    post_via_redirect "http://developer.tower.lib.vt.edu:3000/etds/new", {:etd=>{\
-      :id=>2,\
-  	  :title=>'Tesst',\
-  	  :abstract=>'This is the second test abstract',\
-  	  :availability_id=>1,\
-  	  :bound=>false,\
-  	  :copyright_statement_id=>1,\
-  #degree_id: 2
-  #department_id: 2
-  	  :document_type_id=>2,\
-  	  :privacy_statement_id=>2,\
-  	  :status=>'Submitted',\
-      :url=>'http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/',\
-  	  :urn=>'etd-05212008-084627'}}
+    user=Person.find(2)
+    user.update_attributes({:password=>'12345789',:password_confirmation=>'12345789'})
+    post_via_redirect "/login", {:person=>{:pid => user.pid, :password => "12345789", :remember_me =>"0"}}
+    post_via_redirect "/etds", {:etd=>{:id=>2,
+  	  		:title=>'Tesst',
+  	  		:abstract=>'This is the second test abstract',
+  	  		:availability_id=>1,
+  	  		:bound=>false,
+  	  		:copyright_statement_id=>1,
+  	  		:degree_id=> 2,
+  	  		:department_ids=> [2],
+  	  		:document_type_id=>2,
+  	  		:privacy_statement_id=>2,
+  	  		:status=>'Submitted',
+      		:url=>'http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/',
+  	  		:urn=>'etd-05212008-084627'}}
   	 assert_response :success
-
-  #:etd => {etd(:SungHee).title, : => people(:SungHee).suffix
-    #assert_equal '/pages#home', path
-    #assert_equal '/people/sessions#new', path
-    #assert_equal 'Welcome shpark!', flash[:notice]
-
-    #get "/logout"
-    #assert_response :success
- 
-    #https!(false)
-    #get "/posts/all"
-    #assert_response :success
-    #assert assigns(:etds)
   end
-  
-  
-  test "submit an new etd" do
+    
+  test "authorization" do
+  	
   end
 end
