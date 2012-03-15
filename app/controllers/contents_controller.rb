@@ -55,7 +55,7 @@ class ContentsController < ApplicationController
     respond_to do |format|
       if @content.save
         @etd.contents << @content
-        format.html { redirect_to(:action => "my_contents") }
+        format.html { redirect_to @content }
       else 
         format.html { render :action => "new", :notice => 'You have errors.' }
       end
@@ -85,11 +85,13 @@ class ContentsController < ApplicationController
     @content.destroy
 
     respond_to do |format|
-      format.html { redirect_to(contents_url) }
+      format.html { redirect_to(contents_my_contents_url) }
       format.xml  { head :ok }
     end
   end
 
+  # GET /my_contents
+  # GET /my_contents.xml
   def my_contents
     respond_to do |format|
       # This should be implemented in a before_filter
