@@ -71,6 +71,7 @@ class EtdsController < ApplicationController
     pr.person_id = current_person.id
     pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
     @etd.people_roles << pr
+    @etd.status = "Created"
 
     respond_to do |format|
       if @etd.save
@@ -173,5 +174,19 @@ class EtdsController < ApplicationController
     else
       render :action => 'next_new'
     end    
+  end
+
+  # GET /etd/submit/1
+  def submit
+    @etd = Etd.find(params[:id])
+    # Change @etd status to submitted.
+    # Add s_date
+
+    # Email Author to confirm.
+    
+    # Email committee members to review @etd.
+
+    # Render Confirmation page.
+    #
   end
 end
