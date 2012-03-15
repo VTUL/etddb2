@@ -1,6 +1,7 @@
   <div id="candidates">
     <table>
-      <% for candidate in Person.where("last_name LIKE '%" + params[:lname] + "%'") do %>
+      <% @candidates = Person.where("last_name LIKE '%" + params[:lname] + "%'") %>
+      <% for candidate in @candidates do %>
         <tr>
           <td><%= radio_button_tag("committee", candidate.id) %></td>
           <td><%= candidate.first_name + " " + candidate.last_name%></td>

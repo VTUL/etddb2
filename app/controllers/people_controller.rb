@@ -86,6 +86,9 @@ class PeopleController < ApplicationController
   # DELETE /people/1.xml
   def destroy
     @person = Person.find(params[:id])
+
+    # Destroy authored ETDs here.
+
     @person.destroy
 
     respond_to do |format|
