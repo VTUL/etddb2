@@ -71,6 +71,7 @@
     </tr>
   <% end %>
 </table>
+<%= button_to "Add More Content", {:action => :add_contents}, :method => :get %>
 </p>
 <p>
 <table class="outlined">
@@ -82,6 +83,7 @@
     <tr>
       <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
       <td><%= pr[:role] %></td>
+      <td><%= link_to 'Destroy', people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => "del_pr" %></td>
     </tr>
   <% end %>
 </table>
@@ -93,3 +95,8 @@
 </p><br />
 <%= link_to 'Edit', edit_etd_path(@etd) %> |
 <%= link_to 'Back', etds_path %>
+<script>
+$('.del_pr').bind('ajax:success', function() {  
+    $(this).closest('tr').fadeOut();  
+});
+</script>

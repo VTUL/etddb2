@@ -19,7 +19,7 @@ class EtdsController < ApplicationController
     @prs = []
     for pr in @etd.people_roles do
       p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name}
+      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
     end
 
     respond_to do |format|
@@ -143,15 +143,6 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etds/change_availability
-  def change_availability
-    @etd = Etd.find(params[:id])
-
-    respond_to do |format|
-      format.html # change_availability.html.erb
-    end
-  end
-
   # GET /etds/next_new/1
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
@@ -159,7 +150,7 @@ class EtdsController < ApplicationController
     @prs = []
     for pr in @etd.people_roles do
       p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr_id => pr.id}
+      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
     end
     respond_to do |format|
       format.html # new_next.html.erb
@@ -167,13 +158,23 @@ class EtdsController < ApplicationController
   end
 
   # PUT /etds/next_new/1
+  # (This is used from next_new, and add_contents)
   def save_contents
     @etd = Etd.find(params[:id])
     if @etd.update_attributes(params[:etd])
-      redirect_to :next_new_etd, :notice => "Successfully updated article."
+      redirect_to params[:origin] + @etd.id.to_s, :notice => "Successfully updated article."
     else
-      render :action => 'next_new'
+      redirect_to params[:origin] + @etd.id.to_s
     end    
+  end
+
+  # GET /etds/add_contents/1
+  def add_contents
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      format.html # add_contents.html.erb
+    end
   end
 
   # GET /etd/submit/1
