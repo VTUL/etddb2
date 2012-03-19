@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   respond_to :html, :json, :js
+
   # GET /people
   # GET /people.xml
   def index
@@ -87,7 +88,14 @@ class PeopleController < ApplicationController
   def destroy
     @person = Person.find(params[:id])
 
-    # Destroy authored ETDs here.
+    # Destroy ETDs this person has Authored.
+    author = Role.where(:name => "Author").first()
+    for pr in @person.people_roles do
+      if pr.role_id == author.id
+        etd = Etd.find(pr.etd_id)
+        etd.destroy
+      end
+    end
 
     @person.destroy
 
