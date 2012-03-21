@@ -128,7 +128,7 @@ class PeopleController < ApplicationController
   def add_committee
     pr = PeopleRole.new
     pr.etd_id = params[:etd_id]
-    pr.role_id = Role.find(:first, :conditions => "name = '" + params[:committee_type] + "'").id
+    pr.role_id = Role.where(:name => params[:committee_type].first().id
     Person.find(params[:committee]).people_roles << pr
 
     respond_to do |format|
