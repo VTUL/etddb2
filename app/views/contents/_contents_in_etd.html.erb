@@ -1,0 +1,29 @@
+<h3>Other contents in this ETD:</h3>
+<table>
+  <tr>
+    <th>Filename:</th>
+    <th>Type:</th>
+    <th>Size:</th>
+    <th>Availability:</th>
+    <th>Bound:</th>
+    <th>Page Count:</th>
+    <th>Duration:</th>
+    <th>Dimensions:</th>
+  </tr>
+  <% @etd.contents.each do |content| %>
+    <tr>
+      <td><%=h content.content.file.filename %></td>
+      <td><%=h content.content.file.content_type %></td>
+      <td><%=h content.content.file.size %></td>
+      <td><%=h content.availability.name %></td>
+      <td><%=h content.bound %></td>
+      <td><%=h content.page_count %></td>
+      <td><%=h content.dimensions %></td>
+      <td><%=h content.duration %></td>
+      <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% if content.id != @content.id %>
+              <td><%= link_to 'Show', content_path(content) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

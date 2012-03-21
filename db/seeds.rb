@@ -126,7 +126,7 @@ end
 
 #! Beyond this point, you should not need to edit this file.
 
-roles = ["Author", "Admin", "Committee Chair", "Comittee CoChair", "Comittee Member", "Reviewer"]
+roles = ["Author", "Admin", "Committee Chair", "Committee Co-Chair", "Committee Member", "Reviewer"]
 for role in roles do
   Role.create([{ :name => role }])
 end

@@ -50,6 +50,7 @@ gem 'devise'
 #gem 'paperclip','~>2.4'
 gem 'carrierwave'
 gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
+gem 'mime-types'
 
 # For Pure ruby ldap, one day test
 #gem rubygem-net-ldap', 0.1.1

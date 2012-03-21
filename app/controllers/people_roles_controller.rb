@@ -1,4 +1,6 @@
 class PeopleRolesController < ApplicationController
+  respond_to :html, :json, :js
+
   # GET /people_roles
   # GET /people_roles.xml
   def index
@@ -77,7 +79,8 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(people_roles_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
+      format.js { render :nothing => true }
     end
   end
 end

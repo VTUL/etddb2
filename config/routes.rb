@@ -20,14 +20,15 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/my_etds' => 'etds#my_etds', :as => :my_etds
   get '/etds/next_new/:id' => 'etds#next_new', :as => :next_new_etd
   put '/etds/next_new/:id' => 'etds#save_contents'
+  get '/etds/add_contents/:id' => 'etds#add_contents', :as => :add_contents_to_etd
 
   get '/contents/my_contents' => 'contents#my_contents'
   post '/contents/new' => 'contents#new' # Need to post the ETD ID to this route.
   put '/contents' => 'contents#create' # Should accept files upon creation.
-  #post '/contents/save_contents' => 'contents#save_contents' # This needs to be fixed. This is handled by contents#update.
 
   match '/people/find' => 'people#find'
   match '/people/new_committee_member' => 'people#new_committee_member'
+  match '/people/add_committee' => 'people#add_committee'
 
   resources :etds
   resources :roles

@@ -1,4 +1,4 @@
-<h1>New ETD</h1>
+<h1>Add Contents to ETD</h1>
 <%= nested_form_for @etd, :url => next_new_etd_path(@etd), :html => {:multipart => true} do |f| %>
   <%= f.fields_for :contents do |cf| %>
     <% if cf.object.content? %>
@@ -16,34 +16,9 @@
     <% end %>
   <% end %>
   <%= f.link_to_add "Add more content", :contents %><br />
-  <%= hidden_field_tag(:origin, '/etds/next_new/') %>
+  <%= hidden_field_tag(:origin, '/etds/add_contents/') %>
   <%= f.submit "Update Content" %>
 <% end %>
-<p>
-<table class="outlined">
-  <tr>
-    <th>Person:</th>
-    <th>Role:</th>
-  </tr>
-  <% for pr in @prs do %>
-    <tr>
-      <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
-      <td><%= pr[:role] %></td>
-      <td><%= link_to 'Destroy', people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => "del_pr" %></td>
-    </tr>
-  <% end %>
-</table>
-<%= form_tag(:controller => "people", :action => "find") do %>
-  <%= hidden_field_tag(:etd_id, @etd.id) %>
-  <%= hidden_field_tag(:origin, '/etds/next_new/') %>
-  <%= submit_tag "Add New Committee Member" %>
-<% end %>
-</p>
-<p>
+<br />
 <%= link_to 'View ETD', @etd %>
 </p>
-<script>
-$('.del_pr').bind('ajax:success', function() {  
-    $(this).closest('tr').fadeOut();  
-});
-</script>

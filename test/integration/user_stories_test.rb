@@ -19,7 +19,7 @@ class UserStoriesTest < ActionController::IntegrationTest
     assert true
   end
 
- test "login, new an etd, new committee members, and new contents" do
+ test "login, new an etd, new committee members, (and new contents)" do
     # login via https
     #https!
     get "/logout"
@@ -46,12 +46,14 @@ class UserStoriesTest < ActionController::IntegrationTest
   	  		:status=>'Submitted',
       		:url=>'http://scholar.lib.vt.edu/tehses/available/etd-07292008-13039050/',
   	  		:urn=>'etd-05212008-084627'}}
+
       
   	  if (assert_response :redirect)
-  	  	sess.post("/contents", {:id=>2, :content=>{:id=>1, :uploaded=>File.new(Rails.root + 'app/assets/images/body_bg2.jpg')}}})
-  	  	assert_response :redirect
-        sess.delete "/contents/1"
-        if (assert_response :success)
+  	  	#sess.post("/contents", {:etd_id=>2, :etd=>{:id=>2, :content=>{:id=>5, :uploaded=>File.new(Rails.root + 'app/assets/images/body_bg2.jpg')}}})
+  	  	
+  	  	#assert_response :redirect
+        #sess.delete "/contents/5"
+        if (assert_response :redirect)
           puts "I am happy:)"
         else 
           puts "I am not happy, too :("
@@ -59,9 +61,23 @@ class UserStoriesTest < ActionController::IntegrationTest
       else 
 		puts "I am not happy:("		
 	  end
-  	  if (assert_response :success)
-  	  	sess.post("/people", {:etd_id=>2, :lname=>'weeks'})
-  	  	assert_equal '/people', path.to_s
+  	  if (assert_response :redirect)
+  	  	sess.post("/people/find", {:etd_id=>2, :origin=>'/etds/next_new'})
+  	  	sess.post("/people/find", {:etd_id=>2, :origin=>'/etds/next_new',:lname=>'s'})
+  	  	assert_response :redirect
+  	  	assert_not_nil sess.response.body['Kimberli Weeks']
+#  	  	puts sess.response.body
+  	  	
+#  	  	sess.post("/people/sign_up", {:fname=>'Keith' ,:lname=>'Richardson', })
+#  	  	assert_equal '/people', path.to_s
+  	  	sess.delete("/people/2")
+  	  	puts sess.response.body
+  	  	
+        if (assert_response :redirect)
+          puts "I am happy:)"
+        else 
+          puts "I am not happy, too :("
+        end
   	  else 
 		puts "I am not happy:("
 	  end	  

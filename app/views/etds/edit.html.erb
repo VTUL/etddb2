@@ -1,24 +1,4 @@
 <h1>Edit ETD</h1>
 <%= render 'form' %>
 <br />
-<%= nested_form_for @etd, :html => {:multipart => true} do |f| %>
-  <%= f.fields_for :contents do |cf| %>
-    <% if cf.object.content? %>
-      <% #This content already exists %>
-      <%= cf.object.content.file.filename %> |
-      <%= cf.object.content.file.size %> |
-      <%= link_to "Edit", content_path(cf.object)%> |
-      <%= cf.link_to_remove "Delete" %>
-    <% else %>
-      <% #This is new content %>
-      <%= cf.file_field :content %>
-      <%= cf.hidden_field(:bound, {:value => @etd.bound}) %>
-      <%= cf.hidden_field(:availability_id, {:value => @etd.availability_id}) %>
-      <%= cf.link_to_remove "Remove"%>
-    <% end %>
-  <% end %>
-  <%= f.link_to_add "Add more content", :contents %><br />
-  <%= f.submit "Update Content" %>
-<% end %>
-<br />
 <%= link_to 'Back to ETDs', etds_path %>
