@@ -2,7 +2,7 @@
 <table>
   <tr>
     <th>Filename:</th>
-    <th>Type:</th>
+    <!--<th>Type:</th>-->
     <th>Size:</th>
     <th>Availability:</th>
     <th>Bound:</th>
@@ -13,7 +13,7 @@
   <% @etd.contents.each do |content| %>
     <tr>
       <td><%=h content.content.file.filename %></td>
-      <td><%=h content.content.file.content_type %></td>
+      <!--<td><%#=h content.content.file.content_type %></td>-->
       <td><%=h content.content.file.size %></td>
       <td><%=h content.availability.name %></td>
       <td><%=h content.bound %></td>
