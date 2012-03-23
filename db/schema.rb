@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.string   "name"
     t.string   "description"
     t.boolean  "retired"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "contents", :force => true do |t|
@@ -31,29 +31,29 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.integer  "page_count"
     t.integer  "duration"
     t.string   "dimensions"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "copyright_statements", :force => true do |t|
     t.string   "statement"
     t.boolean  "retired"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "degrees", :force => true do |t|
     t.string   "name"
     t.boolean  "retired"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.boolean  "retired"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "departments_etds", :id => false, :force => true do |t|
@@ -63,15 +63,15 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
 
   create_table "digital_objects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "document_types", :force => true do |t|
     t.string   "name"
     t.boolean  "retired"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "etds", :force => true do |t|
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.integer  "degree_id"
     t.integer  "document_type_id"
     t.integer  "privacy_statement_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "people", :force => true do |t|
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
@@ -136,35 +136,35 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.integer  "user_action_id"
     t.integer  "role_id"
     t.integer  "digital_object_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "privacy_statements", :force => true do |t|
     t.string   "statement"
     t.boolean  "retired"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "provenances", :force => true do |t|
     t.integer  "etd_id"
     t.string   "creator"
     t.string   "notice"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_actions", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

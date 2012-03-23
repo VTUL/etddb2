@@ -1,4 +1,4 @@
-<%= form_for @etd, :html => {:multipart => true} do |f| %>
+<%= form_for @etd do |f| %>
   <% if @etd.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this ETD from being saved:</h2>
@@ -20,9 +20,12 @@
     <%= f.collection_select(:document_type_id, DocumentType.where(:retired => false), :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label(:department) %><br />
-    <%#= f.options_from_collection_for_select(Department.all, :id, :name) %>
-    Discuss solutions. Luckily, not required to create an ETD.
+    <%= f.label(:department_ids, "Departments") %><br />
+    <%= f.fields_for :department_ids do |df| %>
+      <% dept_array = Department.all.map { |dept| [dept.name, dept.id] } %>
+      <%= df.select(:id_1, options_for_select(dept_array, @etd.department_ids[0])) %><br />
+      <%= df.select(:id_2, options_for_select(dept_array, @etd.department_ids[1]), {:prompt => "I do not have a second department."}) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label(:ddate, "Defense Date") %><br />
