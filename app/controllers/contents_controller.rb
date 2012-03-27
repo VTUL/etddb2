@@ -51,6 +51,8 @@ class ContentsController < ApplicationController
 
     @content.availability = @etd.availability
     @content.bound = @etd.bound
+    # Use this if you're assigning to the model. CarrierWave and content_type don't work.
+    #@content.content.file.content_type = MIME::Types.of(@content.content.file.filename)[0]
 
     respond_to do |format|
       if @content.save

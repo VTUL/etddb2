@@ -73,6 +73,12 @@ class EtdsController < ApplicationController
     @etd.people_roles << pr
     @etd.status = "Created"
 
+    d = [params[:etd][:department_ids][:id_1]]
+    if params[:etd][:department_ids][:id_2] != "" then
+      d << params[:etd][:department_ids][:id_2]
+    end
+    @etd.department_ids = d
+
     respond_to do |format|
       if @etd.save
         format.html { redirect_to(next_new_etd_path(@etd), :notice => 'Etd was successfully created.') }
@@ -88,6 +94,12 @@ class EtdsController < ApplicationController
   # PUT /etds/1.xml
   def update
     @etd = Etd.find(params[:id])
+
+    d = [params[:etd][:department_ids][:id_1]]
+    if params[:etd][:department_ids][:id_2] != "" then
+      d << params[:etd][:department_ids][:id_2]
+    end
+    params[:etd][:department_ids] = d
 
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
