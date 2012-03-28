@@ -13,9 +13,6 @@ class ContentTest < ActiveSupport::TestCase
   test "should be invalid with empty attributes" do
     content = Content.new
     assert content.invalid?
-    assert content.errors[:uploaded_file_name].any?
-    assert content.errors[:uploaded_content_type].any?
-    assert content.errors[:uploaded_file_size].any?
     assert content.errors[:availability_id].any?
     assert content.errors[:bound].any?
   end

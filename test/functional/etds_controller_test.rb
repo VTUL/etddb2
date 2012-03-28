@@ -22,6 +22,7 @@ class EtdsControllerTest < ActionController::TestCase
     assert_difference('Etd.count') do
       @etd_attrs = @etd.attributes
       @etd_attrs[:urn] = 0
+      @etd_attrs[:department_ids] = {:id_1 => 1}
       post :create, etd: @etd_attrs
     end
 
@@ -45,7 +46,9 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should update etd" do
-    put :update, id: @etd.to_param, etd: @etd.attributes
+    @etd_attrs = @etd.attributes
+    @etd_attrs[:department_ids] = {:id_1 => 1}
+    put :update, id: @etd.to_param, etd: @etd_attrs
     assert_redirected_to etd_path(assigns(:etd))
   end
 

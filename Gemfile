@@ -31,10 +31,12 @@ gem 'ruby-ldap', '0.9.10'
 # For test,
 group :development do
   #gem 'rspec-rails','2.5.0'
+  gem "rails_code_qa", "~> 0.5.1"
 end
 group :test do
   #gem 'rspec','2.5.0'
   gem 'webrat', '0.7.1'
+  gem "rails_code_qa", "~> 0.5.1"
 end
 
 # For user authorization

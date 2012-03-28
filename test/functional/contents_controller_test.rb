@@ -30,13 +30,13 @@ class ContentsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @content.to_param, etd_id: 1
+    get :edit, id: @content.to_param
     assert_response :success
   end
 
   test "should update content" do
     put :update, id: @content.to_param, content: @content.attributes, etd_id: 1
-    assert_redirected_to contents_my_contents_path(id: 1)
+    assert_redirected_to content_path(assigns(:content))
   end
 
   test "should destroy content" do
@@ -44,6 +44,6 @@ class ContentsControllerTest < ActionController::TestCase
       delete :destroy, id: @content.to_param
     end
 
-    assert_redirected_to contents_path
+    assert_redirected_to contents_my_contents_path
   end
 end

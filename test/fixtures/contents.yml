@@ -1,15 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  #uploaded_file_name: content1.pdf
-  #uploaded_content_type: pdf
-  #uploaded_file_size: 1234
+  content: File.open(Rails.root.join("README"))
+  etd_id: 1
   availability_id: 2
   bound: false
   
-#two:
-  #uploaded_file_name: content2.ppt
-  #uploaded_content_type: ppt
-  #uploaded_file_size: 5678
-  #availability_id: 1
-  #bound: false
+two:
+  content: File.open(Rails.root.join("README"))
+  etd_id: 1
+  availability_id: 1
+  bound: false
