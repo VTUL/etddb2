@@ -21,7 +21,6 @@ class EtdsControllerTest < ActionController::TestCase
   test "should create etd" do
     assert_difference('Etd.count') do
       @etd_attrs = @etd.attributes
-      @etd_attrs[:urn] = 0
       @etd_attrs[:department_ids] = {:id_1 => 1}
       post :create, etd: @etd_attrs
     end
