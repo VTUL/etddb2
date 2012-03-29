@@ -10,9 +10,8 @@ one:
   degree_id: 1
   document_type_id: 1
   privacy_statement_id: 1
-  status: Submitted
-  url: http://scholar.lib.vt.edu/theses/available/etd-07292010-14030054/
-  urn: etd-07292010-235426
+  urn: etd-20120101-00000003
+  url: http://scholar.vt.edu/theses/submitted/etd-20120101-00000003/
 
 two:
   id: 2
@@ -24,6 +23,5 @@ two:
   degree_id: 2
   document_type_id: 2
   privacy_statement_id: 2
-  status: Submitted
-  url: http://scholar.lib.vt.edu/theses/available/etd-07292008-13039050/
-  urn: etd-05212008-084627
+  urn: etd-20120101-00000004
+  url: http://scholar.vt.edu/theses/submitted/etd-20120101-00000004/
