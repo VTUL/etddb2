@@ -67,6 +67,9 @@ class EtdsController < ApplicationController
   def create
     @etd = Etd.new(params[:etd])
 
+    @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
+    @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
+
     pr = PeopleRole.new
     pr.person_id = current_person.id
     pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
