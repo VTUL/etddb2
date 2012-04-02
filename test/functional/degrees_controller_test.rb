@@ -24,6 +24,13 @@ class DegreesControllerTest < ActionController::TestCase
     assert_redirected_to degree_path(assigns(:degree))
   end
 
+  test "should not create degree" do
+    assert_no_difference("Degree.count") do
+      post :create, degree: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show degree" do
     get :show, id: @degree.to_param
     assert_response :success
@@ -37,6 +44,11 @@ class DegreesControllerTest < ActionController::TestCase
   test "should update degree" do
     put :update, id: @degree.to_param, degree: @degree.attributes
     assert_redirected_to degree_path(assigns(:degree))
+  end
+
+  test "should not update degree" do
+    put :update, id: @degree.to_param, degree: {name: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy degree" do

@@ -29,6 +29,13 @@ class PeopleControllerTest < ActionController::TestCase
     assert_redirected_to person_path(assigns(:person))
   end
 
+  test "should not create person" do
+    assert_no_difference('Person.count') do
+      post :create, person: {first_name: "K", last_name: "W"}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show person" do
     get :show, id: @person.to_param
     assert_response :success
@@ -44,6 +51,11 @@ class PeopleControllerTest < ActionController::TestCase
     assert_redirected_to person_path(assigns(:person))
   end
 
+  test "should not update person" do
+    put :update, id: @person.to_param, person: {email: nil}
+    assert(false, "Should check for flash.")
+  end
+
   test "should destroy person" do
     assert_difference('Person.count', -1) do
       delete :destroy, id: @person.to_param
@@ -51,4 +63,13 @@ class PeopleControllerTest < ActionController::TestCase
 
     assert_redirected_to people_path
   end
+
+  test "should get committee search page." do
+    assert(false, "TODO")
+  end
+
+  test "should add a committee member." do
+    assert(false, "TODO")
+  end
+
 end

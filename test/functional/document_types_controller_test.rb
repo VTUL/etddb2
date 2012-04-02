@@ -24,6 +24,13 @@ class DocumentTypesControllerTest < ActionController::TestCase
     assert_redirected_to document_type_path(assigns(:document_type))
   end
 
+  test "should not create document_type" do
+    assert_no_difference('DocumentType.count') do
+      post :create, document_type: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show document_type" do
     get :show, id: @document_type.to_param
     assert_response :success
@@ -37,6 +44,11 @@ class DocumentTypesControllerTest < ActionController::TestCase
   test "should update document_type" do
     put :update, id: @document_type.to_param, document_type: @document_type.attributes
     assert_redirected_to document_type_path(assigns(:document_type))
+  end
+
+  test "should not update document_type" do
+    put :update, id: @document_type.to_param, document_type: {name: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy document_type" do

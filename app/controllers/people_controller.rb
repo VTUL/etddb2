@@ -55,7 +55,7 @@ class PeopleController < ApplicationController
     @person.display_name = @person.first_name + " " + @person.last_name
 
     respond_to do |format|
-      if @person.save!
+      if @person.save
         format.html { redirect_to(@person, :notice => 'Person was successfully created.') }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else

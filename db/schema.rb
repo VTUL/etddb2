@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.boolean  "bound"
     t.string   "title"
     t.text     "description"
+    t.text     "mime_type"
     t.integer  "etd_id"
     t.integer  "availability_id"
     t.integer  "page_count"
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.integer "person_id"
     t.integer "role_id"
     t.integer "etd_id"
+    t.boolean "vote"
   end
 
   add_index "people_roles", ["etd_id"], :name => "index_people_roles_on_etd_id"

@@ -63,7 +63,7 @@ class UserActionsController < ApplicationController
         format.html { redirect_to(@user_action, :notice => 'Action was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :user_action => "edit" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @user_action.errors, :status => :unprocessable_entity }
       end
     end

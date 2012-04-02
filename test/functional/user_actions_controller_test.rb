@@ -24,6 +24,13 @@ class UserActionsControllerTest < ActionController::TestCase
     assert_redirected_to user_action_path(assigns(:user_action))
   end
 
+  test "should not create action" do
+    assert_no_difference('UserAction.count') do
+      post :create, user_action: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show action" do
     get :show, id: @user_action.to_param
     assert_response :success
@@ -37,6 +44,11 @@ class UserActionsControllerTest < ActionController::TestCase
   test "should update action" do
     put :update, id: @user_action.to_param, user_action: @user_action.attributes
     assert_redirected_to user_action_path(assigns(:user_action))
+  end
+
+  test "should not update action" do
+    put :update, id: @user_action.to_param, user_action: {name: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy action" do

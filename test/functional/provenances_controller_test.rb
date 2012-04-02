@@ -24,6 +24,13 @@ class ProvenancesControllerTest < ActionController::TestCase
     assert_redirected_to provenance_path(assigns(:provenance))
   end
 
+  test "should not create provenance" do
+    assert_no_difference('Provenance.count') do
+      post :create, provenance: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show provenance" do
     get :show, id: @provenance.to_param
     assert_response :success
@@ -37,6 +44,11 @@ class ProvenancesControllerTest < ActionController::TestCase
   test "should update provenance" do
     put :update, id: @provenance.to_param, provenance: @provenance.attributes
     assert_redirected_to provenance_path(assigns(:provenance))
+  end
+
+  test "should not update provenance" do
+    put :update, id: @provenance.to_param, provenance: {notice: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy provenance" do

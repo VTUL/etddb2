@@ -26,6 +26,13 @@ class RolesControllerTest < ActionController::TestCase
     assert_redirected_to role_path(assigns(:role))
   end
 
+  test "should not create role" do
+    assert_no_difference('Role.count') do
+      post :create, role: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show role" do
     get :show, id: @role.to_param
     assert_response :success
@@ -39,6 +46,11 @@ class RolesControllerTest < ActionController::TestCase
   test "should update role" do
     put :update, id: @role.to_param, role: @role.attributes
     assert_redirected_to role_path(assigns(:role))
+  end
+
+  test "should not update role" do
+    put :update, id: @role.to_param, role: {name: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy role" do

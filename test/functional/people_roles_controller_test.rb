@@ -20,7 +20,14 @@ class PeopleRolesControllerTest < ActionController::TestCase
     assert_redirected_to people_role_path(assigns(:people_role))
   end
 
-  test "should show person_role" do
+  test "should not create people_role" do
+    assert_no_difference('PeopleRole.count') do
+      post :create, :people_role => {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
+  test "should show people_role" do
     get :show, :id => people_roles(:one).to_param
     assert_response :success
   end
@@ -30,12 +37,17 @@ class PeopleRolesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update person_role" do
+  test "should update people_role" do
     put :update, :id => people_roles(:one).to_param, :people_role => {:person_id => 3}
     assert_redirected_to people_role_path(assigns(:people_role))
   end
 
-  test "should destroy person_role" do
+  test "should not update people_role" do
+    put :update, :id => people_roles(:one).to_param, :people_role => {:person_id => nil}
+    assert(false, "Should check for flash")
+  end
+
+  test "should destroy people_role" do
     assert_difference('PeopleRole.count', -1) do
       delete :destroy, :id => people_roles(:one).to_param
     end

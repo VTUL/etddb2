@@ -4,6 +4,7 @@ class CreatePeopleRoles < ActiveRecord::Migration
       t.integer :person_id
       t.integer :role_id
       t.integer :etd_id
+      t.boolean :vote
     end
 
     # Indexes are important for performance if join tables grow big

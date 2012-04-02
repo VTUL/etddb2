@@ -24,6 +24,13 @@ class PrivacyStatementsControllerTest < ActionController::TestCase
     assert_redirected_to privacy_statement_path(assigns(:privacy_statement))
   end
 
+  test "should not create privacy_statement" do
+    assert_no_difference('PrivacyStatement.count') do
+      post :create, privacy_statement: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show privacy_statement" do
     get :show, id: @privacy_statement.to_param
     assert_response :success
@@ -37,6 +44,11 @@ class PrivacyStatementsControllerTest < ActionController::TestCase
   test "should update privacy_statement" do
     put :update, id: @privacy_statement.to_param, privacy_statement: @privacy_statement.attributes
     assert_redirected_to privacy_statement_path(assigns(:privacy_statement))
+  end
+
+  test "should not update privacy_statement" do
+    put :update, id: @privacy_statement.to_param, privacy_statement: {statement: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy privacy_statement" do

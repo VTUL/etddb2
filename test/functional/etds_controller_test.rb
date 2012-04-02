@@ -28,6 +28,15 @@ class EtdsControllerTest < ActionController::TestCase
     assert_redirected_to next_new_etd_path(assigns(:etd))
   end
 
+  test "should not create etd" do
+    assert_no_difference('Etd.count') do
+      @etd_attrs = {}
+      @etd_attrs[:department_ids] = {:id_1 => 1}
+      post :create, etd: @etd_attrs
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should get next_new" do
     get :next_new, id: @etd.to_param
     assert_response :success
@@ -37,11 +46,13 @@ class EtdsControllerTest < ActionController::TestCase
   test "should show etd" do
     get :show, id: @etd.to_param
     assert_response :success
+    assert_not_nil assigns(:etd)
   end
 
   test "should get edit" do
     get :edit, id: @etd.to_param
     assert_response :success
+    assert_not_nil assigns(:etd)
   end
 
   test "should update etd" do
@@ -51,6 +62,39 @@ class EtdsControllerTest < ActionController::TestCase
     assert_redirected_to etd_path(assigns(:etd))
   end
 
+  test "should not update etd" do
+    @etd_attrs = {title: nil}
+    @etd_attrs[:department_ids] = {:id_1 => 1}
+
+    put :update, id: @etd.to_param, etd: @etd_attrs
+    assert(false, "Should check for flash.")
+  end
+
+  test "should be logged in for certain functionality." do
+    sign_out @person
+
+    get :new
+    assert_redirected_to login_path
+
+    get :edit, id: @etd.to_param
+    assert_redirected_to login_path
+
+    delete :destroy, id: @etd.to_param
+    assert_redirected_to etds_path
+  end
+
+  test "should only be able to edit and destroy your ETDs." do
+    sign_out @person
+    @person = people(:two)
+    sign_in @person
+
+    get :edit, id: @etd.to_param
+    assert_redirected_to etds_path
+
+    delete :destroy, id: @etd.to_param
+    assert_redirected_to etds_path
+  end
+
   test "should destroy etd" do
     assert_difference('Etd.count', -1) do
       delete :destroy, id: @etd.to_param
@@ -58,4 +102,17 @@ class EtdsControllerTest < ActionController::TestCase
 
     assert_redirected_to :controller => "etds", :action => "index", :notice => "ETD Deleted."
   end
+
+  test "should get my_etds" do
+    assert(false, "TODO")
+  end
+
+  test "should get add_contents" do
+    assert(false, "TODO")
+  end
+
+  test "should add multiple contents to an ETD." do
+    assert(false, "TODO")
+  end
+
 end

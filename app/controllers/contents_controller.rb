@@ -1,4 +1,5 @@
 class ContentsController < ApplicationController
+  require 'mime/types' 
   # GET /contents
   # GET /contents.xml
   def index
@@ -50,9 +51,9 @@ class ContentsController < ApplicationController
     @content = Content.new(params[:content])
 
     @content.availability = @etd.availability
+    @content.etd = @etd
     @content.bound = @etd.bound
-    # Use this if you're assigning to the model. CarrierWave and content_type don't work.
-    #@content.content.file.content_type = MIME::Types.of(@content.content.file.filename)[0]
+    #@content.mime_type = MIME::Types.of(@content.content.filename)[0] or ""
 
     respond_to do |format|
       if @content.save

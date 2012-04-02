@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class CopyrightStatementsControllerTest < ActionController::TestCase
+  setup do
+    @copyright = copyright_statements(:one)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +18,42 @@ class CopyrightStatementsControllerTest < ActionController::TestCase
 
   test "should create copyright_statement" do
     assert_difference('CopyrightStatement.count') do
-      post :create, :copyright_statement => {:statement => "Blah, Blah", :retired => true }
+      post :create, :copyright_statement => @copyright.attributes
     end
 
     assert_redirected_to copyright_statement_path(assigns(:copyright_statement))
   end
 
+  test "should not create copyright_statement" do
+    assert_no_difference('CopyrightStatement.count') do
+      post :create, :copyright_statement => {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show copyright_statement" do
-    get :show, :id => copyright_statements(:one).to_param
+    get :show, :id => @copyright.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => copyright_statements(:one).to_param
+    get :edit, :id => @copyright.to_param
     assert_response :success
   end
 
   test "should update copyright_statement" do
-    put :update, :id => copyright_statements(:one).to_param, :copyright_statement => { }
+    put :update, :id => @copyright.to_param, :copyright_statement => {}
     assert_redirected_to copyright_statement_path(assigns(:copyright_statement))
+  end
+
+  test "should not update copyright_statement" do
+    put :update, :id => @copyright.to_param, :copyright_statement => {:statement => nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy copyright_statement" do
     assert_difference('CopyrightStatement.count', -1) do
-      delete :destroy, :id => copyright_statements(:one).to_param
+      delete :destroy, :id => @copyright.to_param
     end
 
     assert_redirected_to copyright_statements_path

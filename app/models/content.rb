@@ -16,7 +16,7 @@ class Content < ActiveRecord::Base
   # New Carrierwave mountings
   mount_uploader :content, ContentUploader
 
-  validates_presence_of :availability_id#, :etd_id
+  validates_presence_of :mime_type, :availability_id, :etd_id
   validates :bound, :inclusion => {:in => [true, false], :message => "must be boolean"}
 end
 

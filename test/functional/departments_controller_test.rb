@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class DepartmentsControllerTest < ActionController::TestCase
+  setup do
+    @department = departments(:one)
+  end
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +18,42 @@ class DepartmentsControllerTest < ActionController::TestCase
 
   test "should create department" do
     assert_difference('Department.count') do
-      post :create, :department => {:name=>"Computer Science", :retired=>true}
+      post :create, :department => @department.attributes
     end
 
     assert_redirected_to department_path(assigns(:department))
   end
+  
+  test "should not create department" do
+    assert_no_difference('Department.count') do
+      post :create, :department => {}
+    end
+    assert(false, "Should check for flash.")
+  end
 
   test "should show department" do
-    get :show, :id => departments(:one).to_param
+    get :show, :id => @department.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => departments(:one).to_param
+    get :edit, :id => @department.to_param
     assert_response :success
   end
 
   test "should update department" do
-    put :update, :id => departments(:one).to_param, :department => { }
+    put :update, :id => @department.to_param, :department => {}
     assert_redirected_to department_path(assigns(:department))
+  end
+
+  test "should not update department" do
+    put :update, :id => @department.to_param, :department => {name: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy department" do
     assert_difference('Department.count', -1) do
-      delete :destroy, :id => departments(:one).to_param
+      delete :destroy, :id => @department.to_param
     end
 
     assert_redirected_to departments_path

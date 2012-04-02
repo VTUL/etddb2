@@ -24,6 +24,13 @@ class DigitalObjectsControllerTest < ActionController::TestCase
     assert_redirected_to digital_object_path(assigns(:digital_object))
   end
 
+  test "should not create digital_object" do
+    assert_no_difference('DigitalObject.count') do
+      post :create, digital_object: {}
+    end
+    assert(false, "Should check for flash.")
+  end
+
   test "should show digital_object" do
     get :show, id: @digital_object.to_param
     assert_response :success
@@ -37,6 +44,11 @@ class DigitalObjectsControllerTest < ActionController::TestCase
   test "should update digital_object" do
     put :update, id: @digital_object.to_param, digital_object: @digital_object.attributes
     assert_redirected_to digital_object_path(assigns(:digital_object))
+  end
+
+  test "should not update digital_object" do
+    put :update, id: @digital_object.to_param, digital_object: {name: nil}
+    assert(false, "Should check for flash.")
   end
 
   test "should destroy digital_object" do

@@ -12,9 +12,4 @@ class ApprovalMailer < ActionMailer::Base
     mail(:to => person.email, :subject => "Confirmed.")
   end
 
-  def sent(sent_at = Time.now)
-    @person = person
-    mail(:to => person.email, :subject => '???')
-  end
-
 end
