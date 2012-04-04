@@ -3,6 +3,8 @@ require 'test_helper'
 class RolesControllerTest < ActionController::TestCase
   setup do
     @role = roles(:one)
+    @person = people(:one)
+    sign_in @person
   end
 
   test "should get index" do
@@ -12,8 +14,6 @@ class RolesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    @person = people(:one)
-    sign_in @person
     get :new
     assert_response :success
   end
@@ -30,7 +30,7 @@ class RolesControllerTest < ActionController::TestCase
     assert_no_difference('Role.count') do
       post :create, role: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show role" do
@@ -50,7 +50,7 @@ class RolesControllerTest < ActionController::TestCase
 
   test "should not update role" do
     put :update, id: @role.to_param, role: {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy role" do

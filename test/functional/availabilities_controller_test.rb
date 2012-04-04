@@ -28,7 +28,7 @@ class AvailabilitiesControllerTest < ActionController::TestCase
     assert_no_difference('Availability.count') do
       post :create, availability: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show availability" do
@@ -48,7 +48,7 @@ class AvailabilitiesControllerTest < ActionController::TestCase
 
   test "should not update availability" do
     put :update, id:@availability.to_param, availability: {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy availability" do

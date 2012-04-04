@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class PeopleRolesControllerTest < ActionController::TestCase
+  setup do
+    #TODO
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -24,7 +28,7 @@ class PeopleRolesControllerTest < ActionController::TestCase
     assert_no_difference('PeopleRole.count') do
       post :create, :people_role => {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show people_role" do
@@ -44,7 +48,7 @@ class PeopleRolesControllerTest < ActionController::TestCase
 
   test "should not update people_role" do
     put :update, :id => people_roles(:one).to_param, :people_role => {:person_id => nil}
-    assert(false, "Should check for flash")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy people_role" do

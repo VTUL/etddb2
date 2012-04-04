@@ -34,7 +34,7 @@ class EtdsControllerTest < ActionController::TestCase
       @etd_attrs[:department_ids] = {:id_1 => 1}
       post :create, etd: @etd_attrs
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should get next_new" do
@@ -67,7 +67,7 @@ class EtdsControllerTest < ActionController::TestCase
     @etd_attrs[:department_ids] = {:id_1 => 1}
 
     put :update, id: @etd.to_param, etd: @etd_attrs
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should be logged in for certain functionality." do

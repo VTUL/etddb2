@@ -28,7 +28,7 @@ class UserActionsControllerTest < ActionController::TestCase
     assert_no_difference('UserAction.count') do
       post :create, user_action: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show action" do
@@ -48,7 +48,7 @@ class UserActionsControllerTest < ActionController::TestCase
 
   test "should not update action" do
     put :update, id: @user_action.to_param, user_action: {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy action" do

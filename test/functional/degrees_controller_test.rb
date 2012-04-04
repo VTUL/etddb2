@@ -28,7 +28,7 @@ class DegreesControllerTest < ActionController::TestCase
     assert_no_difference("Degree.count") do
       post :create, degree: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show degree" do
@@ -48,7 +48,7 @@ class DegreesControllerTest < ActionController::TestCase
 
   test "should not update degree" do
     put :update, id: @degree.to_param, degree: {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy degree" do

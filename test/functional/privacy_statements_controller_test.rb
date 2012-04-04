@@ -28,7 +28,7 @@ class PrivacyStatementsControllerTest < ActionController::TestCase
     assert_no_difference('PrivacyStatement.count') do
       post :create, privacy_statement: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show privacy_statement" do
@@ -48,7 +48,7 @@ class PrivacyStatementsControllerTest < ActionController::TestCase
 
   test "should not update privacy_statement" do
     put :update, id: @privacy_statement.to_param, privacy_statement: {statement: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy privacy_statement" do

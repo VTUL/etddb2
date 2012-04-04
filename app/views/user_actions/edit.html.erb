@@ -1,15 +1,6 @@
 <h1>Editing action</h1>
 
-<%= form_for(@user_action) do |f| %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
 <%= link_to 'Show', @user_action %> |
 <%= link_to 'Back', user_actions_path %>

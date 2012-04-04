@@ -28,7 +28,7 @@ class CopyrightStatementsControllerTest < ActionController::TestCase
     assert_no_difference('CopyrightStatement.count') do
       post :create, :copyright_statement => {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show copyright_statement" do
@@ -48,7 +48,7 @@ class CopyrightStatementsControllerTest < ActionController::TestCase
 
   test "should not update copyright_statement" do
     put :update, :id => @copyright.to_param, :copyright_statement => {:statement => nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy copyright_statement" do

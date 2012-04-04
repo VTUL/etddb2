@@ -28,7 +28,7 @@ class DigitalObjectsControllerTest < ActionController::TestCase
     assert_no_difference('DigitalObject.count') do
       post :create, digital_object: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show digital_object" do
@@ -48,7 +48,7 @@ class DigitalObjectsControllerTest < ActionController::TestCase
 
   test "should not update digital_object" do
     put :update, id: @digital_object.to_param, digital_object: {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy digital_object" do

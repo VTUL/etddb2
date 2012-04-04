@@ -28,7 +28,7 @@ class ProvenancesControllerTest < ActionController::TestCase
     assert_no_difference('Provenance.count') do
       post :create, provenance: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show provenance" do
@@ -48,7 +48,7 @@ class ProvenancesControllerTest < ActionController::TestCase
 
   test "should not update provenance" do
     put :update, id: @provenance.to_param, provenance: {notice: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy provenance" do

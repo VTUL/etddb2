@@ -28,7 +28,7 @@ class DepartmentsControllerTest < ActionController::TestCase
     assert_no_difference('Department.count') do
       post :create, :department => {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show department" do
@@ -48,7 +48,7 @@ class DepartmentsControllerTest < ActionController::TestCase
 
   test "should not update department" do
     put :update, :id => @department.to_param, :department => {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy department" do

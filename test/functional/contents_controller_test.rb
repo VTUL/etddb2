@@ -18,7 +18,7 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should create content" do
     assert_difference('Content.count') do
-      post :create, content: @content.attributes, etd_id: 1
+      post :create, {content: @content.attributes, etd_id: 1}
     end
 
     assert_redirected_to content_path(assigns(:content))
@@ -26,9 +26,9 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should not create content" do
     assert_no_difference('Content.count') do
-      post :create, content: {}, etd_id: 1
+      post :create, {content: {}, etd_id: 1}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show content" do
@@ -48,7 +48,7 @@ class ContentsControllerTest < ActionController::TestCase
 
   test "should not update content" do
     put :update, id: @content.to_param, content: {bound: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy content" do

@@ -28,7 +28,7 @@ class DocumentTypesControllerTest < ActionController::TestCase
     assert_no_difference('DocumentType.count') do
       post :create, document_type: {}
     end
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should show document_type" do
@@ -48,7 +48,7 @@ class DocumentTypesControllerTest < ActionController::TestCase
 
   test "should not update document_type" do
     put :update, id: @document_type.to_param, document_type: {name: nil}
-    assert(false, "Should check for flash.")
+    assert_select "div#error_explanation"
   end
 
   test "should destroy document_type" do
