@@ -53,14 +53,14 @@ class ContentsController < ApplicationController
     @content.availability = @etd.availability
     @content.etd = @etd
     @content.bound = @etd.bound
-    #@content.mime_type = MIME::Types.of(@content.content.filename)[0] or ""
-
+    #@content.mime_type = MIME::Types.of(@content.content.file.filename)[0]
+    
     respond_to do |format|
       if @content.save
         @etd.contents << @content
-        format.html { redirect_to @content }
+        format.html { redirect_to @content, notice: 'Content was successfully created.' }
       else 
-        format.html { render :action => "new", :notice => 'You have errors.' }
+        format.html { render :action => "new"}
       end
     end
   end

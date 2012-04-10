@@ -5,11 +5,9 @@ one:
   etd_id: 1
   availability_id: 2
   bound: false
-  mime_type: text
   
 two:
   content: File.open(Rails.root.join("coverage/index.html"))
   etd_id: 1
   availability_id: 1
   bound: true
-  mime_type: text

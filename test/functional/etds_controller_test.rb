@@ -76,6 +76,9 @@ class EtdsControllerTest < ActionController::TestCase
     get :new
     assert_redirected_to login_path
 
+    get :my_etds
+    assert_redirected_to login_path
+
     get :edit, id: @etd.to_param
     assert_redirected_to login_path
 
@@ -104,15 +107,23 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should get my_etds" do
-    assert(false, "TODO")
+    get :my_etds
+    assert_response :success
+    assert_not_nil assigns(:authors_etds)
   end
 
   test "should get add_contents" do
-    assert(false, "TODO")
+    post :add_contents, id: etds(:one).to_param
+    assert_response :success
+    assert_not_nil assigns(:etd)
   end
 
   test "should add multiple contents to an ETD." do
-    assert(false, "TODO")
+    assert(false, "WIP, CarrierWave is not easy to test.")
+    assert_difference('Etd.find(etds(:one).to_param).contents.count') do
+      post :next_new, id: etds(:one).to_param, origin: "/etds/add_contents/" #TODO: Add params for CarrierWave content.
+    end
+    assert_redirected_to add_contents_to_etd_path(etds(:one))
   end
 
 end

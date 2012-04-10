@@ -23,46 +23,42 @@ class PeopleController < ApplicationController
     end
   end
 
+  # The two functions below are relics from before Devise handled authentication.
+  # They are left in for completeness, and laziness.
+
   # GET /people/new
   # GET /people/new.xml
-  def new
-    @person = Person.new
-    @ability = Ability.new(@person)
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @person }
-    end
-  end
+  #def new
+  #  @person = Person.new
+  #  @ability = Ability.new(@person)
+  #
+  #  respond_to do |format|
+  #    format.html # new.html.erb
+  #    format.xml  { render :xml => @person }
+  #  end
+  #end
+  #
+  # POST /people
+  # POST /people.xml
+  #def create
+  #  @person = Person.new(params[:person])
+  #  @person.display_name = @person.first_name + " " + @person.last_name
+  #
+  #  respond_to do |format|
+  #    if @person.save
+  #      format.html { redirect_to(@person, :notice => 'Person was successfully created.') }
+  #      format.xml  { render :xml => @person, :status => :created, :location => @person }
+  #    else
+  #      format.html { render :action => "new" }
+  #      format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # GET /people/1/edit
   def edit
-    #@session = Session.last
-    #@ability = Ability.new(@)
-    #@current_user = @session.user
     @person = Person.find(params[:id])
     @ability = Ability.new(@person)
-  end
-
-  # POST /people
-  # POST /people.xml
-  def create
-    @person = Person.new(params[:person])
-
-    #puts params.to_yaml
-    #puts @person.to_yaml
-
-    @person.display_name = @person.first_name + " " + @person.last_name
-
-    respond_to do |format|
-      if @person.save
-        format.html { redirect_to(@person, :notice => 'Person was successfully created.') }
-        format.xml  { render :xml => @person, :status => :created, :location => @person }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   # PUT /people/1

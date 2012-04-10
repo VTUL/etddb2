@@ -42,12 +42,12 @@ class ContentsControllerTest < ActionController::TestCase
   end
 
   test "should update content" do
-    put :update, id: @content.to_param, content: @content.attributes
+    put :update, {id: @content.to_param, content: @content.attributes}
     assert_redirected_to content_path(assigns(:content))
   end
 
   test "should not update content" do
-    put :update, id: @content.to_param, content: {bound: nil}
+    put :update, {id: @content.to_param, content: {bound: nil}}
     assert_select "div#error_explanation"
   end
 
@@ -59,7 +59,15 @@ class ContentsControllerTest < ActionController::TestCase
     assert_redirected_to contents_my_contents_path
   end
 
-  test "should get my_contents" do
-    assert(false, "TODO")
+  test "should get my_contents, if you are logged in." do
+    get :my_contents
+    assert_redirected_to login_path
+
+    @person = people(:one)
+    sign_in @person
+
+    get :my_contents
+    assert_response :success
+    assert_not_nil assigns(:authors_etds)
   end
 end

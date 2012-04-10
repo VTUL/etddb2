@@ -12,6 +12,9 @@ class PeopleControllerTest < ActionController::TestCase
     assert_not_nil assigns(:people)
   end
 
+  # The three tests below are relics from before Devise was handling
+  # authentication. They are left here for completeness, and laziness.
+
   #test "should get new" do
   #  get :new
   #  assert_response :success
@@ -65,11 +68,31 @@ class PeopleControllerTest < ActionController::TestCase
   end
 
   test "should get committee search page." do
-    assert(false, "TODO")
+    post :find, etd_id: etds(:one).to_param, origin: "/etds/"
+    assert_response :success
+    assert_select "form#committee_search"
+  end
+
+  test "should have people to add to your committee." do
+    post :find, etd_id: etds(:one).to_param, origin: "/etds/", lname: "k"
+    assert_response :success
+    assert_select "form#committee_add" do
+      assert_select "table"
+    end
+  end
+
+  test "should get the committee search page, and have people to add." do
+    post :new_committee_member, etd_id: etds(:one).to_param, origin: "/etds/", lname: "k"
+    assert_response :success
+    assert_select "form#committee_add" do
+      assert_select "table"
+    end
   end
 
   test "should add a committee member." do
-    assert(false, "TODO")
+    assert_difference('Etd.find(etds(:one).to_param).people_roles.count') do
+      post :add_committee, etd_id: etds(:one).to_param, origin: "/etds/", committee: people(:one).id, committee_type: "Committee Member"
+    end
+    assert_redirected_to etd_path(etds(:one))
   end
-
 end
