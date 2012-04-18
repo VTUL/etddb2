@@ -56,7 +56,7 @@ class ContentsControllerTest < ActionController::TestCase
       delete :destroy, id: @content.to_param
     end
 
-    assert_redirected_to contents_my_contents_path
+    assert_redirected_to my_contents_path
   end
 
   test "should get my_contents, if you are logged in." do
