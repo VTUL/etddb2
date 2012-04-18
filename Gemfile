@@ -3,7 +3,7 @@
 #  Added this to gemfile in branch test merge to devel to share
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -24,7 +24,7 @@ gem 'jquery-rails'
 
 #JS requirements
 gem 'execjs'
-#gem 'therubyracer'
+gem 'therubyracer'
 
 gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
