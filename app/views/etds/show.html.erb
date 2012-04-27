@@ -83,7 +83,7 @@
     <tr>
       <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
       <td><%= pr[:role] %></td>
-      <td><%= link_to 'Destroy', people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => "del_pr" %></td>
+      <td><%= link_to 'Destroy', destroy_people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
     </tr>
   <% end %>
 </table>
