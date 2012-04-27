@@ -14,10 +14,10 @@ a:link {
 	padding:0px;
 	width:758px;
 	background: none repeat scroll 0 0 #F5F5EB;
-    border-color: -moz-use-text-color #FFFFFF #FFFFFF;
-    border-right: 3px solid #FFFFFF;
-    border-style: none solid solid;
-    border-width: 0 3px 3px;
+        border-color: -moz-use-text-color #FFFFFF #FFFFFF;
+        border-right: 3px solid #FFFFFF;
+        border-style: none solid solid;
+        border-width: 0 3px 3px;
 }
 
 #footer ul li {
@@ -34,7 +34,7 @@ a:link {
 	float:left;
 	padding:7px 0px 10px 20px;
 	width:171px;
-	background:#3c5b6f url(../../images/search_bg.jpg);
+	background:#3c5b6f url(../images/search_bg.jpg);
 	margin:0;
 }
 
@@ -332,7 +332,7 @@ body {
 	margin:0 20px;
 	min-height:10in;
 	padding:0;
-	background:#9D9879 url(../../images/body_bg.jpg) repeat-x top left;
+	background:#9D9879 url(../images/body_bg.jpg) repeat-x top left;
 	font-family:Arial, Verdana, sans-serif;
 	border:0;
 	line-height:normal;  /* Peekaboo safety net for pages with broken links to ie.css. See Position is Everything */;
@@ -434,7 +434,7 @@ ul h1 {
 
 #header li a {
 	font-size:10px;
-	list-style-image:url(/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	text-decoration:none;
 	padding:0;
@@ -452,7 +452,7 @@ ul h1 {
 	color:#fff;
 	float:left;
 	display:inline;
-	background:#3c5b6f url(../../images/search_bg.jpg) repeat-y top left;
+	background:#3c5b6f url(../images/search_bg.jpg) repeat-y top left;
 	border-bottom:1px #fff solid;
 }
 
@@ -562,7 +562,7 @@ h5 {
 ol ul {
 	list-style-type:none;
 	margin-right:0;
-	list-style-image:url(/assets/img/aa/list_bullet_fw.gif);
+	list-style-image:url(../images/list_bullet_fw.gif);
 	margin-left:0;
 }
 
@@ -591,7 +591,7 @@ dl dd {
 
 #header li {
 	font-size:10px;
-	list-style-image:url(/etd-db2-0/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;
@@ -667,7 +667,7 @@ hr {
 }
 
 #header {
-	background-image:url(../../images/vt_header_screen.png);
+	background-image:url(../vt_header_screen.png);
 	background-position:left top;
 	background-repeat:no-repeat;
 	color:#fff;
@@ -720,14 +720,14 @@ ol ol ol {
 #main #search ul li a {
 	padding:0 7px;
 	color:#fff;
-	background:transparent url(../img/search_bullet.gif) no-repeat 0px 3px;
+	background:transparent url(../images/search_bullet.gif) no-repeat 0px 3px;
 }
 
 ul {
 	padding:0;
 	border:0;
 	margin:5px 15px 10px 10px;
-	list-style-image:url(/assets/image/nav_bullet_fw.gif);
+	list-style-image:url(../images/nav_bullet_fw.gif);
 }
 
 ul h4 {
@@ -797,7 +797,7 @@ ul h3 {
 	color:#666;
 	clear:both;
 	width:758px;
-	background:#edeada url(../../images/related_links_top.gif) no-repeat top left;
+	background:#edeada url(../images/related_links_top.gif) no-repeat top left;
 	padding-top:5px;
 	font-weight:bold;
 	text-align:center;
@@ -893,7 +893,7 @@ form ol {
 }
 
 #sub-header-inside {
-	background-image:url(../../images/etd_banner.jpg);
+	background-image:url(../etd_banner.jpg);
 	background-repeat:no-repeat;
 	float:right;
 	height:77px;
@@ -951,7 +951,7 @@ form ol {
 
 #header ul {
 	font-size:10px;
-	list-style-image:url(/etd-db2-0/assets/img/nav_bullet_fw_white.gif);
+	list-style-image:url(../images/nav_bullet_fw_white.gif);
 	color:#FFFFFF;
 	padding:0;
 	font-weight:bold;

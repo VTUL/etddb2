@@ -44,28 +44,28 @@ class PeopleControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @person.to_param
-    assert_response :success
-  end
+  #test "should get edit" do
+  #  get :edit, id: @person.to_param
+  #  assert_response :success
+  #end
 
-  test "should update person" do
-    put :update, id: @person.to_param, person: @person.attributes
-    assert_redirected_to person_path(assigns(:person))
-  end
+  #test "should update person" do
+  #  put :update, id: @person.to_param, person: @person.attributes
+  #  assert_redirected_to person_path(assigns(:person))
+  #end
 
-  test "should not update person" do
-    put :update, id: @person.to_param, person: {email: nil}
-    assert_select "div#error_explanation"
-  end
+  #test "should not update person" do
+  #  put :update, id: @person.to_param, person: {email: nil}
+  #  assert_select "div#error_explanation"
+  #end
 
-  test "should destroy person" do
-    assert_difference('Person.count', -1) do
-      delete :destroy, id: @person.to_param
-    end
-
-    assert_redirected_to people_path
-  end
+  #test "should destroy person" do
+  #  assert_difference('Person.count', -1) do
+  #    delete :destroy, id: @person.to_param
+  #  end
+  #
+  #  assert_redirected_to people_path
+  #end
 
   test "should get committee search page." do
     post :find, etd_id: etds(:one).to_param, origin: "/etds/"
