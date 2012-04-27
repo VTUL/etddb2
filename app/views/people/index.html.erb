@@ -20,7 +20,7 @@
     <td><%=h person.pid %></td>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', destroy_person_path(person), :confirm => 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>

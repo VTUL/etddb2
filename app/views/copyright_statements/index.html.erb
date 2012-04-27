@@ -12,7 +12,7 @@
     <td><%=h copyright_statement.retired %></td>
     <td><%= link_to 'Show', copyright_statement %></td>
     <td><%= link_to 'Edit', edit_copyright_statement_path(copyright_statement) %></td>
-    <td><%= link_to 'Destroy', copyright_statement, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', destroy_copyright_statement_path(copyright_statement), :confirm => 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>

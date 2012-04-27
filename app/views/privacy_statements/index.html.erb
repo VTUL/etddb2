@@ -15,7 +15,7 @@
     <td><%= privacy_statement.retired %></td>
     <td><%= link_to 'Show', privacy_statement %></td>
     <td><%= link_to 'Edit', edit_privacy_statement_path(privacy_statement) %></td>
-    <td><%= link_to 'Destroy', privacy_statement, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= button_to 'Destroy', destroy_privacy_statement_path(privacy_statement), :confirm => 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>

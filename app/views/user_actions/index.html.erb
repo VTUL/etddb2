@@ -10,7 +10,7 @@
     <td><%=h user_action.name %></td>
     <td><%= link_to 'Show', user_action %></td>
     <td><%= link_to 'Edit', edit_user_action_path(user_action) %></td>
-    <td><%= link_to 'Destroy', user_action, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', destroy_user_action_path(user_action), :confirm => 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>

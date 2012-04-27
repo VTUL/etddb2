@@ -13,6 +13,7 @@
     <td><%= link_to 'Show', department %></td>
     <td><%= link_to 'Edit', edit_department_path(department) %></td>
     <td><%= link_to 'Destroy', department, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', destroy_department_path(depatment), :confirm => 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>
