@@ -40,7 +40,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :degrees, :except => :destroy
   post '/degrees/:id/delete', :to => 'degrees#destroy', :as => :destroy_degree
   resources :departments, :except => :destroy
-  post '/departments/:id/delete', :to => 'departments#destroy', :as => :destroy_deparmtent
+  post '/departments/:id/delete', :to => 'departments#destroy', :as => :destroy_department
   resources :provenances, :except => :destroy
   post '/provenances/:id/delete', :to => 'provenances#destroy', :as => :destroy_provenance
   resources :availabilities, :except => :destroy
