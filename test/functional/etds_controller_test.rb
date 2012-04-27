@@ -118,7 +118,7 @@ class EtdsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:etd)
   end
 
-  test "should add multiple contents to an ETD." do
+  test "should add multiple contents (save_contents) to an ETD." do
     assert(false, "WIP, CarrierWave is not easy to test.")
     assert_difference('Etd.find(etds(:one).to_param).contents.count') do
       post :next_new, id: etds(:one).to_param, origin: "/etds/add_contents/" #TODO: Add params for CarrierWave content.
