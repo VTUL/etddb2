@@ -126,4 +126,9 @@ class EtdsControllerTest < ActionController::TestCase
     assert_redirected_to add_contents_to_etd_path(etds(:one))
   end
 
+  test "should submit the etd for review." do
+    post :submit, id: @etd.to_param
+    assert_response :success
+  end
+
 end
