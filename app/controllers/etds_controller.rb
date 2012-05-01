@@ -195,14 +195,15 @@ class EtdsController < ApplicationController
   # GET /etd/submit/1
   def submit
     @etd = Etd.find(params[:id])
-    # Change @etd status to submitted.
-    # Add s_date
+    @etd.status = "Submitted"
+    @etd.sdate = Time.now()
 
-    # Email Author to confirm.
+    # TODO: Email Author to confirm.
     
-    # Email committee members to review @etd.
+    # TODO: Email committee members to review @etd.
 
-    # Render Confirmation page.
-    #
+    respond_to do |format|
+      format.html #submit.html.erb
+    end
   end
 end
