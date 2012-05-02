@@ -1,9 +1,8 @@
 require 'test_helper'
 
-class ApprovalMailerTest < ActionMailer::TestCase
-  tests ApprovalMailer
-
-  def test_confirm
+class EtddbMailerTest < ActionMailer::TestCase
+  test "should send submittal emails." do
+    assert(false, "under construction.")
     p = people(:one)
     email = ApprovalMailer.confirm(p).deliver
     assert !ActionMailer::Base.deliveries.empty?
