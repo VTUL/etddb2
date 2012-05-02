@@ -198,9 +198,7 @@ class EtdsController < ApplicationController
     @etd.status = "Submitted"
     @etd.sdate = Time.now()
 
-    # TODO: Email Author to confirm.
-    
-    # TODO: Email committee members to review @etd.
+    EtddbMailer.confirm_submit(@etd).deliver
 
     respond_to do |format|
       format.html #submit.html.erb
