@@ -198,7 +198,9 @@ class EtdsController < ApplicationController
     @etd.status = "Submitted"
     @etd.sdate = Time.now()
 
-    EtddbMailer.confirm_submit(@etd).deliver
+    EtddbMailer.confirm_submit_author(@etd).deliver
+    EtddbMailer.confirm_submit_school(@etd).deliver
+    EtddbMailer.confirm_submit_committee(@etd).deliver
 
     respond_to do |format|
       format.html #submit.html.erb
