@@ -31,6 +31,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   put '/etds/next_new/:id', :to => 'etds#save_contents', :as => :save_contents_to_etd
   get '/etds/add_contents/:id', :to => 'etds#add_contents', :as => :add_contents_to_etd
   post '/etds/submit/:id', :to => 'etds#submit', :as => :submit_etd
+  post '/etds/vote/:id', :to => 'etds#vote', :as => :vote_for_etd
 
   resources :contents, :except => [:new, :create, :destroy]
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
