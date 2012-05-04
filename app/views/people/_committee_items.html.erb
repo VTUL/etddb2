@@ -1,0 +1,18 @@
+<h3>Committee Etds</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Abstract</th>
+  </tr>
+
+<% @committee_etds.each do |etd| %>
+  <tr>
+    <td><%=h etd.title %></td>
+    <td><%=h etd.abstract %></td>
+    <td><%= link_to 'Show', etd_path(etd) %></td>
+    <td>APPROVAL VOTE GOES HERE</td>
+    </td>
+  </tr>
+<% end %>
+</table>
+<br />
