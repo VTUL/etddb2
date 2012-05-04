@@ -210,4 +210,28 @@ class EtdsController < ApplicationController
       format.html #submit.html.erb
     end
   end
+
+  # POST /etd/vote/1
+  def vote
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.status != "Submitted"
+        if person_signed_in?
+          pr = @etd.people_roles.where(:person_id => current_person.id).first
+          if !pr.nil? && Role.where("name LIKE 'Committee%'").map(&:id).include?(pr.role_id)
+            pr.vote = params[:vote]
+            pr.save()
+            format.html #vote.html.erb
+          else
+            # Error. You are either not part of this ETD, or at least not on it's committee.
+          end
+        else
+          # Error. Must be signed in.
+        end
+      else
+        # Error. ETD not submitted. You are either too early, or too late.
+      end
+    end
+  end
 end
