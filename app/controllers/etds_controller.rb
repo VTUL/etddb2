@@ -74,6 +74,8 @@ class EtdsController < ApplicationController
     pr.person_id = current_person.id
     pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
     @etd.people_roles << pr
+
+    @etd.cdate = Time.now()
     @etd.status = "Created"
 
     d = [params[:etd][:department_ids][:id_1]]
@@ -199,7 +201,7 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
-    @author = Person.find(etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
+    @author = Person.find(@etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
     EtddbMailer.confirm_submit_author(@etd, @author).deliver
     EtddbMailer.confirm_submit_school(@etd, @author).deliver
     EtddbMailer.confirm_submit_committee(@etd, @author).deliver
