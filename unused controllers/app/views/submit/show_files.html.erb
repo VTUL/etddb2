@@ -1,0 +1,15 @@
+<table border>
+<p>
+  <tr><th>Filename:</th>  <th>Types:</th> <th>Size:</th> <th>Availability:</th> <th>Bound:</th></tr>
+
+<% @etd.contents.each do |content| %>
+  <tr><td><%=h content.filename %></td><td> <%=h content.types %></td><td><%=h content.size %></td> <td><%=h content.availability %></td> <td><%=h content.bound %></td>
+<td><%= link_to 'Delete This File', url_for(:controller => :submit, :action => :delete_file , :id => content.id), :confirm=>"Are you sure to delete the file?"%></td></tr>
+<% end %>
+</p>
+</table>
+<%= link_to 'Back', url_for(:controller=>:submit, :action=>:show_etd,:id=>@etd.id ) %>
+<%= link_to 'Add files', url_for(:controller=>:submit,:action=>:add_files,:id=>@etd.id) %>
+<% if @etd.availability.eql? :mixed.to_s %>
+<%= link_to 'Change availability of files', url_for(:controller=>:submit, :action=>:change_file_availability,:id=>@etd.id ) %>
+<% end %> 

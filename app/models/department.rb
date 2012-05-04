@@ -5,7 +5,8 @@
 #########################################################
 
 class Department < ActiveRecord::Base
-  belongs_to :etd
+  has_and_belongs_to_many :etds
 
-  validates_presence_of :name, :id
+  validates_presence_of :name
+  validates :retired, :inclusion => {:in => [true, false], :message => "must be boolean"}
 end

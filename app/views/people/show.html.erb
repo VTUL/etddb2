@@ -1,9 +1,4 @@
 <p>
-  <b>Role:</b>
-  <%=h @person.role %>
-</p>
-
-<p>
   <b>First name:</b>
   <%=h @person.first_name %>
 </p>
@@ -19,6 +14,11 @@
 </p>
 
 <p>
+  <b>Suffix:</b>
+  <%=h @person.suffix %>
+</p>
+
+<p>
   <b>Email:</b>
   <%=h @person.email %>
 </p>
@@ -28,11 +28,6 @@
   <%=h @person.pid %>
 </p>
 
-<p>
-  <b>Suffix:</b>
-  <%=h @person.suffix %>
-</p>
 
-
-<%= link_to 'Edit', url_for(:action => :edit, :id => @person.id) %> |
-<%= link_to 'Back', url_for(:controller => 'submit', :action => 'view_committee', :id=>@person.etd_ids) %>
+<%= link_to 'Edit', edit_person_registration_path %>
+<%= link_to 'Back', people_path %>

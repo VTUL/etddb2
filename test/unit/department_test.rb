@@ -1,24 +1,25 @@
+#########################################################
+# The source codes are developed by
+# Digital Library and Archive at Virginia Tech.
+# Last updated: Mar-15-2011
+#########################################################
+
 require 'test_helper'
 
 class DepartmentTest < ActiveSupport::TestCase
-  fixtures :departments
-  # Replace this with your real tests.
-#  test "the truth" do
-#    assert true
-#  end
   test "invalid with empty attributes" do
-    department = Department.new(:name => departments(:one).name)
-    #department = Department.new
-    puts "adld#{department.name}"
+    department = Department.new
     assert !department.valid?
     assert department.errors[:name].any?
-    assert department.errors[:created_at].any?
-    assert department.errors[:updated_at].any?
- 
-#    department = Department.new(:name => departments(:two).name)
-    #department = Department.new
-#    puts "2adld#{department.name}"
-#    assert !department.valid?
-#    assert department.errors[:name].any?
+    assert department.errors[:retired].any?
+  end
+
+  test "invalid with non-boolean retired attribute." do
+    deparment = Department.new(departments(:one).attributes)
+    deparment.retired = nil
+    assert !deparment.valid?
+    assert deparment.errors[:retired].include?("must be boolean")
+    deparment.retired = false
+    assert deparment.valid?
   end
 end

@@ -1,0 +1,27 @@
+<h1>Find Person</h1>
+<%= form_tag '/people/new_committee_member', :id => "committee_search" do %>
+  <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
+  <%= hidden_field_tag(:origin, params[:origin]) %>
+  <%= label_tag(:lname, "Member's Last Name") %>
+  <%= text_field_tag(:lname) %>
+  <%= submit_tag("Find") %>
+<% end %>
+<br />
+<%= form_tag '/people/add_committee', :id => "committee_add" do %>
+  <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
+  <%= hidden_field_tag(:origin, params[:origin]) %>
+  <div id="candidates">
+    <table>
+      <% @candidates = Person.find_by_sql("SELECT 'people'.* FROM 'people' WHERE 'people'.'last_name' LIKE '%" + params[:lname] + "%'") %>
+      <% for candidate in @candidates do %>
+        <tr>
+          <td><%= radio_button_tag("committee", candidate.id) %></td>
+          <td><%= candidate.first_name + " " + candidate.last_name%></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= select_tag(:committee_type, options_for_select(['Committee Member', 'Committee Chair', 'Committee Co-Chair'])) %>
+  </div>
+  <br />
+  <%= submit_tag("Add to committee") %>
+<% end %>

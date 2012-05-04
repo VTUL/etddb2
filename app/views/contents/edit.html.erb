@@ -1,40 +1,5 @@
-<h1>Editing content</h1>
-
-<% form_for(@content) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :filename %><br />
-    <%= f.text_field :filename %>
-  </p>
-  <p>
-    <%= f.label :types %><br />
-    <%= f.text_field :types %>
-  </p>
-  <p>
-    <%= f.label :size %><br />
-    <%= f.text_field :size %>
-  </p>
-  <p>
-    <%= f.label :availability %><br />
-    <%= f.text_field :availability %>
-  </p>
-  <p>
-    <%= f.label :bound %><br />
-    <%= f.text_field :bound %>
-  </p>
-  <p>
-    <%= f.label :page_count %><br />
-    <%= f.text_field :page_count %>
-  </p>
-  <p>
-    <%= f.label :timestamp %><br />
-    <%= f.datetime_select :timestamp %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @content %> |
-<%= link_to 'Back', contents_path %>
+<%= render 'form' %>
+<br />
+<%= link_to 'Back', my_contents_path %>
+<br />
+<%= render 'contents_in_etd' %>

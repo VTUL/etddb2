@@ -1,7 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  description: MyString
+  id: 1
+  statement: Open Source.
+  retired: true
 
 two:
-  description: MyString
+  id: 2
+  statement: Full Copyright
+  retired: false

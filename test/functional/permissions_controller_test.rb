@@ -4,40 +4,46 @@ class PermissionsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:permissions)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create permission" do
-    assert_difference('Permission.count') do
-      post :create, :permission => { }
-    end
-
-    assert_redirected_to permission_path(assigns(:permission))
-  end
-
-  test "should show permission" do
-    get :show, :id => permissions(:one).to_param
-    assert_response :success
+    assert_not_nil assigns(:roles)
+    assert_not_nil assigns(:digital_objects)
+    assert_not_nil assigns(:actions)
   end
 
   test "should get edit" do
-    get :edit, :id => permissions(:one).to_param
+    get :edit
     assert_response :success
+    assert_not_nil assigns(:roles)
+    assert_not_nil assigns(:digital_objects)
+    assert_not_nil assigns(:actions)
   end
 
   test "should update permission" do
-    put :update, :id => permissions(:one).to_param, :permission => { }
-    assert_redirected_to permission_path(assigns(:permission))
-  end
+    old_perms = Set[]
+    for perm in Permission.all
+      old_perms << "#{perm.role_id}_#{perm.digital_object_id}_#{perm.user_action_id}"
+    end
 
-  test "should destroy permission" do
+    @perm_params = {}
+    for perm in old_perms
+      @perm_params[perm] = "true"
+    end
+
+    if @perm_params.has_key?("6_9_4")
+      assert(false, "Our 'new' permission is already taken.")
+    end
+
+    @perm_params["6_9_4"] = "true"
+
+    assert_difference('Permission.count') do
+      post :update, perms: @perm_params
+    end
+    
+    assert_redirected_to permissions_path
+
+    @perm_params["6_9_4"] = "false"
+
     assert_difference('Permission.count', -1) do
-      delete :destroy, :id => permissions(:one).to_param
+      post :update, perms: @perm_params
     end
 
     assert_redirected_to permissions_path

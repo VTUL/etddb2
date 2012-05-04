@@ -1,0 +1,8 @@
+<div id="footer">
+  <ul class="nav">
+    <li <%= "class='selected'" if params["action"] == "dev" %>><%= link_to "Development", '/dev' %></li>
+    <li <%= "class='selected'" if params["action"] == "contact" %>><%= link_to "Contact Us", '/contact' %></li>
+  </ul>
+  <br>
+  <p class="small">URL: <%= link_to %></p>
+</div>

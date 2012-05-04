@@ -1,11 +1,9 @@
-<h1>New person</h1>
+<h1>Enter a new person</h1>
 
-<% form_for(@person) do |f| %>
-  <%= f.error_messages %>
-
+<%= form_for(@person) do |f| %>
   <p>
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
+    <!------------------------>
+    <!------------------------>
   </p>
   <p>
     <%= f.label :first_name %><br />
@@ -20,16 +18,16 @@
     <%= f.text_field :last_name %>
   </p>
   <p>
+    <%= f.label :suffix %><br />
+    <%= f.text_field :suffix %>
+  </p>
+  <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
   <p>
     <%= f.label :pid %><br />
     <%= f.text_field :pid %>
-  </p>
-  <p>
-    <%= f.label :suffix %><br />
-    <%= f.text_field :suffix %>
   </p>
   <p>
     <%= f.submit 'Create' %>

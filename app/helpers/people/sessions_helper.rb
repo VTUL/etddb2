@@ -1,0 +1,2 @@
+module People::SessionsHelper
+end

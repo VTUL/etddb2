@@ -1,52 +1,35 @@
-<h1>Listing etds</h1>
+<h1>ETDs</h1>
+<div id="special_search">
+  <form>
+    <input type="text" name="keywords" value="Search ETDs" />
+    <input type="submit" value="Go" />
+  </form>
+  <br>
+</div>
+
+<% if person_signed_in? %>
+  <div>
+    <h3><%= link_to "My Etds", my_etds_path %></h3>
+  </div>
+<% end %>
 
 <table>
   <tr>
-    <th>Degree</th>
-    <th>Department</th>
-    <th>Dtype</th>
     <th>Title</th>
     <th>Abstract</th>
-    <th>Availability</th>
-    <th>Availability description</th>
-    <th>Copyright statement</th>
-    <th>Ddate</th>
-    <th>Sdate</th>
-    <th>Adate</th>
-    <th>Cdate</th>
-    <th>Rdate</th>
-    <th>Pid</th>
-    <th>Url</th>
-    <th>Timestamp</th>
-    <th>Bound</th>
   </tr>
 
 <% @etds.each do |etd| %>
   <tr>
-    <td><%=h etd.degree %></td>
-    <td><%=h etd.department %></td>
-    <td><%=h etd.dtype %></td>
     <td><%=h etd.title %></td>
     <td><%=h etd.abstract %></td>
-    <td><%=h etd.availability %></td>
-    <td><%=h etd.availability_description %></td>
-    <td><%=h etd.copyright_statement %></td>
-    <td><%=h etd.ddate %></td>
-    <td><%=h etd.sdate %></td>
-    <td><%=h etd.adate %></td>
-    <td><%=h etd.cdate %></td>
-    <td><%=h etd.rdate %></td>
-    <td><%=h etd.pid %></td>
-    <td><%=h etd.url %></td>
-    <td><%=h etd.timestamp %></td>
-    <td><%=h etd.bound %></td>
     <td><%= link_to 'Show', etd %></td>
     <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-    <td><%= link_to 'Destroy', etd, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', destroy_etd_path(etd), :confirm => 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New etd', new_etd_path %>
+<%= link_to 'New ETD', new_etd_path %>

@@ -1,88 +1,102 @@
 <p>
   <b>Degree:</b>
-  <%=h @etd.degree %>
+  <%=h @etd.degree.name %>
 </p>
-
 <p>
-  <b>Department:</b>
-  <%=h @etd.department %>
+  <b>Departments:</b><br />
+  <% for dept in @etd.departments do %>
+    <%=h dept.name %><br />
+  <% end %>
 </p>
-
 <p>
-  <b>Dtype:</b>
-  <%=h @etd.dtype %>
+  <b>Document Type:</b>
+  <%=h @etd.document_type.name %>
 </p>
-
 <p>
   <b>Title:</b>
   <%=h @etd.title %>
 </p>
-
 <p>
   <b>Abstract:</b>
   <%=h @etd.abstract %>
 </p>
-
 <p>
   <b>Availability:</b>
-  <%=h @etd.availability %>
+  <%=h @etd.availability.name %>
+  <%=h @etd.availability.description %>
 </p>
-
-<p>
-  <b>Availability description:</b>
-  <%=h @etd.availability_description %>
-</p>
-
 <p>
   <b>Copyright statement:</b>
-  <%=h @etd.copyright_statement %>
+  <%=h @etd.copyright_statement.statement %>
 </p>
-
 <p>
   <b>Ddate:</b>
   <%=h @etd.ddate %>
 </p>
-
 <p>
   <b>Sdate:</b>
   <%=h @etd.sdate %>
 </p>
-
 <p>
   <b>Adate:</b>
   <%=h @etd.adate %>
 </p>
-
 <p>
   <b>Cdate:</b>
   <%=h @etd.cdate %>
 </p>
-
 <p>
   <b>Rdate:</b>
   <%=h @etd.rdate %>
 </p>
-
-<p>
-  <b>Pid:</b>
-  <%=h @etd.pid %>
-</p>
-
 <p>
   <b>Url:</b>
   <%=h @etd.url %>
 </p>
-
-<p>
-  <b>Timestamp:</b>
-  <%=h @etd.timestamp %>
-</p>
-
 <p>
   <b>Bound:</b>
   <%=h @etd.bound %>
 </p>
-
-
+<p>
+<table class="outlined">
+  <tr>
+    <th>Uploaded Files:</th>
+    <th>File Size:</th>
+    <th></th>
+  </tr>
+  <% for c in @etd.contents do %>
+    <tr>
+      <td><%= c.content.file.filename %></td>
+      <td><%= c.content.file.size %></td>
+    </tr>
+  <% end %>
+</table>
+<%= button_to "Add More Content", {:action => :add_contents}, :method => :get %>
+</p>
+<p>
+<table class="outlined">
+  <tr>
+    <th>Person:</th>
+    <th>Role:</th>
+  </tr>
+  <% for pr in @prs do %>
+    <tr>
+      <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
+      <td><%= pr[:role] %></td>
+      <td><%= link_to 'Destroy', destroy_people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
+    </tr>
+  <% end %>
+</table>
+<%= form_tag(:controller => "people", :action => "find") do %>
+  <%= hidden_field_tag(:etd_id, @etd.id) %>
+  <%= hidden_field_tag(:origin, '/etds/') %>
+  <%= submit_tag "Add New Committee Member" %>
+<% end %>
+</p><br />
 <%= link_to 'Edit', edit_etd_path(@etd) %> |
 <%= link_to 'Back', etds_path %>
+<script>
+$('.del_pr').bind('ajax:success', function() {  
+    $(this).closest('tr').fadeOut();  
+});
+</script>

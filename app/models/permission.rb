@@ -5,9 +5,9 @@
 #########################################################
 
 class Permission < ActiveRecord::Base
-  has_many :digital_objects 
-  has_many :actions
-  has_many :people
- 
-  validates_presence_of :id
+  belongs_to :digital_object
+  belongs_to :user_action
+  belongs_to :role
+
+  validates_presence_of :role_id, :user_action_id, :digital_object_id
 end

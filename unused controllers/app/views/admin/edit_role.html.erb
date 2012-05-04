@@ -1,0 +1,15 @@
+<h1>Editing role</h1>
+<% if @ability.can? :assign_roles, @person %>
+<% form_for(@role) do |f| %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', url_for(:controller=>:admin, :action=>:show_role, :id=>@role.id) %> |
+<%= link_to 'Back', url_for(:controller=>:admin, :action=>:index_role) %>
+<% end %>

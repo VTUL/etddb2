@@ -1,47 +1,42 @@
 #########################################################
 # The source codes are developed by
 # Digital Library and Archive at Virginia Tech.
-# Last updated: Feb-16-2011
+# Last updated: Mar-15-2011
 #########################################################
 
 class Content < ActiveRecord::Base
   belongs_to :etd
-  validates_presence_of :filename, :size, :availability, :types, :bound
-  validates_numericality_of :size 
- # validates_format_of :filename,
- #                     :with => %r{([A-Z]([A-Z]|[a-z])*)(_([a-z]|[A-Z])+)*(_[D|T])(_([0-9]{4}))\.(([a-z]|[A-Z]){3})},
- #                     :message => 'must have these component <Last name>_<first (and) middle initials>_T or D_<yyyy of defense' 
+  belongs_to :availability
+  
+  # Old Paperclip mountings/validations
+  #has_attached_file :content, :storage => :filesystem, :path => ":rails_root/public/bin/submitted/:filename"
+  #validates_attachment_presence :content
+  #validates_attachment_size :content, :less_than => 512.megabytes
+  
+  # New Carrierwave mountings
+  mount_uploader :content, ContentUploader
 
-  validates_format_of :types,
-                      :with => /^image/,
-                      :message => "--- you can only upload pictures"
+  validates_presence_of :availability_id, :etd_id
+  validates :bound, :inclusion => {:in => [true, false], :message => "must be boolean"}
+  validates_integrity_of :content
+  validates_processing_of :content
+end
 
-  def uploaded_picture=(content_field)
-    self.filename = base_part_of(content_field.original_filename)
-    self.types = content_field.content_type.chomp
-    #self.data = picture_field.read
-    self.availability = 'unrestricted'
-    self.size = 10000
-    self.bound = 'no'
-  end
-
-  def base_part_of(file_name)
-    File.basename(file_name).gsub(/[^\w._-]/, '' )
-  end
-
-  def self.find_contents_for_view(id)
-    @etd=Etd.find(:first, :conditions => "id= '#{id}'")
-    @contents=@etd.contents
-  end 
+class Audio < Content
+  validates_presence_of :duration
+  validates_numericality_of :duration
 end
 
 class Document < Content
   validates_presence_of :page_count
-  validates_numericality_of :page_count   
+  validates_numericality_of :page_count
+end
+
+class Picture < Content
+  validates_presence_of :dimensions
 end
 
 class Video < Content
-end
-
-class Audio < Content
+  validates_presence_of :duration, :dimensions
+  validates_numericality_of :duration
 end

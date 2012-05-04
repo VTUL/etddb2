@@ -1,20 +1,6 @@
 <h1>Editing provenance</h1>
 
-<% form_for(@provenance) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :creator %><br />
-    <%= f.text_field :creator %>
-  </p>
-  <p>
-    <%= f.label :notice %><br />
-    <%= f.text_field :notice %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
 <%= link_to 'Show', @provenance %> |
 <%= link_to 'Back', provenances_path %>

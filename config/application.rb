@@ -4,7 +4,12 @@ require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  # Bundler.require *Rails.groups(:assets => %w(development test))
+  # If you want your assets lazily compiled in production, use this line
+  Bundler.require(:default, :assets, Rails.env)
+end
 
 module NewVtEtdUpgrd
   class Application < Rails::Application
@@ -38,8 +43,19 @@ module NewVtEtdUpgrd
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+<<<<<<< HEAD
     # Please configure it on your application.
     config.secret_token = 'a72ff0d0570381bb6f2ce2c1be97d3ce7ed111d177f4da013a
 2def039ee1eba9cff567262b05f54b51e163163cb9aa3299e15fd9084e4398089af78c5dd67ded';
+=======
+    config.secret_token = 'a72ff0d0570381bb6f2ce2c1be97d3ce7ed111d177f4da013
+a2def039ee1eba9cff567262b05f54b51e163163cb9aa3299e15fd9084e4398089af78c5dd67ded';
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+>>>>>>> b7d5a72fbe30d7fbe42acdd877d12b69eb094395
   end
 end

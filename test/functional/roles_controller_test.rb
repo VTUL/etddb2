@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
+  setup do
+    @role = roles(:one)
+    @person = people(:one)
+    sign_in @person
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,30 +20,42 @@ class RolesControllerTest < ActionController::TestCase
 
   test "should create role" do
     assert_difference('Role.count') do
-      post :create, :role => { }
+      post :create, role: @role.attributes
     end
 
     assert_redirected_to role_path(assigns(:role))
   end
 
+  test "should not create role" do
+    assert_no_difference('Role.count') do
+      post :create, role: {}
+    end
+    assert_select "div#error_explanation"
+  end
+
   test "should show role" do
-    get :show, :id => roles(:one).to_param
+    get :show, id: @role.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => roles(:one).to_param
+    get :edit, id: @role.to_param
     assert_response :success
   end
 
   test "should update role" do
-    put :update, :id => roles(:one).to_param, :role => { }
+    put :update, id: @role.to_param, role: @role.attributes
     assert_redirected_to role_path(assigns(:role))
+  end
+
+  test "should not update role" do
+    put :update, id: @role.to_param, role: {name: nil}
+    assert_select "div#error_explanation"
   end
 
   test "should destroy role" do
     assert_difference('Role.count', -1) do
-      delete :destroy, :id => roles(:one).to_param
+      delete :destroy, id: @role.to_param
     end
 
     assert_redirected_to roles_path

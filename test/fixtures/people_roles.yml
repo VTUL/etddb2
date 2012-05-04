@@ -3,7 +3,13 @@
 one:
   person_id: 1
   role_id: 2
-
+  etd_id: 1
+  
 two:
-  person_id: 1
-  role_id: 3
+  person_id: 2
+  role_id: 2
+  etd_id: 2
+  
+three:
+  person_id: 3
+  role_id: 1

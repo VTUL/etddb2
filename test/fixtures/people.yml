@@ -1,19 +1,29 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  role: MyString
-  first_name: MyString
-  middle_name: MyString
-  last_name: MyString
-  email: MyString
-  pid: MyString
-  suffix: MyString
+  id: 1
+  first_name: Collin
+  last_name: Brittle
+  email: rotated8@vt.edu
+  pid: rotated8
 
 two:
-  role: MyString
-  first_name: MyString
-  middle_name: MyString
-  last_name: MyString
-  email: MyString
-  pid: MyString
-  suffix: MyString
+  id: 2
+  first_name: Sung Hee
+  last_name: Park
+  email: shpark@vt.edu
+  pid: shpark
+
+three:
+  id: 3
+  first_name: Kimberli
+  last_name: Weeks
+  email: kdweeks@vt.edu
+  pid: kdweeks
+  
+Gail:
+  id: 4
+  first_name: Gail
+  last_name: McMillan
+  email: gailmac@vt.edu
+  pid: gailmac

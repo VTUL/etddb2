@@ -1,0 +1,46 @@
+<h1>Add new permission</h1>
+
+<% for role1 in @roles %>
+<tr>
+<b> <%= role1.name.humanize %>
+</tr>
+<% form_for @permission, :url => {:action=>"create_permission"} do |f| %>
+<table border="1">
+  <tr>
+    <td>
+    Digital Objects\Actions 
+    </td>
+    <% for action1 in @array_actions %>
+    <td>
+      <%= action1.humanize %> 
+    </td>
+    <% end %>
+  <tr>
+  
+  <% f.label :action %>
+  <% if @ability.can? :assign_permission, Permission %>
+    <% for digital_object1 in @digital_objects %>
+    <tr>
+    <td>
+    <%= digital_object1.name.humanize %>
+    </td>
+    <% for action1 in @actions %>
+      <td>
+      <%= check_box_tag "permission[{action1.id}][do#{digital_object1.id}]", "#{action1.id} * #{digital_object1.id}", @permission.action.nil?  %>
+      <%#=h "#{action1.humanize} ,#{digital_object1.humanize}"%><br />
+      <%#= hidden_field_tag 'collected_input', '', :onchange => "alert('Input collected!')" %>
+	  <% f.label :action %>
+      </td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
+  <p>
+    <%= f.submit 'Create_Permission' %>
+  </p>
+<% end %>
+<% end %>
+<% end %>
+
+
+<%= link_to 'Back', url_for(:controller=>:admin, :action=>:index_permission) %>

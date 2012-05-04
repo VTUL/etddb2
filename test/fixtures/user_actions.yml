@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+Create:
+  name: Create
+
+Read:
+  name: Read
+
+Update:
+  name: Update
+  
+Delete:
+  name: Delete

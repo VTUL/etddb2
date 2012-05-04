@@ -1,9 +1,8 @@
 class CreateCopyrightStatements < ActiveRecord::Migration
   def self.up
     create_table :copyright_statements do |t|
-      t.integer :etd_id
-
-      t.string :description
+      t.string :statement
+      t.boolean :retired
 
       t.timestamps
     end

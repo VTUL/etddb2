@@ -1,0 +1,59 @@
+<%= form_for @content do |f| %>
+  <% if @content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+
+      <ul>
+      <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label(:content)%><br />
+    <%= f.file_field(:content)%>
+  </div>
+
+  <div class="field">
+    <%= f.label(:title) %><br />
+    <%= f.text_field(:title) %>
+  </div>
+  <div class="field">
+    <%= f.label(:description) %><br />
+    <%= f.text_area(:description) %>
+  </div>
+  <div class="field">
+    <%= f.label(:page_count) %><br />
+    <%= f.text_field(:page_count) %>
+  </div>
+  <div class="field">
+    <%= f.label(:duration) %><br />
+    <%= f.text_field(:duration) %>
+  </div>
+  <div class="field">
+    <%= f.label(:dimensions) %><br />
+    <%= f.text_field(:dimensions) %>
+  </div>
+
+  <% if @etd.availability.name == "Mixed" %>
+  <div class="field">
+    <%= f.label(:availability_id, "Availability") %>
+    <table>
+      <% for avail in Availability.where(:retired => false) do %>
+        <% if avail.name != "Mixed" %>
+        <tr>
+          <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
+          <td valign='top' align='right'><%= avail.name %>:</td>
+          <td valign='top'><%= avail.description %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+  <% end %>
+
+  <%=h hidden_field_tag('etd_id', @etd.id) %>
+  <%= f.submit %>
+<% end %>

@@ -1,6 +1,10 @@
 require 'test_helper'
 
-class PersonRolesControllerTest < ActionController::TestCase
+class PeopleRolesControllerTest < ActionController::TestCase
+  setup do
+    #TODO
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -12,15 +16,22 @@ class PersonRolesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create person_role" do
-    anssert_difference('PersonRole.count') do
-      post :create, :person_role => { }
+  test "should create people_role" do
+    assert_difference('PeopleRole.count') do
+      post :create, :people_role => {:person_id=>"1",:role_id=>"1" }
     end
 
-    assert_redirected_to people_roles_path(assigns(:person_role))
+    assert_redirected_to people_role_path(assigns(:people_role))
   end
 
-  test "should show person_role" do
+  test "should not create people_role" do
+    assert_no_difference('PeopleRole.count') do
+      post :create, :people_role => {}
+    end
+    assert_select "div#error_explanation"
+  end
+
+  test "should show people_role" do
     get :show, :id => people_roles(:one).to_param
     assert_response :success
   end
@@ -30,13 +41,18 @@ class PersonRolesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update person_role" do
-    put :update, :id => people_roles(:one).to_param, :person_role => { }
-    assert_redirected_to people_roles_path(assigns(:person_role))
+  test "should update people_role" do
+    put :update, :id => people_roles(:one).to_param, :people_role => {:person_id => 3}
+    assert_redirected_to people_role_path(assigns(:people_role))
   end
 
-  test "should destroy person_role" do
-    assert_difference('PersonRole.count', -1) do
+  test "should not update people_role" do
+    put :update, :id => people_roles(:one).to_param, :people_role => {:person_id => nil}
+    assert_select "div#error_explanation"
+  end
+
+  test "should destroy people_role" do
+    assert_difference('PeopleRole.count', -1) do
       delete :destroy, :id => people_roles(:one).to_param
     end
 

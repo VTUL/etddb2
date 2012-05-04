@@ -1,0 +1,23 @@
+<h2>Log In</h2>
+<p>Enter your Virginia Tech PID (username) and password. Note that you
+must use the PID you were originally assigned, and not any aliases you
+may have created. You can get help with PIDs through <a href="http://www.4help.vt.edu/">
+4Help</a> (including forgotten passwords or deactivated accounts).</p>
+
+<p>Your browser must accept <%= link_to "cookies", '/authorhelp#cookies' %> to continue the submission process.</p>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div><%= f.label :pid %><br />
+  <%= f.text_field :pid %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+  <% end -%>
+
+  <div><%= f.submit "Sign in" %></div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

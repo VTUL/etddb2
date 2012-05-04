@@ -1,18 +1,35 @@
 <h1>Listing permissions</h1>
 
-<table>
-  <tr>
-  </tr>
-
-<% @permissions.each do |permission| %>
-  <tr>
-    <td><%= link_to 'Show', permission %></td>
-    <td><%= link_to 'Edit', edit_permission_path(permission) %></td>
-    <td><%= link_to 'Destroy', permission, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% for a_role in @roles %>
+  <p><b> <%= a_role.name.humanize %> </b>
+  <table border="1">
+    <tr>
+      <td>
+        Digital Objects\Actions
+      </td>
+      <% for an_action in @actions %>
+        <td>
+          <%= an_action.name.humanize %>
+        </td>
+      <% end %>
+    </tr>
+    <% for a_digital_object in @digital_objects %>
+      <tr>
+        <td>
+          <%= a_digital_object.name.humanize %>
+        </td>
+        <% for an_action in @actions %>
+          <% checked = Permission.exists?(:user_action_id => an_action.id, :role_id => a_role.id, :digital_object_id => a_digital_object.id) %>
+          <td>
+            <%= check_box :perms, "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", {:checked => checked, :disabled => true}, true, false%>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  </p>
+  <br />
 <% end %>
-</table>
 
-<br />
 
-<%= link_to 'New permission', new_permission_path %>
+<p><%= link_to 'Edit', '/permissions/edit' %></p>

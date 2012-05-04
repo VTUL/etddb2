@@ -22,10 +22,22 @@
 
 # Logs and databases #
 ######################
-log/*.log
+.sass-cache/
+log/*
+tmp/
+public/bin/submitted/*
+public/theses/*
 *.log
 *.sql
 *.sqlite
+*.sqlite3
+*.core
+*.pid
+
+# Configuration Files #
+#######################
+*.lock
+ETDDB.komodoproject
 
 # OS generated files #
 ######################
@@ -33,3 +45,4 @@ log/*.log
 ehthumbs.db
 Icon?
 Thumbs.db
+*.swp

@@ -1,0 +1,26 @@
+<h1>Editing permission</h1>
+<table>
+<tr>
+</tr>
+<% if @ability.can? :assign_permission, Permission %>
+<% form_for(@permission) do |f| %>
+  <% f.label :role %> 
+  <% for digital_object1 in @array_digital_objects %>
+    <tr>
+    <% for action1 in @array_actions %>
+     <td>
+     <% check_box_tag "permission[actions][]", action1, @permission.action.include?(action1) %>
+      
+        <%=h action1.humanize %><br />
+      </td>
+    <% end %> 
+    </tr>
+  <% end %> 
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+<% end %>
+
+<%= link_to 'Show', @permission %> |
+<%= link_to 'Back', permissions_path %>

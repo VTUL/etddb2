@@ -1,4 +1,5 @@
 class ContentsController < ApplicationController
+  require 'mime/types' 
   # GET /contents
   # GET /contents.xml
   def index
@@ -14,6 +15,7 @@ class ContentsController < ApplicationController
   # GET /contents/1.xml
   def show
     @content = Content.find(params[:id])
+    @etd = Etd.find(@content.etd_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,8 @@ class ContentsController < ApplicationController
   # GET /contents/new.xml
   def new
     @content = Content.new
+    @etd = Etd.find(params[:etd_id])
+    @contents = @etd.contents.find(:all)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -33,38 +37,46 @@ class ContentsController < ApplicationController
   end
 
   # GET /contents/1/edit
+  # GET /contents/1/edit.xml
   def edit
     @content = Content.find(params[:id])
+    @etd = Etd.find(@content.etd_id)
+    @contents = @etd.contents.find(:all)
   end
 
   # POST /contents
   # POST /contents.xml
   def create
+    @etd = Etd.find(params[:etd_id])
     @content = Content.new(params[:content])
 
+    @content.availability = @etd.availability
+    @content.etd = @etd
+    @content.bound = @etd.bound
+    #@content.mime_type = MIME::Types.of(@content.content.file.filename)[0]
+    
     respond_to do |format|
       if @content.save
-        format.html { redirect_to(@content, :notice => 'Content was successfully created.') }
-        format.xml  { render :xml => @content, :status => :created, :location => @content }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
+        @etd.contents << @content
+        format.html { redirect_to @content, notice: 'Content was successfully created.' }
+      else 
+        format.html { render :action => "new"}
       end
     end
   end
 
-  # PUT /contents/1
-  # PUT /contents/1.xml
+  # POST /contents/edit
+  # POST /contents/edit.xml
   def update
     @content = Content.find(params[:id])
 
     respond_to do |format|
       if @content.update_attributes(params[:content])
-        format.html { redirect_to(@content, :notice => 'Content was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to @content, notice: 'Content was successfully updated.' }
+        format.json { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @content.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @document_type.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,8 +88,25 @@ class ContentsController < ApplicationController
     @content.destroy
 
     respond_to do |format|
-      format.html { redirect_to(contents_url) }
+      format.html { redirect_to(my_contents_path) }
       format.xml  { head :ok }
     end
   end
+
+  # GET /my_contents
+  # GET /my_contents.xml
+  def my_contents
+    respond_to do |format|
+      # This should be implemented in a before_filter
+      if person_signed_in?
+        @authors_etds = current_person.etds
+
+        format.html # show_etd_by_author.html.erb
+        format.xml  { render :xml => @authors_etds , :xml => @person }
+      else
+        format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
+      end
+    end
+  end
+
 end

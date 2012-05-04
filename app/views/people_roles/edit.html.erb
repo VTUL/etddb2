@@ -1,16 +1,6 @@
-<h1>Editing person_role</h1>
+<h1>Editing people_role</h1>
 
-<% form_for(@person_role) do |f| %>
-  <%= f.error_messages %>
+<%= render 'form' %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @person_role %> |
+<%= link_to 'Show', @people_role %> |
 <%= link_to 'Back', people_roles_path %>

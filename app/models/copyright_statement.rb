@@ -5,6 +5,8 @@
 #########################################################
 
 class CopyrightStatement < ActiveRecord::Base
-  belongs_to :etd
-  validates_presence_of :description    
+  has_many :etds
+
+  validates_presence_of :statement
+  validates :retired, :inclusion => {:in => [true, false], :message => "must be boolean"}
 end

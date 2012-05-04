@@ -1,16 +1,19 @@
 class CreateContents < ActiveRecord::Migration
   def self.up
     create_table :contents do |t|
+      #t.has_attached_file :content
+      t.string :content
+      t.boolean :bound
+      t.string :title
+      t.text :description
+      t.text :mime_type
 
       t.integer :etd_id
+      t.integer :availability_id
 
-      t.string :filename
-      t.string :types
-      t.string :size
-      t.string :availability
-      t.string :bound
       t.integer :page_count
-      t.timestamp :timestamp
+      t.integer :duration
+      t.string :dimensions
 
       t.timestamps
     end

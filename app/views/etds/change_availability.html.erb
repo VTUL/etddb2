@@ -1,0 +1,16 @@
+<p>
+    If you are changing the availability of this ETD to allow parts to be accessible worldwide while others are restricted to Virginia Tech access or completely withheld from the web-based collection (option 4), you will be prompted to assign availability information for individual files once the status of the ETD has been changed.
+</p>
+<hr>
+<%= form_for @etd, :url=>{:action=>:edit, :id =>@etd.id } do |f| %>
+  <table>
+    <% for avail in Availability.all do %>
+      <tr>
+        <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
+        <td valign='top' align='right'><%= avail.name %>:</td>
+        <td valign='top'><%= avail.description %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.submit %>
+<% end %>

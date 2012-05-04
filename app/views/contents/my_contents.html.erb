@@ -1,0 +1,39 @@
+<h1><center> Pending contents</center></h1>
+
+<% @authors_etds.each do |etd| %>
+<p>
+<h3><%= etd.title %></h3>
+<table>
+  <tr>
+    <th>Filename</th>
+    <th>Type</th>
+    <th>Size (bytes)</th>
+    <th>Availability</th>
+    <th>Bound</th>
+    <th>Page Count</th>
+    <th>Duration</th>
+    <th>Dimensions</th> 
+  </tr>
+  <% etd.contents.each do |content| %>
+  <tr>
+    <td><%=h content.content.file.filename %></td>
+    <td><%=h content.content.file.content_type %></td>
+    <td><%=h content.content.file.size %></td>
+    <td><%=h content.availability.name %></td>
+    <td><%=h content.bound %></td>
+    <td><%=h content.page_count %></td>
+    <td><%=h content.duration %></td>
+    <td><%=h content.dimensions %></td> 
+    <td><%= link_to 'Show', content %></td>
+    <td><%= link_to 'Edit', edit_content_path(content) %></td>
+    <td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+  <% end %>
+</table>
+<%= form_tag('/contents/new') do |f| %>
+  <%= hidden_field_tag :etd_id, etd.id %> 
+  <%= submit_tag "Add Content" %>
+<% end %>
+</p>
+<br />
+<% end %>

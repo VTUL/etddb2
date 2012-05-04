@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Statement:</b>
+  <%= @privacy_statement.statement %>
+</p>
+
+<p>
+  <b>Retired?</b>
+  <%= @privacy_statement.retired %>
+</p>
+
+
+<%= link_to 'Edit', edit_privacy_statement_path(@privacy_statement) %> |
+<%= link_to 'Back', privacy_statements_path %>

@@ -1,7 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  id: 1
+  name: Admin
 
 two:
-  name: MyString
+  id: 2
+  name: Author
+
+three:
+  id: 3
+  name: Committee Chair
+
+four:
+  name: Committee CoChair
+
+five:
+  name: Committee Member
