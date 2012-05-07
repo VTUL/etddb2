@@ -1,33 +1,8 @@
-<p>
-  <b>First name:</b>
-  <%=h @person.first_name %>
-</p>
+<%= render 'profile' %>
+<%= render 'etd_items' %>
+<%= render 'committee_items' %>
+<%= render 'review_items' %>
+<%= render 'admin_items' %>
 
-<p>
-  <b>Middle name:</b>
-  <%=h @person.middle_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%=h @person.last_name %>
-</p>
-
-<p>
-  <b>Suffix:</b>
-  <%=h @person.suffix %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @person.email %>
-</p>
-
-<p>
-  <b>Pid:</b>
-  <%=h @person.pid %>
-</p>
-
-
-<%= link_to 'Edit', edit_person_registration_path %>
+<%= link_to 'Edit Your Profile', edit_person_registration_path %><br />
 <%= link_to 'Back', people_path %>
