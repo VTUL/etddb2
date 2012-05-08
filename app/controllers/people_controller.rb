@@ -32,7 +32,7 @@ class PeopleController < ApplicationController
       if params[:lname].nil?
         format.html { render(:action => "find") }
       else
-        format.js { render(:partial => "people/find") }
+        format.js
         format.html { render(:action => "new_committee_member") }
       end
     end
