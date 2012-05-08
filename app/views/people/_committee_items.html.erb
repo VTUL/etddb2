@@ -10,7 +10,11 @@
     <td><%=h etd.title %></td>
     <td><%=h etd.abstract %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
-    <td>APPROVAL VOTE GOES HERE</td>
+    <td>
+      <%= form_tag(vote_for_etd_path(etd)) do %>
+        <%= select_tag(:vote, options_for_select([['Approve', true], ['Reject', false]])) %>
+        <%= submit_tag('Vote') %>
+      <% end %>
     </td>
   </tr>
 <% end %>

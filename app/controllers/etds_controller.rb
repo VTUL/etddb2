@@ -216,11 +216,15 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      if @etd.status != "Submitted"
+      if @etd.status == "Submitted"
         if person_signed_in?
           pr = @etd.people_roles.where(:person_id => current_person.id).first
           if !pr.nil? && Role.where("name LIKE 'Committee%'").map(&:id).include?(pr.role_id)
-            pr.vote = params[:vote]
+            if params[:vote] == 'true'
+              pr.vote = true
+            else
+              pr.vote = false
+            end
             pr.save()
             format.html #vote.html.erb
           else
