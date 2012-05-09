@@ -12,10 +12,11 @@ class Role < ActiveRecord::Base
 
 
   has_many :permission
-  has_many :user_actions, :through=>:permission
-  has_many :digital_objects, :through=>:permission
+  has_many :user_actions, :through => :permission
+  has_many :digital_objects, :through => :permission
 
   # Validates attributes
-  validates_presence_of :name
+  validates_presence_of :name, :group
+  validates :group, :inclusion => {:in => ["Creators", "Collaborators", "Graduate School", "Administration"], :message => "must be one of our groups."}
 
 end
