@@ -2,7 +2,10 @@
   <b>Name:</b>
   <%=h @role.name %>
 </p>
-
+<p>
+  <b>Group:</b>
+  <%=h @role.group %>
+</p>
 
 <%= link_to 'Edit', edit_role_path(@role) %> |
 <%= link_to 'Back', roles_path %>
