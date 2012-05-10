@@ -63,7 +63,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :user_actions, :except => :destroy
   post '/digital_objects/:id/delete', :to => 'digital_objects#destroy', :as => :destroy_digital_object
   resources :digital_objects, :except => :destroy
-  resources :permissions, :only => [:index, :edit, :update]
+  get '/permissions', :to => 'permissions#index', :as => :permissions
+  get '/permissions/edit', :to => 'permissions#edit', :as => :edit_permissions
+  post '/permissions/edit', :to => 'permissions#update', :as => :update_permissions
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

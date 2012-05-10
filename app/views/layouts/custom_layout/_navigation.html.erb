@@ -1,0 +1,26 @@
+<div id="navigation">
+  <h3>DEV NAVIGATION:</h3>
+  <p>
+    <% if person_signed_in? %>
+      <li>
+        <%= link_to('My Profile', person_path(current_person)) %>
+      </li>
+      <li>
+        <%= link_to('Edit Profile', edit_person_registration_path) %>
+      </li>
+      <li>
+        <%= link_to('Logout', destroy_person_session_path) %>        
+      </li>
+    <% else %>
+      <li>
+        <%= link_to('Register', new_person_registration_path)  %>
+      </li>
+      <li>
+        <%= link_to('Login', new_person_session_path)  %>  
+      </li>
+    <% end %>
+  </p>
+  <p>
+  <!-- Controller select box goes here. -->
+  </p>
+</div>

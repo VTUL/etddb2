@@ -1,5 +1,5 @@
 <!--[if lt IE 9]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<%= stylesheet_link_tag (File.exists?('app/assets/stylesheets/custom_styles/screen.css') ? 'custom_styles/screen' : 'screen'), :media => 'screen' %>
-		<%= stylesheet_link_tag (File.exists?('app/assets/stylesheets/custom_styles/print.css') ? 'custom_styles/print' : 'print'),  :media => 'print' %>
+		<%= stylesheet_link_tag (File.exists?('app/assets/stylesheets/custom_styles/screen_fluid.css.erb') ? 'custom_styles/screen_fluid' : 'screen'), :media => 'screen' %>
+		<%= stylesheet_link_tag (File.exists?('app/assets/stylesheets/custom_styles/print_fluid.css.erb') ? 'custom_styles/print_fluid' : 'print'),  :media => 'print' %>

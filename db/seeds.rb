@@ -126,9 +126,11 @@ end
 
 #! Beyond this point, you should not need to edit this file.
 
-roles = ["Author", "Admin", "Committee Chair", "Committee Co-Chair", "Committee Member", "Reviewer"]
+roles = [["Author", "Creators"], ["Admin", "Administration"],
+        ["Committee Chair", "Collaborators"], ["Committee Co-Chair", "Collaborators"],
+        ["Committee Member", "Collaborators"], ["Reviewer", "Graduate School"]]
 for role in roles do
-  Role.create([{ :name => role }])
+  Role.create([{ :name => role[0], :group => role[1] }])
 end
 
 digital_objects = ["Etd", "Content", "Role", "Department", "Degree", "Availability",
