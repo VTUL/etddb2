@@ -9,7 +9,7 @@
     </head>
     <body>
         <%= File.exists?("app/views/layouts/custom_layout/_header_fluid.html.erb") ? render('layouts/custom_layout/header_fluid') : render('layouts/header') %>
-        <div id="yield">
+        <div id="yield" style="padding: 0 5%;">
             <p class="notice"><%= notice %></p>
             <p class="alert"><%= alert %></p>
             <%= yield %>
