@@ -15,6 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :group %><br />
+    <%= f.select(:group, options_for_select(["Creators", "Collaborators", "Graduate School", "Administration"])) %>
+  </div>
 
   <div class="actions">
     <%= f.submit 'Submit' %>

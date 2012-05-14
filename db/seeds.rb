@@ -112,7 +112,7 @@ for copyright in retired_copyrights do
 end
 
 # Add your privacy statements here.
-privacies = ["I hereby grant to Virginia Tech and its agents the non-exclusive license to archive and make accessible, under the conditions specified below, my thesis, dissertation, or project report in whole or in part in all forms of media, now or hereafter known. I retain all other ownership rights to the copyright of the thesis, dissertation, or project report. I also retain the right to use in future works (such as articles or books) all or part of this thesis, dissertation, or project report."]
+privacies = ["<br>I hereby grant to Virginia Tech and its agents the non-exclusive license to archive and make accessible, under the conditions specified below, my thesis, dissertation, or project report in whole or in part in all forms of media, now or hereafter known. I retain all other ownership rights to the copyright of the thesis, dissertation, or project report. I also retain the right to use in future works (such as articles or books) all or part of this thesis, dissertation, or project report."]
 
 retired_privacies = ["None!"]
 
@@ -126,9 +126,11 @@ end
 
 #! Beyond this point, you should not need to edit this file.
 
-roles = ["Author", "Admin", "Committee Chair", "Committee Co-Chair", "Committee Member", "Reviewer"]
+roles = [["Author", "Creators"], ["Admin", "Administration"],
+        ["Committee Chair", "Collaborators"], ["Committee Co-Chair", "Collaborators"],
+        ["Committee Member", "Collaborators"], ["Reviewer", "Graduate School"]]
 for role in roles do
-  Role.create([{ :name => role }])
+  Role.create([{ :name => role[0], :group => role[1] }])
 end
 
 digital_objects = ["Etd", "Content", "Role", "Department", "Degree", "Availability",

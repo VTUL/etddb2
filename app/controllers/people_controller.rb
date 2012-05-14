@@ -16,6 +16,9 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
+    @my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(name: "Author").first).map(&:etd_id))
+    @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where("name LIKE 'Committee%'")).map(&:etd_id))
+    @reviewable_etds = Etd.where(status: "Submitted")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +32,7 @@ class PeopleController < ApplicationController
       if params[:lname].nil?
         format.html { render(:action => "find") }
       else
-        format.js { render :parital => "people/find" }
+        format.js
         format.html { render(:action => "new_committee_member") }
       end
     end
@@ -38,7 +41,7 @@ class PeopleController < ApplicationController
   # POST /people/new_committee_member
   def new_committee_member
     respond_to do |format|
-      format.html {render :action => "new_committee_member"}
+      format.html { render(:action => "new_committee_member") }
     end
   end
 
