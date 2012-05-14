@@ -37,7 +37,11 @@ public/theses/*
 # Configuration Files #
 #######################
 *.lock
+
+# Gems #
+########
 .bundle/*
+/local/*
 
 # OS generated files #
 ######################
