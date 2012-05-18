@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class PeopleRolesControllerTest < ActionController::TestCase
-  setup do
-    #TODO
-  end
-
   test "should get index" do
     get :index
     assert_response :success
