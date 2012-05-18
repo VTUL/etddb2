@@ -37,7 +37,11 @@ public/theses/*
 # Configuration Files #
 #######################
 *.lock
-ETDDB.komodoproject
+
+# Gems #
+########
+.bundle/*
+/local/*
 
 # OS generated files #
 ######################

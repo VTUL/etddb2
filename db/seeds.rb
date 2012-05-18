@@ -67,14 +67,16 @@ end
 
 # Add your availabilities here, in (name, description) pairs.
 availabilities = [
-  ["Unrestricted", "Release the entire work immediately for access worldwide."],
-  ["Restricted", "Release the entire work for Virginia Tech access only."],
-  ["Withheld", "Secure the entire work for patent and/or proprietary purposes for a period of one year. During this period the copyright owner also agrees not to exercise their ownership rights, including public use in works, without prior authorization from Virginia Tech. At the end of the one year period, either they or Virginia Tech may request an automatic extension for one additional year. At the end of the one year secure period, or its extension, if such is requested, the work will be handled under option 1 above, unless we request option 2 or 4 in writing."],
+  ["Unrestricted", "Provide open and immediate access to the ETD."],
+  ["Restricted", "Restrict access to the ETD for Virginia Tech only for a period of one year."],
+  ["Withheld", "Withold access to the ETD for one year for patent, security, or another reason."],
   ["Mixed", "Release the entire work for Virginia Tech access only, while at the same time releasing parts of the work for worldwide access. Parts of the work may also be completely withheld from access. You will be asked at a later point to specify the availability of each file you submit."]
 ]
 
 retired_availabilities = [
-  ["Available", "Release the entire work immediately for access worldwide."]
+  ["Available", "Release the entire work immediately for access worldwide."],
+  ["Semi-Available", "Release the entire work for Virginia Tech access only."],
+  ["Unavailable", "Secure the entire work for patent and/or proprietary purposes for a period of one year. During this period the copyright owner also agrees not to exercise their ownership rights, including public use in works, without prior authorization from Virginia Tech. At the end of the one year period, either they or Virginia Tech may request an automatic extension for one additional year. At the end of the one year secure period, or its extension, if such is requested, the work will be handled under option 1 above, unless we request option 2 or 4 in writing."]
 ]
 
 for availability in availabilities do
@@ -99,7 +101,7 @@ for doc_type in retired_doc_types do
 end
 
 # Add your copyright statements here.
-copyrights = ["Copyright Statement Goes Here."]
+copyrights = ["I hereby certify that, if appropriate, I have obtained and submitted with my ETD a written permission statemtn from the owner(s) of each third party copyrighted matter to be included in my thesis or dissertation, allowing distribution as specified above. I certify that the version I submitted is the same as that approved by my advisory committee."]
 
 retired_copyrights = ["None!"]
 
@@ -112,7 +114,7 @@ for copyright in retired_copyrights do
 end
 
 # Add your privacy statements here.
-privacies = ["I hereby grant to Virginia Tech and its agents the non-exclusive license to archive and make accessible, under the conditions specified below, my thesis, dissertation, or project report in whole or in part in all forms of media, now or hereafter known. I retain all other ownership rights to the copyright of the thesis, dissertation, or project report. I also retain the right to use in future works (such as articles or books) all or part of this thesis, dissertation, or project report."]
+privacies = ["I hereby grant to Virginia Tech and its agents the non-exclusive license to archive and make accessible, under the conditions specified above, my thesis or dissertation [in whole or in part in all forms of media], now or hereafter known. I retain all ownership rights to the copyright of the thesis or dissertation. I also retain the right to use in future works (such as articles or books) all or part of this thesis or dissertation."]
 
 retired_privacies = ["None!"]
 
@@ -126,9 +128,11 @@ end
 
 #! Beyond this point, you should not need to edit this file.
 
-roles = ["Author", "Admin", "Committee Chair", "Committee Co-Chair", "Committee Member", "Reviewer"]
+roles = [["Author", "Creators"], ["Admin", "Administration"],
+        ["Committee Chair", "Collaborators"], ["Committee Co-Chair", "Collaborators"],
+        ["Committee Member", "Collaborators"], ["Reviewer", "Graduate School"]]
 for role in roles do
-  Role.create([{ :name => role }])
+  Role.create([{ :name => role[0], :group => role[1] }])
 end
 
 digital_objects = ["Etd", "Content", "Role", "Department", "Degree", "Availability",

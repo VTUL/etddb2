@@ -1,6 +1,3 @@
-# Fixing our Comments again - kdw -- Documentation is great - shpark
-
-#  Added this to gemfile in branch test merge to devel to share
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.3'
@@ -55,7 +52,7 @@ gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
 gem 'mime-types'
 
 # For Pure ruby ldap, one day test
-#gem rubygem-net-ldap', 0.1.1
+#gem 'rubygem-net-ldap', '0.1.1'
 
 
 # Use unicorn as the web server
