@@ -15,7 +15,7 @@
   </tr>
 
 <% @etds.each do |etd| %>
-  <% p = Person.find(etd.people_roles.where(role_id: Role.where(name: "Author").first).first.person_id) %>
+  <% p = Person.find(etd.people_roles.where(role_id: Role.where(group: 'Creators').first).first.person_id) %>
   <tr>
     <td><%=h p.first_name + " " + p.last_name %></td>
     <td><%=h etd.title %></td>
