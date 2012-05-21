@@ -11,7 +11,11 @@
     <td><%=h etd.abstract %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
     <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-    <td><%= button_to 'Submit', submit_etd_path(etd), :confirm => 'Are you sure?' %></td>
+    <% if etd.status == "Created" %>
+      <td><%= button_to 'Submit', submit_etd_path(etd), :confirm => 'Are you sure?' %></td>
+    <% else %>
+      <td><%= button_to 'Submitted', submit_etd_path(etd), :disabled => true %></td>
+    <% end %>
     <td><%= button_to 'Destroy', destroy_etd_path(etd), :confirm => 'Are you sure?' %></td>
     </td>
   </tr>

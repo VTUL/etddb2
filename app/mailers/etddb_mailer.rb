@@ -5,7 +5,7 @@
 #########################################################
 
 class EtddbMailer < ActionMailer::Base
-  default :from => 'shpark@vt.edu'
+  default :from => 'etds-no-reply@scholar.lib.vt.edu'
 
   def confirm_submit_author(etd, author)
     @etd = etd
@@ -16,7 +16,8 @@ class EtddbMailer < ActionMailer::Base
   def confirm_submit_school(etd, author)
     @etd = etd
     @author = author
-    mail(:to => 'graduate.school@vt.edu', :subject => 'New ETD Submitted.')
+    mail(:to => 'cnbrittle@gmail.com', :subject => 'New ETD Submitted.')
+    # TODO: Change email address for graduate school.
   end
 
   def confirm_submit_committee(etd, author)
@@ -24,5 +25,11 @@ class EtddbMailer < ActionMailer::Base
     @author = author
     committee = Person.find(etd.people_roles.where(:role_id => Role.where(group: 'Collaborators')).pluck(:person_id))
     mail(:to => committee.map(&:email), :subject => 'New ETD Submitted.')
+  end
+
+  def committee_approved(etd)
+    @etd = etd
+    mail(:to => 'cnbrittle@gmail.com', :subject => 'A Committee has approved an ETD.')
+    # TODO: Change email address for graduate school.
   end
 end

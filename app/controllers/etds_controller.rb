@@ -227,6 +227,13 @@ class EtdsController < ApplicationController
               pr.vote = false
             end
             pr.save()
+
+            # Check if the entire Committee has approved the ETD.
+            all_trues = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:vote).uniq
+            if all_trues.include?(true) && all_trues.size == 1
+              EtddbMailer.committee_approved(@etd).deliver
+            end
+
             format.html #vote.html.erb
           else
             # Error. You are either not part of this ETD, or at least not on it's committee.
