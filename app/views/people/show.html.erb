@@ -5,7 +5,7 @@
 <% if !@committee_etds.empty? %>
   <%= render 'committee_items' %>
 <% end %>
-<% if !@reviewable_etds.empty? %>
+<% if !@person.people_roles.where(role_id: Role.where(group: 'Graduate School')).empty? %>
   <%= render 'review_items' %>
 <% end %>
 <% if !@person.people_roles.where(role_id: Role.where(group: 'Administration')).empty? %>
