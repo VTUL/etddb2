@@ -72,7 +72,8 @@ class EtdsController < ApplicationController
 
     pr = PeopleRole.new
     pr.person_id = current_person.id
-    pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
+    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first.id
+    # TODO: Is there a better way to do give the creator's role?
     @etd.people_roles << pr
 
     @etd.cdate = Time.now()
@@ -201,7 +202,7 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
-    @author = Person.find(@etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
+    @author = Person.find(@etd.people_roles.where(:role_id => Role.where(:group => 'Creators')).first.person_id)
     EtddbMailer.confirm_submit_author(@etd, @author).deliver
     EtddbMailer.confirm_submit_school(@etd, @author).deliver
     EtddbMailer.confirm_submit_committee(@etd, @author).deliver
@@ -219,7 +220,7 @@ class EtdsController < ApplicationController
       if @etd.status == "Submitted"
         if person_signed_in?
           pr = @etd.people_roles.where(:person_id => current_person.id).first
-          if !pr.nil? && Role.where("name LIKE 'Committee%'").map(&:id).include?(pr.role_id)
+          if !pr.nil? && Role.where(:group => 'Collaborators').pluck(:id).include?(pr.role_id)
             if params[:vote] == 'true'
               pr.vote = true
             else

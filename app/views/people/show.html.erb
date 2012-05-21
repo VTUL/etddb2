@@ -1,8 +1,16 @@
 <%= render 'profile' %>
-<%= render 'etd_items' %>
-<%= render 'committee_items' %>
-<%= render 'review_items' %>
-<%= render 'admin_items' %>
+<% if !@my_etds.empty? %>
+  <%= render 'etd_items' %>
+<% end %>
+<% if !@committee_etds.empty? %>
+  <%= render 'committee_items' %>
+<% end %>
+<% if !@person.people_roles.where(role_id: Role.where(group: 'Graduate School')).empty? %>
+  <%= render 'review_items' %>
+<% end %>
+<% if !@person.people_roles.where(role_id: Role.where(group: 'Administration')).empty? %>
+  <%= render 'admin_items' %>
+<% end %>
 
 <%= link_to 'Edit Your Profile', edit_person_registration_path %><br />
 <%= link_to 'Back', people_path %>
