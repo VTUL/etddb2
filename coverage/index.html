@@ -23,7 +23,7 @@
       <img src="./assets/0.5.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2012-05-21T11:59:16-04:00">2012-05-21T11:59:16-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-05-21T14:10:25-04:00">2012-05-21T14:10:25-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -142,7 +142,7 @@
       <tr>
         <td class="strong"><a href="#e43f69ec3829c1b9d749785337361a94913dac0b" class="src_link" title="app/controllers/etds_controller.rb">app/controllers/etds_controller.rb</a></td>
         <td class="yellow strong">87.9 %</td>
-        <td>241</td>
+        <td>242</td>
         <td>124</td>
         <td>109</td>
         <td>15</td>
@@ -730,7 +730,7 @@
       <tr>
         <td class="strong"><a href="#e43f69ec3829c1b9d749785337361a94913dac0b" class="src_link" title="app/controllers/etds_controller.rb">app/controllers/etds_controller.rb</a></td>
         <td class="yellow strong">87.9 %</td>
-        <td>241</td>
+        <td>242</td>
         <td>124</td>
         <td>109</td>
         <td>15</td>
@@ -5765,1000 +5765,1006 @@
         <li class="covered" data-hits="2" data-linenumber="75">
           <span class="hits">2</span>
           
-          <code class="ruby">    pr.role_id = Role.find(:first, :conditions =&gt; &quot;name = 'Author'&quot;).id</code>
+          <code class="ruby">    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: &quot;Author&quot;).first.id : Role.where(group: 'Creators').first.id</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="76">
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">    # TODO: Is there a better way to do give the creator's role?</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="77">
           <span class="hits">2</span>
           
           <code class="ruby">    @etd.people_roles &lt;&lt; pr</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="77">
+        <li class="never" data-hits="" data-linenumber="78">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="78">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    @etd.cdate = Time.now()</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="79">
           <span class="hits">2</span>
           
+          <code class="ruby">    @etd.cdate = Time.now()</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="80">
+          <span class="hits">2</span>
+          
           <code class="ruby">    @etd.status = &quot;Created&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="80">
+        <li class="never" data-hits="" data-linenumber="81">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="81">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    d = [params[:etd][:department_ids][:id_1]]</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="82">
           <span class="hits">2</span>
           
-          <code class="ruby">    if params[:etd][:department_ids][:id_2] != &quot;&quot; then</code>
+          <code class="ruby">    d = [params[:etd][:department_ids][:id_1]]</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="83">
           <span class="hits">2</span>
           
+          <code class="ruby">    if params[:etd][:department_ids][:id_2] != &quot;&quot; then</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="84">
+          <span class="hits">2</span>
+          
           <code class="ruby">      d &lt;&lt; params[:etd][:department_ids][:id_2]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
+        <li class="never" data-hits="" data-linenumber="85">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="85">
+        <li class="covered" data-hits="2" data-linenumber="86">
           <span class="hits">2</span>
           
           <code class="ruby">    @etd.department_ids = d</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="87">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="88">
           <span class="hits">2</span>
           
-          <code class="ruby">      if @etd.save</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="89">
           <span class="hits">2</span>
           
+          <code class="ruby">      if @etd.save</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="90">
+          <span class="hits">2</span>
+          
           <code class="ruby">        format.html { redirect_to(next_new_etd_path(@etd), :notice =&gt; 'Etd was successfully created.') }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="90">
+        <li class="covered" data-hits="1" data-linenumber="91">
           <span class="hits">1</span>
           
           <code class="ruby">        format.xml  { render :xml =&gt; @etd, :status =&gt; :created, :location =&gt; @etd }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
+        <li class="never" data-hits="" data-linenumber="92">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="92">
+        <li class="covered" data-hits="2" data-linenumber="93">
           <span class="hits">2</span>
           
           <code class="ruby">        format.html { render :action =&gt; &quot;new&quot;, :notice =&gt; 'You have errors.' }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="94">
           <span class="hits">1</span>
           
           <code class="ruby">        format.xml  { render :xml =&gt; @etd.errors, :status =&gt; :unprocessable_entity }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="94">
-          
-          
-          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="95">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="96">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="97">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="98">
           
           
-          <code class="ruby">  # PUT /etds/1</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="99">
           
           
+          <code class="ruby">  # PUT /etds/1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
           <code class="ruby">  # PUT /etds/1.xml</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="100">
+        <li class="covered" data-hits="1" data-linenumber="101">
           <span class="hits">1</span>
           
           <code class="ruby">  def update</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="101">
+        <li class="covered" data-hits="2" data-linenumber="102">
           <span class="hits">2</span>
           
           <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="103">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="103">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    d = [params[:etd][:department_ids][:id_1]]</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="104">
           <span class="hits">2</span>
           
-          <code class="ruby">    if params[:etd][:department_ids][:id_2] != &quot;&quot; then</code>
+          <code class="ruby">    d = [params[:etd][:department_ids][:id_1]]</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="105">
           <span class="hits">2</span>
           
+          <code class="ruby">    if params[:etd][:department_ids][:id_2] != &quot;&quot; then</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="106">
+          <span class="hits">2</span>
+          
           <code class="ruby">      d &lt;&lt; params[:etd][:department_ids][:id_2]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="106">
+        <li class="never" data-hits="" data-linenumber="107">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="107">
+        <li class="covered" data-hits="2" data-linenumber="108">
           <span class="hits">2</span>
           
           <code class="ruby">    params[:etd][:department_ids] = d</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="108">
+        <li class="never" data-hits="" data-linenumber="109">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="109">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="110">
           <span class="hits">2</span>
           
-          <code class="ruby">      if @etd.update_attributes(params[:etd])</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="111">
           <span class="hits">2</span>
           
+          <code class="ruby">      if @etd.update_attributes(params[:etd])</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="112">
+          <span class="hits">2</span>
+          
           <code class="ruby">        format.html { redirect_to(@etd, :notice =&gt; 'Etd was successfully updated.') }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="112">
+        <li class="covered" data-hits="1" data-linenumber="113">
           <span class="hits">1</span>
           
           <code class="ruby">        format.xml  { head :ok }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="113">
+        <li class="never" data-hits="" data-linenumber="114">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="114">
+        <li class="covered" data-hits="2" data-linenumber="115">
           <span class="hits">2</span>
           
           <code class="ruby">        format.html { render :action =&gt; &quot;edit&quot; }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="115">
+        <li class="covered" data-hits="1" data-linenumber="116">
           <span class="hits">1</span>
           
           <code class="ruby">        format.xml  { render :xml =&gt; @etd.errors, :status =&gt; :unprocessable_entity }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="117">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="118">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="119">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="120">
           
           
-          <code class="ruby">  # DELETE /etds/1</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="121">
           
           
+          <code class="ruby">  # DELETE /etds/1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="122">
+          
+          
           <code class="ruby">  # DELETE /etds/1.xml</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="122">
+        <li class="covered" data-hits="1" data-linenumber="123">
           <span class="hits">1</span>
           
           <code class="ruby">  def destroy</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="123">
+        <li class="covered" data-hits="3" data-linenumber="124">
           <span class="hits">3</span>
           
           <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="124">
+        <li class="never" data-hits="" data-linenumber="125">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="125">
+        <li class="covered" data-hits="3" data-linenumber="126">
           <span class="hits">3</span>
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="126">
+        <li class="never" data-hits="" data-linenumber="127">
           
           
           <code class="ruby">      # before_filter</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="127">
+        <li class="covered" data-hits="3" data-linenumber="128">
           <span class="hits">3</span>
           
           <code class="ruby">      if !person_signed_in?</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="128">
+        <li class="covered" data-hits="2" data-linenumber="129">
           <span class="hits">2</span>
           
           <code class="ruby">        format.html { redirect_to etds_path, :notice =&gt; &quot;You must log in to delete your ETDs.&quot; }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="129">
+        <li class="never" data-hits="" data-linenumber="130">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="130">
+        <li class="never" data-hits="" data-linenumber="131">
           
           
           <code class="ruby">        # Cancan</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="131">
+        <li class="covered" data-hits="2" data-linenumber="132">
           <span class="hits">2</span>
           
           <code class="ruby">        if current_person.etds.include?(@etd)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="132">
+        <li class="covered" data-hits="1" data-linenumber="133">
           <span class="hits">1</span>
           
           <code class="ruby">          for pr in @etd.people_roles do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="133">
+        <li class="covered" data-hits="1" data-linenumber="134">
           <span class="hits">1</span>
           
           <code class="ruby">            pr.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="134">
+        <li class="never" data-hits="" data-linenumber="135">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="135">
+        <li class="covered" data-hits="1" data-linenumber="136">
           <span class="hits">1</span>
           
           <code class="ruby">          for content in @etd.contents do</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="136">
+        <li class="covered" data-hits="2" data-linenumber="137">
           <span class="hits">2</span>
           
           <code class="ruby">            content.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="137">
+        <li class="never" data-hits="" data-linenumber="138">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="138">
+        <li class="covered" data-hits="1" data-linenumber="139">
           <span class="hits">1</span>
           
           <code class="ruby">          @etd.destroy</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="139">
+        <li class="covered" data-hits="2" data-linenumber="140">
           <span class="hits">2</span>
           
           <code class="ruby">          format.html { redirect_to :action =&gt; 'index', :notice =&gt; &quot;ETD Deleted.&quot; }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="140">
+        <li class="covered" data-hits="1" data-linenumber="141">
           <span class="hits">1</span>
           
           <code class="ruby">          format.xml  { head :ok }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="141">
+        <li class="never" data-hits="" data-linenumber="142">
           
           
           <code class="ruby">        else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="142">
+        <li class="covered" data-hits="2" data-linenumber="143">
           <span class="hits">2</span>
           
           <code class="ruby">          format.html { redirect_to etds_path, :notice =&gt; &quot;You cannot delete that ETD.&quot;}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="143">
-          
-          
-          <code class="ruby">        end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="144">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="145">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="146">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="147">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="148">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="149">
+          
+          
           <code class="ruby">  # GET /etds/my_etds</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="149">
+        <li class="covered" data-hits="1" data-linenumber="150">
           <span class="hits">1</span>
           
           <code class="ruby">  def my_etds</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="150">
+        <li class="covered" data-hits="2" data-linenumber="151">
           <span class="hits">2</span>
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="151">
+        <li class="never" data-hits="" data-linenumber="152">
           
           
           <code class="ruby">      # This should be implemented in a before_filter</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="152">
+        <li class="covered" data-hits="2" data-linenumber="153">
           <span class="hits">2</span>
           
           <code class="ruby">      if person_signed_in?</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="153">
+        <li class="covered" data-hits="1" data-linenumber="154">
           <span class="hits">1</span>
           
           <code class="ruby">        @authors_etds = current_person.etds</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="154">
+        <li class="never" data-hits="" data-linenumber="155">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="155">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        format.html # my_etds.html.erb</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="156">
           <span class="hits">1</span>
           
+          <code class="ruby">        format.html # my_etds.html.erb</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="157">
+          <span class="hits">1</span>
+          
           <code class="ruby">        format.xml  { render :xml =&gt; @authors_etds }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="157">
+        <li class="never" data-hits="" data-linenumber="158">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="158">
+        <li class="covered" data-hits="2" data-linenumber="159">
           <span class="hits">2</span>
           
           <code class="ruby">        format.html {redirect_to(login_path, :notice =&gt; &quot;You need to login to browse your ETDs.&quot;)}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="159">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="160">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="161">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="162">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="163">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="164">
+          
+          
           <code class="ruby">  # GET /etds/next_new/1</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="164">
+        <li class="covered" data-hits="1" data-linenumber="165">
           <span class="hits">1</span>
           
           <code class="ruby">  def next_new</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="165">
+        <li class="never" data-hits="" data-linenumber="166">
           
           
           <code class="ruby">    # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="166">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    @etd = Etd.find(params[:id])</code>
-        </li>
-      
         <li class="covered" data-hits="1" data-linenumber="167">
           <span class="hits">1</span>
           
-          <code class="ruby">    @prs = []</code>
+          <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="168">
           <span class="hits">1</span>
           
-          <code class="ruby">    for pr in @etd.people_roles do</code>
+          <code class="ruby">    @prs = []</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="169">
           <span class="hits">1</span>
           
-          <code class="ruby">      p = Person.find(pr.person_id)</code>
+          <code class="ruby">    for pr in @etd.people_roles do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="170">
           <span class="hits">1</span>
           
+          <code class="ruby">      p = Person.find(pr.person_id)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="171">
+          <span class="hits">1</span>
+          
           <code class="ruby">      @prs &lt;&lt; {:first_name =&gt; p.first_name.to_s, :last_name =&gt; p.last_name.to_s, :role =&gt; Role.find(pr.role_id).name, :pr =&gt; pr}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="171">
+        <li class="never" data-hits="" data-linenumber="172">
           
           
           <code class="ruby">    end</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="172">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="173">
           <span class="hits">1</span>
           
-          <code class="ruby">      format.html # new_next.html.erb</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="174">
+        <li class="covered" data-hits="1" data-linenumber="174">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      format.html # new_next.html.erb</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="175">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="176">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="177">
           
           
-          <code class="ruby">  # PUT /etds/next_new/1</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="178">
           
           
+          <code class="ruby">  # PUT /etds/next_new/1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="179">
+          
+          
           <code class="ruby">  # (This is used from next_new, and add_contents)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="179">
+        <li class="covered" data-hits="1" data-linenumber="180">
           <span class="hits">1</span>
           
           <code class="ruby">  def save_contents</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="180">
-          
-          
-          <code class="ruby">    @etd = Etd.find(params[:id])</code>
-        </li>
-      
         <li class="missed" data-hits="0" data-linenumber="181">
           
           
-          <code class="ruby">    if @etd.update_attributes(params[:etd])</code>
+          <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="182">
           
           
+          <code class="ruby">    if @etd.update_attributes(params[:etd])</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="183">
+          
+          
           <code class="ruby">      redirect_to params[:origin] + @etd.id.to_s, :notice =&gt; &quot;Successfully updated article.&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="183">
+        <li class="never" data-hits="" data-linenumber="184">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="184">
+        <li class="missed" data-hits="0" data-linenumber="185">
           
           
           <code class="ruby">      redirect_to params[:origin] + @etd.id.to_s</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="185">
+        <li class="never" data-hits="" data-linenumber="186">
           
           
           <code class="ruby">    end    </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="186">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="187">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="188">
           
           
-          <code class="ruby">  # GET /etds/add_contents/1</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="189">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="189">
           
-          <code class="ruby">  def add_contents</code>
+          
+          <code class="ruby">  # GET /etds/add_contents/1</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="190">
           <span class="hits">1</span>
           
+          <code class="ruby">  def add_contents</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="191">
+          <span class="hits">1</span>
+          
           <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="191">
+        <li class="never" data-hits="" data-linenumber="192">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="192">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="193">
           <span class="hits">1</span>
           
-          <code class="ruby">      format.html # add_contents.html.erb</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="194">
+        <li class="covered" data-hits="1" data-linenumber="194">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      format.html # add_contents.html.erb</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="195">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="196">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="197">
           
           
-          <code class="ruby">  # GET /etd/submit/1</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="198">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="198">
           
-          <code class="ruby">  def submit</code>
+          
+          <code class="ruby">  # GET /etd/submit/1</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="199">
           <span class="hits">1</span>
           
-          <code class="ruby">    @etd = Etd.find(params[:id])</code>
+          <code class="ruby">  def submit</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="200">
           <span class="hits">1</span>
           
-          <code class="ruby">    @etd.status = &quot;Submitted&quot;</code>
+          <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="201">
           <span class="hits">1</span>
           
-          <code class="ruby">    @etd.sdate = Time.now()</code>
+          <code class="ruby">    @etd.status = &quot;Submitted&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="202">
           <span class="hits">1</span>
           
+          <code class="ruby">    @etd.sdate = Time.now()</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="203">
+          <span class="hits">1</span>
+          
           <code class="ruby">    @etd.save()</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="203">
+        <li class="never" data-hits="" data-linenumber="204">
           
           
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="204">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    @author = Person.find(@etd.people_roles.where(:role_id =&gt; Role.where(:name =&gt; 'Author').first).first.person_id)</code>
-        </li>
-      
         <li class="covered" data-hits="1" data-linenumber="205">
           <span class="hits">1</span>
           
-          <code class="ruby">    EtddbMailer.confirm_submit_author(@etd, @author).deliver</code>
+          <code class="ruby">    @author = Person.find(@etd.people_roles.where(:role_id =&gt; Role.where(:group =&gt; 'Creators')).first.person_id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="206">
           <span class="hits">1</span>
           
-          <code class="ruby">    EtddbMailer.confirm_submit_school(@etd, @author).deliver</code>
+          <code class="ruby">    EtddbMailer.confirm_submit_author(@etd, @author).deliver</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="207">
           <span class="hits">1</span>
           
+          <code class="ruby">    EtddbMailer.confirm_submit_school(@etd, @author).deliver</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="208">
+          <span class="hits">1</span>
+          
           <code class="ruby">    EtddbMailer.confirm_submit_committee(@etd, @author).deliver</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="208">
+        <li class="never" data-hits="" data-linenumber="209">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="209">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="210">
           <span class="hits">1</span>
           
-          <code class="ruby">      format.html #submit.html.erb</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="211">
+        <li class="covered" data-hits="1" data-linenumber="211">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      format.html #submit.html.erb</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="212">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="213">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="214">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="215">
+          
+          
           <code class="ruby">  # POST /etd/vote/1</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="215">
+        <li class="covered" data-hits="1" data-linenumber="216">
           <span class="hits">1</span>
           
           <code class="ruby">  def vote</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="216">
+        <li class="missed" data-hits="0" data-linenumber="217">
           
           
           <code class="ruby">    @etd = Etd.find(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="217">
+        <li class="never" data-hits="" data-linenumber="218">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="218">
+        <li class="missed" data-hits="0" data-linenumber="219">
           
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="219">
+        <li class="missed" data-hits="0" data-linenumber="220">
           
           
           <code class="ruby">      if @etd.status == &quot;Submitted&quot;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="220">
+        <li class="missed" data-hits="0" data-linenumber="221">
           
           
           <code class="ruby">        if person_signed_in?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="221">
+        <li class="missed" data-hits="0" data-linenumber="222">
           
           
           <code class="ruby">          pr = @etd.people_roles.where(:person_id =&gt; current_person.id).first</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="222">
-          
-          
-          <code class="ruby">          if !pr.nil? &amp;&amp; Role.where(&quot;name LIKE 'Committee%'&quot;).map(&amp;:id).include?(pr.role_id)</code>
-        </li>
-      
         <li class="missed" data-hits="0" data-linenumber="223">
           
           
-          <code class="ruby">            if params[:vote] == 'true'</code>
+          <code class="ruby">          if !pr.nil? &amp;&amp; Role.where(:group =&gt; 'Collaborators').pluck(:id).include?(pr.role_id)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="224">
           
           
+          <code class="ruby">            if params[:vote] == 'true'</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="225">
+          
+          
           <code class="ruby">              pr.vote = true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="225">
+        <li class="never" data-hits="" data-linenumber="226">
           
           
           <code class="ruby">            else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="226">
+        <li class="missed" data-hits="0" data-linenumber="227">
           
           
           <code class="ruby">              pr.vote = false</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="227">
+        <li class="never" data-hits="" data-linenumber="228">
           
           
           <code class="ruby">            end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="228">
+        <li class="missed" data-hits="0" data-linenumber="229">
           
           
           <code class="ruby">            pr.save()</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="229">
+        <li class="missed" data-hits="0" data-linenumber="230">
           
           
           <code class="ruby">            format.html #vote.html.erb</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="230">
+        <li class="never" data-hits="" data-linenumber="231">
           
           
           <code class="ruby">          else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="231">
+        <li class="never" data-hits="" data-linenumber="232">
           
           
           <code class="ruby">            # Error. You are either not part of this ETD, or at least not on it's committee.</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="232">
+        <li class="never" data-hits="" data-linenumber="233">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="233">
+        <li class="never" data-hits="" data-linenumber="234">
           
           
           <code class="ruby">        else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="234">
+        <li class="never" data-hits="" data-linenumber="235">
           
           
           <code class="ruby">          # Error. Must be signed in.</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="235">
+        <li class="never" data-hits="" data-linenumber="236">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="236">
+        <li class="never" data-hits="" data-linenumber="237">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="237">
+        <li class="never" data-hits="" data-linenumber="238">
           
           
           <code class="ruby">        # Error. ETD not submitted. You are either too early, or too late.</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="238">
+        <li class="never" data-hits="" data-linenumber="239">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="239">
+        <li class="never" data-hits="" data-linenumber="240">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="240">
+        <li class="never" data-hits="" data-linenumber="241">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="241">
+        <li class="never" data-hits="" data-linenumber="242">
           
           
           <code class="ruby">end</code>
@@ -7097,13 +7103,13 @@
         <li class="covered" data-hits="1" data-linenumber="19">
           <span class="hits">1</span>
           
-          <code class="ruby">    @my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(name: &quot;Author&quot;).first).map(&amp;:etd_id))</code>
+          <code class="ruby">    @my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">    @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(&quot;name LIKE 'Committee%'&quot;)).map(&amp;:etd_id))</code>
+          <code class="ruby">    @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="21">
@@ -11135,7 +11141,7 @@
         <li class="covered" data-hits="2" data-linenumber="25">
           <span class="hits">2</span>
           
-          <code class="ruby">    committee = Person.find(etd.people_roles.where(:role_id =&gt; Role.where(&quot;name LIKE 'Committee%'&quot;)).map(&amp;:person_id))</code>
+          <code class="ruby">    committee = Person.find(etd.people_roles.where(:role_id =&gt; Role.where(group: 'Collaborators')).pluck(:person_id))</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="26">
