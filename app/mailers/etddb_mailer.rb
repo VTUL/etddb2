@@ -22,7 +22,7 @@ class EtddbMailer < ActionMailer::Base
   def confirm_submit_committee(etd, author)
     @etd = etd
     @author = author
-    committee = Person.find(etd.people_roles.where(:role_id => Role.where(group: 'Collaborators')).map(&:person_id))
+    committee = Person.find(etd.people_roles.where(:role_id => Role.where(group: 'Collaborators')).pluck(:person_id))
     mail(:to => committee.map(&:email), :subject => 'New ETD Submitted.')
   end
 end

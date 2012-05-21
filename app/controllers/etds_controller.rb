@@ -220,7 +220,7 @@ class EtdsController < ApplicationController
       if @etd.status == "Submitted"
         if person_signed_in?
           pr = @etd.people_roles.where(:person_id => current_person.id).first
-          if !pr.nil? && Role.where(:group => 'Collaborators').map(&:id).include?(pr.role_id)
+          if !pr.nil? && Role.where(:group => 'Collaborators').pluck(:id).include?(pr.role_id)
             if params[:vote] == 'true'
               pr.vote = true
             else
