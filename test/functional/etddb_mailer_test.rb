@@ -5,7 +5,7 @@ class EtddbMailerTest < ActionMailer::TestCase
     etd = etds(:one)
     author = Person.find(etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
 
-    email = EtddbMailer.confirm_submit_author(etd).deliver
+    email = EtddbMailer.confirm_submit_author(etd, author).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [author.email], email.to
@@ -17,7 +17,7 @@ class EtddbMailerTest < ActionMailer::TestCase
     etd = etds(:one)
     author = Person.find(etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
 
-    email = EtddbMailer.confirm_submit_school(etd).deliver
+    email = EtddbMailer.confirm_submit_school(etd, author).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal ['graduate.school@vt.edu'], email.to
@@ -31,7 +31,7 @@ class EtddbMailerTest < ActionMailer::TestCase
     author = Person.find(etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
     committee_emails = Person.find(etd.people_roles.where(:role_id => Role.where("name LIKE 'Committee%'")).map(&:person_id)).map(&:email)
 
-    email = EtddbMailer.confirm_submit_committee(etd).deliver
+    email = EtddbMailer.confirm_submit_committee(etd, author).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal committee_emails, email.to

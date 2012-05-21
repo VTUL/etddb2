@@ -16,7 +16,8 @@ class Role < ActiveRecord::Base
   has_many :digital_objects, :through => :permission
 
   # Validates attributes
+  groups = ["Creators", "Collaborators", "Graduate School", "Administration"]
   validates_presence_of :name, :group
-  validates :group, :inclusion => {:in => ["Creators", "Collaborators", "Graduate School", "Administration"], :message => "must be one of our groups."}
+  validates :group, :inclusion => {:in => groups, :message => "must be one of our groups."}
 
 end
