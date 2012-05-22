@@ -1,4 +1,12 @@
 <p>
+  <b>Type of Document:</b>
+  <%=h @etd.document_type.name %>
+</p>
+<p>
+  <b>Author:</b>
+  <%=h @creators.pluck(:last_name).zip( @creators.pluck(:first_name) ).map { |o| o.join(", ") } .join("; ") %>
+</p>
+<p>
   <b>Degree:</b>
   <%=h @etd.degree.name %>
 </p>
@@ -7,10 +15,6 @@
   <% for dept in @etd.departments do %>
     <%=h dept.name %><br />
   <% end %>
-</p>
-<p>
-  <b>Document Type:</b>
-  <%=h @etd.document_type.name %>
 </p>
 <p>
   <b>Title:</b>
@@ -79,12 +83,14 @@
     <th>Person:</th>
     <th>Role:</th>
   </tr>
-  <% for pr in @prs do %>
-    <tr>
-      <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
-      <td><%= pr[:role] %></td>
-      <td><%= link_to 'Destroy', destroy_people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
-    </tr>
+  <% for collab in @collabs do %>
+    <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
+      <tr>
+        <td><%= collab.first_name + " " + collab.last_name %></td>
+        <td><%= Role.find(pr.role_id).name %></td>
+        <td><%= link_to 'Destroy', destroy_people_role_path(pr), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 <%= form_tag(:controller => "people", :action => "find") do %>

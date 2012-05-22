@@ -16,11 +16,9 @@ class EtdsController < ApplicationController
   # GET /etds/1.xml
   def show
     @etd = Etd.find(params[:id])
-    @prs = []
-    for pr in @etd.people_roles do
-      p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
-    end
+    @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
+    # @collabs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
 
     respond_to do |format|
       format.html # show.html.erb
