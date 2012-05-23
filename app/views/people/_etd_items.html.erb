@@ -2,13 +2,15 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Abstract</th>
+    <th>Departments</th>
+    <th>Defense Date</th>
   </tr>
 
 <% @my_etds.each do |etd| %>
   <tr>
     <td><%=h etd.title %></td>
-    <td><%=h etd.abstract %></td>
+    <td><%=h Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
+    <td><%=h etd.ddate %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
     <% if person_signed_in? && current_person.id == @person.id %>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
