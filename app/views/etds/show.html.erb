@@ -2,27 +2,66 @@
   <b>Type of Document:</b>
   <%=h @etd.document_type.name %>
 </p>
+<% get_creators @etd do |creators| %>
+  <p>
+    <b><%= "Author".pluralize(creators.size) %>:</b>
+    <%=h creators.pluck(:last_name).zip( creators.pluck(:first_name) ).map { |o| o.join(", ") } .join("; ") %>
+  </p>
+  <p>
+    <b>Author's <%= "Email".pluralize(creators.size) %>:</b>
+    <%=h creators.pluck(:email).join(", ") %>
+  </p>
+<% end %>
 <p>
-  <b>Author:</b>
-  <%=h @creators.pluck(:last_name).zip( @creators.pluck(:first_name) ).map { |o| o.join(", ") } .join("; ") %>
-</p>
-<p>
-  <b>Degree:</b>
-  <%=h @etd.degree.name %>
-</p>
-<p>
-  <b>Departments:</b><br />
-  <% for dept in @etd.departments do %>
-    <%=h dept.name %><br />
-  <% end %>
+  <b>URN:</b>
+  <%= @etd.urn %>
 </p>
 <p>
   <b>Title:</b>
   <%=h @etd.title %>
 </p>
 <p>
-  <b>Abstract:</b>
-  <%=h @etd.abstract %>
+  <b>Degree:</b>
+  <%=h @etd.degree.name %>
+</p>
+<p>
+  <b>Departments:</b>
+  <%=h Department.where(id: @etd.departments).pluck(:name).join(", ") %>
+</p>
+<% get_collabs @etd do |collabs| %>
+  <p>
+    <b>Advisory Committee:</b>
+    <% if !collabs.empty? %>
+      <table class="outlined">
+        <tr>
+          <th>Advisor:</th>
+          <th>Role:</th>
+        </tr>
+        <% for collab in collabs do %>
+          <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
+            <tr>
+              <td><%= collab.first_name + " " + collab.last_name %></td>
+              <td><%= Role.find(pr.role_id).name %></td>
+              <td><%= link_to 'Destroy', destroy_people_role_path(pr), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+    <% end %>
+    <%= form_tag(:controller => "people", :action => "find") do %>
+      <%= hidden_field_tag(:etd_id, @etd.id) %>
+      <%= hidden_field_tag(:origin, '/etds/') %>
+      <%= submit_tag "Add New Committee Member" %>
+    <% end %>
+  </p>
+<% end %>
+<p>
+  <b>Keywords:</b><br />
+  <% # TODO: Add keywords as a bulleted list.  %>
+</p>
+<p>
+  <b>Defense Date:</b>
+  <%=h @etd.ddate %>
 </p>
 <p>
   <b>Availability:</b>
@@ -30,75 +69,29 @@
   <%=h @etd.availability.description %>
 </p>
 <p>
-  <b>Copyright statement:</b>
-  <%=h @etd.copyright_statement.statement %>
+  <b>Abstract:</b>
+  <%=h @etd.abstract %>
 </p>
 <p>
-  <b>Ddate:</b>
-  <%=h @etd.ddate %>
-</p>
-<p>
-  <b>Sdate:</b>
-  <%=h @etd.sdate %>
-</p>
-<p>
-  <b>Adate:</b>
-  <%=h @etd.adate %>
-</p>
-<p>
-  <b>Cdate:</b>
-  <%=h @etd.cdate %>
-</p>
-<p>
-  <b>Rdate:</b>
-  <%=h @etd.rdate %>
-</p>
-<p>
-  <b>Url:</b>
-  <%=h @etd.url %>
-</p>
-<p>
-  <b>Bound:</b>
-  <%=h @etd.bound %>
-</p>
-<p>
-<table class="outlined">
-  <tr>
-    <th>Uploaded Files:</th>
-    <th>File Size:</th>
-    <th></th>
-  </tr>
-  <% for c in @etd.contents do %>
+  <b>Files:</b>
+  <% if !@etd.contents.empty? %>
+  <table class="outlined">
     <tr>
-      <td><%= c.content.file.filename %></td>
-      <td><%= c.content.file.size %></td>
+      <th>File Name:</th>
+      <th>File Size:</th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
-<%= button_to "Add More Content", {:action => :add_contents}, :method => :get %>
-</p>
-<p>
-<table class="outlined">
-  <tr>
-    <th>Person:</th>
-    <th>Role:</th>
-  </tr>
-  <% for collab in @collabs do %>
-    <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
+    <% for c in @etd.contents do %>
       <tr>
-        <td><%= collab.first_name + " " + collab.last_name %></td>
-        <td><%= Role.find(pr.role_id).name %></td>
-        <td><%= link_to 'Destroy', destroy_people_role_path(pr), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
+        <td><%= c.content.file.filename %></td>
+        <td><%= c.content.file.size %></td>
       </tr>
     <% end %>
+  </table>
   <% end %>
-</table>
-<%= form_tag(:controller => "people", :action => "find") do %>
-  <%= hidden_field_tag(:etd_id, @etd.id) %>
-  <%= hidden_field_tag(:origin, '/etds/') %>
-  <%= submit_tag "Add New Committee Member" %>
-<% end %>
-</p><br />
+  <%= button_to "Add More Content", {:action => :add_contents}, :method => :get %>
+</p>
+<br />
 <%= link_to 'Edit', edit_etd_path(@etd) %> |
 <%= link_to 'Back', etds_path %>
 <script>

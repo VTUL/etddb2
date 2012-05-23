@@ -16,9 +16,6 @@ class EtdsController < ApplicationController
   # GET /etds/1.xml
   def show
     @etd = Etd.find(params[:id])
-    @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
-    # @collabs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,7 +27,7 @@ class EtdsController < ApplicationController
   # GET /etds/new.xml
   def new
     respond_to do |format|
-      # This should be implemented as a before_filter.
+      # BUG: This should be implemented as a before_filter.
       if !person_signed_in?
         format.html { redirect_to(login_path, :notice => "You must login create an ETD.") }
       end
@@ -46,9 +43,9 @@ class EtdsController < ApplicationController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
-      # Again, this should be implemented in a before_filter
+      # BUG: Again, this should be implemented in a before_filter
       if person_signed_in?
-        # This works, but is only a hack, we should use Cancan.
+        # BUG: This works, but is only a hack, we should use Cancan.
         if !current_person.etds.include?(@etd)
           format.html { redirect_to(etds_path, :notice => "You cannot edit that ETD.") }
         else
@@ -122,11 +119,11 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      # before_filter
+      # BUG: Put in a before_filter.
       if !person_signed_in?
         format.html { redirect_to etds_path, :notice => "You must log in to delete your ETDs." }
       else
-        # Cancan
+        # BUG: Use Cancan for this.
         if current_person.etds.include?(@etd)
           for pr in @etd.people_roles do
             pr.destroy
@@ -147,7 +144,7 @@ class EtdsController < ApplicationController
   # GET /etds/my_etds
   def my_etds
     respond_to do |format|
-      # This should be implemented in a before_filter
+      # BUG: This should be implemented in a before_filter
       if person_signed_in?
         @authors_etds = current_person.etds
 
