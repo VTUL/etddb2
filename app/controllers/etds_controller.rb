@@ -179,6 +179,13 @@ class EtdsController < ApplicationController
   # (This is used from next_new, and add_contents)
   def save_contents
     @etd = Etd.find(params[:id])
+
+    # Whitelist params[:origin]
+    origins = ["/etds/add_contents/", "/etds/next_new/"]
+    if !origins.include?(params[:origin])
+      params[:origin] = "/etds/add_contents/"
+    end
+
     if @etd.update_attributes(params[:etd])
       redirect_to params[:origin] + @etd.id.to_s, :notice => "Successfully updated article."
     else
