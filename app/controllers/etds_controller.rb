@@ -160,11 +160,7 @@ class EtdsController < ApplicationController
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
-    @prs = []
-    for pr in @etd.people_roles do
-      p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
-    end
+
     respond_to do |format|
       format.html # new_next.html.erb
     end
