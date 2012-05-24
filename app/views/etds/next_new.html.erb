@@ -1,42 +1,53 @@
 <h1>New ETD</h1>
-<%= nested_form_for @etd, :url => next_new_etd_path(@etd), :html => {:multipart => true} do |f| %>
-  <%= f.fields_for :contents do |cf| %>
-    <% if cf.object.content? %>
-      <% #This content already exists %>
-      <%= cf.object.content.file.filename %> |
-      <%= cf.object.content.file.size %> |
-      <%= link_to "Edit", edit_content_path(cf.object)%> |
-      <%= cf.link_to_remove "Delete" %>
-    <% else %>
-      <% #This is new content %>
-      <%= cf.file_field :content %>
-      <%= cf.hidden_field(:bound, {:value => @etd.bound}) %>
-      <%= cf.hidden_field(:availability_id, {:value => @etd.availability_id}) %>
-      <%= cf.link_to_remove "Remove"%>
-    <% end %>
-  <% end %>
-  <%= f.link_to_add "Add more content", :contents %><br />
-  <%= hidden_field_tag(:origin, '/etds/next_new/') %>
-  <%= f.submit "Update Content" %>
-<% end %>
 <p>
-<table class="outlined">
-  <tr>
-    <th>Person:</th>
-    <th>Role:</th>
-  </tr>
-  <% for pr in @prs do %>
-    <tr>
-      <td><%= pr[:first_name] + " " + pr[:last_name] %></td>
-      <td><%= pr[:role] %></td>
-      <td><%= link_to 'Destroy', people_role_path(pr[:pr]), :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => "del_pr" %></td>
-    </tr>
+  <b>Files:</b>
+  <%= nested_form_for @etd, :url => next_new_etd_path(@etd), :html => {:multipart => true} do |f| %>
+    <%= f.fields_for :contents do |cf| %>
+      <% if cf.object.content? %>
+        <% #This content already exists %>
+        <%= cf.object.content.file.filename %> |
+        <%= cf.object.content.file.size %> |
+        <%= link_to "Edit", edit_content_path(cf.object)%> |
+        <%= cf.link_to_remove "Delete" %>
+      <% else %>
+        <% #This is new content %>
+        <%= cf.file_field :content %>
+        <%= cf.hidden_field(:bound, {:value => @etd.bound}) %>
+        <%= cf.hidden_field(:availability_id, {:value => @etd.availability_id}) %>
+        <%= cf.link_to_remove "Remove"%>
+      <% end %>
+    <% end %>
+    <%= f.link_to_add "Add more content", :contents %><br />
+    <%= hidden_field_tag(:origin, '/etds/next_new/') %>
+    <%= f.submit "Update Content" %>
   <% end %>
-</table>
-<%= form_tag(:controller => "people", :action => "find") do %>
-  <%= hidden_field_tag(:etd_id, @etd.id) %>
-  <%= hidden_field_tag(:origin, '/etds/next_new/') %>
-  <%= submit_tag "Add New Committee Member" %>
+</p>
+<% get_collabs @etd do |collabs| %>
+  <p>
+    <b>Advisory Committee:</b>
+    <% if !collabs.empty? %>
+      <table class="outlined">
+        <tr>
+          <th>Advisor:</th>
+          <th>Role:</th>
+        </tr>
+        <% for collab in collabs do %>
+          <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
+            <tr>
+              <td><%= collab.first_name + " " + collab.last_name %></td>
+              <td><%= Role.find(pr.role_id).name %></td>
+              <td><%= link_to 'Destroy', destroy_people_role_path(pr), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+    <% end %>
+    <%= form_tag(:controller => "people", :action => "find") do %>
+      <%= hidden_field_tag(:etd_id, @etd.id) %>
+      <%= hidden_field_tag(:origin, '/etds/') %>
+      <%= submit_tag "Add New Committee Member" %>
+    <% end %>
+  </p>
 <% end %>
 </p>
 <p>

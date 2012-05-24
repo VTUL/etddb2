@@ -6,7 +6,7 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @degrees }
+      format.json { render(json: @degrees) }
     end
   end
 
@@ -17,7 +17,7 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @degree }
+      format.json { render(json: @degree) }
     end
   end
 
@@ -28,7 +28,7 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @degree }
+      format.json { render(json: @degree) }
     end
   end
 
@@ -44,11 +44,11 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       if @degree.save
-        format.html { redirect_to @degree, notice: 'Degree was successfully created.' }
-        format.json { render json: @degree, status: :created, location: @degree }
+        format.html { redirect_to(@degree, notice: 'Degree was successfully created.') }
+        format.json { render(json: @degree, status: :created, location: @degree) }
       else
-        format.html { render action: "new" }
-        format.json { render json: @degree.errors, status: :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.json { render(json: @degree.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       if @degree.update_attributes(params[:degree])
-        format.html { redirect_to @degree, notice: 'Degree was successfully updated.' }
+        format.html { redirect_to(@degree, notice: 'Degree was successfully updated.') }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @degree.errors, status: :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.json { render(json: @degree.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -76,7 +76,7 @@ class DegreesController < ApplicationController
     @degree.destroy
 
     respond_to do |format|
-      format.html { redirect_to degrees_url }
+      format.html { redirect_to(degrees_url) }
       format.json { head :ok }
     end
   end

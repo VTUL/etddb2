@@ -7,7 +7,7 @@ class ContentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @contents }
+      format.xml  { render(xml: @contents) }
     end
   end
 
@@ -19,7 +19,7 @@ class ContentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @content }
+      format.xml  { render(xml: @content) }
     end
   end
 
@@ -32,7 +32,7 @@ class ContentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @content }
+      format.xml  { render(xml: @content) }
     end
   end
 
@@ -58,9 +58,9 @@ class ContentsController < ApplicationController
     respond_to do |format|
       if @content.save
         @etd.contents << @content
-        format.html { redirect_to @content, notice: 'Content was successfully created.' }
+        format.html { redirect_to(@content, notice: 'Content was successfully created.') }
       else 
-        format.html { render :action => "new"}
+        format.html { render(action: "new") }
       end
     end
   end
@@ -72,11 +72,11 @@ class ContentsController < ApplicationController
 
     respond_to do |format|
       if @content.update_attributes(params[:content])
-        format.html { redirect_to @content, notice: 'Content was successfully updated.' }
+        format.html { redirect_to(@content, notice: 'Content was successfully updated.') }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @document_type.errors, status: :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.json { render(json: @document_type.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -102,9 +102,9 @@ class ContentsController < ApplicationController
         @authors_etds = current_person.etds
 
         format.html # show_etd_by_author.html.erb
-        format.xml  { render :xml => @authors_etds , :xml => @person }
+        format.xml  { render(xml: @authors_etds , xml: @person) }
       else
-        format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
+        format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
       end
     end
   end
