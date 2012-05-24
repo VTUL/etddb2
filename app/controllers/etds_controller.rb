@@ -215,8 +215,8 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      if @etd.status == "Submitted"
-        if person_signed_in?
+      if person_signed_in?
+        if @etd.status == "Submitted"
           pr = @etd.people_roles.where(person_id: current_person.id).first
           if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
             if params[:vote] == 'true'
@@ -235,12 +235,15 @@ class EtdsController < ApplicationController
             format.html #vote.html.erb
           else
             # Error. You are either not part of this ETD, or at least not on it's committee.
+            format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
           end
         else
-          # Error. Must be signed in.
+          # Error. ETD not submitted. You are either too early, or too late.
+          format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
         end
       else
-        # Error. ETD not submitted. You are either too early, or too late.
+        # Error. Must be signed in.
+        format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
       end
     end
   end
