@@ -53,7 +53,7 @@ class PeopleController < ApplicationController
     Person.find(params[:committee]).people_roles << pr
 
     # Whitelist params[:origin]
-    origins = ["/etds/", "/next_new/"]
+    origins = ["/etds/", "/etds/next_new/"]
     if !origins.include?(params[:origin])
       params[:origin] = "/etds/"
     end
