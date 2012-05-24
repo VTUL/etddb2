@@ -8,7 +8,7 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @people_roles }
+      format.xml  { render(xml: @people_roles) }
     end
   end
 
@@ -19,7 +19,7 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @people_role }
+      format.xml  { render(xml: @people_role) }
     end
   end
 
@@ -30,7 +30,7 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @people_role }
+      format.xml  { render(xml: @people_role) }
     end
   end
 
@@ -46,11 +46,11 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       if @people_role.save
-        format.html { redirect_to(@people_role, :notice => 'PeopleRole was successfully created.') }
-        format.xml  { render :xml => @people_role, :status => :created, :location => @people_role }
+        format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully created.') }
+        format.xml  { render(xml: @people_role, status: :created, location: @people_role) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @peeopl_role.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @people_role.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -62,11 +62,11 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       if @people_role.update_attributes(params[:people_role])
-        format.html { redirect_to(@people_role, :notice => 'PeopleRole was successfully updated.') }
+        format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @people_role.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit" }
+        format.xml  { render(xml: @people_role.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -80,7 +80,7 @@ class PeopleRolesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(people_roles_url) }
       format.xml { head :ok }
-      format.js { render :nothing => true }
+      format.js { render(nothing: true) }
     end
   end
 end

@@ -8,7 +8,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @etds }
+      format.xml  { render(xml: @etds) }
     end
   end
 
@@ -19,7 +19,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @etd }
+      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -29,13 +29,13 @@ class EtdsController < ApplicationController
     respond_to do |format|
       # BUG: This should be implemented as a before_filter.
       if !person_signed_in?
-        format.html { redirect_to(login_path, :notice => "You must login create an ETD.") }
+        format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
       end
 
       @etd = Etd.new
 
       format.html # new.html.erb
-      format.xml  { render :xml => @etd }
+      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -47,12 +47,12 @@ class EtdsController < ApplicationController
       if person_signed_in?
         # BUG: This works, but is only a hack, we should use Cancan.
         if !current_person.etds.include?(@etd)
-          format.html { redirect_to(etds_path, :notice => "You cannot edit that ETD.") }
+          format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
         else
-          format.html { render :action => "edit" }
+          format.html { render(action: "edit") }
         end
       else
-        format.html { redirect_to(login_path, :notice => "You must sign in to edit ETDs.") }
+        format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
       end
     end
   end
@@ -82,11 +82,11 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.save
-        format.html { redirect_to(next_new_etd_path(@etd), :notice => 'Etd was successfully created.') }
-        format.xml  { render :xml => @etd, :status => :created, :location => @etd }
+        format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
+        format.xml  { render(xml: @etd, status: :created, location: @etd) }
       else
-        format.html { render :action => "new", :notice => 'You have errors.' }
-        format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new", notice: 'You have errors.') }
+        format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -104,11 +104,11 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
-        format.html { redirect_to(@etd, :notice => 'Etd was successfully updated.') }
+        format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -121,7 +121,7 @@ class EtdsController < ApplicationController
     respond_to do |format|
       # BUG: Put in a before_filter.
       if !person_signed_in?
-        format.html { redirect_to etds_path, :notice => "You must log in to delete your ETDs." }
+        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
       else
         # BUG: Use Cancan for this.
         if current_person.etds.include?(@etd)
@@ -132,10 +132,10 @@ class EtdsController < ApplicationController
             content.destroy
           end
           @etd.destroy
-          format.html { redirect_to :action => 'index', :notice => "ETD Deleted." }
+          format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
           format.xml  { head :ok }
         else
-          format.html { redirect_to etds_path, :notice => "You cannot delete that ETD."}
+          format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
         end
       end
     end
@@ -149,9 +149,9 @@ class EtdsController < ApplicationController
         @authors_etds = current_person.etds
 
         format.html # my_etds.html.erb
-        format.xml  { render :xml => @authors_etds }
+        format.xml  { render(xml: @authors_etds) }
       else
-        format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
+        format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
       end
     end
   end
@@ -178,9 +178,9 @@ class EtdsController < ApplicationController
     end
 
     if @etd.update_attributes(params[:etd])
-      redirect_to params[:origin] + @etd.id.to_s, :notice => "Successfully updated article."
+      redirect_to(params[:origin] + @etd.id.to_s, notice: "Successfully updated article.")
     else
-      redirect_to params[:origin] + @etd.id.to_s
+      redirect_to(params[:origin] + @etd.id.to_s)
     end    
   end
 
@@ -200,7 +200,7 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
-    @author = Person.find(@etd.people_roles.where(:role_id => Role.where(:group => 'Creators')).first.person_id)
+    @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
     EtddbMailer.confirm_submit_author(@etd, @author).deliver
     EtddbMailer.confirm_submit_school(@etd, @author).deliver
     EtddbMailer.confirm_submit_committee(@etd, @author).deliver
@@ -217,8 +217,8 @@ class EtdsController < ApplicationController
     respond_to do |format|
       if @etd.status == "Submitted"
         if person_signed_in?
-          pr = @etd.people_roles.where(:person_id => current_person.id).first
-          if !pr.nil? && Role.where(:group => 'Collaborators').pluck(:id).include?(pr.role_id)
+          pr = @etd.people_roles.where(person_id: current_person.id).first
+          if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
             if params[:vote] == 'true'
               pr.vote = true
             else

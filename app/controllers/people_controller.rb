@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @people }
+      format.xml  { render(xml: @people) }
     end
   end
 
@@ -22,7 +22,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @person }
+      format.xml  { render(xml: @person) }
     end
   end
 
@@ -30,10 +30,10 @@ class PeopleController < ApplicationController
   def find
     respond_to do |format|
       if params[:lname].nil?
-        format.html { render(:action => "find") }
+        format.html { render(action: "find") }
       else
         format.js
-        format.html { render(:action => "new_committee_member") }
+        format.html { render(action: "new_committee_member") }
       end
     end
   end
@@ -41,7 +41,7 @@ class PeopleController < ApplicationController
   # POST /people/new_committee_member
   def new_committee_member
     respond_to do |format|
-      format.html { render(:action => "new_committee_member") }
+      format.html { render(action: "new_committee_member") }
     end
   end
 
@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
   def add_committee
     pr = PeopleRole.new
     pr.etd_id = params[:etd_id]
-    pr.role_id = Role.where(:name => params[:committee_type]).first().id
+    pr.role_id = Role.where(name: params[:committee_type]).first().id
     Person.find(params[:committee]).people_roles << pr
 
     # Whitelist params[:origin]
