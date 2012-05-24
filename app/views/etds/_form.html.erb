@@ -12,12 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label(:degree_id, "Degree") %><br />
-    <%= f.collection_select(:degree_id, Degree.where(:retired => false), :id, :name) %>
-  </div>
-  <div class="field">
     <%= f.label(:document_type_id, "Document Type") %><br />
     <%= f.collection_select(:document_type_id, DocumentType.where(:retired => false), :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label(:title) %><br />
+    <%= f.text_field(:title) %>
+  </div>
+  <div class="field">
+    <%= f.label(:degree_id, "Degree") %><br />
+    <%= f.collection_select(:degree_id, Degree.where(:retired => false), :id, :name) %>
   </div>
   <div class="field">
     <%= f.label(:department_ids, "Departments") %><br />
@@ -27,20 +31,12 @@
     <% end %>
   </div>
   <div class="field">
-    <%= f.label(:ddate, "Defense Date") %><br />
-    <%= f.date_select(:ddate, {:end_year => Time.now.year}) %>
-  </div>
-  <div class="field">
-    <%= f.label(:title) %><br />
-    <%= f.text_field(:title) %>
-  </div>
-  <div class="field">
-    <%= f.label(:abstract) %><br />
-    <%= f.text_area(:abstract) %>
-  </div>
-  <div class="field">
     <%= f.label(:keywords) %><br />
     <%= f.text_area(:keywords, :rows => 5) %>
+  </div>
+  <div class="field">
+    <%= f.label(:ddate, "Defense Date") %><br />
+    <%= f.date_select(:ddate, {:end_year => Time.now.year}) %>
   </div>
   <div class="field">
     <%= f.label(:availability_id, "Availability") %>
@@ -55,6 +51,10 @@
     </table>
   </div>
   <div class="field">
+    <%= f.label(:abstract) %><br />
+    <%= f.text_area(:abstract) %>
+  </div>
+  <div class="field">
     <%= CopyrightStatement.where(:retired => false).last.statement %><br />
     <%= f.check_box(:copyright_statement_id, {}, CopyrightStatement.where(:retired => false).last.id, nil)%>
     <%= f.label(:copyright_statement_id, "I have read the above and agreed to it.")%>
@@ -65,10 +65,6 @@
     <%= f.label(:privacy_statement_id, "I have read the above and agreed to it.")%>
   </div>
 
-  <% urnvalue = "etd-#{Time.now.month}#{Time.now.day}#{Time.now.year}-#{Time.now.hour}#{Time.now.min}#{Time.now.sec}" %>
-  <% base_url = "http://developer.tower.lib.vt.edu:3000/theses/available" %>
-  <%= f.hidden_field(:urn, {:value=>"#{urnvalue}"}) %>
-  <%= f.hidden_field(:url, {:value=>"#{base_url}/"+"#{urnvalue}"+"/"}) %>
   <%= f.hidden_field(:bound, {:value=>false}) %>
   <%= f.submit %>
 <% end %>
