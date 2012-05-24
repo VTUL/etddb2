@@ -2,15 +2,16 @@
 <% if !@my_etds.empty? %>
   <%= render 'etd_items' %>
 <% end %>
-<% if !@committee_etds.empty? %>
-  <%= render 'committee_items' %>
+<% if person_signed_in? && current_person.id == @person.id %>
+  <% if !@committee_etds.empty? %>
+    <%= render 'committee_items' %>
+  <% end %>
+  <% if !@person.people_roles.where(role_id: Role.where(group: 'Graduate School')).empty? %>
+    <%= render 'review_items' %>
+  <% end %>
+  <% if !@person.people_roles.where(role_id: Role.where(group: 'Administration')).empty? %>
+    <%= render 'admin_items' %>
+  <% end %>
 <% end %>
-<% if !@person.people_roles.where(role_id: Role.where(group: 'Graduate School')).empty? %>
-  <%= render 'review_items' %>
-<% end %>
-<% if !@person.people_roles.where(role_id: Role.where(group: 'Administration')).empty? %>
-  <%= render 'admin_items' %>
-<% end %>
-
-<%= link_to 'Edit Your Profile', edit_person_registration_path %><br />
-<%= link_to 'Back', people_path %>
+<br />
+<%= link_to 'Browse ETDs', etds_path %>
