@@ -65,7 +65,7 @@ class PeopleRolesController < ApplicationController
         format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render(action: "edit" }
+        format.html { render(action: "edit") }
         format.xml  { render(xml: @people_role.errors, status: :unprocessable_entity) }
       end
     end

@@ -47,8 +47,8 @@ class UserActionsController < ApplicationController
         format.html { redirect_to(@user_action, notice: 'User Action was successfully created.') }
         format.xml  { render(xml: @user_action, status: :created, location: @user_action) }
       else
-        format.html { render(action: "new" }
-        format.xml  { render(xml: @user_action.errors, status: :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @user_action.errors, status: :unprocessable_entity) }
       end
     end
   end
