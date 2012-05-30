@@ -20,7 +20,7 @@ class EtddbMailerTest < ActionMailer::TestCase
     email = EtddbMailer.confirm_submit_school(etd, author).deliver
     assert !ActionMailer::Base.deliveries.empty?
 
-    assert_equal ['graduate.school@vt.edu'], email.to
+    assert_equal ['cnbrittle@gmail.com'], email.to
     assert_equal "New ETD Submitted.", email.subject
     #TODO: Make this last one unique.
     assert_match(/#{author.display_name} just submitted their ETD!/, email.encoded)
