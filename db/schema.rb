@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126205621) do
+ActiveRecord::Schema.define(:version => 20120530204657) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
   end
 
   create_table "contents", :force => true do |t|
-    t.string   "content"
     t.boolean  "bound"
     t.string   "title"
     t.text     "description"
@@ -32,8 +31,12 @@ ActiveRecord::Schema.define(:version => 20120126205621) do
     t.integer  "page_count"
     t.integer  "duration"
     t.string   "dimensions"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "content_file_name"
+    t.string   "content_content_type"
+    t.integer  "content_file_size"
+    t.datetime "content_updated_at"
   end
 
   create_table "copyright_statements", :force => true do |t|
