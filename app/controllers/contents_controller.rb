@@ -53,7 +53,6 @@ class ContentsController < ApplicationController
     @content.availability = @etd.availability
     @content.etd = @etd
     @content.bound = @etd.bound
-    #@content.mime_type = MIME::Types.of(@content.content.file.filename)[0]
     
     respond_to do |format|
       if @content.save
@@ -69,6 +68,9 @@ class ContentsController < ApplicationController
   # POST /contents/edit.xml
   def update
     @content = Content.find(params[:id])
+    # The below are needed in case we need to render the edit page again (ie. if there are errors).
+    @etd = Etd.find(@content.etd_id)
+    @contents = @etd.contents.find(:all)
 
     respond_to do |format|
       if @content.update_attributes(params[:content])
