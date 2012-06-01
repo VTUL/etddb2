@@ -48,8 +48,8 @@ gem 'devise'
 #gem 'test_helper'
 
 # For multiple file upload
-#gem 'paperclip','~>2.4'
-gem 'carrierwave'
+gem 'paperclip'
+#gem 'carrierwave'
 gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
 gem 'mime-types'
 

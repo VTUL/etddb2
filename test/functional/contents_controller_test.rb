@@ -47,7 +47,7 @@ class ContentsControllerTest < ActionController::TestCase
   end
 
   test "should not update content" do
-    put :update, {id: @content.to_param, content: {bound: nil}}
+    put :update, {id: @content.to_param, content: @content.attributes.merge(bound: nil)}
     assert_select "div#error_explanation"
   end
 

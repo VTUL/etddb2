@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  content: File.open(Rails.root.join("coverage/index.html"))
+  content_file_name: file.html
   etd_id: 1
   availability_id: 2
   bound: false
   
 two:
-  content: File.open(Rails.root.join("coverage/index.html"))
+  content_file_name: file2.html
   etd_id: 1
   availability_id: 1
   bound: true

@@ -3,8 +3,9 @@
   <%= f.fields_for :contents do |cf| %>
     <% if cf.object.content? %>
       <% #This content already exists %>
-      <%= cf.object.content.file.filename %> |
-      <%= cf.object.content.file.size %> |
+      <%= cf.object.content_file_name %> |
+      <!--<%= cf.object.content_content_type %> |-->
+      <%= cf.object.content_file_size %> |
       <%= link_to "Edit", edit_content_path(cf.object)%> |
       <%= cf.link_to_remove "Delete" %>
     <% else %>
