@@ -158,13 +158,13 @@ PeopleRole.create([{:person_id => Person.first.id, :role_id => Role.where(:name 
 
 #! These are just for ease of use for testing
 # Create an ETD for the super user.
-Etd.create([{:title => "Test", :abstract => "This is an abstract for an ETD.", :availability => Availability.first, :copyright_statement => CopyrightStatement.first, :degree => Degree.first, :document_type => DocumentType.first, :privacy_statement => PrivacyStatement.first, :bound => false, :urn => "etd-20120101-00000001", :url => "http://scholar.lib.vt.edu/theses/etd-20120101-00000001/"}])
+Etd.create([{:title => "Test", :abstract => "This is an abstract for an ETD.", :availability => Availability.first, :copyright_statement => CopyrightStatement.first, :degree => Degree.first, :document_type => DocumentType.first, :privacy_statement => PrivacyStatement.first, :bound => false, :urn => "etd-20120101-00000001", :url => "http://scholar.lib.vt.edu/theses/etd-20120101-00000001/", status: "Created"}])
 Etd.first.departments = [Department.first, Department.last]
 PeopleRole.create([{:person_id => Person.first.id, :etd_id => Etd.first.id, :role_id => Role.where(:name => "Author").first.id}])
 
 # Add Sung Hee to People, give him an ETD.
 Person.create([{ :first_name => "Sung Hee", :last_name => "Park", :pid => "shpark", :email => "shpark@vt.edu", :password => "123456789", :password_confirmation => "123456789" }])
-Etd.create([{:title => "Tesst", :abstract => "This is another abstract.", :availability => Availability.last, :copyright_statement => CopyrightStatement.last, :degree => Degree.last, :document_type => DocumentType.last, :privacy_statement => PrivacyStatement.last, :bound => false, :urn => "etd-20120101-00000002", :url => "http://scholar.lib.vt.edu/theses/etd-20120101-00000002/"}])
+Etd.create([{:title => "Tesst", :abstract => "This is another abstract.", :availability => Availability.last, :copyright_statement => CopyrightStatement.last, :degree => Degree.last, :document_type => DocumentType.last, :privacy_statement => PrivacyStatement.last, :bound => false, :urn => "etd-20120101-00000002", :url => "http://scholar.lib.vt.edu/theses/etd-20120101-00000002/", status: "Created"}])
 Etd.last.departments << Department.where(:name => "Computer Science").first
 PeopleRole.create([{:person_id => Person.last.id, :etd_id => Etd.last.id, :role_id => Role.where(:name => "Author").first.id}])
 
