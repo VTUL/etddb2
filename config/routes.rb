@@ -34,7 +34,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
-  get '/contents/my_contents', :to => 'contents#my_contents', :as => :my_contents
   post '/contents/new', :to => 'contents#new', :as => :new_content
   post '/contents', :to => 'contents#create'
   resources :contents, :except => [:new, :create, :destroy]
