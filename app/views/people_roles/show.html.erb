@@ -1,8 +1,17 @@
-
-<p>
-  <b>Name:</b>
-</p>
-
+<table>
+  <tr>
+    <th>Person</th>
+    <th>Role</th>
+    <th>ETD</th>
+    <th>Vote</th>
+  </tr>
+  <tr>
+    <td><%= h @people_role.person_id %></td>
+    <td><%= h @people_role.role_id %></td>
+    <td><%= h @people_role.etd_id %></td>
+    <td><%= h @people_role.vote %></td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_people_role_path(@people_role) %> |
 <%= link_to 'Back', people_roles_path %>

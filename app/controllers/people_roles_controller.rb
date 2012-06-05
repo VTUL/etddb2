@@ -60,6 +60,14 @@ class PeopleRolesController < ApplicationController
   def update
     @people_role = PeopleRole.find(params[:id])
 
+    if params[:vote] == ''
+      params[:vote] = nil
+    elsif params[:vote] == 'true'
+      params[:vote] = true
+    elsif params[:vote] == 'false'
+      params[:vote] = false
+    end
+
     respond_to do |format|
       if @people_role.update_attributes(params[:people_role])
         format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully updated.') }
