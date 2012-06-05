@@ -23,14 +23,14 @@
       <img src="./assets/0.5.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2012-06-05T15:16:30-04:00">2012-06-05T15:16:30-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-06-05T15:46:25-04:00">2012-06-05T15:46:25-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">92.66%</span></span>
+    (<span class="covered_percent"><span class="green">92.37%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
@@ -41,9 +41,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>54</b> files in total.
-    <b>927</b> relevant lines. 
-    <span class="green"><b>859</b> lines covered</span> and
-    <span class="red"><b>68</b> lines missed </span>
+    <b>931</b> relevant lines. 
+    <span class="green"><b>860</b> lines covered</span> and
+    <span class="red"><b>71</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -181,12 +181,12 @@
       
       <tr>
         <td class="strong"><a href="#67c19f36fb15a3d175833f21962163d02afe65ab" class="src_link" title="app/controllers/people_roles_controller.rb">app/controllers/people_roles_controller.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>86</td>
-        <td>42</td>
-        <td>42</td>
-        <td>0</td>
-        <td>1.3</td>
+        <td class="green strong">93.48 %</td>
+        <td>94</td>
+        <td>46</td>
+        <td>43</td>
+        <td>3</td>
+        <td>1.2</td>
       </tr>
       
       <tr>
@@ -608,7 +608,7 @@
           <div class="file_list_container" id="Controllers">
   <h2>
     <span class="group_name">Controllers</span>
-    (<span class="covered_percent"><span class="green">95.57%</span></span>
+    (<span class="covered_percent"><span class="green">95.18%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
@@ -619,9 +619,9 @@
   <a name="Controllers"></a>
   <div>
     <b>18</b> files in total.
-    <b>722</b> relevant lines. 
-    <span class="green"><b>690</b> lines covered</span> and
-    <span class="red"><b>32</b> lines missed </span>
+    <b>726</b> relevant lines. 
+    <span class="green"><b>691</b> lines covered</span> and
+    <span class="red"><b>35</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -759,12 +759,12 @@
       
       <tr>
         <td class="strong"><a href="#67c19f36fb15a3d175833f21962163d02afe65ab" class="src_link" title="app/controllers/people_roles_controller.rb">app/controllers/people_roles_controller.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>86</td>
-        <td>42</td>
-        <td>42</td>
-        <td>0</td>
-        <td>1.3</td>
+        <td class="green strong">93.48 %</td>
+        <td>94</td>
+        <td>46</td>
+        <td>43</td>
+        <td>3</td>
+        <td>1.2</td>
       </tr>
       
       <tr>
@@ -2060,7 +2060,7 @@
         <li class="covered" data-hits="1" data-linenumber="12">
           <span class="hits">1</span>
           
-          <code class="ruby">        format.xml  { render(xml: @authors_etds , xml: @person) }</code>
+          <code class="ruby">        format.xml  { render(xml: @authors_etds) }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="13">
@@ -2072,7 +2072,7 @@
         <li class="covered" data-hits="2" data-linenumber="14">
           <span class="hits">2</span>
           
-          <code class="ruby">        format.html { redirect_to(login_path, notice: &quot;You need to login to browse your ETDs.&quot;) }</code>
+          <code class="ruby">        format.html { redirect_to(login_path, notice: &quot;You need to login to browse your contents.&quot;) }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="15">
@@ -7500,11 +7500,11 @@
         <div class="source_table" id="67c19f36fb15a3d175833f21962163d02afe65ab">
   <div class="header">
     <h3>app/controllers/people_roles_controller.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="green">93.48 %</span> covered</h4>
     <div>
-      <b>42</b> relevant lines. 
-      <span class="green"><b>42</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>46</b> relevant lines. 
+      <span class="green"><b>43</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
   
@@ -7886,142 +7886,190 @@
         <li class="covered" data-hits="2" data-linenumber="63">
           <span class="hits">2</span>
           
-          <code class="ruby">    respond_to do |format|</code>
+          <code class="ruby">    if params[:vote] == ''</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="64">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="64">
           
-          <code class="ruby">      if @people_role.update_attributes(params[:people_role])</code>
+          
+          <code class="ruby">      params[:vote] = nil</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="65">
-          <span class="hits">2</span>
+        <li class="never" data-hits="" data-linenumber="65">
           
-          <code class="ruby">        format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully updated.') }</code>
+          
+          <code class="ruby">    elsif params[:vote] == 'true'</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="66">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="66">
           
-          <code class="ruby">        format.xml  { head :ok }</code>
+          
+          <code class="ruby">      params[:vote] = true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="67">
           
           
-          <code class="ruby">      else</code>
+          <code class="ruby">    elsif params[:vote] == 'false'</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="68">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="68">
           
-          <code class="ruby">        format.html { render(action: &quot;edit&quot;) }</code>
+          
+          <code class="ruby">      params[:vote] = false</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="69">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="69">
           
-          <code class="ruby">        format.xml  { render(xml: @people_role.errors, status: :unprocessable_entity) }</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="70">
           
           
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="71">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="72">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="73">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
+        <li class="covered" data-hits="2" data-linenumber="71">
+          <span class="hits">2</span>
           
+          <code class="ruby">    respond_to do |format|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="72">
+          <span class="hits">2</span>
           
-          <code class="ruby">  # DELETE /people_roles/1</code>
+          <code class="ruby">      if @people_role.update_attributes(params[:people_role])</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="73">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully updated.') }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        format.xml  { head :ok }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="75">
           
           
-          <code class="ruby">  # DELETE /people_roles/1.xml</code>
+          <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="76">
+          <span class="hits">2</span>
           
-          <code class="ruby">  def destroy</code>
+          <code class="ruby">        format.html { render(action: &quot;edit&quot;) }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="77">
           <span class="hits">1</span>
           
-          <code class="ruby">    @people_role = PeopleRole.find(params[:id])</code>
+          <code class="ruby">        format.xml  { render(xml: @people_role.errors, status: :unprocessable_entity) }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="78">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="78">
           
-          <code class="ruby">    @people_role.destroy</code>
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="79">
           
           
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="80">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    respond_to do |format|</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="81">
-          <span class="hits">2</span>
-          
-          <code class="ruby">      format.html { redirect_to(people_roles_url) }</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="82">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      format.xml { head :ok }</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="83">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      format.js { render(nothing: true) }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="84">
-          
-          
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="85">
+        <li class="never" data-hits="" data-linenumber="80">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="81">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="82">
+          
+          
+          <code class="ruby">  # DELETE /people_roles/1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby">  # DELETE /people_roles/1.xml</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="84">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def destroy</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="85">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @people_role = PeopleRole.find(params[:id])</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="86">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @people_role.destroy</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="88">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    respond_to do |format|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="89">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      format.html { redirect_to(people_roles_url) }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="90">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      format.xml { head :ok }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="91">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      format.js { render(nothing: true) }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="92">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
           
           
           <code class="ruby">end</code>
