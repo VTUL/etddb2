@@ -114,7 +114,7 @@ class ContentsController < ApplicationController
     @content.destroy
 
     respond_to do |format|
-      format.html { redirect_to(my_contents_path) }
+      format.html { redirect_to(contents_path) }
       format.xml  { head :ok }
     end
   end

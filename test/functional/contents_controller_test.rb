@@ -3,12 +3,21 @@ require 'test_helper'
 class ContentsControllerTest < ActionController::TestCase
   def setup
     @content = contents(:one)
+    @person = people(:one)
+    sign_in @person
   end
 
-  test "should get index" do
+  test "should redirect to login if not signed in." do
+    sign_out @person
+    get :index
+    assert_response(:redirect)
+    # TODO: Finish the sign in test.
+  end
+
+  test "should get index, if signed in." do
     get :index
     assert_response :success
-    assert_not_nil assigns(:contents)
+    assert_not_nil assigns(:authors_etds)
   end
 
   test "should get new" do
@@ -56,18 +65,6 @@ class ContentsControllerTest < ActionController::TestCase
       delete :destroy, id: @content.to_param
     end
 
-    assert_redirected_to my_contents_path
-  end
-
-  test "should get my_contents, if you are logged in." do
-    get :my_contents
-    assert_redirected_to login_path
-
-    @person = people(:one)
-    sign_in @person
-
-    get :my_contents
-    assert_response :success
-    assert_not_nil assigns(:authors_etds)
+    assert_redirected_to contents_path
   end
 end
