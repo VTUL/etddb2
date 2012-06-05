@@ -9,9 +9,9 @@ class ContentsController < ApplicationController
         @authors_etds = current_person.etds
 
         format.html # index.html.erb
-        format.xml  { render(xml: @authors_etds , xml: @person) }
+        format.xml  { render(xml: @authors_etds) }
       else
-        format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
+        format.html { redirect_to(login_path, notice: "You need to login to browse your contents.") }
       end
     end
   end
