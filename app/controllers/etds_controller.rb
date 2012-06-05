@@ -46,10 +46,10 @@ class EtdsController < ApplicationController
       # BUG: Again, this should be implemented in a before_filter
       if person_signed_in?
         # BUG: This works, but is only a hack, we should use Cancan.
-        if !current_person.etds.include?(@etd)
-          format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
-        else
+        if current_person.etds.include?(@etd)
           format.html { render(action: "edit") }
+        else
+          format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
         end
       else
         format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
@@ -96,14 +96,24 @@ class EtdsController < ApplicationController
   def update
     @etd = Etd.find(params[:id])
 
+    # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
     if params[:etd][:department_ids][:id_2] != "" then
       d << params[:etd][:department_ids][:id_2]
     end
     params[:etd][:department_ids] = d
-
+    
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
+        # Change the availability of all the ETD's contents, if the availability isn't mixed.
+        if @etd.availability_id != Availability.where(name: "Mixed").first.id
+          # TODO: Is the where clause necessary?
+          contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
+          for content in contents do
+            content.availability_id = @etd.availability_id
+          end
+        end
+
         format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
       else
