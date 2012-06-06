@@ -1,7 +1,7 @@
 <h1>New ETD</h1>
 <p>
   <b>Files:</b>
-  <%= nested_form_for @etd, :url => next_new_etd_path(@etd), :html => {:multipart => true} do |f| %>
+  <%= nested_form_for @etd, url: next_new_etd_path(@etd), html: {multipart: true} do |f| %>
     <%= f.fields_for :contents do |cf| %>
       <% if cf.object.content? %>
         <% #This content already exists %>
@@ -13,8 +13,8 @@
       <% else %>
         <% #This is new content %>
         <%= cf.file_field :content %>
-        <%= cf.hidden_field(:bound, {:value => @etd.bound}) %>
-        <%= cf.hidden_field(:availability_id, {:value => @etd.availability_id}) %>
+        <%= cf.hidden_field(:bound, {value: @etd.bound}) %>
+        <%= cf.hidden_field(:availability_id, {value: @etd.availability_id}) %>
         <%= cf.link_to_remove "Remove"%>
       <% end %>
     <% end %>
@@ -37,13 +37,13 @@
             <tr>
               <td><%= collab.first_name + " " + collab.last_name %></td>
               <td><%= Role.find(pr.role_id).name %></td>
-              <td><%= link_to 'Destroy', destroy_people_role_path(pr), :confirm => 'Are you sure?', :method => :post, :remote => true, :class => "del_pr" %></td>
+              <td><%= link_to 'Destroy', destroy_people_role_path(pr), confirm: 'Are you sure?', method: :post, remote: true, class: "del_pr" %></td>
             </tr>
           <% end %>
         <% end %>
       </table>
     <% end %>
-    <%= form_tag(:controller => "people", :action => "find") do %>
+    <%= form_tag(controller: "people", action: "find") do %>
       <%= hidden_field_tag(:etd_id, @etd.id) %>
       <%= hidden_field_tag(:origin, '/etds/') %>
       <%= submit_tag "Add New Committee Member" %>

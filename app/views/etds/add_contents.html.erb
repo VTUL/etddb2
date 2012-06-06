@@ -1,5 +1,5 @@
 <h1>Add Contents to ETD</h1>
-<%= nested_form_for @etd, :url => next_new_etd_path(@etd), :html => {:multipart => true} do |f| %>
+<%= nested_form_for @etd, url: next_new_etd_path(@etd), html: {multipart: true} do |f| %>
   <%= f.fields_for :contents do |cf| %>
     <% if cf.object.content? %>
       <% #This content already exists %>
@@ -11,8 +11,8 @@
     <% else %>
       <% #This is new content %>
       <%= cf.file_field :content %>
-      <%= cf.hidden_field(:bound, {:value => @etd.bound}) %>
-      <%= cf.hidden_field(:availability_id, {:value => @etd.availability_id}) %>
+      <%= cf.hidden_field(:bound, {value: @etd.bound}) %>
+      <%= cf.hidden_field(:availability_id, {value: @etd.availability_id}) %>
       <%= cf.link_to_remove "Remove"%>
     <% end %>
   <% end %>

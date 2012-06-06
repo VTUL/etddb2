@@ -20,7 +20,7 @@
       <td><%=h content.page_count %></td>
       <td><%=h content.dimensions %></td>
       <td><%=h content.duration %></td>
-      <td><%= button_to 'Destroy', destroy_content_path(content), :confirm => 'Are you sure?' %></td>
+      <td><%= button_to 'Destroy', destroy_content_path(content), confirm: 'Are you sure?' %></td>
       <% if content.id != @content.id %>
               <td><%= link_to 'Show', content_path(content) %></td>
       <% end %>

@@ -23,7 +23,7 @@
     <td><%=h etd.departments.pluck(:name).join(", ") %></td>
     <td><%= link_to 'Show', etd %></td>
     <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-    <td><%= button_to 'Destroy', destroy_etd_path(etd), :confirm => 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_etd_path(etd), confirm: 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>
