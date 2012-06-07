@@ -1,2 +1,5 @@
-<% # TODO: ALL THIS PARTIAL. %>
-<p>You have a profile.</p>
+<% # TODO: The person's name should be their display name, not the below, but we aren't storing it on creation, so... %>
+<h3><%= @person.first_name %> <%= @person.last_name %></h3>
+<% if @person.show_email %>
+  <p>Email: <%= @person.email %></p>
+<% end %>
