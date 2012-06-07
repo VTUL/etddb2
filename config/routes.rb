@@ -1,4 +1,6 @@
 NewVtEtdUpgrd::Application.routes.draw do
+  require 'resque/server'
+
   # These are boring static pages.
   root :to => 'pages#home'
   match '/about', :to => 'pages#about'
@@ -6,6 +8,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   match '/authorhelp', :to => 'pages#authorhelp'
   match '/staffhelp', :to => 'pages#staffhelp'
   match '/dev', :to => 'pages#dev'
+  
+  # Resque's routes.
+  mount Resque::Server.new, at: "/resque"
 
   # Set up devise for people, and make it use our sessions controller.
   devise_for :people, :controllers => {:sessions => "people/sessions"}
