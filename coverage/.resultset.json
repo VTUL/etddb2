@@ -5651,6 +5651,14 @@
         null,
         0,
         0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
         0,
         0,
         null,
@@ -6431,7 +6439,7 @@
         null
       ]
     },
-    "timestamp": 1338922803
+    "timestamp": 1339439902
   },
   "/home/moot/.rvm/gems/ruby-1.9.3-p125@global/gems/rake-0.9.2.2/lib/rake/rake_test_loader.rb ": {
     "coverage": {
@@ -7461,16 +7469,16 @@
         null,
         null,
         1,
+        2,
+        null,
+        null,
+        2,
+        2,
         0,
         null,
         null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
+        2,
+        2,
         null,
         0,
         null,
@@ -8493,6 +8501,6 @@
         null
       ]
     },
-    "timestamp": 1338998147
+    "timestamp": 1339447406
   }
 }
