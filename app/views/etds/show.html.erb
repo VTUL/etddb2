@@ -42,7 +42,7 @@
             <tr>
               <td><%= collab.first_name + " " + collab.last_name %></td>
               <td><%= Role.find(pr.role_id).name %></td>
-              <td><%= link_to 'Destroy', destroy_people_role_path(pr), confirm: 'Are you sure?', method: :post, remote: true, class: "del_pr" %></td>
+              <td><%= link_to 'Destroy', destroy_people_role_path(pr), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
             </tr>
           <% end %>
         <% end %>

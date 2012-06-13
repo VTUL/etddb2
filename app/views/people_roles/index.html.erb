@@ -17,7 +17,7 @@
     <td><%= h people_role.vote %></td>
     <td><%= link_to 'Show', people_role %></td>
     <td><%= link_to 'Edit', edit_people_role_path(people_role) %></td>
-    <td><%= button_to 'Destroy', destroy_people_role_path(people_role), confirm: 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_people_role_path(people_role), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>

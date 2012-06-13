@@ -12,7 +12,7 @@
     <td><%=h department.retired %></td>
     <td><%= link_to 'Show', department %></td>
     <td><%= link_to 'Edit', edit_department_path(department) %></td>
-    <td><%= button_to 'Destroy', destroy_department_path(department), confirm: 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_department_path(department), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>

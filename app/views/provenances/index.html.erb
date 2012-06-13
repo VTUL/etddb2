@@ -12,7 +12,7 @@
     <td><%=h provenance.notice %></td>
     <td><%= link_to 'Show', provenance %></td>
     <td><%= link_to 'Edit', edit_provenance_path(provenance) %></td>
-    <td><%= button_to 'Destroy', destroy_provenance_path(provenance), confirm: 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_provenance_path(provenance), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>
