@@ -147,4 +147,30 @@ class EtdsControllerTest < ActionController::TestCase
     post(:submit, id: @etd.to_param)
     assert_response(:success)
   end
+
+  test "Switching the ETD to Mixed should not update it's content." do
+    @etd_attrs = @etd.attributes
+    @etd_attrs[:department_ids] = {id_1: 1}
+
+    assert_no_difference '@etd.contents.first.availability_id' do
+      assert_no_difference '@etd.contents.last.availability_id' do
+        @etd_attrs[:availability_id] = Availability.where(name: "Mixed").first.id
+        put(:update, id: @etd.to_param, etd: @etd_attrs)
+      end
+    end
+  end
+
+  test "Changing to anything other than Mixed should update content." do
+    @etd_attrs = @etd.attributes
+    @etd_attrs[:department_ids] = {id_1: 1}
+
+    new_avail = Availability.where(name: "Withheld").first.id
+    assert_not_equal(@etd.contents.first.availability_id, new_avail)
+    assert_not_equal(@etd.contents.last.availability_id, new_avail)
+
+    @etd_attrs[:availability_id] = new_avail
+    put(:update, id: @etd.to_param, etd: @etd_attrs)
+    assert_equal(@etd.contents.first.availability_id, new_avail)
+    assert_equal(@etd.contents.last.availability_id, new_avail)
+  end
 end

@@ -107,10 +107,11 @@ class EtdsController < ApplicationController
       if @etd.update_attributes(params[:etd])
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
         if @etd.availability_id != Availability.where(name: "Mixed").first.id
-          # TODO: Is the where clause necessary?
+          # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
           contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
           for content in contents do
             content.availability_id = @etd.availability_id
+            content.save
           end
         end
 
