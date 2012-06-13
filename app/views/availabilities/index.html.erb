@@ -17,7 +17,7 @@
     <td><%= availability.retired %></td>
     <td><%= link_to 'Show', availability %></td>
     <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
-    <td><%= button_to 'Destroy', destroy_availability_path(availability), :confirm => 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_availability_path(availability), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>
