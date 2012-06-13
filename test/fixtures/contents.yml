@@ -11,3 +11,13 @@ two:
   etd_id: 1
   availability_id: 1
   bound: true
+
+three:
+  content_file_name: file3.html
+  availability_id: 1
+  bound: false
+
+four:
+  content_file_name: file4.html
+  availability_id: 1
+  bound: false

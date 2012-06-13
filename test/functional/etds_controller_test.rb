@@ -119,8 +119,28 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should add multiple contents (save_contents) to an ETD." do
-    #TODO: Add test for Paperclip multiple file uploads.
-    assert(true)
+    @content_a = Content.create(contents(:three).attributes)
+    @content_b = Content.create(contents(:four).attributes)
+
+    params = {contents_attributes: {new_1: @content_a.attributes, new_2: @content_b.attributes}}
+    for c in @etd.contents do
+      params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: false}
+    end
+    
+    assert_difference('@etd.contents.count', 2) do
+      post(:save_contents, etd: params, origin: '/etds/add_contents/', id: @etd.id)
+    end
+  end  
+  
+  test "should delete multiple contents from an ETD." do
+    params = {contents_attributes: {}}
+    for c in @etd.contents do
+      params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: true}
+    end
+
+    assert_difference('@etd.contents.count', -(@etd.contents.count)) do
+      post(:save_contents, etd: params, origin: '/etds/add_contents/', id: @etd.id)
+    end
   end
 
   test "should submit the etd for review." do
