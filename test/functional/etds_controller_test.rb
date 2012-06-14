@@ -76,14 +76,13 @@ class EtdsControllerTest < ActionController::TestCase
     get(:new)
     assert_redirected_to(login_path)
 
-    get(:my_etds)
-    assert_redirected_to(login_path)
-
     get(:edit, id: @etd.to_param)
     assert_redirected_to(login_path)
 
     delete(:destroy, id: @etd.to_param)
     assert_redirected_to(etds_path)
+
+    # TODO: Add Voting on an ETD.
   end
 
   test "should only be able to edit and destroy your ETDs." do
@@ -104,12 +103,6 @@ class EtdsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to(controller: "etds", action: "index", notice: "ETD Deleted.")
-  end
-
-  test "should get my_etds" do
-    get(:my_etds)
-    assert_response(:success)
-    assert_not_nil(assigns(:authors_etds))
   end
 
   test "should get add_contents" do
