@@ -39,4 +39,9 @@ class EtddbMailer < ActionMailer::Base
     mail(to: 'cnbrittle@gmail.com', subject: 'A Committee has approved an ETD.')
     # TODO: Change email address for graduate school.
   end
+
+  def proquest(etd)
+    @etd = etd
+    mail(to: 'email@proquest.vt.edu', subject: 'New Dissertation from Virginia Tech')
+    # TODO: the real proquest email address is 'dissepubl@proquest.com', but I don't want to send them anything by accident.
 end
