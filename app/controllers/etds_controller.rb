@@ -147,24 +147,7 @@ class EtdsController < ApplicationController
           format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
         end
       else
-        session[:return_to] = request.fullpath
         format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
-      end
-    end
-  end
-
-  # GET /etds/my_etds
-  def my_etds
-    respond_to do |format|
-      # BUG: This should be implemented in a before_filter
-      if person_signed_in?
-        @authors_etds = current_person.etds
-
-        format.html # my_etds.html.erb
-        format.xml  { render(xml: @authors_etds) }
-      else
-        session[:return_to] = request.fullpath
-        format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
       end
     end
   end
@@ -255,8 +238,7 @@ class EtdsController < ApplicationController
           format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
         end
       else
-        # Error. Must be signed in.
-        session[:return_to] = request.fullpath
+        # Error. Must be signed in. This should not be possible normally.
         format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
       end
     end
