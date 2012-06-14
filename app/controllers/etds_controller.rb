@@ -28,14 +28,14 @@ class EtdsController < ApplicationController
   def new
     respond_to do |format|
       # BUG: This should be implemented as a before_filter.
-      if !person_signed_in?
+      if person_signed_in?
+        @etd = Etd.new
+        format.html # new.html.erb
+        format.xml  { render(xml: @etd) }
+      else
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
       end
-
-      @etd = Etd.new
-
-      format.html # new.html.erb
-      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -52,6 +52,7 @@ class EtdsController < ApplicationController
           format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
         end
       else
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
       end
     end
@@ -130,9 +131,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Put in a before_filter.
-      if !person_signed_in?
-        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
-      else
+      if person_signed_in?
         # BUG: Use Cancan for this.
         if current_person.etds.include?(@etd)
           for pr in @etd.people_roles do
@@ -147,6 +146,9 @@ class EtdsController < ApplicationController
         else
           format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
         end
+      else
+        session[:return_to] = request.fullpath
+        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
       end
     end
   end
@@ -161,6 +163,7 @@ class EtdsController < ApplicationController
         format.html # my_etds.html.erb
         format.xml  { render(xml: @authors_etds) }
       else
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
       end
     end
@@ -253,6 +256,7 @@ class EtdsController < ApplicationController
         end
       else
         # Error. Must be signed in.
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
       end
     end
