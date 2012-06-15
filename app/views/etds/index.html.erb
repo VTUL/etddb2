@@ -15,18 +15,17 @@
   </tr>
 
 <% @etds.each do |etd| %>
-  <% p = Person.find(etd.people_roles.where(role_id: Role.where(name: "Author").first).first.person_id) %>
   <tr>
-    <td><%=h p.first_name + " " + p.last_name %></td>
+    <% get_creators etd do |creators| %>
+      <td><%=h creators.pluck(:last_name).zip( creators.pluck(:first_name) ).map { |o| o.join(", ") } .join("; ") %></td>
+    <% end %>
     <td><%=h etd.title %></td>
-    <td><%=h etd.departments.map(&:name).join(", ") %></td>
+    <td><%=h etd.departments.pluck(:name).join(", ") %></td>
     <td><%= link_to 'Show', etd %></td>
     <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-    <td><%= button_to 'Destroy', destroy_etd_path(etd), :confirm => 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>
-
 <br />
-
 <%= link_to 'New ETD', new_etd_path %>

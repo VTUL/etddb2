@@ -8,7 +8,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @etds }
+      format.xml  { render(xml: @etds) }
     end
   end
 
@@ -16,15 +16,10 @@ class EtdsController < ApplicationController
   # GET /etds/1.xml
   def show
     @etd = Etd.find(params[:id])
-    @prs = []
-    for pr in @etd.people_roles do
-      p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
-    end
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @etd }
+      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -32,15 +27,15 @@ class EtdsController < ApplicationController
   # GET /etds/new.xml
   def new
     respond_to do |format|
-      # This should be implemented as a before_filter.
+      # BUG: This should be implemented as a before_filter.
       if !person_signed_in?
-        format.html { redirect_to(login_path, :notice => "You must login create an ETD.") }
+        format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
       end
 
       @etd = Etd.new
 
       format.html # new.html.erb
-      format.xml  { render :xml => @etd }
+      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -48,16 +43,16 @@ class EtdsController < ApplicationController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
-      # Again, this should be implemented in a before_filter
+      # BUG: Again, this should be implemented in a before_filter
       if person_signed_in?
-        # This works, but is only a hack, we should use Cancan.
-        if !current_person.etds.include?(@etd)
-          format.html { redirect_to(etds_path, :notice => "You cannot edit that ETD.") }
+        # BUG: This works, but is only a hack, we should use Cancan.
+        if current_person.etds.include?(@etd)
+          format.html { render(action: "edit") }
         else
-          format.html { render :action => "edit" }
+          format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
         end
       else
-        format.html { redirect_to(login_path, :notice => "You must sign in to edit ETDs.") }
+        format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
       end
     end
   end
@@ -72,7 +67,8 @@ class EtdsController < ApplicationController
 
     pr = PeopleRole.new
     pr.person_id = current_person.id
-    pr.role_id = Role.find(:first, :conditions => "name = 'Author'").id
+    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first.id
+    # TODO: Is there a better way to do give the creator's role?
     @etd.people_roles << pr
 
     @etd.cdate = Time.now()
@@ -86,11 +82,11 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.save
-        format.html { redirect_to(next_new_etd_path(@etd), :notice => 'Etd was successfully created.') }
-        format.xml  { render :xml => @etd, :status => :created, :location => @etd }
+        format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
+        format.xml  { render(xml: @etd, status: :created, location: @etd) }
       else
-        format.html { render :action => "new", :notice => 'You have errors.' }
-        format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new", notice: 'You have errors.') }
+        format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -100,19 +96,29 @@ class EtdsController < ApplicationController
   def update
     @etd = Etd.find(params[:id])
 
+    # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
     if params[:etd][:department_ids][:id_2] != "" then
       d << params[:etd][:department_ids][:id_2]
     end
     params[:etd][:department_ids] = d
-
+    
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
-        format.html { redirect_to(@etd, :notice => 'Etd was successfully updated.') }
+        # Change the availability of all the ETD's contents, if the availability isn't mixed.
+        if @etd.availability_id != Availability.where(name: "Mixed").first.id
+          # TODO: Is the where clause necessary?
+          contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
+          for content in contents do
+            content.availability_id = @etd.availability_id
+          end
+        end
+
+        format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @etd.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -123,11 +129,11 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      # before_filter
+      # BUG: Put in a before_filter.
       if !person_signed_in?
-        format.html { redirect_to etds_path, :notice => "You must log in to delete your ETDs." }
+        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
       else
-        # Cancan
+        # BUG: Use Cancan for this.
         if current_person.etds.include?(@etd)
           for pr in @etd.people_roles do
             pr.destroy
@@ -136,10 +142,10 @@ class EtdsController < ApplicationController
             content.destroy
           end
           @etd.destroy
-          format.html { redirect_to :action => 'index', :notice => "ETD Deleted." }
+          format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
           format.xml  { head :ok }
         else
-          format.html { redirect_to etds_path, :notice => "You cannot delete that ETD."}
+          format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
         end
       end
     end
@@ -148,14 +154,14 @@ class EtdsController < ApplicationController
   # GET /etds/my_etds
   def my_etds
     respond_to do |format|
-      # This should be implemented in a before_filter
+      # BUG: This should be implemented in a before_filter
       if person_signed_in?
         @authors_etds = current_person.etds
 
         format.html # my_etds.html.erb
-        format.xml  { render :xml => @authors_etds }
+        format.xml  { render(xml: @authors_etds) }
       else
-        format.html {redirect_to(login_path, :notice => "You need to login to browse your ETDs.")}
+        format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
       end
     end
   end
@@ -164,11 +170,7 @@ class EtdsController < ApplicationController
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
-    @prs = []
-    for pr in @etd.people_roles do
-      p = Person.find(pr.person_id)
-      @prs << {:first_name => p.first_name.to_s, :last_name => p.last_name.to_s, :role => Role.find(pr.role_id).name, :pr => pr}
-    end
+
     respond_to do |format|
       format.html # new_next.html.erb
     end
@@ -178,10 +180,17 @@ class EtdsController < ApplicationController
   # (This is used from next_new, and add_contents)
   def save_contents
     @etd = Etd.find(params[:id])
+
+    # Whitelist params[:origin]
+    origins = ["/etds/add_contents/", "/etds/next_new/"]
+    if !origins.include?(params[:origin])
+      params[:origin] = "/etds/add_contents/"
+    end
+
     if @etd.update_attributes(params[:etd])
-      redirect_to params[:origin] + @etd.id.to_s, :notice => "Successfully updated article."
+      redirect_to(params[:origin] + @etd.id.to_s, notice: "Successfully updated article.")
     else
-      redirect_to params[:origin] + @etd.id.to_s
+      redirect_to(params[:origin] + @etd.id.to_s)
     end    
   end
 
@@ -201,7 +210,7 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
-    @author = Person.find(@etd.people_roles.where(:role_id => Role.where(:name => 'Author').first).first.person_id)
+    @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
     EtddbMailer.confirm_submit_author(@etd, @author).deliver
     EtddbMailer.confirm_submit_school(@etd, @author).deliver
     EtddbMailer.confirm_submit_committee(@etd, @author).deliver
@@ -216,25 +225,35 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      if @etd.status == "Submitted"
-        if person_signed_in?
-          pr = @etd.people_roles.where(:person_id => current_person.id).first
-          if !pr.nil? && Role.where("name LIKE 'Committee%'").map(&:id).include?(pr.role_id)
+      if person_signed_in?
+        if @etd.status == "Submitted"
+          pr = @etd.people_roles.where(person_id: current_person.id).first
+          if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
             if params[:vote] == 'true'
               pr.vote = true
             else
               pr.vote = false
             end
             pr.save()
+
+            # Check if the entire Committee has approved the ETD.
+            all_trues = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:vote).uniq
+            if all_trues.include?(true) && all_trues.size == 1
+              EtddbMailer.committee_approved(@etd).deliver
+            end
+
             format.html #vote.html.erb
           else
             # Error. You are either not part of this ETD, or at least not on it's committee.
+            format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
           end
         else
-          # Error. Must be signed in.
+          # Error. ETD not submitted. You are either too early, or too late.
+          format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
         end
       else
-        # Error. ETD not submitted. You are either too early, or too late.
+        # Error. Must be signed in.
+        format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
       end
     end
   end

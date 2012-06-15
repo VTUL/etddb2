@@ -6,7 +6,7 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @departments }
+      format.xml  { render(xml: @departments) }
     end
   end
 
@@ -17,7 +17,7 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @department }
+      format.xml  { render(xml: @department) }
     end
   end
 
@@ -28,7 +28,7 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @department }
+      format.xml  { render(xml: @department) }
     end
   end
 
@@ -44,11 +44,11 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
-        format.html { redirect_to(@department, :notice => 'Department was successfully created.') }
-        format.xml  { render :xml => @department, :status => :created, :location => @department }
+        format.html { redirect_to(@department, notice: 'Department was successfully created.') }
+        format.xml  { render(xml: @department, status: :created, location: @department) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @department.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @department.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.update_attributes(params[:department])
-        format.html { redirect_to(@department, :notice => 'Department was successfully updated.') }
+        format.html { redirect_to(@department, notice: 'Department was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @department.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @department.errors, status: :unprocessable_entity) }
       end
     end
   end

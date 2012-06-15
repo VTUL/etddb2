@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,6 +14,7 @@ group :assets do
   gem 'sass-rails', " ~> 3.2.3"
   gem 'coffee-rails', " ~> 3.2.1"
   gem 'uglifier'
+  gem 'haml'
 end
 
 #For AJAX:
@@ -29,6 +30,7 @@ gem 'ruby-ldap', '0.9.10'
 group :development do
   #gem 'rspec-rails','2.5.0'
   gem "rails_code_qa", "~> 0.5.1"
+  gem 'thin'
 end
 group :test do
   #gem 'rspec','2.5.0'
@@ -46,8 +48,8 @@ gem 'devise'
 #gem 'test_helper'
 
 # For multiple file upload
-#gem 'paperclip','~>2.4'
-gem 'carrierwave'
+gem 'paperclip'
+#gem 'carrierwave'
 gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
 gem 'mime-types'
 

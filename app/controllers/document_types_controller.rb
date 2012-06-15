@@ -6,7 +6,7 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @document_types }
+      format.json { render(json: @document_types) }
     end
   end
 
@@ -17,7 +17,7 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @document_type }
+      format.json { render(json: @document_type) }
     end
   end
 
@@ -28,7 +28,7 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @document_type }
+      format.json { render(json: @document_type) }
     end
   end
 
@@ -44,11 +44,11 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       if @document_type.save
-        format.html { redirect_to @document_type, notice: 'Document type was successfully created.' }
-        format.json { render json: @document_type, status: :created, location: @document_type }
+        format.html { redirect_to(@document_type, notice: 'Document type was successfully created.') }
+        format.json { render(json: @document_type, status: :created, location: @document_type) }
       else
-        format.html { render action: "new" }
-        format.json { render json: @document_type.errors, status: :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.json { render(json: @document_type.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       if @document_type.update_attributes(params[:document_type])
-        format.html { redirect_to @document_type, notice: 'Document type was successfully updated.' }
+        format.html { redirect_to(@document_type, notice: 'Document type was successfully updated.') }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @document_type.errors, status: :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.json { render(json: @document_type.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -76,7 +76,7 @@ class DocumentTypesController < ApplicationController
     @document_type.destroy
 
     respond_to do |format|
-      format.html { redirect_to document_types_url }
+      format.html { redirect_to(document_types_url) }
       format.json { head :ok }
     end
   end

@@ -6,8 +6,8 @@
 
 class UserAction < ActiveRecord::Base
   has_many :permission
-  has_many :roles, :through=>:permission
-  has_many :digital_objects, :through=>:permission
+  has_many :roles, through: :permission
+  has_many :digital_objects, through: :permission
 
   validates_presence_of :name
 end

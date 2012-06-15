@@ -15,7 +15,7 @@
     <td><%= degree.retired %></td>
     <td><%= link_to 'Show', degree %></td>
     <td><%= link_to 'Edit', edit_degree_path(degree) %></td>
-    <td><%= button_to 'Destroy', destroy_degree_path(degree), :confirm => 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_degree_path(degree), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>

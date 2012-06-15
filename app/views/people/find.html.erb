@@ -1,5 +1,5 @@
 <h1>Find Person</h1>
-<%= form_tag '/people/find', :remote => true, :id => "committee_search" do %>
+<%= form_tag '/people/find', remote: true, id: "committee_search" do %>
   <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
   <%= hidden_field_tag(:origin, params[:origin]) %>
   <%= label_tag(:lname, "Member's Last Name") %>
@@ -7,7 +7,7 @@
   <%= submit_tag("Find") %>
 <% end %>
 <br />
-<%= form_tag '/people/add_committee', :id => "committee_add" do %>
+<%= form_tag '/people/add_committee', id: "committee_add" do %>
   <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
   <%= hidden_field_tag(:origin, params[:origin]) %>
   <div id="candidates">

@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label(:content)%><br />
-    <%= f.file_field(:content)%>
+    <%= f.label(:content) %><br />
+    <%= f.file_field(:content) %>
   </div>
 
   <div class="field">
@@ -41,7 +41,7 @@
   <div class="field">
     <%= f.label(:availability_id, "Availability") %>
     <table>
-      <% for avail in Availability.where(:retired => false) do %>
+      <% for avail in Availability.where(retired: false) do %>
         <% if avail.name != "Mixed" %>
         <tr>
           <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>

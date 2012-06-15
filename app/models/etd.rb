@@ -15,15 +15,17 @@ class Etd < ActiveRecord::Base
 
   has_and_belongs_to_many :departments
 
-  has_many :contents, :dependent => :destroy
-  accepts_nested_attributes_for :contents, :allow_destroy => true
+  has_many :contents, dependent: :destroy
+  accepts_nested_attributes_for :contents, allow_destroy: true
 
-  has_many :people_roles, :dependent => :destroy
-  has_many :roles, :through => :people_roles
-  has_many :people, :through => :people_roles
+  has_many :people_roles, dependent: :destroy
+  has_many :roles, through: :people_roles
+  has_many :people, through: :people_roles
 
   validates_presence_of :abstract, :availability_id, :copyright_statement_id, :degree_id,
                         :document_type_id, :title, :privacy_statement_id, :urn, :url
   validates_uniqueness_of :urn
-  validates :bound, :inclusion => {:in => [true, false], :message => "must be boolean"}
+  validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
+  statuses = ["Created", "Submitted", "Approved"]
+  validates :status, inclusion: {in: statuses, message: "must be a valid status."}
 end

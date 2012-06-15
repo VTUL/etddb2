@@ -15,7 +15,7 @@
     <td><%= document_type.retired %></td>
     <td><%= link_to 'Show', document_type %></td>
     <td><%= link_to 'Edit', edit_document_type_path(document_type) %></td>
-    <td><%= button_to 'Destroy', destroy_document_type_path(document_type), :confirm => 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_document_type_path(document_type), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>

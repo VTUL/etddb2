@@ -7,7 +7,7 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @roles }
+      format.xml  { render(xml: @roles) }
     end
   end
 
@@ -18,7 +18,7 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @role }
+      format.xml  { render(xml: @role) }
     end
   end
 
@@ -31,7 +31,7 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @role }
+      format.xml  { render(xml: @role) }
     end
   end
 
@@ -47,11 +47,11 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to(@role, :notice => 'Role was successfully created.') }
-        format.xml  { render :xml => @role, :status => :created, :location => @role }
+        format.html { redirect_to(@role, notice: 'Role was successfully created.') }
+        format.xml  { render(xml: @role, status: :created, location: @role) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @role.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -63,11 +63,11 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       if @role.update_attributes(params[:role])
-        format.html { redirect_to(@role, :notice => 'Role was successfully updated.') }
+        format.html { redirect_to(@role, notice: 'Role was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @role.errors, status: :unprocessable_entity) }
       end
     end
   end

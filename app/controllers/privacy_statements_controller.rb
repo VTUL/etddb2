@@ -6,7 +6,7 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @privacy_statements }
+      format.json { render(json: @privacy_statements) }
     end
   end
 
@@ -17,7 +17,7 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @privacy_statement }
+      format.json { render(json: @privacy_statement) }
     end
   end
 
@@ -28,7 +28,7 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @privacy_statement }
+      format.json { render(json: @privacy_statement) }
     end
   end
 
@@ -44,11 +44,11 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       if @privacy_statement.save
-        format.html { redirect_to @privacy_statement, notice: 'Privacy statement was successfully created.' }
-        format.json { render json: @privacy_statement, status: :created, location: @privacy_statement }
+        format.html { redirect_to(@privacy_statement, notice: 'Privacy statement was successfully created.') }
+        format.json { render(json: @privacy_statement, status: :created, location: @privacy_statement) }
       else
-        format.html { render action: "new" }
-        format.json { render json: @privacy_statement.errors, status: :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.json { render(json: @privacy_statement.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       if @privacy_statement.update_attributes(params[:privacy_statement])
-        format.html { redirect_to @privacy_statement, notice: 'Privacy statement was successfully updated.' }
+        format.html { redirect_to(@privacy_statement, notice: 'Privacy statement was successfully updated.') }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @privacy_statement.errors, status: :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.json { render(json: @privacy_statement.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -76,7 +76,7 @@ class PrivacyStatementsController < ApplicationController
     @privacy_statement.destroy
 
     respond_to do |format|
-      format.html { redirect_to privacy_statements_url }
+      format.html { redirect_to(privacy_statements_url) }
       format.json { head :ok }
     end
   end

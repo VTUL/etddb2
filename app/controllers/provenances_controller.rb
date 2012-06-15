@@ -6,7 +6,7 @@ class ProvenancesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @provenances }
+      format.xml  { render(xml: @provenances) }
     end
   end
 
@@ -17,7 +17,7 @@ class ProvenancesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @provenance }
+      format.xml  { render(xml: @provenance) }
     end
   end
 
@@ -28,7 +28,7 @@ class ProvenancesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @provenance }
+      format.xml  { render(xml: @provenance) }
     end
   end
 
@@ -44,11 +44,11 @@ class ProvenancesController < ApplicationController
 
     respond_to do |format|
       if @provenance.save
-        format.html { redirect_to(@provenance, :notice => 'Provenance was successfully created.') }
-        format.xml  { render :xml => @provenance, :status => :created, :location => @provenance }
+        format.html { redirect_to(@provenance, notice: 'Provenance was successfully created.') }
+        format.xml  { render(xml: @provenance, status: :created, location: @provenance) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @provenance.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @provenance.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class ProvenancesController < ApplicationController
 
     respond_to do |format|
       if @provenance.update_attributes(params[:provenance])
-        format.html { redirect_to(@provenance, :notice => 'Provenance was successfully updated.') }
+        format.html { redirect_to(@provenance, notice: 'Provenance was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @provenance.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @provenance.errors, status: :unprocessable_entity) }
       end
     end
   end

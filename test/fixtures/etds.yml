@@ -6,6 +6,7 @@ one:
   abstract: This is a test abstract
   availability_id: 1
   bound: false
+  status: Created
   copyright_statement_id: 1
   degree_id: 1
   document_type_id: 1
@@ -19,6 +20,7 @@ two:
   abstract: This is the second test abstract 
   availability_id: 2
   bound: true
+  status: Created
   copyright_statement_id: 2
   degree_id: 2
   document_type_id: 2

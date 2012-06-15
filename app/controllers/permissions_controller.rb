@@ -44,11 +44,11 @@ class PermissionsController < ApplicationController
     for perm in xor_perms
       ids = perm.split("_")
       if new_perms.include? perm
-        Permission.create(:role_id => ids[0], :digital_object_id => ids[1], :user_action_id => ids[2])
+        Permission.create(role_id: ids[0], digital_object_id: ids[1], user_action_id: ids[2])
         new_count += 1
       else
         # The loop here is only to prevent duplicate entries. It should actually execute in O(1) time, as there should only be one entry.
-        for old_perm in Permission.where({:role_id => ids[0], :digital_object_id => ids[1], :user_action_id => ids[2]})
+        for old_perm in Permission.where({role_id: ids[0], digital_object_id: ids[1], user_action_id: ids[2]})
           Permission.delete(old_perm.id)
           del_count += 1
         end
@@ -56,7 +56,7 @@ class PermissionsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(permissions_path, :notice => "Successfully added #{new_count} permissions, and deleted #{del_count}.") }
+      format.html { redirect_to(permissions_path, notice: "Successfully added #{new_count} permissions, and deleted #{del_count}.") }
     end
   end
 end

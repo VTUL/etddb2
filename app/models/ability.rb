@@ -12,7 +12,7 @@ class Ability
     #if !etd.nil? and !roles.nil? and !role_names.nil?
     #  # Check if the user has a specific role for this ETD, and only give them
     #  # appropriate permissions.
-    #  pr = PeopleRole.new(:person_id => user.id, :etd_id => etd.id)
+    #  pr = PeopleRole.new(person_id: user.id, etd_id: etd.id)
     #  for role in roles
     #    pr.role_id = role.id
     #    if user.people_roles.exists?(pr)

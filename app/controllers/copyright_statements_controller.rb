@@ -6,7 +6,7 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @copyright_statements }
+      format.xml  { render(xml: @copyright_statements) }
     end
   end
 
@@ -17,7 +17,7 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @copyright_statement }
+      format.xml  { render(xml: @copyright_statement) }
     end
   end
 
@@ -28,7 +28,7 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @copyright_statement }
+      format.xml  { render(xml: @copyright_statement) }
     end
   end
 
@@ -44,11 +44,11 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       if @copyright_statement.save
-        format.html { redirect_to(@copyright_statement, :notice => 'CopyrightStatement was successfully created.') }
-        format.xml  { render :xml => @copyright_statement, :status => :created, :location => @copyright_statement }
+        format.html { redirect_to(@copyright_statement, notice: 'CopyrightStatement was successfully created.') }
+        format.xml  { render(xml: @copyright_statement, status: :created, location: @copyright_statement) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @copyright_statement.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @copyright_statement.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       if @copyright_statement.update_attributes(params[:copyright_statement])
-        format.html { redirect_to(@copyright_statement, :notice => 'CopyrightStatement was successfully updated.') }
+        format.html { redirect_to(@copyright_statement, notice: 'CopyrightStatement was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @copyright_statement.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @copyright_statement.errors, status: :unprocessable_entity) }
       end
     end
   end

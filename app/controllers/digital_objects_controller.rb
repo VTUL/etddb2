@@ -6,7 +6,7 @@ class DigitalObjectsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @digital_objects }
+      format.xml  { render(xml: @digital_objects) }
     end
   end
 
@@ -17,7 +17,7 @@ class DigitalObjectsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @digital_object }
+      format.xml  { render(xml: @digital_object) }
     end
   end
 
@@ -28,7 +28,7 @@ class DigitalObjectsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @digital_object }
+      format.xml  { render(xml: @digital_object) }
     end
   end
 
@@ -44,11 +44,11 @@ class DigitalObjectsController < ApplicationController
 
     respond_to do |format|
       if @digital_object.save
-        format.html { redirect_to(@digital_object, :notice => 'DigitalObject was successfully created.') }
-        format.xml  { render :xml => @digital_object, :status => :created, :location => @digital_object }
+        format.html { redirect_to(@digital_object, notice: 'DigitalObject was successfully created.') }
+        format.xml  { render(xml: @digital_object, status: :created, location: @digital_object) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @digital_object.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @digital_object.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class DigitalObjectsController < ApplicationController
 
     respond_to do |format|
       if @digital_object.update_attributes(params[:digital_object])
-        format.html { redirect_to(@digital_object, :notice => 'DigitalObject was successfully updated.') }
+        format.html { redirect_to(@digital_object, notice: 'DigitalObject was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @digital_object.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @digital_object.errors, status: :unprocessable_entity) }
       end
     end
   end

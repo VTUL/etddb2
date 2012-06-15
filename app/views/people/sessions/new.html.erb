@@ -6,7 +6,7 @@ may have created. You can get help with PIDs through <a href="http://www.4help.v
 
 <p>Your browser must accept <%= link_to "cookies", '/authorhelp#cookies' %> to continue the submission process.</p>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div><%= f.label :pid %><br />
   <%= f.text_field :pid %></div>
 
@@ -20,4 +20,4 @@ may have created. You can get help with PIDs through <a href="http://www.4help.v
   <div><%= f.submit "Sign in" %></div>
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<%= render partial: "devise/shared/links" %>

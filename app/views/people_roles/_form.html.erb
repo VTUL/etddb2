@@ -15,8 +15,20 @@
     <%= f.label :person_id %><br />
     <%= f.text_field :person_id %>
   </div>
+  <div class="field">
+    <%= f.label :role_id %><br />
+    <%= f.collection_select(:role_id, Role.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :etd_id %><br />
+    <%= f.text_field :etd_id %>
+  </div>
+  <div class="field">
+    <%= f.label :vote %><br />
+    <%= f.select(:vote, options_for_select([['None', ''], ['Approve', 'true'], ['Disapprove', 'false']])) %>
+  </div>
 
   <div class="actions">
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Submit' %>
   </div>
 <% end %>

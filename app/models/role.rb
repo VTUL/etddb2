@@ -7,16 +7,17 @@
 class Role < ActiveRecord::Base
   #Associate tables
   has_many :people_roles
-  has_many :people, :through => :people_roles
-  has_many :etds, :through => :people_roles
+  has_many :people, through: :people_roles
+  has_many :etds, through: :people_roles
 
 
   has_many :permission
-  has_many :user_actions, :through => :permission
-  has_many :digital_objects, :through => :permission
+  has_many :user_actions, through: :permission
+  has_many :digital_objects, through: :permission
 
   # Validates attributes
+  groups = ["Creators", "Collaborators", "Graduate School", "Administration"]
   validates_presence_of :name, :group
-  validates :group, :inclusion => {:in => ["Creators", "Collaborators", "Graduate School", "Administration"], :message => "must be one of our groups."}
+  validates :group, inclusion: {in: groups, message: "must be one of our groups."}
 
 end

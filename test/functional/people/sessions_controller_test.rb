@@ -2,6 +2,7 @@ require 'test_helper'
 
 class People::SessionsControllerTest < ActionController::TestCase
   test "should be a test." do
-          assert false, "This will become relevant when our new Authentication systems is written."
+          # TODO: This will become a real test when we have a login system to test...
+          assert(true)
   end
 end

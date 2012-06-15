@@ -12,7 +12,7 @@
     <td><%=h role.group %></td>
     <td><%= link_to 'Show', role %></td>
     <td><%= link_to 'Edit', edit_role_path(role) %></td>
-    <td><%= button_to 'Destroy', destroy_role_path(role), :confirm => 'Are you sure?' %></td>
+    <td><%= button_to 'Destroy', destroy_role_path(role), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
 </table>

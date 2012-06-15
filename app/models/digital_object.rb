@@ -6,8 +6,8 @@
 
 class DigitalObject < ActiveRecord::Base
   has_many :permission
-  has_many :roles, :through=>:permission
-  has_many :user_actions, :through=>:permission
+  has_many :roles, through: :permission
+  has_many :user_actions, through: :permission
 
   validates_presence_of :name
 end

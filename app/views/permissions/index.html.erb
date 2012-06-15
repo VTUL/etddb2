@@ -19,9 +19,9 @@
           <%= a_digital_object.name.humanize %>
         </td>
         <% for an_action in @actions %>
-          <% checked = Permission.exists?(:user_action_id => an_action.id, :role_id => a_role.id, :digital_object_id => a_digital_object.id) %>
+          <% checked = Permission.exists?(user_action_id: an_action.id, role_id: a_role.id, digital_object_id: a_digital_object.id) %>
           <td>
-            <%= check_box :perms, "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", {:checked => checked, :disabled => true}, true, false%>
+            <%= check_box :perms, "#{a_role.id}_#{a_digital_object.id}_#{an_action.id}", {checked: checked, disabled: true}, true, false%>
           </td>
         <% end %>
       </tr>

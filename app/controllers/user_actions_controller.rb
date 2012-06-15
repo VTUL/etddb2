@@ -6,7 +6,7 @@ class UserActionsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @user_actions }
+      format.xml  { render(xml: @user_actions) }
     end
   end
 
@@ -17,7 +17,7 @@ class UserActionsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @user_action }
+      format.xml  { render(xml: @user_action) }
     end
   end
 
@@ -28,7 +28,7 @@ class UserActionsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @user_action }
+      format.xml  { render(xml: @user_action) }
     end
   end
 
@@ -44,11 +44,11 @@ class UserActionsController < ApplicationController
 
     respond_to do |format|
       if @user_action.save
-        format.html { redirect_to(@user_action, :notice => 'User Action was successfully created.') }
-        format.xml  { render :xml => @user_action, :status => :created, :location => @user_action }
+        format.html { redirect_to(@user_action, notice: 'User Action was successfully created.') }
+        format.xml  { render(xml: @user_action, status: :created, location: @user_action) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user_action.errors, :status => :unprocessable_entity }
+        format.html { render(action: "new") }
+        format.xml  { render(xml: @user_action.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,11 +60,11 @@ class UserActionsController < ApplicationController
 
     respond_to do |format|
       if @user_action.update_attributes(params[:user_action])
-        format.html { redirect_to(@user_action, :notice => 'Action was successfully updated.') }
+        format.html { redirect_to(@user_action, notice: 'Action was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user_action.errors, :status => :unprocessable_entity }
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @user_action.errors, status: :unprocessable_entity) }
       end
     end
   end
