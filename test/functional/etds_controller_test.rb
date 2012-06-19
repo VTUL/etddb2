@@ -25,7 +25,7 @@ class EtdsControllerTest < ActionController::TestCase
       post(:create, etd: @etd_attrs)
     end
 
-    assert_redirected_to next_new_etd_path(assigns(:etd))
+    assert_redirected_to(next_new_etd_path(assigns(:etd)))
   end
 
   test "should not create etd" do
@@ -165,5 +165,36 @@ class EtdsControllerTest < ActionController::TestCase
     put(:update, id: @etd.to_param, etd: @etd_attrs)
     assert_equal(@etd.contents.first.availability_id, new_avail)
     assert_equal(@etd.contents.last.availability_id, new_avail)
+  end
+
+  test "should be able to vote on an submitted ETD." do
+    # Not-signed-in tested elsewhere.
+
+    # Shouldn't vote on an unsubmitted ETD.
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_redirected_to(person_path(@person))
+    # TODO: Test flash message.
+
+    # Shouldn't vote if you aren't a committee member.
+    @etd.status = "Submitted"
+    @etd.save
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_redirected_to(person_path(@person))
+    # TODO: Test flash message.
+
+    # Sign in an actual committee member.
+    sign_out @person
+    @person = Person.last
+    @etd.people_roles << PeopleRole.new(person_id: @person.id, role_id: Role.where(group: "Collaborators").first.id)
+    sign_in @person
+
+    # Should vote on a submitted ETD.
+    post(:vote, id: @etd.id, vote: 'not true')
+    assert_response(:success)
+    assert(!@etd.people_roles.where(person_id: @person.id).last.vote)
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_response(:success)
+    assert(@etd.people_roles.where(person_id: @person.id).last.vote)
+    assert(!ActionMailer::Base.deliveries.empty?)
   end
 end
