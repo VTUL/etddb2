@@ -167,20 +167,23 @@ class EtdsControllerTest < ActionController::TestCase
     assert_equal(@etd.contents.last.availability_id, new_avail)
   end
 
-  test "should be able to vote on an submitted ETD." do
+  test "should not be able to vote on an ETD." do
     # Not-signed-in tested elsewhere.
 
     # Shouldn't vote on an unsubmitted ETD.
     post(:vote, id: @etd.id, vote: 'true')
-    assert_redirected_to(person_path(@person))
-    # TODO: Test flash message.
+    assert_redirected_to(person_path(@person), notice: "That ETD is not ready to be voted on.")
 
     # Shouldn't vote if you aren't a committee member.
     @etd.status = "Submitted"
     @etd.save
     post(:vote, id: @etd.id, vote: 'true')
-    assert_redirected_to(person_path(@person))
-    # TODO: Test flash message.
+    assert_redirected_to(person_path(@person), notice: "You cannot vote on that ETD.")
+  end
+
+  test "should be able to vote on an submitted ETD." do
+    @etd.status = "Submitted"
+    @etd.save
 
     # Sign in an actual committee member.
     sign_out @person
