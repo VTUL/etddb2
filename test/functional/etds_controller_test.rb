@@ -82,7 +82,8 @@ class EtdsControllerTest < ActionController::TestCase
     delete(:destroy, id: @etd.to_param)
     assert_redirected_to(etds_path)
 
-    # TODO: Add Voting on an ETD.
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_redirected_to(login_path, notice: "You must log in to vote on an ETD.")
   end
 
   test "should only be able to edit and destroy your ETDs." do
