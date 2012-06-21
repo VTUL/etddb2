@@ -56,8 +56,12 @@
   </p>
 <% end %>
 <p>
-  <b>Keywords:</b><br />
-  <% # TODO: Add keywords as a bulleted list.  %>
+  <b>Keywords:</b>
+  <ul>
+  <% for word in @etd.keywords.to_s.split(", ") do %>
+    <li><%= word %></li>
+  <% end %>
+  </ul>
 </p>
 <p>
   <b>Defense Date:</b>
