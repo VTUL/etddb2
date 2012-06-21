@@ -1,2 +1,9 @@
-<% # TODO: ALL THIS PARTIAL. %>
-<p>You have a profile.</p>
+<% # TODO: What else goes here? %>
+<% if @person.display_name.nil? %>
+  <h2><%= @person.first_name %> <%= @person.last_name %></h2>
+<% else %>
+  <h2><%= @person.display_name %></h2>
+<% end %>
+<% if @person.show_email == true %>
+  <p><%= @person.email %></p>
+<% end %>
