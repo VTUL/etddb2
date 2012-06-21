@@ -203,7 +203,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etd/submit/1
+  # POST /etd/submit/1
   def submit
     @etd = Etd.find(params[:id])
     @etd.status = "Submitted"
@@ -238,6 +238,7 @@ class EtdsController < ApplicationController
 
             # Check if the entire Committee has approved the ETD.
             all_trues = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:vote).uniq
+            @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
             if all_trues.include?(true) && all_trues.size == 1
               EtddbMailer.committee_approved(@etd).deliver
             end
