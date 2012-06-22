@@ -4,7 +4,8 @@ class EtdsController < ApplicationController
   # GET /etds
   # GET /etds.xml
   def index
-    @etds = Etd.all
+    # This is a bit of black magic.
+    @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +17,8 @@ class EtdsController < ApplicationController
   # GET /etds/1.xml
   def show
     @etd = Etd.find(params[:id])
+    @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
 
     respond_to do |format|
       format.html # show.html.erb
@@ -170,6 +173,7 @@ class EtdsController < ApplicationController
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
+    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
 
     respond_to do |format|
       format.html # new_next.html.erb
@@ -237,9 +241,8 @@ class EtdsController < ApplicationController
             pr.save()
 
             # Check if the entire Committee has approved the ETD.
-            all_trues = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:vote).uniq
             @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
-            if all_trues.include?(true) && all_trues.size == 1
+            if @nonapproved == 0
               EtddbMailer.committee_approved(@etd).deliver
             end
 
