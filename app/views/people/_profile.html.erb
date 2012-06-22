@@ -1,9 +1,4 @@
-<% # TODO: What else goes here? %>
-<% if @person.display_name.nil? %>
-  <h2><%= @person.first_name %> <%= @person.last_name %></h2>
-<% else %>
-  <h2><%= @person.display_name %></h2>
-<% end %>
+<h1><%= get_name(@person) %></h1>
 <% if @person.show_email == true %>
-  <p><%= @person.email %></p>
+  <p><b>Email:</b> <%= @person.email %></p>
 <% end %>
