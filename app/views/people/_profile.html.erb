@@ -1,4 +1,4 @@
 <h1><%= get_name(@person) %></h1>
-<% if @person.show_email == true %>
+<% if @person.show_email %>
   <p><b>Email:</b> <%= @person.email %></p>
 <% end %>

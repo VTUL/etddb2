@@ -86,6 +86,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.save
+        EtddbMailer.confirm_create(@etd, current_person).deliver
         format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
         format.xml  { render(xml: @etd, status: :created, location: @etd) }
       else

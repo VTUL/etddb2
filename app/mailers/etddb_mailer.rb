@@ -7,11 +7,10 @@
 class EtddbMailer < ActionMailer::Base
   default from: 'etds-no-reply@scholar.lib.vt.edu'
 
-  def confirm_created(etd, author)
-    # TODO: Use.
+  def confirm_create(etd, author)
     @etd = etd
     @author = author
-    mail(to: @auhtor.email, subject: 'ETD Successfully Created.')
+    mail(to: @author.email, subject: 'ETD Successfully Created.')
   end
 
   def confirm_submit_author(etd, author)
