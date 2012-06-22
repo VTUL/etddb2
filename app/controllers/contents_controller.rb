@@ -11,6 +11,7 @@ class ContentsController < ApplicationController
         format.html # index.html.erb
         format.xml  { render(xml: @authors_etds) }
       else
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You need to login to browse your contents.") }
       end
     end
@@ -53,22 +54,18 @@ class ContentsController < ApplicationController
     @etd = Etd.find(params[:etd_id])
     @content = Content.new(params[:content])
 
-    @content.availability = @etd.availability
+    if @content.availability_id.nil? && @content.availability.nil?
+      @content.availability = @etd.availability
+    end
     @content.etd = @etd
     @content.bound = @etd.bound
     
     respond_to do |format|
       if @content.save
         @etd.contents << @content
-
         # Update the ETD's availability.
-        if @content.availability_id != @etd.availability_id
-          avails = @etd.contents.pluck(:availability_id).uniq
-          if avails.length == 1
-            @etd.availability_id = avails[0]
-          else
-            @etd.availability_id = Availability.where(name: "Mixed").first.id
-          end
+        if @content.availability_id != @etd.availability_id && @etd.availability.name != "Mixed"
+          @etd.availability_id = Availability.where(name: "Mixed").first.id
           @etd.save
         end
 

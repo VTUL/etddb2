@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render(xml: @people) }
+      format.xml { render(xml: @people) }
     end
   end
 
@@ -22,7 +22,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render(xml: @person) }
+      format.xml { render(xml: @person) }
     end
   end
 
@@ -59,7 +59,7 @@ class PeopleController < ApplicationController
     end
 
     respond_to do |format|
-      format.html{ redirect_to(params[:origin] + params[:etd_id]) }
+      format.html { redirect_to(params[:origin] + params[:etd_id]) }
     end
   end
 end

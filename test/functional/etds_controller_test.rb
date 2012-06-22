@@ -25,7 +25,7 @@ class EtdsControllerTest < ActionController::TestCase
       post(:create, etd: @etd_attrs)
     end
 
-    assert_redirected_to next_new_etd_path(assigns(:etd))
+    assert_redirected_to(next_new_etd_path(assigns(:etd)))
   end
 
   test "should not create etd" do
@@ -76,14 +76,14 @@ class EtdsControllerTest < ActionController::TestCase
     get(:new)
     assert_redirected_to(login_path)
 
-    get(:my_etds)
-    assert_redirected_to(login_path)
-
     get(:edit, id: @etd.to_param)
     assert_redirected_to(login_path)
 
     delete(:destroy, id: @etd.to_param)
     assert_redirected_to(etds_path)
+
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_redirected_to(login_path, notice: "You must log in to vote on an ETD.")
   end
 
   test "should only be able to edit and destroy your ETDs." do
@@ -104,12 +104,6 @@ class EtdsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to(controller: "etds", action: "index", notice: "ETD Deleted.")
-  end
-
-  test "should get my_etds" do
-    get(:my_etds)
-    assert_response(:success)
-    assert_not_nil(assigns(:authors_etds))
   end
 
   test "should get add_contents" do
@@ -146,5 +140,65 @@ class EtdsControllerTest < ActionController::TestCase
   test "should submit the etd for review." do
     post(:submit, id: @etd.to_param)
     assert_response(:success)
+  end
+
+  test "Switching the ETD to Mixed should not update it's content." do
+    @etd_attrs = @etd.attributes
+    @etd_attrs[:department_ids] = {id_1: 1}
+
+    assert_no_difference '@etd.contents.first.availability_id' do
+      assert_no_difference '@etd.contents.last.availability_id' do
+        @etd_attrs[:availability_id] = Availability.where(name: "Mixed").first.id
+        put(:update, id: @etd.to_param, etd: @etd_attrs)
+      end
+    end
+  end
+
+  test "Changing to anything other than Mixed should update content." do
+    @etd_attrs = @etd.attributes
+    @etd_attrs[:department_ids] = {id_1: 1}
+
+    new_avail = Availability.where(name: "Withheld").first.id
+    assert_not_equal(@etd.contents.first.availability_id, new_avail)
+    assert_not_equal(@etd.contents.last.availability_id, new_avail)
+
+    @etd_attrs[:availability_id] = new_avail
+    put(:update, id: @etd.to_param, etd: @etd_attrs)
+    assert_equal(@etd.contents.first.availability_id, new_avail)
+    assert_equal(@etd.contents.last.availability_id, new_avail)
+  end
+
+  test "should not be able to vote on an ETD." do
+    # Not-signed-in tested elsewhere.
+
+    # Shouldn't vote on an unsubmitted ETD.
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_redirected_to(person_path(@person), notice: "That ETD is not ready to be voted on.")
+
+    # Shouldn't vote if you aren't a committee member.
+    @etd.status = "Submitted"
+    @etd.save
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_redirected_to(person_path(@person), notice: "You cannot vote on that ETD.")
+  end
+
+  test "should be able to vote on an submitted ETD." do
+    @etd.status = "Submitted"
+    @etd.save
+
+    # Sign in an actual committee member.
+    sign_out @person
+    @person = Person.last
+    @etd.people_roles << PeopleRole.new(person_id: @person.id, role_id: Role.where(group: "Collaborators").first.id)
+    sign_in @person
+
+    # Should vote on a submitted ETD.
+    post(:vote, id: @etd.id, vote: 'not true')
+    assert_response(:success)
+    assert(!@etd.people_roles.where(person_id: @person.id).last.vote)
+    post(:vote, id: @etd.id, vote: 'true')
+    assert_response(:success)
+    assert(@etd.people_roles.where(person_id: @person.id).last.vote)
+    assert(!ActionMailer::Base.deliveries.empty?)
   end
 end

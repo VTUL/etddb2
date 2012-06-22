@@ -16,6 +16,7 @@ class Person < ActiveRecord::Base
   # Validates attributes
   validates_presence_of :first_name, :last_name, :pid, :email
   validates_uniqueness_of :pid, :email
+  validates :show_email, inclusion: {in: [true, false, nil], message: "must be boolean"}
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -23,4 +24,4 @@ class Person < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :email, :password, :password_confirmation, :remember_me
- end
+end

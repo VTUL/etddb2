@@ -56,7 +56,7 @@ class ContentsControllerTest < ActionController::TestCase
   end
 
   test "should not update content" do
-    put(:update, {id: @content.to_param, content: @content.attributes.merge(bound: nil)})
+    put(:update, {id: @content.to_param, content: @content.attributes.merge({bound: nil})})
     assert_select("div#error_explanation")
   end
 
@@ -66,5 +66,39 @@ class ContentsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to(contents_path)
+  end
+
+  test "should change the ETD's availability if appropriate." do
+    @etd = etds(:one)
+    mixed_avail = Availability.where(name: "Mixed").first.id
+    withheld_avail = Availability.where(name: "Withheld").first.id
+    available_avail = Availability.where(name: "Available").first.id
+
+    # Should change from the default to mixed by updating a piece of content.
+    assert_not_equal(@etd.availability_id, mixed_avail)
+    c = @etd.contents.first
+    post(:update, {id: c.to_param, content: c.attributes.merge({availability_id: withheld_avail})})
+    # Reload the ETD from the DB to get the changes. (You don't want to debug this.)
+    @etd = Etd.find(@etd.id)
+    assert_equal(@etd.availability_id, mixed_avail)
+
+    # Should change to Withheld by updating all the content.
+    for c in @etd.contents do
+      post(:update, {id: c.to_param, content: c.attributes.merge({availability_id: withheld_avail})})
+    end
+    @etd = Etd.find(@etd.id)
+    assert_equal(@etd.availability_id, withheld_avail)
+
+    # Should not change the avail when creating content with the ETD's avail.
+    @contents = contents(:three)
+    post(:create, {content: @content.attributes.merge({availability_id: withheld_avail}), etd_id: @etd.id})
+    @etd = Etd.find(@etd.id)
+    assert_equal(@etd.availability_id, withheld_avail)
+
+    # Should change to Mixed with new content of a different avail.
+    @contents = contents(:four)
+    post(:create, {content: @content.attributes.merge({availability_id: available_avail}), etd_id: @etd.id})
+    @etd = Etd.find(@etd.id)
+    assert_equal(@etd.availability_id, mixed_avail)
   end
 end
