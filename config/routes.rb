@@ -30,7 +30,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :people, :only => [:index, :show]
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
-  get '/etds/my_etds', :to => 'etds#my_etds', :as => :my_etds
   get '/etds/next_new/:id', :to => 'etds#next_new', :as => :next_new_etd
   put '/etds/next_new/:id', :to => 'etds#save_contents', :as => :save_contents_to_etd
   get '/etds/add_contents/:id', :to => 'etds#add_contents', :as => :add_contents_to_etd

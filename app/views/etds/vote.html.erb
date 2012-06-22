@@ -1,2 +1,12 @@
-<%# TODO: ALL THIS VIEW %>
-<p>Thank you for voting.</p>
+<%# TODO: Real Wording. %>
+<p>
+  Thank you for voting to <%= params[:vote] == 'true' ? 'approve' : 'disapprove' %> the ETD "<%= @etd.title %>".<br />
+  <% if @nonapproved == 0 %>
+    The committee has reached consensus, and the graduate school has been instructed to approve this ETD.
+  <% else %>
+    <%= @nonapproved %> more <%= "committee member".pluralize(@nonapproved) %> must approve this ETD.
+  <% end %>
+</p>
+<p>
+  <%= link_to("Back to my profile.", person_path(current_person)) %>
+</p>

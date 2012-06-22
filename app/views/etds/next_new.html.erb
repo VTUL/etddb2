@@ -23,33 +23,32 @@
     <%= f.submit "Update Content" %>
   <% end %>
 </p>
-<% get_collabs @etd do |collabs| %>
-  <p>
-    <b>Advisory Committee:</b>
-    <% if !collabs.empty? %>
-      <table class="outlined">
-        <tr>
-          <th>Advisor:</th>
-          <th>Role:</th>
-        </tr>
-        <% for collab in collabs do %>
-          <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
-            <tr>
-              <td><%= collab.first_name + " " + collab.last_name %></td>
-              <td><%= Role.find(pr.role_id).name %></td>
-              <td><%= link_to 'Destroy', destroy_people_role_path(pr), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
-            </tr>
-          <% end %>
+<p>
+  <b>Advisory Committee:</b>
+  <% if !@collabs.empty? %>
+    <table class="outlined">
+      <tr>
+        <th>Advisor:</th>
+        <th>Role:</th>
+      </tr>
+      <% for collab in @collabs do %>
+        <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
+          <tr>
+            <td><%= get_name(collab) %></td>
+            <td><%= Role.find(pr.role_id).name %></td>
+            <td><%= link_to 'Destroy', destroy_people_role_path(pr), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
+          </tr>
         <% end %>
-      </table>
-    <% end %>
-    <%= form_tag(controller: "people", action: "find") do %>
-      <%= hidden_field_tag(:etd_id, @etd.id) %>
-      <%= hidden_field_tag(:origin, '/etds/') %>
-      <%= submit_tag "Add New Committee Member" %>
-    <% end %>
-  </p>
-<% end %>
+      <% end %>
+    </table>
+  <% else %>
+    None yet. Go add one!
+  <% end %>
+  <%= form_tag(controller: "people", action: "find") do %>
+    <%= hidden_field_tag(:etd_id, @etd.id) %>
+    <%= hidden_field_tag(:origin, '/etds/') %>
+    <%= submit_tag "Add New Committee Member" %>
+  <% end %>
 </p>
 <p>
 <%= link_to 'View ETD', @etd %>

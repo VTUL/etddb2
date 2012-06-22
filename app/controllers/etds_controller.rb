@@ -4,7 +4,8 @@ class EtdsController < ApplicationController
   # GET /etds
   # GET /etds.xml
   def index
-    @etds = Etd.all
+    # This is a bit of black magic.
+    @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +17,8 @@ class EtdsController < ApplicationController
   # GET /etds/1.xml
   def show
     @etd = Etd.find(params[:id])
+    @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,14 +31,14 @@ class EtdsController < ApplicationController
   def new
     respond_to do |format|
       # BUG: This should be implemented as a before_filter.
-      if !person_signed_in?
+      if person_signed_in?
+        @etd = Etd.new
+        format.html # new.html.erb
+        format.xml  { render(xml: @etd) }
+      else
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
       end
-
-      @etd = Etd.new
-
-      format.html # new.html.erb
-      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -52,6 +55,7 @@ class EtdsController < ApplicationController
           format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
         end
       else
+        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
       end
     end
@@ -82,6 +86,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.save
+        EtddbMailer.confirm_create(@etd, current_person).deliver
         format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
         format.xml  { render(xml: @etd, status: :created, location: @etd) }
       else
@@ -107,10 +112,11 @@ class EtdsController < ApplicationController
       if @etd.update_attributes(params[:etd])
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
         if @etd.availability_id != Availability.where(name: "Mixed").first.id
-          # TODO: Is the where clause necessary?
+          # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
           contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
           for content in contents do
             content.availability_id = @etd.availability_id
+            content.save
           end
         end
 
@@ -130,9 +136,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Put in a before_filter.
-      if !person_signed_in?
-        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
-      else
+      if person_signed_in?
         # BUG: Use Cancan for this.
         if current_person.etds.include?(@etd)
           for pr in @etd.people_roles do
@@ -147,21 +151,8 @@ class EtdsController < ApplicationController
         else
           format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
         end
-      end
-    end
-  end
-
-  # GET /etds/my_etds
-  def my_etds
-    respond_to do |format|
-      # BUG: This should be implemented in a before_filter
-      if person_signed_in?
-        @authors_etds = current_person.etds
-
-        format.html # my_etds.html.erb
-        format.xml  { render(xml: @authors_etds) }
       else
-        format.html { redirect_to(login_path, notice: "You need to login to browse your ETDs.") }
+        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
       end
     end
   end
@@ -170,6 +161,7 @@ class EtdsController < ApplicationController
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
+    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
 
     respond_to do |format|
       format.html # new_next.html.erb
@@ -203,7 +195,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etd/submit/1
+  # POST /etd/submit/1
   def submit
     @etd = Etd.find(params[:id])
     @etd.status = "Submitted"
@@ -237,8 +229,8 @@ class EtdsController < ApplicationController
             pr.save()
 
             # Check if the entire Committee has approved the ETD.
-            all_trues = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:vote).uniq
-            if all_trues.include?(true) && all_trues.size == 1
+            @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
+            if @nonapproved == 0
               EtddbMailer.committee_approved(@etd).deliver
             end
 
@@ -252,7 +244,7 @@ class EtdsController < ApplicationController
           format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
         end
       else
-        # Error. Must be signed in.
+        # Error. Must be signed in. This should not be possible normally.
         format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
       end
     end
