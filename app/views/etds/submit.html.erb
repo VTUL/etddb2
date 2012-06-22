@@ -1,2 +1,8 @@
-<%# TODO: ALL THIS VIEW %>
-<p>Successfully submitted</p>
+<%# TODO: Real Wording. %>
+<p>
+  Your ETD "<%= @etd.title %>" was successfully submitted! Congratulations!<br />
+  We have sent you, your committee, and the graduate school an email confirming this.
+</p>
+<p>
+  <%= link_to("Back to your profile", person_path(current_person)) %>
+</p>
