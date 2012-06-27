@@ -1,13 +1,8 @@
 <p>
-  <b>Creator:</b>
-  <%=h @provenance.creator %>
+  <%= link_to(get_name(@provenance.person), person_path(@provenance.person)) %> <%= @provenance.action %> <%= link_to("#{@provenance.model_type} #{@provenance.model_id}", @provenance.model) %>
 </p>
-
 <p>
-  <b>Notice:</b>
-  <%=h @provenance.notice %>
+  <%= @provenance.message %>
 </p>
-
-
 <%= link_to 'Edit', edit_provenance_path(@provenance) %> |
 <%= link_to 'Back', provenances_path %>

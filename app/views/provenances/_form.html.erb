@@ -12,12 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :creator %><br />
-    <%= f.text_field :creator %>
+    <%= f.label :person_id, "Person" %><br />
+    <%= f.text_field :person_id %>
   </div>
   <div class="field">
-    <%= f.label :notice %><br />
-    <%= f.text_field :notice %>
+    <%= f.label :action %><br />
+    <%= f.text_field :action %>
+  </div>
+  <div class="field">
+    <%= f.label :model_type %><br />
+    <%= f.text_field :model_type %>
+  </div>
+  <div class="field">
+    <%= f.label :model_id %><br />
+    <%= f.text_field :model_id %>
+  </div>
+  <div class="field">
+    <%= f.label :message %><br />
+    <%= f.text_field :message %>
   </div>
 
   <div class="actions">
