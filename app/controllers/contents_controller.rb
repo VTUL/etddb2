@@ -1,5 +1,5 @@
 class ContentsController < ApplicationController
-  require 'mime/types' 
+  #require 'mime/types'
   # GET /contents
   # GET /contents.xml
   def index
@@ -11,7 +11,6 @@ class ContentsController < ApplicationController
         format.html # index.html.erb
         format.xml  { render(xml: @authors_etds) }
       else
-        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You need to login to browse your contents.") }
       end
     end

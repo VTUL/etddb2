@@ -1,5 +1,5 @@
 class EtdsController < ApplicationController
-  skip_before_filter :authenticate_person
+  skip_before_filter :authenticate_person!, only: [:show, :index]
 
   # GET /etds
   # GET /etds.xml
@@ -36,7 +36,6 @@ class EtdsController < ApplicationController
         format.html # new.html.erb
         format.xml  { render(xml: @etd) }
       else
-        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
       end
     end
@@ -55,7 +54,6 @@ class EtdsController < ApplicationController
           format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
         end
       else
-        session[:return_to] = request.fullpath
         format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
       end
     end
@@ -66,23 +64,31 @@ class EtdsController < ApplicationController
   def create
     @etd = Etd.new(params[:etd])
 
+    #Add implied params.
+    @etd.cdate = Time.now()
+    @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
 
-    pr = PeopleRole.new
-    pr.person_id = current_person.id
-    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first.id
-    # TODO: Is there a better way to do give the creator's role?
-    @etd.people_roles << pr
-
-    @etd.cdate = Time.now()
-    @etd.status = "Created"
-
+    # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
     if params[:etd][:department_ids][:id_2] != "" then
       d << params[:etd][:department_ids][:id_2]
     end
     @etd.department_ids = d
+
+    # Make the current_person the creator, or preferably, author.
+    pr = PeopleRole.new
+    pr.person_id = current_person.id
+    # TODO: Is there a better way to do give the creator's role?
+    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first.id
+    @etd.people_roles << pr
+
+    # Add a provenance
+    prov = Provenance.new
+    prov.person = current_person
+    prov.action = "created"
+    @etd.provenances << prov
 
     respond_to do |format|
       if @etd.save
@@ -108,11 +114,17 @@ class EtdsController < ApplicationController
     end
     params[:etd][:department_ids] = d
     
+    # Add a provenance
+    prov = Provenance.new
+    prov.person = current_person
+    prov.action = "updated"
+    @etd.provenances << prov
+
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
+        # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
         if @etd.availability_id != Availability.where(name: "Mixed").first.id
-          # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
           contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
           for content in contents do
             content.availability_id = @etd.availability_id
@@ -133,6 +145,12 @@ class EtdsController < ApplicationController
   # DELETE /etds/1.xml
   def destroy
     @etd = Etd.find(params[:id])
+
+    # Add a provenance
+    prov = Provenance.new
+    prov.person = current_person
+    prov.action = "destroyed"
+    @etd.provenances << prov
 
     respond_to do |format|
       # BUG: Put in a before_filter.
@@ -202,6 +220,12 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
+    # Add a provenance
+    prov = Provenance.new
+    prov.person = current_person
+    prov.action = "submitted"
+    @etd.provenances << prov
+
     @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
     EtddbMailer.confirm_submit_author(@etd, @author).deliver
     EtddbMailer.confirm_submit_school(@etd, @author).deliver
@@ -227,6 +251,12 @@ class EtdsController < ApplicationController
               pr.vote = false
             end
             pr.save()
+
+            # Add a provenance
+            prov = Provenance.new
+            prov.person = current_person
+            prov.action = "voted on"
+            @etd.provenances << prov
 
             # Check if the entire Committee has approved the ETD.
             @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
