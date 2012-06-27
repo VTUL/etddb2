@@ -1,9 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  creator: Someone
-  notice: I have no idea
-
-two:
-  creator: Someone else
-  notice: What?
+  person_id: 1
+  action: created
+  model_type: Etd
+  model_id: 1
+  message: Hooray
