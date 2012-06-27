@@ -9,5 +9,7 @@ class Permission < ActiveRecord::Base
   belongs_to :user_action
   belongs_to :role
 
+  has_many :provenances, as: :model
+
   validates_presence_of :role_id, :user_action_id, :digital_object_id
 end
