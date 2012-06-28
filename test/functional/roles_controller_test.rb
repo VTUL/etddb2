@@ -4,7 +4,7 @@ class RolesControllerTest < ActionController::TestCase
   setup do
     @role = roles(:one)
     @person = people(:one)
-    sign_in @person
+    sign_in(@person)
   end
 
   test "should get index" do

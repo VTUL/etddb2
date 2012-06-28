@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class PermissionsControllerTest < ActionController::TestCase
+  setup do
+    @person = people(:one)
+    sign_in(@person) 
+  end
+
   test "should get index" do
     get :index
     assert_response :success

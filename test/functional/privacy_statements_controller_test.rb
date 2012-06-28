@@ -3,6 +3,8 @@ require 'test_helper'
 class PrivacyStatementsControllerTest < ActionController::TestCase
   setup do
     @privacy_statement = privacy_statements(:one)
+    @person = people(:one)
+    sign_in(@person)
   end
 
   test "should get index" do

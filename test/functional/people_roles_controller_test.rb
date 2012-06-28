@@ -3,6 +3,8 @@ require 'test_helper'
 class PeopleRolesControllerTest < ActionController::TestCase
   setup do
     @people_role = people_roles(:three)
+    @person = people(:one)
+    sign_in(@person)
   end
 
   test "should get index" do

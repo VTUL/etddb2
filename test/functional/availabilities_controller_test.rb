@@ -3,6 +3,8 @@ require 'test_helper'
 class AvailabilitiesControllerTest < ActionController::TestCase
   setup do
     @availability = availabilities(:one)
+    @person = people(:one)
+    sign_in(@person) 
   end
 
   test "should get index" do

@@ -3,6 +3,8 @@ require 'test_helper'
 class DocumentTypesControllerTest < ActionController::TestCase
   setup do
     @document_type = document_types(:one)
+    @person = people(:one)
+    sign_in(@person) 
   end
 
   test "should get index" do

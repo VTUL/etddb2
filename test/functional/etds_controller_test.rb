@@ -4,10 +4,11 @@ class EtdsControllerTest < ActionController::TestCase
   setup do
     @etd = etds(:one)
     @person = people(:one)
-    sign_in(@person)
+    sign_in(@person) 
   end
 
   test "should get index" do
+    sign_out(@person)
     get(:index)
     assert_response(:success)
     assert_not_nil(assigns(:etds))
@@ -44,6 +45,7 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should show etd" do
+    sign_out(@person)
     get(:show, id: @etd.to_param)
     assert_response(:success)
     assert_not_nil(assigns(:etd))
@@ -68,22 +70,6 @@ class EtdsControllerTest < ActionController::TestCase
 
     put(:update, id: @etd.to_param, etd: @etd_attrs)
     assert_select("div#error_explanation")
-  end
-
-  test "should be logged in for certain functionality." do
-    sign_out(@person)
-
-    get(:new)
-    assert_redirected_to(login_path)
-
-    get(:edit, id: @etd.to_param)
-    assert_redirected_to(login_path)
-
-    delete(:destroy, id: @etd.to_param)
-    assert_redirected_to(etds_path)
-
-    post(:vote, id: @etd.id, vote: 'true')
-    assert_redirected_to(login_path, notice: "You must log in to vote on an ETD.")
   end
 
   test "should only be able to edit and destroy your ETDs." do
@@ -187,10 +173,10 @@ class EtdsControllerTest < ActionController::TestCase
     @etd.save
 
     # Sign in an actual committee member.
-    sign_out @person
+    sign_out(@person)
     @person = Person.last
     @etd.people_roles << PeopleRole.new(person_id: @person.id, role_id: Role.where(group: "Collaborators").first.id)
-    sign_in @person
+    sign_in(@person)
 
     # Should vote on a submitted ETD.
     post(:vote, id: @etd.id, vote: 'not true')
