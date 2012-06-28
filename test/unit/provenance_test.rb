@@ -11,7 +11,8 @@ class ProvenanceTest < ActiveSupport::TestCase
   test "should be invalid with empty attributes" do
     provenance = Provenance.new
     assert !provenance.valid?
-    assert provenance.errors[:creator].any?
-    assert provenance.errors[:notice].any?
+    assert provenance.errors[:person].any?
+    assert provenance.errors[:action].any?
+    assert provenance.errors[:model].any?
   end
 end
