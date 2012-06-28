@@ -55,6 +55,7 @@ class ContentsController < ApplicationController
     
     respond_to do |format|
       if @content.save
+        Provenance.create(person: current_person, action: "created", model: @content)
         @etd.contents << @content
         # Update the ETD's availability.
         if @content.availability_id != @etd.availability_id && @etd.availability.name != "Mixed"
@@ -73,10 +74,12 @@ class ContentsController < ApplicationController
   # POST /contents/edit.xml
   def update
     @content = Content.find(params[:id])
-    @etd = Etd.find(@content.etd_id)
+    @etd = @content.etd
 
     respond_to do |format|
       if @content.update_attributes(params[:content])
+        Provenance.create(person: current_person, action: "updated", model: @content)
+
         # Update the ETD's availability.
         if @content.availability_id != @etd.availability_id
           avails = @etd.contents.pluck(:availability_id).uniq
@@ -101,6 +104,7 @@ class ContentsController < ApplicationController
   # DELETE /contents/1.xml
   def destroy
     @content = Content.find(params[:id])
+    Provenance.create(person: current_person, action: "deleted", model: @content)
     @content.destroy
 
     respond_to do |format|
