@@ -30,14 +30,9 @@ class EtdsController < ApplicationController
   # GET /etds/new.xml
   def new
     respond_to do |format|
-      # BUG: This should be implemented as a before_filter.
-      if person_signed_in?
-        @etd = Etd.new
-        format.html # new.html.erb
-        format.xml  { render(xml: @etd) }
-      else
-        format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
-      end
+      @etd = Etd.new
+      format.html # new.html.erb
+      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -45,16 +40,11 @@ class EtdsController < ApplicationController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
-      # BUG: Again, this should be implemented in a before_filter
-      if person_signed_in?
-        # BUG: This works, but is only a hack, we should use Cancan.
-        if current_person.etds.include?(@etd)
-          format.html { render(action: "edit") }
-        else
-          format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
-        end
+      # BUG: This works, but is only a hack, we should use Cancan.
+      if current_person.etds.include?(@etd)
+        format.html { render(action: "edit") }
       else
-        format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
+        format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
       end
     end
   end
@@ -109,15 +99,11 @@ class EtdsController < ApplicationController
       d << params[:etd][:department_ids][:id_2]
     end
     params[:etd][:department_ids] = d
-    
-    # Add a provenance
-    prov = Provenance.new
-    prov.person = current_person
-    prov.action = "updated"
-    @etd.provenances << prov
 
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
+        Provenance.create(person: current_person, action: "updated", model: @etd)
+
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
         # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
         if @etd.availability_id != Availability.where(name: "Mixed").first.id
@@ -142,31 +128,23 @@ class EtdsController < ApplicationController
   def destroy
     @etd = Etd.find(params[:id])
 
-    # Add a provenance
-    prov = Provenance.new
-    prov.person = current_person
-    prov.action = "destroyed"
-    @etd.provenances << prov
-
     respond_to do |format|
-      # BUG: Put in a before_filter.
-      if person_signed_in?
-        # BUG: Use Cancan for this.
-        if current_person.etds.include?(@etd)
-          for pr in @etd.people_roles do
-            pr.destroy
-          end
-          for content in @etd.contents do
-            content.destroy
-          end
-          @etd.destroy
-          format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
-          format.xml  { head :ok }
-        else
-          format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
+      # BUG: Use Cancan for this.
+      if current_person.etds.include?(@etd)
+        Provenance.create(person: current_person, action: "deleted", model: @etd)
+
+        for pr in @etd.people_roles do
+          pr.destroy
         end
+        for content in @etd.contents do
+          content.destroy
+        end
+
+        @etd.destroy
+        format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
+        format.xml  { head :ok }
       else
-        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
+        format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
       end
     end
   end
@@ -194,6 +172,7 @@ class EtdsController < ApplicationController
     end
 
     if @etd.update_attributes(params[:etd])
+      Provenance.create(person: current_person, action: "updated", model: @etd)
       redirect_to(params[:origin] + @etd.id.to_s, notice: "Successfully updated article.")
     else
       redirect_to(params[:origin] + @etd.id.to_s)
@@ -216,11 +195,7 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
-    # Add a provenance
-    prov = Provenance.new
-    prov.person = current_person
-    prov.action = "submitted"
-    @etd.provenances << prov
+    Provenance.create(person: current_person, action: "submitted", model: @etd)
 
     @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
     EtddbMailer.confirm_submit_author(@etd, @author).deliver
@@ -237,41 +212,32 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      if person_signed_in?
-        if @etd.status == "Submitted"
-          pr = @etd.people_roles.where(person_id: current_person.id).first
-          if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
-            if params[:vote] == 'true'
-              pr.vote = true
-            else
-              pr.vote = false
-            end
-            pr.save()
-
-            # Add a provenance
-            prov = Provenance.new
-            prov.person = current_person
-            prov.action = "voted on"
-            @etd.provenances << prov
-
-            # Check if the entire Committee has approved the ETD.
-            @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
-            if @nonapproved == 0
-              EtddbMailer.committee_approved(@etd).deliver
-            end
-
-            format.html #vote.html.erb
+      if @etd.status == "Submitted"
+        pr = @etd.people_roles.where(person_id: current_person.id).first
+        if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
+          if params[:vote] == 'true'
+            pr.vote = true
           else
-            # Error. You are either not part of this ETD, or at least not on it's committee.
-            format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
+            pr.vote = false
           end
+          pr.save()
+
+          Provenance.create(person: current_person, action: "voted on", model: @etd)
+
+          # Check if the entire Committee has approved the ETD.
+          @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
+          if @nonapproved == 0
+            EtddbMailer.committee_approved(@etd).deliver
+          end
+
+          format.html #vote.html.erb
         else
-          # Error. ETD not submitted. You are either too early, or too late.
-          format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
+          # Error. You are either not part of this ETD, or at least not on it's committee.
+          format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
         end
       else
-        # Error. Must be signed in. This should not be possible normally.
-        format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
+        # Error. ETD not submitted. You are either too early, or too late.
+        format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
       end
     end
   end

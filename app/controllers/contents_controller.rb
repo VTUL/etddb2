@@ -4,15 +4,9 @@ class ContentsController < ApplicationController
   # GET /contents.xml
   def index
     respond_to do |format|
-      # This should be implemented in a before_filter
-      if person_signed_in?
-        @authors_etds = current_person.etds
-
-        format.html # index.html.erb
-        format.xml  { render(xml: @authors_etds) }
-      else
-        format.html { redirect_to(login_path, notice: "You need to login to browse your contents.") }
-      end
+      @authors_etds = current_person.etds
+      format.html # index.html.erb
+      format.xml  { render(xml: @authors_etds) }
     end
   end
 
