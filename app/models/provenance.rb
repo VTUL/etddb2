@@ -7,4 +7,6 @@
 class Provenance < ActiveRecord::Base
   belongs_to :person
   belongs_to :model, polymorphic: true
+
+  validates_presence_of :person, :action, :model
 end
