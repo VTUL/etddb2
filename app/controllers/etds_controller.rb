@@ -5,7 +5,13 @@ class EtdsController < ApplicationController
   # GET /etds.xml
   def index
     # This is a bit of black magic.
-    @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+    @etds = []
+    case params[:order]
+    when "department"
+      @etds = Etd.find(:all, include: :departments, order: 'departments.name')
+    else
+      @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
