@@ -241,4 +241,21 @@ class EtdsController < ApplicationController
       end
     end
   end
+
+  # POST /etd/unsubmit/1
+  def unsubmit
+    @etd = Etd.find(params[:id])
+    
+    respond_to do |format|
+      if !current_person.roles.where(group: 'Graduate School').empty?
+        @etd.status = "Created"
+        @etd.save
+        
+        Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
+
+        format.html { redirect_to(etd_path(@etd), notice: "Sucessfully unsubmitted this ETD.") }
+      else
+        format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }
+      end
+  end
 end
