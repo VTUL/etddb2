@@ -11,7 +11,7 @@ class Content < ActiveRecord::Base
   has_many :provenances, as: :model
   
   # Paperclip mountings/validations
-  has_attached_file :content, storage: :filesystem, path: ":rails_root/public/bin/submitted/:filename"
+  has_attached_file :content, storage: :filesystem, path: ":rails_root/public/bin/submitted/:filename", url: "/bin/submitted/:filename"
   validates_attachment_presence :content
   validates_attachment_size :content, less_than: 512.megabytes
   
