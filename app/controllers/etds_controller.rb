@@ -172,7 +172,7 @@ class EtdsController < ApplicationController
     end
 
     if @etd.update_attributes(params[:etd])
-      Provenance.create(person: current_person, action: "updated", model: @etd)
+      Provenance.create(person: current_person, action: "added contents to", model: @etd)
       redirect_to(params[:origin] + @etd.id.to_s, notice: "Successfully updated article.")
     else
       redirect_to(params[:origin] + @etd.id.to_s)
