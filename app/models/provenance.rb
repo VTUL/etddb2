@@ -5,9 +5,8 @@
 #########################################################
 
 class Provenance < ActiveRecord::Base
-  # Associate tables
-  belongs_to :etd
+  belongs_to :person
+  belongs_to :model, polymorphic: true
 
-  # Validate attributes
-  validates_presence_of :creator, :notice
+  validates_presence_of :person, :action, :model
 end

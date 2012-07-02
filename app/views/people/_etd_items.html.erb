@@ -12,7 +12,7 @@
     <td><%=h Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
     <td><%=h etd.ddate %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
-    <% if person_signed_in? && current_person.id == @person.id %>
+    <% if current_person.id == @person.id %>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
       <% if etd.status == "Created" %>
         <td><%= button_to 'Submit', submit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>

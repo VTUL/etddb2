@@ -5,6 +5,8 @@
 #########################################################
 
 class Department < ActiveRecord::Base
+  has_many :provenances, as: :model
+
   has_and_belongs_to_many :etds
 
   validates_presence_of :name

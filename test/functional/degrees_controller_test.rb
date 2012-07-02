@@ -3,6 +3,8 @@ require 'test_helper'
 class DegreesControllerTest < ActionController::TestCase
   setup do
     @degree = degrees(:one)
+    @person = people(:one)
+    sign_in(@person) 
   end
 
   test "should get index" do

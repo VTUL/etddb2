@@ -1,3 +1,17 @@
-<% # TODO: Needs reviewer functions. %>
 <h3>Review Items</h3>
-<p>You are a reviewer.</p>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+  </tr>
+
+<% @reviewable_etds.each do |etd| %>
+  <tr>
+    <td><%= link_to(etd.title, etd_path(etd)) %></td>
+    <td><%= get_name(Person.where(etd.people_roles.where(role_id: Role.where(group: "Creators")).first.id).first) %></td>
+    <% # TODO: Needs reviewer functions. %>
+    <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+  </tr>
+<% end %>
+</table>
+<br />

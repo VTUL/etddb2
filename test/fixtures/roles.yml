@@ -22,3 +22,7 @@ four:
 five:
   name: Committee Member
   group: Collaborators
+
+six:
+  name: Reviewer
+  group: Graduate School

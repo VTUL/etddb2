@@ -1,22 +1,13 @@
 <h1>Listing provenances</h1>
-
 <table>
-  <tr>
-    <th>Creator</th>
-    <th>Notice</th>
-  </tr>
-
-<% @provenances.each do |provenance| %>
-  <tr>
-    <td><%=h provenance.creator %></td>
-    <td><%=h provenance.notice %></td>
-    <td><%= link_to 'Show', provenance %></td>
-    <td><%= link_to 'Edit', edit_provenance_path(provenance) %></td>
-    <td><%= button_to 'Destroy', destroy_provenance_path(provenance), data: {confirm: 'Are you sure?'} %></td>
-  </tr>
-<% end %>
+  <% @provenances.each do |prov| %>
+    <tr>
+      <td><%= get_name(prov.person) %> <%= prov.action %> <%= prov.model_type %> <%= prov.model_id %></td>
+      <td><%= link_to 'Show', prov %></td>
+      <td><%= link_to 'Edit', edit_provenance_path(prov) %></td>
+      <td><%= button_to 'Destroy', destroy_provenance_path(prov), data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
 </table>
-
 <br />
-
 <%= link_to 'New provenance', new_provenance_path %>

@@ -1,19 +1,12 @@
 class ContentsController < ApplicationController
-  require 'mime/types' 
+  #require 'mime/types'
   # GET /contents
   # GET /contents.xml
   def index
     respond_to do |format|
-      # This should be implemented in a before_filter
-      if person_signed_in?
-        @authors_etds = current_person.etds
-
-        format.html # index.html.erb
-        format.xml  { render(xml: @authors_etds) }
-      else
-        session[:return_to] = request.fullpath
-        format.html { redirect_to(login_path, notice: "You need to login to browse your contents.") }
-      end
+      @authors_etds = current_person.etds
+      format.html # index.html.erb
+      format.xml  { render(xml: @authors_etds) }
     end
   end
 
@@ -62,6 +55,7 @@ class ContentsController < ApplicationController
     
     respond_to do |format|
       if @content.save
+        Provenance.create(person: current_person, action: "created", model: @content)
         @etd.contents << @content
         # Update the ETD's availability.
         if @content.availability_id != @etd.availability_id && @etd.availability.name != "Mixed"
@@ -80,10 +74,12 @@ class ContentsController < ApplicationController
   # POST /contents/edit.xml
   def update
     @content = Content.find(params[:id])
-    @etd = Etd.find(@content.etd_id)
+    @etd = @content.etd
 
     respond_to do |format|
       if @content.update_attributes(params[:content])
+        Provenance.create(person: current_person, action: "updated", model: @content)
+
         # Update the ETD's availability.
         if @content.availability_id != @etd.availability_id
           avails = @etd.contents.pluck(:availability_id).uniq
@@ -108,6 +104,7 @@ class ContentsController < ApplicationController
   # DELETE /contents/1.xml
   def destroy
     @content = Content.find(params[:id])
+    Provenance.create(person: current_person, action: "deleted", model: @content)
     @content.destroy
 
     respond_to do |format|

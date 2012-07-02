@@ -2,7 +2,7 @@
 <% if !@my_etds.empty? %>
   <%= render 'etd_items' %>
 <% end %>
-<% if person_signed_in? && current_person.id == @person.id %>
+<% if current_person.id == @person.id %>
   <% if !@committee_etds.empty? %>
     <%= render 'committee_items' %>
   <% end %>

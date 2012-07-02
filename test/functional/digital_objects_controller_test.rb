@@ -3,6 +3,8 @@ require 'test_helper'
 class DigitalObjectsControllerTest < ActionController::TestCase
   setup do
     @digital_object = digital_objects(:one)
+    @person = people(:one)
+    sign_in(@person) 
   end
 
   test "should get index" do

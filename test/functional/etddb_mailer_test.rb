@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class EtddbMailerTest < ActionMailer::TestCase
+  test "should send creation confirmation to the author." do
+    assert(false)
+  end
+
   test "should send submission confirmation to the author." do
     etd = etds(:one)
     author = Person.find(etd.people_roles.where(role_id: Role.where(name: 'Author').first).first.person_id)
@@ -22,7 +26,7 @@ class EtddbMailerTest < ActionMailer::TestCase
 
     assert_equal(['cnbrittle@gmail.com'], email.to)
     assert_equal("New ETD Submitted.", email.subject)
-    #TODO: This assert_match should be unique to the grad school submission confirmation email.
+    # TODO: This assert_match should be unique to the grad school submission confirmation email.
     assert_match(/#{author.display_name} just submitted their ETD!/, email.encoded)
   end
   
@@ -36,7 +40,15 @@ class EtddbMailerTest < ActionMailer::TestCase
 
     assert_equal(committee_emails, email.to)
     assert_equal("New ETD Submitted.", email.subject)
-    #TODO: This assert_match should be unique to the committee submission confirmation email.
+    # TODO: This assert_match should be unique to the committee submission confirmation email.
     assert_match(/#{author.display_name} just submitted their ETD!/, email.encoded)
+  end
+
+  test "should email the grad school when the committee approves an ETD." do
+    assert(false)
+  end
+
+  test "should send an email to proquest." do
+    assert(false)
   end
 end

@@ -8,6 +8,8 @@ class Content < ActiveRecord::Base
   belongs_to :etd
   belongs_to :availability
   
+  has_many :provenances, as: :model
+  
   # Paperclip mountings/validations
   has_attached_file :content, storage: :filesystem, path: ":rails_root/public/bin/submitted/:filename"
   validates_attachment_presence :content

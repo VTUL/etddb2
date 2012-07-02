@@ -12,6 +12,8 @@ class PeopleRole < ActiveRecord::Base
   belongs_to :role
   belongs_to :etd
 
+  has_many :provenances, as: :model
+
   #Validate attributes
   validates_presence_of :person_id, :role_id
 end

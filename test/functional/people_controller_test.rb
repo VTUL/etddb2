@@ -3,7 +3,7 @@ require 'test_helper'
 class PeopleControllerTest < ActionController::TestCase
   setup do
     @person = people(:one)
-    sign_in @person
+    sign_in(@person)
   end
 
   test "should get index" do
