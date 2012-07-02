@@ -197,4 +197,21 @@ class EtdsControllerTest < ActionController::TestCase
     assert(@etd.people_roles.where(person_id: @person.id).last.vote)
     assert(!ActionMailer::Base.deliveries.empty?)
   end
+
+  test "should unsubmit an ETD, if appropriate." do
+    # ETD not submitted
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(person_path(@person), notice: "You cannot unsubmit an ETD that hasn't been submitted.")
+
+    # Non-Grad School person.
+    @etd.status = "Submitted"
+    @etd.save
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(person_path(@person), notice: "You cannot unsubmit ETDs.")
+
+    # Success!
+    @person.people_roles << PeopleRole.new(role_id: Role.where(group: "Graduate School").first.id)
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.")
+  end
 end
