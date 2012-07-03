@@ -44,6 +44,8 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       if @degree.save
+        Provenance.create(person: current_person, action: "created", model: @degree)
+
         format.html { redirect_to(@degree, notice: 'Degree was successfully created.') }
         format.json { render(json: @degree, status: :created, location: @degree) }
       else
@@ -60,6 +62,8 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       if @degree.update_attributes(params[:degree])
+        Provenance.create(person: current_person, action: "updated", model: @degree)
+
         format.html { redirect_to(@degree, notice: 'Degree was successfully updated.') }
         format.json { head :ok }
       else
@@ -73,6 +77,7 @@ class DegreesController < ApplicationController
   # DELETE /degrees/1.json
   def destroy
     @degree = Degree.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @degree)
     @degree.destroy
 
     respond_to do |format|

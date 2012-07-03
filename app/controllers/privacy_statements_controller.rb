@@ -44,6 +44,8 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       if @privacy_statement.save
+        Provenance.create(person: current_person, action: "created", model: @privacy_statement)
+
         format.html { redirect_to(@privacy_statement, notice: 'Privacy statement was successfully created.') }
         format.json { render(json: @privacy_statement, status: :created, location: @privacy_statement) }
       else
@@ -60,6 +62,8 @@ class PrivacyStatementsController < ApplicationController
 
     respond_to do |format|
       if @privacy_statement.update_attributes(params[:privacy_statement])
+        Provenance.create(person: current_person, action: "updated", model: @privacy_statement)
+
         format.html { redirect_to(@privacy_statement, notice: 'Privacy statement was successfully updated.') }
         format.json { head :ok }
       else
@@ -73,6 +77,7 @@ class PrivacyStatementsController < ApplicationController
   # DELETE /privacy_statements/1.json
   def destroy
     @privacy_statement = PrivacyStatement.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @privacy_statement)
     @privacy_statement.destroy
 
     respond_to do |format|

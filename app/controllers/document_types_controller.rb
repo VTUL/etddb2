@@ -44,6 +44,8 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       if @document_type.save
+        Provenance.create(person: current_person, action: "created", model: @document_type)
+
         format.html { redirect_to(@document_type, notice: 'Document type was successfully created.') }
         format.json { render(json: @document_type, status: :created, location: @document_type) }
       else
@@ -60,6 +62,8 @@ class DocumentTypesController < ApplicationController
 
     respond_to do |format|
       if @document_type.update_attributes(params[:document_type])
+        Provenance.create(person: current_person, action: "updated", model: @document_type)
+
         format.html { redirect_to(@document_type, notice: 'Document type was successfully updated.') }
         format.json { head :ok }
       else
@@ -73,6 +77,7 @@ class DocumentTypesController < ApplicationController
   # DELETE /document_types/1.json
   def destroy
     @document_type = DocumentType.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @document_type)
     @document_type.destroy
 
     respond_to do |format|
