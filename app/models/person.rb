@@ -11,7 +11,8 @@ class Person < ActiveRecord::Base
   has_many :people_roles, dependent: :destroy
   has_many :roles, through: :people_roles
   has_many :etds, through: :people_roles
-  has_many :provenances
+  has_many :created_provenances, class_name: 'Provenance'
+  has_many :subject_of_provenances, class_name: 'Provenance', as: :model
 
   validates_presence_of :first_name, :last_name, :pid, :email
   validates_uniqueness_of :pid, :email
@@ -20,5 +21,4 @@ class Person < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:pid]
-
 end
