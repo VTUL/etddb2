@@ -24,7 +24,7 @@ class EtdsController < ApplicationController
   def show
     @etd = Etd.find(params[:id])
     @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
+    @collabs = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
 
     respond_to do |format|
       format.html # show.html.erb
