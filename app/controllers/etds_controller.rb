@@ -5,7 +5,13 @@ class EtdsController < ApplicationController
   # GET /etds.xml
   def index
     # This is a bit of black magic.
-    @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+    @etds = []
+    case params[:order]
+    when "department"
+      @etds = Etd.find(:all, include: :departments, order: 'departments.name')
+    else
+      @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -238,6 +244,28 @@ class EtdsController < ApplicationController
       else
         # Error. ETD not submitted. You are either too early, or too late.
         format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
+      end
+    end
+  end
+
+  # POST /etd/unsubmit/1
+  def unsubmit
+    @etd = Etd.find(params[:id])
+    
+    respond_to do |format|
+      if @etd.status == "Submitted"
+        if !current_person.roles.where(group: 'Graduate School').empty?
+          @etd.status = "Created"
+          @etd.save
+          
+          Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
+  
+          format.html { redirect_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.") }
+        else
+          format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }
+        end
+      else
+        format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit an ETD that hasn't been submitted.") }
       end
     end
   end

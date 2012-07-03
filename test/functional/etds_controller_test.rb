@@ -111,6 +111,16 @@ class EtdsControllerTest < ActionController::TestCase
       post(:save_contents, etd: params, origin: '/etds/add_contents/', id: @etd.id)
     end
   end  
+
+  test "should correct the origin param." do
+    params = {contents_attributes: {}}
+    for c in @etd.contents do
+      params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: false}
+    end
+
+    post(:save_contents, etd: params, origin: '/bad/path/', id: @etd.id)
+    assert_redirected_to(controller: 'etds', action: 'add_contents')
+  end
   
   test "should delete multiple contents from an ETD." do
     params = {contents_attributes: {}}
@@ -186,5 +196,22 @@ class EtdsControllerTest < ActionController::TestCase
     assert_response(:success)
     assert(@etd.people_roles.where(person_id: @person.id).last.vote)
     assert(!ActionMailer::Base.deliveries.empty?)
+  end
+
+  test "should unsubmit an ETD, if appropriate." do
+    # ETD not submitted
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(person_path(@person), notice: "You cannot unsubmit an ETD that hasn't been submitted.")
+
+    # Non-Grad School person.
+    @etd.status = "Submitted"
+    @etd.save
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(person_path(@person), notice: "You cannot unsubmit ETDs.")
+
+    # Success!
+    @person.people_roles << PeopleRole.new(role_id: Role.where(group: "Graduate School").first.id)
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.")
   end
 end
