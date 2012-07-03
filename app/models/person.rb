@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   has_many :roles, through: :people_roles
   has_many :etds, through: :people_roles
   has_many :created_provenances, class_name: 'Provenance'
-  has_many :subject_of_provenances, class_name: 'Provenance', as: :model
+  has_many :provenances, as: :model
 
   validates_presence_of :first_name, :last_name, :pid, :email
   validates_uniqueness_of :pid, :email
