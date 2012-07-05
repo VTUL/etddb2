@@ -53,6 +53,9 @@ gem 'paperclip'
 gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
 gem 'mime-types'
 
+# For pagination
+gem 'will_paginate', '3.0.3'
+
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'
 
