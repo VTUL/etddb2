@@ -1,4 +1,7 @@
 <h3>My Etds</h3>
+
+<%= will_paginate @my_etds %>
+<br/>
 <table>
   <tr>
     <th>Title</th>
@@ -25,6 +28,9 @@
   </tr>
 <% end %>
 </table>
+<br />
+<%= will_paginate @my_etds %>
+<br />
 <p>
   <%= link_to("Create a new ETD", new_etd_path) %>
 </p>

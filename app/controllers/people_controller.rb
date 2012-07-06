@@ -16,7 +16,11 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
-    @my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))
+    # New query to take advantage of pagination
+    @my_etds = Etd.paginate(:page => params[:page], :per_page => 10, include: [:people_roles], 
+                            :conditions => {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
+    # Previous query
+    #@my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))
     @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))
     @reviewable_etds = Etd.where(status: "Submitted")
 
