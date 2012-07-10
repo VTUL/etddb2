@@ -16,7 +16,7 @@
 
 
 <%= will_paginate %>
-
+<%= stylesheet_link_tag 'paginate' %>
 <br />
 <% @etds.each do |etd| %>
   <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
