@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626210030) do
+ActiveRecord::Schema.define(:version => 20120710154401) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -98,6 +98,17 @@ ActiveRecord::Schema.define(:version => 20120626210030) do
     t.integer  "privacy_statement_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "msg"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "read"
+    t.integer  "model_id"
+    t.string   "model_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "people", :force => true do |t|
