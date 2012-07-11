@@ -1,0 +1,23 @@
+<p>
+  <b>Message:</b>
+  <%= @message.msg %>
+</p>
+<p>
+  <b>Sender:</b>
+  <%= link_to(get_name(@message.sender), person_path(@message.sender)) %>
+</p>
+<p>
+  <b>Recipient:</b>
+  <%= link_to(get_name(@message.recipient), person_path(@message.recipient)) %>
+</p>
+<p>
+  <b>Read?</b>
+  <%= @message.read %>
+</p>
+<p>
+  <b>About:</b>
+  <%= link_to("#{@message.model_type} #{@message.model_id}", @message.model) %>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

@@ -47,6 +47,8 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       if @role.save
+        Provenance.create(person: current_person, action: "created", model: @role)
+
         format.html { redirect_to(@role, notice: 'Role was successfully created.') }
         format.xml  { render(xml: @role, status: :created, location: @role) }
       else
@@ -63,6 +65,8 @@ skip_before_filter :authenticate_person
 
     respond_to do |format|
       if @role.update_attributes(params[:role])
+        Provenance.create(person: current_person, action: "updated", model: @role)
+
         format.html { redirect_to(@role, notice: 'Role was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -76,6 +80,7 @@ skip_before_filter :authenticate_person
   # DELETE /roles/1.xml
   def destroy
     @role = Role.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @role)
     @role.destroy
 
     respond_to do |format|

@@ -44,6 +44,8 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       if @copyright_statement.save
+        Provenance.create(person: current_person, action: "created", model: @copyright_statement)
+
         format.html { redirect_to(@copyright_statement, notice: 'CopyrightStatement was successfully created.') }
         format.xml  { render(xml: @copyright_statement, status: :created, location: @copyright_statement) }
       else
@@ -60,6 +62,8 @@ class CopyrightStatementsController < ApplicationController
 
     respond_to do |format|
       if @copyright_statement.update_attributes(params[:copyright_statement])
+        Provenance.create(person: current_person, action: "updated", model: @copyright_statement)
+
         format.html { redirect_to(@copyright_statement, notice: 'CopyrightStatement was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -73,6 +77,7 @@ class CopyrightStatementsController < ApplicationController
   # DELETE /copyright_statements/1.xml
   def destroy
     @copyright_statement = CopyrightStatement.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @copyright_statement)
     @copyright_statement.destroy
 
     respond_to do |format|

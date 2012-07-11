@@ -2,7 +2,12 @@ class ProvenancesController < ApplicationController
   # GET /provenances
   # GET /provenances.xml
   def index
-    @provenances = Provenance.all
+    @provenances = []
+    if params[:type].nil?
+      @provenances = Provenance.find(:all, order: 'id DESC')
+    else
+      @provenances = Provenance.where(model_type: params[:type]).order('id DESC')
+    end
 
     respond_to do |format|
       format.html # index.html.erb

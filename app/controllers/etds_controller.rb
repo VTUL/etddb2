@@ -6,9 +6,11 @@ class EtdsController < ApplicationController
   def index
     # This is a bit of black magic.
     @etds = []
-    case params[:order]
+    case params[:orderby]
     when "department"
       @etds = Etd.find(:all, include: :departments, order: 'departments.name')
+    when "title"
+      @etds = Etd.find(:all, order: 'title')
     else
       @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
     end

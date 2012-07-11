@@ -9,6 +9,7 @@ class Content < ActiveRecord::Base
   belongs_to :availability
   
   has_many :provenances, as: :model
+  has_many :messages, as: :model
   
   # Paperclip mountings/validations
   has_attached_file :content, storage: :filesystem, path: ":rails_root/public/bin/submitted/:filename", url: "/bin/submitted/:filename"

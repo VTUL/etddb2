@@ -44,6 +44,8 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
+        Provenance.create(person: current_person, action: "created", model: @department)
+
         format.html { redirect_to(@department, notice: 'Department was successfully created.') }
         format.xml  { render(xml: @department, status: :created, location: @department) }
       else
@@ -60,6 +62,8 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.update_attributes(params[:department])
+        Provenance.create(person: current_person, action: "updated", model: @department)
+
         format.html { redirect_to(@department, notice: 'Department was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -73,6 +77,7 @@ class DepartmentsController < ApplicationController
   # DELETE /departments/1.xml
   def destroy
     @department = Department.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @department)
     @department.destroy
 
     respond_to do |format|
