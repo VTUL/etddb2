@@ -3,6 +3,8 @@ require 'test_helper'
 class MessagesControllerTest < ActionController::TestCase
   setup do
     @message = messages(:one)
+    @person = people(:one)
+    sign_in(@person)
   end
 
   test "should get index" do
@@ -18,10 +20,18 @@ class MessagesControllerTest < ActionController::TestCase
 
   test "should create message" do
     assert_difference('Message.count') do
-      post :create, message: { model_id: @message.model_id, model_type: @message.model_type, msg: @message.msg, read: @message.read, recipient_id: @message.recipient_id, sender_id: @message.sender_id }
+      post :create, message: { msg: @message.msg, read: @message.read, recipient_id: @message.recipient_id, sender_id: @message.sender_id }
     end
 
     assert_redirected_to message_path(assigns(:message))
+  end
+
+  test "should not create a message" do
+    assert_no_difference('Message.count') do
+      post :create, message: { msg: @message.msg }
+    end
+
+    assert_response :success
   end
 
   test "should show message" do
@@ -35,8 +45,13 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   test "should update message" do
-    put :update, id: @message, message: { model_id: @message.model_id, model_type: @message.model_type, msg: @message.msg, read: @message.read, recipient_id: @message.recipient_id, sender_id: @message.sender_id }
+    put :update, id: @message, message: { msg: @message.msg, read: @message.read, recipient_id: @message.recipient_id, sender_id: @message.sender_id }
     assert_redirected_to message_path(assigns(:message))
+  end
+
+  test "should not update message" do
+    put :update, id: @message, message: { msg: @message.msg, read: @message.read, recipient_id: @message.recipient_id, sender_id: nil }
+    assert_response :success
   end
 
   test "should destroy message" do
