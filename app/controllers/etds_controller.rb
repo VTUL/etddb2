@@ -8,11 +8,20 @@ class EtdsController < ApplicationController
     @etds = []
     case params[:orderby]
     when "department"
-      @etds = Etd.find(:all, include: :departments, order: 'departments.name')
+      # Previous query
+      #@etds = Etd.find(:all, include: :departments, order: 'departments.name')
+      # Updated query for pagination
+      @etds = Etd.paginate(page: params[:page], per_page: 10, include: :departments, order: 'departments.name')
     when "title"
-      @etds = Etd.find(:all, order: 'title')
+      # Previous query
+      #@etds = Etd.find(:all, order: 'title')
+      # Updated query for pagination
+      @etds = Etd.paginate(page: params[:page], per_page: 10,  order: 'title')
     else
-      @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+      # Previous query
+      #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+      # Updated query for pagination
+      @etds = Etd.paginate(page: params[:page], per_page: 10, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
     end
 
     respond_to do |format|

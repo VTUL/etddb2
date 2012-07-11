@@ -14,6 +14,10 @@
     <th>Department</th>
   </tr>
 
+
+<%= will_paginate %>
+<%= stylesheet_link_tag 'paginate' %>
+<br />
 <% @etds.each do |etd| %>
   <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
   <tr>
@@ -25,6 +29,9 @@
     <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>
+
 </table>
+<br />
+<%= will_paginate %>
 <br />
 <%= link_to 'New ETD', new_etd_path %>
