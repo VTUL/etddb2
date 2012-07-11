@@ -17,6 +17,7 @@ class Etd < ActiveRecord::Base
   has_many :roles, through: :people_roles
   has_many :people, through: :people_roles
   has_many :provenances, as: :model
+  has_many :messages, as: :model
 
   has_and_belongs_to_many :departments
 

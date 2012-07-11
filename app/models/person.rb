@@ -13,6 +13,9 @@ class Person < ActiveRecord::Base
   has_many :etds, through: :people_roles
   has_many :created_provenances, class_name: 'Provenance'
   has_many :provenances, as: :model
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :recieved_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :messages, as: :model
 
   validates_presence_of :first_name, :last_name, :pid, :email
   validates_uniqueness_of :pid, :email
