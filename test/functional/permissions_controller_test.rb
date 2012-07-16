@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PermissionsControllerTest < ActionController::TestCase
   setup do
-    @person = people(:one)
+    @person = Person.first
     sign_in(@person) 
   end
 

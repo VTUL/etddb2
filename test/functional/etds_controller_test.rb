@@ -2,8 +2,8 @@ require 'test_helper'
 
 class EtdsControllerTest < ActionController::TestCase
   setup do
-    @etd = etds(:one)
-    @person = people(:one)
+    @etd = Etd.first
+    @person = Person.first
     sign_in(@person) 
   end
 
@@ -74,7 +74,7 @@ class EtdsControllerTest < ActionController::TestCase
 
   test "should only be able to edit and destroy your ETDs." do
     sign_out(@person)
-    @person = people(:two)
+    @person = Person.last
     sign_in(@person)
 
     get(:edit, id: @etd.to_param)
@@ -99,10 +99,10 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should add multiple contents (save_contents) to an ETD." do
-    @content_a = Content.create(contents(:three).attributes)
-    @content_b = Content.create(contents(:four).attributes)
+    @content_a = Content.last
+    @content_b = Content.first
 
-    params = {contents_attributes: {new_1: @content_a.attributes, new_2: @content_b.attributes}}
+    params = {contents_attributes: {new_1: @content_a.attributes.merge({id: nil}), new_2: @content_b.attributes.merge({id: nil})}}
     for c in @etd.contents do
       params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: false}
     end

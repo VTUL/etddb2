@@ -2,16 +2,9 @@ require 'test_helper'
 
 class ContentsControllerTest < ActionController::TestCase
   def setup
-    @content = contents(:one)
-    @person = people(:one)
+    @content = Content.first
+    @person = Person.first
     sign_in(@person)
-  end
-
-  test "should redirect to login if not signed in." do
-    sign_out(@person)
-    get(:index)
-    assert_response(:redirect)
-    # TODO: Finish the "must be signed in" test.
   end
 
   test "should get index, if signed in." do
@@ -69,7 +62,7 @@ class ContentsControllerTest < ActionController::TestCase
   end
 
   test "should change the ETD's availability if appropriate." do
-    @etd = etds(:one)
+    @etd = Etd.first
     mixed_avail = Availability.where(name: "Mixed").first.id
     withheld_avail = Availability.where(name: "Withheld").first.id
     available_avail = Availability.where(name: "Available").first.id
@@ -90,13 +83,13 @@ class ContentsControllerTest < ActionController::TestCase
     assert_equal(@etd.availability_id, withheld_avail)
 
     # Should not change the avail when creating content with the ETD's avail.
-    @contents = contents(:three)
+    @contents = Content.last
     post(:create, {content: @content.attributes.merge({availability_id: withheld_avail}), etd_id: @etd.id})
     @etd = Etd.find(@etd.id)
     assert_equal(@etd.availability_id, withheld_avail)
 
     # Should change to Mixed with new content of a different avail.
-    @contents = contents(:four)
+    #@contents = contents(:four)
     post(:create, {content: @content.attributes.merge({availability_id: available_avail}), etd_id: @etd.id})
     @etd = Etd.find(@etd.id)
     assert_equal(@etd.availability_id, mixed_avail)

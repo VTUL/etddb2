@@ -6,7 +6,7 @@ class EtddbMailerTest < ActionMailer::TestCase
   end
 
   test "should send submission confirmation to the author." do
-    etd = etds(:one)
+    etd = Etd.first
     author = Person.find(etd.people_roles.where(role_id: Role.where(name: 'Author').first).first.person_id)
 
     email = EtddbMailer.confirm_submit_author(etd, author).deliver
@@ -18,7 +18,7 @@ class EtddbMailerTest < ActionMailer::TestCase
   end
   
   test "should send submission confirmation to the graduate school." do
-    etd = etds(:one)
+    etd = Etd.first
     author = Person.find(etd.people_roles.where(role_id: Role.where(name: 'Author').first).first.person_id)
 
     email = EtddbMailer.confirm_submit_school(etd, author).deliver
@@ -31,7 +31,7 @@ class EtddbMailerTest < ActionMailer::TestCase
   end
   
   test "should send submission confirmation to the committee members." do
-    etd = etds(:one)
+    etd = Etd.first
     author = Person.find(etd.people_roles.where(role_id: Role.where(name: 'Author').first).first.person_id)
     committee_emails = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id)).pluck(:email)
 

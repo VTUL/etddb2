@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ProvenancesControllerTest < ActionController::TestCase
   setup do
-    @provenance = provenances(:one)
-    @person = people(:one)
+    @provenance = Provenance.first
+    @person = Person.first
     sign_in(@person)
   end
 
