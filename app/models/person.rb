@@ -24,4 +24,11 @@ class Person < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:pid]
+
+  def name
+    if self.display_name.to_s.empty?
+      return "#{self.first_name} #{self.last_name}"
+    end
+    return self.display_name
+  end
 end

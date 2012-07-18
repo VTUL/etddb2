@@ -8,7 +8,7 @@
 <% @reviewable_etds.each do |etd| %>
   <tr>
     <td><%= link_to(etd.title, etd_path(etd)) %></td>
-    <td><%= get_name(Person.where(etd.people_roles.where(role_id: Role.where(group: "Creators")).first.id).first) %></td>
+    <td><%= Person.where(etd.people_roles.where(role_id: Role.where(group: "Creators")).first.id).first.name %></td>
     <% # TODO: Needs reviewer functions. %>
     <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
   </tr>

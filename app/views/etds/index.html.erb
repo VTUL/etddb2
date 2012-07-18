@@ -21,7 +21,7 @@
 <% @etds.each do |etd| %>
   <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
   <tr>
-    <td><%= creators.map { |o| get_name(o) } .join(", ") %></td>
+    <td><%= creators.map { |o| o.name } .join(", ") %></td>
     <td><%= etd.title %></td>
     <td><%= etd.departments.pluck(:name).join(", ") %></td>
     <td><%= link_to 'Show', etd %></td>

@@ -1,5 +1,5 @@
 <p>
-  <%= link_to(get_name(@provenance.person), person_path(@provenance.person)) %> <%= @provenance.action %>
+  <%= link_to(@provenance.person.name, person_path(@provenance.person)) %> <%= @provenance.action %>
   <%= link_to("#{@provenance.model_type} #{@provenance.model_id}", @provenance.model) %> at <%= @provenance.created_at.strftime("%H:%M:%S on %b %d %Y") %>
 </p>
 <p>

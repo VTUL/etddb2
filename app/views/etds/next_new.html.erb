@@ -34,7 +34,7 @@
       <% for collab in @collabs do %>
         <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
           <tr>
-            <td><%= get_name(collab) %></td>
+            <td><%= collab.name %></td>
             <td><%= Role.find(pr.role_id).name %></td>
             <td><%= link_to 'Destroy', destroy_people_role_path(pr), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
           </tr>

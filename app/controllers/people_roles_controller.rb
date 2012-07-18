@@ -46,8 +46,7 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       if @people_role.save
-        # TODO: Instead of the pid, this should get the display name.
-        Provenance.create(person: current_person, action: "made #{@people_role.person.pid} a #{@people_role.role.name}. See ", model: @people_role)
+        Provenance.create(person: current_person, action: "made #{@people_role.person.name} a #{@people_role.role.name}. See ", model: @people_role)
 
         format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully created.') }
         format.xml  { render(xml: @people_role, status: :created, location: @people_role) }
