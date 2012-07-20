@@ -7,6 +7,7 @@
 
 class Person < ActiveRecord::Base
   self.table_name = "people"
+  acts_as_messageable
 
   has_many :people_roles, dependent: :destroy
   has_many :roles, through: :people_roles
