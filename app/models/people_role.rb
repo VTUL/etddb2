@@ -13,7 +13,7 @@ class PeopleRole < ActiveRecord::Base
   belongs_to :etd
 
   has_many :provenances, as: :model
-  has_many :messages, as: :model
+  #has_many :messages, as: :model
 
   #Validate attributes
   validates_presence_of :person_id, :role_id
