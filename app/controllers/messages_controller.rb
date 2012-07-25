@@ -36,6 +36,7 @@ class MessagesController < ApplicationController
   def create
     @recipients = []
     if params[:_recipients].present?
+      params[:_recipients] = params[:_recipients].split(',')
       params[:_recipients].each do |recp_id|
         recp = Person.find(recp_id)
         next if recp.nil?
