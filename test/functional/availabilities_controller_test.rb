@@ -2,8 +2,8 @@ require 'test_helper'
 
 class AvailabilitiesControllerTest < ActionController::TestCase
   setup do
-    @availability = availabilities(:one)
-    @person = people(:one)
+    @availability = Availability.first
+    @person = Person.first
     sign_in(@person) 
   end
 

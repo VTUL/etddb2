@@ -2,8 +2,8 @@ require 'test_helper'
 
 class PeopleRolesControllerTest < ActionController::TestCase
   setup do
-    @people_role = people_roles(:three)
-    @person = people(:one)
+    @people_role = PeopleRole.first
+    @person = Person.first
     sign_in(@person)
   end
 

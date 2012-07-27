@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DepartmentsControllerTest < ActionController::TestCase
   setup do
-    @department = departments(:one)
-    @person = people(:one)
+    @department = Department.first
+    @person = Person.first
     sign_in(@person) 
   end
   

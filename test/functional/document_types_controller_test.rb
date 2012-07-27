@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DocumentTypesControllerTest < ActionController::TestCase
   setup do
-    @document_type = document_types(:one)
-    @person = people(:one)
+    @document_type = DocumentType.first
+    @person = Person.first
     sign_in(@person) 
   end
 

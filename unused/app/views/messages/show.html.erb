@@ -4,11 +4,11 @@
 </p>
 <p>
   <b>Sender:</b>
-  <%= link_to(get_name(@message.sender), person_path(@message.sender)) %>
+  <%= link_to(@message.sender.name, person_path(@message.sender)) %>
 </p>
 <p>
   <b>Recipient:</b>
-  <%= link_to(get_name(@message.recipient), person_path(@message.recipient)) %>
+  <%= link_to(@message.recipient.name, person_path(@message.recipient)) %>
 </p>
 <p>
   <b>Read?</b>

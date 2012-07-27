@@ -2,8 +2,8 @@ require 'test_helper'
 
 class CopyrightStatementsControllerTest < ActionController::TestCase
   setup do
-    @copyright = copyright_statements(:one)
-    @person = people(:one)
+    @copyright = CopyrightStatement.first
+    @person = Person.first
     sign_in(@person) 
   end
 

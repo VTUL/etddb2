@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DigitalObjectsControllerTest < ActionController::TestCase
   setup do
-    @digital_object = digital_objects(:one)
-    @person = people(:one)
+    @digital_object = DigitalObject.first
+    @person = Person.first
     sign_in(@person) 
   end
 

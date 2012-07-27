@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710154401) do
+ActiveRecord::Schema.define(:version => 20120720194046) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(:version => 20120710154401) do
     t.string   "content_content_type"
     t.integer  "content_file_size"
     t.datetime "content_updated_at"
+  end
+
+  create_table "conversations", :force => true do |t|
+    t.string   "subject",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "copyright_statements", :force => true do |t|
@@ -100,16 +106,23 @@ ActiveRecord::Schema.define(:version => 20120710154401) do
     t.datetime "updated_at",             :null => false
   end
 
-  create_table "messages", :force => true do |t|
-    t.string   "msg"
+  create_table "notifications", :force => true do |t|
+    t.string   "type"
+    t.text     "body"
+    t.string   "subject",              :default => ""
     t.integer  "sender_id"
-    t.integer  "recipient_id"
-    t.boolean  "read"
-    t.integer  "model_id"
-    t.string   "model_type"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "sender_type"
+    t.integer  "conversation_id"
+    t.boolean  "draft",                :default => false
+    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                              :null => false
+    t.integer  "notified_object_id"
+    t.string   "notified_object_type"
+    t.string   "notification_code"
+    t.string   "attachment"
   end
+
+  add_index "notifications", ["conversation_id"], :name => "index_notifications_on_conversation_id"
 
   create_table "people", :force => true do |t|
     t.string   "pid"
@@ -173,6 +186,20 @@ ActiveRecord::Schema.define(:version => 20120710154401) do
     t.string   "action"
     t.string   "message"
   end
+
+  create_table "receipts", :force => true do |t|
+    t.integer  "receiver_id"
+    t.string   "receiver_type"
+    t.integer  "notification_id",                                  :null => false
+    t.boolean  "read",                          :default => false
+    t.boolean  "trashed",                       :default => false
+    t.boolean  "deleted",                       :default => false
+    t.string   "mailbox_type",    :limit => 25
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+  end
+
+  add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

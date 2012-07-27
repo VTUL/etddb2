@@ -11,7 +11,7 @@
 
 <% @people_roles.each do |people_role| %>
   <tr>
-    <td><%= get_name(Person.find(people_role.person_id)) %></td>
+    <td><%= Person.find(people_role.person_id).name %></td>
     <td><%= Role.find(people_role.role_id).name %></td>
     <% if !people_role.etd_id.nil? %>
     <td><%= link_to(Etd.find(people_role.etd_id).title, etd_path(people_role.etd_id)) %></td>

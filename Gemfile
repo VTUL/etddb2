@@ -56,6 +56,9 @@ gem 'mime-types'
 # For pagination
 gem 'will_paginate', '3.0.3'
 
+# For messaging
+gem 'mailboxer'
+
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'
 

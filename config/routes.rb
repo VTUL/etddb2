@@ -68,6 +68,8 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   post '/messages/:id/delete', :to => 'messages#destroy', :as => :destroy_message
   resources :messages, :except => :destroy
+  post '/conversations/:id/delete', :to => 'conversations#destroy', :as => :destroy_conversation
+  resources :conversations, :except => :destroy
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

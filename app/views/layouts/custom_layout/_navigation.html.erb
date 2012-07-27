@@ -1,9 +1,13 @@
 <div id="navigation">
-  <h3>DEV NAVIGATION:</h3>
-  <p>
+  <h3>NAVIGATION:</h3>
+  <ul>
     <% if person_signed_in? %>
       <li>
         <%= link_to('My Profile', person_path(current_person)) %>
+      </li>
+      <li>
+        <% unread = current_person.mailbox.inbox(unread: true).count(:id, distinct: true) %>
+        <%= link_to("Messages (#{unread})", conversations_path) %>
       </li>
       <li>
         <%= link_to('Edit Profile', edit_person_registration_path) %>
@@ -19,7 +23,7 @@
         <%= link_to('Login', new_person_session_path)  %>  
       </li>
     <% end %>
-  </p>
+  </ul>
   <p>
   <%# TODO: Controller select box goes here? %>
   </p>

@@ -9,7 +9,7 @@ class Role < ActiveRecord::Base
   has_many :people, through: :people_roles
   has_many :etds, through: :people_roles
   has_many :provenances, as: :model
-  has_many :messages, as: :model
+  #has_many :messages, as: :model
 
   has_many :permission
   has_many :user_actions, through: :permission

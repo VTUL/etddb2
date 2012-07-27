@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Sender</th>
+    <th>Date</th>
+    <th>Subject</th>
+  </tr>
+
+  <% @conversations.each do |conv| %>
+  <tr>
+    <td><%= link_to(conv.last_sender.name, person_path(conv.last_sender)) %></td>
+    <td><%= time_ago_in_words(conv.updated_at) %> ago</td>
+    <td><%= link_to(truncate(conv.subject, length: 55), conversation_path(conv.id, box: @box)) %></td>
+    <td><%= truncate(conv.last_message.body, length:50) %></td>
+    <% unless @box.eql?('trash') %>
+      <!--<td><%#= link_to("Mark As Read", ) %></td>-->
+      <td><%= link_to("Delete", destroy_conversation_path(conv, box: @box), confirm: "Are you sure?", method: :post) %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+
+<div>
+  <%= link_to("New Message", new_message_path) %><br />
+  <%= link_to("Inbox", conversations_path) %><br />
+  <%= link_to("Sentbox", conversations_path(box: :sentbox)) %>
+</div>

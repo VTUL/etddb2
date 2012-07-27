@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DegreesControllerTest < ActionController::TestCase
   setup do
-    @degree = degrees(:one)
-    @person = people(:one)
+    @degree = Degree.first
+    @person = Person.first
     sign_in(@person) 
   end
 
