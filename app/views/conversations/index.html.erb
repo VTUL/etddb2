@@ -12,8 +12,8 @@
     <td><%= link_to(truncate(conv.subject, length: 55), conversation_path(conv.id, box: @box)) %></td>
     <td><%= truncate(conv.last_message.body, length:50) %></td>
     <% unless @box.eql?('trash') %>
-      <td><%= link_to("Mark As Read") %></td>
-      <td><%= link_to("Delete", conversation_path(conv, box: @box), confirm: "Are you sure?", method: :post) %></td>
+      <!--<td><%#= link_to("Mark As Read", ) %></td>-->
+      <td><%= link_to("Delete", destroy_conversation_path(conv, box: @box), confirm: "Are you sure?", method: :post) %></td>
     <% end %>
   </tr>
   <% end %>

@@ -10,7 +10,7 @@
 <% @receipts.each do |receipt| %>
   <div>
     <p>
-    <%= time_ago_in_words(receipt.message.updated_at).capitalize %> ago <b><%= receipt.message.sender.name %></b> said:<br />
+    <%= time_ago_in_words(receipt.message.updated_at).capitalize %> ago <%= receipt.message.sender.name %> said:<br />
     <% if receipt.message.is_unread?(current_person) %>
       <b><%= receipt.message.body %></b>
     <% else %>
@@ -42,6 +42,6 @@
 
 <% unless @box.eql?('trash') %>
   <div>
-    <%= link_to("Delete", conversation_path(@conversation, box: @box), confirm: "Are you sure?", method: :post) %>
+    <%= link_to("Delete", destroy_conversation_path(@conversation, box: @box), confirm: "Are you sure?", method: :post) %>
   </div>
 <% end %>

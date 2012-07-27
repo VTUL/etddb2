@@ -28,7 +28,6 @@ class MessagesController < ApplicationController
 
   # GET /messages/1/edit
   def edit
-
   end
 
   # POST /messages
@@ -56,13 +55,11 @@ class MessagesController < ApplicationController
   # PUT /messages/1
   # PUT /messages/1.xml
   def update
-
   end
 
   # DELETE /messages/1
   # DELETE /messages/1.xml
   def destroy
-
   end
 
   private

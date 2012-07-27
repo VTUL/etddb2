@@ -22,15 +22,12 @@ class ConversationsController < ApplicationController
   end
 
   def new
-
   end
 
   def edit
-
   end
 
   def create
-
   end
 
   def update
@@ -50,7 +47,6 @@ class ConversationsController < ApplicationController
     end
     redirect_to :action => :show
     @receipts.mark_as_read
-
   end
 
   def destroy
