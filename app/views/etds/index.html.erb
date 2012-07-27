@@ -1,22 +1,24 @@
+<%= stylesheet_link_tag 'paginate' %>
 <h1>ETDs</h1>
-<div id="special_search">
+<div id="special_search" class="top_bar">
   <form>
     <input type="text" name="keywords" value="Search ETDs" />
     <input type="submit" value="Go" />
   </form>
   <br>
 </div>
-
-<table>
+  <div id="page_pref" class="top_bar">
+  Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "if(this.value){window.location='?per_page='+this.value;}" %>
+  </div>
+ <%= will_paginate :show_always => true %>
+<table class="clear_left">
   <tr>
     <th>Author</th>
     <th>Title</th>
     <th>Department</th>
   </tr>
 
-
-<%= will_paginate %>
-<%= stylesheet_link_tag 'paginate' %>
 <br />
 <% @etds.each do |etd| %>
   <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>

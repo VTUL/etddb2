@@ -4,7 +4,13 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.paginate(page: params[:page], per_page: 10)
+    # Make sure parameter exists and is an integer
+    if params[:per_page] =~ /^\d+$/
+      @per_page = params[:per_page]
+    else
+      @per_page = 10
+    end
+    @people = Person.paginate(page: params[:page], per_page: @per_page)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,11 +21,16 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
+    if params[:per_page] =~ /^\d+$/
+      @per_page = params[:per_page]
+    else
+      @per_page = 10
+    end
     @person = Person.find(params[:id])
     # Previous query
     #@my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))
     # New query to take advantage of pagination
-    @my_etds = Etd.paginate(page: params[:page], per_page: 10, include: [:people_roles], 
+    @my_etds = Etd.paginate(page: params[:page], per_page: @per_page, include: [:people_roles], 
                             conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
     @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))
     @reviewable_etds = Etd.where(status: "Submitted")

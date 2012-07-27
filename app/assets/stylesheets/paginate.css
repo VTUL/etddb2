@@ -2,6 +2,7 @@
     background: none repeat scroll 0 0 white;
     cursor: default;
     font-size: 10pt;
+    clear: left;
 }
 .pagination a, .pagination span, .pagination em {
     display: block;
@@ -54,4 +55,16 @@
 }
 :first-child + html .pagination {
     overflow: hidden;
+}
+
+#page_pref {
+    margin-left: 70px;
+}
+
+.top_bar {
+    float: left;
+}
+
+.clear_left {
+    clear: left;
 }
