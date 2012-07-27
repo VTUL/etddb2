@@ -9,7 +9,7 @@ class DegreeTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-boolean retired attribute." do
-    degree = Degree.new(degrees(:one).attributes)
+    degree = Degree.first
     degree.retired = nil
     assert !degree.valid?
     assert degree.errors[:retired].include?("must be boolean")

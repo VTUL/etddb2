@@ -19,10 +19,9 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-unique pid" do
-    person = Person.new(people(:one).attributes)
-    # Fix the other errors that should show up after loading a fixture.
-    person.email = "unique001@example.com"
-    person.password = "password"
+    person = Person.first
+    # Fix the other errors that should show up after loading an existing person.
+    person.pid = Person.last.pid
     assert !person.valid?
     assert person.errors[:pid].include?("has already been taken")
     person.pid = "unique001"
@@ -30,10 +29,9 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-unique email" do
-    person = Person.new(people(:one).attributes)
-    # Fix the other errors that should show up after loading a fixture.
-    person.pid = "unique001"
-    person.password = "password"
+    person = Person.first
+    # Fix the other errors that should show up after loading an existing person.
+    person.email = Person.last.email
     assert !person.valid?
     assert person.errors[:email].include?("has already been taken")
     person.email = "unique001@example.com"
