@@ -17,17 +17,16 @@ class EtdTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-unique urn." do
-    etd = Etd.new(etds(:one).attributes)
+    etd = Etd.first
+    etd.urn = Etd.last.urn
     assert !etd.valid?
     assert etd.errors[:urn].include?("has already been taken")
-    etd.urn = 0
+    etd.urn = Etd.first.urn
     assert etd.valid?
   end
 
   test "invalid with non-boolean bound attribute." do
-    etd = Etd.new(etds(:one).attributes)
-    #The urn will also cause an error, so fix it.
-    etd.urn = 0
+    etd = Etd.first
     etd.bound = nil
     assert !etd.valid?
     assert etd.errors[:bound].include?("must be boolean")

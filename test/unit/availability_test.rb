@@ -10,7 +10,7 @@ class AvailabilityTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-boolean retired attribute." do
-    avail = Availability.new(availabilities(:one).attributes)
+    avail = Availability.first
     avail.retired = nil
     assert !avail.valid?
     assert avail.errors[:retired].include?("must be boolean")

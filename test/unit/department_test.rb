@@ -15,7 +15,7 @@ class DepartmentTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-boolean retired attribute." do
-    deparment = Department.new(departments(:one).attributes)
+    deparment = Department.first
     deparment.retired = nil
     assert !deparment.valid?
     assert deparment.errors[:retired].include?("must be boolean")
