@@ -254,7 +254,7 @@ class EtdsController < ApplicationController
 
           format.html #vote.html.erb
         else
-          # Error. You are either not part of this ETD, or at least not on it's committee.
+          # Error. You are not part of this ETD's committee.
           format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
         end
       else
@@ -282,6 +282,20 @@ class EtdsController < ApplicationController
         end
       else
         format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit an ETD that hasn't been submitted.") }
+      end
+    end
+  end
+
+  # GET /etd/reviewboard/1
+  def reviewboard
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.status == "Submitted"
+        @committee = @etd.people_roles.where(role_id: Role.where(group: "Collaborators"))
+        format.html
+      else
+        format.html { redirect_to(etd_path(@etd), notice: "This ETD doesn't currently have a review board.") }
       end
     end
   end
