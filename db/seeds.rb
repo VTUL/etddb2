@@ -195,7 +195,7 @@ pr.save
 
 # Make Kimberli a reviewer.
 PeopleRole.create({person: Person.last, etd: Etd.first, role: Role.where(group: "Graduate School").first})
-Provenance.create({person: Person.first, action: "made kdweeks a Reviewer. See", model: PeopleRole.last})
+Provenance.create({person: Person.first, action: "made #{Person.last.name} a #{Role.where(group: "Graduate School").first.name}. See ", model: PeopleRole.last})
 
 # Add nine more ETDs and eight more People, so their index pages will paginate.
 Etd.create({title: "zLast", abstract: "This is another abstract.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000003", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000003/", status: "Created"})

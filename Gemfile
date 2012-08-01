@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '~> 3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,7 +14,7 @@ group :assets do
   gem 'sass-rails', " ~> 3.2.3"
   gem 'coffee-rails', " ~> 3.2.1"
   gem 'uglifier'
-  gem 'haml'
+  #gem 'haml'
 end
 
 #For AJAX:
