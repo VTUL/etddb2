@@ -1,7 +1,36 @@
-<div>
+<h1><%= link_to(@etd.title, etd_path(@etd)) %></h1>
+By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: "Creators")).first.person_id).name %> <%#= TODO: link to send author a message %>
+<h3>Committee Members</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Vote</th>
+  </tr>
   <% @committee.each do |member| %>
-    <p>
-      <%= member.person.name %>
-    </p>
+  <tr>
+    <td><%= member.person.name %></td>
+    <% if member.vote.nil? %>
+      <td>No Vote</td>
+    <% else %>
+      <td><%= member.vote ? "Approve" : "Disapprove" %></td>
+    <% end %>
+    <% if current_person == member.person %>
+      <td>
+        <%= form_tag(vote_for_etd_path(@etd)) do %>
+          <%= select_tag(:vote, options_for_select([['Approve', true], ['Disapprove', false]])) %>
+          <%= submit_tag('Vote') %>
+        <% end %>
+      </td>
+    <% else %>
+      <!--<td><%#= TODO: Link to message member %></td>-->
+    <% end %>
+  </tr>
   <% end %>
-</div>
+</table>
+<% if !(current_person.roles & Role.where(group: ["Graduate School", "Administration"])).empty? %>
+<p>
+  <% #TODO: Real Approval Path %>
+  <%= button_to("Approve ETD", etd_path(@etd)) %>
+  <%= button_to("Unsubmit ETD", unsubmit_etd_path(@etd)) %>
+</p>
+<% end %>
