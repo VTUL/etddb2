@@ -8,6 +8,7 @@ class PeopleRole < ActiveRecord::Base
   #Specify irregular table names
   self.table_name = "people_roles"
 
+  #belongs_to :legacy_person
   belongs_to :person
   belongs_to :role
   belongs_to :etd
