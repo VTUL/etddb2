@@ -6,6 +6,16 @@
 
 require 'test_helper'
 
+class LegacyPersonTest < ActiveSupport::TestCase
+  # Replace this with your real tests.
+  test "should be invalid with empty attributes" do
+    person = LegacyPerson.new
+    assert !person.valid?, "Error: Person is valid with empty attributes."
+    assert person.errors[:first_name].any?, "No errors for missing first name."
+    assert person.errors[:last_name].any?,  "No errors for missing last name."
+  end
+end
+
 class PersonTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "should be invalid with empty attributes" do

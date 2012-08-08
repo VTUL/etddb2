@@ -15,6 +15,9 @@ class PeopleControllerTest < ActionController::TestCase
   test "should show person" do
     get(:show, id: @person.to_param)
     assert_response(:success)
+    # Get a LegacyPerson, too.
+    get(:show, id: Person.last.to_param)
+    assert_response(:success)
   end
 
   test "should get committee search page." do
