@@ -3,8 +3,8 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.xml
   def index
+    @authors_etds = current_person.etds
     respond_to do |format|
-      @authors_etds = current_person.etds
       format.html # index.html.erb
       format.xml  { render(xml: @authors_etds) }
     end
@@ -95,7 +95,7 @@ class ContentsController < ApplicationController
         format.json { head :ok }
       else
         format.html { render(action: "edit") }
-        format.json { render(json: @document_type.errors, status: :unprocessable_entity) }
+        format.json { render(json: @content.errors, status: :unprocessable_entity) }
       end
     end
   end

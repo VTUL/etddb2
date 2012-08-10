@@ -77,4 +77,54 @@ class PeopleController < ApplicationController
       format.html { redirect_to(params[:origin] + params[:etd_id]) }
     end
   end
+
+  # GET /people/new_legacy
+  def new
+    @person = LegacyPerson.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render(xml: @person) }
+    end
+  end
+
+  # GET /people/edit_legacy/1
+  def edit
+    @person = LegacyPerson.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.xml  { render(xml: @person) }
+    end
+  end
+
+  # POST /people/new_legacy
+  def create
+    @person = LegacyPerson.new(params[:legacy_person])
+    respond_to do |format|
+      if @person.save
+        Provenance.create(person: current_person, action: "created", model: @person)
+        format.html { redirect_to(person_path(@person), notice: "#{@person.name} was successfully created.") }
+      else
+        format.html { render(action: "new") }
+        format.json { render(json: @person.errors, status: :unprocessable_entity) }
+      end
+    end
+  end
+
+  # POST /people/edit_legacy
+  def update
+    @person = LegacyPerson.find(params[:id])
+
+    respond_to do |format|
+      if @person.update_attributes(params[:legacy_person])
+        Provenance.create(person: current_person, action: "updated", model: @person)
+
+        format.html { redirect_to(person_path(@person), notice: "#{@person.name} was successfully updated.") }
+        format.json { head :ok }
+      else
+        format.html { render(action: "edit") }
+        format.json { render(json: @person.errors, status: :unprocessable_entity) }
+      end
+    end
+  end
+
 end

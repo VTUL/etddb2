@@ -22,6 +22,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/people/find', :to => 'people#find'
   post '/people/new_committee_member', :to => 'people#new_committee_member'
   post '/people/add_committee', :to => 'people#add_committee'
+  get '/people/new_legacy', :to => 'people#new', :as => :new_legacy_person
+  get '/people/edit_legacy/:id', :to => 'people#edit', :as => :edit_legacy_person
+  post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
+  put '/people/edit_legacy/:id', :to => 'people#update', :as => :update_legacy_person
   resources :people, :only => [:index, :show]
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
