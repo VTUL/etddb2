@@ -127,4 +127,15 @@ class PeopleController < ApplicationController
     end
   end
 
+  # POST /people/destroy_legacy
+  def destroy
+    @person = LegacyPerson.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @person)
+    @person.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(people_path) }
+      format.xml  { head :ok }
+    end
+  end
 end

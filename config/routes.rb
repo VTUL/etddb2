@@ -26,6 +26,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/people/edit_legacy/:id', :to => 'people#edit', :as => :edit_legacy_person
   post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
   put '/people/edit_legacy/:id', :to => 'people#update', :as => :update_legacy_person
+  post '/people/destroy_legacy/:id', :to => 'people#destroy', :as => :destroy_legacy_person
   resources :people, :only => [:index, :show]
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
