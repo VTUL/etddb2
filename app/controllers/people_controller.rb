@@ -89,10 +89,14 @@ class PeopleController < ApplicationController
 
   # GET /people/edit_legacy/1
   def edit
-    @person = LegacyPerson.find(params[:id])
+    @person = Person.find(params[:id])
     respond_to do |format|
-      format.html # edit.html.erb
-      format.xml  { render(xml: @person) }
+      if @person.valid?
+        format.html { redirect_to(edit_person_registration_path(@person)) }
+      else
+        format.html # edit.html.erb
+        format.xml  { render(xml: @person) }
+      end
     end
   end
 
@@ -129,13 +133,18 @@ class PeopleController < ApplicationController
 
   # POST /people/destroy_legacy
   def destroy
-    @person = LegacyPerson.find(params[:id])
-    Provenance.create(person: current_person, action: "destroyed", model: @person)
-    @person.destroy
+    @person = Person.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to(people_path) }
-      format.xml  { head :ok }
+    if @person.valid?
+      redirect_to(people_path, notice: "That's a bad link. Please report this.")
+    else
+      Provenance.create(person: current_person, action: "destroyed", model: @person)
+      @person.destroy
+
+      respond_to do |format|
+        format.html { redirect_to(people_path) }
+        format.xml  { head :ok }
+      end
     end
   end
 end
