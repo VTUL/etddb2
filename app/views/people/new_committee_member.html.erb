@@ -2,8 +2,8 @@
 <%= form_tag '/people/new_committee_member', id: "committee_search" do %>
   <%= hidden_field_tag(:etd_id, params[:etd_id]) %>
   <%= hidden_field_tag(:origin, params[:origin]) %>
-  <%= label_tag(:lname, "Member's Last Name") %>
-  <%= text_field_tag(:lname) %>
+  <%= label_tag(:name, "Member's Last Name") %>
+  <%= text_field_tag(:name) %>
   <%= submit_tag("Find") %>
 <% end %>
 <br />
@@ -12,7 +12,7 @@
   <%= hidden_field_tag(:origin, params[:origin]) %>
   <div id="candidates">
     <table>
-      <% @candidates = Person.find_by_sql("SELECT 'people'.* FROM 'people' WHERE 'people'.'last_name' LIKE '%" + params[:lname] + "%'") %>
+      <% @candidates = Person.where("UPPER(first_name||' '||last_name) LIKE '%" + params[:name] + "%'") %>
       <% for candidate in @candidates do %>
         <tr>
           <td><%= radio_button_tag("committee", candidate.id) %></td>

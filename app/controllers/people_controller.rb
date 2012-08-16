@@ -44,7 +44,7 @@ class PeopleController < ApplicationController
   # POST /people/find/
   def find
     respond_to do |format|
-      if params[:lname].nil?
+      if params[:name].nil?
         format.html { render(action: "find") }
       else
         format.js
