@@ -12,7 +12,7 @@
   <%= hidden_field_tag(:origin, params[:origin]) %>
   <div id="candidates">
     <table>
-      <% @candidates = Person.where("UPPER(first_name||' '||last_name) LIKE '%" + params[:name] + "%'") %>
+      <% @candidates = Person.where("UPPER(first_name||' '||last_name) LIKE '%" + params[:name].upcase + "%'") %>
       <% for candidate in @candidates do %>
         <tr>
           <td><%= radio_button_tag("committee", candidate.id) %></td>
