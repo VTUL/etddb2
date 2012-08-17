@@ -16,7 +16,7 @@
       <% for candidate in @candidates do %>
         <tr>
           <td><%= radio_button_tag("committee", candidate.id) %></td>
-          <td><%= candidate.first_name + " " + candidate.last_name%></td>
+          <td><%= candidate.name %></td>
         </tr>
       <% end %>
     </table>
