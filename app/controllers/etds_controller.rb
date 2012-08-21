@@ -89,20 +89,25 @@ class EtdsController < ApplicationController
     end
     @etd.department_ids = d
 
-    # Make the current_person the creator, or preferably, author.
-    pr = PeopleRole.new
-    pr.person_id = current_person.id
-    # TODO: Is there a better way to do give the creator's role?
-    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first.id
-    @etd.people_roles << pr
-
     respond_to do |format|
       if @etd.save
         Provenance.create(person: current_person, action: "created", model: @etd)
-        EtddbMailer.confirm_create(@etd, current_person).deliver
+        if current_person.roles.include?(Role.where(group: "Administration").first)
+          # Defer creating the author.
+          format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.xml  { render(xml: @etd, status: :created, location: @etd) }
+        else
+          # Make the current_person the creator, or preferably, author.
+          pr = PeopleRole.new(person_id: current_person.id, etd_id: @etd.id)
+          # TODO: Is there a better way to do give the creator's role?
+          pr.role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first
+          pr.save
 
-        format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
-        format.xml  { render(xml: @etd, status: :created, location: @etd) }
+          EtddbMailer.confirm_create(@etd, current_person).deliver
+
+          format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.xml  { render(xml: @etd, status: :created, location: @etd) }
+        end
       else
         format.html { render(action: "new", notice: 'You have errors.') }
         format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
@@ -168,6 +173,30 @@ class EtdsController < ApplicationController
       else
         format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
       end
+    end
+  end
+
+  # GET /etds/add_author/1
+  def add_author
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      format.html # add_author.html.erb
+    end
+  end
+
+  # POST /etds/add_author
+  def save_author
+    @etd = Etd.find(params[:id])
+    @role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
+    @pr = PeopleRole.new(person_id: params[:person_id], role_id: @role.id, etd_id: @etd.id)
+
+    if @pr.save
+      Provenance.create(person: current_person, action: "created", model: @pr)
+      redirect_to(next_new_etd_path(@etd))
+    else
+      format.html { render(action: "add_author", notice: 'You have errors.') }
+      format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
     end
   end
 
