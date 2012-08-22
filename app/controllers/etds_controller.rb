@@ -321,7 +321,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.status == "Submitted"
-        @committee = @etd.people_roles.where(role_id: Role.where(group: "Collaborators"))
+        @committee = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
         format.html
       else
         format.html { redirect_to(etd_path(@etd), notice: "This ETD doesn't currently have a review board.") }

@@ -3,11 +3,13 @@ By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: "Creators"
 <h3>Committee Members</h3>
 <table>
   <tr>
+    <th>Role</th>
     <th>Name</th>
     <th>Vote</th>
   </tr>
   <% @committee.each do |member| %>
   <tr>
+    <td><%= member.role.name %></td>
     <td><%= member.person.name %></td>
     <% if member.vote.nil? %>
       <td>No Vote</td>
