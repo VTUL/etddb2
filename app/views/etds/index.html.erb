@@ -2,16 +2,20 @@
 <h1>ETDs</h1>
 <div id="special_search" class="top_bar">
   <form>
-    <input type="text" name="keywords" value="Search ETDs" />
-    <input type="submit" value="Go" />
+    <%= text_field_tag :keywords, params[:keywords], :placeholder => 'Search ETDs' %>
+    <%= submit_tag 'Go', :name => nil %>
+    <%= hidden_field_tag :per_page, params[:per_page] %>
   </form>
   <br>
 </div>
   <div id="page_pref" class="top_bar">
-  Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
-         :onchange => "if(this.value){window.location='?per_page='+this.value;}" %>
+    <form>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+           :onchange => "this.form.submit();" %>
+           <%= hidden_field_tag :keywords, params[:keywords] %>
+    </form>
   </div>
- <%= will_paginate :show_always => true %>
+ <%= will_paginate %>
 <table class="clear_left">
   <tr>
     <th>Author</th>
