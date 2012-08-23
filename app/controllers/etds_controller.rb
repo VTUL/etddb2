@@ -40,7 +40,7 @@ class EtdsController < ApplicationController
   def show
     @etd = Etd.find(params[:id])
     @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    @collabs = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
+    @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
 
     respond_to do |format|
       format.html # show.html.erb
@@ -204,7 +204,7 @@ class EtdsController < ApplicationController
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
-    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
+    @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
 
     respond_to do |format|
       format.html # new_next.html.erb
@@ -321,7 +321,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.status == "Submitted"
-        @committee = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
+        @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
         format.html
       else
         format.html { redirect_to(etd_path(@etd), notice: "This ETD doesn't currently have a review board.") }
