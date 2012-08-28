@@ -7,7 +7,7 @@ By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: "Creators"
     <th>Name</th>
     <th>Vote</th>
   </tr>
-  <% @committee.each do |member| %>
+  <% @collabs.each do |member| %>
   <tr>
     <td><%= member.role.name %></td>
     <td><%= member.person.name %></td>
