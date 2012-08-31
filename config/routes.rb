@@ -148,6 +148,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/:availability/:urn', :to => 'etds#old_show', :constraints => AccessConstraint.new
   get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => AccessConstraint.new
 
+  get '/search/index'
+  get '/search', :to => 'search#index'
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   #match ':controller(/:action(/:id(.:format)))'
