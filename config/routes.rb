@@ -79,6 +79,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/conversations/:id/delete', :to => 'conversations#destroy', :as => :destroy_conversation
   resources :conversations, :except => :destroy
 
+  get '/search/index'
+  get '/search', :to => 'search#index'
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   #match ':controller(/:action(/:id(.:format)))'

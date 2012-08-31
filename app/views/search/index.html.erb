@@ -1,0 +1,48 @@
+<%= stylesheet_link_tag 'paginate' %>
+<h1>Advanced Search</h1>
+<div id = "advance_search" class = "top_bar"> 
+	<%= form_tag search_index_path, method: :get do %>
+	  <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search' %>
+	  <%= submit_tag "Search", name: nil %>
+	  <%= hidden_field_tag :per_page, params[:per_page] %>
+	<% end %>
+	<br>
+</div>
+<div id="page_pref" class="top_bar"> 
+	<%= form_tag search_index_path, :method => 'get' do %> 
+  Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
+         <%= hidden_field_tag :adv_search, params[:adv_search] %>
+  <% end %>
+</div>
+<%= will_paginate @etds %>
+<% if @etds.blank? %>
+  <br>
+  <br>
+  <h3 class="clear_left"> No Records Found </h3>
+<% else %>
+  <table class="clear_left">
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Department</th>
+    </tr>
+
+  <br />
+  <% @etds.each do |etd| %>
+    <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
+    <tr>
+      <td><%= creators.map { |o| o.name } .join(", ") %></td>
+      <td><%= etd.title %></td>
+      <td><%= etd.departments.pluck(:name).join(", ") %></td>
+      <td><%= link_to 'Show', etd %></td>
+      <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
+      <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
+
+  </table>
+<% end %>
+<br />
+<%= will_paginate @etds %>
+<br />
