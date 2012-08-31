@@ -5,11 +5,11 @@
 #########################################################
 
 class Content < ActiveRecord::Base
-  belongs_to :etd
-  belongs_to :availability
+  belongs_to :etd, inverse_of: :contents
+  belongs_to :availability, inverse_of: :contents
   
   has_many :provenances, as: :model
-  #has_many :messages, as: :model
+  has_many :conversations, as: :model
   
   # Paperclip mountings/validations
   has_attached_file :content, storage: :filesystem, path: ":rails_root/public/bin/submitted/:filename", url: "/bin/submitted/:filename"

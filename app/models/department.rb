@@ -6,7 +6,7 @@
 
 class Department < ActiveRecord::Base
   has_many :provenances, as: :model
-  #has_many :messages, as: :model
+  has_many :conversations, as: :model
 
   has_and_belongs_to_many :etds
 

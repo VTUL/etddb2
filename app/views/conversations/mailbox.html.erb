@@ -1,0 +1,35 @@
+<h1>Listing Conversations</h1>
+
+<table>
+  <tr>
+    <th>Subject</th>
+    <th>About</th>
+    <th>Read?</th>
+    <!--<th>Archived?</th>-->
+    <th>Mark As</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @convs.each do |conv| %>
+    <tr>
+      <% if !conv.nil? %>
+      <td><%= conv.subject %></td>
+      <td><%= conv.model_type %> <%= conv.model_id %></td>
+      <td><%= conv.read_by?(current_person) %></td>
+      <!--<td><%= conv.archived_by?(current_person) %></td>-->
+      <% if conv.read_by?(current_person) %>
+        <td><%= link_to 'Unread', unread_conversation_path(conv) %></td>
+      <% else %>
+        <td><%= link_to 'Read', read_conversation_path(conv) %></td>
+      <% end %>
+      <td><%= link_to 'Archive', archive_conversation_path(conv) %></td>
+      <td><%= link_to 'Show', conv %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Conversation', new_conversation_path %>

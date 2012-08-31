@@ -1,92 +1,135 @@
 class ConversationsController < ApplicationController
-  before_filter :get_box
-  before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
-  def index
-    if @box.eql? "inbox"
-      @conversations = current_person.mailbox.inbox
-    elsif @box.eql? "sentbox"
-      @conversations = current_person.mailbox.sentbox
+  # GET /conversations
+  # GET /conversations.json
+  def mailbox
+    @convs = []
+    @box = params[:box]
+    case @box
+    when 'outbox'
+      @convs = current_person.sent_messages.order('updated_at DESC').map { |m| m.conversation unless m.conversation.archived_by?(current_person) } .uniq
+    when 'all'
+      @convs = current_person.conversations.order('updated_at DESC')
+    when 'archived'
+      @convs = current_person.conversations.order('updated_at DESC').map { |c| c if c.archived_by?(current_person) } .uniq
+    when 'unread'
+      @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.read_by?(current_person) or c.archived_by?(current_person) } .uniq
+    when 'all unread'
+      @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.read_by?(current_person) } .uniq
     else
-      @conversations = current_person.mailbox.trash
+      # Inbox by default.
+      @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.archived_by?(current_person) } .uniq
     end
-  end
-
-  def show
-    if @box.eql? 'trash'
-      @receipts = current_person.mailbox.receipts_for(@conversation).trash
-    else
-      @receipts = current_person.mailbox.receipts_for(@conversation).not_trash
-    end
-    render :action => :show
-    @receipts.mark_as_read
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
-  def create
-  end
-
-  def update
-    if params[:untrash].present?
-    @conversation.untrash(current_person)
-    end
-
-    if params[:reply_all].present?
-      last_receipt = current_person.mailbox.receipts_for(@conversation).last
-      @receipt = current_person.reply_to_all(last_receipt, params[:body])
-    end
-
-    if @box.eql? 'trash'
-      @receipts = current_person.mailbox.receipts_for(@conversation).trash
-    else
-      @receipts = current_person.mailbox.receipts_for(@conversation).not_trash
-    end
-    redirect_to :action => :show
-    @receipts.mark_as_read
-  end
-
-  def destroy
-    @conversation.move_to_trash(current_person)
 
     respond_to do |format|
-      format.html {
-        if params[:location].present? and params[:location] == 'conversation'
-          redirect_to conversations_path(:box => :trash)
-	    else
-          redirect_to conversations_path(:box => @box,:page => params[:page])
-	    end
-      }
-      format.js {
-        if params[:location].present? and params[:location] == 'conversation'
-          render :js => "window.location = '#{conversations_path(:box => @box,:page => params[:page])}';"
-	    else
-          render 'conversations/destroy'
-	    end
-      }
+      format.html # mailbox.html.erb
+      format.json { render json: @convs }
     end
   end
 
-  private
+  # GET /conversations/1
+  # GET /conversations/1.json
+  def show
+    @conv = Conversation.find(params[:id])
+    @messages = @conv.messages.order('created_at ASC')
 
-  def get_box
-    if params[:box].blank? or !["inbox","sentbox","trash"].include?params[:box]
-      @box = "inbox"
-    return
-    end
-    @box = params[:box]
-  end
+    @conv.set_read(current_person)
 
-  def check_current_subject_in_conversation
-    @conversation = Conversation.find_by_id(params[:id])
-
-    if @conversation.nil? or !@conversation.is_participant?(current_person)
-      redirect_to conversations_path(:box => @box)
-    return
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @conv }
     end
   end
 
+  # GET /conversations/new
+  # GET /conversations/new.json
+  def new
+    @conv = Conversation.new
+    @conv.messages << Message.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @conv }
+    end
+  end
+
+  # POST /conversations/new
+  # POST /conversations/new.json
+  def create
+    @conv = Conversation.new(params[:conversation])
+
+    @conv.participant_ids = [current_person.id] | params[:conversation][:participant_ids].split(',')
+
+    respond_to do |format|
+      if @conv.save
+        format.html { redirect_to @conv, notice: 'Conversation was successfully created.' }
+        format.json { render json: @conv, status: :created, location: @conv }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @conv.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /conversations/reply/1
+  def reply
+    @message = Message.new
+
+    respond_to do |format|
+      format.html # reply.html.erb
+      format.json { render json: @message }
+    end
+  end
+
+  # POST /conversations/reply/1
+  # POST /conversations/reply.json
+  def send_reply
+    @message = Message.new(params[:message])
+    @message.conversation_id = params[:id]
+
+    respond_to do |format|
+      if @message.save
+        format.html { redirect_to Conversation.find(params[:id]), notice: 'Message Sent.' }
+        format.json { render json: @message, status: :created, location: @message }
+      else
+        format.html { render action: "reply" }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /conversations/read/1
+  def read
+    @conv = Conversation.find(params[:id])
+    @conv.set_read(current_person)
+    @conv.save
+
+    redirect_to conversations_path
+  end
+
+  # GET /conversations/unread/1
+  def unread
+    @conv = Conversation.find(params[:id])
+    @conv.set_read(current_person, false)
+    @conv.save
+
+    redirect_to conversations_path
+  end
+
+  # GET /conversations/archive/1
+  def archive
+    @conv = Conversation.find(params[:id])
+    @conv.set_archived(current_person)
+    @conv.save
+
+    redirect_to conversations_path
+  end
+
+  # GET /conversations/unarchive/1
+  def unarchive
+    @conv = Conversation.find(params[:id])
+    @conv.set_archived(current_person, false)
+    @conv.save
+
+    redirect_to conversations_path
+  end
 end
