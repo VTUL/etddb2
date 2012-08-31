@@ -19,14 +19,15 @@
     <%= f.label :subject %><br />
     <%= f.text_field :subject %>
   </div>
+  <%= f.hidden_field(:model_type, {value: @conv.model_type}) %>
+  <%= f.hidden_field(:model_id, {value: @conv.model_id}) %>
+
   <%= f.fields_for :messages do |m| %>
   <div class="field">
     <%= m.label :msg, "Message" %><br />
     <%= m.text_area :msg %>
   </div>
-  <div class="hidden_field">
-    <%= m.hidden_field(:sender_id, {value: current_person.id}) %>
-  </div>
+  <%= m.hidden_field(:sender_id, {value: current_person.id}) %>
   <% end %>
 
   <div class="actions">

@@ -45,6 +45,8 @@ class ConversationsController < ApplicationController
   def new
     @conv = Conversation.new
     @conv.messages << Message.new
+    @conv.model_type = params[:model_type]
+    @conv.model_id =params[:model_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,7 +59,9 @@ class ConversationsController < ApplicationController
   def create
     @conv = Conversation.new(params[:conversation])
 
-    @conv.participant_ids = [current_person.id] | params[:conversation][:participant_ids].split(',')
+    participants = params[:conversation][:participant_ids].split(',')
+    # TODO: Take care of groups like Reviewers, or Graduate School
+    @conv.participant_ids = [current_person.id] | participants
 
     respond_to do |format|
       if @conv.save

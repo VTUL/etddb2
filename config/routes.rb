@@ -80,8 +80,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/conversations/unread/:id', :to => 'conversations#unread', :as => :unread_conversation
   get '/conversations/archive/:id', :to => 'conversations#archive', :as => :archive_conversation
   get '/conversations/unarchive/:id', :to => 'conversations#unarchive', :as => :unarchive_conversation
-  get '/conversations/new', :to => 'conversations#new', :as => :new_conversation
-  post '/conversations/new', :to => 'conversations#create', :as => :create_conversation
+  match '/conversations/new', :to => 'conversations#new', :as => :new_conversation
+  post '/conversations', :to => 'conversations#create', :as => :create_conversation
   get '/conversations/reply/:id', :to => 'conversations#reply', :as => :reply_to_conversation
   post '/conversations/reply/:id', :to => 'conversations#send_reply', :as => :send_reply_to_conversation
   #get '/conversations/reply_all/:id', :to => 'conversations#reply_all', :as => :reply_all
