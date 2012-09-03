@@ -35,7 +35,9 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       if @conv.participants.include?(current_person)
         @messages = @conv.messages.order('created_at ASC')
-        @conv.set_read(current_person)
+        unless @conv.read_by?(current_person)
+          @conv.set_read(current_person)
+        end
 
         format.html # show.html.erb
         format.json { render json: @conv }
@@ -92,14 +94,19 @@ class ConversationsController < ApplicationController
   # POST /conversations/reply/1
   # POST /conversations/reply.json
   def send_reply
+    @conv = Conversation.find(params[:id])
     @message = Message.new(params[:message])
-    @message.conversation_id = params[:id]
-
-    # TODO: Set as unread for everyone except the sender.
+    @conv.messages << @message
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to Conversation.find(params[:id]), notice: 'Message Sent.' }
+        @conv.participants.each do |p|
+          unless p == current_person
+            @conv.set_read(p, false)
+          end
+        end
+
+        format.html { redirect_to @conv, notice: 'Message Sent.' }
         format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "reply" }
