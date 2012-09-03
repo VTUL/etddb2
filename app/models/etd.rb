@@ -28,7 +28,11 @@ class Etd < ActiveRecord::Base
   statuses = ["Created", "Submitted", "Approved"]
   validates :status, inclusion: {in: statuses, message: "must be a valid status."}
 
-  def self.search(search)
+  searchable do
+    text :title, :boost => 2.0
+  end
+
+  def self.search1(search)
     if search 
       where('etds.title LIKE ?', "%#{search}%")
     else 

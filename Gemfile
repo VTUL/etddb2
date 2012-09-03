@@ -62,6 +62,11 @@ gem 'mailboxer'
 # For ip filtering
 gem 'netaddr'
 
+# For Full Text Search
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+
+
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'
 
