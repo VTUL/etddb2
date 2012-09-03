@@ -26,7 +26,7 @@ class EtdsController < ApplicationController
       # Previous query
       #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
       # Updated query for pagination
-      @etds = Etd.search(params[:keywords]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
+      @etds = Etd.search1(params[:keywords]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
     end
 
     respond_to do |format|
