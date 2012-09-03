@@ -270,7 +270,6 @@ c = Conversation.new(subject: 'You Guys', model: Etd.where(title: 'A National Pa
 c.participants << Person.where(last_name: 'Cameron').first
 c.participants << Person.where(last_name: 'Mahler').first
 c.participants << Person.where(last_name: 'Muir').first
-c.participants << Person.first
 c.save
 Provenance.create(person: Person.where(last_name: 'Cameron').first, action: "started a", model: Conversation.last)
 Message.create(conversation: c, sender: Person.where(last_name: 'Cameron').first, msg: 'I hate you.')
@@ -281,7 +280,6 @@ Message.create(conversation: c, sender: Person.where(last_name: 'Muir').first, m
 Provenance.create(person: Person.where(last_name: 'Muir').first, action: "sent a", model: Message.last)
 c.updated_at = Time.now
 c.save
-c.set_archived(Person.first)
 c.set_read(Person.where(last_name: 'Mahler').first)
 c.set_read(Person.where(last_name: 'Muir').first)
 
@@ -303,6 +301,7 @@ Provenance.create(person: Person.first, action: "started a", model: Conversation
 Message.create(conversation: c2, sender: Person.first, msg: 'How are you?')
 Provenance.create(person: Person.first, action: "sent a", model: Message.last)
 c2.set_read(Person.first)
+c2.set_archived(Person.first)
 c2.updated_at = Time.now
 c2.save
 

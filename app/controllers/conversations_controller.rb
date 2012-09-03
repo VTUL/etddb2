@@ -17,6 +17,7 @@ class ConversationsController < ApplicationController
       @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.read_by?(current_person) } .uniq
     else
       # Inbox by default.
+      params[:box] = 'inbox'
       @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.archived_by?(current_person) } .uniq
     end
 
@@ -26,17 +27,21 @@ class ConversationsController < ApplicationController
     end
   end
 
-  # GET /conversations/1
-  # GET /conversations/1.json
+  # GET /conversations/show/1
+  # GET /conversations/show/1.json
   def show
     @conv = Conversation.find(params[:id])
-    @messages = @conv.messages.order('created_at ASC')
-
-    @conv.set_read(current_person)
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @conv }
+      if @conv.participants.include?(current_person)
+        @messages = @conv.messages.order('created_at ASC')
+        @conv.set_read(current_person)
+
+        format.html # show.html.erb
+        format.json { render json: @conv }
+      else
+        format.html { redirect_to conversations_path, notice: 'You are not part of that conversation' }
+      end
     end
   end
 
@@ -89,6 +94,8 @@ class ConversationsController < ApplicationController
   def send_reply
     @message = Message.new(params[:message])
     @message.conversation_id = params[:id]
+
+    # TODO: Set as unread for everyone except the sender.
 
     respond_to do |format|
       if @message.save
