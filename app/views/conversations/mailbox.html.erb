@@ -1,5 +1,13 @@
 <h1>Listing Conversations</h1>
 
+<p>
+  <%= params[:box] == 'inbox' ? 'Inbox' : link_to('Inbox', conversations_path) %> |
+  <%= params[:box] == 'unread' ? 'Unread' : link_to('Unread', conversations_path('unread')) %> |
+  <%= params[:box] == 'outbox' ? 'Outbox' : link_to('Outbox', conversations_path('outbox')) %> |
+  <%= params[:box] == 'archived' ? 'Archived' : link_to('Archived', conversations_path('archived')) %> |
+  <%= params[:box] == 'all' ? 'All' : link_to('All', conversations_path('all')) %>
+</p>
+
 <table>
   <tr>
     <th>Subject</th>
