@@ -50,7 +50,3 @@ ehthumbs.db
 Icon?
 Thumbs.db
 *.swp
-
-# Solr Data #
-#############
-/solr/data

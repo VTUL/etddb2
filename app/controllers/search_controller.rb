@@ -6,10 +6,11 @@ class SearchController < ApplicationController
 	    else
 	      @per_page = 10
 	    end
-		#@etds = Etd.search(params[:adv_search]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
-		@search = Etd.search do 
-			fulltext params[:adv_search]
-			paginate :page => params[:page], :per_page => @per_page
+		# query parameter needed here to expose DSL and allow use of instance
+		# variable @per_page
+		@search = Etd.search do |query|
+			query.fulltext params[:adv_search]
+			query.paginate :page => params[:page], :per_page => @per_page
 		end
 
 		@etds = @search.results

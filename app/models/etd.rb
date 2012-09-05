@@ -32,7 +32,7 @@ class Etd < ActiveRecord::Base
     text :title, :boost => 2
   end
 
-  def self.search1(search)
+  def self.search_quick(search)
     if search 
       where('etds.title LIKE ?', "%#{search}%")
     else 
