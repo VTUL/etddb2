@@ -40,4 +40,14 @@ class Person < LegacyPerson
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:pid]
+
+  def unread_count
+    count = 0
+    self.conversations.each do |c|
+      if !c.archived_by?(self) && !c.read_by?(self)
+        count += 1
+      end
+    end
+    return count
+  end
 end

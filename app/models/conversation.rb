@@ -10,6 +10,8 @@ class Conversation < ActiveRecord::Base
 
   validates_presence_of :subject, :participants
 
+  SPECIAL_CASES = ['GRAD SCHOOL', 'GRADUATE SCHOOL', 'REVIEWER']
+
   def archived_by?(person)
     return self.receipts.where(participant_id: person.id).first.archived.equal?(true)
   end

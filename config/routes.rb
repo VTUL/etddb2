@@ -29,6 +29,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   put '/people/edit_legacy/:id', :to => 'people#update', :as => :update_legacy_person
   post '/people/destroy_legacy/:id', :to => 'people#destroy', :as => :destroy_legacy_person
   resources :people, :only => [:index, :show]
+  # This allows us to link to a attached model, and not get errors with LegacyPeople.
+  # However, this route never needs to resolve, it is absorbed by the resources route above it. It just needs to be named.
+  get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
   get '/etds/add_author/:id', :to => 'etds#add_author', :as => :add_author_to_etd
@@ -81,6 +84,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/conversations/archive/:id', :to => 'conversations#archive', :as => :archive_conversation
   get '/conversations/unarchive/:id', :to => 'conversations#unarchive', :as => :unarchive_conversation
   match '/conversations/new', :to => 'conversations#new', :as => :new_conversation
+  post '/conversations/confirm_new', :to => 'conversations#confirm_new', :as => :confirm_new_conversation
   post '/conversations', :to => 'conversations#create', :as => :create_conversation
   get '/conversations/reply/:id', :to => 'conversations#reply', :as => :reply_to_conversation
   post '/conversations/reply/:id', :to => 'conversations#send_reply', :as => :send_reply_to_conversation

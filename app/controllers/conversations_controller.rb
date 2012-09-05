@@ -6,19 +6,19 @@ class ConversationsController < ApplicationController
     @box = params[:box]
     case @box
     when 'outbox'
-      @convs = current_person.sent_messages.order('updated_at DESC').map { |m| m.conversation unless m.conversation.archived_by?(current_person) } .uniq
+      @convs = current_person.sent_messages.order('updated_at DESC').map { |m| m.conversation unless m.conversation.archived_by?(current_person) }.compact.uniq
     when 'all'
       @convs = current_person.conversations.order('updated_at DESC')
     when 'archived'
-      @convs = current_person.conversations.order('updated_at DESC').map { |c| c if c.archived_by?(current_person) } .uniq
+      @convs = current_person.conversations.order('updated_at DESC').select { |c| c.archived_by?(current_person) }
     when 'unread'
-      @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.read_by?(current_person) or c.archived_by?(current_person) } .uniq
+      @convs = current_person.conversations.order('updated_at DESC').select { |c| !c.read_by?(current_person) and !c.archived_by?(current_person) }
     when 'all unread'
-      @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.read_by?(current_person) } .uniq
+      @convs = current_person.conversations.order('updated_at DESC').select { |c| !c.read_by?(current_person) }
     else
       # Inbox by default.
       params[:box] = 'inbox'
-      @convs = current_person.conversations.order('updated_at DESC').map { |c| c unless c.archived_by?(current_person) } .uniq
+      @convs = current_person.conversations.order('updated_at DESC').select { |c| !c.archived_by?(current_person) }
     end
 
     respond_to do |format|
@@ -53,7 +53,7 @@ class ConversationsController < ApplicationController
     @conv = Conversation.new
     @conv.messages << Message.new
     @conv.model_type = params[:model_type]
-    @conv.model_id =params[:model_id]
+    @conv.model_id = params[:model_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -61,21 +61,49 @@ class ConversationsController < ApplicationController
     end
   end
 
-  # POST /conversations/new
-  # POST /conversations/new.json
-  def create
+  # POST /conversations/confirm_new
+  # POST /conversations/confirm_new.json
+  def confirm_new
     @conv = Conversation.new(params[:conversation])
 
-    participants = params[:conversation][:participant_ids].split(',')
-    # TODO: Take care of groups like Reviewers, or Graduate School
-    @conv.participant_ids = [current_person.id] | participants
+    @participants = []
+    params[:participants].split(',').each do |p|
+      p = p.strip().upcase()
+      if !Conversation::SPECIAL_CASES.include?(p)
+        @participants << Person.where("(UPPER(first_name) LIKE '%#{p}%' OR UPPER(last_name) LIKE '%#{p}%' OR UPPER(display_name) LIKE '%#{p}%') AND encrypted_password <> ''")
+      else
+        # TODO: Take care of special cases.
+      end
+    end
+
+    respond_to do |format|
+      format.html # confirm_new.html.erb
+      format.json { render json: @conv }
+    end
+  end
+
+  # POST /conversations/
+  # POST /conversations/
+  def create
+    params[:conversation][:participant_ids] << current_person.id.to_s
+    params[:conversation][:participant_ids] = params[:conversation][:participant_ids].uniq.compact
+    @conv = Conversation.new(params[:conversation])
 
     respond_to do |format|
       if @conv.save
         format.html { redirect_to @conv, notice: 'Conversation was successfully created.' }
         format.json { render json: @conv, status: :created, location: @conv }
       else
-        format.html { render action: "new" }
+        @participants = []
+        params[:participants].split(',').each do |p|
+          p = p.strip().upcase()
+          if !Conversation::SPECIAL_CASES.include?(p)
+            @participants << Person.where("(UPPER(first_name) LIKE '%#{p}%' OR UPPER(last_name) LIKE '%#{p}%' OR UPPER(display_name) LIKE '%#{p}%') AND encrypted_password <> ''")
+          else
+            # TODO: Take care of special cases.
+          end
+        end
+        format.html { render action: "confirm_new" }
         format.json { render json: @conv.errors, status: :unprocessable_entity }
       end
     end

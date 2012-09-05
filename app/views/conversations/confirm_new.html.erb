@@ -1,6 +1,6 @@
 <h1>New conversation</h1>
 
-<%= form_for(@conv, url: confirm_new_conversation_path) do |f| %>
+<%= form_for(@conv, url: create_conversation_path) do |f| %>
   <% if @conv.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@conv.errors.count, "error") %> prohibited this conversation from being saved:</h2>
@@ -13,16 +13,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= label_tag :participants, "To" %><br />
-    <%= number_field_tag :participants %>
-  </div>
+  <p>
+    <% @participants.each do |p| %>
+      <select name="conversation[participant_ids][]">
+        <%= options_from_collection_for_select(p, :id, :name) %>
+      </select>
+    <% end %>
+  </p>
+
   <div class="field">
     <%= f.label :subject %><br />
     <%= f.text_field :subject %>
   </div>
   <%= f.hidden_field(:model_type, {value: @conv.model_type}) %>
   <%= f.hidden_field(:model_id, {value: @conv.model_id}) %>
+  <%= hidden_field_tag(:participants, params[:participants]) %>
 
   <%= f.fields_for :messages do |m| %>
   <div class="field">
