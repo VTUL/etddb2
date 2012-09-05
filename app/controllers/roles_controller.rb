@@ -1,5 +1,4 @@
 class RolesController < ApplicationController
-skip_before_filter :authenticate_person
   # GET /roles
   # GET /roles.xml
   def index
@@ -26,8 +25,6 @@ skip_before_filter :authenticate_person
   # GET /roles/new.xml
   def new
     @role = Role.new
-
-    @ability = Ability.new(current_person)
 
     respond_to do |format|
       format.html # new.html.erb
