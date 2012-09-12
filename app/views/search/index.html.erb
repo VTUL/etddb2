@@ -4,23 +4,42 @@
 	<%= form_tag search_index_path, method: :get do %>
 	  <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search' %>
 	  <%= submit_tag "Search", name: nil %>
+    <div id = "options_list" >
+      <table class="options_table">
+        <% @checkbox_options.each do |option| %>
+        <tr>
+          <td><%= label_tag option %>:</td>
+          <td>
+            <% if params[:search_using].nil? or (!params[:search_using][option].blank?) %>
+              <%= check_box_tag "search_using[#{option}]", 1, true %>
+            <% else %>
+              <%= check_box_tag "search_using[#{option}]", 1 %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %> 
+    </table>
+  </div>
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
 	<% end %>
 	<br>
 </div>
 <div id="page_pref" class="top_bar"> 
-	<%= form_tag search_index_path, :method => 'get' do %> 
+	<%= form_tag search_index_path, :id => 'page_pref_form', :method => 'get' do %> 
   Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
          :onchange => "this.form.submit();" %>
          <%= hidden_field_tag :adv_search, params[:adv_search] %>
+         <%= hidden_field_tag :search_using, params[:search_using] %>
   <% end %>
 </div>
-<%= will_paginate @etds %>
-<% if @etds.blank? %>
+<% if @no_search %>
+  <!-- Render nothing below search params if they haven't searched anything -->
+<% elsif @etds.blank? %>
   <br>
   <br>
   <h3 class="clear_left"> No Records Found </h3>
 <% else %>
+  <%= will_paginate @etds %>
   <table class="clear_left">
     <tr>
       <th>Author</th>
@@ -42,7 +61,7 @@
   <% end %>
 
   </table>
+  <br />
+  <%= will_paginate @etds %>
 <% end %>
-<br />
-<%= will_paginate @etds %>
 <br />

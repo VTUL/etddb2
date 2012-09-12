@@ -29,7 +29,9 @@ class Etd < ActiveRecord::Base
   validates :status, inclusion: {in: statuses, message: "must be a valid status."}
 
   searchable do
-    text :title, :boost => 2
+    text :title, :boost => 5
+    text :keywords
+    text :abstract
   end
 
   def self.search_quick(search)
