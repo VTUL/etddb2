@@ -19,7 +19,7 @@ class RestrictedWhitelist
     end
 
     # Allow local dev work.
-    if Rails.env == "development" and request.remote_ip = '127.0.0.1'
+    if Rails.env == "development" and ['127.0.0.1', '::1'].contains?(request.remote_ip)
         valid << true
     end
 
