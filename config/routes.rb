@@ -18,8 +18,11 @@ class RestrictedWhitelist
       valid = @ipv6.select {|subnet| subnet.contains?(request.remote_ip) }
     end
 
+    # Allow MetaArchive access
+    # TODO: read allowed ips from file, allow as below.
+
     # Allow local dev work.
-    if Rails.env == "development" and ['127.0.0.1', '::1'].contains?(request.remote_ip)
+    if Rails.env == "development" and ['127.0.0.1', '::1'].include?(request.remote_ip)
         valid << true
     end
 
