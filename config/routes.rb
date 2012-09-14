@@ -1,7 +1,36 @@
+class RestrictedWhitelist
+  def initialize
+    @ipv4 = [NetAddr::CIDR.create('128.173.0.0/16')]    # Blacksburg
+    @ipv4 << NetAddr::CIDR.create('198.82.0.0/16')      # Blacksburg
+    @ipv4 << NetAddr::CIDR.create('208.22.18.0/24')     # NOVA
+    @ipv4 << NetAddr::CIDR.create('208.29.54.0/24')     # NOVA
+    @ipv6 = [NetAddr::CIDR.create('2001:468:c80::/48')] # Blacksburg
+    @ipv6 << NetAddr::CIDR.create('2002:80ad::/32')     # Blacksburg, 6in4 from 128.173.0.0::/16
+    @ipv6 << NetAddr::CIDR.create('2002:2652::/32')     # Blacksburg, 6in4 from 198.82.0.0::/16
+  end
+
+  def matches?(request)
+    valid = []
+    # I'd rather this be an if, and sort the ip addresses, but I'm loathe to add another gem.
+    begin
+      valid = @ipv4.select {|subnet| subnet.contains?(request.remote_ip) }
+    rescue NetAddr::VersionError => e
+      valid = @ipv6.select {|subnet| subnet.contains?(request.remote_ip) }
+    end
+
+    # Allow local dev work.
+    if Rails.env == "development" and request.remote_ip = '127.0.0.1'
+        valid << true
+    end
+
+    !valid.empty?
+  end
+end
+      
 NewVtEtdUpgrd::Application.routes.draw do
   # These are boring static pages.
   root :to => 'pages#home'
-  match '/about', :to => 'pages#about'
+  match '/about', :to => 'pages#about', :constraints => RestrictedWhitelist.new
   match '/contact', :to => 'pages#contact'
   match '/authorhelp', :to => 'pages#authorhelp'
   match '/staffhelp', :to => 'pages#staffhelp'

@@ -59,6 +59,9 @@ gem 'will_paginate', '3.0.3'
 # For messaging
 gem 'mailboxer'
 
+# For ip filtering
+gem 'netaddr'
+
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'
 
