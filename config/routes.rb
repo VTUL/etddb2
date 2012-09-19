@@ -4,14 +4,21 @@ class RestrictedWhitelist
     @ipv4 << NetAddr::CIDR.create('198.82.0.0/16')      # Blacksburg
     @ipv4 << NetAddr::CIDR.create('208.22.18.0/24')     # NOVA
     @ipv4 << NetAddr::CIDR.create('208.29.54.0/24')     # NOVA
+
     @ipv6 = [NetAddr::CIDR.create('2001:468:c80::/48')] # Blacksburg
     @ipv6 << NetAddr::CIDR.create('2002:80ad::/32')     # Blacksburg, 6in4 from 128.173.0.0::/16
     @ipv6 << NetAddr::CIDR.create('2002:2652::/32')     # Blacksburg, 6in4 from 198.82.0.0::/16
+
+    @metaarchive = []
+    File.open("#{Rails.root}/lib/MetaArchive.ips") do |f|
+      @metaarchive = f.lines.to_a.map { |l| l.strip }
+    end
   end
 
   def matches?(request)
     valid = []
-    # I'd rather this be an if, and sort the ip addresses, but I'm loathe to add another gem.
+    # Allow on-campus access
+    # I'd rather this be an if, and sort the ip addresses, but I'm loathe to add another gem (and this works).
     begin
       valid = @ipv4.select {|subnet| subnet.contains?(request.remote_ip) }
     rescue NetAddr::VersionError => e
@@ -19,17 +26,30 @@ class RestrictedWhitelist
     end
 
     # Allow MetaArchive access
-    # TODO: read allowed ips from file, allow as below.
+    if Rails.env == "production" and @metaarchive.include?(request.remote_ip)
+      valid << true
+    end
 
     # Allow local dev work.
     if Rails.env == "development" and ['127.0.0.1', '::1'].include?(request.remote_ip)
-        valid << true
+      valid << true
     end
 
     !valid.empty?
   end
 end
-      
+
+class EtdConstraint
+  def initialize
+    @avails = Availability.pluck(:name)
+    @urn = /etd-\d+(-\d+)?/
+  end
+
+  def matches?(request)
+    @avails.include?(params[:availability]) && @urn.match(params[:etd_urn])
+  end
+end
+
 NewVtEtdUpgrd::Application.routes.draw do
   # These are boring static pages.
   root :to => 'pages#home'
@@ -110,6 +130,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :messages, :except => :destroy
   post '/conversations/:id/delete', :to => 'conversations#destroy', :as => :destroy_conversation
   resources :conversations, :except => :destroy
+
+  # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
+  get '/:availability/:urn', :to => 'etds#show', :as => :etd_path, :constraints => EtdConstraint.new
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => EtdConstraint.new
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
