@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(:version => 20120720194046) do
     t.string   "suffix"
     t.string   "display_name"
     t.string   "email"
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -142,9 +142,9 @@ ActiveRecord::Schema.define(:version => 20120720194046) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.boolean  "show_email"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "show_email",             :default => false
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
