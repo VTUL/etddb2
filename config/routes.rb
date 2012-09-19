@@ -41,12 +41,11 @@ end
 
 class EtdConstraint
   def initialize
-    @avails = Availability.pluck(:name)
     @urn = /etd-\d+(-\d+)?/
   end
 
   def matches?(request)
-    @avails.include?(params[:availability]) && @urn.match(params[:etd_urn])
+    @urn.match(params[:etd_urn])
   end
 end
 
