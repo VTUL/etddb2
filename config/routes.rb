@@ -51,13 +51,14 @@ class EtdConstraint
 end
 
 NewVtEtdUpgrd::Application.routes.draw do
+
   # These are boring static pages.
   root :to => 'pages#home'
-  match '/about', :to => 'pages#about', :constraints => RestrictedWhitelist.new
-  match '/contact', :to => 'pages#contact'
-  match '/authorhelp', :to => 'pages#authorhelp'
-  match '/staffhelp', :to => 'pages#staffhelp'
-  match '/dev', :to => 'pages#dev'
+  get '/about', :to => 'pages#about', :constraints => RestrictedWhitelist.new
+  get '/contact', :to => 'pages#contact'
+  get '/authorhelp', :to => 'pages#authorhelp'
+  get '/staffhelp', :to => 'pages#staffhelp'
+  get '/dev', :to => 'pages#dev'
 
   # Set up devise for people, and make it use our sessions controller.
   devise_for :people, :controllers => {:sessions => "people/sessions"}
@@ -80,6 +81,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   put '/people/edit_legacy/:id', :to => 'people#update', :as => :update_legacy_person
   post '/people/destroy_legacy/:id', :to => 'people#destroy', :as => :destroy_legacy_person
   resources :people, :only => [:index, :show]
+  # This allows us to link to a attached model, and not get errors with LegacyPeople.
+  # However, this route never needs to resolve, it is absorbed by the resources route above it. It just needs to be named.
+  get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
   get '/etds/add_author/:id', :to => 'etds#add_author', :as => :add_author_to_etd
@@ -126,10 +130,20 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/permissions/edit', :to => 'permissions#edit', :as => :edit_permissions
   post '/permissions/edit', :to => 'permissions#update', :as => :update_permissions
 
-  post '/messages/:id/delete', :to => 'messages#destroy', :as => :destroy_message
-  resources :messages, :except => :destroy
-  post '/conversations/:id/delete', :to => 'conversations#destroy', :as => :destroy_conversation
-  resources :conversations, :except => :destroy
+  get '/conversations/show/:id', :to => 'conversations#show', :as => :conversation
+  get '/conversations/read/:id', :to => 'conversations#read', :as => :read_conversation
+  get '/conversations/unread/:id', :to => 'conversations#unread', :as => :unread_conversation
+  get '/conversations/archive/:id', :to => 'conversations#archive', :as => :archive_conversation
+  get '/conversations/unarchive/:id', :to => 'conversations#unarchive', :as => :unarchive_conversation
+  match '/conversations/new', :to => 'conversations#new', :as => :new_conversation
+  post '/conversations/confirm_new', :to => 'conversations#confirm_new', :as => :confirm_new_conversation
+  post '/conversations', :to => 'conversations#create', :as => :create_conversation
+  get '/conversations/reply/:id', :to => 'conversations#reply', :as => :reply_to_conversation
+  post '/conversations/reply/:id', :to => 'conversations#send_reply', :as => :send_reply_to_conversation
+  #get '/conversations/reply_all/:id', :to => 'conversations#reply_all', :as => :reply_all
+  #post '/conversations/reply_all/:id', :to => 'conversations#send_reply_all', :as => :send_reply_all
+  # This goes here so the above routes will resolve correctly.
+  get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
 
   # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
   get '/:availability/:urn', :to => 'etds#show', :as => :etd_path, :constraints => EtdConstraint.new

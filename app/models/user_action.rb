@@ -5,7 +5,7 @@
 #########################################################
 
 class UserAction < ActiveRecord::Base
-  has_many :permission
+  has_many :permissions, inverse_of: :user_action
   has_many :roles, through: :permission
   has_many :digital_objects, through: :permission
 

@@ -5,8 +5,11 @@
 #########################################################
 
 class Provenance < ActiveRecord::Base
-  belongs_to :person
+  belongs_to :person, inverse_of: :created_provenances
   belongs_to :model, polymorphic: true
+
+  has_many :conversations, as: :model
+  has_many :provenances, as: :model
 
   validates_presence_of :person, :action, :model
 end

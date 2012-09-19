@@ -5,19 +5,19 @@
 #########################################################
 
 class Etd < ActiveRecord::Base
-  belongs_to :availability
-  belongs_to :copyright_statement
-  belongs_to :degree
-  belongs_to :document_type
-  belongs_to :privacy_statement
+  belongs_to :availability, inverse_of: :etds
+  belongs_to :copyright_statement, inverse_of: :etds
+  belongs_to :degree, inverse_of: :etds
+  belongs_to :document_type, inverse_of: :etds
+  belongs_to :privacy_statement, inverse_of: :etds
 
-  has_many :contents, dependent: :destroy
+  has_many :contents, dependent: :destroy, inverse_of: :etd
   accepts_nested_attributes_for :contents, allow_destroy: true
-  has_many :people_roles, dependent: :destroy
+  has_many :people_roles, dependent: :destroy, inverse_of: :etd
   has_many :roles, through: :people_roles
   has_many :people, through: :people_roles
   has_many :provenances, as: :model
-  #has_many :messages, as: :model
+  has_many :conversations, as: :model
 
   has_and_belongs_to_many :departments
 
