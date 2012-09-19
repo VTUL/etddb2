@@ -41,7 +41,7 @@ class EtddbMailer < ActionMailer::Base
 
   def proquest(etd)
     @etd = etd
-    mail(to: 'email@proquest.vt.edu', subject: 'New Dissertation from Virginia Tech')
+    mail(to: 'email@proquest.vt.edu', subject: 'New Electronic Dissertation')
     # TODO: the real proquest email address is 'dissepubl@proquest.com', but I don't want to send them anything by accident.
   end
 end
