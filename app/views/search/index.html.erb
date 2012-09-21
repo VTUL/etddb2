@@ -30,10 +30,9 @@
   Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
          :onchange => "submit_form()" %>
          <%= hidden_field_tag :adv_search, params[:adv_search] %>
-         <!-- <%= hidden_field_tag :search_using, params[:search_using]%> -->
          <% if !params[:search_using].blank? %>
            <% params[:search_using].each do |k, v| %>
-              <%= hidden_field_tag "search_using[#{k}]", v %>
+              <%= hidden_field_tag "search_using[#{k}]", v, :class => 'pref_removable' %>
            <%end%>
          <%end%>
   <% end %>
