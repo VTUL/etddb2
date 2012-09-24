@@ -113,4 +113,20 @@ class ContentsController < ApplicationController
     end
   end
 
+  # GET /available/etd-00000000-00000000/available/filename.format?12345678
+  def get_file
+    @etd = Etd.where(urn: params[:urn]).first
+    params[:filename] += ".#{params[:format]}" unless params[:format].nil?
+    @content = @etd.contents.where(content_file_name: params[:filename]).first unless @etd.nil?
+
+    correct_avail = !@etd.nil? && params[:availability] == @etd.availability.name.downcase()
+    correct_avail &= !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
+    if correct_avail
+      send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
+    else
+      # Bad URN, or wrong availability, or bad filename.
+      # TODO: Split this up to handle individual cases
+      render # get_file.html.erb
+    end
+  end
 end

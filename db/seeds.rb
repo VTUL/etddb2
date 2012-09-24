@@ -168,9 +168,9 @@ Etd.create(title: "Test", abstract: "This is an abstract for an ETD.", availabil
 Etd.first.departments = [Department.first, Department.last]
 PeopleRole.create(person: Person.first, etd: Etd.first, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.first, action: "created", model: Etd.first)
-Content.create(etd: Etd.first, availability: Availability.first, content: File.new('Gemfile'), bound: false, page_count: 0)
+Content.create(etd: Etd.first, availability: Availability.first, content: File.new('app/models/degree.rb'), bound: false, page_count: 0)
 Provenance.create(person: Person.first, action: "created", model: Content.first)
-Content.create(etd: Etd.first, availability: Availability.first, content: File.new('Rakefile'), bound: false, duration: 0)
+Content.create(etd: Etd.first, availability: Availability.first, content: File.new('app/models/etd.rb'), bound: false, duration: 0)
 Provenance.create(person: Person.first, action: "created", model: Content.last)
 
 # Add Sung Hee to People, give him an ETD.
@@ -208,7 +208,7 @@ Etd.create(title: "The Origin of Yosemite's Valleys", abstract: "It's glaciers!"
 Etd.last.departments << Department.first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
-Content.create(etd: Etd.last, availability: Availability.first, content: File.new('README'), bound: false)
+Content.create(etd: Etd.last, availability: Availability.first, content: File.new('Gemfile'), bound: false)
 Provenance.create(person: Person.last, action: "created", model: Content.last)
 PeopleRole.create(person: Person.first, etd: Etd.last, role: Role.where(group: "Collaborators").first)
 Provenance.create(person: Person.last, action: "added to their committee.", model: PeopleRole.last)

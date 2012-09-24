@@ -1,4 +1,4 @@
-class RestrictedWhitelist
+class AccessConstraint
   def initialize
     @ipv4 = [NetAddr::CIDR.create('128.173.0.0/16')]    # Blacksburg
     @ipv4 << NetAddr::CIDR.create('198.82.0.0/16')      # Blacksburg
@@ -16,44 +16,43 @@ class RestrictedWhitelist
   end
 
   def matches?(request)
-    valid = []
+    restricted_access = []
+    withheld_access = false
+
     # Allow on-campus access
-    # I'd rather this be an if, and sort the ip addresses, but I'm loathe to add another gem (and this works).
     begin
-      valid = @ipv4.select {|subnet| subnet.contains?(request.remote_ip) }
+      restricted_access = @ipv4.select { |subnet| subnet.contains?(request.remote_ip) }
     rescue NetAddr::VersionError => e
-      valid = @ipv6.select {|subnet| subnet.contains?(request.remote_ip) }
+      restricted_access = @ipv6.select { |subnet| subnet.contains?(request.remote_ip) }
     end
 
     # Allow MetaArchive access
     if Rails.env == "production" and @metaarchive.include?(request.remote_ip)
-      valid << true
+      restricted_access << true
     end
 
     # Allow local dev work.
     if Rails.env == "development" and ['127.0.0.1', '::1'].include?(request.remote_ip)
-      valid << true
+      withheld_access = true
     end
 
-    !valid.empty?
-  end
-end
+    result = ['available', 'submitted'].include?(request.params[:availability]) and (request.params[:file_availability].nil? or
+                    request.params[:file_availability] == 'available' or
+                    (request.params[:file_availability] == 'restricted' && (!restricted_access.empty? || withheld_access)) or
+                    (request.params[:file_availability] == 'withheld' && withheld_access))
+    result |= request.params[:availability] == 'withheld' && withheld_access
+    # TODO: REMOVE NEXT LINE! FOR DEBUGGING ONLY!
+    result = true
+    result &= !/etd-\d+(-\d+)?/.match(request.params[:urn]).nil?
 
-class EtdConstraint
-  def initialize
-    @urn = /etd-\d+(-\d+)?/
-  end
-
-  def matches?(request)
-    @urn.match(params[:etd_urn])
+    return result
   end
 end
 
 NewVtEtdUpgrd::Application.routes.draw do
-
   # These are boring static pages.
   root :to => 'pages#home'
-  get '/about', :to => 'pages#about', :constraints => RestrictedWhitelist.new
+  get '/about', :to => 'pages#about'
   get '/contact', :to => 'pages#contact'
   get '/authorhelp', :to => 'pages#authorhelp'
   get '/staffhelp', :to => 'pages#staffhelp'
@@ -145,8 +144,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
 
   # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
-  get '/:availability/:urn', :to => 'etds#show', :as => :etd_path, :constraints => EtdConstraint.new
-  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => EtdConstraint.new
+  get '/:availability/:urn', :to => 'etds#old_show', :constraints => AccessConstraint.new
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => AccessConstraint.new
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

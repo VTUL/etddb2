@@ -48,6 +48,19 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /available/etd-00000000-00000000
+  def old_show
+    @etd = Etd.where(urn: params[:urn]).first
+
+    if !@etd.nil?
+      # Redirect to the ETD's new path (Let it take care of access rights.)
+      redirect_to(etd_path(@etd), status: :moved_permanently)
+    else
+      # TODO: Make this less generic, or better yet, a 404.
+      render #old_show.html.erb
+    end
+  end
+
   # GET /etds/new
   # GET /etds/new.xml
   def new
@@ -326,6 +339,25 @@ class EtdsController < ApplicationController
       else
         format.html { redirect_to(etd_path(@etd), notice: "This ETD doesn't currently have a review board.") }
       end
+    end
+  end
+
+  #POST /etd/approve/1
+  def approve
+    @etd = Etd.find(params[:id])
+    @etd.status = 'Approved'
+    @etd.adate = Time.now()
+    @etd.save()
+
+    Provenance.create(person: current_person, action: "approved", model: @etd)
+
+    @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
+    EtddbMailer.confirm_approve_author(@etd, @author).deliver
+    EtddbMailer.confirm_approve_committee(@etd, @author).deliver
+    EtddbMailer.confirm_approve_proquest(@etd, @author).deliver
+
+    respond_to do |format|
+      format.html # approve.html.erb
     end
   end
 end
