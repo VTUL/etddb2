@@ -41,6 +41,7 @@ class EtddbMailer < ActionMailer::Base
 
   def proquest(etd)
     @etd = etd
+    @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
     mail(to: 'email@proquest.vt.edu', subject: 'New Electronic Dissertation')
     # TODO: the real proquest email address is 'dissepubl@proquest.com', but I don't want to send them anything by accident.
   end
