@@ -8,7 +8,7 @@
 </p>
 <p>
   <b>Author's <%= "Email".pluralize(@creators.size) %>:</b>
-  <%= @creators.pluck(:email).join(", ") %>
+  <%= @creators.where(show_email: true).pluck(:email).join(", ") %>
 </p>
 <p>
   <b>URN:</b>
