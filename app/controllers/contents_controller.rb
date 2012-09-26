@@ -109,7 +109,7 @@ class ContentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(contents_path) }
-      format.xml  { head :ok }
+      format.xml  { head(:ok) }
     end
   end
 
@@ -120,12 +120,21 @@ class ContentsController < ApplicationController
     @content = @etd.contents.where(content_file_name: params[:filename]).first unless @etd.nil?
 
     correct_avail = !@etd.nil? && params[:availability] == @etd.availability.name.downcase()
-    correct_avail &= !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
-    if correct_avail
+    correct_file_avail = !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
+    if correct_avail && correct_file_avail
       send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
+    elsif correct_avail && @content.nil?
+      # Bad filename
+      redirect_to(etd_path(@etd), notice: "I can't find that file. Pick one below.")
+    elsif correct_avail
+      # Bad file availability
+      redirect_to(content_path(@content), notice: 'That file has a different availability.')
+    elsif !@etd.nil?
+      # Bad availability
+      redirect_to(etd_path(@etd), notice: 'That ETD has a different availability.')
     else
-      # Bad URN, or wrong availability, or bad filename.
-      # TODO: Split this up to handle individual cases
+      # Bad URN
+      # TODO: This should 404.
       render # get_file.html.erb
     end
   end
