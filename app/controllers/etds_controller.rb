@@ -42,6 +42,8 @@ class EtdsController < ApplicationController
     @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
     @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
 
+    # TODO: Add access rights management code, or implement Cancan.
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render(xml: @etd) }
@@ -333,7 +335,8 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      if @etd.status == "Submitted"
+      if @etd.status == 'Submitted'
+        # TODO: Limit access.
         @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
         format.html
       else
@@ -354,7 +357,9 @@ class EtdsController < ApplicationController
     @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
     EtddbMailer.confirm_approve_author(@etd, @author).deliver
     EtddbMailer.confirm_approve_committee(@etd, @author).deliver
-    EtddbMailer.confirm_approve_proquest(@etd, @author).deliver
+    if @etd.document_type == DocumentType.where(retired: false, name: "Dissertation").first
+      EtddbMailer.confirm_approve_proquest(@etd, @author).deliver
+    end
 
     respond_to do |format|
       format.html # approve.html.erb
