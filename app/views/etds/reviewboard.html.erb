@@ -31,7 +31,6 @@ By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators'
 </table>
 <% if !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty? %>
 <p>
-  <% #TODO: Real Approval Path %>
   <%= button_to('Approve ETD', approve_etd_path(@etd)) %>
   <%= button_to('Unsubmit ETD', unsubmit_etd_path(@etd)) %>
 </p>

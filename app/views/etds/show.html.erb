@@ -43,12 +43,14 @@
       <% end %>
     </table>
   <% else %>
-    None yet. Go add one!
+    None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
-  <%= form_tag(controller: "people", action: "find") do %>
-    <%= hidden_field_tag(:etd_id, @etd.id) %>
-    <%= hidden_field_tag(:origin, '/etds/') %>
-    <%= submit_tag "Add New Committee Member" %>
+  <% if @creators.include?(current_person) %>
+    <%= form_tag(controller: "people", action: "find") do %>
+      <%= hidden_field_tag(:etd_id, @etd.id) %>
+      <%= hidden_field_tag(:origin, '/etds/') %>
+      <%= submit_tag "Add New Committee Member" %>
+    <% end %>
   <% end %>
 </p>
 <p>
@@ -91,9 +93,9 @@
       <% end %>
     </table>
   <% else %>
-    None yet. Go add one!
+    None yet.<%= ' Go add some!' if @creators.include?(current_person) %>
   <% end %>
-  <%= button_to "Add More Content", {action: :add_contents}, method: :get %>
+  <%= button_to "Add More Content", {action: :add_contents}, method: :get if @creators.include?(current_person)%>
 </p>
 <br />
 <%= form_tag(controller: "conversations", action: "new") do %>
