@@ -7,9 +7,9 @@
 
 <% @reviewable_etds.each do |etd| %>
   <tr>
-    <td><%= link_to(etd.title, etd_path(etd)) %></td>
-    <td><%= Person.where(etd.people_roles.where(role_id: Role.where(group: "Creators")).first.id).first.name %></td>
-    <% # TODO: Needs reviewer functions. %>
+    <td><%= link_to(etd.title, etd_reviewboard_path(etd)) %></td>
+    <td><%= Person.find(etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).map { |p| p.name } .join(', ') %></td>
+    <td><%= button_to 'Approve', approve_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
     <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
   </tr>
 <% end %>

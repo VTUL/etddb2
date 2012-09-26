@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag 'paginate' %>
 
-
 <h3 class ="top_bar">My Etds</h3>
 <div id="page_pref" class ="top_bar" style="margin-top:17px">
   <%= form_tag @person, :method => 'get' do %> 
@@ -15,14 +14,14 @@
   <tr>
     <th>Title</th>
     <th>Departments</th>
-    <th>Defense Date</th>
+    <th>Submit Date</th>
   </tr>
 
 <% @my_etds.each do |etd| %>
   <tr>
-    <td><%=h etd.title %></td>
-    <td><%=h Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
-    <td><%=h etd.ddate %></td>
+    <td><%= etd.title %></td>
+    <td><%= Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
+    <td><%= etd.sdate %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
     <% if current_person.id == @person.id %>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
