@@ -4,13 +4,11 @@ class EtdsController < ApplicationController
   # GET /etds
   # GET /etds.xml
   def index
+    @creator_roles = Role.where(group: 'Creators').pluck(:id)
+    @per_page = (params[:per_page] =~ /^\d+$/) ? params[:per_page] : 10
+
     # This is a bit of black magic.
     @etds = []
-    if params[:per_page] =~ /^\d+$/
-      @per_page = params[:per_page]
-    else
-      @per_page = 10
-    end
     case params[:orderby]
     when "department"
       # Previous query

@@ -6,7 +6,7 @@
     <%= submit_tag 'Go', :name => nil %>
     <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
-  <br>
+  <br />
 </div>
   <div id="page_pref" class="top_bar">
     <%= form_tag etds_path, :method => 'get' do %> 
@@ -16,9 +16,9 @@
     <% end %>
   </div>
   <%= will_paginate %>
-<% if @etds.blank? %>
-  <br>
-  <br>
+<% if @etds.empty? %>
+  <br />
+  <br />
   <h3 class="clear_left"> No Records Found </h3>
 <% else %>
   <table class="clear_left">
@@ -30,7 +30,7 @@
 
   <br />
   <% @etds.each do |etd| %>
-    <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
+    <% creators = Person.where(id: etd.people_roles.where(role_id: @creator_roles).pluck(:person_id)).order('last_name ASC') %>
     <tr>
       <td><%= creators.map { |o| o.name } .join(", ") %></td>
       <td><%= etd.title %></td>
