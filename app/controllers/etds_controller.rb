@@ -116,7 +116,7 @@ class EtdsController < ApplicationController
           pr.role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first
           pr.save
 
-          EtddbMailer.confirm_create(@etd, current_person).deliver
+          EtddbMailer.created_authors(@etd).deliver
 
           format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
@@ -261,10 +261,9 @@ class EtdsController < ApplicationController
     
     Provenance.create(person: current_person, action: "submitted", model: @etd)
 
-    @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
-    EtddbMailer.confirm_submit_author(@etd, @author).deliver
-    EtddbMailer.confirm_submit_school(@etd, @author).deliver
-    EtddbMailer.confirm_submit_committee(@etd, @author).deliver
+    EtddbMailer.submitted_authors(@etd).deliver
+    EtddbMailer.submitted_school(@etd).deliver
+    EtddbMailer.submitted_committee(@etd).deliver
 
     respond_to do |format|
       format.html #submit.html.erb
@@ -291,7 +290,7 @@ class EtdsController < ApplicationController
           # Check if the entire Committee has approved the ETD.
           @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
           if @nonapproved == 0
-            EtddbMailer.committee_approved(@etd).deliver
+            EtddbMailer.approved_school(@etd).deliver
           end
 
           format.html #vote.html.erb
@@ -352,11 +351,11 @@ class EtdsController < ApplicationController
 
     Provenance.create(person: current_person, action: "approved", model: @etd)
 
-    @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
-    EtddbMailer.confirm_approve_author(@etd, @author).deliver
-    EtddbMailer.confirm_approve_committee(@etd, @author).deliver
+    EtddbMailer.approved_authors(@etd).deliver
+    EtddbMailer.approved_committee(@etd).deliver
+    # TODO: Don't send unless available.
     if @etd.document_type == DocumentType.where(retired: false, name: "Dissertation").first
-      EtddbMailer.confirm_approve_proquest(@etd, @author).deliver
+      EtddbMailer.approved_proquest(@etd).deliver
     end
 
     respond_to do |format|

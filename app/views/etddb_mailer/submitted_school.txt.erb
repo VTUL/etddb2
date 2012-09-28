@@ -1,0 +1,7 @@
+Hello Reviewers!
+
+<%= @authors.pluck(:last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %> just submitted their ETD!
+You may view the ETD here: <%= etd_url(@etd) %>
+
+Thanks,
+ETDDB

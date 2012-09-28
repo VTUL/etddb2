@@ -1,19 +1,15 @@
-The ETD submitted by <% # TODO: Add author's name. %>
+The ETD submitted by <%= @authors.pluck(:last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
 has been approved by the Graduate School.
 
-<% # TODO: Availability description (see emails for examples). %>
+As you requested, access to your ETD will be <% # TODO: Short availability statement (See approved.pl in this folder.) %>
 
 Within a few hours, your information will be added to all the
 indexes of currently available theses.  Within a week, your
 information will be added to our search facility.
 
-Use the following URL to access your ETD:
+<% # TODO: Availability email description (see approved.pl in this folder). %>
 
-<% # TODO: ETD's url. %>
-
-
-
-You may also call , or send mail to:
+You may also call, or send mail to:
     VT ETDs
     Graduate School
     Virginia Tech
