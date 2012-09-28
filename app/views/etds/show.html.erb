@@ -105,7 +105,7 @@
 <% end %>
 <br />
 <%= link_to 'Edit', edit_etd_path(@etd) %> |
-<%= link_to 'Back', etds_path %>
+<%= link_to 'Back', :back %>
 <script>
 $('.del_pr').bind('ajax:success', function() {  
     $(this).closest('tr').fadeOut();  
