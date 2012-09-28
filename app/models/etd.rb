@@ -32,6 +32,13 @@ class Etd < ActiveRecord::Base
     text :title, :boost => 5
     text :keywords
     text :abstract
+    text :author
+  end
+
+  def author
+    creators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
+        .pluck(:person_id)).order('last_name ASC')
+    creators.map { |o| o.name }
   end
 
   def self.search_quick(search)

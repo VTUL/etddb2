@@ -17,4 +17,9 @@ class PeopleRole < ActiveRecord::Base
 
   #Validate attributes
   validates_presence_of :person_id, :role_id
+  after_save :update_etd
+
+  def update_etd
+  	etd.index
+  end
 end

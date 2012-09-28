@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 		@etds = []
 		# keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
-							 "abstract" => "Abstract"}
+							 "abstract" => "Abstract", "author" => "Author"}
 	    if params[:per_page] =~ /^\d+$/
 	      @per_page = params[:per_page]
 	    else
