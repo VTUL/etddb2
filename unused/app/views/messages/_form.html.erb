@@ -1,0 +1,27 @@
+<%= form_tag messages_path, method: :post do %>
+  <% if @receipt and @receipt.errors.any? %>
+    <div id="error_explanation">
+      <h2><% pluralize(@receipt.errors.count, "error") %> prohibited this message from being saved:</h2>
+      <ul>
+      <% @receipt.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= label_tag(:recipients) %><br />
+    <%= text_field_tag(:_recipients) %><br />
+  </div>
+  <div class="field">
+    <%= label_tag(:subject) %><br />
+    <%= text_field_tag(:subject) %><br />
+  </div>
+  <div class="field">
+    <%= label_tag(:body) %><br />
+    <%= text_area_tag(:body) %><br />
+  </div>
+
+  <%= submit_tag %>
+<% end %>

@@ -2,7 +2,9 @@ require 'test_helper'
 
 class ProvenancesControllerTest < ActionController::TestCase
   setup do
-    @provenance = provenances(:one)
+    @provenance = Provenance.first
+    @person = Person.first
+    sign_in(@person)
   end
 
   test "should get index" do
@@ -47,7 +49,7 @@ class ProvenancesControllerTest < ActionController::TestCase
   end
 
   test "should not update provenance" do
-    put :update, id: @provenance.to_param, provenance: {notice: nil}
+    put :update, id: @provenance.to_param, provenance: {person_id: nil}
     assert_select "div#error_explanation"
   end
 

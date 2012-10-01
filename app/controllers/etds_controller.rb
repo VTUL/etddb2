@@ -1,11 +1,31 @@
 class EtdsController < ApplicationController
-  skip_before_filter :authenticate_person
+  skip_before_filter :authenticate_person!, only: [:show, :index]
 
   # GET /etds
   # GET /etds.xml
   def index
+    @creator_roles = Role.where(group: 'Creators').pluck(:id)
+    @per_page = (params[:per_page] =~ /^\d+$/) ? params[:per_page] : 10
+
     # This is a bit of black magic.
-    @etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+    @etds = []
+    case params[:orderby]
+    when "department"
+      # Previous query
+      #@etds = Etd.find(:all, include: :departments, order: 'departments.name')
+      # Updated query for pagination
+      @etds = Etd.paginate(page: params[:page], per_page: @per_page, include: :departments, order: 'departments.name')
+    when "title"
+      # Previous query
+      #@etds = Etd.find(:all, order: 'title')
+      # Updated query for pagination
+      @etds = Etd.paginate(page: params[:page], per_page: @per_page,  order: 'title')
+    else
+      # Previous query
+      #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
+      # Updated query for pagination
+      @etds = Etd.search(params[:keywords]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +38,9 @@ class EtdsController < ApplicationController
   def show
     @etd = Etd.find(params[:id])
     @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
+    @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
+
+    # TODO: Add access rights management code, or implement Cancan.
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,19 +48,26 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /available/etd-00000000-00000000
+  def old_show
+    @etd = Etd.where(urn: params[:urn]).first
+
+    if !@etd.nil?
+      # Redirect to the ETD's new path (Let it take care of access rights.)
+      redirect_to(etd_path(@etd), status: :moved_permanently)
+    else
+      # TODO: Make this less generic, or better yet, a 404.
+      render #old_show.html.erb
+    end
+  end
+
   # GET /etds/new
   # GET /etds/new.xml
   def new
     respond_to do |format|
-      # BUG: This should be implemented as a before_filter.
-      if person_signed_in?
-        @etd = Etd.new
-        format.html # new.html.erb
-        format.xml  { render(xml: @etd) }
-      else
-        session[:return_to] = request.fullpath
-        format.html { redirect_to(login_path, notice: "You must login create an ETD.") }
-      end
+      @etd = Etd.new
+      format.html # new.html.erb
+      format.xml  { render(xml: @etd) }
     end
   end
 
@@ -46,17 +75,11 @@ class EtdsController < ApplicationController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
-      # BUG: Again, this should be implemented in a before_filter
-      if person_signed_in?
-        # BUG: This works, but is only a hack, we should use Cancan.
-        if current_person.etds.include?(@etd)
-          format.html { render(action: "edit") }
-        else
-          format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
-        end
+      # BUG: This works, but is only a hack, we should use Cancan.
+      if current_person.etds.include?(@etd)
+        format.html { render(action: "edit") }
       else
-        session[:return_to] = request.fullpath
-        format.html { redirect_to(login_path, notice: "You must sign in to edit ETDs.") }
+        format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
       end
     end
   end
@@ -66,18 +89,13 @@ class EtdsController < ApplicationController
   def create
     @etd = Etd.new(params[:etd])
 
+    #Add implied params.
+    @etd.cdate = Time.now()
+    @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
 
-    pr = PeopleRole.new
-    pr.person_id = current_person.id
-    pr.role_id = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first.id
-    # TODO: Is there a better way to do give the creator's role?
-    @etd.people_roles << pr
-
-    @etd.cdate = Time.now()
-    @etd.status = "Created"
-
+    # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
     if params[:etd][:department_ids][:id_2] != "" then
       d << params[:etd][:department_ids][:id_2]
@@ -86,9 +104,23 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.save
-        EtddbMailer.confirm_create(@etd, current_person).deliver
-        format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
-        format.xml  { render(xml: @etd, status: :created, location: @etd) }
+        Provenance.create(person: current_person, action: "created", model: @etd)
+        if current_person.roles.include?(Role.where(group: "Administration").first)
+          # Defer creating the author.
+          format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.xml  { render(xml: @etd, status: :created, location: @etd) }
+        else
+          # Make the current_person the creator, or preferably, author.
+          pr = PeopleRole.new(person_id: current_person.id, etd_id: @etd.id)
+          # TODO: Is there a better way to do give the creator's role?
+          pr.role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first
+          pr.save
+
+          EtddbMailer.created_authors(@etd).deliver
+
+          format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.xml  { render(xml: @etd, status: :created, location: @etd) }
+        end
       else
         format.html { render(action: "new", notice: 'You have errors.') }
         format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
@@ -107,12 +139,14 @@ class EtdsController < ApplicationController
       d << params[:etd][:department_ids][:id_2]
     end
     params[:etd][:department_ids] = d
-    
+
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
+        Provenance.create(person: current_person, action: "updated", model: @etd)
+
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
+        # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
         if @etd.availability_id != Availability.where(name: "Mixed").first.id
-          # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
           contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
           for content in contents do
             content.availability_id = @etd.availability_id
@@ -135,25 +169,47 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      # BUG: Put in a before_filter.
-      if person_signed_in?
-        # BUG: Use Cancan for this.
-        if current_person.etds.include?(@etd)
-          for pr in @etd.people_roles do
-            pr.destroy
-          end
-          for content in @etd.contents do
-            content.destroy
-          end
-          @etd.destroy
-          format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
-          format.xml  { head :ok }
-        else
-          format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
+      # BUG: Use Cancan for this.
+      if current_person.etds.include?(@etd)
+        Provenance.create(person: current_person, action: "deleted", model: @etd)
+
+        for pr in @etd.people_roles do
+          pr.destroy
         end
+        for content in @etd.contents do
+          content.destroy
+        end
+
+        @etd.destroy
+        format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
+        format.xml  { head :ok }
       else
-        format.html { redirect_to(etds_path, notice: "You must log in to delete your ETDs.") }
+        format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
       end
+    end
+  end
+
+  # GET /etds/add_author/1
+  def add_author
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      format.html # add_author.html.erb
+    end
+  end
+
+  # POST /etds/add_author
+  def save_author
+    @etd = Etd.find(params[:id])
+    @role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
+    @pr = PeopleRole.new(person_id: params[:person_id], role_id: @role.id, etd_id: @etd.id)
+
+    if @pr.save
+      Provenance.create(person: current_person, action: "created", model: @pr)
+      redirect_to(next_new_etd_path(@etd))
+    else
+      format.html { render(action: "add_author", notice: 'You have errors.') }
+      format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
     end
   end
 
@@ -161,7 +217,7 @@ class EtdsController < ApplicationController
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
-    @collabs = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:person_id))
+    @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
 
     respond_to do |format|
       format.html # new_next.html.erb
@@ -180,6 +236,7 @@ class EtdsController < ApplicationController
     end
 
     if @etd.update_attributes(params[:etd])
+      Provenance.create(person: current_person, action: "added contents to", model: @etd)
       redirect_to(params[:origin] + @etd.id.to_s, notice: "Successfully updated article.")
     else
       redirect_to(params[:origin] + @etd.id.to_s)
@@ -202,10 +259,11 @@ class EtdsController < ApplicationController
     @etd.sdate = Time.now()
     @etd.save()
     
-    @author = Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id)
-    EtddbMailer.confirm_submit_author(@etd, @author).deliver
-    EtddbMailer.confirm_submit_school(@etd, @author).deliver
-    EtddbMailer.confirm_submit_committee(@etd, @author).deliver
+    Provenance.create(person: current_person, action: "submitted", model: @etd)
+
+    EtddbMailer.submitted_authors(@etd).deliver
+    EtddbMailer.submitted_school(@etd).deliver
+    EtddbMailer.submitted_committee(@etd).deliver
 
     respond_to do |format|
       format.html #submit.html.erb
@@ -217,36 +275,91 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
 
     respond_to do |format|
-      if person_signed_in?
-        if @etd.status == "Submitted"
-          pr = @etd.people_roles.where(person_id: current_person.id).first
-          if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
-            if params[:vote] == 'true'
-              pr.vote = true
-            else
-              pr.vote = false
-            end
-            pr.save()
-
-            # Check if the entire Committee has approved the ETD.
-            @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
-            if @nonapproved == 0
-              EtddbMailer.committee_approved(@etd).deliver
-            end
-
-            format.html #vote.html.erb
+      if @etd.status == "Submitted"
+        pr = @etd.people_roles.where(person_id: current_person.id).first
+        if !pr.nil? && Role.where(group: 'Collaborators').pluck(:id).include?(pr.role_id)
+          if params[:vote] == 'true'
+            pr.vote = true
           else
-            # Error. You are either not part of this ETD, or at least not on it's committee.
-            format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
+            pr.vote = false
           end
+          pr.save()
+
+          Provenance.create(person: current_person, action: "voted on", model: @etd)
+
+          # Check if the entire Committee has approved the ETD.
+          @nonapproved = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators'), vote: [false, nil]).count
+          if @nonapproved == 0
+            EtddbMailer.approved_school(@etd).deliver
+          end
+
+          format.html #vote.html.erb
         else
-          # Error. ETD not submitted. You are either too early, or too late.
-          format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
+          # Error. You are not part of this ETD's committee.
+          format.html { redirect_to(person_path(current_person), notice: "You cannot vote on that ETD.") }
         end
       else
-        # Error. Must be signed in. This should not be possible normally.
-        format.html { redirect_to(login_path, notice: "You must log in to vote on an ETD.") }
+        # Error. ETD not submitted. You are either too early, or too late.
+        format.html { redirect_to(person_path(current_person), notice: "That ETD is not ready to be voted on.") }
       end
+    end
+  end
+
+  # POST /etd/unsubmit/1
+  def unsubmit
+    @etd = Etd.find(params[:id])
+    
+    respond_to do |format|
+      if @etd.status == "Submitted"
+        if !current_person.roles.where(group: 'Graduate School').empty?
+          @etd.status = "Created"
+          @etd.save
+          
+          Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
+  
+          format.html { redirect_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.") }
+        else
+          format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }
+        end
+      else
+        format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit an ETD that hasn't been submitted.") }
+      end
+    end
+  end
+
+  # GET /etd/reviewboard/1
+  def reviewboard
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.status == 'Submitted'
+        # TODO: Limit access.
+        @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
+        format.html
+      else
+        format.html { redirect_to(etd_path(@etd), notice: "This ETD doesn't currently have a review board.") }
+      end
+    end
+  end
+
+  #POST /etd/approve/1
+  def approve
+    @etd = Etd.find(params[:id])
+    @etd.status = 'Approved'
+    @etd.adate = Time.now()
+    @etd.save()
+
+    Provenance.create(person: current_person, action: "approved", model: @etd)
+
+    EtddbMailer.approved_authors(@etd).deliver
+    EtddbMailer.approved_committee(@etd).deliver
+    # TODO: Don't send unless available.
+    if @etd.document_type == DocumentType.where(retired: false, name: "Dissertation").first
+      EtddbMailer.approved_proquest(@etd).deliver
+    end
+
+    respond_to do |format|
+      format.html # approve.html.erb
     end
   end
 end

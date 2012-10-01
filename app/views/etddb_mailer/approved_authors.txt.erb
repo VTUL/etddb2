@@ -1,0 +1,27 @@
+The ETD submitted by <%= @authors.pluck(:last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
+has been approved by the Graduate School.
+
+As you requested, access to your ETD will be <% # TODO: Short availability statement (See approved.pl in this folder.) %>
+
+Within a few hours, your information will be added to all the
+indexes of currently available theses.  Within a week, your
+information will be added to our search facility.
+
+<% # TODO: Availability email description (see approved.pl in this folder). %>
+
+You may also call, or send mail to:
+    VT ETDs
+    Graduate School
+    Virginia Tech
+    120 GLC @ Donaldson Brown (0325)
+    Blacksburg, VA 24061
+
+Sincerely,
+
+
+Karen P. DePauw, Ph.D.
+Vice President for Graduate Studies
+and Dean of the Graduate School
+VPI & SU Graduate Life Center at
+Donaldson Brown
+Blacksburg, VA 24061

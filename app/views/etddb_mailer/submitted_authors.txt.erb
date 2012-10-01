@@ -1,0 +1,7 @@
+Congratulations, <%= @authors.map { |a| a.first_name } .join(', ') %>!
+
+You have successfully submitted your ETD, "<%= @etd.title %>".
+We have also emailed your committee, and the graduate school.
+
+Yours,
+ETDDB

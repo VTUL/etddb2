@@ -2,7 +2,9 @@ require 'test_helper'
 
 class UserActionsControllerTest < ActionController::TestCase
   setup do
-    @user_action = user_actions(:Create)
+    @user_action = UserAction.first
+    @person = Person.first
+    sign_in(@person)
   end
 
   test "should get index" do

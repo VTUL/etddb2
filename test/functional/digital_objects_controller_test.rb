@@ -2,7 +2,9 @@ require 'test_helper'
 
 class DigitalObjectsControllerTest < ActionController::TestCase
   setup do
-    @digital_object = digital_objects(:one)
+    @digital_object = DigitalObject.first
+    @person = Person.first
+    sign_in(@person) 
   end
 
   test "should get index" do

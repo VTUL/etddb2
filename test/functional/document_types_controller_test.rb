@@ -2,7 +2,9 @@ require 'test_helper'
 
 class DocumentTypesControllerTest < ActionController::TestCase
   setup do
-    @document_type = document_types(:one)
+    @document_type = DocumentType.first
+    @person = Person.first
+    sign_in(@person) 
   end
 
   test "should get index" do

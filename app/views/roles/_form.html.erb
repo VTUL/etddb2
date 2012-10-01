@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :group %><br />
-    <%= f.select(:group, options_for_select(["Creators", "Collaborators", "Graduate School", "Administration"])) %>
+    <%= f.select(:group, options_for_select(Role::GROUPS)) %>
   </div>
 
   <div class="actions">

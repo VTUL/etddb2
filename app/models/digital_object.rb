@@ -5,7 +5,7 @@
 #########################################################
 
 class DigitalObject < ActiveRecord::Base
-  has_many :permission
+  has_many :permissions, inverse_of: :digital_object
   has_many :roles, through: :permission
   has_many :user_actions, through: :permission
 

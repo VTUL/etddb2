@@ -1,10 +1,11 @@
   <div id="candidates">
     <table>
-      <% @candidates = Person.where("last_name LIKE '%" + params[:lname] + "%'") %>
+      <% @name = params[:name].upcase %>
+      <% @candidates = Person.where("UPPER(first_name) LIKE '%#{@name}%' OR UPPER(last_name) LIKE '%#{@name}%' OR UPPER(display_name) LIKE '%#{@name}%'") %>
       <% for candidate in @candidates do %>
         <tr>
           <td><%= radio_button_tag("committee", candidate.id) %></td>
-          <td><%= candidate.first_name + " " + candidate.last_name%></td>
+          <td><%= candidate.name %></td>
         </tr>
       <% end %>
     </table>

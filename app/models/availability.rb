@@ -5,8 +5,10 @@
 #########################################################
 
 class Availability < ActiveRecord::Base
-  has_many :etds
-  has_many :contents
+  has_many :etds, inverse_of: :availability
+  has_many :contents, inverse_of: :availability
+  has_many :provenances, as: :model
+  has_many :conversations, as: :model
 
   validates_presence_of :name, :description
   validates :retired, inclusion: {in: [true, false], message: "must be boolean"}

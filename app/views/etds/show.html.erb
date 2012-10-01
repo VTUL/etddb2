@@ -8,7 +8,7 @@
 </p>
 <p>
   <b>Author's <%= "Email".pluralize(@creators.size) %>:</b>
-  <%= @creators.pluck(:email).join(", ") %>
+  <%= @creators.where(show_email: true).pluck(:email).join(", ") %>
 </p>
 <p>
   <b>URN:</b>
@@ -35,22 +35,22 @@
         <th>Role:</th>
       </tr>
       <% for collab in @collabs do %>
-        <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
-          <tr>
-            <td><%= get_name(collab) %></td>
-            <td><%= Role.find(pr.role_id).name %></td>
-            <td><%= link_to 'Destroy', destroy_people_role_path(pr), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= collab.person.name %></td>
+          <td><%= collab.role.name %></td>
+          <td><%= link_to 'Destroy', destroy_people_role_path(collab), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
+        </tr>
       <% end %>
     </table>
   <% else %>
-    None yet. Go add one!
+    None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
-  <%= form_tag(controller: "people", action: "find") do %>
-    <%= hidden_field_tag(:etd_id, @etd.id) %>
-    <%= hidden_field_tag(:origin, '/etds/') %>
-    <%= submit_tag "Add New Committee Member" %>
+  <% if @creators.include?(current_person) %>
+    <%= form_tag(controller: "people", action: "find") do %>
+      <%= hidden_field_tag(:etd_id, @etd.id) %>
+      <%= hidden_field_tag(:origin, '/etds/') %>
+      <%= submit_tag "Add New Committee Member" %>
+    <% end %>
   <% end %>
 </p>
 <p>
@@ -87,16 +87,22 @@
       </tr>
       <% for c in @etd.contents do %>
         <tr>
-          <td><%= c.content_file_name %></td>
+          <td><%= link_to(c.content_file_name, content_path(c)) %></td>
           <td><%= c.content_file_size %></td>
         </tr>
       <% end %>
     </table>
   <% else %>
-    None yet. Go add one!
+    None yet.<%= ' Go add some!' if @creators.include?(current_person) %>
   <% end %>
-  <%= button_to "Add More Content", {action: :add_contents}, method: :get %>
+  <%= button_to "Add More Content", {action: :add_contents}, method: :get if @creators.include?(current_person)%>
 </p>
+<br />
+<%= form_tag(controller: "conversations", action: "new") do %>
+  <%= hidden_field_tag(:model_type, @etd.class.name) %>
+  <%= hidden_field_tag(:model_id, @etd.id) %>
+  <%= submit_tag "Send a message about this ETD" %>
+<% end %>
 <br />
 <%= link_to 'Edit', edit_etd_path(@etd) %> |
 <%= link_to 'Back', etds_path %>

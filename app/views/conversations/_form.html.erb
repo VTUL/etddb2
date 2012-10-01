@@ -1,0 +1,36 @@
+<%= form_for(@conv, url: create_conversation_path) do |f| %>
+  <% if @conv.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@conv.errors.count, "error") %> prohibited this conversation from being saved:</h2>
+
+      <ul>
+      <% @conv.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :participant_ids, "To" %><br />
+    <%= f.number_field :participant_ids, {value: ''} %>
+  </div>
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </div>
+  <%= f.hidden_field(:model_type, {value: @conv.model_type}) %>
+  <%= f.hidden_field(:model_id, {value: @conv.model_id}) %>
+
+  <%= f.fields_for :messages do |m| %>
+  <div class="field">
+    <%= m.label :msg, "Message" %><br />
+    <%= m.text_area :msg %>
+  </div>
+  <%= m.hidden_field(:sender_id, {value: current_person.id}) %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

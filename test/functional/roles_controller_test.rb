@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
   setup do
-    @role = roles(:one)
-    @person = people(:one)
-    sign_in @person
+    @role = Role.first
+    @person = Person.first
+    sign_in(@person)
   end
 
   test "should get index" do

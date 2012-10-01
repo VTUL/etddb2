@@ -1,0 +1,18 @@
+The ETD submitted by <%= @authors.pluck(:last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
+has been approved by the Graduate School.
+
+As they requested, access to their ETD will be <% # TODO: Short availability statement (See approved.pl in this folder.) %>
+
+Within a few hours, their information will be added to all the
+indexes of currently available theses.  Within a week, their
+information will be added to our search facility.
+
+Sincerely,
+
+
+Karen P. DePauw, Ph.D.
+Vice President for Graduate Studies
+and Dean of the Graduate School
+VPI & SU Graduate Life Center at
+Donaldson Brown
+Blacksburg, VA 24061

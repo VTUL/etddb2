@@ -1,0 +1,70 @@
+.pagination {
+    background: none repeat scroll 0 0 white;
+    cursor: default;
+    font-size: 10pt;
+    clear: left;
+}
+.pagination a, .pagination span, .pagination em {
+    display: block;
+    float: left;
+    margin-right: 1px;
+    padding: 0.2em 0.5em;
+}
+.pagination .disabled {
+    border: 1px solid #DDDDDD;
+    color: #999999;
+}
+.pagination .current {
+    background: none repeat scroll 0 0 #3C5B6F;
+    border: 1px solid #000000;
+    color: white;
+    font-style: normal;
+    font-weight: bold;
+}
+.pagination a {
+    border: 1px solid #3C5B6F;
+    color: #000000;
+    text-decoration: none;
+}
+.pagination a:hover, .pagination a:focus {
+    border-color: #000033;
+    color: #000033;
+}
+.pagination .page_info {
+    background: none repeat scroll 0 0 #2E6AB1;
+    color: white;
+    margin-bottom: 0.3em;
+    padding: 0.4em 0.6em;
+    text-align: center;
+    width: 22em;
+}
+.pagination .page_info b {
+    background: none repeat scroll 0 0 #6AA6ED;
+    color: #000033;
+    padding: 0.1em 0.25em;
+}
+.pagination:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+* html .pagination {
+    height: 1%;
+}
+:first-child + html .pagination {
+    overflow: hidden;
+}
+
+#page_pref {
+    margin-left: 70px;
+}
+
+.top_bar {
+    float: left;
+}
+
+.clear_left {
+    clear: left;
+}

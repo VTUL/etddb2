@@ -15,7 +15,7 @@ class PrivacyStatementTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-boolean retired attribute." do
-    statement = PrivacyStatement.new(privacy_statements(:one).attributes)
+    statement = PrivacyStatement.first
     statement.retired = nil
     assert !statement.valid?
     assert statement.errors[:retired].include?("must be boolean")

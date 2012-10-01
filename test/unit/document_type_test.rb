@@ -9,7 +9,7 @@ class DocumentTypeTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-boolean retired attribute." do
-    doc_type = DocumentType.new(document_types(:one).attributes)
+    doc_type = DocumentType.first
     doc_type.retired = nil
     assert !doc_type.valid?
     assert doc_type.errors[:retired].include?("must be boolean")

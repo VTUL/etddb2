@@ -1,19 +1,12 @@
 class ContentsController < ApplicationController
-  require 'mime/types' 
+  #require 'mime/types'
   # GET /contents
   # GET /contents.xml
   def index
+    @authors_etds = current_person.etds
     respond_to do |format|
-      # This should be implemented in a before_filter
-      if person_signed_in?
-        @authors_etds = current_person.etds
-
-        format.html # index.html.erb
-        format.xml  { render(xml: @authors_etds) }
-      else
-        session[:return_to] = request.fullpath
-        format.html { redirect_to(login_path, notice: "You need to login to browse your contents.") }
-      end
+      format.html # index.html.erb
+      format.xml  { render(xml: @authors_etds) }
     end
   end
 
@@ -62,6 +55,7 @@ class ContentsController < ApplicationController
     
     respond_to do |format|
       if @content.save
+        Provenance.create(person: current_person, action: "created", model: @content)
         @etd.contents << @content
         # Update the ETD's availability.
         if @content.availability_id != @etd.availability_id && @etd.availability.name != "Mixed"
@@ -80,10 +74,12 @@ class ContentsController < ApplicationController
   # POST /contents/edit.xml
   def update
     @content = Content.find(params[:id])
-    @etd = Etd.find(@content.etd_id)
+    @etd = @content.etd
 
     respond_to do |format|
       if @content.update_attributes(params[:content])
+        Provenance.create(person: current_person, action: "updated", model: @content)
+
         # Update the ETD's availability.
         if @content.availability_id != @etd.availability_id
           avails = @etd.contents.pluck(:availability_id).uniq
@@ -99,7 +95,7 @@ class ContentsController < ApplicationController
         format.json { head :ok }
       else
         format.html { render(action: "edit") }
-        format.json { render(json: @document_type.errors, status: :unprocessable_entity) }
+        format.json { render(json: @content.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -108,12 +104,38 @@ class ContentsController < ApplicationController
   # DELETE /contents/1.xml
   def destroy
     @content = Content.find(params[:id])
+    Provenance.create(person: current_person, action: "deleted", model: @content)
     @content.destroy
 
     respond_to do |format|
       format.html { redirect_to(contents_path) }
-      format.xml  { head :ok }
+      format.xml  { head(:ok) }
     end
   end
 
+  # GET /available/etd-00000000-00000000/available/filename.format?12345678
+  def get_file
+    @etd = Etd.where(urn: params[:urn]).first
+    params[:filename] += ".#{params[:format]}" unless params[:format].nil?
+    @content = @etd.contents.where(content_file_name: params[:filename]).first unless @etd.nil?
+
+    correct_avail = !@etd.nil? && params[:availability] == @etd.availability.name.downcase()
+    correct_file_avail = !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
+    if correct_avail && correct_file_avail
+      send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
+    elsif correct_avail && @content.nil?
+      # Bad filename
+      redirect_to(etd_path(@etd), notice: "I can't find that file. Pick one below.")
+    elsif correct_avail
+      # Bad file availability
+      redirect_to(content_path(@content), notice: 'That file has a different availability.')
+    elsif !@etd.nil?
+      # Bad availability
+      redirect_to(etd_path(@etd), notice: 'That ETD has a different availability.')
+    else
+      # Bad URN
+      # TODO: This should 404.
+      render # get_file.html.erb
+    end
+  end
 end

@@ -2,12 +2,13 @@ require 'test_helper'
 
 class EtdsControllerTest < ActionController::TestCase
   setup do
-    @etd = etds(:one)
-    @person = people(:one)
-    sign_in(@person)
+    @etd = Etd.first
+    @person = Person.first
+    sign_in(@person) 
   end
 
   test "should get index" do
+    sign_out(@person)
     get(:index)
     assert_response(:success)
     assert_not_nil(assigns(:etds))
@@ -44,6 +45,7 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should show etd" do
+    sign_out(@person)
     get(:show, id: @etd.to_param)
     assert_response(:success)
     assert_not_nil(assigns(:etd))
@@ -70,25 +72,9 @@ class EtdsControllerTest < ActionController::TestCase
     assert_select("div#error_explanation")
   end
 
-  test "should be logged in for certain functionality." do
-    sign_out(@person)
-
-    get(:new)
-    assert_redirected_to(login_path)
-
-    get(:edit, id: @etd.to_param)
-    assert_redirected_to(login_path)
-
-    delete(:destroy, id: @etd.to_param)
-    assert_redirected_to(etds_path)
-
-    post(:vote, id: @etd.id, vote: 'true')
-    assert_redirected_to(login_path, notice: "You must log in to vote on an ETD.")
-  end
-
   test "should only be able to edit and destroy your ETDs." do
     sign_out(@person)
-    @person = people(:two)
+    @person = Person.last
     sign_in(@person)
 
     get(:edit, id: @etd.to_param)
@@ -113,10 +99,10 @@ class EtdsControllerTest < ActionController::TestCase
   end
 
   test "should add multiple contents (save_contents) to an ETD." do
-    @content_a = Content.create(contents(:three).attributes)
-    @content_b = Content.create(contents(:four).attributes)
+    @content_a = Content.last
+    @content_b = Content.first
 
-    params = {contents_attributes: {new_1: @content_a.attributes, new_2: @content_b.attributes}}
+    params = {contents_attributes: {new_1: @content_a.attributes.merge({id: nil}), new_2: @content_b.attributes.merge({id: nil})}}
     for c in @etd.contents do
       params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: false}
     end
@@ -125,6 +111,16 @@ class EtdsControllerTest < ActionController::TestCase
       post(:save_contents, etd: params, origin: '/etds/add_contents/', id: @etd.id)
     end
   end  
+
+  test "should correct the origin param." do
+    params = {contents_attributes: {}}
+    for c in @etd.contents do
+      params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: false}
+    end
+
+    post(:save_contents, etd: params, origin: '/bad/path/', id: @etd.id)
+    assert_redirected_to(controller: 'etds', action: 'add_contents')
+  end
   
   test "should delete multiple contents from an ETD." do
     params = {contents_attributes: {}}
@@ -187,10 +183,10 @@ class EtdsControllerTest < ActionController::TestCase
     @etd.save
 
     # Sign in an actual committee member.
-    sign_out @person
+    sign_out(@person)
     @person = Person.last
     @etd.people_roles << PeopleRole.new(person_id: @person.id, role_id: Role.where(group: "Collaborators").first.id)
-    sign_in @person
+    sign_in(@person)
 
     # Should vote on a submitted ETD.
     post(:vote, id: @etd.id, vote: 'not true')
@@ -200,5 +196,22 @@ class EtdsControllerTest < ActionController::TestCase
     assert_response(:success)
     assert(@etd.people_roles.where(person_id: @person.id).last.vote)
     assert(!ActionMailer::Base.deliveries.empty?)
+  end
+
+  test "should unsubmit an ETD, if appropriate." do
+    # ETD not submitted
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(person_path(@person), notice: "You cannot unsubmit an ETD that hasn't been submitted.")
+
+    # Non-Grad School person.
+    @etd.status = "Submitted"
+    @etd.save
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(person_path(@person), notice: "You cannot unsubmit ETDs.")
+
+    # Success!
+    @person.people_roles << PeopleRole.new(role_id: Role.where(group: "Graduate School").first.id)
+    post(:unsubmit, id: @etd.id)
+    assert_redirected_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.")
   end
 end

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '~> 3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,7 +14,7 @@ group :assets do
   gem 'sass-rails', " ~> 3.2.3"
   gem 'coffee-rails', " ~> 3.2.1"
   gem 'uglifier'
-  gem 'haml'
+  #gem 'haml'
 end
 
 #For AJAX:
@@ -54,6 +54,15 @@ gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
 
 # Background Workers!
 gem 'resque'
+
+# For pagination
+gem 'will_paginate', '3.0.3'
+
+# For messaging
+gem 'mailboxer'
+
+# For ip filtering
+gem 'netaddr'
 
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'

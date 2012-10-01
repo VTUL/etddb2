@@ -18,7 +18,7 @@ class ContentTest < ActiveSupport::TestCase
   end
 
   test "invalid with non-boolean bound attribute." do
-    content = Content.new(contents(:one).attributes)
+    content = Content.first
     content.bound = nil
     assert !content.valid?
     assert content.errors[:bound].include?("must be boolean")

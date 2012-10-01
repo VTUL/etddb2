@@ -1,33 +1,30 @@
-<h1>Enter a new person</h1>
+<h1>Create A Person</h1>
 
-<%= form_for(@person) do |f| %>
-  <p>
+<%= form_for(@person, url: create_legacy_person_path) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :middle_name %><br />
-    <%= f.text_field :middle_name %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name %>
-  </p>
-  <p>
-    <%= f.label :suffix %><br />
-    <%= f.text_field :suffix %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :pid %><br />
-    <%= f.text_field :pid %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Submit' %>
+  </div>
 <% end %>
 
 <%= link_to 'Back', people_path %>

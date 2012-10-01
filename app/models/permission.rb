@@ -5,9 +5,12 @@
 #########################################################
 
 class Permission < ActiveRecord::Base
-  belongs_to :digital_object
-  belongs_to :user_action
-  belongs_to :role
+  belongs_to :digital_object, inverse_of: :permissions
+  belongs_to :user_action, inverse_of: :permissions
+  belongs_to :role, inverse_of: :permissions
+
+  has_many :provenances, as: :model
+  has_many :conversations, as: :model
 
   validates_presence_of :role_id, :user_action_id, :digital_object_id
 end

@@ -44,6 +44,8 @@ class AvailabilitiesController < ApplicationController
 
     respond_to do |format|
       if @availability.save
+        Provenance.create(person: current_person, action: "created", model: @availability)
+
         format.html { redirect_to(@availability, notice: 'Availability was successfully created.') }
         format.json { render(json: @availability, status: :created, location: @availability) }
       else
@@ -60,6 +62,8 @@ class AvailabilitiesController < ApplicationController
 
     respond_to do |format|
       if @availability.update_attributes(params[:availability])
+        Provenance.create(person: current_person, action: "updated", model: @availability)
+
         format.html { redirect_to(@availability, notice: 'Availability was successfully updated.') }
         format.json { head :ok }
       else
@@ -73,6 +77,7 @@ class AvailabilitiesController < ApplicationController
   # DELETE /availabilities/1.json
   def destroy
     @availability = Availability.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @availability)
     @availability.destroy
 
     respond_to do |format|

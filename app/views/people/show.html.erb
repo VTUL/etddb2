@@ -2,14 +2,14 @@
 <% if !@my_etds.empty? %>
   <%= render 'etd_items' %>
 <% end %>
-<% if person_signed_in? && current_person.id == @person.id %>
+<% if current_person.id == @person.id %>
   <% if !@committee_etds.empty? %>
     <%= render 'committee_items' %>
   <% end %>
-  <% if !@person.people_roles.where(role_id: Role.where(group: 'Graduate School')).empty? %>
+  <% if !@person.roles.where(group: 'Graduate School').empty? %>
     <%= render 'review_items' %>
   <% end %>
-  <% if !@person.people_roles.where(role_id: Role.where(group: 'Administration')).empty? %>
+  <% if !@person.roles.where(group: 'Administration').empty? %>
     <%= render 'admin_items' %>
   <% end %>
 <% end %>

@@ -1,6 +1,15 @@
-<h1>Listing people</h1>
+<%= stylesheet_link_tag 'paginate' %>
 
-<table>
+<h1 class="top_bar">Listing people</h1>
+<div id="page_pref" class="top_bar" style="margin-top:30px">
+  <%= form_tag people_path, :method => 'get' do %>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
+  <% end %>
+</div>
+<%=will_paginate @people %>
+<br/>
+<table class="clear_left">
   <tr>
     <th>First name</th>
     <th>Middle name</th>
@@ -19,9 +28,17 @@
     <td><%=h person.email %></td>
     <td><%=h person.pid %></td>
     <td><%= link_to 'Show', person %></td>
-    <td><%= link_to 'Edit', edit_person_registration_path %></td>
-    <td><%= button_to 'Destroy', destroy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
+    <% if person.valid? %>
+      <td><%= link_to 'Edit', edit_person_registration_path %></td>
+      <td><%= button_to 'Destroy', destroy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
+    <% else %>
+      <td><%= link_to 'Edit', edit_legacy_person_path(person) %></td>
+      <td><%= button_to 'Destroy', destroy_legacy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
+<br/>
+<%=will_paginate @people %>
+
 <br />

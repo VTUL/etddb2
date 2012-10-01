@@ -6,7 +6,7 @@
       <% if cf.object.content? %>
         <% #This content already exists %>
         <%= cf.object.content_file_name %> |
-        <!--<%= cf.object.content_content_type %> |-->
+        <%= cf.object.content_content_type %> |
         <%= cf.object.content_file_size %> |
         <%= link_to "Edit", edit_content_path(cf.object)%> |
         <%= cf.link_to_remove "Delete" %>
@@ -32,13 +32,11 @@
         <th>Role:</th>
       </tr>
       <% for collab in @collabs do %>
-        <% for pr in @etd.people_roles.where(person_id: collab.id, role_id: Role.where(group: 'Collaborators')) %>
-          <tr>
-            <td><%= get_name(collab) %></td>
-            <td><%= Role.find(pr.role_id).name %></td>
-            <td><%= link_to 'Destroy', destroy_people_role_path(pr), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= collab.person.name %></td>
+          <td><%= collab.role.name %></td>
+          <td><%= link_to 'Destroy', destroy_people_role_path(collab), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
+        </tr>
       <% end %>
     </table>
   <% else %>

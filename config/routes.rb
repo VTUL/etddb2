@@ -1,14 +1,66 @@
+class AccessConstraint
+  def initialize
+    @ipv4 = [NetAddr::CIDR.create('128.173.0.0/16')]    # Blacksburg
+    @ipv4 << NetAddr::CIDR.create('198.82.0.0/16')      # Blacksburg
+    @ipv4 << NetAddr::CIDR.create('208.22.18.0/24')     # NOVA
+    @ipv4 << NetAddr::CIDR.create('208.29.54.0/24')     # NOVA
+
+    @ipv6 = [NetAddr::CIDR.create('2001:468:c80::/48')] # Blacksburg
+    @ipv6 << NetAddr::CIDR.create('2002:80ad::/32')     # Blacksburg, 6in4 from 128.173.0.0::/16
+    @ipv6 << NetAddr::CIDR.create('2002:2652::/32')     # Blacksburg, 6in4 from 198.82.0.0::/16
+
+    @metaarchive = []
+    File.open("#{Rails.root}/lib/MetaArchive.ips") do |f|
+      @metaarchive = f.lines.to_a.map { |l| l.strip }
+    end
+  end
+
+  def matches?(request)
+    restricted_access = []
+    withheld_access = false
+
+    # Allow on-campus access
+    begin
+      restricted_access = @ipv4.select { |subnet| subnet.contains?(request.remote_ip) }
+    rescue NetAddr::VersionError => e
+      restricted_access = @ipv6.select { |subnet| subnet.contains?(request.remote_ip) }
+    end
+
+    # Allow MetaArchive access
+    if Rails.env == "production" and @metaarchive.include?(request.remote_ip)
+      restricted_access << true
+    end
+
+    # Allow local dev work.
+    if Rails.env == "development" and ['127.0.0.1', '::1'].include?(request.remote_ip)
+      withheld_access = true
+    end
+
+    result = ['available', 'submitted'].include?(request.params[:availability]) and (request.params[:file_availability].nil? or
+                    request.params[:file_availability] == 'available' or
+                    (request.params[:file_availability] == 'restricted' && (!restricted_access.empty? || withheld_access)) or
+                    (request.params[:file_availability] == 'withheld' && withheld_access))
+    result |= request.params[:availability] == 'withheld' && withheld_access
+    # TODO: REMOVE NEXT LINE! FOR DEBUGGING ONLY!
+    result = true
+    result &= !/etd-\d+(-\d+)?/.match(request.params[:urn]).nil?
+
+    return result
+  end
+end
+
 NewVtEtdUpgrd::Application.routes.draw do
   require 'resque/server'
 
   # These are boring static pages.
   root :to => 'pages#home'
-  match '/about', :to => 'pages#about'
-  match '/contact', :to => 'pages#contact'
-  match '/authorhelp', :to => 'pages#authorhelp'
-  match '/staffhelp', :to => 'pages#staffhelp'
-  match '/dev', :to => 'pages#dev'
-  
+
+  get '/about', :to => 'pages#about'
+  get '/contact', :to => 'pages#contact'
+  get '/authorhelp', :to => 'pages#authorhelp'
+  get '/staffhelp', :to => 'pages#staffhelp'
+  get '/dev', :to => 'pages#dev'
+
   # Resque's routes.
   mount Resque::Server.new, at: "/resque"
 
@@ -27,14 +79,27 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/people/find', :to => 'people#find'
   post '/people/new_committee_member', :to => 'people#new_committee_member'
   post '/people/add_committee', :to => 'people#add_committee'
+  get '/people/new_legacy', :to => 'people#new', :as => :new_legacy_person
+  get '/people/edit_legacy/:id', :to => 'people#edit', :as => :edit_legacy_person
+  post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
+  put '/people/edit_legacy/:id', :to => 'people#update', :as => :update_legacy_person
+  post '/people/destroy_legacy/:id', :to => 'people#destroy', :as => :destroy_legacy_person
   resources :people, :only => [:index, :show]
+  # This allows us to link to a attached model, and not get errors with LegacyPeople.
+  # However, this route never needs to resolve, it is absorbed by the resources route above it. It just needs to be named.
+  get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
+  get '/etds/add_author/:id', :to => 'etds#add_author', :as => :add_author_to_etd
+  post '/etds/add_author/:id', :to => 'etds#save_author', :as => :save_author_to_etd
   get '/etds/next_new/:id', :to => 'etds#next_new', :as => :next_new_etd
   put '/etds/next_new/:id', :to => 'etds#save_contents', :as => :save_contents_to_etd
   get '/etds/add_contents/:id', :to => 'etds#add_contents', :as => :add_contents_to_etd
   post '/etds/submit/:id', :to => 'etds#submit', :as => :submit_etd
   post '/etds/vote/:id', :to => 'etds#vote', :as => :vote_for_etd
+  post '/etds/unsubmit/:id', :to => 'etds#unsubmit', :as => :unsubmit_etd
+  get '/etds/reviewboard/:id', :to => 'etds#reviewboard', :as => :etd_reviewboard
+  post '/etds/approve/:id', :to => 'etds#approve', :as => :approve_etd
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
@@ -69,6 +134,25 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/permissions', :to => 'permissions#index', :as => :permissions
   get '/permissions/edit', :to => 'permissions#edit', :as => :edit_permissions
   post '/permissions/edit', :to => 'permissions#update', :as => :update_permissions
+
+  get '/conversations/show/:id', :to => 'conversations#show', :as => :conversation
+  get '/conversations/read/:id', :to => 'conversations#read', :as => :read_conversation
+  get '/conversations/unread/:id', :to => 'conversations#unread', :as => :unread_conversation
+  get '/conversations/archive/:id', :to => 'conversations#archive', :as => :archive_conversation
+  get '/conversations/unarchive/:id', :to => 'conversations#unarchive', :as => :unarchive_conversation
+  match '/conversations/new', :to => 'conversations#new', :as => :new_conversation
+  post '/conversations/confirm_new', :to => 'conversations#confirm_new', :as => :confirm_new_conversation
+  post '/conversations', :to => 'conversations#create', :as => :create_conversation
+  get '/conversations/reply/:id', :to => 'conversations#reply', :as => :reply_to_conversation
+  post '/conversations/reply/:id', :to => 'conversations#send_reply', :as => :send_reply_to_conversation
+  #get '/conversations/reply_all/:id', :to => 'conversations#reply_all', :as => :reply_all
+  #post '/conversations/reply_all/:id', :to => 'conversations#send_reply_all', :as => :send_reply_all
+  # This goes here so the above routes will resolve correctly.
+  get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
+
+  # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
+  get '/:availability/:urn', :to => 'etds#old_show', :constraints => AccessConstraint.new
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => AccessConstraint.new
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

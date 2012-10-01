@@ -46,6 +46,8 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       if @people_role.save
+        Provenance.create(person: current_person, action: "made #{@people_role.person.name} a #{@people_role.role.name}. See ", model: @people_role)
+
         format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully created.') }
         format.xml  { render(xml: @people_role, status: :created, location: @people_role) }
       else
@@ -70,6 +72,8 @@ class PeopleRolesController < ApplicationController
 
     respond_to do |format|
       if @people_role.update_attributes(params[:people_role])
+        Provenance.create(person: current_person, action: "updated", model: @people_role)
+
         format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -83,6 +87,7 @@ class PeopleRolesController < ApplicationController
   # DELETE /people_roles/1.xml
   def destroy
     @people_role = PeopleRole.find(params[:id])
+    Provenance.create(person: current_person, action: "destroyed", model: @people_role)
     @people_role.destroy
 
     respond_to do |format|

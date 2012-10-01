@@ -7,8 +7,8 @@
 
 <% @committee_etds.each do |etd| %>
   <tr>
-    <td><%= link_to(etd.title, etd_path(etd)) %></td>
-    <td><%= get_name(Person.where(etd.people_roles.where(role_id: Role.where(group: "Creators")).first.id).first) %></td>
+    <td><%= link_to(etd.title, etd_reviewboard_path(etd)) %></td>
+    <td><%= Person.find(etd.people_roles.where(role_id: Role.where(group: "Creators")).pluck(:person_id)).map { |p| p.name } .join(', ') %></td>
     <td>
       <%= form_tag(vote_for_etd_path(etd)) do %>
         <%= select_tag(:vote, options_for_select([['Approve', true], ['Disapprove', false]])) %>
