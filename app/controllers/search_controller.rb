@@ -12,24 +12,36 @@ class SearchController < ApplicationController
 	    
 	    if params[:adv_search].blank?
 	    	@no_search = true
+	    	@result = "no_search"
 	    else
 			# query parameter needed here to expose DSL and allow use of instance
 			# variable @per_page
-			search = Etd.search do |query|
-				if params[:search_using].blank?
-					# User has no checkboxes set to delimit search, 
-					# default search in this case goes here
-					fields = "title"
-				else
-					# Grab selected keys (for all options, see @checkbox_options), 
-					# use as fields to search through
-					fields = params[:search_using].keys
+			begin
+				search = Etd.search do |query|
+					if params[:search_using].blank?
+						# User has no checkboxes set to delimit search, 
+						# default search in this case goes here
+						fields = "title"
+					else
+						# Grab selected keys (for all options, see @checkbox_options), 
+						# use as fields to search through
+						fields = params[:search_using].keys
+					end
+					query.keywords params[:adv_search], :fields => fields
+					query.paginate :page => params[:page], :per_page => @per_page
 				end
-				query.keywords params[:adv_search], :fields => fields
-				query.paginate :page => params[:page], :per_page => @per_page
-			end
 
-			@etds = search.results
+				@etds = search.results
+				if search.results.size < 1 
+					@result = "none_found"
+				else
+					@result = search.results
+				end
+			rescue Exception => ex
+				# Catch exceptions, likely due to solr server being down
+				@result = "exception"
+				@debug = ex.message
+			end
 		end
 	end
 end
