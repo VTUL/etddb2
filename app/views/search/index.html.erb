@@ -38,9 +38,12 @@
          <%end%>
   <% end %>
 </div>
-<% if @no_search %>
+
+<% if @result == "no_search" %>
   <!-- Render nothing below search params if they haven't searched anything -->
-<% elsif @etds.blank? %>
+<% elsif @result == "exception" %>
+  <h3 class="clear_left"> Could Not Complete Request - <%= @debug %> </h3>
+<% elsif @result == "none_found" %>
   <br>
   <br>
   <h3 class="clear_left"> No Records Found </h3>
@@ -54,7 +57,7 @@
     </tr>
 
   <br />
-  <% @etds.each do |etd| %>
+  <% @result.each do |etd| %>
     <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
     <tr>
       <td><%= creators.map { |o| o.name } .join(", ") %></td>
