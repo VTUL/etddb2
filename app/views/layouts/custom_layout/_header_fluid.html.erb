@@ -46,12 +46,21 @@ The CSS styles used in this file can be found in custom_styles/screen_fluid.css.
   <!-- BEGIN SEARCH -->
   <!-- The search form for the ETD pages uses the Googlemini engine. -->
   <div id="search">
-    <form  method="get" action="http://googlemini.lib.vt.edu/search">
+    <%= form_tag search_index_path, :id => 'search_check_form', method: :get do %>
+    <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search' %>
+    <%= image_submit_tag("/assets/search_submit.gif") %>
+    <%= hidden_field_tag :per_page, params[:per_page] %>
+    <%= hidden_field_tag "search_using[title]", 1 %>
+  <% end %>
+  <div id="adv_search_link">
+    <%= link_to("Advanced Search", search_index_path) %>
+  </div>
+    <!-- <form  method="get" action="http://googlemini.lib.vt.edu/search">
       <fieldset id="search-entry">
         <legend>
-          <label for="search-query" class="hide">Search ETDs</label>
+          <label for="search-query" class="hide">Search ETDs</label> -->
           <!-- Clears the search box TODO - Need to get working in imported javascript -->
-          <input id="search-query" style="text-align:right"  name="q" type="text" value="Search ETDs" onClick="if (this.value == 'Search ETDs') { this.value = ''; }" size="25" maxlength="50" >
+<!--           <input id="search-query" style="text-align:right"  name="q" type="text" value="Search ETDs" onClick="if (this.value == 'Search ETDs') { this.value = ''; }" size="25" maxlength="50" >
           <input name="sitesearch" type="hidden" value="scholar.lib.vt.edu" > 
           <input name="hl" type="hidden" value="en" >
           <input type="hidden" name="site" value="etd">
@@ -60,12 +69,12 @@ The CSS styles used in this file can be found in custom_styles/screen_fluid.css.
           <input type="hidden" name="output" value="xml_no_dtd">
           <input type="hidden" name="num" value="10">
           <input type="hidden" name="proxyreload" value="1">
-          <input name="btnG" type="image" src=<%= asset_path('search_submit.gif') %> alt="Go" >
-	</legend>
-      </fieldset>
+          <input name="btnG" type="image" src=<%= asset_path('search_submit.gif') %> alt="Go" > -->
+<!-- 	</legend>
+      </fieldset> -->
       <!-- Advanced Search -->
-      <p><a href="http://googlemini.lib.vt.edu/search?entqr=0&amp;access=p&&amp;ud=1&&amp;sort=date%3AD%3AL%3Ad1&&amp;output=xml_no_dtd&&amp;site=etd&&amp;ie=UTF-8&&amp;oe=UTF-8&&amp;client=default_frontend&&amp;proxystylesheet=default_frontend&&amp;ip=128.173.124.223&&amp;proxycustom=%3CADVANCED/%3E" style="margin-left:-1.5em">Advanced Search</a></p>
-    </form>
+<!--       <p><a href="http://googlemini.lib.vt.edu/search?entqr=0&amp;access=p&&amp;ud=1&&amp;sort=date%3AD%3AL%3Ad1&&amp;output=xml_no_dtd&&amp;site=etd&&amp;ie=UTF-8&&amp;oe=UTF-8&&amp;client=default_frontend&&amp;proxystylesheet=default_frontend&&amp;ip=128.173.124.223&&amp;proxycustom=%3CADVANCED/%3E" style="margin-left:-1.5em">Advanced Search</a></p>
+    </form> -->
     <div class="clear">
       <span>&nbsp;</span> 
     </div>
