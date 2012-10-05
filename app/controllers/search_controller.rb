@@ -11,7 +11,6 @@ class SearchController < ApplicationController
 	    end
 	    
 	    if params[:adv_search].blank?
-	    	@no_search = true
 	    	@result = "no_search"
 	    else
 			# query parameter needed here to expose DSL and allow use of instance
@@ -40,7 +39,7 @@ class SearchController < ApplicationController
 			rescue Exception => ex
 				# Catch exceptions, likely due to solr server being down
 				@result = "exception"
-				@debug = ex.message
+				@exception_message = ex.message
 			end
 		end
 	end
