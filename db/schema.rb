@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20120827175341) do
     t.integer  "conversation_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    
   end
 
   create_table "people", :force => true do |t|
