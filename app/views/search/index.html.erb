@@ -8,7 +8,7 @@
 	  <%= submit_tag "Search", name: nil %>
     <div id = "options_list" >
       <table class="options_table">
-        <% @checkbox_options.each do |key, display_name| %>
+        <% @checkbox_options.each_with_index do |(key, display_name), index| %>
           <tr>
             <td><%= label_tag display_name %>:</td>
             <td>
@@ -18,12 +18,22 @@
                 <%= check_box_tag "search_using[#{key}]", 1 %>
               <% end %>
             </td>
+<!--             <% if index == 0 %>
+              <td>
+                <div id="sort_by_div">
+                  Sort By: 
+                </div>  
+              </td>
+              <td>
+                # <%= select_tag :sort_by, options_for_select(@sort_by_options, @sort_by) %>
+              </td>
+            <% end %> -->
           </tr>
-        <% end %> 
+        <% end %>
     </table>
   </div>
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
-	<% end %>
+  <% end %>
 	<br>
 </div>
 <div id="page_pref" class="top_bar"> 

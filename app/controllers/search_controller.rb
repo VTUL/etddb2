@@ -4,12 +4,18 @@ class SearchController < ApplicationController
 		# keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 							 "abstract" => "Abstract", "author" => "Author"}
+		@sort_by_options = ["Relevance", "Department", "Defense Date"]
 	    if params[:per_page] =~ /^\d+$/
 	      @per_page = params[:per_page]
 	    else
 	      @per_page = 10
 	    end
 	    
+	    if params[:sort_by].blank? 
+	    	@sort_by = @sort_by_options[0]
+	    else
+	    	@sort_by = params[:sort_by]
+	    end
 	    if params[:adv_search].blank?
 	    	@result = "no_search"
 	    else
@@ -28,6 +34,7 @@ class SearchController < ApplicationController
 					end
 					query.keywords params[:adv_search], :fields => fields
 					query.paginate :page => params[:page], :per_page => @per_page
+					# query.order_by(:degree_id, :asc)
 				end
 
 				@etds = search.results
