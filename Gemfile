@@ -59,7 +59,6 @@ gem 'will_paginate', '3.0.3'
 # For messaging
 gem 'mailboxer'
 
-<<<<<<< HEAD
 # For ip filtering
 gem 'netaddr'
 
