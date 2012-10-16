@@ -18,16 +18,6 @@
                 <%= check_box_tag "search_using[#{key}]", 1 %>
               <% end %>
             </td>
-<!--             <% if index == 0 %>
-              <td>
-                <div id="sort_by_div">
-                  Sort By: 
-                </div>  
-              </td>
-              <td>
-                # <%= select_tag :sort_by, options_for_select(@sort_by_options, @sort_by) %>
-              </td>
-            <% end %> -->
           </tr>
         <% end %>
     </table>
@@ -58,7 +48,10 @@
   <br>
   <h3 class="clear_left"> No Records Found </h3>
 <% else %>
-  <%= will_paginate @etds %>
+  <% if !@results_info.blank? %>
+  <h5 id="total" class="clear_left"><%= @results_info %></h5>
+  <% end %>
+  <%= will_paginate @result %>
   <table class="clear_left">
     <tr>
       <th>Author</th>
@@ -81,6 +74,6 @@
 
   </table>
   <br />
-  <%= will_paginate @etds %>
+  <%= will_paginate @result %>
 <% end %>
 <br />

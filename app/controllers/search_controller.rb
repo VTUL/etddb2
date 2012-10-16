@@ -4,18 +4,13 @@ class SearchController < ApplicationController
 		# keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 							 "abstract" => "Abstract", "author" => "Author"}
-		@sort_by_options = ["Relevance", "Department", "Defense Date"]
+		@results_info = nil
 	    if params[:per_page] =~ /^\d+$/
 	      @per_page = params[:per_page]
 	    else
 	      @per_page = 10
 	    end
 	    
-	    if params[:sort_by].blank? 
-	    	@sort_by = @sort_by_options[0]
-	    else
-	    	@sort_by = params[:sort_by]
-	    end
 	    if params[:adv_search].blank?
 	    	@result = "no_search"
 	    else
@@ -37,11 +32,12 @@ class SearchController < ApplicationController
 					# query.order_by(:degree_id, :asc)
 				end
 
-				@etds = search.results
 				if search.results.size < 1 
 					@result = "none_found"
 				else
 					@result = search.results
+					@results_info = "Showing Results #{@result.offset + 1} - 
+									#{@result.size + @result.offset} of #{search.total}" 
 				end
 			rescue Exception => ex
 				# Catch exceptions, likely due to solr server being down
