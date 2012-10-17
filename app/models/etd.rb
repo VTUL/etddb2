@@ -33,6 +33,7 @@ class Etd < ActiveRecord::Base
     text :keywords
     text :abstract
     text :author
+    string :author, :multiple => true
   end
 
   def author

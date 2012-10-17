@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag 'paginate' %>
 <%= stylesheet_link_tag 'advanced_search' %>
 <%= javascript_include_tag 'adv_search' %>
+<%= javascript_include_tag 'facets' %>
 <h1>Advanced Search</h1>
 <div id = "advance_search" class = "top_bar"> 
 	<%= form_tag search_index_path, :id => 'search_check_form', method: :get do %>
@@ -77,3 +78,18 @@
   <%= will_paginate @result %>
 <% end %>
 <br />
+
+<div id="facets">
+  <h3>Published</h3>
+  <ul>
+    <% for row in @search.facet(:author).rows %>
+      <li>
+        <% if params[:author].blank? %>
+          <%= link_to row.value, params.merge({:author => row.value}) %> (<%= row.count %>)
+        <% else %>
+          <strong><%= row.value %></strong> (<%= link_to "remove", :author => nil %>)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
