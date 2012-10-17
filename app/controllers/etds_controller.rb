@@ -360,8 +360,21 @@ class EtdsController < ApplicationController
       EtddbMailer.approved_proquest(@etd).deliver
     end
 
+    # TODO: Compute length of restriction.
+    if @etd.availability_id == Availability.where(name: 'Withheld').first.id
+      # TODO: Set up attribute to store the reason to withhold.
+    elsif @etd.availability_id == Availability.where(name: 'Restricted').first.id
+      Redis.current.zadd('release:action', (Time.now + 18.months).strftime('%Y%m%d'), @etd.id)
+    end
+
     respond_to do |format|
       format.html # approve.html.erb
     end
+  end
+
+  # POST /etd/delay_release/1
+  def delay_release
+    Redis.current.zadd('release:warning', (Time.now + 11.months).strftime('%Y%m%d'), @etd.id)
+    Redis.current.zadd('release:action', (Time.now + 18.months).strftime('%Y%m%d'), @etd.id)
   end
 end
