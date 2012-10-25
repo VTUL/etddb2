@@ -27,7 +27,7 @@ class SearchController < ApplicationController
 				end
 				query.keywords params[:adv_search], :fields => fields
 				query.paginate :page => params[:page], :per_page => @per_page
-				query.facet(:author)
+				query.facet(:author) 
 				query.with(:author, params[:author]) if params[:author].present?
 			end
 

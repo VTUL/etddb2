@@ -21,3 +21,7 @@
 	margin-left: auto;
 	padding-top: 8px;
 }
+
+#results_list {
+	float: right;
+}
