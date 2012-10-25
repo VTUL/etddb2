@@ -1,0 +1,28 @@
+<h1>Listing reasons</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Months Until Warning</th>
+    <th>Months Until Release</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reasons.each do |reason| %>
+  <tr>
+    <td><%= reason.name %></td>
+    <td><%= reason.description %></td>
+    <td><%= reason.months_to_wanring.nil? ? 'Never' : reason.months_to_warning %></td>
+    <td><%= reason.months_to_release.nil? ? 'Never' : reason.months_to_release %></td>
+    <td><%= link_to 'Show', reason %></td>
+    <td><%= link_to 'Edit', edit_reason_path(reason) %></td>
+    <td><%= link_to 'Destroy', reason, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'New Reason', new_reason_path %>

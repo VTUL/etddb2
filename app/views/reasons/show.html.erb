@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Months Until Warning</th>
+    <th>Months Until Release</th>
+  </tr>
+  <tr>
+    <td><%= @reason.name %></td>
+    <td><%= @reason.description %></td>
+    <td><%= @reason.months_to_warning %></td>
+    <td><%= @reason.months_to_release %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_reason_path(@reason) %> |
+<%= link_to 'Back', reasons_path %>
