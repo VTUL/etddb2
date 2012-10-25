@@ -13,11 +13,11 @@ class CreateEtds < ActiveRecord::Migration
       t.date :approval_date
       t.date :release_date
 
-      t.integer :availability_id
       t.integer :copyright_statement_id
       t.integer :degree_id
       t.integer :document_type_id
       t.integer :privacy_statement_id
+      t.integer :release_manager_id
 
       t.timestamps
     end

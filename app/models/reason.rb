@@ -1,0 +1,8 @@
+class Reason < ActiveRecord::Base
+  has_many :release_managers, inverse_of: :reason
+  has_many :provenances, as: :model
+  has_many :conversations, as: :model
+
+  validates_presence_of :name, :months_to_release, :months_to_warning
+  validates :months_to_release, :months_to_warning, numericality: { only_integer: true }
+end
