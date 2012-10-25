@@ -13,8 +13,8 @@ class ContentTest < ActiveSupport::TestCase
   test "should be invalid with empty attributes" do
     content = Content.new
     assert content.invalid?
-    assert content.errors[:availability_id].any?
     assert content.errors[:bound].any?
+    assert content.errors[:release_manager_id].any?
   end
 
   test "invalid with non-boolean bound attribute." do
