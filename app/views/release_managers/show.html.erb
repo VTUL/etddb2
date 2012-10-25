@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>Availability</th>
+    <th>Reason</th>
+    <th>Description</th>
+    <th>Attached To</th>
+  </tr>
+  <tr>
+    <td><%= link_to(@release_manager.availability.name, availability_path(@release_manager.availability_id)) %></td>
+    <td><%= link_to(@release_manager.reason.name, reason_path(@release_manager.reason_id) %></td>
+    <td><%= @release_manager.other_reason_desc %></td>
+    <td><%# TODO: Add to controller, if possible. %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_release_manager_path(@release_manager) %> |
+<%= link_to 'Back', release_managers_path %>

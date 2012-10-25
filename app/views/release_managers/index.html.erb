@@ -1,0 +1,27 @@
+<h1>Listing release_managers</h1>
+
+<table>
+  <tr>
+    <th>Availability</th>
+    <th>Reason</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @release_managers.each do |release_manager| %>
+  <tr>
+    <td><%= release_manager.availability.name %></td>
+    <td><%= release_manager.reason.name %></td>
+    <td><%= release_manager.other_reason_desc %></td>
+    <td><%= link_to 'Show', release_manager %></td>
+    <td><%= link_to 'Edit', edit_release_manager_path(release_manager) %></td>
+    <td><%= link_to 'Destroy', release_manager, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Release manager', new_release_manager_path %>
