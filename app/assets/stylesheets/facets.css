@@ -1,3 +1,28 @@
 #facets {
-	float: left;
+	/*float: left;*/
+	display: inline;
+    float: left;
+    margin-right: 0.6993%;
+    overflow: hidden;
+    width: 10em;
+}
+
+#facets ul {
+	border-bottom: 1px dotted #CCCCCC;
+    margin: 0;
+    padding-bottom: 1em;
+    padding-left: 0em;
+    font-size: 87%;
+}
+
+#facets h3 {
+	color: #555555;
+    cursor: pointer;
+    font-weight: 400;
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+#yield {
+	width: 81%;
 }

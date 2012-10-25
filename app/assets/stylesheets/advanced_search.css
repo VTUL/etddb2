@@ -24,4 +24,9 @@
 
 #results_list {
 	float: right;
+	/*display: inline;*/
+}
+
+#results_list table {
+	table-layout: fixed;
 }
