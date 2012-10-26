@@ -5,6 +5,7 @@ class CreateReasons < ActiveRecord::Migration
       t.string :description
       t.integer :months_to_release
       t.integer :months_to_warning
+      t.boolean :warn_before_approval
 
       t.timestamps
     end

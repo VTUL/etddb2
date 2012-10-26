@@ -27,7 +27,7 @@ class Etd < ActiveRecord::Base
   STATUSES = ["Created", "Submitted", "Approved", "Released"]
   validates :status, inclusion: {in: STATUSES, message: "must be a valid status."}
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
-  validates_presence_of :copyright_statement_id, :degree_id, :document_type_id, :privacy_statement_id
+  validates_presence_of :copyright_statement_id, :degree_id, :document_type_id, :privacy_statement_id, :release_manager_id
   validates_presence_of :abstract, :title, :urn, :url
   validates_uniqueness_of :urn
 

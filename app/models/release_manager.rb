@@ -7,7 +7,7 @@ class ReleaseManager < ActiveRecord::Base
   has_many :contents, inverse_of: :release_managers
 
   validates_presence_of :availability_id
-  validates_presence_of :reason_id, if: :requires_a_reason?
+  #validates_presence_of :reason_id, if: :requires_a_reason?
   
   def requires_a_reason?
     Availability.find(availability_id).name == 'Withheld'
