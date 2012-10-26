@@ -5,8 +5,6 @@ class CreateReleaseManagers < ActiveRecord::Migration
 
       t.integer :availability_id
       t.integer :reason_id
-
-      t.timestamps
     end
   end
 end
