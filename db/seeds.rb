@@ -132,14 +132,12 @@ roles = [
   ["Reviewer", "Graduate School"],
   ["Admin", "Administration"]
 ]
-
 for role in roles do
   Role.create(name: role[0], group: role[1])
 end
 
 digital_objects = ["Etd", "Content", "Role", "Department", "Degree",
   "Availability", "CopyrightStatement", "PrivacyStatement", "Provenance"]
-
 for object in digital_objects do
   DigitalObject.create(name: object)
 end
@@ -147,6 +145,16 @@ end
 user_actions = ["Create", "Read", "Update", "Delete"]
 for action in user_actions do
   UserAction.create(name: action)
+end
+
+reasons = [
+  ['Security', '', nil, nil, true],
+  ['Patent', '', 24, 30, false],
+  ['Creative Writing', '', 0, 120, true],
+  ['Other', '', 0, 24, false]
+]
+for reason in reasons do
+  Reason.create(name: reason[0], description: reason[1], months_to_warning: reason[2], months_to_release: reason[3], warn_before_approval: reason[4])
 end
 
 # Give Admin all permissions.
@@ -164,18 +172,22 @@ PeopleRole.create(person: Person.first, role: Role.where(group: "Administration"
 # These are just for ease of use in development.
 
 # Create an ETD for the super user.
-Etd.create(title: "Test", abstract: "This is an abstract for an ETD.", availability: Availability.first, copyright_statement: CopyrightStatement.first, degree: Degree.first, document_type: DocumentType.first, privacy_statement: PrivacyStatement.first, bound: false, urn: "etd-20120101-00000001", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000001/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.first)
+Etd.create(title: "Test", abstract: "This is an abstract for an ETD.", copyright_statement: CopyrightStatement.first, degree: Degree.first, document_type: DocumentType.first,
+           privacy_statement: PrivacyStatement.first, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000001", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000001/", status: "Created")
 Etd.first.departments = [Department.first, Department.last]
 PeopleRole.create(person: Person.first, etd: Etd.first, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.first, action: "created", model: Etd.first)
-Content.create(etd: Etd.first, availability: Availability.first, content: File.new('app/models/degree.rb'), bound: false, page_count: 0)
+Content.create(etd: Etd.first, release_manager_id: rm.id, content: File.new('app/models/degree.rb'), bound: false, page_count: 0)
 Provenance.create(person: Person.first, action: "created", model: Content.first)
-Content.create(etd: Etd.first, availability: Availability.first, content: File.new('app/models/etd.rb'), bound: false, duration: 0)
+Content.create(etd: Etd.first, release_manager_id: rm.id, content: File.new('app/models/etd.rb'), bound: false, duration: 0)
 Provenance.create(person: Person.first, action: "created", model: Content.last)
 
 # Add Sung Hee to People, give him an ETD.
 Person.create(first_name: "Sung Hee", last_name: "Park", pid: "shpark", email: "shpark@vt.edu", password: "123456789", password_confirmation: "123456789")
-Etd.create(title: "Tesst", abstract: "This is another abstract.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000002", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000002/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.where(retired: false).last)
+Etd.create(title: "Tesst", abstract: "This is another abstract.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000002", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000002/", status: "Created")
 Etd.last.departments << Department.where(name: "Computer Science").first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
@@ -199,17 +211,21 @@ PeopleRole.create(person: Person.last, etd: Etd.first, role: Role.where(group: "
 Provenance.create(person: Person.first, action: "made #{Person.last.name} a #{Role.where(group: "Graduate School").first.name}. See ", model: PeopleRole.last)
 
 # Add nine more ETDs and eight more People, so their index pages will paginate.
-Etd.create(title: "zLast", abstract: "This is another abstract.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000003", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000003/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.where(retired: false).last)
+Etd.create(title: "zLast", abstract: "This is another abstract.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000003", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000003/", status: "Created")
 Etd.last.departments << Department.last
 PeopleRole.create(person: Person.where(pid: 'suser').first, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.where(pid: 'suser').first, action: "created", model: Etd.last)
 
 Person.create(first_name: "John", last_name: "Muir", pid: "trailhead", email: "trailhead@vt.edu", password: "123456", password_confirmation: "123456", show_email: false)
-Etd.create(title: "The Origin of Yosemite's Valleys", abstract: "It's glaciers!", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000004", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000004/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.first)
+Etd.create(title: "The Origin of Yosemite's Valleys", abstract: "It's glaciers!", copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000004", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000004/", status: "Created")
 Etd.last.departments << Department.first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
-Content.create(etd: Etd.last, availability: Availability.first, content: File.new('Gemfile'), bound: false)
+Content.create(etd: Etd.last, release_manager_id: rm.id, content: File.new('Gemfile'), bound: false)
 Provenance.create(person: Person.last, action: "created", model: Content.last)
 PeopleRole.create(person: Person.first, etd: Etd.last, role: Role.where(group: "Collaborators").first)
 Provenance.create(person: Person.last, action: "added to their committee.", model: PeopleRole.last)
@@ -217,43 +233,57 @@ Etd.last.update_attributes(status: 'Submitted', submission_date: Time.now())
 Provenance.create(person: Person.last, action: "submitted", model: Etd.last)
 
 Person.create(first_name: "Stephen", last_name: "Mahler", pid: "npschief", email: "npschief@vt.edu", password: "123456", password_confirmation: "123456", show_email: false)
-Etd.create(title: "A National Park Service", abstract: "Why we need one.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000005", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000005/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.first)
+Etd.create(title: "A National Park Service", abstract: "Why we need one.", copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000005", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000005/", status: "Created")
 Etd.last.departments << Department.first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "John", last_name: "Rockefeller", pid: "junior", email: "junior@vt.edu", password: "123456", password_confirmation: "123456", display_name: 'John T. Rockefeller, Jr.')
-Etd.create(title: "How To Buy Land", abstract: "Two Words: Shell Company.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000006", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000006/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.first)
+Etd.create(title: "How To Buy Land", abstract: "Two Words: Shell Company.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000006", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000006/", status: "Created")
 Etd.last.departments = [Department.where(name: 'Business Administration').first, Department.first]
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "James", last_name: "Cameron", pid: "mycanyon", email: "mycanyon@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "NPS Failures", abstract: "Oh, I guess there aren't any...", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000007", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000007/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.where(retired: false).last)
+Etd.create(title: "NPS Failures", abstract: "Oh, I guess there aren't any...", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000007", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000007/", status: "Created")
 Etd.last.departments << Department.where(name: 'Numerology').first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "TJ", last_name: "Rossmeissl", pid: "tallone", email: "tallone@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "Tallness", abstract: "Is it important? Yes.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000008", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000008/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.where(retired: false).last)
+Etd.create(title: "Tallness", abstract: "Is it important? Yes.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000008", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000008/", status: "Created")
 Etd.last.departments << Department.where(name: 'Political Science').first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "Christie", last_name: "Eickhoff", pid: "kendo", email: "kendo@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "Kendo!", abstract: "It's great.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000009", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000009/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.where(retired: false).last)
+Etd.create(title: "Kendo!", abstract: "It's great.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000009", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000009/", status: "Created")
 Etd.last.departments << Department.where(name: 'Psychology').first
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "Jane", last_name: "Doe", pid: "jdoe", email: "jdoe@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "zLast", abstract: "This is another abstract.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000010", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000010/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.first)
+Etd.create(title: "zLast", abstract: "This is another abstract.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000010", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000010/", status: "Created")
 Etd.last.departments << Department.last
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "John", last_name: "Smith", pid: "jsmith", email: "jsmith@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "zLast", abstract: "This is ')other abstract.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: false, urn: "etd-20120101-00000011", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000011/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.first)
+Etd.create(title: "zLast", abstract: "This is ')other abstract.", copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: false, urn: "etd-20120101-00000011", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000011/", status: "Created")
 Etd.last.departments << Department.last
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
@@ -261,7 +291,9 @@ Provenance.create(person: Person.last, action: "created", model: Etd.last)
 # Create a BTD with a LegacyPerson
 LegacyPerson.create(first_name: "Collin", last_name: "Brittle")
 Provenance.create(person: Person.first, action: "created", model: LegacyPerson.last)
-Etd.create(title: "Ye Olde BTD", abstract: "A Paper BTD.", availability: Availability.last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last, privacy_statement: PrivacyStatement.last, bound: true, urn: "etd-19120101-00000012", url: "http://scholar.lib.vt.edu/theses/etd-19120101-00000012/", status: "Created")
+rm = ReleaseManager.create(availability: Availability.last)
+Etd.create(title: "Ye Olde BTD", abstract: "A Paper BTD.",  copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.last,
+           privacy_statement: PrivacyStatement.last, release_manager_id: rm.id, bound: true, urn: "etd-19120101-00000012", url: "http://scholar.lib.vt.edu/theses/etd-19120101-00000012/", status: "Created")
 Etd.last.departments << Department.where(name: "Information Technology").first
 Provenance.create(person: Person.first, action: "created", model: Etd.last)
 PeopleRole.create(person: LegacyPerson.last, etd: Etd.last, role: Role.where(group: "Creators").first)
