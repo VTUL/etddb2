@@ -101,21 +101,29 @@ class EtdsController < ApplicationController
     end
     @etd.department_ids = d
 
+    # TODO: Reasons.
+
     respond_to do |format|
       if @etd.save
         Provenance.create(person: current_person, action: "created", model: @etd)
         if current_person.roles.include?(Role.where(group: "Administration").first)
           # Defer creating the author.
+          # Don't email, or warn about the availability
           format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
         else
           # Make the current_person the creator, or preferably, author.
           pr = PeopleRole.new(person_id: current_person.id, etd_id: @etd.id)
-          # TODO: Is there a better way to do give the creator's role?
           pr.role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first
           pr.save
 
+          # Email ALL the people!
           EtddbMailer.created_authors(@etd).deliver
+
+          # Warn the Author and Committee Chair if the release reason says so.
+          if @etd.reason && @etd.reason.warn_before_approval
+            # TODO: Email Author and Committee Chair
+          end
 
           format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
@@ -144,8 +152,7 @@ class EtdsController < ApplicationController
         Provenance.create(person: current_person, action: "updated", model: @etd)
 
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
-        # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
-        if @etd.availability_id != Availability.where(name: "Mixed").first.id
+        if @etd.availability != Availability.where(name: "Mixed").first
           contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
           for content in contents do
             content.availability_id = @etd.availability_id
