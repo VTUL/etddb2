@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022152907) do
+ActiveRecord::Schema.define(:version => 20121029220412) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20121022152907) do
     t.string   "title"
     t.text     "description"
     t.integer  "etd_id"
-    t.integer  "release_manager_id"
+    t.integer  "availability_id"
     t.integer  "page_count"
     t.integer  "duration"
     t.string   "dimensions"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20121022152907) do
     t.string   "content_content_type"
     t.integer  "content_file_size"
     t.datetime "content_updated_at"
+    t.integer  "reason_id"
   end
 
   create_table "conversations", :force => true do |t|
@@ -97,13 +98,14 @@ ActiveRecord::Schema.define(:version => 20121022152907) do
     t.date     "submission_date"
     t.date     "approval_date"
     t.date     "release_date"
+    t.integer  "availability_id"
     t.integer  "copyright_statement_id"
     t.integer  "degree_id"
     t.integer  "document_type_id"
     t.integer  "privacy_statement_id"
-    t.integer  "release_manager_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.integer  "reason_id"
   end
 
   create_table "messages", :force => true do |t|
@@ -194,12 +196,6 @@ ActiveRecord::Schema.define(:version => 20121022152907) do
     t.integer  "conversation_id"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-  end
-
-  create_table "release_managers", :force => true do |t|
-    t.string  "other_reason_desc"
-    t.integer "availability_id"
-    t.integer "reason_id"
   end
 
   create_table "roles", :force => true do |t|
