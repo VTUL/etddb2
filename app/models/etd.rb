@@ -9,10 +9,8 @@ class Etd < ActiveRecord::Base
   belongs_to :degree, inverse_of: :etds
   belongs_to :document_type, inverse_of: :etds
   belongs_to :privacy_statement, inverse_of: :etds
-  belongs_to :release_manager, inverse_of: :etd
-
-  has_one :availability, through: :release_manager
-  has_one :reason, through: :release_manager
+  belongs_to :availability, inverse_of: :etds
+  belongs_to :reason, inverse_of: :etds
 
   has_many :contents, dependent: :destroy, inverse_of: :etd
   accepts_nested_attributes_for :contents, allow_destroy: true
@@ -27,7 +25,7 @@ class Etd < ActiveRecord::Base
   STATUSES = ["Created", "Submitted", "Approved", "Released"]
   validates :status, inclusion: {in: STATUSES, message: "must be a valid status."}
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
-  validates_presence_of :copyright_statement_id, :degree_id, :document_type_id, :privacy_statement_id, :release_manager_id
+  validates_presence_of :availability_id, :copyright_statement_id, :degree_id, :document_type_id, :privacy_statement_id, :reason_id
   validates_presence_of :abstract, :title, :urn, :url
   validates_uniqueness_of :urn
 

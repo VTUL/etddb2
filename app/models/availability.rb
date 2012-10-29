@@ -5,7 +5,8 @@
 #########################################################
 
 class Availability < ActiveRecord::Base
-  has_many :release_managers, inverse_of: :availability
+  has_many :etds, inverse_of: :availability
+  has_many :contents, inverse_of: :availability
   has_many :provenances, as: :model
   has_many :conversations, as: :model
 
