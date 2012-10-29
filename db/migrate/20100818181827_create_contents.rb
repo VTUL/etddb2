@@ -6,10 +6,9 @@ class CreateContents < ActiveRecord::Migration
       t.boolean :bound
       t.string :title
       t.text :description
-      t.text :mime_type
 
       t.integer :etd_id
-      t.integer :release_manager_id
+      t.integer :availability_id
 
       t.integer :page_count
       t.integer :duration
