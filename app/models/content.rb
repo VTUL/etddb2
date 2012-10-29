@@ -8,6 +8,9 @@ class Content < ActiveRecord::Base
   belongs_to :etd, inverse_of: :contents
   belongs_to :release_manager, inverse_of: :contents
   
+  has_one :availability, through: :release_manager
+  has_one :reason, through: :release_manager
+
   has_many :provenances, as: :model
   has_many :conversations, as: :model
 

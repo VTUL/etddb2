@@ -11,8 +11,8 @@ class Etd < ActiveRecord::Base
   belongs_to :privacy_statement, inverse_of: :etds
   belongs_to :release_manager, inverse_of: :etd
 
-  has_one :release_manager, inverse_of: :etd
   has_one :availability, through: :release_manager
+  has_one :reason, through: :release_manager
 
   has_many :contents, dependent: :destroy, inverse_of: :etd
   accepts_nested_attributes_for :contents, allow_destroy: true
