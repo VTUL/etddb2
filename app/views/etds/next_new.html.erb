@@ -49,7 +49,11 @@
   <% end %>
 </p>
 <p>
-<%= link_to 'View ETD', @etd %>
+<% unless ['Withheld'].include?(@etd.availability.name) %>
+  <%= link_to 'View ETD', @etd %>
+<% else %>
+  <%= link_to('Pick a release schedule for your ETD.', pick_reason_path(@etd))
+<% end %>
 </p>
 <script>
 $('.del_pr').bind('ajax:success', function() {  

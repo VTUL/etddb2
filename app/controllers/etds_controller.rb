@@ -101,7 +101,8 @@ class EtdsController < ApplicationController
     end
     @etd.department_ids = d
 
-    # TODO: Reasons.
+    # Add the default reason.
+    @etd.reason = Reason.where(name: @etd.availability.name).first
 
     respond_to do |format|
       if @etd.save
@@ -258,6 +259,33 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       format.html # add_contents.html.erb
+    end
+  end
+
+  # GET /etds/add_reason/1
+  def pick_reason
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      format.html #pick_reason.html.erb
+    end
+  end
+
+  # POST /etds/add_reason/1
+  def add_reason
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.update_attributes(params[:etd])
+        # TODO: Better Action.
+        Provenance.create(person: current_person, action: "updated", model: @etd)
+
+        format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render(action: "edit") }
+        format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
+      end
     end
   end
 

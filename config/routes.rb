@@ -94,6 +94,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/unsubmit/:id', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/reviewboard/:id', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/approve/:id', :to => 'etds#approve', :as => :approve_etd
+  get '/etds/add_reason/:id', :to => 'etds#pick_reason', :as => :pick_reason
+  post '/etds/add_reason/:id', :to => 'etds#add_reason', :as => :add_reason
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
