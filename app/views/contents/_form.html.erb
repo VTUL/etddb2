@@ -39,12 +39,12 @@
 
   <% if @etd.availability.name == "Mixed" %>
   <div class="field">
-    <%= label_tag("Availability") %>
+    <%= f.label(:availability_id, "Availability") %>
     <table>
       <% for avail in Availability.where(retired: false) do %>
         <% if avail.name != "Mixed" %>
         <tr>
-          <td valign='top'><%= radio_button_tag(:availability_id, avail.id) %></td>
+          <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
           <td valign='top' align='right'><%= avail.name %>:</td>
           <td valign='top'><%= avail.description %></td>
         </tr>
