@@ -265,6 +265,8 @@ class EtdsController < ApplicationController
   # GET /etds/add_reason/1
   def pick_reason
     @etd = Etd.find(params[:id])
+    # TODO: Filter out availability reasons, except the one from the ETD.
+    @reasons = Reason.all
 
     respond_to do |format|
       format.html #pick_reason.html.erb

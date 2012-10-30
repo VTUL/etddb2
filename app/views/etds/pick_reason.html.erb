@@ -1,0 +1,30 @@
+<%= form_for @etd, url: add_reason_path(@etd) do |f| %>
+  <% if @etd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this ETD from being saved:</h2>
+
+      <ul>
+      <% @etd.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% # TODO: Better label text. %>
+    <%= f.label(:reason_id, "Reasons") %>
+    <table>
+      <% for reason in @reasons do %>
+        <tr>
+          <td valign='top'><%= f.radio_button(:reason_id, reason.id) %></td>
+          <td valign='top' align='right'><%= reason.name %>:</td>
+          <% #TODO: add desc to seeded reasons, show months_to_* here.
+          <td valign='top'><%= reason.description %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <%= f.submit %>
+<% end %>
