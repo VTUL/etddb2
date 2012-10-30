@@ -1,10 +1,15 @@
 #facets {
-	/*float: left;*/
 	display: inline;
     float: left;
     margin-right: 0.6993%;
+    margin-top: 68px;
+    padding: 5px;
     overflow: hidden;
     width: 10em;
+    border-color: #5A6A7A;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 2px;
 }
 
 #facets ul {
@@ -13,6 +18,8 @@
     padding-bottom: 1em;
     padding-left: 0em;
     font-size: 87%;
+    display: none;
+    list-style-type: none;
 }
 
 #facets h3 {
@@ -20,9 +27,22 @@
     cursor: pointer;
     font-weight: 400;
     margin-bottom: 0;
+    margin-top: 0;
     text-align: justify;
 }
 
 #yield {
 	width: 81%;
 }
+
+/*th.table_title_col {
+    width: 30%;
+}
+
+th.table_dept_col {
+    width:  15%;
+}
+
+th.table_author_col {
+    width:  15%;
+}*/

@@ -3,7 +3,8 @@ class SearchController < ApplicationController
 		@etds = []
 		# keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
-							 "abstract" => "Abstract", "author" => "Author"}
+							 "abstract" => "Abstract", "author" => "Author", 
+							 "urn" => "URN"}
 		@results_info = nil
 	    if params[:per_page] =~ /^\d+$/
 	      @per_page = params[:per_page]
@@ -18,7 +19,7 @@ class SearchController < ApplicationController
 			@search = Etd.search do |query|
 				if params[:search_using].blank?
 					# User has no checkboxes set to delimit search, 
-					# default search in this case goes here
+					# default search fields in this case goes here
 					fields = "title"
 				else
 					# Grab selected keys (for all options, see @checkbox_options), 
@@ -29,6 +30,7 @@ class SearchController < ApplicationController
 				query.paginate :page => params[:page], :per_page => @per_page
 				query.facet(:author) 
 				query.with(:author, params[:author]) if params[:author].present?
+				query.with(:urn, params[:urn]) if params[:urn].present?
 			end
 
 			if @search.results.size < 1 

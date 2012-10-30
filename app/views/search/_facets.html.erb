@@ -1,0 +1,16 @@
+<% if !@search.nil? %>
+  <div id="facets" class="clear_left">
+    <h3 class="facet_title">Author</h3>
+    <ul>
+      <% for row in search.facet(:author).rows %>
+        <li>
+          <% if params[:author].blank? %>
+            <%= link_to row.value, params.merge({:author => row.value}) %> (<%= row.count %>)
+          <% else %>
+            <strong><%= row.value %></strong> (<%= link_to "remove", params.merge({:author => nil}) %>)
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

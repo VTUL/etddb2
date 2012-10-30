@@ -2,6 +2,8 @@
 <%= stylesheet_link_tag 'advanced_search' %>
 <%= stylesheet_link_tag 'facets' %>
 <%= javascript_include_tag 'adv_search' %>
+<%= javascript_include_tag 'facets' %>
+<%= javascript_include_tag 'jquery.collapser' %>
 <h1>Advanced Search</h1>
 <div id = "advance_search" class = "top_bar"> 
 	<%= form_tag search_index_path, :id => 'search_check_form', method: :get do %>
@@ -40,20 +42,8 @@
   <% end %>
 </div>
 
-  <div id="facets" class="clear_left">
-    <h3>Author</h3>
-    <ul>
-      <% for row in @search.facet(:author).rows %>
-        <li>
-          <% if params[:author].blank? %>
-            <%= link_to row.value, params.merge({:author => row.value}) %> (<%= row.count %>)
-          <% else %>
-            <strong><%= row.value %></strong> (<%= link_to "remove", :author => nil %>)
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<%= render '/search/facets', :search => @search %>
+
 <div id="results_list">
 <% if @result == "no_search" %>
   <!-- Render nothing below search params if they haven't searched anything -->
@@ -69,25 +59,27 @@
   <% end %>
   <%= will_paginate @result %>
   <table>
-    <tr>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Department</th>
-    </tr>
-
+    <thead>
+      <tr>
+        <th class="table_author_col">Author</th>
+        <th class="table_title_col">Title</th>
+        <th class="table_dept_col">Department</th>
+      </tr>
+    </thead>
   <br />
-  <% @result.each do |etd| %>
-    <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
-    <tr>
-      <td><%= creators.map { |o| o.name } .join(", ") %></td>
-      <td><%= etd.title %></td>
-      <td><%= etd.departments.pluck(:name).join(", ") %></td>
-      <td><%= link_to 'Show', etd %></td>
-      <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-      <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
-    </tr>
-  <% end %>
-
+  <tbody>
+    <% @result.each do |etd| %>
+      <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
+      <tr>
+        <td><%= creators.map { |o| o.name } .join(", ") %></td>
+        <td><%= etd.title %></td>
+        <td><%= etd.departments.pluck(:name).join(", ") %></td>
+        <td><%= link_to 'Show', etd %></td>
+        <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
+        <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
   </table>
   <br />
   <%= will_paginate @result %>
