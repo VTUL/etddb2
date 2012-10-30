@@ -283,7 +283,7 @@ class EtdsController < ApplicationController
         format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render(action: "edit") }
+        format.html { render(action: "pick_reason") }
         format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
       end
     end
