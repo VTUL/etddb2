@@ -2,7 +2,7 @@ class ReasonsController < ApplicationController
   # GET /reasons
   # GET /reasons.json
   def index
-    @reasons = Reason.all
+    @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +35,10 @@ class ReasonsController < ApplicationController
   # GET /reasons/1/edit
   def edit
     @reason = Reason.find(params[:id])
+
+    if Availability.pluck(:name).include?(@reason.name)
+      redirect_to(edit_availability_path(Availability.where(name: @reason.name).first))
+    end
   end
 
   # POST /reasons
@@ -73,6 +77,11 @@ class ReasonsController < ApplicationController
   # DELETE /reasons/1.json
   def destroy
     @reason = Reason.find(params[:id])
+
+    if Availability.pluck(:name).include?(@reason.name)
+      redirect_to(reasons_url, notice: 'That Reason is attached to an Availability, and cannot be deleted.')
+    end
+
     @reason.destroy
 
     respond_to do |format|
