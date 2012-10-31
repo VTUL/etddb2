@@ -117,8 +117,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :privacy_statements, :except => :destroy
   post '/copyright_statements/:id/delete', :to => 'copyright_statements#destroy', :as => :destroy_copyright_statement
   resources :copyright_statements, :except => :destroy
-  post '/release_managers/:id/delete', :to => 'release_managers#destroy', :as => :destroy_release_manager
-  resources :release_managers, :except => :destroy
   post '/reasons/:id/delete', :to => 'reasons#destroy', :as => :destroy_reasons
   resources :reasons, :except => :destroy
 
