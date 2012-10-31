@@ -19,7 +19,15 @@
         <tr>
           <td valign='top'><%= f.radio_button(:reason_id, reason.id) %></td>
           <td valign='top' align='right'><%= reason.name %>:</td>
-          <% #TODO: add desc to seeded reasons, show months_to_* here.
+          <% if reason.months_to_release > 0 %>
+            <td valign='top'>The ETD will be released in <%= reason.months_to_release %> <%= "months".pluralize(reason.months_to_release) %>.</td>
+          <% else %>
+            <% if reason.months_to_release < 0 %>
+              <td valign='top'>The ETD will never be released.</td>
+            <% else %>
+              <td valign='top'>The ETD will be released immediately.</td>
+            <% end %>
+          <% end %>
           <td valign='top'><%= reason.description %></td>
         </tr>
       <% end %>

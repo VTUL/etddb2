@@ -265,15 +265,17 @@ class EtdsController < ApplicationController
   # GET /etds/add_reason/1
   def pick_reason
     @etd = Etd.find(params[:id])
-    # TODO: Filter out availability reasons, except the one from the ETD.
-    @reasons = Reason.all
+    @reasons = [@etd.reason] 
+    if ['Withheld', 'Restricted'].include?(@etd.availability.name)
+      @reasons += Reason.where("name NOT IN (?)", Availability.pluck(:name))
+    end
 
     respond_to do |format|
       format.html #pick_reason.html.erb
     end
   end
 
-  # POST /etds/add_reason/1
+  # PUT /etds/add_reason/1
   def add_reason
     @etd = Etd.find(params[:id])
 

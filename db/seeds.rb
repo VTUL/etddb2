@@ -148,17 +148,17 @@ for action in user_actions do
 end
 
 reasons = [
-  ['Unrestricted', '', 0, 0, false],
-  ['Restricted', '', 0, 18, false],
-  ['Mixed', '', 0, 0, false],
-  ['Withheld', '', 0, 24, true],
-  ['Available', '', 0, 0, false],
-  ['Semi-Available', '', 0, 18, false],
-  ['Unavailable', '', 0, 24, true],
-  ['Security', '', 0, 0, true],
-  ['Patent', '', 24, 30, false],
-  ['Creative Writing', '', 0, 120, true],
-  ['Other', '', 0, 60, false]
+  ['Unrestricted', 'The default release schedule for unrestricted ETDs.', 0, 0, false],
+  ['Restricted', 'The default release schedule for restricted ETDs.', 0, 18, false],
+  ['Mixed', 'The default release schedule for mixed ETDs. Note: Content will be released according to its own schedules', 0, 0, false],
+  ['Withheld', 'The default release schedule for withheld ETDs.', 0, 24, true],
+  ['Available', 'The default release schedule for available ETDs.', 0, 0, false],
+  ['Semi-Available', 'The default release schedule for semi-available ETDs.', 0, 18, false],
+  ['Unavailable', 'The default release schedule for unavailable ETDs.', 0, 24, true],
+  ['Security', 'This ETD cannot be released due to security reasons.', 0, -1, true],
+  ['Patent', 'This ETD cannot be released on time because of the patents it includes.', 24, 30, false],
+  ['Creative Writing', 'This ETD includes a creative writing story that prevents it from being released on time.', 0, 120, true],
+  ['Other', 'This ETD cannot be released in the default time for some other reason.', 0, 60, false]
 ]
 for reason in reasons do
   Reason.create(name: reason[0], description: reason[1], months_to_warning: reason[2], months_to_release: reason[3], warn_before_approval: reason[4])
