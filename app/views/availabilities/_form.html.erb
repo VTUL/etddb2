@@ -10,6 +10,17 @@
       </ul>
     </div>
   <% end %>
+  <% if @reason.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reason.errors.count, "error") %> prohibited this availability from being saved:</h2>
+
+      <ul>
+      <% @reason.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -22,6 +33,18 @@
   <div class="field">
     <%= f.label :retired %><br />
     <%= f.check_box :retired, {}, true, false %>
+  </div>
+  <div class="field">
+    <%= label(:reason, :months_to_warning) %><br />
+    <%= text_field(:reason, :months_to_warning) %>
+  </div>
+  <div class="field">
+    <%= label(:reason, :months_to_release) %><br />
+    <%= text_field(:reason, :months_to_release) %>
+  </div>
+  <div class="field">
+    <%= label(:reason, :warn_before_approval) %><br />
+    <%= check_box(:reason, :warn_before_approval, {}, true, false) %>
   </div>
 
   <div class="actions">

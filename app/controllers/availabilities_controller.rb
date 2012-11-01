@@ -44,8 +44,9 @@ class AvailabilitiesController < ApplicationController
   # POST /availabilities.json
   def create
     @availability = Availability.new(params[:availability])
-    # TODO: Make the below work.
-    @reason = Reason.new(name: @availability.name, description: "The default release schedule for #{@availability.name} ETDs.")
+    @reason = Reason.new(params[:reason])
+    @reason.name = @availability.name 
+    @reason.description =  "The default release schedule for #{@availability.name} ETDs."
 
     respond_to do |format|
       if @availability.save && @reason.save
@@ -65,10 +66,9 @@ class AvailabilitiesController < ApplicationController
   def update
     @availability = Availability.find(params[:id])
     @reason = Reason.where(name: @availability.name).first
-    # TODO: Update reason here.
 
     respond_to do |format|
-      if @availability.update_attributes(params[:availability]) && @reason.save
+      if @availability.update_attributes(params[:availability]) && @reason.update_attributes(params[:reason])
         Provenance.create(person: current_person, action: "updated", model: @availability)
 
         format.html { redirect_to(@availability, notice: 'Availability was successfully updated.') }
