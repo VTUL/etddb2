@@ -26,8 +26,13 @@
   <div class="field">
     <%= f.label(:department_ids, "Departments") %><br />
     <%= f.fields_for :department_ids do |df| %>
-      <%= df.collection_select(:id_1, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[0]}) %><br />
-      <%= df.collection_select(:id_2, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[1], prompt: "I do not have a second department."}) %>
+      <% if (current_person.roles & Role.where(group: 'Administration')).empty?  %>
+        <%= df.collection_select(:id_1, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[0]}) %><br />
+        <%= df.collection_select(:id_2, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[1], prompt: "I do not have a second department."}) %>
+      <% else %>
+        <%= df.collection_select(:id_1, Department.all, :id, :name, {selected: @etd.department_ids[0]}) %><br />
+        <%= df.collection_select(:id_2, Department.all, :id, :name, {selected: @etd.department_ids[1], prompt: "I do not have a second department."}) %>
+      <% end %>
     <% end %>
   </div>
   <div class="field">

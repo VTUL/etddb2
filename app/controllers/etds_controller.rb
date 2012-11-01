@@ -107,7 +107,8 @@ class EtdsController < ApplicationController
     respond_to do |format|
       if @etd.save
         Provenance.create(person: current_person, action: "created", model: @etd)
-        if current_person.roles.include?(Role.where(group: "Administration").first)
+
+        if (current_person.roles & Role.where(group: "Administration")).empty?
           # Defer creating the author.
           # Don't email, or warn about the availability
           format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }

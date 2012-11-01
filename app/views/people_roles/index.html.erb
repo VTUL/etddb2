@@ -11,10 +11,10 @@
 
 <% @people_roles.each do |people_role| %>
   <tr>
-    <td><%= Person.find(people_role.person_id).name %></td>
-    <td><%= Role.find(people_role.role_id).name %></td>
+    <td><%= people_role.person.name %></td>
+    <td><%= people_role.role.name %></td>
     <% if !people_role.etd_id.nil? %>
-    <td><%= link_to(Etd.find(people_role.etd_id).title, etd_path(people_role.etd_id)) %></td>
+    <td><%= link_to(people_role.etd.title, etd_path(people_role.etd_id)) %></td>
     <% else %>
     <td></td>
     <% end %>
