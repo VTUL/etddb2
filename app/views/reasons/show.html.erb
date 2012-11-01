@@ -4,12 +4,30 @@
     <th>Description</th>
     <th>Months Until Warning</th>
     <th>Months Until Release</th>
+    <th>Warn Before Approval?</th>
   </tr>
   <tr>
     <td><%= @reason.name %></td>
     <td><%= @reason.description %></td>
-    <td><%= @reason.months_to_warning %></td>
-    <td><%= @reason.months_to_release %></td>
+    <% if @reason.months_to_warning > 0 %>
+        <td><%= @reason.months_to_warning %></td>
+    <% else %>
+      <% if @reason.months_to_warning < 0 %>
+        <td>Never</td>
+      <% else %>
+        <td>Immediately</td>
+      <% end %>
+    <% end %>
+    <% if @reason.months_to_release > 0 %>
+        <td><%= @reason.months_to_release %></td>
+    <% else %>
+      <% if @reason.months_to_release < 0 %>
+        <td>Never</td>
+      <% else %>
+        <td>Immediately</td>
+      <% end %>
+    <% end %>
+    <td><%= @reason.warn_before_approval ? 'Yes' : 'No' %></td>
   </tr>
 </table>
 
