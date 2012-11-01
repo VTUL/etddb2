@@ -36,8 +36,8 @@ class ReasonsController < ApplicationController
   def edit
     @reason = Reason.find(params[:id])
 
-    if Availability.pluck(:name).include?(@reason.name)
-      redirect_to(edit_availability_path(Availability.where(name: @reason.name).first))
+    unless @reason.availability.nil?
+      redirect_to(edit_availability_path(@reason.availability))
     end
   end
 
@@ -78,7 +78,7 @@ class ReasonsController < ApplicationController
   def destroy
     @reason = Reason.find(params[:id])
 
-    if Availability.pluck(:name).include?(@reason.name)
+    unless @reason.availability.nil?
       redirect_to(reasons_url, notice: 'That Reason is attached to an Availability, and cannot be deleted.')
     end
 

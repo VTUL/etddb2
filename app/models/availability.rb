@@ -12,6 +12,6 @@ class Availability < ActiveRecord::Base
 
   belongs_to :reason, inverse_of: :availability
 
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :reason_id
   validates :retired, inclusion: {in: [true, false], message: "must be boolean"}
 end

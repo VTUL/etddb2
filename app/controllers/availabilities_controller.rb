@@ -14,7 +14,7 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/1.json
   def show
     @availability = Availability.find(params[:id])
-    @reason = Reason.where(name: @availability.name).first
+    @reason = @availability.reason
 
     respond_to do |format|
       format.html # show.html.erb
@@ -67,7 +67,7 @@ class AvailabilitiesController < ApplicationController
   # PUT /availabilities/1.json
   def update
     @availability = Availability.find(params[:id])
-    @reason = Reason.where(name: @availability.name).first
+    @reason = @availability.reason
 
     respond_to do |format|
       if @availability.update_attributes(params[:availability]) && @reason.update_attributes(params[:reason])
@@ -86,9 +86,10 @@ class AvailabilitiesController < ApplicationController
   # DELETE /availabilities/1.json
   def destroy
     @availability = Availability.find(params[:id])
-    @reason = Reason.where(name: @availability.name).first
+    @reason = @availability.reason
     Provenance.create(person: current_person, action: "destroyed", model: @availability)
     @availability.destroy
+    @reason.destroy
 
     respond_to do |format|
       format.html { redirect_to(availabilities_url) }
