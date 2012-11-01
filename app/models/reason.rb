@@ -1,4 +1,6 @@
 class Reason < ActiveRecord::Base
+  has_one :availability, inverse_of: :reason
+
   has_many :etds, inverse_of: :reason
   has_many :contents, inverse_of: :reason
   has_many :provenances, as: :model

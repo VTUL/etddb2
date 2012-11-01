@@ -43,13 +43,15 @@ class AvailabilitiesController < ApplicationController
   # POST /availabilities
   # POST /availabilities.json
   def create
+    params[:availability][:retired] = false if params[:availability][:retired].nil?
     @availability = Availability.new(params[:availability])
     @reason = Reason.new(params[:reason])
     @reason.name = @availability.name 
     @reason.description =  "The default release schedule for #{@availability.name} ETDs."
+    @availability.reason = @reason
 
     respond_to do |format|
-      if @availability.save && @reason.save
+      if  @reason.save && @availability.save
         Provenance.create(person: current_person, action: "created", model: @availability)
 
         format.html { redirect_to(@availability, notice: 'Availability was successfully created.') }
