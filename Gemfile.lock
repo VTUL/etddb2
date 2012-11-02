@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/ryanb/nested_form.git
-  revision: 74a8683c1e2569f575f828b7f9dd84957a47ee67
+  revision: bd30e0b48ec66a04ad3fd8d3eb2b79f7f3b2173c
   specs:
-    nested_form (0.2.3)
+    nested_form (0.3.0)
 
 GEM
   remote: http://rubygems.org/
@@ -36,19 +36,19 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    builder (3.0.3)
+    builder (3.0.4)
     cancan (1.6.8)
-    carrierwave (0.6.2)
+    carrierwave (0.7.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    cocaine (0.3.0)
+    cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.3.3)
+    coffee-script-source (1.4.0)
     daemons (1.1.9)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
@@ -70,7 +70,7 @@ GEM
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (2.1.2)
+    jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
@@ -88,11 +88,11 @@ GEM
     netaddr (1.5.0)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
-    paperclip (3.2.0)
+    paperclip (3.3.1)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
-      cocaine (>= 0.0.2)
+      cocaine (~> 0.4.0)
       mime-types
     polyglot (0.3.3)
     rack (1.4.1)
@@ -100,7 +100,7 @@ GEM
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     rails (3.2.8)
       actionmailer (= 3.2.8)
@@ -146,16 +146,16 @@ GEM
     sqlite3 (1.3.6)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
-    thin (1.4.1)
+    thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
-    treetop (1.4.10)
+    treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.33)
+    tzinfo (0.3.34)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
