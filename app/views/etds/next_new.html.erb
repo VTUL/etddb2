@@ -49,10 +49,10 @@
   <% end %>
 </p>
 <p>
-<% unless ['Withheld', 'Restricted'].include?(@etd.availability.name) %>
+<% if !@etd.availability.allows_reasons %>
   <%= link_to 'View ETD', @etd %>
 <% else %>
-  <%= link_to('Pick a release schedule for your ETD.', pick_reason_path(@etd))
+  <%= link_to('Pick a release schedule for your ETD.', pick_reason_path(@etd)) %>
 <% end %>
 </p>
 <script>

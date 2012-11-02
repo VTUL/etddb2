@@ -8,7 +8,11 @@
 </p>
 <p>
   <b>Retired?</b>
-  <%= @availability.retired %>
+  <%= @availability.retired ? 'Yes' : 'No' %>
+</p>
+<p>
+  <b>Only for ETDs?</b>
+  <%= @availability.etd_only ? 'Yes' : 'No' %>
 </p>
 <p>
   <b>Months Until Warning</b>
@@ -33,6 +37,10 @@
       Immediately
     <% end %>
   <% end %>
+</p>
+<p>
+  <b>Allow other release schedules?</b>
+  <%= @availability.allows_reasons ? 'Yes' : 'No' %>
 </p>
 <p>
   <b>Warn Before Approval?</b>

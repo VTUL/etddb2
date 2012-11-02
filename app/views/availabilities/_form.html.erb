@@ -23,16 +23,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label(:name) %><br />
+    <%= f.text_field(:name) %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.label(:description) %><br />
+    <%= f.text_area(:description) %>
   </div>
   <div class="field">
-    <%= f.label :retired %><br />
-    <%= f.check_box :retired, {}, true, false %>
+    <%= f.label(:retired) %><br />
+    <%= f.check_box(:retired, {}, true, false) %>
+  </div>
+  <div class="field">
+    <%= f.label(:etd_only, "Only allow for ETDs?") %><br />
+    <%= f.check_box(:etd_only, {}, true, false) %>
   </div>
   <div class="field">
     <%= label(:reason, :months_to_warning) %><br />
@@ -41,6 +45,10 @@
   <div class="field">
     <%= label(:reason, :months_to_release) %><br />
     <%= text_field(:reason, :months_to_release) %>
+  </div>
+  <div class="field">
+    <%= f.label(:allows_reasons, "Allow other release schedules?") %><br />
+    <%= f.check_box(:allows_reasons, {}, true, false) %>
   </div>
   <div class="field">
     <%= label(:reason, :warn_before_approval) %><br />

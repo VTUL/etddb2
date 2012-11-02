@@ -154,10 +154,9 @@ class EtdsController < ApplicationController
         Provenance.create(person: current_person, action: "updated", model: @etd)
 
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
-        if @etd.availability != Availability.where(name: "Mixed").first
-          contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
-          for content in contents do
-            content.availability_id = @etd.availability_id
+        if !@etd.availability.etd_only
+          for content in @etd.contents do
+            content.availability= @etd.availability
             content.save
           end
         end
@@ -267,7 +266,7 @@ class EtdsController < ApplicationController
   def pick_reason
     @etd = Etd.find(params[:id])
     @reasons = [@etd.reason] 
-    if ['Withheld', 'Restricted'].include?(@etd.availability.name)
+    if @etd.availability.allows_reasons
       @reasons += Reason.where("name NOT IN (?)", Availability.pluck(:name))
     end
 
