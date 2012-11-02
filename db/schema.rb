@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101202135) do
+ActiveRecord::Schema.define(:version => 20121102143829) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.boolean  "retired"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "reason_id"
+    t.boolean  "allows_reasons"
+    t.boolean  "etd_only"
   end
 
   create_table "contents", :force => true do |t|
