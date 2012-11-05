@@ -40,8 +40,8 @@
     <%= f.text_area(:keywords, rows: 5) %>
   </div>
   <div class="field">
-    <%= f.label(:ddate, "Defense Date") %><br />
-    <%= f.date_select(:ddate, {end_year: Time.now.year}) %>
+    <%= f.label(:defense_date, "Defense Date") %><br />
+    <%= f.date_select(:defense_date, {end_year: Time.now.year}) %>
   </div>
   <div class="field">
     <%= f.label(:availability_id, "Availability") %>
