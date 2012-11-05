@@ -50,7 +50,7 @@ gem 'devise'
 # For multiple file upload
 gem 'paperclip'
 #gem 'carrierwave'
-gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
+gem 'nested_form'#, :git => "https://github.com/ryanb/nested_form.git"
 gem 'mime-types'
 
 # For pagination
