@@ -27,6 +27,7 @@ log/*
 tmp/
 public/bin/submitted/*
 public/theses/*
+public/assets/*
 files/*
 *.log
 *.sql
