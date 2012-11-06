@@ -21,9 +21,9 @@
       <% for row in search.facet(:document_type_id).rows %>
         <li>
           <% if params[:document_type_id].blank? %>
-            <%= link_to row.value, params.merge({:document_type_id => row.value}) %> (<%= row.count %>)
+            <%= link_to DocumentType.find(row.value).name, params.merge({:document_type_id => row.value}) %> (<%= row.count %>)
           <% else %>
-            <strong><%= row.value %></strong> (<%= link_to "remove", params.merge({:document_type_id => nil}) %>)
+            <strong><%= DocumentType.find(row.value).name %></strong> (<%= link_to "remove", params.merge({:document_type_id => nil}) %>)
           <% end %>
         </li>
       <% end %>
