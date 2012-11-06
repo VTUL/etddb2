@@ -1,5 +1,4 @@
 function submit_form() {
-	var $currChecked = new Array();
 
 	// Remove all inputs from page pref dropdown
 	$('.pref_removable').remove();
@@ -9,14 +8,16 @@ function submit_form() {
 	$checkBoxForm.each(function() {
 		var $parsed = getName("search_using", $(this).attr("name"));
 		if ($parsed != -1)
-			$currChecked.push($parsed);
+			appendValue($(this));
 	});
 
-	// Add back in those that were selected 
-	for(var i = 0; i < $currChecked.length; i++) {
-		$('<input type="hidden" value="1" name="search_using[' + $currChecked[i] + ']"' 
-			+ ' id="search_using_' + $currChecked[i] + '" class="pref_removable">').appendTo('#page_pref_form');
-	}
+	// Add dropdown values to form before submitting page pref
+	$dropdowns = $("select.dropdowns");
+	$dropdowns.each(function() {
+		var $name = getName("doc_info", $(this).attr("name"));
+		if($name != -1)
+			appendValue($(this));
+	});
 
 	// Submit form
 	$("#page_pref_form").submit();
@@ -25,6 +26,7 @@ function submit_form() {
 //If string contains the keyword, extract anything between '[' and ']'
 //Returns -1 on failure
 function getName($keyword , $rawString) {
+	if ($keyword == undefined || $rawString == undefined) return -1;
 	if ($rawString.indexOf($keyword) >= 0) {
 		var start = $rawString.indexOf("[");
 		var end = $rawString.indexOf("]");
@@ -33,4 +35,10 @@ function getName($keyword , $rawString) {
 		return $rawString.slice(start + 1, end);
 	}
 	return -1;
+}
+
+function appendValue($value) {
+	alert($value.attr("name"));
+	$('<input type="hidden" value="' + $value.val() + '" name="' + $value.attr("name") + '"' 
+			+ ' id="' + $value.attr("id") + '" class="pref_removable">').appendTo('#page_pref_form');
 }

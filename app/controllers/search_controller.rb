@@ -28,9 +28,14 @@ class SearchController < ApplicationController
 				end
 				query.keywords params[:adv_search], :fields => fields
 				query.paginate :page => params[:page], :per_page => @per_page
-				query.facet(:author) 
+				query.facet(:author)
+				query.facet(:document_type_id)
 				query.with(:author, params[:author]) if params[:author].present?
 				query.with(:urn, params[:urn]) if params[:urn].present?
+				query.with(:document_type_id, params[:document_type_id]) if params[:document_type_id].present?
+				# if params[:doc_info][:document_type_id].present? && !params[:doc_info][:document_type_id].empty?
+				# 	query.with(:document_type_id, params[:doc_info][:document_type_id]) 
+				# end
 			end
 
 			if @search.results.size < 1 
@@ -45,44 +50,5 @@ class SearchController < ApplicationController
 			@result = "exception"
 			@exception_message = ex.message
 		end
-
-
-
-
-	 #    if params[:adv_search].blank?
-	 #    	@result = "no_search"
-	 #    else
-		# 	# query parameter needed here to expose DSL and allow use of instance
-		# 	# variable @per_page
-		# 	begin
-		# 		@search = Etd.search do |query|
-		# 			if params[:search_using].blank?
-		# 				# User has no checkboxes set to delimit search, 
-		# 				# default search in this case goes here
-		# 				fields = "title"
-		# 			else
-		# 				# Grab selected keys (for all options, see @checkbox_options), 
-		# 				# use as fields to search through
-		# 				fields = params[:search_using].keys
-		# 			end
-		# 			query.keywords params[:adv_search], :fields => fields
-		# 			query.paginate :page => params[:page], :per_page => @per_page
-		# 			query.facet(:author)
-		# 			query.with(:author, params[:author]) if params[:author].present?
-		# 		end
-
-		# 		if @search.results.size < 1 
-		# 			@result = "none_found"
-		# 		else
-		# 			@result = @search.results
-		# 			@results_info = "Showing Results #{@result.offset + 1} - 
-		# 							#{@result.size + @result.offset} of #{@search.total}" 
-		# 		end
-		# 	rescue Exception => ex
-		# 		# Catch exceptions, likely due to solr server being down
-		# 		@result = "exception"
-		# 		@exception_message = ex.message
-		# 	end
-		# end
 	end
 end

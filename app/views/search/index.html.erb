@@ -24,6 +24,7 @@
           </tr>
         <% end %>
     </table>
+   <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, {:class => "dropdowns"})%>
   </div>
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>

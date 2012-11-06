@@ -34,6 +34,7 @@ class Etd < ActiveRecord::Base
     text :abstract
     text :author
     text :urn
+    integer :document_type_id
     string :urn
     string :author, :multiple => true
   end

@@ -1,12 +1,10 @@
 $(document).ready(function () {
-  $('#facets h3').collapser({
-    target: 'next',
-    targetOnly: null,
-    effect: 'slide',
-    changeText: false,
-    expandHtml: '',
-    collapseHtml: '',
-    expandClass: '',
-    collapseClass:''
-  });
+  $('.facet_title').collapser({
+      target: 'next',
+      targetOnly: 'ul',
+      effect: 'slide',
+      changeText: 0,
+      expandClass: 'expand',
+      collapseClass:'collapse'
+    });
 });
