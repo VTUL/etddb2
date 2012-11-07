@@ -1,16 +1,50 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @availability.name %>
 </p>
-
 <p>
-<b>Description:</b><br />
+  <b>Description:</b><br />
   <%= @availability.description %>
 </p>
-<b>Retired?</b>
-  <%= @availability.retired %>
+<p>
+  <b>Retired?</b>
+  <%= @availability.retired ? 'Yes' : 'No' %>
+</p>
+<p>
+  <b>Only for ETDs?</b>
+  <%= @availability.etd_only ? 'Yes' : 'No' %>
+</p>
+<p>
+  <b>Months Until Warning</b>
+  <% if @reason.months_to_warning > 0 %>
+      <%= @reason.months_to_warning %>
+  <% else %>
+    <% if @reason.months_to_warning < 0 %>
+      Never
+    <% else %>
+      Immediately
+    <% end %>
+  <% end %>
+</p>
+<p>
+  <b>Months Until Release</b>
+  <% if @reason.months_to_release > 0 %>
+      <%= @reason.months_to_release %>
+  <% else %>
+    <% if @reason.months_to_release < 0 %>
+      Never
+    <% else %>
+      Immediately
+    <% end %>
+  <% end %>
+</p>
+<p>
+  <b>Allow other release schedules?</b>
+  <%= @availability.allows_reasons ? 'Yes' : 'No' %>
+</p>
+<p>
+  <b>Warn Before Approval?</b>
+  <%= @reason.warn_before_approval ? 'Yes' : 'No' %>
 </p>
 
 <%= link_to 'Edit', edit_availability_path(@availability) %> |

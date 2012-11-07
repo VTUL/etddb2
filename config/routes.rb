@@ -100,6 +100,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/unsubmit/:id', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/reviewboard/:id', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/approve/:id', :to => 'etds#approve', :as => :approve_etd
+  get '/etds/add_reason/:id', :to => 'etds#pick_reason', :as => :pick_reason
+  put '/etds/add_reason/:id', :to => 'etds#add_reason', :as => :add_reason
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
@@ -121,6 +123,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :privacy_statements, :except => :destroy
   post '/copyright_statements/:id/delete', :to => 'copyright_statements#destroy', :as => :destroy_copyright_statement
   resources :copyright_statements, :except => :destroy
+  post '/reasons/:id/delete', :to => 'reasons#destroy', :as => :destroy_reasons
+  resources :reasons, :except => :destroy
 
   post '/roles/:id/delete', :to => 'roles#destroy', :as => :destroy_role
   resources :roles, :except => :destroy

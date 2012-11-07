@@ -1,0 +1,40 @@
+<%= form_for(@reason) do |f| %>
+  <% if @reason.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reason.errors.count, "error") %> prohibited this reason from being saved:</h2>
+
+      <ul>
+      <% @reason.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :months_to_warning %><br />
+    <%= f.text_field :months_to_warning %>
+    <span>Here, zero (0) means 'Immediately', and negative numbers (-1) mean 'Never'.</span>
+  </div>
+  <div class="field">
+    <%= f.label :months_to_release %><br />
+    <%= f.text_field :months_to_release %>
+    <span>Here, zero (0) means 'Immediately', and negative numbers (-1) mean 'Never'.</span>
+  </div>
+  <div class="field">
+    <%= f.label :warn_before_approval %><br />
+    <%= f.check_box :warn_before_approval, {}, true, false %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
