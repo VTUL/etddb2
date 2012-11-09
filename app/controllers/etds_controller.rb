@@ -388,22 +388,33 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
     @etd.status = 'Approved'
     @etd.approval_date = Time.now()
+    @etd.release_date = Time.now() + @etd.reason.months_to_release.months if @etd.months_to_release >= 0
     @etd.save()
 
     Provenance.create(person: current_person, action: "approved", model: @etd)
 
     EtddbMailer.approved_authors(@etd).deliver
     EtddbMailer.approved_committee(@etd).deliver
-    # TODO: Don't send unless available.
-    if @etd.document_type == DocumentType.where(retired: false, name: "Dissertation").first
+    # If the availability is not etd only, and there is no time until release, the ETD is available.
+    if @etd.document_type == DocumentType.where(name: "Dissertation").first && !@etd.availability.etd_only && @etd.reason.months_to_release == 0
       EtddbMailer.approved_proquest(@etd).deliver
     end
 
-    # TODO: Compute length of restriction.
-    if @etd.availability_id == Availability.where(name: 'Withheld').first.id
-      # TODO: Set up attribute to store the reason to withhold.
-    elsif @etd.availability_id == Availability.where(name: 'Restricted').first.id
-      Redis.current.zadd('release:action', (Time.now + 18.months).strftime('%Y%m%d'), @etd.id)
+    # Queue up release and warnings.
+    # If months_to_release is 0, it is now considered released. If it is less than 0, it will never be released.
+    Redis.current.zadd('etddb:release', (Time.now() + @etd.reason.months_to_release.months).strftime('%Y%m%d'), "#{@etd.class.name}:#{@etd.id}") if @etd.reason.months_to_release > 0
+    Redis.current.zadd('etddb:warning', (Time.now() + @etd.reason.months_to_warning.months).strftime('%Y%m%d'), "#{@etd.class.name}:#{@etd.id}") if @etd.reason.months_to_warning > 0
+    warn = !@etd.reason.warn_before_approval if @etd.reason.months_to_warning == 0
+    if @etd.availability.etd_only
+      for content in @etd.contents do
+        Redis.current.zadd('etddb:release', (Time.now() + content.reason.months_to_release.months).strftime('%Y%m%d'), "#{content.class.name}:#{content.id}") if content.reason.months_to_release > 0
+        Redis.current.zadd('etddb:warning', (Time.now() + content.reason.months_to_warning.months).strftime('%Y%m%d'), "#{content.class.name}:#{content.id}") if content.reason.months_to_warning > 0
+        warn = !content.reason.warn_before_approval if content.reason.months_to_warning == 0 && !warn
+      end
+    end
+
+    if warn
+      # TODO: Warn.
     end
 
     respond_to do |format|
