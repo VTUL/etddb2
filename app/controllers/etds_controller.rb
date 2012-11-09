@@ -102,7 +102,7 @@ class EtdsController < ApplicationController
     @etd.department_ids = d
 
     # Add the default reason.
-    @etd.reason = Reason.where(name: @etd.availability.name).first
+    @etd.reason = @etd.availability.reason
 
     respond_to do |format|
       if @etd.save
