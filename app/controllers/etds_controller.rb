@@ -157,6 +157,7 @@ class EtdsController < ApplicationController
         if !@etd.availability.etd_only
           for content in @etd.contents do
             content.availability= @etd.availability
+            content.reason = @etd.reason
             content.save
           end
         end
