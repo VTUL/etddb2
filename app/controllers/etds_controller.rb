@@ -257,19 +257,27 @@ class EtdsController < ApplicationController
 
   # POST /etd/submit/1
   def submit
-    @etd = Etd.find(params[:id])
-    @etd.status = "Submitted"
-    @etd.submission_date = Time.now()
-    @etd.save()
-    
-    Provenance.create(person: current_person, action: "submitted", model: @etd)
-
-    EtddbMailer.submitted_authors(@etd).deliver
-    EtddbMailer.submitted_school(@etd).deliver
-    EtddbMailer.submitted_committee(@etd).deliver
-
     respond_to do |format|
-      format.html #submit.html.erb
+      # ETD must have atleast one committee member, and one piece of content.
+      if @etd.contents.length > 0 && @etd.people_roles.where(role_id: Role.where(group: 'Collaborators').pluck(:id)).pluck(:person_id).uniq.count > 0
+        @etd = Etd.find(params[:id])
+        @etd.status = "Submitted"
+        @etd.submission_date = Time.now()
+        @etd.save()
+
+        #Create an archive of the ETD for easy downloading.
+        Resque.enqueue(Archive, @etd.id)
+
+        Provenance.create(person: current_person, action: "submitted", model: @etd)
+
+        EtddbMailer.submitted_authors(@etd).deliver
+        EtddbMailer.submitted_school(@etd).deliver
+        EtddbMailer.submitted_committee(@etd).deliver
+
+        format.html #submit.html.erb
+      else
+        # Redirect to etd, prompt to add content, committee.
+      end
     end
   end
 
