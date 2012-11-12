@@ -285,8 +285,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
-        # TODO: Better Action.
-        Provenance.create(person: current_person, action: "updated", model: @etd)
+        Provenance.create(person: current_person, action: "changed the release reason for", model: @etd)
 
         format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
