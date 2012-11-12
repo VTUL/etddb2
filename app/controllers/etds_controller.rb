@@ -168,9 +168,6 @@ class EtdsController < ApplicationController
           end
         end
 
-        # TODO: Implement the Archive process.
-        #Resque.enqueue(Archive, @etd.id)
-
         format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -306,6 +303,9 @@ class EtdsController < ApplicationController
     @etd.status = "Submitted"
     @etd.submission_date = Time.now()
     @etd.save()
+
+    #Create an archive of the ETD for easy downloading.
+    Resque.enqueue(Archive, @etd.id)
     
     Provenance.create(person: current_person, action: "submitted", model: @etd)
 
