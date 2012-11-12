@@ -3,6 +3,6 @@ class Archive
 
   def self.perform(etd_id)
     etd = Etd.find(etd_id)
-    # Back up to the filesystem.
+    etd.create_archive()
   end
 end
