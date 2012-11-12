@@ -36,4 +36,9 @@ class Etd < ActiveRecord::Base
       scoped
     end
   end
+
+  def create_archive()
+    # TODO: create archive.
+    puts("I'll get right on that.")
+  end
 end
