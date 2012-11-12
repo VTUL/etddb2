@@ -149,6 +149,12 @@ class EtdsController < ApplicationController
     end
     params[:etd][:department_ids] = d
 
+    # Update the reason if the availability changes.
+    if @etd.availability_id != Integer(params[:etd][:availability_id])
+      @etd.reason = Availability.find(params[:etd][:availability_id]).reason
+      @etd.save
+    end
+
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
         Provenance.create(person: current_person, action: "updated", model: @etd)
