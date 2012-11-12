@@ -277,6 +277,7 @@ class EtdsController < ApplicationController
         format.html #submit.html.erb
       else
         # Redirect to etd, prompt to add content, committee.
+        redirect_to(etd_path(@etd), notice: 'Please add a committee member and some content before submitting.')
       end
     end
   end
