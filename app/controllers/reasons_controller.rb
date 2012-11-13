@@ -48,6 +48,7 @@ class ReasonsController < ApplicationController
 
     respond_to do |format|
       if @reason.save
+        Provenance.create(person: current_person, action: "created", model: @reason)
         format.html { redirect_to @reason, notice: 'Reason was successfully created.' }
         format.json { render json: @reason, status: :created, location: @reason }
       else
@@ -64,6 +65,7 @@ class ReasonsController < ApplicationController
 
     respond_to do |format|
       if @reason.update_attributes(params[:reason])
+        Provenance.create(person: current_person, action: "updated", model: @reason)
         format.html { redirect_to @reason, notice: 'Reason was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,6 +85,8 @@ class ReasonsController < ApplicationController
     end
 
     @reason.destroy
+
+    Provenance.create(person: current_person, action: "destroyed", model: @reason)
 
     respond_to do |format|
       format.html { redirect_to reasons_url }
