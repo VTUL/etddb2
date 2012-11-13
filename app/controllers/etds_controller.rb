@@ -415,7 +415,7 @@ class EtdsController < ApplicationController
       for content in @etd.contents do
         Redis.current.zadd('etddb:release', (Time.now() + content.reason.months_to_release.months).strftime('%Y%m%d'), "#{content.class.name}:#{content.id}") if content.reason.months_to_release > 0
         Redis.current.zadd('etddb:warning', (Time.now() + content.reason.months_to_warning.months).strftime('%Y%m%d'), "#{content.class.name}:#{content.id}") if content.reason.months_to_warning > 0
-        warn = !content.reason.warn_before_approval if content.reason.months_to_warning == 0 && !warn
+        warn = !content.reason.warn_before_approval if !warn && content.reason.months_to_warning == 0
       end
     end
 
