@@ -35,6 +35,7 @@ class Etd < ActiveRecord::Base
     text :author
     text :urn
     integer :document_type_id
+    integer :department, :multiple => true
     string :urn
     string :author, :multiple => true
   end
@@ -43,6 +44,11 @@ class Etd < ActiveRecord::Base
     creators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id)).order('last_name ASC')
     creators.map { |o| o.name }
+  end
+
+  def department
+    dept = Department.where(id: self.departments)
+    dept.map { |e| e.id }
   end
 
   def self.search_quick(search)

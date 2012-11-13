@@ -1,5 +1,4 @@
 function submit_form() {
-
 	// Remove all inputs from page pref dropdown
 	$('.pref_removable').remove();
 	
@@ -18,7 +17,6 @@ function submit_form() {
 		if($name != -1)
 			appendValue($(this));
 	});
-
 	// Submit form
 	$("#page_pref_form").submit();
 }
@@ -38,7 +36,6 @@ function getName($keyword , $rawString) {
 }
 
 function appendValue($value) {
-	alert($value.attr("name"));
 	$('<input type="hidden" value="' + $value.val() + '" name="' + $value.attr("name") + '"' 
 			+ ' id="' + $value.attr("id") + '" class="pref_removable">').appendTo('#page_pref_form');
 }

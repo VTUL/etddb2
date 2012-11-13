@@ -13,7 +13,7 @@ class SearchController < ApplicationController
 	    end
 	    
 
-		begin
+		# begin
 			# query parameter needed here to expose DSL and allow use of instance
 			# variable @per_page
 			@search = Etd.search do |query|
@@ -30,12 +30,18 @@ class SearchController < ApplicationController
 				query.paginate :page => params[:page], :per_page => @per_page
 				query.facet(:author)
 				query.facet(:document_type_id)
+				query.facet(:department)
 				query.with(:author, params[:author]) if params[:author].present?
 				query.with(:urn, params[:urn]) if params[:urn].present?
-				query.with(:document_type_id, params[:document_type_id]) if params[:document_type_id].present?
-				# if params[:doc_info][:document_type_id].present? && !params[:doc_info][:document_type_id].empty?
-				# 	query.with(:document_type_id, params[:doc_info][:document_type_id]) 
-				# end
+				if params[:doc_info].present? 
+					if params[:doc_info][:department].present?
+						query.with(:department, params[:doc_info][:department])
+					end
+
+					if params[:doc_info][:document_type_id].present?
+						query.with(:document_type_id, params[:doc_info][:document_type_id])
+					end
+				end
 			end
 
 			if @search.results.size < 1 
@@ -45,10 +51,10 @@ class SearchController < ApplicationController
 				@results_info = "Showing Results #{@result.offset + 1} - 
 								#{@result.size + @result.offset} of #{@search.total}" 
 			end
-		rescue Exception => ex
-			# Catch exceptions, likely due to solr server being down
-			@result = "exception"
-			@exception_message = ex.message
-		end
+		# rescue Exception => ex
+		# 	# Catch exceptions, likely due to solr server being down
+		# 	@result = "exception"
+		# 	@exception_message = ex.message
+		# end
 	end
 end

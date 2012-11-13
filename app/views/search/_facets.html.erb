@@ -15,18 +15,45 @@
       <% end %>
     </ul>
     <h3 class="facet_title">Document Type</h3>
-    <ul <% if params[:document_type_id].blank? %>
-          style="display:none"
-        <% end %>> 
-      <% for row in search.facet(:document_type_id).rows %>
-        <li>
-          <% if params[:document_type_id].blank? %>
-            <%= link_to DocumentType.find(row.value).name, params.merge({:document_type_id => row.value}) %> (<%= row.count %>)
-          <% else %>
-            <strong><%= DocumentType.find(row.value).name %></strong> (<%= link_to "remove", params.merge({:document_type_id => nil}) %>)
+
+    <% if params[:doc_info].blank? or params[:doc_info][:document_type_id].blank? %>
+      <ul style="display:none" >
+    <% else %>
+      <ul>
+    <% end %>
+    <% for row in search.facet(:document_type_id).rows %>
+      <li>
+        <% if params[:doc_info].blank? %>
+          <%= link_to DocumentType.find(row.value).name, params.except(:page).merge({:doc_info => {:document_type_id => row.value}}) %> (<%= row.count %>)
+        <% elsif !params[:doc_info].blank? and params[:doc_info][:document_type_id].blank? %>
+          <%= link_to DocumentType.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <strong><%= DocumentType.find(row.value).name %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => nil})}) %>)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+    <h3 class="facet_title">Department</h3>
+
+    <% if params[:doc_info].blank? or params[:doc_info][:department].blank? %>
+      <ul style="display:none" >
+    <% else %>
+      <ul>
+    <% end %>
+    <% for row in search.facet(:department).rows %>
+      <li>
+        <% if params[:doc_info].blank? %>
+          <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => {:department => row.value}}) %> (<%= row.count %>)
+        <% elsif !params[:doc_info].blank? and params[:doc_info][:department].blank? %>
+          <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <% if params[:doc_info][:department].to_i == row.value %>
+            <strong><%= Department.find(row.value).name %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => nil})}) %>)
           <% end %>
-        </li>
-      <% end %>
-    </ul>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
   </div>
 <% end %>
