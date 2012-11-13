@@ -33,17 +33,25 @@ class Etd < ActiveRecord::Base
     text :keywords
     text :abstract
     text :author
+    text :committee
     text :urn
     integer :document_type_id
     integer :department, :multiple => true
     string :urn
     string :author, :multiple => true
+    string :committee, :multiple => true
   end
 
   def author
     creators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id)).order('last_name ASC')
     creators.map { |o| o.name }
+  end
+
+  def committee
+    collaborators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Collaborators'))
+        .pluck(:person_id)).order('last_name ASC')
+    collaborators.map { |o| o.name }
   end
 
   def department
