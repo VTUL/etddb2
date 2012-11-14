@@ -76,7 +76,7 @@ class EtdsController < ApplicationController
     respond_to do |format|
       @etd = Etd.find(params[:id])
       # BUG: This works, but is only a hack, we should use Cancan.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if current_person.etds.include?(@etd)
         format.html { render(action: "edit") }
       else
         format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
@@ -90,6 +90,7 @@ class EtdsController < ApplicationController
     @etd = Etd.new(params[:etd])
 
     #Add implied params.
+    @etd.cdate = Time.now()
     @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
@@ -154,9 +155,6 @@ class EtdsController < ApplicationController
           end
         end
 
-        # TODO: Implement the Archive process.
-        #Resque.enqueue(Archive, @etd.id)
-
         format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -173,7 +171,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Use Cancan for this.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if current_person.etds.include?(@etd)
         Provenance.create(person: current_person, action: "deleted", model: @etd)
 
         for pr in @etd.people_roles do
@@ -266,7 +264,7 @@ class EtdsController < ApplicationController
         @etd.save()
 
         #Create an archive of the ETD for easy downloading.
-        Resque.enqueue(Archive, @etd.id)
+        #Resque.enqueue(Archive, @etd.id)
 
         Provenance.create(person: current_person, action: "submitted", model: @etd)
 
@@ -354,11 +352,11 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/approve/1
+  #POST /etd/approve/1
   def approve
     @etd = Etd.find(params[:id])
     @etd.status = 'Approved'
-    @etd.approval_date = Time.now()
+    @etd.adate = Time.now()
     @etd.save()
 
     Provenance.create(person: current_person, action: "approved", model: @etd)
