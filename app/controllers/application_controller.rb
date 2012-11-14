@@ -14,7 +14,12 @@ class ApplicationController < ActionController::Base
 
   # Overwriting the login redirect.
   def after_sign_in_path_for(resource_or_scope)
-    session[:previous_urls].last || root_path
+    redirect = session[:previous_urls].last
+    if session[:previous_urls].last.end_with?('/people/sign_in', '/login')
+      redirect = person_path(current_person.id)
+    end
+
+    return redirect
   end
 
   def after_sign_out_path_for(resource_or_scope)

@@ -76,7 +76,7 @@ class EtdsController < ApplicationController
     respond_to do |format|
       @etd = Etd.find(params[:id])
       # BUG: This works, but is only a hack, we should use Cancan.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if current_person.etds.include?(@etd)
         format.html { render(action: "edit") }
       else
         format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
@@ -90,6 +90,7 @@ class EtdsController < ApplicationController
     @etd = Etd.new(params[:etd])
 
     #Add implied params.
+    @etd.cdate = Time.now()
     @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
@@ -184,7 +185,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Use Cancan for this.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if current_person.etds.include?(@etd)
         Provenance.create(person: current_person, action: "deleted", model: @etd)
 
         for pr in @etd.people_roles do
@@ -298,22 +299,28 @@ class EtdsController < ApplicationController
 
   # POST /etd/submit/1
   def submit
-    @etd = Etd.find(params[:id])
-    @etd.status = "Submitted"
-    @etd.submission_date = Time.now()
-    @etd.save()
-
-    #Create an archive of the ETD for easy downloading.
-    Resque.enqueue(Archive, @etd.id)
-    
-    Provenance.create(person: current_person, action: "submitted", model: @etd)
-
-    EtddbMailer.submitted_authors(@etd).deliver
-    EtddbMailer.submitted_school(@etd).deliver
-    EtddbMailer.submitted_committee(@etd).deliver
-
     respond_to do |format|
-      format.html #submit.html.erb
+      # ETD must have atleast one committee member, and one piece of content.
+      if @etd.contents.length > 0 && @etd.people_roles.where(role_id: Role.where(group: 'Collaborators').pluck(:id)).pluck(:person_id).uniq.count > 0
+        @etd = Etd.find(params[:id])
+        @etd.status = "Submitted"
+        @etd.submission_date = Time.now()
+        @etd.save()
+
+        #Create an archive of the ETD for easy downloading.
+        Resque.enqueue(Archive, @etd.id)
+
+        Provenance.create(person: current_person, action: "submitted", model: @etd)
+
+        EtddbMailer.submitted_authors(@etd).deliver
+        EtddbMailer.submitted_school(@etd).deliver
+        EtddbMailer.submitted_committee(@etd).deliver
+
+        format.html #submit.html.erb
+      else
+        # Redirect to etd, prompt to add content, committee.
+        redirect_to(etd_path(@etd), notice: 'Please add a committee member and some content before submitting.')
+      end
     end
   end
 
@@ -389,7 +396,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/approve/1
+  #POST /etd/approve/1
   def approve
     @etd = Etd.find(params[:id])
     @etd.status = 'Approved'

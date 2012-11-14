@@ -8,10 +8,11 @@ class CreateEtds < ActiveRecord::Migration
       t.string :status
       t.string :urn
       t.string :url
-      t.date :defense_date
-      t.date :submission_date
-      t.date :approval_date
-      t.date :release_date
+      t.date :ddate
+      t.date :sdate
+      t.date :adate
+      t.date :rdate
+      t.date :cdate
 
       t.integer :availability_id
       t.integer :copyright_statement_id
