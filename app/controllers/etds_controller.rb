@@ -90,7 +90,6 @@ class EtdsController < ApplicationController
     @etd = Etd.new(params[:etd])
 
     #Add implied params.
-    @etd.cdate = Time.now()
     @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
