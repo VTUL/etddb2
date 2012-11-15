@@ -54,6 +54,7 @@ gem 'nested_form'#, :git => "https://github.com/ryanb/nested_form.git"
 
 # Background Workers!
 gem 'resque'
+gem 'resque-scheduler', require: 'resque_scheduler'
 
 # For pagination
 gem 'will_paginate', '3.0.3'
