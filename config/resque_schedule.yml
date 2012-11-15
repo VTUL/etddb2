@@ -18,3 +18,9 @@
 #  queue: low
 #  args: contributors
 #  description: "This job resets the weekly leaderboard for contributions"
+just_do_it:
+  every: 1h
+  class: DoIt
+  queue: do_it
+  args:
+  description: just...
