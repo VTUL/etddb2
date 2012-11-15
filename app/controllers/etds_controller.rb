@@ -76,7 +76,7 @@ class EtdsController < ApplicationController
     respond_to do |format|
       @etd = Etd.find(params[:id])
       # BUG: This works, but is only a hack, we should use Cancan.
-      if current_person.etds.include?(@etd)
+      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
         format.html { render(action: "edit") }
       else
         format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
@@ -170,7 +170,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Use Cancan for this.
-      if current_person.etds.include?(@etd)
+      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
         Provenance.create(person: current_person, action: "deleted", model: @etd)
 
         for pr in @etd.people_roles do
