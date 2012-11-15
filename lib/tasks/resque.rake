@@ -8,6 +8,8 @@ namespace :resque do
     require 'resque_scheduler'
     require 'resque/scheduler'
 
+    Resque.redis = Redis.current
+
     # If you want to be able to dynamically change the schedule,
     # uncomment this line.  A dynamic schedule can be updated via the
     # Resque::Scheduler.set_schedule (and remove_schedule) methods.
