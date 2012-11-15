@@ -21,7 +21,7 @@
   <tr>
     <td><%= etd.title %></td>
     <td><%= Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
-    <td><%= etd.sdate %></td>
+    <td><%= etd.submission_date %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
     <% if current_person.id == @person.id %>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
