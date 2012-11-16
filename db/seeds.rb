@@ -163,6 +163,12 @@ for availability in retired_availabilities do
   Availability.create(name: availability[0], description: availability[1], reason: Reason.where(name: availability[0]).first, allows_reasons: availability[2], etd_only: availability[3], retired: true)
 end
 
+release_id = Availability.first.id
+Availability.all.each do |a|
+  a.release_availability_id = release_id
+  a.save
+end
+
 # Give Admin all permissions.
 for action in UserAction.select(:id)
   for object in DigitalObject.select(:id)
