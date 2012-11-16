@@ -18,6 +18,7 @@
 #  queue: low
 #  args: contributors
 #  description: "This job resets the weekly leaderboard for contributions"
+
 just_do_it:
   cron: "*/5 * * * *"
   #every: 5m
