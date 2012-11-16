@@ -4,3 +4,4 @@ if Rails.env = 'production'
 end
 
 Resque.redis = Redis.current
+Resque.schedule = YAML.load_file(File.join(Rails.root, 'config/resque_schedule.yml'))

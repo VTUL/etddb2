@@ -51,6 +51,7 @@ end
 
 NewVtEtdUpgrd::Application.routes.draw do
   require 'resque/server'
+  require 'resque_scheduler/server'
 
   # These are boring static pages.
   root :to => 'pages#home'
