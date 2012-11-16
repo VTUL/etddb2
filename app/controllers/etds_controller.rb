@@ -412,21 +412,15 @@ class EtdsController < ApplicationController
       EtddbMailer.approved_proquest(@etd).deliver
     end
 
-    # Queue up release and warnings.
+    # Queue up releases and warnings.
     # If months_to_release is 0, it is now considered released. If it is less than 0, it will never be released.
-    Redis.current.zadd('etddb:release', (Time.now() + @etd.reason.months_to_release.months).strftime('%Y%m%d'), "#{@etd.class.name}:#{@etd.id}") if @etd.reason.months_to_release > 0
-    Redis.current.zadd('etddb:warning', (Time.now() + @etd.reason.months_to_warning.months).strftime('%Y%m%d'), "#{@etd.class.name}:#{@etd.id}") if @etd.reason.months_to_warning > 0
-    warn = !@etd.reason.warn_before_approval if @etd.reason.months_to_warning == 0
+    Resque.enqueue_at((Time.now() + @etd.reason.months_to_release.months), Release, class_type: @etd.class.name, class_id: @etd.id)) if @etd.reason.months_to_release > 0
+    Resque.enqueue_at((Time.now() + @etd.reason.months_to_warning.months), Warning, class_type: @etd.class.name, class_id: @etd.id)) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
     if @etd.availability.etd_only
       for content in @etd.contents do
-        Redis.current.zadd('etddb:release', (Time.now() + content.reason.months_to_release.months).strftime('%Y%m%d'), "#{content.class.name}:#{content.id}") if content.reason.months_to_release > 0
-        Redis.current.zadd('etddb:warning', (Time.now() + content.reason.months_to_warning.months).strftime('%Y%m%d'), "#{content.class.name}:#{content.id}") if content.reason.months_to_warning > 0
-        warn = !content.reason.warn_before_approval if !warn && content.reason.months_to_warning == 0
+        Resque.enqueue_at((Time.now() + content.reason.months_to_release.months), Release, class_type: content.class.name, class_id: content.id)) if content.reason.months_to_release > 0
+        Resque.enqueue_at((Time.now() + content.reason.months_to_warning.months), Warning, class_type: content.class.name, class_id: content.id)) if content.reason.months_to_warning > 0 || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
       end
-    end
-
-    if warn
-      # TODO: Warn.
     end
 
     respond_to do |format|
