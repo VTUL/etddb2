@@ -414,12 +414,12 @@ class EtdsController < ApplicationController
 
     # Queue up releases and warnings.
     # If months_to_release is 0, it is now considered released. If it is less than 0, it will never be released.
-    Resque.enqueue_at(@etd.reason.months_to_release.months.from_now, Release, class_type: @etd.class.name, class_id: @etd.id) if @etd.reason.months_to_release > 0
-    Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, class_type: @etd.class.name, class_id: @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
+    Resque.enqueue_at(@etd.reason.months_to_release.months.from_now, Release, @etd.class.name, @etd.id) if @etd.reason.months_to_release > 0
+    Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, @etd.class.name, @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
     if @etd.availability.etd_only
       for content in @etd.contents do
-        Resque.enqueue_at(content.reason.months_to_release.months.from_now, Release, class_type: content.class.name, class_id: content.id) if content.reason.months_to_release > 0
-        Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, class_type: content.class.name, class_id: content.id) if content.reason.months_to_warning > 0 || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
+        Resque.enqueue_at(content.reason.months_to_release.months.from_now, Release, content.class.name, content.id) if content.reason.months_to_release > 0
+        Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, content.class.name, content.id) if content.reason.months_to_warning > 0 || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
       end
     end
 
