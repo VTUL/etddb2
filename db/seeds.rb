@@ -103,12 +103,12 @@ end
 #! Beyond this point, you should not need to edit this file.
 
 roles = [
-  ["Author", "Creators"],
-  ["Committee Member", "Collaborators"],
-  ["Committee Co-Chair", "Collaborators"],
-  ["Committee Chair", "Collaborators"],
-  ["Reviewer", "Graduate School"],
-  ["Admin", "Administration"]
+  ["Author", "Creators", 1],
+  ["Committee Member", "Collaborators", 10],
+  ["Committee Co-Chair", "Collaborators", 18],
+  ["Committee Chair", "Collaborators", 20],
+  ["Reviewer", "Graduate School", 50],
+  ["Admin", "Administration", 100]
 ]
 for role in roles do
   Role.create(name: role[0], group: role[1])
