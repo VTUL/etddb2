@@ -430,7 +430,7 @@ class EtdsController < ApplicationController
 
   # POST /etd/delay_release/1
   def delay_release
-    Redis.current.zadd('release:warning', (Time.now + 11.months).strftime('%Y%m%d'), @etd.id)
-    Redis.current.zadd('release:action', (Time.now + 18.months).strftime('%Y%m%d'), @etd.id)
+    Resque.remove_delayed(params[:worker].constantize, params[:class_type], params[:class_id])
+    Resque.enqueue_at(params[:months].to_i.months.from_now, params[:worker].constantize, params[:class_type], params[:class_id])
   end
 end
