@@ -398,12 +398,13 @@ class EtdsController < ApplicationController
   # POST /etd/approve/1
   def approve
     @etd = Etd.find(params[:id])
-    @etd.status = 'Approved'
     @etd.approval_date = Time.now()
-    @etd.release_date = Time.now() + @etd.reason.months_to_release.months if @etd.months_to_release >= 0
+    @etd.release_date = @etd.reason.months_to_release.months.from_now if @etd.reason.months_to_release >= 0
+    @etd.status = (@etd.months.reason.months_to_release == 0 && !@etd.availability.etd_only?) ? 'Released' : 'Approved'
     @etd.save()
 
-    Provenance.create(person: current_person, action: "approved", model: @etd)
+    Provenance.create(person: current_person, action: 'approved', model: @etd)
+    Provenance.create(person: current_person, action: 'released (by approving)', model: @etd) if @etd.reason.months_to_release == 0 && !@etd.availability.etd_only?
 
     EtddbMailer.approved_authors(@etd).deliver
     EtddbMailer.approved_committee(@etd).deliver
