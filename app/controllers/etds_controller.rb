@@ -429,9 +429,32 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /etd/delay_release/1
+  def get_delay_release
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.status == 'Approved'
+        if !@etd.availability.etd_only?
+          format.html # delay_release.html.erb
+        else
+          # Redirect... somewhere.
+        end
+      else
+        format.html { redirect_to(etd_path(@etd), notice: "This ETD it not available for release at this time.") }
+      end
+    end
+  end
+
   # POST /etd/delay_release/1
   def delay_release
-    Resque.remove_delayed(params[:worker].constantize, params[:class_type], params[:class_id])
-    Resque.enqueue_at(params[:months].to_i.months.from_now, params[:worker].constantize, params[:class_type], params[:class_id])
+    Provenance.create(person: current_person, action: 'delayed the release of', model: @etd)
+
+    Resque.remove_delayed(params[:worker].constantize, 'Etd', params[:id])
+    Resque.enqueue_at(params[:months].to_i.months.from_now, params[:worker].constantize, 'Etd', params[:id])
+
+    respond_to do |format|
+      format.html { redirect_to(etd_path(@etd), notice: "Successfully delayed release.") }
+    end
   end
 end
