@@ -395,7 +395,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  #POST /etd/approve/1
+  # POST /etd/approve/1
   def approve
     @etd = Etd.find(params[:id])
     @etd.status = 'Approved'
@@ -408,18 +408,18 @@ class EtdsController < ApplicationController
     EtddbMailer.approved_authors(@etd).deliver
     EtddbMailer.approved_committee(@etd).deliver
     # If the availability is not etd only, and there is no time until release, the ETD is available.
-    if @etd.document_type == DocumentType.where(name: "Dissertation").first && !@etd.availability.etd_only && @etd.reason.months_to_release == 0
+    if @etd.document_type == DocumentType.where(name: 'Dissertation').first && !@etd.availability.etd_only? && @etd.reason.months_to_release == 0
       EtddbMailer.approved_proquest(@etd).deliver
     end
 
     # Queue up releases and warnings.
     # If months_to_release is 0, it is now considered released. If it is less than 0, it will never be released.
     Resque.enqueue_at(@etd.reason.months_to_release.months.from_now, Release, @etd.class.name, @etd.id) if @etd.reason.months_to_release > 0
-    Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, @etd.class.name, @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
-    if @etd.availability.etd_only
+    Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, @etd.class.name, @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval?)
+    if @etd.availability.etd_only?
       for content in @etd.contents do
         Resque.enqueue_at(content.reason.months_to_release.months.from_now, Release, content.class.name, content.id) if content.reason.months_to_release > 0
-        Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, content.class.name, content.id) if content.reason.months_to_warning > 0 || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval)
+        Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, content.class.name, content.id) if (content.reason.months_to_warning > 0) || (content.reason.months_to_warning == 0 && !content.reason.warn_before_approval?)
       end
     end
 
