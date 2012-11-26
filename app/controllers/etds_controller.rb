@@ -19,7 +19,7 @@ class EtdsController < ApplicationController
       # Previous query
       #@etds = Etd.find(:all, order: 'title')
       # Updated query for pagination
-      @etds = Etd.paginate(page: params[:page], per_page: @per_page,  order: 'title')
+      @etds = Etd.paginate(page: params[:page], per_page: @per_page, order: 'title')
     else
       # Previous query
       #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
@@ -404,7 +404,7 @@ class EtdsController < ApplicationController
     @etd.save()
 
     Provenance.create(person: current_person, action: 'approved', model: @etd)
-    Provenance.create(person: current_person, action: 'released (by approving)', model: @etd) if @etd.reason.months_to_release == 0 && !@etd.availability.etd_only?
+    Provenance.create(person: current_person, action: 'released (by approval)', model: @etd) if @etd.reason.months_to_release == 0 && !@etd.availability.etd_only?
 
     EtddbMailer.approved_authors(@etd).deliver
     EtddbMailer.approved_committee(@etd).deliver
