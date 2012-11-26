@@ -103,8 +103,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/approve/:id', :to => 'etds#approve', :as => :approve_etd
   get '/etds/add_reason/:id', :to => 'etds#pick_reason', :as => :pick_reason
   put '/etds/add_reason/:id', :to => 'etds#add_reason', :as => :add_reason
-  get '/etds/delay_release/:id', :to => 'etds#get_delay_release'. :as => :get_delay_release
-  post '/etds/delay_release/:id', :to => 'etds#delay_release'. :as => :delay_release
+  get '/etds/delay_release/:id', :to => 'etds#get_delay_release', :as => :get_delay_release
+  post '/etds/delay_release/:id', :to => 'etds#delay_release', :as => :delay_release
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content

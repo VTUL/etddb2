@@ -1,1 +1,7 @@
-<% # TODO %>
+<h1>Delay Release</h1>
+<%= form_tag(url: delay_release_path) %>
+  <%= label_tag(:months, 'Delay by this many months:') %>
+  <%= text_field_tag(:months) %>
+  <%= label_tag(:rewarn, 'Rewarn the author?') %>
+  <%= check_box_tag(:rewarn) %>
+<% end %>
