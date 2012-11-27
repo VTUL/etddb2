@@ -223,7 +223,7 @@ PeopleRole.create(person: Person.where(pid: 'suser').first, etd: Etd.last, role:
 Provenance.create(person: Person.where(pid: 'suser').first, action: "created", model: Etd.last)
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Collaborators").last)
 Provenance.create(person: Person.first, action: "added to their committee", model: PeopleRole.last)
-Etd.first.update_attributes(status: 'Submitted', submission_date: Time.now)
+Etd.last.update_attributes(status: 'Submitted', submission_date: Time.now)
 
 # Add nine more ETDs and People, so their index pages will paginate.
 Person.create(first_name: "John", last_name: "Muir", pid: "trailhead", email: "trailhead@vt.edu", password: "123456", password_confirmation: "123456", show_email: false)
