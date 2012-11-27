@@ -7,7 +7,7 @@ function submit_form() {
 	$checkBoxForm.each(function() {
 		var $parsed = getName("search_using", $(this).attr("name"));
 		if ($parsed != -1)
-			appendValue($(this));
+			appendWithValue($(this));
 	});
 
 	// Add dropdown values to form before submitting page pref
@@ -15,8 +15,15 @@ function submit_form() {
 	$dropdowns.each(function() {
 		var $name = getName("doc_info", $(this).attr("name"));
 		if($name != -1)
-			appendValue($(this));
+			appendWithValue($(this));
 	});
+
+	// All facets that arent' included in dropdowns
+	$facets = $(".faceted");
+	$facets.each(function() {
+		appendWithText($(this));
+	});
+
 	// Submit form
 	$("#page_pref_form").submit();
 }
@@ -35,7 +42,12 @@ function getName($keyword , $rawString) {
 	return -1;
 }
 
-function appendValue($value) {
+function appendWithValue($value) {
 	$('<input type="hidden" value="' + $value.val() + '" name="' + $value.attr("name") + '"' 
+			+ ' id="' + $value.attr("id") + '" class="pref_removable">').appendTo('#page_pref_form');
+}
+
+function appendWithText($value) {
+	$('<input type="hidden" value="' + $value.text() + '" name="' + $value.attr("name") + '"' 
 			+ ' id="' + $value.attr("id") + '" class="pref_removable">').appendTo('#page_pref_form');
 }

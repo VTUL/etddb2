@@ -5,7 +5,7 @@
 <%= javascript_include_tag 'facets' %>
 <%= javascript_include_tag 'jquery.collapser' %>
 <h1>Advanced Search</h1>
-<div id = "advance_search" class = "top_bar"> 
+<div id = "advance_search" class = "top_bar">
 	<%= form_tag search_index_path, :id => 'search_check_form', method: :get do %>
 	  <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search' %>
 	  <%= submit_tag "Search", name: nil %>
@@ -24,9 +24,28 @@
           </tr>
         <% end %>
     </table>
-   <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, {:class => "dropdowns"})%>
- </br>
-   <%=label_tag "Department: " %><%=collection_select(:doc_info, :department, Department.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, {:class => "dropdowns"})%>
+  <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, {:class => "dropdowns"})%>
+  </br>
+  <%=label_tag "Department: " %><%=collection_select(:doc_info, :department, Department.where(retired: false).order('name ASC'), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, {:class => "dropdowns"})%>
+</br>
+</br>
+  <span id="date_format"> Date formats accepted: YYYY, YYYY-MM, YYYY-MM-DD </span>
+  <div id="defense_date_range_div">
+    <%= label_tag "Defense Date:" %>
+    <%= label_tag "Before ", nil, :id => 'before_label' %>
+    <%= text_field_tag :defense_date_before, params[:defense_date_before], {:class=>'date_range_input'} %> 
+
+    <%= label_tag "After", nil %>
+    <%= text_field_tag :defense_date_after, params[:defense_date_after], {:class=>'date_range_input'} %>
+  </div>
+  <div id="release_date_range_div">
+    <%= label_tag "Release Date:" %>
+    <%= label_tag "Before ", nil, :id => 'before_label' %>
+    <%= text_field_tag :release_date_before, params[:release_date_before], {:class=>'date_range_input'} %> 
+
+    <%= label_tag "After", nil %>
+    <%= text_field_tag :release_date_after, params[:release_date_after], {:class=>'date_range_input'} %>
+  </div>
   </div>
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
@@ -45,6 +64,7 @@
   <% end %>
 </div>
 
+<!-- Render the facets -->
 <%= render '/search/facets', :search => @search %>
 
 <div id="results_list">

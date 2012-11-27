@@ -30,3 +30,17 @@
 #results_list table {
 	table-layout: fixed;
 }
+
+#before_label {
+	padding-left: 1em;
+}
+
+.date_range_input {
+	width: 7em;
+}
+
+#date_format {
+	font-style: italic;
+	color: #808080;
+}
+

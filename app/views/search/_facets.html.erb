@@ -9,7 +9,7 @@
           <% if params[:author].blank? %>
             <%= link_to row.value, params.merge({:author => row.value}) %> (<%= row.count %>)
           <% else %>
-            <strong><%= row.value %></strong> (<%= link_to "remove", params.merge({:author => nil}), :class => 'faceted' %>)
+            <strong><%= row.value %></strong> (<%= link_to "remove", params.merge({:author => nil}) %>)
           <% end %>
         </li>
       <% end %>
@@ -51,6 +51,46 @@
           <% if params[:doc_info][:department].to_i == row.value %>
             <strong><%= Department.find(row.value).name %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => nil})}) %>)
           <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3 class="facet_title">Defense Year</h3>
+
+    <% if params[:doc_info].blank? or params[:doc_info][:defense_year].blank? %>
+      <ul style="display:none" >
+    <% else %>
+      <ul>
+    <% end %>
+    <% for row in search.facet(:defense_year).rows.sort{|x, y| y.value <=> x.value} %>
+      <li>
+        <% if params[:doc_info].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => {:defense_year => row.value}}) %> (<%= row.count %>)
+        <% elsif !params[:doc_info].blank? and params[:doc_info][:defense_year].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:defense_year => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <strong class="faceted" id="doc_info_defense_year" name="doc_info[defense_year]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:defense_year => nil})}) %>)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3 class="facet_title">Release Year</h3>
+
+    <% if params[:doc_info].blank? or params[:doc_info][:release_year].blank? %>
+      <ul style="display:none" >
+    <% else %>
+      <ul>
+    <% end %>
+    <% for row in search.facet(:release_year).rows.sort{|x, y| y.value <=> x.value} %>
+      <li>
+        <% if params[:doc_info].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => {:release_year => row.value}}) %> (<%= row.count %>)
+        <% elsif !params[:doc_info].blank? and params[:doc_info][:release_year].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:release_year => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <strong class="faceted" id="doc_info_release_year" name="doc_info[release_year]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:release_year => nil})}) %>)
         <% end %>
       </li>
     <% end %>

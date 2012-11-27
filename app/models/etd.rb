@@ -40,6 +40,11 @@ class Etd < ActiveRecord::Base
     string :urn
     string :author, :multiple => true
     string :committee, :multiple => true
+    string :defense_year
+    string :release_year
+    date :ddate
+    date :rdate
+    boolean :bound
   end
 
   def author
@@ -57,6 +62,20 @@ class Etd < ActiveRecord::Base
   def department
     dept = Department.where(id: self.departments)
     dept.map { |e| e.id }
+  end
+
+  def defense_year
+    # Need to change to defense_date when merging with devel
+    if !ddate.nil?
+      ddate.strftime("%Y")
+    end
+  end
+
+  def release_year
+    # Need to change to release_date when merging with devel
+    if !rdate.nil?
+      rdate.strftime("%Y")
+    end
   end
 
   def self.search_quick(search)
