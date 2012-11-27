@@ -24,8 +24,8 @@
     <td><%= etd.submission_date %></td>
     <td><%= link_to 'Show', etd_path(etd) %></td>
     <% if current_person.id == @person.id %>
-      <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
       <% if etd.status == "Created" %>
+        <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
         <td><%= button_to 'Submit', submit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
         <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
       <% else %>
