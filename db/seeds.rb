@@ -101,9 +101,8 @@ for availability in retired_availabilities do
   Availability.create(name: availability[0], description: availability[1], reason: Reason.where(name: availability[0]).first, allows_reasons: availability[2], etd_only: availability[3], retired: true)
 end
 
-release_id = Availability.first.id
 Availability.all.each do |a|
-  a.release_availability_id = release_id
+  a.release_availability = Availability.first
   a.save
 end
 
@@ -163,7 +162,6 @@ end
 
 digital_objects = ["Etd", "Content", "Role", "Department", "Degree",
   "Availability", "CopyrightStatement", "PrivacyStatement", "Provenance"]
-
 for object in digital_objects do
   DigitalObject.create(name: object)
 end
@@ -176,7 +174,7 @@ end
 # Give Admin all permissions.
 for action in UserAction.select(:id)
   for object in DigitalObject.select(:id)
-    Permission.create(user_action: action, digital_object: object, role_id: Role.where(group: "Administration").first)
+    Permission.create(user_action: action, digital_object: object, role: Role.where(group: 'Administration').first)
   end
 end
 
@@ -211,9 +209,9 @@ Provenance.create(person: Person.where(pid: 'suser').first, action: "submitted",
 pr = PeopleRole.last
 pr.vote = true
 pr.save
-Etd.first.update_attributes(status: 'Approved', approval_date: Time.now)
+Etd.first.update_attributes(status: 'Approved', approval_date: Time.now, release_date: Time.now + Etd.first.reason.months_to_release.months)
 Provenance.create(person: Person.last, action: "approved", model: Etd.first)
-Resque.enqueue_at(Etd.first.reason.months_to_release.months.from_now, Release, Etd.first.class.name, Etd.first.id)
+Resque.enqueue_at(Etd.first.release_date.to_time, Release, Etd.first.class.name, Etd.first.id)
 
 # SU gets another ETD. This one is just submitted.
 Etd.create(title: "My Other ETD", abstract: "This is another ETD.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.find(:first, offset: rand(DocumentType.count)),
