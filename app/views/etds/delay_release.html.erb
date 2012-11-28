@@ -1,7 +1,15 @@
 <h1>Delay Release</h1>
-<%= form_tag(url: delay_release_path) %>
-  <%= label_tag(:months, 'Delay by this many months:') %>
-  <%= text_field_tag(:months) %>
-  <%= label_tag(:rewarn, 'Rewarn the author?') %>
-  <%= check_box_tag(:rewarn) %>
+<%= form_tag(url: process_delay_release_path) do %>
+  <div class="field">
+    <%= label_tag(:months, 'Delay by this many months:') %>
+    <%= number_field_tag(:months, nil, in: 1..120, step: 1) %>
+  </div>
+  <div class="field">
+    <%= check_box_tag(:rewarn, true, false) %>
+    <%= label_tag(:rewarn, 'Rewarn the author one month before release? (Must delay by at least two months)') %><br>
+  </div>
+  <br />
+  <div class="actions">
+    <%= submit_tag('Delay') %>
+  </div>
 <% end %>
