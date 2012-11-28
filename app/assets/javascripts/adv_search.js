@@ -18,10 +18,16 @@ function submit_form() {
 			appendWithValue($(this));
 	});
 
-	// All facets that arent' included in dropdowns
+	// All facets that aren't included in dropdowns
 	$facets = $(".faceted");
 	$facets.each(function() {
 		appendWithText($(this));
+	});
+
+	//Add the date range inputs
+	$date_ranges = $(".date_range_input");
+	$date_ranges.each(function() {
+		appendWithValue($(this));
 	});
 
 	// Submit form
