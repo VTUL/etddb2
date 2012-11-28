@@ -74,26 +74,26 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/people/new_committee_member', :to => 'people#new_committee_member'
   post '/people/add_committee', :to => 'people#add_committee'
   get '/people/new_legacy', :to => 'people#new', :as => :new_legacy_person
-  get '/people/edit_legacy/:id', :to => 'people#edit', :as => :edit_legacy_person
+  get '/people/:id/edit_legacy', :to => 'people#edit', :as => :edit_legacy_person
   post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
-  put '/people/edit_legacy/:id', :to => 'people#update', :as => :update_legacy_person
-  post '/people/destroy_legacy/:id', :to => 'people#destroy', :as => :destroy_legacy_person
+  put '/people/:id/edit_legacy', :to => 'people#update', :as => :update_legacy_person
+  post '/people/:id/destroy_legacy', :to => 'people#destroy', :as => :destroy_legacy_person
   resources :people, :only => [:index, :show]
   # This allows us to link to a attached model, and not get errors with LegacyPeople.
   # However, this route never needs to resolve, it is absorbed by the resources route above it. It just needs to be named.
   get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
-  get '/etds/add_author/:id', :to => 'etds#add_author', :as => :add_author_to_etd
-  post '/etds/add_author/:id', :to => 'etds#save_author', :as => :save_author_to_etd
-  get '/etds/next_new/:id', :to => 'etds#next_new', :as => :next_new_etd
-  put '/etds/next_new/:id', :to => 'etds#save_contents', :as => :save_contents_to_etd
-  get '/etds/add_contents/:id', :to => 'etds#add_contents', :as => :add_contents_to_etd
-  post '/etds/submit/:id', :to => 'etds#submit', :as => :submit_etd
-  post '/etds/vote/:id', :to => 'etds#vote', :as => :vote_for_etd
-  post '/etds/unsubmit/:id', :to => 'etds#unsubmit', :as => :unsubmit_etd
-  get '/etds/reviewboard/:id', :to => 'etds#reviewboard', :as => :etd_reviewboard
-  post '/etds/approve/:id', :to => 'etds#approve', :as => :approve_etd
+  get '/etds/:id/add_author', :to => 'etds#add_author', :as => :add_author_to_etd
+  post '/etds/:id/add_author', :to => 'etds#save_author', :as => :save_author_to_etd
+  get '/etds/:id/next_new', :to => 'etds#next_new', :as => :next_new_etd
+  put '/etds/:id/next_new', :to => 'etds#save_contents', :as => :save_contents_to_etd
+  get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
+  post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
+  post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
+  post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
+  get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
+  post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
@@ -129,18 +129,18 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/permissions/edit', :to => 'permissions#edit', :as => :edit_permissions
   post '/permissions/edit', :to => 'permissions#update', :as => :update_permissions
 
-  get '/conversations/show/:id', :to => 'conversations#show', :as => :conversation
-  get '/conversations/read/:id', :to => 'conversations#read', :as => :read_conversation
-  get '/conversations/unread/:id', :to => 'conversations#unread', :as => :unread_conversation
-  get '/conversations/archive/:id', :to => 'conversations#archive', :as => :archive_conversation
-  get '/conversations/unarchive/:id', :to => 'conversations#unarchive', :as => :unarchive_conversation
+  get '/conversations/:id/show', :to => 'conversations#show', :as => :conversation
+  get '/conversations/:id/read', :to => 'conversations#read', :as => :read_conversation
+  get '/conversations/:id/unread', :to => 'conversations#unread', :as => :unread_conversation
+  get '/conversations/:id/archive', :to => 'conversations#archive', :as => :archive_conversation
+  get '/conversations/:id/unarchive', :to => 'conversations#unarchive', :as => :unarchive_conversation
   match '/conversations/new', :to => 'conversations#new', :as => :new_conversation
   post '/conversations/confirm_new', :to => 'conversations#confirm_new', :as => :confirm_new_conversation
   post '/conversations', :to => 'conversations#create', :as => :create_conversation
-  get '/conversations/reply/:id', :to => 'conversations#reply', :as => :reply_to_conversation
-  post '/conversations/reply/:id', :to => 'conversations#send_reply', :as => :send_reply_to_conversation
-  #get '/conversations/reply_all/:id', :to => 'conversations#reply_all', :as => :reply_all
-  #post '/conversations/reply_all/:id', :to => 'conversations#send_reply_all', :as => :send_reply_all
+  get '/conversations/:id/reply', :to => 'conversations#reply', :as => :reply_to_conversation
+  post '/conversations/:id/reply', :to => 'conversations#send_reply', :as => :send_reply_to_conversation
+  #get '/conversations/:id/reply_all', :to => 'conversations#reply_all', :as => :reply_all
+  #post '/conversations/:id/reply_all', :to => 'conversations#send_reply_all', :as => :send_reply_all
   # This goes here so the above routes will resolve correctly.
   get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
 
