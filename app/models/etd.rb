@@ -35,6 +35,7 @@ class Etd < ActiveRecord::Base
     text :author
     text :committee
     text :urn
+    text :file_type
     integer :document_type_id
     integer :department, :multiple => true
     string :urn
@@ -42,6 +43,7 @@ class Etd < ActiveRecord::Base
     string :committee, :multiple => true
     string :defense_year
     string :release_year
+    string :file_type, :multiple => true
     date :ddate
     date :rdate
     boolean :bound
@@ -62,6 +64,11 @@ class Etd < ActiveRecord::Base
   def department
     dept = Department.where(id: self.departments)
     dept.map { |e| e.id }
+  end
+
+  def file_type
+    cont = self.contents
+    cont.map { |e| e.content_content_type }
   end
 
   def defense_year

@@ -95,5 +95,27 @@
       </li>
     <% end %>
   </ul>
+
+   <h3 class="facet_title">File Type</h3>
+
+    <% if params[:doc_info].blank? or params[:doc_info][:file_type].blank? %>
+      <ul style="display:none" >
+    <% else %>
+      <ul>
+    <% end %>
+    <% for row in search.facet(:file_type).rows %>
+      <li>
+        <% if params[:doc_info].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => {:file_type => row.value}}) %> (<%= row.count %>)
+        <% elsif !params[:doc_info].blank? and params[:doc_info][:file_type].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:file_type => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <% if params[:doc_info][:file_type] == row.value %>
+            <strong class="faceted" id="doc_info_file_type" name="doc_info[file_type]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:file_type => nil})}) %>)
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
   </div>
 <% end %>
