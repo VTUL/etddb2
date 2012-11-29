@@ -54,6 +54,14 @@ class SearchController < ApplicationController
 						query.with(:defense_year, params[:doc_info][:release_year])
 					end
 				end
+				if !params[:type_etd].present? ^ !params[:type_btd].present?
+					if params[:type_etd].present?
+						query.with(:bound, false)
+					end
+					if params[:type_btd].present?
+						query.with(:bound, true)
+					end
+				end
 			end
 
 			if @search.results.size < 1 

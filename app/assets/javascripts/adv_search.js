@@ -5,8 +5,7 @@ function submit_form() {
 	// Strip title from all checked boxes, add to list
 	$checkBoxForm = $("#search_check_form :checked");
 	$checkBoxForm.each(function() {
-		var $parsed = getName("search_using", $(this).attr("name"));
-		if ($parsed != -1)
+		if ($(this).attr("name") != undefined)
 			appendWithValue($(this));
 	});
 
@@ -24,7 +23,7 @@ function submit_form() {
 		appendWithText($(this));
 	});
 
-	//Add the date range inputs
+	// Add the date range inputs
 	$date_ranges = $(".date_range_input");
 	$date_ranges.each(function() {
 		appendWithValue($(this));

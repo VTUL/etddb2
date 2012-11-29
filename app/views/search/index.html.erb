@@ -33,20 +33,22 @@
   <div id="defense_date_range_div">
     <%= label_tag "Defense Date:" %>
     <%= label_tag "Before ", nil, :id => 'before_label' %>
-    <%= text_field_tag :defense_date_before, params[:defense_date_before], {:class=>'date_range_input'} %> 
+    <%= text_field_tag :defense_date_before, params[:defense_date_before], :class=>"date_range_input" %> 
 
     <%= label_tag "After", nil %>
-    <%= text_field_tag :defense_date_after, params[:defense_date_after], {:class=>'date_range_input'} %>
+    <%= text_field_tag :defense_date_after, params[:defense_date_after], :class=>"date_range_input" %>
   </div>
   <div id="release_date_range_div">
     <%= label_tag "Release Date:" %>
     <%= label_tag "Before ", nil, :id => 'before_label' %>
-    <%= text_field_tag :release_date_before, params[:release_date_before], {:class=>'date_range_input'} %> 
+    <%= text_field_tag :release_date_before, params[:release_date_before], :class=>"date_range_input" %> 
 
     <%= label_tag "After", nil %>
-    <%= text_field_tag :release_date_after, params[:release_date_after], {:class=>'date_range_input'} %>
+    <%= text_field_tag :release_date_after, params[:release_date_after], :class=>"date_range_input" %>
   </div>
   </div>
+    <%= label_tag "ETD:" %> <%= check_box_tag "type_etd", 1, params[:type_etd].present?, :class => 'etd_btd_check' %>
+    <%= label_tag "BTD:" %> <%= check_box_tag "type_btd", 1, params[:type_btd].present?, :class => 'etd_btd_check' %>
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
 	<br>
