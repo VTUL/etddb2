@@ -44,8 +44,8 @@ class Etd < ActiveRecord::Base
     string :defense_year
     string :release_year
     string :file_type, :multiple => true
-    date :ddate
-    date :rdate
+    date :defense_date
+    date :release_date
     boolean :bound
     # attachment :etd_attachment, :multiple => true
   end
@@ -79,15 +79,15 @@ class Etd < ActiveRecord::Base
 
   def defense_year
     # Need to change to defense_date when merging with devel
-    if !ddate.nil?
-      ddate.strftime("%Y")
+    if !defense_date.nil?
+      defense_date.strftime("%Y")
     end
   end
 
   def release_year
     # Need to change to release_date when merging with devel
-    if !rdate.nil?
-      rdate.strftime("%Y")
+    if !release_date.nil?
+      release_date.strftime("%Y")
     end
   end
 

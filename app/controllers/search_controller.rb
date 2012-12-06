@@ -37,10 +37,10 @@ class SearchController < ApplicationController
 				query.facet(:file_type)
 				query.with(:author, params[:author]) if params[:author].present?
 				query.with(:urn, params[:urn]) if params[:urn].present?
-				query.with(:ddate).less_than(stripDate(params[:defense_date_before])) if params[:defense_date_before].present?
-				query.with(:ddate).greater_than(stripDate(params[:defense_date_after])) if params[:defense_date_after].present?
-				query.with(:rdate).less_than(stripDate(params[:release_date_before])) if params[:release_date_before].present?
-				query.with(:rdate).greater_than(stripDate(params[:release_date_after])) if params[:release_date_after].present?
+				query.with(:defense_date).less_than(stripDate(params[:defense_date_before])) if params[:defense_date_before].present?
+				query.with(:defense_date).greater_than(stripDate(params[:defense_date_after])) if params[:defense_date_after].present?
+				query.with(:release_date).less_than(stripDate(params[:release_date_before])) if params[:release_date_before].present?
+				query.with(:release_date).greater_than(stripDate(params[:release_date_after])) if params[:release_date_after].present?
 				if params[:doc_info].present? 
 					if params[:doc_info][:department].present?
 						query.with(:department, params[:doc_info][:department])
