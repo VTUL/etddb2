@@ -4,7 +4,8 @@ class SearchController < ApplicationController
 		# keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 							 "abstract" => "Abstract", "author" => "Author", 
-							 "urn" => "URN", "committee" => "Committee Members"}
+							 "urn" => "URN", "committee" => "Committee Members", 
+							 "etd_attachment" => "Attachments"}
 		@results_info = nil
 	    if isInt(params[:per_page])
 	      @per_page = params[:per_page]
@@ -61,13 +62,8 @@ class SearchController < ApplicationController
 						query.with(:file_type, params[:doc_info][:file_type])
 					end
 				end
-				if !params[:type_etd].present? ^ !params[:type_btd].present?
-					if params[:type_etd].present?
-						query.with(:bound, false)
-					end
-					if params[:type_btd].present?
-						query.with(:bound, true)
-					end
+				if params[:type_etd].present? ^ params[:type_btd].present?
+					params[:type_etd].present? ? query.with(:bound, false) : query.with(:bound, true)
 				end
 			end
 

@@ -63,8 +63,10 @@ gem 'mailboxer'
 gem 'netaddr'
 
 # For Full Text Search
-gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'sunspot_rails'
+gem 'sunspot_cell', :git => 'git://github.com/zheileman/sunspot_cell.git'
+gem 'sunspot_cell_jars'
 
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'

@@ -47,6 +47,7 @@ class Etd < ActiveRecord::Base
     date :ddate
     date :rdate
     boolean :bound
+    # attachment :etd_attachment, :multiple => true
   end
 
   def author
@@ -64,6 +65,11 @@ class Etd < ActiveRecord::Base
   def department
     dept = Department.where(id: self.departments)
     dept.map { |e| e.id }
+  end
+
+  def etd_attachment
+    cont = self.contents
+    cont.map { |e| e.content.path }
   end
 
   def file_type
