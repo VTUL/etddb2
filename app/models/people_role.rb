@@ -20,6 +20,8 @@ class PeopleRole < ActiveRecord::Base
   after_save :update_etd
 
   def update_etd
-  	etd.index
+    if !etd.nil?
+  	 etd.index
+    end
   end
 end
