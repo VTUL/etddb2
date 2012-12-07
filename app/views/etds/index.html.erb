@@ -12,7 +12,7 @@
     <%= form_tag etds_path, :method => 'get' do %> 
     Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
            :onchange => "this.form.submit();" %>
-           <%= hidden_field_tag :keywords, params[:keywords] %>
+           <%= hidden_field_tag :keywords, params[:keywords] if params[:keywords] %>
     <% end %>
   </div>
   <%= will_paginate %>

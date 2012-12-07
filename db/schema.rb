@@ -11,21 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827175341) do
+ActiveRecord::Schema.define(:version => 20121119201823) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.boolean  "retired"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "reason_id"
+    t.boolean  "allows_reasons"
+    t.boolean  "etd_only"
+    t.integer  "release_availability_id"
   end
 
   create_table "contents", :force => true do |t|
     t.boolean  "bound"
     t.string   "title"
     t.text     "description"
-    t.text     "mime_type"
     t.integer  "etd_id"
     t.integer  "availability_id"
     t.integer  "page_count"
@@ -37,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120827175341) do
     t.string   "content_content_type"
     t.integer  "content_file_size"
     t.datetime "content_updated_at"
+    t.integer  "reason_id"
   end
 
   create_table "conversations", :force => true do |t|
@@ -94,11 +98,10 @@ ActiveRecord::Schema.define(:version => 20120827175341) do
     t.string   "status"
     t.string   "urn"
     t.string   "url"
-    t.date     "ddate"
-    t.date     "sdate"
-    t.date     "adate"
-    t.date     "cdate"
-    t.date     "rdate"
+    t.date     "defense_date"
+    t.date     "submission_date"
+    t.date     "approval_date"
+    t.date     "release_date"
     t.integer  "availability_id"
     t.integer  "copyright_statement_id"
     t.integer  "degree_id"
@@ -106,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120827175341) do
     t.integer  "privacy_statement_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.integer  "reason_id"
   end
 
   create_table "messages", :force => true do |t|
@@ -179,6 +183,16 @@ ActiveRecord::Schema.define(:version => 20120827175341) do
     t.string   "message"
   end
 
+  create_table "reasons", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "months_to_release"
+    t.integer  "months_to_warning"
+    t.boolean  "warn_before_approval"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
   create_table "receipts", :force => true do |t|
     t.boolean  "read",            :default => false
     t.boolean  "archived",        :default => false
@@ -193,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20120827175341) do
     t.string   "group"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "priority"
   end
 
   create_table "user_actions", :force => true do |t|

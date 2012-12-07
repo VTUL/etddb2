@@ -6,6 +6,8 @@
 
 class Content < ActiveRecord::Base
   belongs_to :etd, inverse_of: :contents
+  has_many :people_roles, through: :etd
+
   belongs_to :availability, inverse_of: :contents
   
   has_many :provenances, as: :model

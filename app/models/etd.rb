@@ -25,7 +25,7 @@ class Etd < ActiveRecord::Base
                         :document_type_id, :title, :privacy_statement_id, :urn, :url
   validates_uniqueness_of :urn
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
-  statuses = ["Created", "Submitted", "Approved"]
+  statuses = ["Created", "Submitted", "Approved", "Released"]
   validates :status, inclusion: {in: statuses, message: "must be a valid status."}
 
   searchable do

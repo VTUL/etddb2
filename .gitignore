@@ -27,11 +27,13 @@ log/*
 tmp/
 public/bin/submitted/*
 public/theses/*
+public/assets/*
 files/*
 *.log
 *.sql
 *.sqlite
 *.sqlite3
+*.rdb
 *.core
 *.pid
 
@@ -47,6 +49,7 @@ files/*
 # OS generated files #
 ######################
 .DS_Store?
+.DS_Store
 ehthumbs.db
 Icon?
 Thumbs.db

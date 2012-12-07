@@ -3,7 +3,7 @@
   <%= f.fields_for :contents do |cf| %>
     <% if cf.object.content? %>
       <% #This content already exists %>
-      <%= cf.object.content_file_name %> |
+      <%= link_to(cf.object.content_file_name, content_path(cf.object)) %> |
       <!--<%= cf.object.content_content_type %> |-->
       <%= cf.object.content_file_size %> |
       <%= link_to "Edit", edit_content_path(cf.object)%> |

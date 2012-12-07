@@ -11,8 +11,8 @@ class CreateEtds < ActiveRecord::Migration
       t.date :ddate
       t.date :sdate
       t.date :adate
-      t.date :cdate
       t.date :rdate
+      t.date :cdate
 
       t.integer :availability_id
       t.integer :copyright_statement_id
