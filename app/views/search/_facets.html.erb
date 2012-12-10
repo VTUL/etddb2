@@ -22,6 +22,9 @@
       <ul>
     <% end %>
     <% for row in search.facet(:document_type_id).rows %>
+      <% if !DocumentType.exists?(:id => row.value) %>
+        <% next %>
+      <% end %>
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to DocumentType.find(row.value).name, params.except(:page).merge({:doc_info => {:document_type_id => row.value}}) %> (<%= row.count %>)
@@ -42,6 +45,9 @@
       <ul>
     <% end %>
     <% for row in search.facet(:department).rows %>
+      <% if !Department.exists?(:id => row.value) %>
+        <% next %>
+      <% end %>
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => {:department => row.value}}) %> (<%= row.count %>)

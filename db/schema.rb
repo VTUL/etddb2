@@ -17,12 +17,8 @@ ActiveRecord::Schema.define(:version => 20121119201823) do
     t.string   "name"
     t.string   "description"
     t.boolean  "retired"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
-    t.integer  "reason_id"
-    t.boolean  "allows_reasons"
-    t.boolean  "etd_only"
-    t.integer  "release_availability_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "contents", :force => true do |t|
@@ -40,7 +36,6 @@ ActiveRecord::Schema.define(:version => 20121119201823) do
     t.string   "content_content_type"
     t.integer  "content_file_size"
     t.datetime "content_updated_at"
-    t.integer  "reason_id"
   end
 
   create_table "conversations", :force => true do |t|
@@ -109,7 +104,6 @@ ActiveRecord::Schema.define(:version => 20121119201823) do
     t.integer  "privacy_statement_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-    t.integer  "reason_id"
   end
 
   create_table "messages", :force => true do |t|
@@ -181,16 +175,6 @@ ActiveRecord::Schema.define(:version => 20121119201823) do
     t.string   "model_type"
     t.string   "action"
     t.string   "message"
-  end
-
-  create_table "reasons", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "months_to_release"
-    t.integer  "months_to_warning"
-    t.boolean  "warn_before_approval"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
   end
 
   create_table "receipts", :force => true do |t|

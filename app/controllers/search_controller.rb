@@ -4,8 +4,7 @@ class SearchController < ApplicationController
 		# keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 							 "abstract" => "Abstract", "author" => "Author", 
-							 "urn" => "URN", "committee" => "Committee Members", 
-							 "etd_attachment" => "Attachments"}
+							 "urn" => "URN", "committee" => "Committee Members"}
 		@results_info = nil
 	    if isInt(params[:per_page])
 	      @per_page = params[:per_page]
