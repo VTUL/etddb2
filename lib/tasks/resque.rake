@@ -1,15 +1,11 @@
 # Resque tasks
-# TODO: uncomment for redis/resque
-#require 'resque/tasks'
-#require 'resque_scheduler/tasks'
+require 'resque/tasks'
+require 'resque_scheduler/tasks'
 
 task 'resque:setup' => :environment do
-  # TODO: uncomment for redis/resque
-  #require 'resque'
-  #require 'resque_scheduler'
-  #require 'resque/scheduler'
-
-  # Only uncomment above!
+  require 'resque'
+  require 'resque_scheduler'
+  require 'resque/scheduler'
 
   # If you want to be able to dynamically change the schedule,
   # uncomment this line.  A dynamic schedule can be updated via the

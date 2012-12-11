@@ -307,8 +307,7 @@ class EtdsController < ApplicationController
         @etd.save()
 
         #Create an archive of the ETD for easy downloading.
-        # TODO: uncomment for redis/resque
-        #Resque.enqueue(Archive, @etd.id)
+        Resque.enqueue(Archive, @etd.id)
 
         Provenance.create(person: current_person, action: "submitted", model: @etd)
 
@@ -416,15 +415,14 @@ class EtdsController < ApplicationController
 
     # Queue up releases and warnings.
     # If months_to_release is 0, it is now considered released. If it is less than 0, it will never be released.
-    # TODO: uncomment for redis/resque
-    #Resque.enqueue_at(@etd.release_date.to_time, Release, @etd.class.name, @etd.id) if @etd.reason.months_to_release > 0
-    #Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, @etd.class.name, @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval?)
-    #if @etd.availability.etd_only?
-    #  for content in @etd.contents do
-    #    Resque.enqueue_at(content.reason.months_to_release.months.from_now, Release, content.class.name, content.id) if content.reason.months_to_release > 0
-    #    Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, content.class.name, content.id) if (content.reason.months_to_warning > 0) || (content.reason.months_to_warning == 0 && !content.reason.warn_before_approval?)
-    #  end
-    #end
+    Resque.enqueue_at(@etd.release_date.to_time, Release, @etd.class.name, @etd.id) if @etd.reason.months_to_release > 0
+    Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, @etd.class.name, @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval?)
+    if @etd.availability.etd_only?
+      for content in @etd.contents do
+        Resque.enqueue_at(content.reason.months_to_release.months.from_now, Release, content.class.name, content.id) if content.reason.months_to_release > 0
+        Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, content.class.name, content.id) if (content.reason.months_to_warning > 0) || (content.reason.months_to_warning == 0 && !content.reason.warn_before_approval?)
+      end
+    end
 
     respond_to do |format|
       format.html # approve.html.erb
@@ -456,13 +454,12 @@ class EtdsController < ApplicationController
     @etd.save
     Provenance.create(person: current_person, action: 'delayed the release of', model: @etd)
 
-    # TODO: uncomment for redis/resque
-    #Resque.remove_delayed(Release, 'Etd', params[:id].to_i)
-    #Resque.enqueue_at(@etd.release_date.to_time, Release, 'Etd', params[:id].to_i)
-    #if params[:rewarn] && params[:months].to_i >= 2
-    #  Resque.remove_delayed(Warning, 'Etd', params[:id].to_i)
-    #  Resque.enqueue_at((@etd.release_date.to_time - 1.month), Warning, 'Etd', params[:id].to_i)
-    #end
+    Resque.remove_delayed(Release, 'Etd', params[:id].to_i)
+    Resque.enqueue_at(@etd.release_date.to_time, Release, 'Etd', params[:id].to_i)
+    if params[:rewarn] && params[:months].to_i >= 2
+      Resque.remove_delayed(Warning, 'Etd', params[:id].to_i)
+      Resque.enqueue_at((@etd.release_date.to_time - 1.month), Warning, 'Etd', params[:id].to_i)
+    end
 
     respond_to do |format|
       format.html { redirect_to(etd_path(@etd), notice: "Successfully delayed release.") }

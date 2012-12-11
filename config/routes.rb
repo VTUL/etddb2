@@ -50,9 +50,8 @@ class AccessConstraint
 end
 
 NewVtEtdUpgrd::Application.routes.draw do
-  # TODO: uncomment for redis/resque
-  #require 'resque/server'
-  #require 'resque_scheduler/server'
+  require 'resque/server'
+  require 'resque_scheduler/server'
 
   # These are boring static pages.
   root :to => 'pages#home'
@@ -64,8 +63,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/dev', :to => 'pages#dev'
 
   # Resque's routes.
-  # TODO: uncomment for redis/resque
-  #mount Resque::Server.new, at: "/resque"
+  mount Resque::Server.new, at: "/resque"
 
   # Set up devise for people, and make it use our sessions controller.
   devise_for :people, :controllers => {:sessions => "people/sessions"}

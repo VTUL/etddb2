@@ -211,8 +211,7 @@ pr.vote = true
 pr.save
 Etd.first.update_attributes(status: 'Approved', approval_date: Time.now, release_date: Time.now + Etd.first.reason.months_to_release.months)
 Provenance.create(person: Person.last, action: "approved", model: Etd.first)
-# TODO: uncomment for redis/resque
-#Resque.enqueue_at(Etd.first.release_date.to_time, Release, Etd.first.class.name, Etd.first.id)
+Resque.enqueue_at(Etd.first.release_date.to_time, Release, Etd.first.class.name, Etd.first.id)
 
 # SU gets another ETD. This one is just submitted.
 Etd.create(title: "My Other ETD", abstract: "This is another ETD.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.find(:first, offset: rand(DocumentType.count)),
