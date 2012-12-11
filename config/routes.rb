@@ -74,14 +74,14 @@ NewVtEtdUpgrd::Application.routes.draw do
   # devise_scope takes the singular model name, and devise_for takes the plural. Why?
   # Also note: route to our sessions controller rather than the devise one.
   devise_scope :person do
-    get "login", :to => "people/sessions#new"
-    post "login", :to => "people/sessions#create"
-    get "logout", :to => "people/sessions#destroy"
+    get "/login", :to => "people/sessions#new"
+    post "/login", :to => "people/sessions#create"
+    get "/logout", :to => "people/sessions#destroy"
   end
 
-  post '/people/find', :to => 'people#find'
-  post '/people/new_committee_member', :to => 'people#new_committee_member'
-  post '/people/add_committee', :to => 'people#add_committee'
+  post '/people/find', :to => 'people#find', :as => :find_people
+  post '/people/new_committee_member', :to => 'people#new_committee_member', :as => :new_committee_member
+  post '/people/add_committee', :to => 'people#add_committee', :as => :add_committee_member
   get '/people/new_legacy', :to => 'people#new', :as => :new_legacy_person
   get '/people/:id/edit_legacy', :to => 'people#edit', :as => :edit_legacy_person
   post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
@@ -98,6 +98,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/next_new', :to => 'etds#next_new', :as => :next_new_etd
   put '/etds/:id/next_new', :to => 'etds#save_contents', :as => :save_contents_to_etd
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
+  get '/etds/:id/content', :to => 'etds#content', :as => :etd_content
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
@@ -112,7 +113,7 @@ NewVtEtdUpgrd::Application.routes.draw do
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
   post '/contents/new', :to => 'contents#new', :as => :new_content
-  post '/contents', :to => 'contents#create'
+  post '/contents', :to => 'contents#create', :as => :create_content
   resources :contents, :except => [:new, :create, :destroy]
 
   post '/degrees/:id/delete', :to => 'degrees#destroy', :as => :destroy_degree
@@ -157,7 +158,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/conversations/:id/reply', :to => 'conversations#send_reply', :as => :send_reply_to_conversation
   #get '/conversations/:id/reply_all', :to => 'conversations#reply_all', :as => :reply_all
   #post '/conversations/:id/reply_all', :to => 'conversations#send_reply_all', :as => :send_reply_all
-  # This goes here so the above routes will resolve correctly.
+  # This goes at the bottom so the above routes will resolve correctly.
   get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
 
   # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
