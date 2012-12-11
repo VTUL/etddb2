@@ -37,18 +37,16 @@
     <%= f.text_field(:dimensions) %>
   </div>
 
-  <% if @etd.availability.name == "Mixed" %>
+  <% if @etd.availability.etd_only %>
   <div class="field">
     <%= f.label(:availability_id, "Availability") %>
     <table>
-      <% for avail in Availability.where(retired: false) do %>
-        <% if avail.name != "Mixed" %>
+      <% for avail in Availability.where(retired: false, etd_only: false) do %>
         <tr>
           <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
           <td valign='top' align='right'><%= avail.name %>:</td>
           <td valign='top'><%= avail.description %></td>
         </tr>
-        <% end %>
       <% end %>
     </table>
   </div>

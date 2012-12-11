@@ -50,8 +50,11 @@ gem 'devise'
 # For multiple file upload
 gem 'paperclip'
 #gem 'carrierwave'
-gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
-gem 'mime-types'
+gem 'nested_form'#, :git => "https://github.com/ryanb/nested_form.git"
+
+# Background Workers!
+#gem 'resque'
+#gem 'resque-scheduler', require: 'resque_scheduler'
 
 # For pagination
 gem 'will_paginate', '3.0.3'

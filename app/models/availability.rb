@@ -10,6 +10,11 @@ class Availability < ActiveRecord::Base
   has_many :provenances, as: :model
   has_many :conversations, as: :model
 
-  validates_presence_of :name, :description
+  belongs_to :reason, inverse_of: :availability
+  belongs_to :release_availability, class_name: 'Availability', foreign_key: 'release_availability_id'
+
+  validates_presence_of :name, :description, :reason_id
   validates :retired, inclusion: {in: [true, false], message: "must be boolean"}
+  validates :etd_only, inclusion: {in: [true, false], message: "must be boolean"}
+  validates :allows_reasons, inclusion: {in: [true, false], message: "must be boolean"}
 end

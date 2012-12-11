@@ -58,8 +58,8 @@ class ContentsController < ApplicationController
         Provenance.create(person: current_person, action: "created", model: @content)
         @etd.contents << @content
         # Update the ETD's availability.
-        if @content.availability_id != @etd.availability_id && @etd.availability.name != "Mixed"
-          @etd.availability_id = Availability.where(name: "Mixed").first.id
+        if @content.availability != @etd.availability && !@etd.availability.etd_only
+          @etd.availability = Availability.where(retired: false, etd_only: true).first
           @etd.save
         end
 
@@ -81,12 +81,12 @@ class ContentsController < ApplicationController
         Provenance.create(person: current_person, action: "updated", model: @content)
 
         # Update the ETD's availability.
-        if @content.availability_id != @etd.availability_id
+        if @content.availability != @etd.availability
           avails = @etd.contents.pluck(:availability_id).uniq
           if avails.length == 1
             @etd.availability_id = avails[0]
           else
-            @etd.availability_id = Availability.where(name: "Mixed").first.id
+            @etd.availability = Availability.where(retired: false, etd_only: true).first if !@etd.availability.etd_only
           end
           @etd.save
         end

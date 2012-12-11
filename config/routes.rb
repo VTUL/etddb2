@@ -50,13 +50,22 @@ class AccessConstraint
 end
 
 NewVtEtdUpgrd::Application.routes.draw do
+  # TODO: uncomment for redis/resque
+  #require 'resque/server'
+  #require 'resque_scheduler/server'
+
   # These are boring static pages.
   root :to => 'pages#home'
+
   get '/about', :to => 'pages#about'
   get '/contact', :to => 'pages#contact'
   get '/authorhelp', :to => 'pages#authorhelp'
   get '/staffhelp', :to => 'pages#staffhelp'
   get '/dev', :to => 'pages#dev'
+
+  # Resque's routes.
+  # TODO: uncomment for redis/resque
+  #mount Resque::Server.new, at: "/resque"
 
   # Set up devise for people, and make it use our sessions controller.
   devise_for :people, :controllers => {:sessions => "people/sessions"}
@@ -94,6 +103,11 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
+  # TODO
+  get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
+  put '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
+  get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
+  post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
@@ -115,6 +129,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :privacy_statements, :except => :destroy
   post '/copyright_statements/:id/delete', :to => 'copyright_statements#destroy', :as => :destroy_copyright_statement
   resources :copyright_statements, :except => :destroy
+  post '/reasons/:id/delete', :to => 'reasons#destroy', :as => :destroy_reasons
+  resources :reasons, :except => :destroy
 
   post '/roles/:id/delete', :to => 'roles#destroy', :as => :destroy_role
   resources :roles, :except => :destroy

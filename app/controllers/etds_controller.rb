@@ -19,7 +19,7 @@ class EtdsController < ApplicationController
       # Previous query
       #@etds = Etd.find(:all, order: 'title')
       # Updated query for pagination
-      @etds = Etd.paginate(page: params[:page], per_page: @per_page,  order: 'title')
+      @etds = Etd.paginate(page: params[:page], per_page: @per_page, order: 'title')
     else
       # Previous query
       #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
@@ -101,22 +101,31 @@ class EtdsController < ApplicationController
     end
     @etd.department_ids = d
 
+    # Add the default reason.
+    @etd.reason = @etd.availability.reason
+
     respond_to do |format|
       if @etd.save
         Provenance.create(person: current_person, action: "created", model: @etd)
 
         if (current_person.roles & Role.where(group: "Administration")).empty?
           # Defer creating the author.
+          # Don't email, or warn about the availability
           format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
         else
           # Make the current_person the creator, or preferably, author.
           pr = PeopleRole.new(person_id: current_person.id, etd_id: @etd.id)
-          # TODO: Is there a better way to do give the creator's role?
           pr.role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first
           pr.save
 
+          # Email ALL the people!
           EtddbMailer.created_authors(@etd).deliver
+
+          # Warn the Author and Committee Chair if the release reason says so.
+          if @etd.reason && @etd.reason.warn_before_approval
+            # TODO: Email Author and Committee Chair
+          end
 
           format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
@@ -140,16 +149,21 @@ class EtdsController < ApplicationController
     end
     params[:etd][:department_ids] = d
 
+    # Update the reason if the availability changes.
+    if @etd.availability_id != Integer(params[:etd][:availability_id])
+      @etd.reason = Availability.find(params[:etd][:availability_id]).reason
+      @etd.save
+    end
+
     respond_to do |format|
       if @etd.update_attributes(params[:etd])
         Provenance.create(person: current_person, action: "updated", model: @etd)
 
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
-        # TODO: Is the where clause necessary? Would this be faster just updating all the contents?
-        if @etd.availability_id != Availability.where(name: "Mixed").first.id
-          contents = @etd.contents.where("availability_id != ?", @etd.availability_id)
-          for content in contents do
-            content.availability_id = @etd.availability_id
+        if !@etd.availability.etd_only
+          for content in @etd.contents do
+            content.availability= @etd.availability
+            content.reason = @etd.reason
             content.save
           end
         end
@@ -252,6 +266,36 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /etds/add_reason/1
+  def pick_reason
+    @etd = Etd.find(params[:id])
+    @reasons = [@etd.reason] 
+    if @etd.availability.allows_reasons
+      @reasons += Reason.where("name NOT IN (?)", Availability.pluck(:name))
+    end
+
+    respond_to do |format|
+      format.html #pick_reason.html.erb
+    end
+  end
+
+  # PUT /etds/add_reason/1
+  def add_reason
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.update_attributes(params[:etd])
+        Provenance.create(person: current_person, action: "changed the release reason for", model: @etd)
+
+        format.html { redirect_to(@etd, notice: 'Etd was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render(action: "pick_reason") }
+        format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
+      end
+    end
+  end
+
   # POST /etd/submit/1
   def submit
     respond_to do |format|
@@ -263,6 +307,7 @@ class EtdsController < ApplicationController
         @etd.save()
 
         #Create an archive of the ETD for easy downloading.
+        # TODO: uncomment for redis/resque
         #Resque.enqueue(Archive, @etd.id)
 
         Provenance.create(person: current_person, action: "submitted", model: @etd)
@@ -351,24 +396,75 @@ class EtdsController < ApplicationController
     end
   end
 
-  #POST /etd/approve/1
+  # POST /etd/approve/1
   def approve
     @etd = Etd.find(params[:id])
-    @etd.status = 'Approved'
     @etd.approval_date = Time.now()
+    @etd.release_date = @etd.reason.months_to_release.months.from_now if @etd.reason.months_to_release >= 0
+    @etd.status = (@etd.months.reason.months_to_release == 0 && !@etd.availability.etd_only?) ? 'Released' : 'Approved'
     @etd.save()
 
-    Provenance.create(person: current_person, action: "approved", model: @etd)
+    Provenance.create(person: current_person, action: 'approved', model: @etd)
+    Provenance.create(person: current_person, action: 'released (by approval)', model: @etd) if @etd.reason.months_to_release == 0 && !@etd.availability.etd_only?
 
     EtddbMailer.approved_authors(@etd).deliver
     EtddbMailer.approved_committee(@etd).deliver
-    # TODO: Don't send unless available.
-    if @etd.document_type == DocumentType.where(retired: false, name: "Dissertation").first
+    # If the availability is not etd only, and there is no time until release, the ETD is available.
+    if @etd.document_type == DocumentType.where(name: 'Dissertation').first && !@etd.availability.etd_only? && @etd.reason.months_to_release == 0
       EtddbMailer.approved_proquest(@etd).deliver
     end
 
+    # Queue up releases and warnings.
+    # If months_to_release is 0, it is now considered released. If it is less than 0, it will never be released.
+    # TODO: uncomment for redis/resque
+    #Resque.enqueue_at(@etd.release_date.to_time, Release, @etd.class.name, @etd.id) if @etd.reason.months_to_release > 0
+    #Resque.enqueue_at(@etd.reason.months_to_warning.months.from_now, Warning, @etd.class.name, @etd.id) if (@etd.reason.months_to_warning > 0) || (@etd.reason.months_to_warning == 0 && !@etd.reason.warn_before_approval?)
+    #if @etd.availability.etd_only?
+    #  for content in @etd.contents do
+    #    Resque.enqueue_at(content.reason.months_to_release.months.from_now, Release, content.class.name, content.id) if content.reason.months_to_release > 0
+    #    Resque.enqueue_at(content.reason.months_to_warning.months.from_now, Warning, content.class.name, content.id) if (content.reason.months_to_warning > 0) || (content.reason.months_to_warning == 0 && !content.reason.warn_before_approval?)
+    #  end
+    #end
+
     respond_to do |format|
       format.html # approve.html.erb
+    end
+  end
+
+  # GET /etd/delay_release/1
+  def delay_release
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if @etd.status == 'Approved'
+        if !@etd.availability.etd_only?
+          format.html # delay_release.html.erb
+        else
+          # Redirect... somewhere.
+        end
+      else
+        format.html { redirect_to(etd_path(@etd), notice: "This ETD it not available for release at this time.") }
+      end
+    end
+  end
+
+  # POST /etd/delay_release/1
+  def process_delay_release
+    @etd = Etd.find(params[:id])
+    @etd.release_date = (@etd.release_date + params[:months].to_i.months)
+    @etd.save
+    Provenance.create(person: current_person, action: 'delayed the release of', model: @etd)
+
+    # TODO: uncomment for redis/resque
+    #Resque.remove_delayed(Release, 'Etd', params[:id].to_i)
+    #Resque.enqueue_at(@etd.release_date.to_time, Release, 'Etd', params[:id].to_i)
+    #if params[:rewarn] && params[:months].to_i >= 2
+    #  Resque.remove_delayed(Warning, 'Etd', params[:id].to_i)
+    #  Resque.enqueue_at((@etd.release_date.to_time - 1.month), Warning, 'Etd', params[:id].to_i)
+    #end
+
+    respond_to do |format|
+      format.html { redirect_to(etd_path(@etd), notice: "Successfully delayed release.") }
     end
   end
 end

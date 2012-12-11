@@ -59,4 +59,18 @@ class EtddbMailer < ActionMailer::Base
     mail(to: 'email@proquest.vt.edu', subject: 'New Electronic Dissertation')
     # TODO: the real proquest email address is 'dissepubl@proquest.com', but I don't want to send them anything by accident.
   end
+
+  def warn_authors(klass)
+    @klass = klass
+    @etd = klass.class.name == 'Etd' ? klass : klass.etd
+    @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+    mail(to: @authors.pluck(:email), subject: 'Your ETD is due to be released soon.')
+  end
+
+  def release_authors(klass)
+    @klass = klass
+    @etd = klass.class.name == 'Etd' ? klass : klass.etd
+    @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+    mail(to: @authors.pluck(:email), subject: 'Your ETD has been released.')
+  end
 end

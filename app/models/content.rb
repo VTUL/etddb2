@@ -9,11 +9,12 @@ class Content < ActiveRecord::Base
   has_many :people_roles, through: :etd
 
   belongs_to :availability, inverse_of: :contents
-  
+  belongs_to :reason, inverse_of: :contents
+
   has_many :provenances, as: :model
   has_many :conversations, as: :model
 
-  validates_presence_of :availability_id, :etd_id
+  validates_presence_of :availability_id, :etd_id, :reason_id
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
 
   # These allow paperclip to generate the content's path and url dynamically.
