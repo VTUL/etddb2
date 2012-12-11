@@ -177,8 +177,8 @@ class EtdsController < ApplicationController
     end
   end
 
-  # DELETE /etds/1
-  # DELETE /etds/1.xml
+  # POST /etds/1/destroy
+  # POST /etds/1/destroy.xml
   def destroy
     @etd = Etd.find(params[:id])
 
@@ -203,7 +203,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etds/add_author/1
+  # GET /etds/1/add_author
   def add_author
     @etd = Etd.find(params[:id])
 
@@ -227,7 +227,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etds/next_new/1
+  # GET /etds/1/next_new
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
     @etd = Etd.find(params[:id])
@@ -238,7 +238,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # PUT /etds/next_new/1
+  # PUT /etds/1/add_contents
   # (This is used from next_new, and add_contents)
   def save_contents
     @etd = Etd.find(params[:id])
@@ -257,7 +257,7 @@ class EtdsController < ApplicationController
     end    
   end
 
-  # GET /etds/add_contents/1
+  # GET /etds/1/add_contents
   def add_contents
     @etd = Etd.find(params[:id])
 
@@ -279,7 +279,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # PUT /etds/add_reason/1
+  # PUT /etds/1/add_reason
   def add_reason
     @etd = Etd.find(params[:id])
 
@@ -296,7 +296,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/submit/1
+  # POST /etd/1/submit
   def submit
     respond_to do |format|
       # ETD must have atleast one committee member, and one piece of content.
@@ -324,7 +324,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/vote/1
+  # POST /etd/1/vote
   def vote
     @etd = Etd.find(params[:id])
 
@@ -359,7 +359,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/unsubmit/1
+  # POST /etds/1/unsubmit
   def unsubmit
     @etd = Etd.find(params[:id])
     
@@ -381,7 +381,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etd/reviewboard/1
+  # GET /etds/1/reviewboard
   def reviewboard
     @etd = Etd.find(params[:id])
 
@@ -396,7 +396,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/approve/1
+  # POST /etds/1/approve
   def approve
     @etd = Etd.find(params[:id])
     @etd.approval_date = Time.now()
@@ -431,7 +431,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etd/delay_release/1
+  # GET /etds/1/delay_release
   def delay_release
     @etd = Etd.find(params[:id])
 
@@ -448,7 +448,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/delay_release/1
+  # POST /etds/1/delay_release
   def process_delay_release
     @etd = Etd.find(params[:id])
     @etd.release_date = (@etd.release_date + params[:months].to_i.months)
