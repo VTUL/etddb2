@@ -88,7 +88,7 @@ class EtdsController < ApplicationController
   # POST /etds
   # POST /etds.xml
   def create
-    @etd = Etd.new(params[:etd])
+    @etd = Etd.new(params[:etd].except(:department_ids))
 
     #Add implied params.
     @etd.status = "Created"
@@ -97,9 +97,7 @@ class EtdsController < ApplicationController
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
-    if params[:etd][:department_ids][:id_2] != "" then
-      d << params[:etd][:department_ids][:id_2]
-    end
+    d << params[:etd][:department_ids][:id_2] if !params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
 
     # Add the default reason.
@@ -145,10 +143,8 @@ class EtdsController < ApplicationController
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
-    if params[:etd][:department_ids][:id_2] != "" then
-      d << params[:etd][:department_ids][:id_2]
-    end
-    params[:etd][:department_ids] = d
+    d << params[:etd][:department_ids][:id_2] if !params[:etd][:department_ids][:id_2].empty?
+    @etd.department_ids = d
 
     # Update the reason if the availability changes.
     if @etd.availability_id != Integer(params[:etd][:availability_id])
@@ -157,7 +153,7 @@ class EtdsController < ApplicationController
     end
 
     respond_to do |format|
-      if @etd.update_attributes(params[:etd])
+      if @etd.update_attributes(params[:etd].except(:department_ids))
         Provenance.create(person: current_person, action: "updated", model: @etd)
 
         # Change the availability of all the ETD's contents, if the availability isn't mixed.
