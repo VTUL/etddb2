@@ -1,5 +1,5 @@
 <h1>Add Contents to ETD</h1>
-<%= nested_form_for @etd, url: next_new_etd_path(@etd), html: {multipart: true} do |f| %>
+<%= nested_form_for @etd, url: save_contents_to_etd_path(@etd), html: {multipart: true} do |f| %>
   <%= f.fields_for :contents do |cf| %>
     <% if cf.object.content? %>
       <% #This content already exists %>
@@ -23,7 +23,6 @@
     <% end %>
   <% end %>
   <%= f.link_to_add "Add more content", :contents %><br />
-  <%= hidden_field_tag(:origin, '/etds/add_contents/') %>
   <%= f.submit "Update Content" %>
 <% end %>
 <br />

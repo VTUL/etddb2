@@ -244,17 +244,11 @@ class EtdsController < ApplicationController
   def save_contents
     @etd = Etd.find(params[:id])
 
-    # Whitelist params[:origin]
-    origins = ["/etds/add_contents/", "/etds/next_new/"]
-    if !origins.include?(params[:origin])
-      params[:origin] = "/etds/add_contents/"
-    end
-
     if @etd.update_attributes(params[:etd])
       Provenance.create(person: current_person, action: "added contents to", model: @etd)
-      redirect_to(params[:origin] + @etd.id.to_s, notice: "Successfully updated article.")
+      redirect_to(add_contents_to_etd_path(@etd), notice: "Successfully updated article.")
     else
-      redirect_to(params[:origin] + @etd.id.to_s)
+      redirect_to(add_contents_to_etd_path(@etd))
     end    
   end
 
