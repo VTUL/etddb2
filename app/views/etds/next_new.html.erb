@@ -14,7 +14,13 @@
         <% #This is new content %>
         <%= cf.file_field :content %>
         <%= cf.hidden_field(:bound, {value: @etd.bound}) %>
-        <%= cf.hidden_field(:availability_id, {value: @etd.availability_id}) %>
+        <% if @etd.availability.etd_only %>
+          <%= cf.hidden_field(:availability_id, {value: Availability.where(retired: false, etd_only: false).first.id}) %>
+          <%= cf.hidden_field(:reason_id, {value: Availability.where(retired: false, etd_only: false).first.reason.id}) %>
+        <% else %>
+          <%= cf.hidden_field(:availability_id, {value: @etd.availability_id}) %>
+          <%= cf.hidden_field(:reason_id, {value: @etd.reason_id}) %>
+        <% end %>
         <%= cf.link_to_remove "Remove"%>
       <% end %>
     <% end %>
