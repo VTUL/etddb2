@@ -257,7 +257,16 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etds/add_reason/1
+  # GET /etds/1/contents
+  def contents
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      format.html # content.html.erb
+    end
+  end
+
+  # GET /etds/1/add_reason
   def pick_reason
     @etd = Etd.find(params[:id])
     @reasons = [@etd.reason] 
