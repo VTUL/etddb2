@@ -3,6 +3,8 @@
   <%= render 'etd_items' %>
 <% end %>
 <% if current_person.id == @person.id %>
+  <%= link_to 'New ETD', new_etd_path %>
+  <br />
   <% if !@committee_etds.empty? %>
     <%= render 'committee_items' %>
   <% end %>
