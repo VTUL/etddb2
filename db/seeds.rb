@@ -191,9 +191,9 @@ Etd.create(title: "Super Secret Stuff", abstract: "Oh man, this better not get r
 Etd.first.departments = [Department.first, Department.last]
 PeopleRole.create(person: Person.first, etd: Etd.first, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.first, action: "created", model: Etd.first)
-Content.create(etd: Etd.first, availability: Availability.first, reason: Reason.first, content: File.new('app/models/degree.rb'), bound: false, page_count: 0)
+Content.create(etd: Etd.first, availability: Availability.where(retired: false, etd_only: false).last, reason: Reason.where(name: 'Creative Writing').first, content: File.new('app/models/degree.rb'), bound: false, page_count: 0)
 Provenance.create(person: Person.first, action: "created", model: Content.first)
-Content.create(etd: Etd.first, availability: Availability.first, reason: Reason.first, content: File.new('app/models/etd.rb'), bound: false, duration: 0)
+Content.create(etd: Etd.first, availability: Availability.where(retired: false, etd_only: false).last, reason: Reason.where(name: 'Creative Writing').first, content: File.new('app/models/etd.rb'), bound: false, duration: 0)
 Provenance.create(person: Person.first, action: "created", model: Content.last)
 
 # Create a reviewer and add them to SU's ETD.
