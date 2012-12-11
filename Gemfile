@@ -22,6 +22,7 @@ gem 'jquery-rails'
 
 #JS requirements
 gem 'execjs'
+gem 'libv8'
 gem 'therubyracer'
 
 gem 'ruby-ldap', '0.9.10'
