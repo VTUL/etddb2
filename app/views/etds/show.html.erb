@@ -40,7 +40,7 @@
         <tr>
           <td><%= collab.person.name %></td>
           <td><%= collab.role.name %></td>
-          <td><%= link_to 'Destroy', destroy_people_role_path(collab), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
+          <td><%= link_to 'Remove', destroy_people_role_path(collab), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
         </tr>
       <% end %>
     </table>
@@ -71,7 +71,7 @@
 </p>
 <p>
   <b>Availability:</b>
-  <%= @etd.availability.name %>
+  <%= @etd.availability.name %><br />
   <%= @etd.availability.description %>
 </p>
 <p>
