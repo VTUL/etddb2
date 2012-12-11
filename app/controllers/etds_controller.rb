@@ -115,7 +115,7 @@ class EtdsController < ApplicationController
         else
           # Make the current_person the creator, or preferably, author.
           pr = PeopleRole.new(person_id: current_person.id, etd_id: @etd.id)
-          pr.role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first.id : Role.where(group: 'Creators').first
+          pr.role = !Role.where(name: 'Author').empty? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
           pr.save
 
           # Email ALL the people!
@@ -212,7 +212,7 @@ class EtdsController < ApplicationController
   # POST /etds/add_author
   def save_author
     @etd = Etd.find(params[:id])
-    @role = !Role.where(name: 'Author').nil? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
+    @role = !Role.where(name: 'Author').empty? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
     @pr = PeopleRole.new(person_id: params[:person_id], role_id: @role.id, etd_id: @etd.id)
 
     if @pr.save
