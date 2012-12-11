@@ -39,6 +39,7 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
     @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
     @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
+    @emails = @creators.where(show_email: true).pluck(:email).join(", ")
 
     # TODO: Add access rights management code, or implement Cancan.
 

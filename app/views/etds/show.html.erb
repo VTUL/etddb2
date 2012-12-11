@@ -6,10 +6,12 @@
   <b><%= "Author".pluralize(@creators.size) %>:</b>
   <%= @creators.pluck(:last_name).zip(@creators.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
 </p>
+<% if !@emails.nil? %>
 <p>
   <b>Author's <%= "Email".pluralize(@creators.size) %>:</b>
-  <%= @creators.where(show_email: true).pluck(:email).join(", ") %>
+  <%= @emails %>
 </p>
+<% end %>
 <p>
   <b>URN:</b>
   <%= @etd.urn %>
