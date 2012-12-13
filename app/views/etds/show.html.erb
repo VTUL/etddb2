@@ -101,7 +101,7 @@
   <% else %>
     None yet.<%= ' Go add some!' if @creators.include?(current_person) %>
   <% end %>
-  <%= button_to "Add More Content", {action: :add_contents}, method: :get if @creators.include?(current_person)%>
+  <%= button_to("Add More Content", etd_contents_path(@etd), method: :get) if @creators.include?(current_person) %>
 </p>
 <br />
 <%= form_tag(controller: "conversations", action: "new") do %>

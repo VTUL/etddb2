@@ -98,7 +98,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/next_new', :to => 'etds#next_new', :as => :next_new_etd
   put '/etds/:id/next_new', :to => 'etds#save_contents', :as => :save_contents_to_etd
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
-  get '/etds/:id/content', :to => 'etds#content', :as => :etd_content
+  get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd

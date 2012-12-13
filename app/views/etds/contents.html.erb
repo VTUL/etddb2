@@ -1,0 +1,52 @@
+<h1>Contents</h1>
+<% unless @etd.contents.empty? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Size (kb)</th>
+    </tr>
+  <% @etd.contents.each do |c| %>
+    <tr>
+      <td><%= c.content_file_name %></td>
+      <td><%= '%.2f' % (c.content_file_size / 1024.0) %></td>
+      <td style="font-variant: small-caps;"><%= link_to('[metadata]', content_path(c)) %></td>
+      <td style="font-variant: small-caps;"><%= link_to('[download]', c.content.url) %></td>
+      <% if @etd.status == "Created" %>
+        <% if @etd.availability.etd_only? %>
+          <% if c.availability.allows_reasons? %>
+            <td>|form for availabilities, reasons|</td>
+          <% else %>
+            <td>|form for availabilities|</td>
+          <% end %>
+        <% end %>
+        <td><%= button_to 'Delete', destroy_content_path(c), data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+  <br />
+<% end %>
+<div>
+  <p>Add files one at a time below, or in a batch on the <%= link_to('batch upload page', add_contents_to_etd_path(@etd)) %>.</p>
+  <%= form_tag(save_contents_to_etd_path(@etd), method: 'put', multipart: true) do %>
+    <div class='field'>
+      <%= file_field_tag :content %>
+    </div>
+    <div class='actions'>
+      <%= submit_tag('Upload') %>
+    </div>
+
+      <%= hidden_field_tag(:bound, @etd.bound) %>
+    <% if @etd.availability.etd_only? %>
+      <%= hidden_field_tag(:availability_id, Availability.where(retired: false, etd_only: false).first.id) %>
+      <%= hidden_field_tag(:reason_id, Availability.where(retired: false, etd_only: false).first.reason.id) %>
+    <% else %>
+      <%= hidden_field_tag(:availability_id, @etd.availability_id) %>
+      <%= hidden_field_tag(:reason_id, @etd.reason_id) %>
+    <% end %>
+  <% end %>
+</div>
+<br />
+<div>
+  <p>Once you are done, you should <%= link_to('view your ETD', etd_path(@etd)) %> and double check that everything is correct.</p>
+</div>

@@ -104,11 +104,12 @@ class ContentsController < ApplicationController
   # DELETE /contents/1.xml
   def destroy
     @content = Content.find(params[:id])
+    @etd = @content.etd
     Provenance.create(person: current_person, action: "deleted", model: @content)
     @content.destroy
 
     respond_to do |format|
-      format.html { redirect_to(contents_path) }
+      format.html { redirect_to(etd_contents_path(@etd)) }
       format.xml  { head(:ok) }
     end
   end

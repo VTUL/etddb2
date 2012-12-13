@@ -217,7 +217,7 @@ class EtdsController < ApplicationController
 
     if @pr.save
       Provenance.create(person: current_person, action: "created", model: @pr)
-      redirect_to(next_new_etd_path(@etd))
+      redirect_to(etd_contents_path(@etd))
     else
       format.html { render(action: "add_author", notice: 'You have errors.') }
       format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
@@ -240,12 +240,14 @@ class EtdsController < ApplicationController
   def save_contents
     @etd = Etd.find(params[:id])
 
-    if @etd.update_attributes(params[:etd])
-      Provenance.create(person: current_person, action: "added contents to", model: @etd)
-      redirect_to(add_contents_to_etd_path(@etd), notice: "Successfully updated article.")
-    else
-      redirect_to(add_contents_to_etd_path(@etd))
-    end    
+    content = Content.new(content: params[:content], bound: params[:bound], availability_id: params[:availability_id], reason_id: params[:reason_id])
+    @etd.contents << content
+    #if @etd.update_attributes(params[:etd])
+    #  Provenance.create(person: current_person, action: "added contents to", model: @etd)
+      redirect_to(etd_contents_path(@etd), notice: "Successfully updated article.")
+    #else
+    #  redirect_to(add_contents_to_etd_path(@etd))
+    #end
   end
 
   # GET /etds/1/add_contents
