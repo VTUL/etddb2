@@ -1,5 +1,4 @@
 class ContentsController < ApplicationController
-  #require 'mime/types'
   # GET /contents
   # GET /contents.xml
   def index
