@@ -262,6 +262,8 @@ class EtdsController < ApplicationController
   # GET /etds/1/contents
   def contents
     @etd = Etd.find(params[:id])
+    @availabilities = Availability.where(retired: false)
+    @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
 
     respond_to do |format|
       format.html # content.html.erb
