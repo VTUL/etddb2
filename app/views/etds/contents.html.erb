@@ -36,9 +36,21 @@
       <div>
         <p>Here's some more info on those availabilities:</p>
         <table>
+          <tr>
+            <th>Name</th>
+            <th>Time until release</th>
+            <th>Description</th>
+          </tr>
           <% @availabilities.each do |avail| %>
             <tr>
-              <td><%= avail.name %>:</td>
+              <td><%= avail.name %></td>
+              <% if avail.reason.months_to_release > 0 %>
+                <td><%= "#{avail.reason.months_to_release} #{'Month'.pluralize(avail.reason.months_to_release)}" %></td>
+              <% elsif avail.reason.months_to_release < 0 %>
+                <td>Never Releases</td>
+              <% else %>
+                <td>Releases Immediately</td>
+              <% end %>
               <td><%= avail.description %></td>
             </tr>
           <% end %>
@@ -50,9 +62,21 @@
       <div>
         <p>Here's some more info on those reasons:</p>
         <table>
+          <tr>
+            <th>Name</th>
+            <th>Time until release</th>
+            <th>Description</th>
+          </tr>
           <% @reasons.each do |reason| %>
             <tr>
-              <td><%= reason.name %>:</td>
+              <td><%= reason.name %></td>
+              <% if reason.months_to_release > 0 %>
+                <td><%= "#{reason.months_to_release} #{'Month'.pluralize(reason.months_to_release)}" %></td>
+              <% elsif reason.months_to_release < 0 %>
+                <td>Never Releases</td>
+              <% else %>
+                <td>Releases Immediately</td>
+              <% end %>
               <td><%= reason.description %></td>
             </tr>
           <% end %>
