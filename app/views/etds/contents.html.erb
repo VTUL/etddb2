@@ -16,7 +16,8 @@
           <td>
             <%= form_tag(update_content_availability_path(c)) do %>
               <%= select_tag(:availability_id, options_from_collection_for_select(@availabilities, :id, :name, c.availability_id)) %>
-              <%= select_tag(:reason_id, options_from_collection_for_select(@reasons, :id, :name, c.reason_id)) if c.availability.allows_reasons? %>
+              <%= select_tag(:reason_id, options_from_collection_for_select(@reasons, :id, :name, c.reason_id), prompt: 'None') if c.availability.allows_reasons? %>
+              <%= hidden_field_tag(:reason_id, "") if !c.availability.allows_reasons%>
               <%= submit_tag('Change') %>
             <% end %>
           </td>

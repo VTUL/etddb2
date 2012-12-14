@@ -113,6 +113,27 @@ class ContentsController < ApplicationController
     end
   end
 
+  # POST /contents/1/update_availability
+  def update_availability
+    @content = Content.find(params[:id])
+
+    @content.availability = Availability.find(params[:availability_id])
+    if @content.availability.allows_reasons? && !params[:reason_id].empty?
+      @content.reason = Reason.find(params[:reason_id])
+    else
+      @content.reason = Reason.where(name: @content.availability.name).first
+    end
+
+    respond_to do |format|
+      if @content.save
+        Provenance.create(person: current_person, action: "deleted", model: @content)
+        format.html { redirect_to(etd_contents_path(@content.etd), notice: 'Updated Content.') }
+      else
+        format.html { redirect_to(etd_contents_path(@content.etd), notice: "Something's not right...") }
+      end
+    end
+  end
+
   # GET /available/etd-00000000-00000000/available/filename.format?12345678
   def get_file
     @etd = Etd.where(urn: params[:urn]).first
