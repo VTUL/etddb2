@@ -22,63 +22,73 @@
             <% end %>
           </td>
         <% end %>
-        <td><%= button_to 'Delete', destroy_content_path(c), data: {confirm: 'Are you sure?'} %></td>
+        <td><%= button_to('Delete', destroy_content_path(c), data: {confirm: 'Are you sure?'}) %></td>
+      <% elsif @etd.availability.etd_only? %>
+        <td><%= button_to(c.availability.name, '/', disabled: true) %></td>
+        <td><%= button_to(c.reason.name, '/', disabled: true) if c.availability.allows_reasons? %></td>
       <% end %>
     </tr>
   <% end %>
   </table>
-  <% if @etd.availability.etd_only? %>
-  <br />
-  <div>
-    <p>Here's some more info on those availabilities:</p>
-    <table>
-      <% @availabilities.each do |avail| %>
-        <tr>
-          <td><%= avail.name %>:</td>
-          <td><%= avail.description %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-  <% end %>
-  <% if @etd.contents.map { |c| c.availability.allows_reasons? } .include?(true) %>
-  <br />
-  <div>
-    <p>Here's some more info on those reasons:</p>
-    <table>
-      <% @reasons.each do |reason| %>
-        <tr>
-          <td><%= reason.name %>:</td>
-          <td><%= reason.description %></td>
-        </tr>
-      <% end %>
-    </table>
-    <p><strong>Note: if you switch to an availbility that does not allow other reasons, this field will be ignored.</strong></p>
-  </div>
-  <% end %>
-  <br />
-<% end %>
-<div>
-  <p>Add files one at a time below, or in a batch on the <%= link_to('batch upload page', add_contents_to_etd_path(@etd)) %>.</p>
-  <%= form_tag(save_contents_to_etd_path(@etd), method: 'put', multipart: true) do %>
-    <div class='field'>
-      <%= file_field_tag :content %>
-    </div>
-    <div class='actions'>
-      <%= submit_tag('Upload') %>
-    </div>
-
-      <%= hidden_field_tag(:bound, @etd.bound) %>
+  <% if @etd.status == 'Created' %>
     <% if @etd.availability.etd_only? %>
-      <%= hidden_field_tag(:availability_id, Availability.where(retired: false, etd_only: false).first.id) %>
-      <%= hidden_field_tag(:reason_id, Availability.where(retired: false, etd_only: false).first.reason.id) %>
-    <% else %>
-      <%= hidden_field_tag(:availability_id, @etd.availability_id) %>
-      <%= hidden_field_tag(:reason_id, @etd.reason_id) %>
+      <br />
+      <div>
+        <p>Here's some more info on those availabilities:</p>
+        <table>
+          <% @availabilities.each do |avail| %>
+            <tr>
+              <td><%= avail.name %>:</td>
+              <td><%= avail.description %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+    <% if @etd.contents.map { |c| c.availability.allows_reasons? } .include?(true) %>
+      <br />
+      <div>
+        <p>Here's some more info on those reasons:</p>
+        <table>
+          <% @reasons.each do |reason| %>
+            <tr>
+              <td><%= reason.name %>:</td>
+              <td><%= reason.description %></td>
+            </tr>
+          <% end %>
+        </table>
+        <p><strong>Note: if you switch to an availbility that does not allow other reasons, this field will be ignored.</strong></p>
+      </div>
     <% end %>
   <% end %>
-</div>
+<% end %>
+<% if @etd.status == 'Created' %>
+  <br />
+  <div>
+    <p>Add files one at a time below, or in a batch on the <%= link_to('batch upload page', add_contents_to_etd_path(@etd)) %>.</p>
+    <%= form_tag(save_contents_to_etd_path(@etd), method: 'put', multipart: true) do %>
+      <div class='field'>
+        <%= file_field_tag :content %>
+      </div>
+      <div class='actions'>
+        <%= submit_tag('Upload') %>
+      </div>
+
+        <%= hidden_field_tag(:bound, @etd.bound) %>
+      <% if @etd.availability.etd_only? %>
+        <%= hidden_field_tag(:availability_id, Availability.where(retired: false, etd_only: false).first.id) %>
+        <%= hidden_field_tag(:reason_id, Availability.where(retired: false, etd_only: false).first.reason.id) %>
+      <% else %>
+        <%= hidden_field_tag(:availability_id, @etd.availability_id) %>
+        <%= hidden_field_tag(:reason_id, @etd.reason_id) %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
 <br />
 <div>
-  <p>Once you are done, you should <%= link_to('view your ETD', etd_path(@etd)) %> and double check that everything is correct.</p>
+  <p>
+    Once you are done here, you should view your ETD and double check that everything is correct.
+    <%= button_to('View ETD', etd_path(@etd), method: :get) %>
+  </p>
 </div>

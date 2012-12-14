@@ -121,12 +121,12 @@ class ContentsController < ApplicationController
     if @content.availability.allows_reasons? && !params[:reason_id].empty?
       @content.reason = Reason.find(params[:reason_id])
     else
-      @content.reason = Reason.where(name: @content.availability.name).first
+      @content.reason = @content.availability.reason
     end
 
     respond_to do |format|
       if @content.save
-        Provenance.create(person: current_person, action: "deleted", model: @content)
+        Provenance.create(person: current_person, action: "updated the availability for", model: @content)
         format.html { redirect_to(etd_contents_path(@content.etd), notice: 'Updated Content.') }
       else
         format.html { redirect_to(etd_contents_path(@content.etd), notice: "Something's not right...") }
