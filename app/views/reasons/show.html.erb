@@ -10,22 +10,18 @@
     <td><%= @reason.name %></td>
     <td><%= @reason.description %></td>
     <% if @reason.months_to_warning > 0 %>
-        <td><%= @reason.months_to_warning %></td>
+      <td><%= @reason.months_to_warning %></td>
+    <% elsif @reason.months_to_warning < 0 %>
+      <td>Never</td>
     <% else %>
-      <% if @reason.months_to_warning < 0 %>
-        <td>Never</td>
-      <% else %>
-        <td>Immediately</td>
-      <% end %>
+      <td>Immediately</td>
     <% end %>
     <% if @reason.months_to_release > 0 %>
-        <td><%= @reason.months_to_release %></td>
+      <td><%= @reason.months_to_release %></td>
+    <% elsif @reason.months_to_release < 0 %>
+      <td>Never</td>
     <% else %>
-      <% if @reason.months_to_release < 0 %>
-        <td>Never</td>
-      <% else %>
-        <td>Immediately</td>
-      <% end %>
+      <td>Immediately</td>
     <% end %>
     <td><%= @reason.warn_before_approval ? 'Yes' : 'No' %></td>
   </tr>
