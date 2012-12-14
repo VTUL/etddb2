@@ -262,7 +262,8 @@ class EtdsController < ApplicationController
   # GET /etds/1/contents
   def contents
     @etd = Etd.find(params[:id])
-    @availabilities = Availability.where(retired: false)
+    @availabilities = Availability.where(retired: false, etd_only: false)
+    @availabilities += Availability.where(retired: true, etd_only: false) if @etd.bound?
     @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
 
     respond_to do |format|
