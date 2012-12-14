@@ -274,7 +274,7 @@ class EtdsController < ApplicationController
   # GET /etds/1/add_reason
   def pick_reason
     @etd = Etd.find(params[:id])
-    @reasons = [@etd.reason] 
+    @reasons = [@etd.reason]
     if @etd.availability.allows_reasons
       @reasons += Reason.where("name NOT IN (?)", Availability.pluck(:name))
     end
@@ -367,15 +367,15 @@ class EtdsController < ApplicationController
   # POST /etds/1/unsubmit
   def unsubmit
     @etd = Etd.find(params[:id])
-    
+
     respond_to do |format|
       if @etd.status == "Submitted"
         if !current_person.roles.where(group: 'Graduate School').empty?
           @etd.status = "Created"
           @etd.save
-          
+
           Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
-  
+
           format.html { redirect_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.") }
         else
           format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }
