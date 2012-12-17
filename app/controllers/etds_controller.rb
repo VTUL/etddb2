@@ -235,28 +235,33 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /etds/1/add_contents
+  def add_contents
+    @etd = Etd.find(params[:id])
+    @new_contents = [Content.new]
+
+    respond_to do |format|
+      format.html # add_contents.html.erb
+    end
+  end
+
   # PUT /etds/1/add_contents
-  # (This is used from next_new, and add_contents)
+  # This is used from add_contents and contents.
   def save_contents
     @etd = Etd.find(params[:id])
 
-    content = Content.new(content: params[:content], bound: params[:bound], availability_id: params[:availability_id], reason_id: params[:reason_id])
-    @etd.contents << content
+    if params[:content].nil?
+      @etd.update_attributes(params[:etd])
+    else
+      content = Content.new(content: params[:content], bound: params[:bound], availability_id: params[:availability_id], reason_id: params[:reason_id])
+      @etd.contents << content
+    end
     #if @etd.update_attributes(params[:etd])
     #  Provenance.create(person: current_person, action: "added contents to", model: @etd)
       redirect_to(etd_contents_path(@etd), notice: "Successfully updated article.")
     #else
     #  redirect_to(add_contents_to_etd_path(@etd))
     #end
-  end
-
-  # GET /etds/1/add_contents
-  def add_contents
-    @etd = Etd.find(params[:id])
-
-    respond_to do |format|
-      format.html # add_contents.html.erb
-    end
   end
 
   # GET /etds/1/contents

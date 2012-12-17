@@ -1,14 +1,7 @@
 <h1>Add Contents to ETD</h1>
 <%= nested_form_for @etd, url: save_contents_to_etd_path(@etd), html: {multipart: true} do |f| %>
   <%= f.fields_for :contents do |cf| %>
-    <% if cf.object.content? %>
-      <% #This content already exists %>
-      <%= link_to(cf.object.content_file_name, content_path(cf.object)) %> |
-      <!--<%= cf.object.content_content_type %> |-->
-      <%= cf.object.content_file_size %> |
-      <%= link_to "Edit", edit_content_path(cf.object)%> |
-      <%= cf.link_to_remove "Delete" %>
-    <% else %>
+    <% unless cf.object.content? %>
       <% #This is new content %>
       <%= cf.file_field :content %>
       <%= cf.hidden_field(:bound, {value: @etd.bound}) %>
