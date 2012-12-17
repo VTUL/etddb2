@@ -22,7 +22,7 @@
             <% end %>
           </td>
         <% end %>
-        <td><%= button_to('Delete', destroy_content_path(c), data: {confirm: 'Are you sure?'}) %></td>
+        <td><%= button_to('Delete', destroy_content_path(c), data: {confirm: 'Are you sure you want to delete this content?'}) %></td>
       <% elsif @etd.availability.etd_only? %>
         <td><%= button_to(c.availability.name, '/', disabled: true) %></td>
         <td><%= button_to(c.reason.name, '/', disabled: true) if c.availability.allows_reasons? %></td>
