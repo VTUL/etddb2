@@ -95,20 +95,19 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
   get '/etds/:id/add_author', :to => 'etds#add_author', :as => :add_author_to_etd
   post '/etds/:id/add_author', :to => 'etds#save_author', :as => :save_author_to_etd
-  get '/etds/:id/next_new', :to => 'etds#next_new', :as => :next_new_etd
-  put '/etds/:id/next_new', :to => 'etds#save_contents', :as => :save_contents_to_etd
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
+  put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
   # TODO
-  get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
-  put '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
-  get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
-  post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
+  #get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
+  #post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
+  #get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
+  #post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
