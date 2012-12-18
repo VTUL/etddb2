@@ -30,9 +30,9 @@
     </tr>
   <% end %>
   </table>
+  <br />
   <% if @etd.status == 'Created' %>
     <% if @etd.availability.etd_only? %>
-      <br />
       <div>
         <p>Here's some more info on those availabilities:</p>
         <table>
@@ -56,9 +56,8 @@
           <% end %>
         </table>
       </div>
-    <% end %>
-    <% if @etd.contents.map { |c| c.availability.allows_reasons? } .include?(true) %>
       <br />
+    <% if @etd.contents.map { |c| c.availability.allows_reasons? } .include?(true) %>
       <div>
         <p>Here's some more info on those reasons:</p>
         <table>
@@ -83,11 +82,12 @@
         </table>
         <p><strong>Note: if you switch to an availbility that does not allow other reasons, this field will be ignored.</strong></p>
       </div>
+      <br />
+    <% end %>
     <% end %>
   <% end %>
 <% end %>
 <% if @etd.status == 'Created' %>
-  <br />
   <div>
     <p>Add files one at a time below, or in a batch on the <%= link_to('batch upload page', add_contents_to_etd_path(@etd)) %>.</p>
     <%= form_tag(save_contents_to_etd_path(@etd), method: 'put', multipart: true) do %>
@@ -108,11 +108,11 @@
       <% end %>
     <% end %>
   </div>
+  <br />
 <% end %>
-<br />
 <div>
   <p>
     Once you are done here, you should view your ETD and double check that everything is correct.
-    <%= button_to('View ETD', etd_path(@etd), method: :get) %>
   </p>
+  <%= button_to('View ETD', etd_path(@etd), method: :get) %>
 </div>

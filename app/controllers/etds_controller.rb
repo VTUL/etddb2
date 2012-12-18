@@ -239,7 +239,6 @@ class EtdsController < ApplicationController
   # GET /etds/1/add_contents
   def add_contents
     @etd = Etd.find(params[:id])
-    @new_contents = [Content.new]
 
     respond_to do |format|
       format.html # add_contents.html.erb
