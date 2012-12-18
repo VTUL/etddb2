@@ -213,6 +213,7 @@ class EtdsController < ApplicationController
   def save_author
     @etd = Etd.find(params[:id])
     @role = !Role.where(name: 'Author').empty? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
+    params[:person_id] = current_person.id if params[:person_id].empty?
     @pr = PeopleRole.new(person_id: params[:person_id], role_id: @role.id, etd_id: @etd.id)
 
     if @pr.save
