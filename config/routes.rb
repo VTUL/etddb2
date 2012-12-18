@@ -112,10 +112,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
-  post '/contents/new', :to => 'contents#new', :as => :new_content
-  post '/contents', :to => 'contents#create', :as => :create_content
   post '/contents/:id/update_availability', :to => 'contents#update_availability', :as => :update_content_availability
-  resources :contents, :except => [:new, :create, :destroy]
+  resources :contents, :only => [:edit, :update, :show]
 
   post '/degrees/:id/delete', :to => 'degrees#destroy', :as => :destroy_degree
   resources :degrees, :except => :destroy
