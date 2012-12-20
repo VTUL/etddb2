@@ -79,10 +79,6 @@ NewVtEtdUpgrd::Application.routes.draw do
     get "/logout", :to => "people/sessions#destroy"
   end
 
-  # TODO: Remove these when the Etd versions are working.
-  #post '/people/find', :to => 'people#find', :as => :find_people
-  #post '/people/new_committee_member', :to => 'people#new_committee_member', :as => :new_committee_member
-  #post '/people/add_committee', :to => 'people#add_committee', :as => :add_committee_member
   get '/people/new_legacy', :to => 'people#new', :as => :new_legacy_person
   get '/people/:id/edit_legacy', :to => 'people#edit', :as => :edit_legacy_person
   post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
