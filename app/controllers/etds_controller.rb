@@ -209,69 +209,32 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etds/add_author
-  def save_author
-    @etd = Etd.find(params[:id])
-    @role = !Role.where(name: 'Author').empty? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
-    params[:person_id] = current_person.id if params[:person_id].empty?
-    @pr = PeopleRole.new(person_id: params[:person_id], role_id: @role.id, etd_id: @etd.id)
-
-    if @pr.save
-      Provenance.create(person: current_person, action: "created", model: @pr)
-      redirect_to(etd_contents_path(@etd))
-    else
-      format.html { render(action: "add_author", notice: 'You have errors.') }
-      format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
-    end
-  end
-
-  # TODO: Remove.
-  # GET /etds/1/next_new
-  def next_new
-    # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
-    @etd = Etd.find(params[:id])
-    @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
-
-    respond_to do |format|
-      format.html # new_next.html.erb
-    end
-  end
-
   # GET /people/find/
-  def find
+  def find_person
     @etd = Etd.find(params[:id])
+    @role_group = Role::GROUPS.include?(params[:role_group]) ? params[:role_group] : 'Collaborators'
 
     respond_to do |format|
       if params[:name].nil?
-        format.html # find.html.erb
+        format.html # find_person.html.erb
+        @candidates = []
       else
         @name = params[:name].upcase
         @name = '#####' if @name.empty?
         @candidates = Person.where("UPPER(first_name) LIKE '%#{@name}%' OR UPPER(last_name) LIKE '%#{@name}%' OR UPPER(display_name) LIKE '%#{@name}%'").limit(10)
-        format.js # find.js.erb
-        format.html { render(action: "new_committee_member") }
+        format.js # find_person.js.erb
+        format.html # find_person.html.erb
       end
     end
   end
 
-  # POST /people/new_committee
-  def new_committee
-    @etd = Etd.find(params[:id])
-    @name = params[:name].upcase
-    @name = '#####' if @name.empty?
-    @candidates = Person.where("UPPER(first_name) LIKE '%#{@name}%' OR UPPER(last_name) LIKE '%#{@name}%' OR UPPER(display_name) LIKE '%#{@name}%'").limit(10)
-
-    respond_to do |format|
-      format.html # new_committee.html.erb
-    end
-  end
-
-  # POST /people/add_committee
-  def add_committee
+  # POST /people/find_person
+  def save_person
     @etd = Etd.find(params[:id])
     PeopleRole.create(etd_id: params[:id], role_id: params[:role_id], person_id: params[:candidate_id])
 
     respond_to do |format|
+      # TODO: redirect to adding content, if appropriate.
       format.html { redirect_to(etd_path(@etd)) }
     end
   end

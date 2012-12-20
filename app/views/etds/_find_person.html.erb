@@ -8,6 +8,6 @@
         </tr>
       <% end %>
     </table>
-    <%= select_tag(:role_id, options_from_collection_for_select(Role.where(group: 'Collaborators'), :id, :name)) %>
+    <%= select_tag(:role_id, options_from_collection_for_select(Role.where(group: @role_group), :id, :name)) %>
     <% end %>
   </div>
