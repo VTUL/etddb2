@@ -1,0 +1,13 @@
+  <div id="candidates">
+    <% unless @candidates.empty? %>
+    <table>
+      <% for candidate in @candidates do %>
+        <tr>
+          <td><%= radio_button_tag(:candidate_id, candidate.id) %></td>
+          <td><%= candidate.name %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= select_tag(:role_id, options_from_collection_for_select(Role.where(group: 'Collaborators'), :id, :name)) %>
+    <% end %>
+  </div>

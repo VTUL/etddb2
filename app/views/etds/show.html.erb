@@ -48,9 +48,7 @@
     None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
   <% if @creators.include?(current_person) %>
-    <%= form_tag(controller: "people", action: "find") do %>
-      <%= hidden_field_tag(:etd_id, @etd.id) %>
-      <%= hidden_field_tag(:origin, '/etds/') %>
+    <%= form_tag(find_committee_path(@etd)) do %>
       <%= submit_tag "Add New Committee Member" %>
     <% end %>
   <% end %>

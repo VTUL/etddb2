@@ -225,6 +225,7 @@ class EtdsController < ApplicationController
     end
   end
 
+  # TODO: Remove.
   # GET /etds/1/next_new
   def next_new
     # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
@@ -233,6 +234,45 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       format.html # new_next.html.erb
+    end
+  end
+
+  # GET /people/find/
+  def find
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      if params[:name].nil?
+        format.html # find.html.erb
+      else
+        @name = params[:name].upcase
+        @name = '#####' if @name.empty?
+        @candidates = Person.where("UPPER(first_name) LIKE '%#{@name}%' OR UPPER(last_name) LIKE '%#{@name}%' OR UPPER(display_name) LIKE '%#{@name}%'").limit(10)
+        format.js # find.js.erb
+        format.html { render(action: "new_committee_member") }
+      end
+    end
+  end
+
+  # POST /people/new_committee
+  def new_committee
+    @etd = Etd.find(params[:id])
+    @name = params[:name].upcase
+    @name = '#####' if @name.empty?
+    @candidates = Person.where("UPPER(first_name) LIKE '%#{@name}%' OR UPPER(last_name) LIKE '%#{@name}%' OR UPPER(display_name) LIKE '%#{@name}%'").limit(10)
+
+    respond_to do |format|
+      format.html # new_committee.html.erb
+    end
+  end
+
+  # POST /people/add_committee
+  def add_committee
+    @etd = Etd.find(params[:id])
+    PeopleRole.create(etd_id: params[:id], role_id: params[:role_id], person_id: params[:candidate_id])
+
+    respond_to do |format|
+      format.html { redirect_to(etd_path(@etd)) }
     end
   end
 

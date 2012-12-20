@@ -79,9 +79,10 @@ NewVtEtdUpgrd::Application.routes.draw do
     get "/logout", :to => "people/sessions#destroy"
   end
 
-  post '/people/find', :to => 'people#find', :as => :find_people
-  post '/people/new_committee_member', :to => 'people#new_committee_member', :as => :new_committee_member
-  post '/people/add_committee', :to => 'people#add_committee', :as => :add_committee_member
+  # TODO: Remove these when the Etd versions are working.
+  #post '/people/find', :to => 'people#find', :as => :find_people
+  #post '/people/new_committee_member', :to => 'people#new_committee_member', :as => :new_committee_member
+  #post '/people/add_committee', :to => 'people#add_committee', :as => :add_committee_member
   get '/people/new_legacy', :to => 'people#new', :as => :new_legacy_person
   get '/people/:id/edit_legacy', :to => 'people#edit', :as => :edit_legacy_person
   post '/people/new_legacy', :to => 'people#create', :as => :create_legacy_person
@@ -93,10 +94,16 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
+  # TODO
+  #get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
+  #post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
   get '/etds/:id/add_author', :to => 'etds#add_author', :as => :add_author_to_etd
   post '/etds/:id/add_author', :to => 'etds#save_author', :as => :save_author_to_etd
-  get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
+  post '/etds/:id/find', :to => 'etds#find', :as => :find_committee
+  post '/etds/:id/new_committee', :to => 'etds#new_committee', :as => :new_committee
+  post '/etds/:id/add_committee', :to => 'etds#add_committee', :as => :add_committee
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
+  get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
@@ -104,8 +111,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
   # TODO
-  #get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
-  #post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
   #get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
   #post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy
