@@ -1,14 +1,4 @@
 class ContentsController < ApplicationController
-  # GET /contents
-  # GET /contents.xml
-  def index
-    @authors_etds = current_person.etds
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render(xml: @authors_etds) }
-    end
-  end
-
   # GET /contents/1
   # GET /contents/1.xml
   def show
@@ -21,52 +11,11 @@ class ContentsController < ApplicationController
     end
   end
 
-  # GET /contents/new
-  # GET /contents/new.xml
-  def new
-    @content = Content.new
-    @etd = Etd.find(params[:etd_id])
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render(xml: @content) }
-    end
-  end
-
   # GET /contents/1/edit
   # GET /contents/1/edit.xml
   def edit
     @content = Content.find(params[:id])
     @etd = Etd.find(@content.etd_id)
-  end
-
-  # POST /contents
-  # POST /contents.xml
-  def create
-    @etd = Etd.find(params[:etd_id])
-    @content = Content.new(params[:content])
-
-    if @content.availability_id.nil? && @content.availability.nil?
-      @content.availability = @etd.availability
-    end
-    @content.etd = @etd
-    @content.bound = @etd.bound
-    
-    respond_to do |format|
-      if @content.save
-        Provenance.create(person: current_person, action: "created", model: @content)
-        @etd.contents << @content
-        # Update the ETD's availability.
-        if @content.availability != @etd.availability && !@etd.availability.etd_only
-          @etd.availability = Availability.where(retired: false, etd_only: true).first
-          @etd.save
-        end
-
-        format.html { redirect_to(@content, notice: 'Content was successfully created.') }
-      else 
-        format.html { render(action: "new") }
-      end
-    end
   end
 
   # POST /contents/edit
