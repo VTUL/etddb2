@@ -285,6 +285,18 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /etds/1/contents
+  def contents
+    @etd = Etd.find(params[:id])
+    @availabilities = Availability.where(retired: false, etd_only: false)
+    @availabilities += Availability.where(retired: true, etd_only: false) if @etd.bound?
+    @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
+
+    respond_to do |format|
+      format.html # content.html.erb
+    end
+  end
+
   # PUT /etds/1/add_contents
   # This is used from add_contents and contents.
   def save_contents
@@ -302,18 +314,6 @@ class EtdsController < ApplicationController
     #else
     #  redirect_to(add_contents_to_etd_path(@etd))
     #end
-  end
-
-  # GET /etds/1/contents
-  def contents
-    @etd = Etd.find(params[:id])
-    @availabilities = Availability.where(retired: false, etd_only: false)
-    @availabilities += Availability.where(retired: true, etd_only: false) if @etd.bound?
-    @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
-
-    respond_to do |format|
-      format.html # content.html.erb
-    end
   end
 
   # GET /etds/1/add_reason
