@@ -67,6 +67,9 @@ class EtdsController < ApplicationController
   def new
     respond_to do |format|
       @etd = Etd.new
+      @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
+      @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+
       format.html # new.html.erb
       format.xml  { render(xml: @etd) }
     end
@@ -76,8 +79,11 @@ class EtdsController < ApplicationController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
+      @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
+      @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+
       # BUG: This works, but is only a hack, we should use Cancan.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if current_person.etds.include?(@etd) || @admin
         format.html { render(action: "edit") }
       else
         format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
@@ -124,6 +130,7 @@ class EtdsController < ApplicationController
           # Warn the Author and Committee Chair if the release reason says so.
           if @etd.reason && @etd.reason.warn_before_approval
             # TODO: Email Author and Committee Chair
+            # Committee Chair is anyone with role in the collaborators group with the highest priority
           end
 
           format.html { redirect_to(add_collaborator_to_etd_path(@etd)) }
