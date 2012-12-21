@@ -61,7 +61,7 @@ gem 'nested_form'#, :git => "https://github.com/ryanb/nested_form.git"
 gem 'will_paginate', '3.0.3'
 
 # For messaging
-gem 'mailboxer'
+#gem 'mailboxer'
 
 # For ip filtering
 gem 'netaddr'
