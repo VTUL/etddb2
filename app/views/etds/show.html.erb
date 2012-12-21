@@ -48,7 +48,7 @@
     None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
   <% if @creators.include?(current_person) %>
-    <%= form_tag(find_person_for_etd_path(@etd)) do %>
+    <%= form_tag(add_committee_to_etd_path(@etd), method: :get) do %>
       <%= submit_tag "Add New Committee Member" %>
     <% end %>
   <% end %>

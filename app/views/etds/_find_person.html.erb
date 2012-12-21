@@ -9,5 +9,8 @@
       <% end %>
     </table>
     <%= select_tag(:role_id, options_from_collection_for_select(Role.where(group: @role_group), :id, :name)) %>
+    <br />
+    <br />
+    <%= submit_tag("Add to ETD") %>
     <% end %>
   </div>

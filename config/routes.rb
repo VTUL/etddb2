@@ -94,7 +94,8 @@ NewVtEtdUpgrd::Application.routes.draw do
   #get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
   #post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
   get '/etds/:id/add_author', :to => 'etds#add_author', :as => :add_author_to_etd
-  match'/etds/:id/find', :to => 'etds#find_person', :via => [:get, :post], :as => :find_person_for_etd
+  get '/etds/:id/add_committee', :to => 'etds#add_committee', :as => :add_committee_to_etd
+  post '/etds/:id/find', :to => 'etds#find_person', :as => :find_person_for_etd
   post '/etds/:id/find_person', :to => 'etds#save_person', :as => :save_person_to_etd
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd

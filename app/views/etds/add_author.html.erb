@@ -1,7 +1,7 @@
 <h1>Find Person</h1>
 <div>
  <p>Not the author? Search for them and add them to this ETD.</p>
-<%= form_tag(find_person_for_etd_path(@etd), id: "person_search") do %>
+<%= form_tag(find_person_for_etd_path(@etd), remote: true, id: "person_search") do %>
   <%= label_tag(:name, "Person's Name") %>:
   <%= text_field_tag(:name) %>
   <%= hidden_field_tag(:role_group, 'Creators') %>
@@ -16,5 +16,12 @@
   <%= hidden_field_tag(:role_id, Role.where(group: 'Creators').first.id) %>
   <%= hidden_field_tag(:candidate_id, current_person.id) %>
   <%= submit_tag('I am the author') %>
+<% end %>
+</div>
+<br />
+<div>
+<%= form_tag(save_person_to_etd_path(@etd), id: "person_add") do %>
+  <div id="candidates">
+  </div>
 <% end %>
 </div>

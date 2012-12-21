@@ -203,13 +203,24 @@ class EtdsController < ApplicationController
   # GET /etds/1/add_author
   def add_author
     @etd = Etd.find(params[:id])
+    @candidates = []
 
     respond_to do |format|
       format.html # add_author.html.erb
     end
   end
 
-  # GET /people/find/
+  # GET /etds/1/add_author
+  def add_committee
+    @etd = Etd.find(params[:id])
+    @candidates = []
+
+    respond_to do |format|
+      format.html # add_committee.html.erb
+    end
+  end
+
+  # POST /etds/find/
   def find_person
     @etd = Etd.find(params[:id])
     @role_group = Role::GROUPS.include?(params[:role_group]) ? params[:role_group] : 'Collaborators'
@@ -228,7 +239,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /people/find_person
+  # POST /etds/find_person
   def save_person
     @etd = Etd.find(params[:id])
     PeopleRole.create(etd_id: params[:id], role_id: params[:role_id], person_id: params[:candidate_id])

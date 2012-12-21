@@ -1,0 +1,18 @@
+<h1>Find Person</h1>
+<div>
+ <p>Search for a committee member below and add them to this ETD.</p>
+<%= form_tag(find_person_for_etd_path(@etd), remote: true, id: "person_search") do %>
+  <%= label_tag(:name, "Person's Name") %>:
+  <%= text_field_tag(:name) %>
+  <%= hidden_field_tag(:role_group, 'Collaborators') %>
+  <br />
+  <%= submit_tag("Find") %>
+<% end %>
+</div>
+<br />
+<div>
+<%= form_tag(save_person_to_etd_path(@etd), id: "person_add") do %>
+  <div id="candidates">
+  </div>
+<% end %>
+</div>

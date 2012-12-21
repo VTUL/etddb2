@@ -1,11 +1,14 @@
 <h1>Find Person</h1>
+<div>
 <%= form_tag(find_person_for_etd_path(@etd), remote: true, id: "person_search") do %>
   <%= label_tag(:name, "Person's Name") %>
   <%= text_field_tag(:name) %>
   <%= hidden_field_tag(:role_group, @role_group) %>
   <%= submit_tag("Find") %>
 <% end %>
+</div>
 <br />
+<div>
 <%= form_tag(save_person_to_etd_path(@etd), id: "person_add") do %>
   <div id="candidates">
     <% unless @candidates.empty? %>
@@ -18,8 +21,10 @@
       <% end %>
     </table>
     <%= select_tag(:role_id, options_from_collection_for_select(Role.where(group: @role_group), :id, :name)) %>
+    <br />
+    <br />
+    <%= submit_tag("Add to ETD") %>
     <% end %>
   </div>
-  <br />
-  <%= submit_tag("Add to ETD") %>
 <% end %>
+</div>
