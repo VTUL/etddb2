@@ -110,7 +110,7 @@ class EtdsController < ApplicationController
         if !(current_person.roles & Role.where(group: "Administration")).empty?
           # Defer creating the author.
           # Don't email, or warn about the availability
-          format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.html { redirect_to(add_creator_to_etd_path(@etd)) }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
         else
           # Make the current_person the creator, or preferably, author.
@@ -126,7 +126,7 @@ class EtdsController < ApplicationController
             # TODO: Email Author and Committee Chair
           end
 
-          format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.html { redirect_to(add_collaborator_to_etd_path(@etd)) }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
         end
       else
@@ -200,23 +200,23 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etds/1/add_author
-  def add_author
+  # GET /etds/1/add_creator
+  def add_creator
     @etd = Etd.find(params[:id])
     @candidates = []
 
     respond_to do |format|
-      format.html # add_author.html.erb
+      format.html # add_creator.html.erb
     end
   end
 
-  # GET /etds/1/add_author
-  def add_committee
+  # GET /etds/1/add_collaborator
+  def add_collaborator
     @etd = Etd.find(params[:id])
     @candidates = []
 
     respond_to do |format|
-      format.html # add_committee.html.erb
+      format.html # add_collaborator.html.erb
     end
   end
 
