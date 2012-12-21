@@ -192,7 +192,8 @@ class EtdsController < ApplicationController
         end
 
         @etd.destroy
-        format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
+        # TODO: Redirect somewhere better?
+        format.html { redirect_to(etds_path, notice: "ETD Deleted.") }
         format.xml  { head :ok }
       else
         format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
