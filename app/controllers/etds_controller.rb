@@ -110,7 +110,7 @@ class EtdsController < ApplicationController
         if !(current_person.roles & Role.where(group: "Administration")).empty?
           # Defer creating the author.
           # Don't email, or warn about the availability
-          format.html { redirect_to(add_author_to_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.html { redirect_to(add_creator_to_etd_path(@etd)) }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
         else
           # Make the current_person the creator, or preferably, author.
@@ -126,7 +126,7 @@ class EtdsController < ApplicationController
             # TODO: Email Author and Committee Chair
           end
 
-          format.html { redirect_to(next_new_etd_path(@etd), notice: 'Etd was successfully created.') }
+          format.html { redirect_to(add_collaborator_to_etd_path(@etd)) }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
         end
       else
@@ -192,7 +192,8 @@ class EtdsController < ApplicationController
         end
 
         @etd.destroy
-        format.html { redirect_to(action: 'index', notice: "ETD Deleted.") }
+        # TODO: Redirect somewhere better?
+        format.html { redirect_to(etds_path, notice: "ETD Deleted.") }
         format.xml  { head :ok }
       else
         format.html { redirect_to(etds_path, notice: "You cannot delete that ETD.") }
@@ -200,52 +201,54 @@ class EtdsController < ApplicationController
     end
   end
 
-  # GET /etds/1/add_author
-  def add_author
+  # GET /etds/1/add_creator
+  def add_creator
     @etd = Etd.find(params[:id])
+    @candidates = []
 
     respond_to do |format|
-      format.html # add_author.html.erb
+      format.html # add_creator.html.erb
     end
   end
 
-  # POST /etds/add_author
-  def save_author
+  # GET /etds/1/add_collaborator
+  def add_collaborator
     @etd = Etd.find(params[:id])
-    @role = !Role.where(name: 'Author').empty? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
-    @pr = PeopleRole.new(person_id: params[:person_id], role_id: @role.id, etd_id: @etd.id)
-
-    if @pr.save
-      Provenance.create(person: current_person, action: "created", model: @pr)
-      redirect_to(next_new_etd_path(@etd))
-    else
-      format.html { render(action: "add_author", notice: 'You have errors.') }
-      format.xml  { render(xml: @etd.errors, status: :unprocessable_entity) }
-    end
-  end
-
-  # GET /etds/1/next_new
-  def next_new
-    # Assuming someone is signed in, and authorized, as this should only be accessable from /etd/new
-    @etd = Etd.find(params[:id])
-    @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
+    @candidates = []
 
     respond_to do |format|
-      format.html # new_next.html.erb
+      format.html # add_collaborator.html.erb
     end
   end
 
-  # PUT /etds/1/add_contents
-  # (This is used from next_new, and add_contents)
-  def save_contents
+  # POST /etds/find/
+  def find_person
     @etd = Etd.find(params[:id])
+    @role_group = Role::GROUPS.include?(params[:role_group]) ? params[:role_group] : 'Collaborators'
 
-    if @etd.update_attributes(params[:etd])
-      Provenance.create(person: current_person, action: "added contents to", model: @etd)
-      redirect_to(add_contents_to_etd_path(@etd), notice: "Successfully updated article.")
-    else
-      redirect_to(add_contents_to_etd_path(@etd))
-    end    
+    respond_to do |format|
+      if params[:name].nil?
+        format.html # find_person.html.erb
+        @candidates = []
+      else
+        @name = params[:name].upcase
+        @name = '#####' if @name.empty?
+        @candidates = Person.where("UPPER(first_name) LIKE '%#{@name}%' OR UPPER(last_name) LIKE '%#{@name}%' OR UPPER(display_name) LIKE '%#{@name}%'").limit(10)
+        format.js # find_person.js.erb
+        format.html # find_person.html.erb
+      end
+    end
+  end
+
+  # POST /etds/find_person
+  def save_person
+    @etd = Etd.find(params[:id])
+    PeopleRole.create(etd_id: params[:id], role_id: params[:role_id], person_id: params[:candidate_id])
+
+    respond_to do |format|
+      # TODO: redirect to adding content, if appropriate.
+      format.html { redirect_to(etd_path(@etd)) }
+    end
   end
 
   # GET /etds/1/add_contents
@@ -260,16 +263,38 @@ class EtdsController < ApplicationController
   # GET /etds/1/contents
   def contents
     @etd = Etd.find(params[:id])
+    @availabilities = Availability.where(retired: false, etd_only: false)
+    @availabilities += Availability.where(retired: true, etd_only: false) if @etd.bound?
+    @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
 
     respond_to do |format|
       format.html # content.html.erb
     end
   end
 
+  # PUT /etds/1/add_contents
+  # This is used from add_contents and contents.
+  def save_contents
+    @etd = Etd.find(params[:id])
+
+    if params[:content].nil?
+      @etd.update_attributes(params[:etd])
+    else
+      content = Content.new(content: params[:content], bound: params[:bound], availability_id: params[:availability_id], reason_id: params[:reason_id])
+      @etd.contents << content
+    end
+    #if @etd.update_attributes(params[:etd])
+    #  Provenance.create(person: current_person, action: "added contents to", model: @etd)
+      redirect_to(etd_contents_path(@etd), notice: "Successfully updated article.")
+    #else
+    #  redirect_to(add_contents_to_etd_path(@etd))
+    #end
+  end
+
   # GET /etds/1/add_reason
   def pick_reason
     @etd = Etd.find(params[:id])
-    @reasons = [@etd.reason] 
+    @reasons = [@etd.reason]
     if @etd.availability.allows_reasons
       @reasons += Reason.where("name NOT IN (?)", Availability.pluck(:name))
     end
@@ -361,15 +386,15 @@ class EtdsController < ApplicationController
   # POST /etds/1/unsubmit
   def unsubmit
     @etd = Etd.find(params[:id])
-    
+
     respond_to do |format|
       if @etd.status == "Submitted"
         if !current_person.roles.where(group: 'Graduate School').empty?
           @etd.status = "Created"
           @etd.save
-          
+
           Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
-  
+
           format.html { redirect_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.") }
         else
           format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }

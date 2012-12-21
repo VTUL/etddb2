@@ -48,9 +48,7 @@
     None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
   <% if @creators.include?(current_person) %>
-    <%= form_tag(controller: "people", action: "find") do %>
-      <%= hidden_field_tag(:etd_id, @etd.id) %>
-      <%= hidden_field_tag(:origin, '/etds/') %>
+    <%= form_tag(add_collaborator_to_etd_path(@etd), method: :get) do %>
       <%= submit_tag "Add New Committee Member" %>
     <% end %>
   <% end %>
@@ -59,7 +57,7 @@
   <b>Keywords:</b>
   <ul>
   <% for word in @etd.keywords.to_s.split(",").uniq do %>
-    <% if !word.squish.empty? %>
+    <% unless word.squish.empty? %>
       <li><%= word.squish %></li>
     <% end %>
   <% end %>
@@ -87,7 +85,6 @@
         <th>File Size:</th>
         <th></th>
         <th></th>
-        <th></th>
       </tr>
       <% for c in @etd.contents do %>
         <tr>
@@ -101,7 +98,7 @@
   <% else %>
     None yet.<%= ' Go add some!' if @creators.include?(current_person) %>
   <% end %>
-  <%= button_to "Add More Content", {action: :add_contents}, method: :get if @creators.include?(current_person)%>
+  <%= button_to("Manage Content", etd_contents_path(@etd), method: :get) if @creators.include?(current_person) %>
 </p>
 <br />
 <%= form_tag(controller: "conversations", action: "new") do %>
