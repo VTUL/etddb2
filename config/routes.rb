@@ -9,26 +9,26 @@ class AccessConstraint
     @ipv6 << NetAddr::CIDR.create('2002:80ad::/32')     # Blacksburg, 6in4 from 128.173.0.0::/16
     @ipv6 << NetAddr::CIDR.create('2002:2652::/32')     # Blacksburg, 6in4 from 198.82.0.0::/16
 
-    @metaarchive = []
-    File.open("#{Rails.root}/lib/MetaArchive.ips") do |f|
-      @metaarchive = f.lines.to_a.map { |l| l.strip }
+    @remote_whitelist = []
+    File.open("#{Rails.root}/lib/RemoteWhitelist.ips") do |f|
+      @remote_whitelist = f.lines.to_a.map { |l| l.strip }
     end
   end
 
   def matches?(request)
-    restricted_access = []
+    restricted_access = false
     withheld_access = false
 
     # Allow on-campus access
     begin
-      restricted_access = @ipv4.select { |subnet| subnet.contains?(request.remote_ip) }
+      restricted_access = @ipv4.map { |subnet| subnet.contains?(request.remote_ip) } .include?(true)
     rescue NetAddr::VersionError => e
-      restricted_access = @ipv6.select { |subnet| subnet.contains?(request.remote_ip) }
+      restricted_access = @ipv6.map { |subnet| subnet.contains?(request.remote_ip) } .include?(true)
     end
 
     # Allow MetaArchive access
-    if Rails.env == "production" and @metaarchive.include?(request.remote_ip)
-      restricted_access << true
+    if Rails.env == "production" and @remote_whitelist.include?(request.remote_ip)
+      restricted_access = true
     end
 
     # Allow local dev work.
@@ -37,8 +37,8 @@ class AccessConstraint
     end
 
     result = ['available', 'submitted'].include?(request.params[:availability]) and (request.params[:file_availability].nil? or
-                    request.params[:file_availability] == 'available' or
-                    (request.params[:file_availability] == 'restricted' && (!restricted_access.empty? || withheld_access)) or
+                    (request.params[:file_availability] == 'available') or
+                    (request.params[:file_availability] == 'restricted' && (restricted_access || withheld_access)) or
                     (request.params[:file_availability] == 'withheld' && withheld_access))
     result |= request.params[:availability] == 'withheld' && withheld_access
     # TODO: REMOVE NEXT LINE! FOR DEBUGGING ONLY!
