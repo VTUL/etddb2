@@ -4,7 +4,7 @@ class EtdsControllerTest < ActionController::TestCase
   setup do
     @etd = Etd.first
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
 
   test "should get index" do
@@ -106,11 +106,11 @@ class EtdsControllerTest < ActionController::TestCase
     for c in @etd.contents do
       params[:contents_attributes]["#{c.id}"] = {id: c.id, _destroy: false}
     end
-    
+
     assert_difference('@etd.contents.count', 2) do
       post(:save_contents, etd: params, origin: '/etds/add_contents/', id: @etd.id)
     end
-  end  
+  end
 
   test "should correct the origin param." do
     params = {contents_attributes: {}}
@@ -121,7 +121,7 @@ class EtdsControllerTest < ActionController::TestCase
     post(:save_contents, etd: params, origin: '/bad/path/', id: @etd.id)
     assert_redirected_to(controller: 'etds', action: 'add_contents')
   end
-  
+
   test "should delete multiple contents from an ETD." do
     params = {contents_attributes: {}}
     for c in @etd.contents do

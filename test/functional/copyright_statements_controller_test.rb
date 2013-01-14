@@ -4,7 +4,7 @@ class CopyrightStatementsControllerTest < ActionController::TestCase
   setup do
     @copyright = CopyrightStatement.first
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
 
   test "should get index" do

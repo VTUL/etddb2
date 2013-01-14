@@ -4,7 +4,7 @@ class DocumentTypesControllerTest < ActionController::TestCase
   setup do
     @document_type = DocumentType.first
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
 
   test "should get index" do

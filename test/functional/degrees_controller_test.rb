@@ -4,7 +4,7 @@ class DegreesControllerTest < ActionController::TestCase
   setup do
     @degree = Degree.first
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
 
   test "should get index" do
