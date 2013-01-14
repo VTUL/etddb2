@@ -30,9 +30,9 @@ class Etd < ActiveRecord::Base
   validates_uniqueness_of :urn
 
   def self.search(search)
-    if search 
+    if search
       where('etds.title LIKE ?', "%#{search}%")
-    else 
+    else
       scoped
     end
   end

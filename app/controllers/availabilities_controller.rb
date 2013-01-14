@@ -46,7 +46,7 @@ class AvailabilitiesController < ApplicationController
     params[:availability][:retired] = false if params[:availability][:retired].nil?
     @availability = Availability.new(params[:availability])
     @reason = Reason.new(params[:reason])
-    @reason.name = @availability.name 
+    @reason.name = @availability.name
     @reason.description =  "The default release schedule for #{@availability.name} ETDs."
     @availability.reason = @reason
 

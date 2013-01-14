@@ -12,7 +12,7 @@
     <th>Bound</th>
     <th>Page Count</th>
     <th>Duration</th>
-    <th>Dimensions</th> 
+    <th>Dimensions</th>
   </tr>
   <% etd.contents.each do |content| %>
   <tr>
@@ -23,7 +23,7 @@
     <td><%=h content.bound %></td>
     <td><%=h content.page_count %></td>
     <td><%=h content.duration %></td>
-    <td><%=h content.dimensions %></td> 
+    <td><%=h content.dimensions %></td>
     <td><%= link_to 'Show', content %></td>
     <td><%= link_to 'Edit', edit_content_path(content) %></td>
     <td><%= button_to 'Destroy', destroy_content_path(content), data: {confirm: 'Are you sure?'} %></td>
@@ -31,7 +31,7 @@
   <% end %>
 </table>
 <%= form_tag('/contents/new') do |f| %>
-  <%= hidden_field_tag :etd_id, etd.id %> 
+  <%= hidden_field_tag :etd_id, etd.id %>
   <%= submit_tag "Add Content" %>
 <% end %>
 </p>
