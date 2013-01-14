@@ -41,7 +41,7 @@ class Content < ActiveRecord::Base
   has_attached_file :content, storage: :filesystem, path: ":rails_root/files/:urn/:filename", url: "/:availability/:urn/:file_availability/:filename"
   validates_attachment_presence :content
   validates_attachment_size :content, less_than: 512.megabytes
-  
+
   # Carrierwave mountings
   #mount_uploader :content, ContentUploader
   #validates_integrity_of :content

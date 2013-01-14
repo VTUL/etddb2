@@ -2,7 +2,7 @@
 
 <h3 class="top_bar">My Etds</h3>
 <div id="page_pref" class ="top_bar" style="margin-top:17px">
-  <%= form_tag @person, :method => 'get' do %> 
+  <%= form_tag @person, :method => 'get' do %>
     Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
          :onchange => "this.form.submit();" %>
   <% end %>
