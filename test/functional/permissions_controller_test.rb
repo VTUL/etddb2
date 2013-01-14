@@ -3,7 +3,7 @@ require 'test_helper'
 class PermissionsControllerTest < ActionController::TestCase
   setup do
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
 
   test "should get index" do
@@ -42,7 +42,7 @@ class PermissionsControllerTest < ActionController::TestCase
     assert_difference('Permission.count') do
       post :update, perms: @perm_params
     end
-    
+
     assert_redirected_to permissions_path
 
     @perm_params["6_9_4"] = "false"

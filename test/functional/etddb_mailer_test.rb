@@ -16,7 +16,7 @@ class EtddbMailerTest < ActionMailer::TestCase
     assert_equal("ETD Successfully Submitted.", email.subject)
     assert_match(/Congratulations, #{author.first_name}!/, email.encoded)
   end
-  
+
   test "should send submission confirmation to the graduate school." do
     etd = Etd.first
     author = Person.find(etd.people_roles.where(role_id: Role.where(name: 'Author').first).first.person_id)
@@ -29,7 +29,7 @@ class EtddbMailerTest < ActionMailer::TestCase
     # TODO: This assert_match should be unique to the grad school submission confirmation email.
     assert_match(/#{author.display_name} just submitted their ETD!/, email.encoded)
   end
-  
+
   test "should send submission confirmation to the committee members." do
     etd = Etd.first
     author = Person.find(etd.people_roles.where(role_id: Role.where(name: 'Author').first).first.person_id)
