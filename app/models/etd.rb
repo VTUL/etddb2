@@ -47,7 +47,7 @@ class Etd < ActiveRecord::Base
     date :defense_date
     date :release_date
     boolean :bound
-    # attachment :etd_attachment, :multiple => true
+    attachment :etd_attachment
   end
 
   def author
@@ -69,7 +69,12 @@ class Etd < ActiveRecord::Base
 
   def etd_attachment
     cont = self.contents
-    cont.map { |e| e.content.path }
+    # res = cont.map { |e| e.content.path }
+    # return res
+    res = cont[0]
+    if !res.nil?
+      return res.content.path
+    end
   end
 
   def file_type
