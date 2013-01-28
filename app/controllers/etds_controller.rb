@@ -54,7 +54,6 @@ class EtdsController < ApplicationController
     @etd = Etd.where(urn: params[:urn]).first
 
     if !@etd.nil?
-      # Redirect to the ETD's new path (Let it take care of access rights.)
       redirect_to(etd_path(@etd), status: :moved_permanently)
     else
       # TODO: Make this less generic, or better yet, a 404.
@@ -356,7 +355,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/1/vote
+  # POST /etds/1/vote
   def vote
     @etd = Etd.find(params[:id])
 
