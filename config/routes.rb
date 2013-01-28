@@ -61,6 +61,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/authorhelp', :to => 'pages#authorhelp'
   get '/staffhelp', :to => 'pages#staffhelp'
   get '/dev', :to => 'pages#dev'
+  get '/survey_return', :to => 'pages#survey_return', :as => :survey_return_path
 
   # Resque's routes.
   mount Resque::Server.new, at: "/resque"
@@ -88,9 +89,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
-  # TODO
-  #get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
-  #post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
   get '/etds/:id/add_creator', :to => 'etds#add_creator', :as => :add_creator_to_etd
   get '/etds/:id/add_collaborator', :to => 'etds#add_collaborator', :as => :add_collaborator_to_etd
   post '/etds/:id/find', :to => 'etds#find_person', :as => :find_person_for_etd
@@ -98,6 +96,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
+  # TODO: next two paths.
+  get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason_for_etd
+  post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason_to_etd
+  get '/etds/:id/survey', :to => 'etds#survey', :as => :survey
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd

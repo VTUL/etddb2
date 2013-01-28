@@ -113,6 +113,8 @@ class EtdsController < ApplicationController
       if @etd.save
         Provenance.create(person: current_person, action: "created", model: @etd)
 
+        Redis.current.setbit("created:#{@etd.id}", 7, 0)
+
         if !(current_person.roles & Role.where(group: "Administration")).empty?
           # Defer creating the author.
           # Don't email, or warn about the availability
@@ -123,6 +125,8 @@ class EtdsController < ApplicationController
           pr = PeopleRole.new(person_id: current_person.id, etd_id: @etd.id)
           pr.role = !Role.where(name: 'Author').empty? ? Role.where(name: "Author").first : Role.where(group: 'Creators').first
           pr.save
+          # Set 'Needs Author' to 'Done'
+          Redis.current.setbit("created:#{@etd.id}", 7, 1)
 
           # Email ALL the people!
           EtddbMailer.created_authors(@etd).deliver
@@ -191,6 +195,8 @@ class EtdsController < ApplicationController
       if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
         Provenance.create(person: current_person, action: "deleted", model: @etd)
 
+        Redis.current.del("created:#{@etd.id}")
+
         for pr in @etd.people_roles do
           pr.destroy
         end
@@ -252,18 +258,16 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
     PeopleRole.create(etd_id: params[:id], role_id: params[:role_id], person_id: params[:candidate_id])
 
+    role = Role.find(params[:role_id])
+    if role.group == 'Creators'
+      Redis.current.setbit("created:#{@etd.id}", 7, 1)
+    elsif role.group == 'Collaborators'
+      Redis.current.setbit("created:#{@etd.id}", 5, 1)
+    end
+
     respond_to do |format|
       # TODO: redirect to adding content, if appropriate.
       format.html { redirect_to(etd_path(@etd)) }
-    end
-  end
-
-  # GET /etds/1/add_contents
-  def add_contents
-    @etd = Etd.find(params[:id])
-
-    respond_to do |format|
-      format.html # add_contents.html.erb
     end
   end
 
@@ -279,6 +283,15 @@ class EtdsController < ApplicationController
     end
   end
 
+  # GET /etds/1/add_contents
+  def add_contents
+    @etd = Etd.find(params[:id])
+
+    respond_to do |format|
+      format.html # add_contents.html.erb
+    end
+  end
+
   # PUT /etds/1/add_contents
   # This is used from add_contents and contents.
   def save_contents
@@ -290,12 +303,10 @@ class EtdsController < ApplicationController
       content = Content.new(content: params[:content], bound: params[:bound], availability_id: params[:availability_id], reason_id: params[:reason_id])
       @etd.contents << content
     end
-    #if @etd.update_attributes(params[:etd])
-    #  Provenance.create(person: current_person, action: "added contents to", model: @etd)
-      redirect_to(etd_contents_path(@etd), notice: "Successfully updated article.")
-    #else
-    #  redirect_to(add_contents_to_etd_path(@etd))
-    #end
+
+    Redis.current.setbit("created:#{@etd.id}", 6, 1)
+
+    redirect_to(etd_contents_path(@etd), notice: "Successfully updated article.")
   end
 
   # GET /etds/1/add_reason
@@ -328,12 +339,23 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/1/submit
+  # GET /etds/1/survey
+  def survey
+    @etd = Etd.find(params[:id])
+
+    Redis.current.setbit("created:#{@etd.id}", 3, 1)
+    cookies.signed[:etd] = { value: @etd.id, http_only: true }
+
+    # TODO: read survey path from config file, use survey_return_path iff empty.
+    redirect_to(survey_return_path)
+  end
+
+  # POST /etds/1/submit
   def submit
     respond_to do |format|
-      # ETD must have atleast one committee member, and one piece of content.
-      if @etd.contents.length > 0 && @etd.people_roles.where(role_id: Role.where(group: 'Collaborators').pluck(:id)).pluck(:person_id).uniq.count > 0
-        @etd = Etd.find(params[:id])
+      @etd = Etd.find(params[:id])
+      # ETD must have at least one committee member, and one piece of content.
+      if @etd.next_unfinished.nil?
         @etd.status = "Submitted"
         @etd.submission_date = Time.now()
         @etd.save()
@@ -349,7 +371,7 @@ class EtdsController < ApplicationController
 
         format.html #submit.html.erb
       else
-        # Redirect to etd, prompt to add content, committee.
+        # TODO: Redirect to next_unfinished
         redirect_to(etd_path(@etd), notice: 'Please add a committee member and some content before submitting.')
       end
     end

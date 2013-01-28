@@ -5,6 +5,8 @@
 #########################################################
 
 class Etd < ActiveRecord::Base
+  delegate :url_helpers, to: 'Rails.application.routes'
+
   belongs_to :copyright_statement, inverse_of: :etds
   belongs_to :degree, inverse_of: :etds
   belongs_to :document_type, inverse_of: :etds
@@ -35,6 +37,42 @@ class Etd < ActiveRecord::Base
     else
       scoped
     end
+  end
+
+  def next_unfinished()
+    unless self.status == "Created"
+      return nil
+    end
+
+    # 7 - Needs creator.
+    if Redis.current.getbit("created:#{self.id}", 7) == 0
+      return url_helpers.add_creator_to_etd_path(self)
+    end
+    # 6 - Needs content
+    if Redis.current.getbit("created:#{self.id}", 6) == 0
+      return url_helpers.etd_contents_path(self)
+    end
+
+    if self.bound?
+      # BTDs only need the two above.
+      return nil
+    end
+
+    # 5 - Needs collaborator(s)
+    if Redis.current.getbit("created:#{self.id}", 5) == 0
+      return url_helpers.add_collaborator_to_etd_path(self)
+    end
+    # 4 - Needs a release review.
+    if Redis.current.getbit("created:#{self.id}", 4) == 0 && self.availability.allows_reasons?
+      return url_helpers.pick_reason_for_etd_path(self)
+    end
+    # 3 - Needs to take the survey.
+    # 2 - Needs to return from the survey.
+    if Redis.current.getbit("created:#{self.id}", 2) == 0
+      return url_helpers.survey_path(self)
+    end
+
+    nil
   end
 
   def create_archive()

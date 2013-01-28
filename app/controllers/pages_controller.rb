@@ -25,4 +25,9 @@ class PagesController < ApplicationController
   @title = "Development"
   end
 
+  def survey_return
+    @etd = Etd.find(cookies.signed[:etd])
+    Redis.current.setbit("created:#{@etd.id}", 2, 1)
+    cookies.delete(:etd)
+  end
 end
