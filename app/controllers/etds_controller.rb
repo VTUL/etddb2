@@ -177,7 +177,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Use Cancan for this.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if (current_person.etds.include?(@etd) && @etd.status == "Created") || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
         Provenance.create(person: current_person, action: "deleted", model: @etd)
 
         for pr in @etd.people_roles do
