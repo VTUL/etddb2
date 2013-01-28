@@ -84,7 +84,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   put '/people/:id/edit_legacy', :to => 'people#update', :as => :update_legacy_person
   post '/people/:id/destroy_legacy', :to => 'people#destroy', :as => :destroy_legacy_person
   resources :people, :only => [:index, :show]
-  # This allows us to link to a attached model, and not get errors with LegacyPeople.
+  # This allows us to link to an attached model, and not get errors with LegacyPeople.
   # However, this route never needs to resolve, it is absorbed by the resources route above it. It just needs to be named.
   get '/people/:id', :to => 'people#show', :as => :legacy_person
 

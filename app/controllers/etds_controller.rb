@@ -54,11 +54,7 @@ class EtdsController < ApplicationController
     @etd = Etd.where(urn: params[:urn]).first
 
     if !@etd.nil?
-      # Redirect to the ETD's new path (Let it take care of access rights.)
       redirect_to(etd_path(@etd), status: :moved_permanently)
-    else
-      # TODO: Make this less generic, or better yet, a 404.
-      render #old_show.html.erb
     end
   end
 
@@ -103,7 +99,7 @@ class EtdsController < ApplicationController
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
-    d << params[:etd][:department_ids][:id_2] if !params[:etd][:department_ids][:id_2].empty?
+    d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
 
     # Add the default reason.
@@ -128,14 +124,7 @@ class EtdsController < ApplicationController
           # Set 'Needs Author' to 'Done'
           Redis.current.setbit("created:#{@etd.id}", 7, 1)
 
-          # Email ALL the people!
           EtddbMailer.created_authors(@etd).deliver
-
-          # Warn the Author and Committee Chair if the release reason says so.
-          if @etd.reason && @etd.reason.warn_before_approval
-            # TODO: Email Author and Committee Chair
-            # Committee Chair is anyone with role in the collaborators group with the highest priority
-          end
 
           format.html { redirect_to(add_collaborator_to_etd_path(@etd)) }
           format.xml  { render(xml: @etd, status: :created, location: @etd) }
@@ -154,7 +143,7 @@ class EtdsController < ApplicationController
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
-    d << params[:etd][:department_ids][:id_2] if !params[:etd][:department_ids][:id_2].empty?
+    d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
 
     # Update the reason if the availability changes.
@@ -192,7 +181,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # BUG: Use Cancan for this.
-      if current_person.etds.include?(@etd) || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
+      if (current_person.etds.include?(@etd) && @etd.status == "Created") || !(current_person.roles & Role.where(group: ['Graduate School', 'Administration'])).empty?
         Provenance.create(person: current_person, action: "deleted", model: @etd)
 
         Redis.current.del("created:#{@etd.id}")
@@ -377,7 +366,7 @@ class EtdsController < ApplicationController
     end
   end
 
-  # POST /etd/1/vote
+  # POST /etds/1/vote
   def vote
     @etd = Etd.find(params[:id])
 
