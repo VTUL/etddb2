@@ -99,7 +99,7 @@ class EtdsController < ApplicationController
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
-    d << params[:etd][:department_ids][:id_2] if !params[:etd][:department_ids][:id_2].empty?
+    d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
 
     # Add the default reason.
@@ -139,7 +139,7 @@ class EtdsController < ApplicationController
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
-    d << params[:etd][:department_ids][:id_2] if !params[:etd][:department_ids][:id_2].empty?
+    d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
 
     # Update the reason if the availability changes.
