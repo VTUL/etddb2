@@ -66,6 +66,9 @@ gem 'will_paginate', '3.0.3'
 # For ip filtering
 gem 'netaddr'
 
+# For configuration,
+gem 'rails_config'
+
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'
 
