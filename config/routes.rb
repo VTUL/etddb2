@@ -61,7 +61,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/authorhelp', :to => 'pages#authorhelp'
   get '/staffhelp', :to => 'pages#staffhelp'
   get '/dev', :to => 'pages#dev'
-  get '/survey_return', :to => 'pages#survey_return', :as => :survey_return_path
+  get '/survey_return', :to => 'pages#survey_return', :as => :survey_return
 
   # Resque's routes.
   mount Resque::Server.new, at: "/resque"

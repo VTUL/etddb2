@@ -335,8 +335,12 @@ class EtdsController < ApplicationController
     Redis.current.setbit("created:#{@etd.id}", 3, 1)
     cookies.signed[:etd] = { value: @etd.id, http_only: true }
 
-    # TODO: read survey path from config file, use survey_return_path iff empty.
-    redirect_to(survey_return_path)
+    # Use the url in config/settings.yml, if it exists.
+    if Settings.survey_url.empty?
+      redirect_to(survey_return_path)
+    else
+      redirect_to(Settings.survey_url)
+    end
   end
 
   # POST /etds/1/submit

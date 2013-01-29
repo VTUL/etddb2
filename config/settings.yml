@@ -1,0 +1,7 @@
+# Global settings for the application go here.
+# If you edit this file while the server is running, the settings will need to be reloaded.
+# Use `Settings.reload!` to do this in the rails console.
+
+# If you encourage your users to take a survey about their experience with this software,
+# this should be the url to that survey, otherwise, it should be empty quotes.
+survey_url: ''
