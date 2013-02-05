@@ -47,7 +47,7 @@ class Etd < ActiveRecord::Base
     date :defense_date
     date :release_date
     boolean :bound
-    attachment :etd_attachment
+    text :etd_attachment
   end
 
   def author
@@ -69,12 +69,14 @@ class Etd < ActiveRecord::Base
 
   def etd_attachment
     cont = self.contents
-    # res = cont.map { |e| e.content.path }
-    # return res
-    res = cont[0]
-    if !res.nil?
-      return res.content.path
-    end
+    cont.map { |content|
+      if content.content_content_type.eql?('application/pdf')
+        # java -cp :/RAILS_ROOT/parser/tika-app-1.3.jar:/RAILS_ROOT/parser pdfparser <pdf filepath>
+        parser_path = Rails.root.join('parser').to_s
+        tika_path = Rails.root.join('parser', 'tika-app-1.3.jar').to_s
+        parsed = `java -cp :#{tika_path}:#{parser_path} pdfparser #{content.content.path}`
+      end
+    }
   end
 
   def file_type
