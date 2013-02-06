@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119201823) do
+ActiveRecord::Schema.define(:version => 20130205221138) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20121119201823) do
     t.boolean  "allows_reasons"
     t.boolean  "etd_only"
     t.integer  "release_availability_id"
+    t.string   "access_restriction"
   end
 
   create_table "contents", :force => true do |t|

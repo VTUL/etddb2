@@ -27,6 +27,7 @@ class AvailabilitiesController < ApplicationController
   def new
     @availability = Availability.new
     @reason = Reason.new()
+    @restriction_options = Availability::ACCESS_RESTRICTIONS.map { |r| [r, r] }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,6 +39,7 @@ class AvailabilitiesController < ApplicationController
   def edit
     @availability = Availability.find(params[:id])
     @reason = Reason.where(name: @availability.name).first
+    @restriction_options = Availability::ACCESS_RESTRICTIONS.map { |r| [r, r] }
   end
 
   # POST /availabilities

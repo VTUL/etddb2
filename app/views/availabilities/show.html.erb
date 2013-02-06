@@ -46,6 +46,10 @@
   <b>Warn Before Approval?</b>
   <%= @reason.warn_before_approval ? 'Yes' : 'No' %>
 </p>
+<p>
+  <b>Access Restrictions?</b>
+  <%= @availability.access_restriction %>
+</p>
 
 <%= link_to 'Edit', edit_availability_path(@availability) %> |
 <%= link_to 'Back', availabilities_path %>
