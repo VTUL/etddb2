@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+
 	def index
 		@etds = []
 		# keys here must match model attributes
@@ -6,6 +7,7 @@ class SearchController < ApplicationController
 							 "abstract" => "Abstract", "author" => "Author", 
 							 "urn" => "URN", "committee" => "Committee Members",
 							 "etd_attachment" => "Attachments"}
+		patron_availabilities = ['Unrestricted', 'Restricted']
 		@results_info = nil
 	    if isInt(params[:per_page])
 	      @per_page = params[:per_page]
@@ -27,6 +29,7 @@ class SearchController < ApplicationController
 					# use as fields to search through
 					fields = params[:search_using].keys
 				end
+				query.order_by(:title, :asc) if params[:adv_search].nil?
 				query.keywords params[:adv_search], :fields => fields
 				query.paginate :page => params[:page], :per_page => @per_page
 				query.facet(:author)
@@ -65,6 +68,7 @@ class SearchController < ApplicationController
 				if params[:type_etd].present? ^ params[:type_btd].present?
 					params[:type_etd].present? ? query.with(:bound, false) : query.with(:bound, true)
 				end
+				query.with(:availability_status).any_of(patron_availabilities) if !isUserAdmin
 			end
 
 			if @search.results.size < 1 

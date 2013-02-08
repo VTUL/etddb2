@@ -36,24 +36,30 @@ class Etd < ActiveRecord::Base
     text :committee
     text :urn
     text :file_type
+    text :etd_attachment
     integer :document_type_id
     integer :department, :multiple => true
+    string :title
     string :urn
     string :author, :multiple => true
     string :committee, :multiple => true
     string :defense_year
     string :release_year
     string :file_type, :multiple => true
+    string :availability_status
     date :defense_date
     date :release_date
     boolean :bound
-    text :etd_attachment
   end
 
   def author
     creators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id)).order('last_name ASC')
     creators.map { |o| o.name }
+  end
+
+  def availability_status
+    self.availability.name
   end
 
   def committee
