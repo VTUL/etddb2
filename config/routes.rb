@@ -1,4 +1,12 @@
 NewVtEtdUpgrd::Application.routes.draw do
+  class UrnConstraint
+    def matches?(request)
+      !/etd-\d+(-\d+)?/.match(request.params[:urn]).nil?
+    end
+  end
+  require 'resque/server'
+  require 'resque_scheduler/server'
+
   # TODO: uncomment for redis/resque
   #require 'resque/server'
   #require 'resque_scheduler/server'
@@ -45,7 +53,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   # TODO: implement next two paths.
   get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason_for_etd
   post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason_to_etd
-  get '/etds/:id/survey', :to => 'etds#survey', :as => :survey
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
@@ -110,6 +117,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   #mount Resque::Server.new, at: "/resque"
 
   # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
-  get '/:availability/:urn', :to => 'etds#old_show'
-  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file'
+  get '/:availability/:urn', :to => 'etds#old_show', :constraints => UrnConstraint.new()
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#old_show', :constraints => UrnConstraint.new()
 end
