@@ -17,25 +17,21 @@
 <p>
   <b>Months Until Warning</b>
   <% if @reason.months_to_warning > 0 %>
-      <%= @reason.months_to_warning %>
+    <%= @reason.months_to_warning %>
+  <% elsif @reason.months_to_warning < 0 %>
+    Never
   <% else %>
-    <% if @reason.months_to_warning < 0 %>
-      Never
-    <% else %>
-      Immediately
-    <% end %>
+    Immediately
   <% end %>
 </p>
 <p>
   <b>Months Until Release</b>
   <% if @reason.months_to_release > 0 %>
-      <%= @reason.months_to_release %>
+    <%= @reason.months_to_release %>
+  <% elsif @reason.months_to_release < 0 %>
+    Never
   <% else %>
-    <% if @reason.months_to_release < 0 %>
-      Never
-    <% else %>
-      Immediately
-    <% end %>
+    Immediately
   <% end %>
 </p>
 <p>
