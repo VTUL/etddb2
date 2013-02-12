@@ -31,6 +31,8 @@ class Etd < ActiveRecord::Base
   validates_presence_of :abstract, :title, :urn, :url
   validates_uniqueness_of :urn
 
+  ACCESS = AccessConstraint.new()
+
   def self.search(search)
     if search
       where('etds.title LIKE ?', "%#{search}%")

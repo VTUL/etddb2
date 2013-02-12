@@ -1,54 +1,3 @@
-class AccessConstraint
-  def initialize
-    @ipv4 = [NetAddr::CIDR.create('128.173.0.0/16')]    # Blacksburg
-    @ipv4 << NetAddr::CIDR.create('198.82.0.0/16')      # Blacksburg
-    @ipv4 << NetAddr::CIDR.create('208.22.18.0/24')     # NOVA
-    @ipv4 << NetAddr::CIDR.create('208.29.54.0/24')     # NOVA
-
-    @ipv6 = [NetAddr::CIDR.create('2001:468:c80::/48')] # Blacksburg
-    @ipv6 << NetAddr::CIDR.create('2002:80ad::/32')     # Blacksburg, 6in4 from 128.173.0.0::/16
-    @ipv6 << NetAddr::CIDR.create('2002:2652::/32')     # Blacksburg, 6in4 from 198.82.0.0::/16
-
-    @remote_whitelist = []
-    File.open("#{Rails.root}/lib/RemoteWhitelist.ips") do |f|
-      @remote_whitelist = f.lines.to_a.map { |l| l.strip }
-    end
-  end
-
-  def matches?(request)
-    restricted_access = false
-    withheld_access = false
-
-    # Allow on-campus access
-    begin
-      restricted_access = @ipv4.map { |subnet| subnet.contains?(request.remote_ip) } .include?(true)
-    rescue NetAddr::VersionError => e
-      restricted_access = @ipv6.map { |subnet| subnet.contains?(request.remote_ip) } .include?(true)
-    end
-
-    # Allow MetaArchive access
-    if Rails.env == "production" and @remote_whitelist.include?(request.remote_ip)
-      restricted_access = true
-    end
-
-    # Allow local dev work.
-    if Rails.env == "development" and ['127.0.0.1', '::1'].include?(request.remote_ip)
-      withheld_access = true
-    end
-
-    result = ['available', 'submitted'].include?(request.params[:availability]) and (request.params[:file_availability].nil? or
-                    (request.params[:file_availability] == 'available') or
-                    (request.params[:file_availability] == 'restricted' && (restricted_access || withheld_access)) or
-                    (request.params[:file_availability] == 'withheld' && withheld_access))
-    result |= request.params[:availability] == 'withheld' && withheld_access
-    # TODO: REMOVE NEXT LINE! FOR DEBUGGING ONLY!
-    result = true
-    result &= !/etd-\d+(-\d+)?/.match(request.params[:urn]).nil?
-
-    return result
-  end
-end
-
 NewVtEtdUpgrd::Application.routes.draw do
   require 'resque/server'
   require 'resque_scheduler/server'
@@ -62,9 +11,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/staffhelp', :to => 'pages#staffhelp'
   get '/dev', :to => 'pages#dev'
   get '/survey_return', :to => 'pages#survey_return', :as => :survey_return
-
-  # Resque's routes.
-  mount Resque::Server.new, at: "/resque"
 
   # Set up devise for people, and make it use our sessions controller.
   devise_for :people, :controllers => {:sessions => "people/sessions"}
@@ -96,7 +42,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
-  # TODO: next two paths.
+  # TODO: implement next two paths.
   get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason_for_etd
   post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason_to_etd
   get '/etds/:id/survey', :to => 'etds#survey', :as => :survey
@@ -105,9 +51,9 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
-  # TODO
-  #get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
-  #post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
+  # TODO: implement next two paths.
+  get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
+  post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
@@ -159,11 +105,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   # This goes at the bottom so the above routes will resolve correctly.
   get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
 
-  # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
-  get '/:availability/:urn', :to => 'etds#old_show', :constraints => AccessConstraint.new
-  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => AccessConstraint.new
+  # Resque's routes.
+  mount Resque::Server.new, at: "/resque"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  #match ':controller(/:action(/:id(.:format)))'
+  # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
+  get '/:availability/:urn', :to => 'etds#old_show'
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file'
 end
