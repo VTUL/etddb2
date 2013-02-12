@@ -37,15 +37,18 @@ class EtdsController < ApplicationController
   # GET /etds/1.xml
   def show
     @etd = Etd.find(params[:id])
-    @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
-    @emails = @creators.where(show_email: true).pluck(:email).join(", ")
-
-    # TODO: Add access rights management code, or implement Cancan.
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render(xml: @etd) }
+      # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
+      if Etd::ACCESS.matches?(request.ip, @etd.availability) or @etd.people.include?(current_person)
+        @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+        @emails = @creators.where(show_email: true).pluck(:email).join(', ')
+        @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
+        format.html # show.html.erb
+        format.xml  { render(xml: @etd) }
+      else
+        redirect_to(etds_path, notice: 'Access to that ETD is restricted.')
+      end
     end
   end
 
@@ -53,8 +56,12 @@ class EtdsController < ApplicationController
   def old_show
     @etd = Etd.where(urn: params[:urn]).first
 
+    # No access constraint, as it is handled in the redirect.
     if !@etd.nil?
       redirect_to(etd_path(@etd), status: :moved_permanently)
+    else
+      # TODO: Should redirect to the advanced search page?
+      redirect_to(etds_path, notice: "I can't find that ETD, but you can search for it here.")
     end
   end
 
