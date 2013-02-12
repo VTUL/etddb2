@@ -4,8 +4,6 @@ NewVtEtdUpgrd::Application.routes.draw do
       !/etd-\d+(-\d+)?/.match(request.params[:urn]).nil?
     end
   end
-  require 'resque/server'
-  require 'resque_scheduler/server'
 
   # TODO: uncomment for redis/resque
   #require 'resque/server'
