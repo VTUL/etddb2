@@ -25,16 +25,15 @@ class Content < ActiveRecord::Base
     attachment.instance.etd.urn
   end
   Paperclip.interpolates :availability do |attachment, style|
-    #if attachment.instance.etd.status == "Approved"
-    #  if attachment.instance.etd.availability.name == "Withheld"
-    #    return "withheld"
-    #  else
-    #    return "available"
-    #  end
-    #else
-    #  return "submitted"
-    #end
-    attachment.instance.etd.availability.name.downcase()
+    if attachment.instance.etd.status == "Approved"
+      if attachment.instance.etd.availability.access_restriction == "Withheld"
+        return "withheld"
+      else
+        return "available"
+      end
+    else
+      return "submitted"
+    end
   end
 
   # Paperclip mountings/validations
