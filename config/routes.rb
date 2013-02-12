@@ -12,10 +12,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/staffhelp', :to => 'pages#staffhelp'
   get '/dev', :to => 'pages#dev'
 
-  # Resque's routes.
-  # TODO: uncomment for redis/resque
-  #mount Resque::Server.new, at: "/resque"
-
   # Set up devise for people, and make it use our sessions controller.
   devise_for :people, :controllers => {:sessions => "people/sessions"}
   post '/people/:id/delete', :to => 'devise/registrations#destroy', :as => :destroy_person
@@ -39,9 +35,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/people/:id', :to => 'people#show', :as => :legacy_person
 
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
-  # TODO
-  #get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason
-  #post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason
   get '/etds/:id/add_creator', :to => 'etds#add_creator', :as => :add_creator_to_etd
   get '/etds/:id/add_collaborator', :to => 'etds#add_collaborator', :as => :add_collaborator_to_etd
   post '/etds/:id/find', :to => 'etds#find_person', :as => :find_person_for_etd
@@ -49,14 +42,18 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
+  # TODO: implement next two paths.
+  get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason_for_etd
+  post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason_to_etd
+  get '/etds/:id/survey', :to => 'etds#survey', :as => :survey
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd
   post '/etds/:id/vote', :to => 'etds#vote', :as => :vote_for_etd
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
-  # TODO
-  #get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
-  #post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
+  # TODO: implement next two paths.
+  get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
+  post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy
 
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
@@ -108,11 +105,11 @@ NewVtEtdUpgrd::Application.routes.draw do
   # This goes at the bottom so the above routes will resolve correctly.
   get '/conversations(/:box)', :to => 'conversations#mailbox', :as => :conversations
 
-  # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
-  get '/:availability/:urn', :to => 'etds#old_show', :constraints => AccessConstraint.new
-  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file', :constraints => AccessConstraint.new
+  # Resque's routes.
+  # TODO: uncomment for redis/resque
+  #mount Resque::Server.new, at: "/resque"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  #match ':controller(/:action(/:id(.:format)))'
+  # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
+  get '/:availability/:urn', :to => 'etds#old_show'
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file'
 end
