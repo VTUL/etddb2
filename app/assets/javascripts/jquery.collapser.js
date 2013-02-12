@@ -99,7 +99,7 @@
 		return this.each(function(){
 		   
 		   if($.fn[options.target] && $(this)[options.target]()){
-				$(this).toggle(function(){		
+				$(this).toggler(function(){		
 					toggleElement($(this), 1);
 				},function(){
 					toggleElement($(this), 1);
@@ -107,7 +107,7 @@
 				
 		   }else{
 			   
-			   $(this).toggle(function(){
+			   $(this).toggler(function(){
 					toggleElement($(this), 2);
 				},function(){
 					toggleElement($(this), 2);
@@ -137,3 +137,21 @@
     };
     
 })(jQuery);
+
+// Implement the deprecated .toggle from JQuery 1.8
+(function( $ ){
+  $.fn.toggler = function( fn, fn2 ) {
+    var args = arguments,guid = fn.guid || $.guid++,i=0,
+    toggler = function( event ) {
+      var lastToggle = ( $._data( this, "lastToggle" + fn.guid ) || 0 ) % i;
+      $._data( this, "lastToggle" + fn.guid, lastToggle + 1 );
+      event.preventDefault();
+      return args[ lastToggle ].apply( this, arguments ) || false;
+    };
+    toggler.guid = guid;
+    while ( i < args.length ) {
+      args[ i++ ].guid = guid;
+    }
+    return this.click( toggler );
+  };
+})( jQuery );
