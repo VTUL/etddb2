@@ -6,8 +6,45 @@ class ContentsController < ApplicationController
     @etd = Etd.find(@content.etd_id)
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render(xml: @content) }
+      # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
+      if Etd::ACCESS.matches?(request.ip, @etd.availability, @content.availability) or @etd.people.include?(current_person)
+        format.html # show.html.erb
+        format.xml  { render(xml: @content) }
+      else
+        # TODO: Perhaps log IPs that are hitting these pages?
+        redirect_to(etds_path, notice: 'Access to that ETD is restriced.')
+      end
+    end
+  end
+
+  # GET /available/etd-00000000-00000000/available/filename.format?12345678
+  def old_show
+    @etd = Etd.where(urn: params[:urn]).first
+    params[:filename] += ".#{params[:format]}" unless params[:format].nil?
+
+    if !@etd.nil?
+      @content = @etd.contents.where(content_file_name: params[:filename]).first
+      if !@content.nil?
+        redirect_to(content_path(@content), status: :moved_permanently)
+      else
+        redirect_to(etd_path(@etd), notice: 'That file does not seem to exist. Check below.')
+
+
+    correct_avail = !@etd.nil? && params[:availability] == @etd.availability.name.downcase()
+    correct_file_avail = !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
+    if correct_avail && correct_file_avail
+      send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
+    elsif correct_avail && @content.nil?
+      # Bad filename
+      redirect_to(etd_path(@etd), notice: "I can't find that file. Pick one below.")
+    elsif correct_avail
+      # Bad file availability
+      redirect_to(content_path(@content), notice: 'That file has a different availability.')
+    elsif !@etd.nil?
+      # Bad availability
+      redirect_to(etd_path(@etd), notice: 'That ETD has a different availability.')
+    else
+      # Bad URN
     end
   end
 
@@ -80,32 +117,6 @@ class ContentsController < ApplicationController
       else
         format.html { redirect_to(etd_contents_path(@content.etd), notice: "Something's not right...") }
       end
-    end
-  end
-
-  # GET /available/etd-00000000-00000000/available/filename.format?12345678
-  def get_file
-    @etd = Etd.where(urn: params[:urn]).first
-    params[:filename] += ".#{params[:format]}" unless params[:format].nil?
-    @content = @etd.contents.where(content_file_name: params[:filename]).first unless @etd.nil?
-
-    correct_avail = !@etd.nil? && params[:availability] == @etd.availability.name.downcase()
-    correct_file_avail = !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
-    if correct_avail && correct_file_avail
-      send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
-    elsif correct_avail && @content.nil?
-      # Bad filename
-      redirect_to(etd_path(@etd), notice: "I can't find that file. Pick one below.")
-    elsif correct_avail
-      # Bad file availability
-      redirect_to(content_path(@content), notice: 'That file has a different availability.')
-    elsif !@etd.nil?
-      # Bad availability
-      redirect_to(etd_path(@etd), notice: 'That ETD has a different availability.')
-    else
-      # Bad URN
-      # TODO: This should 404.
-      render # get_file.html.erb
     end
   end
 end

@@ -1,4 +1,10 @@
 NewVtEtdUpgrd::Application.routes.draw do
+  class UrnConstraint
+    def matches?(request)
+      !/etd-\d+(-\d+)?/.match(request.params[:urn]).nil?
+    end
+  end
+
   require 'resque/server'
   require 'resque_scheduler/server'
 
@@ -109,6 +115,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   mount Resque::Server.new, at: "/resque"
 
   # These could capture anything, but since they're at the bottom, they should only match the stuff that falls through.
-  get '/:availability/:urn', :to => 'etds#old_show'
-  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#get_file'
+  get '/:availability/:urn', :to => 'etds#old_show', :constraints => UrnConstraint.new()
+  get '/:availability/:urn/:file_availability/:filename', :to => 'contents#old_show', :constraints => UrnConstraint.new()
 end
