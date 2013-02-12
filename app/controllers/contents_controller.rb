@@ -28,24 +28,13 @@ class ContentsController < ApplicationController
         redirect_to(content_path(@content), status: :moved_permanently)
       else
         redirect_to(etd_path(@etd), notice: 'That file does not seem to exist. Check below.')
-
-
-    correct_avail = !@etd.nil? && params[:availability] == @etd.availability.name.downcase()
-    correct_file_avail = !@content.nil? && params[:file_availability] == @content.availability.name.downcase()
-    if correct_avail && correct_file_avail
-      send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
-    elsif correct_avail && @content.nil?
-      # Bad filename
-      redirect_to(etd_path(@etd), notice: "I can't find that file. Pick one below.")
-    elsif correct_avail
-      # Bad file availability
-      redirect_to(content_path(@content), notice: 'That file has a different availability.')
-    elsif !@etd.nil?
-      # Bad availability
-      redirect_to(etd_path(@etd), notice: 'That ETD has a different availability.')
+      end
     else
-      # Bad URN
+      # TODO: Should redirect to the advanced search page?
+      redirect_to(etds_path, notice: "I can't find that ETD, but you can search for it here.")
     end
+
+    #send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
   end
 
   # GET /contents/1/edit
