@@ -5,11 +5,12 @@
 #########################################################
 
 class Etd < ActiveRecord::Base
-  belongs_to :availability, inverse_of: :etds
   belongs_to :copyright_statement, inverse_of: :etds
   belongs_to :degree, inverse_of: :etds
   belongs_to :document_type, inverse_of: :etds
   belongs_to :privacy_statement, inverse_of: :etds
+  belongs_to :availability, inverse_of: :etds
+  belongs_to :reason, inverse_of: :etds
 
   has_many :contents, dependent: :destroy, inverse_of: :etd
   accepts_nested_attributes_for :contents, allow_destroy: true
@@ -21,12 +22,14 @@ class Etd < ActiveRecord::Base
 
   has_and_belongs_to_many :departments
 
-  validates_presence_of :abstract, :availability_id, :copyright_statement_id, :degree_id,
-                        :document_type_id, :title, :privacy_statement_id, :urn, :url
-  validates_uniqueness_of :urn
+  STATUSES = ["Created", "Submitted", "Approved", "Released"]
+  validates :status, inclusion: {in: STATUSES, message: "must be a valid status."}
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
-  statuses = ["Created", "Submitted", "Approved", "Released"]
-  validates :status, inclusion: {in: statuses, message: "must be a valid status."}
+  validates_presence_of :availability_id, :copyright_statement_id, :degree_id, :document_type_id, :privacy_statement_id, :reason_id
+  validates_presence_of :abstract, :title, :urn, :url
+  validates_uniqueness_of :urn
+
+  ACCESS = AccessConstraint.new()
 
   searchable do
     text :title, :boost => 5
@@ -113,8 +116,13 @@ class Etd < ActiveRecord::Base
   def self.search_quick(search)
     if search 
       where('etds.title LIKE ?', "%#{search}%")
-    else 
+    else
       scoped
     end
+  end
+
+  def create_archive()
+    # TODO: create archive.
+    puts("I'll get right on that.")
   end
 end

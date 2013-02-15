@@ -16,7 +16,7 @@ By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators'
     <% else %>
       <td><%= member.vote ? 'Approve' : 'Disapprove' %></td>
     <% end %>
-    <% if current_person == member.person %>
+    <% if current_person.id == member.person.id %>
       <td>
         <%= form_tag(vote_for_etd_path(@etd)) do %>
           <%= select_tag(:vote, options_for_select([['Approve', true], ['Disapprove', false]])) %>

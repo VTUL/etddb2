@@ -2,7 +2,6 @@
   <% if @etd.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this ETD from being saved:</h2>
-
       <ul>
       <% @etd.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -13,7 +12,11 @@
 
   <div class="field">
     <%= f.label(:document_type_id, "Document Type") %><br />
-    <%= f.collection_select(:document_type_id, DocumentType.where(retired: false), :id, :name) %>
+    <% if @admin %>
+      <%= f.collection_select(:document_type_id, DocumentType.all, :id, :name) %>
+    <% else %>
+      <%= f.collection_select(:document_type_id, DocumentType.where(retired: false), :id, :name) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label(:title) %><br />
@@ -21,17 +24,21 @@
   </div>
   <div class="field">
     <%= f.label(:degree_id, "Degree") %><br />
-    <%= f.collection_select(:degree_id, Degree.where(retired: false), :id, :name) %>
+    <% if @admin %>
+      <%= f.collection_select(:degree_id, Degree.all, :id, :name) %>
+    <% else %>
+      <%= f.collection_select(:degree_id, Degree.where(retired: false), :id, :name) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label(:department_ids, "Departments") %><br />
     <%= f.fields_for :department_ids do |df| %>
-      <% if (current_person.roles & Role.where(group: 'Administration')).empty?  %>
-        <%= df.collection_select(:id_1, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[0]}) %><br />
-        <%= df.collection_select(:id_2, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[1], prompt: "I do not have a second department."}) %>
-      <% else %>
+      <% if @admin  %>
         <%= df.collection_select(:id_1, Department.all, :id, :name, {selected: @etd.department_ids[0]}) %><br />
         <%= df.collection_select(:id_2, Department.all, :id, :name, {selected: @etd.department_ids[1], prompt: "I do not have a second department."}) %>
+      <% else %>
+        <%= df.collection_select(:id_1, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[0]}) %><br />
+        <%= df.collection_select(:id_2, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[1], prompt: "I do not have a second department."}) %>
       <% end %>
     <% end %>
   </div>
@@ -41,12 +48,12 @@
   </div>
   <div class="field">
     <%= f.label(:defense_date, "Defense Date") %><br />
-    <%= f.date_select(:defense_date, {end_year: Time.now.year}) %>
+    <%= f.date_select(:defense_date, {end_year: Time.now.year + 1}) %>
   </div>
   <div class="field">
     <%= f.label(:availability_id, "Availability") %>
     <table>
-      <% for avail in Availability.where(retired: false) do %>
+      <% for avail in @availabilities.each do %>
         <tr>
           <td valign='top'><%= f.radio_button(:availability_id, avail.id) %></td>
           <td valign='top' align='right'><%= avail.name %>:</td>
@@ -59,6 +66,7 @@
     <%= f.label(:abstract) %><br />
     <%= f.text_area(:abstract) %>
   </div>
+  <% # TODO: Should these be selectable for admins? %>
   <div class="field">
     <%= CopyrightStatement.where(retired: false).last.statement %><br />
     <%= f.check_box(:copyright_statement_id, {}, CopyrightStatement.where(retired: false).last.id, nil)%>
@@ -69,7 +77,16 @@
     <%= f.check_box(:privacy_statement_id, {}, CopyrightStatement.where(retired: false).last.id, nil)%>
     <%= f.label(:privacy_statement_id, "I have read the above and agreed to it.")%>
   </div>
+  <% if @admin %>
+    <div class="field">
+      <%= f.check_box(:bound, {}, true, false) %>
+      <%= f.label(:bound, 'This ETD was bound.') %>
+    </div>
+  <% else %>
+    <%= f.hidden_field(:bound, {value: false}) %>
+  <% end %>
 
-  <%= f.hidden_field(:bound, {value: false}) %>
-  <%= f.submit %>
+  <div class='actions'>
+    <%= f.submit %>
+  </div>
 <% end %>

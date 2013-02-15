@@ -30,7 +30,7 @@ class PeopleController < ApplicationController
     # Previous query
     #@my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))
     # New query to take advantage of pagination
-    @my_etds = Etd.paginate(page: params[:page], per_page: @per_page, include: [:people_roles], 
+    @my_etds = Etd.paginate(page: params[:page], per_page: @per_page, include: [:people_roles],
                             conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
     @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))
     @reviewable_etds = Etd.where(status: "Submitted")
@@ -38,43 +38,6 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml { render(xml: @person) }
-    end
-  end
-
-  # POST /people/find/
-  def find
-    respond_to do |format|
-      if params[:name].nil?
-        format.html { render(action: "find") }
-      else
-        format.js
-        format.html { render(action: "new_committee_member") }
-      end
-    end
-  end
-
-  # POST /people/new_committee_member
-  def new_committee_member
-    respond_to do |format|
-      format.html { render(action: "new_committee_member") }
-    end
-  end
-
-  # POST /people/add_committee
-  def add_committee
-    pr = PeopleRole.new
-    pr.etd_id = params[:etd_id]
-    pr.role_id = Role.where(name: params[:committee_type]).first().id
-    Person.find(params[:committee]).people_roles << pr
-
-    # Whitelist params[:origin]
-    origins = ["/etds/", "/etds/next_new/"]
-    if !origins.include?(params[:origin])
-      params[:origin] = "/etds/"
-    end
-
-    respond_to do |format|
-      format.html { redirect_to(params[:origin] + params[:etd_id]) }
     end
   end
 

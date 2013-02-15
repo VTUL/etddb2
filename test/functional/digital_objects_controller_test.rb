@@ -4,7 +4,7 @@ class DigitalObjectsControllerTest < ActionController::TestCase
   setup do
     @digital_object = DigitalObject.first
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
 
   test "should get index" do

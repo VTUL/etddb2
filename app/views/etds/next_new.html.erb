@@ -14,12 +14,17 @@
         <% #This is new content %>
         <%= cf.file_field :content %>
         <%= cf.hidden_field(:bound, {value: @etd.bound}) %>
-        <%= cf.hidden_field(:availability_id, {value: @etd.availability_id}) %>
+        <% if @etd.availability.etd_only %>
+          <%= cf.hidden_field(:availability_id, {value: Availability.where(retired: false, etd_only: false).first.id}) %>
+          <%= cf.hidden_field(:reason_id, {value: Availability.where(retired: false, etd_only: false).first.reason.id}) %>
+        <% else %>
+          <%= cf.hidden_field(:availability_id, {value: @etd.availability_id}) %>
+          <%= cf.hidden_field(:reason_id, {value: @etd.reason_id}) %>
+        <% end %>
         <%= cf.link_to_remove "Remove"%>
       <% end %>
     <% end %>
     <%= f.link_to_add "Add more content", :contents %><br />
-    <%= hidden_field_tag(:origin, '/etds/next_new/') %>
     <%= f.submit "Update Content" %>
   <% end %>
 </p>
@@ -49,10 +54,14 @@
   <% end %>
 </p>
 <p>
-<%= link_to 'View ETD', @etd %>
+<% if !@etd.availability.allows_reasons %>
+  <%= link_to 'View ETD', @etd %>
+<% else %>
+  <%= link_to('Pick a release schedule for your ETD.', pick_reason_path(@etd)) %>
+<% end %>
 </p>
 <script>
-$('.del_pr').bind('ajax:success', function() {  
-    $(this).closest('tr').fadeOut();  
+$('.del_pr').bind('ajax:success', function() {
+    $(this).closest('tr').fadeOut();
 });
 </script>

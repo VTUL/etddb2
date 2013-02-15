@@ -22,6 +22,7 @@ gem 'jquery-rails'
 
 #JS requirements
 gem 'execjs'
+gem 'libv8'
 gem 'therubyracer'
 
 gem 'ruby-ldap', '0.9.10'
@@ -50,14 +51,17 @@ gem 'devise'
 # For multiple file upload
 gem 'paperclip'
 #gem 'carrierwave'
-gem 'nested_form', :git => "https://github.com/ryanb/nested_form.git"
-gem 'mime-types'
+gem 'nested_form'#, :git => "https://github.com/ryanb/nested_form.git"
+
+# Background Workers!
+#gem 'resque'
+#gem 'resque-scheduler', require: 'resque_scheduler'
 
 # For pagination
 gem 'will_paginate', '3.0.3'
 
 # For messaging
-gem 'mailboxer'
+#gem 'mailboxer'
 
 # For ip filtering
 gem 'netaddr'
@@ -65,6 +69,9 @@ gem 'netaddr'
 # For Full Text Search
 gem 'sunspot_solr'
 gem 'sunspot_rails'
+
+# For configuration,
+gem 'rails_config'
 
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'

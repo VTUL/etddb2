@@ -1,15 +1,14 @@
 <%= stylesheet_link_tag 'paginate' %>
 
-<h3 class ="top_bar">My Etds</h3>
+<h3 class="top_bar">My Etds</h3>
 <div id="page_pref" class ="top_bar" style="margin-top:17px">
-  <%= form_tag @person, :method => 'get' do %> 
+  <%= form_tag @person, :method => 'get' do %>
     Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
          :onchange => "this.form.submit();" %>
   <% end %>
 </div>
 <%= will_paginate @my_etds %>
 <br/>
-
 <table class="clear_left">
   <tr>
     <th>Title</th>
@@ -19,15 +18,14 @@
 
 <% @my_etds.each do |etd| %>
   <tr>
-    <td><%= etd.title %></td>
+    <td><%= link_to(etd.title, etd_path(etd)) %></td>
     <td><%= Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
     <td><%= etd.submission_date %></td>
-    <td><%= link_to 'Show', etd_path(etd) %></td>
     <% if current_person.id == @person.id %>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-      <% if etd.status == "Created" %>
+      <% if etd.status == 'Created' %>
         <td><%= button_to 'Submit', submit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
-        <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+        <td><%= button_to 'Delete', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
       <% else %>
         <td><%= button_to etd.status, submit_etd_path(etd), disabled: true %></td>
       <% end %>
@@ -36,9 +34,4 @@
   </tr>
 <% end %>
 </table>
-<br />
 <%= will_paginate @my_etds %>
-<br />
-<p>
-  <%= link_to("Create a new ETD", new_etd_path) %>
-</p>

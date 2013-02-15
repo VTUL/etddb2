@@ -4,9 +4,9 @@ class DepartmentsControllerTest < ActionController::TestCase
   setup do
     @department = Department.first
     @person = Person.first
-    sign_in(@person) 
+    sign_in(@person)
   end
-  
+
   test "should get index" do
     get(:index)
     assert_response(:success)
@@ -25,7 +25,7 @@ class DepartmentsControllerTest < ActionController::TestCase
 
     assert_redirected_to(department_path(assigns(:department)))
   end
-  
+
   test "should not create department" do
     assert_no_difference('Department.count') do
       post(:create, department: {})
