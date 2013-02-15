@@ -3,6 +3,9 @@
     cursor: default;
     font-size: 10pt;
     clear: left;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }
 .pagination a, .pagination span, .pagination em {
     display: block;

@@ -66,7 +66,7 @@
 <!-- Render the facets -->
 <%= render '/search/facets', :search => @search %>
 
-<div id="results_list">
+<div id="results">
 <% if @result == "no_search" %>
   <!-- Render nothing below search params if they haven't searched anything -->
 <% elsif @result == "exception" %>
@@ -79,32 +79,31 @@
   <% if !@results_info.blank? %>
   <h5 id="total" class="clear_left"><%= @results_info %></h5>
   <% end %>
-  <%= will_paginate @result %>
-  <table>
-    <thead>
-      <tr>
-        <th class="table_author_col">Author</th>
-        <th class="table_title_col">Title</th>
-        <th class="table_dept_col">Department</th>
-      </tr>
-    </thead>
-  <br />
-  <tbody>
+  <div id="paginate_outer">
+    <div id="paginate_inner">
+      <%= will_paginate @result %>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div id="results_list" >
+    <% last_etd = @result.pop %>
     <% @result.each do |etd| %>
       <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
-      <tr>
-        <td><%= creators.map { |o| o.name } .join(", ") %></td>
-        <td><%= etd.title %></td>
-        <td><%= etd.departments.pluck(:name).join(", ") %></td>
-        <td><%= link_to 'Show', etd %></td>
-        <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-        <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
-      </tr>
+      <div class="list_entry">
+        <%= render '/search/display_etd', :etd => etd %>
+      </div>
     <% end %>
-  </tbody>
-  </table>
+    <div class="list_entry_last">
+      <%= render '/search/display_etd', :etd => last_etd %>
+    </div>
+  </div>
   <br />
-  <%= will_paginate @result %>
+  <div id="paginate_outer">
+    <div id="paginate_inner">
+      <%= will_paginate @result %>
+    </div>
+    <div class="clear"></div>
+  </div>
 <% end %>
 <br />
 </div>

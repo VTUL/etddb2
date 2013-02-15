@@ -188,7 +188,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   execjs
-  jquery-rails (= 2.2.1)
+  jquery-rails
   mailboxer
   mime-types
   nested_form!

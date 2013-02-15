@@ -2,11 +2,12 @@ class SearchController < ApplicationController
 
 	def index
 		@etds = []
-		# keys here must match model attributes
+		# Keys here must match model attributes
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 							 "abstract" => "Abstract", "author" => "Author", 
 							 "urn" => "URN", "committee" => "Committee Members",
 							 "etd_attachment" => "Attachments"}
+		# ETDs that non-admins can see
 		patron_availabilities = ['Unrestricted', 'Restricted']
 		@results_info = nil
 	    if isInt(params[:per_page])
@@ -14,7 +15,6 @@ class SearchController < ApplicationController
 	    else
 	      @per_page = 10
 	    end
-	    
 
 		begin
 			# query parameter needed here to expose DSL and allow use of instance
@@ -29,15 +29,19 @@ class SearchController < ApplicationController
 					# use as fields to search through
 					fields = params[:search_using].keys
 				end
-				query.order_by(:title, :asc) if params[:adv_search].nil?
+				# Query set up
+				query.order_by(:title, :asc) if params[:adv_search].nil? or params[:adv_search].eql?('')
 				query.keywords params[:adv_search], :fields => fields
 				query.paginate :page => params[:page], :per_page => @per_page
+				# Query facet setting
 				query.facet(:author)
 				query.facet(:document_type_id)
 				query.facet(:department)
 				query.facet(:defense_year)
 				query.facet(:release_year)
 				query.facet(:file_type)
+				# Query delimiters
+				query.with(:availability_status).any_of(patron_availabilities) if !isUserAdmin
 				query.with(:author, params[:author]) if params[:author].present?
 				query.with(:urn, params[:urn]) if params[:urn].present?
 				query.with(:defense_date).less_than(stripDate(params[:defense_date_before])) if params[:defense_date_before].present?
@@ -68,7 +72,6 @@ class SearchController < ApplicationController
 				if params[:type_etd].present? ^ params[:type_btd].present?
 					params[:type_etd].present? ? query.with(:bound, false) : query.with(:bound, true)
 				end
-				query.with(:availability_status).any_of(patron_availabilities) if !isUserAdmin
 			end
 
 			if @search.results.size < 1 
