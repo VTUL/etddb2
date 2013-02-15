@@ -8,8 +8,9 @@ import java.io.StringWriter;
 
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.sax.BodyContentHandler;
+import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.pdf.PDFParser;
+import org.apache.tika.parser.Parser;
 import org.xml.sax.ContentHandler;
 
 /**
@@ -38,12 +39,13 @@ public class pdfparser {
 		ContentHandler textHandler = null;
 		try {
 			File file = new File(args[0]);
-			if (!file.isFile()) throw new Exception("Given file name is invalid");
-			if (!isPDF(file)) throw new Exception("File type must be a pdf");
+			if (!file.isFile())
+				throw new Exception("Given file name: " + file.getPath()
+						+ " is invalid or does not exist");
 			input = new FileInputStream(file);
 			textHandler = new BodyContentHandler(WRITE_LIMIT);
 			Metadata metadata = new Metadata();
-			PDFParser parser = new PDFParser();
+			Parser parser = new AutoDetectParser();
 			ParseContext context = new ParseContext();
 			parser.parse(input, textHandler, metadata, context);
 		} catch (FileNotFoundException e) {
@@ -64,12 +66,6 @@ public class pdfparser {
 		if (textHandler != null)
 			System.out.println(textHandler.toString()); // Print the file
 														// contents to console
-	}
-	
-	public static Boolean isPDF(File file) {
-		if (file != null)
-			return file.getPath().endsWith(".pdf");
-		return false;
 	}
 	
 	public static void printStackTrace(Throwable error) {

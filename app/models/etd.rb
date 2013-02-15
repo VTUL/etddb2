@@ -80,17 +80,15 @@ class Etd < ActiveRecord::Base
     cont = self.contents
     exception_identifier = 'EXCEPTION_IN_SCRIPT'
     cont.map { |content|
-      if content.content_content_type.eql?('application/pdf')
-        parser_path = Rails.root.join('parser').to_s
-        tika_path = Rails.root.join('parser', 'tika-app-1.3.jar').to_s
-        # execute script to parse pdf
-        parsed = `java -cp :#{tika_path}:#{parser_path} pdfparser #{content.content.path} #{exception_identifier}`
-        if parsed.start_with?(exception_identifier)
-          # Log here as desired.  Java exceptions printed to console.
-          next nil
-        end
-        next parsed
+      parser_path = Rails.root.join('parser').to_s
+      tika_path = Rails.root.join('parser', 'tika-app-1.3.jar').to_s
+      # execute script to parse pdf
+      parsed = `java -cp :#{tika_path}:#{parser_path} pdfparser #{content.content.path} #{exception_identifier}`
+      if parsed.start_with?(exception_identifier)
+        # Log here as desired.  Java exceptions printed to console.
+        next nil
       end
+      next parsed
     }
   end
 
