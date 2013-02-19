@@ -31,7 +31,7 @@ class SearchController < ApplicationController
 				end
 				# Query set up
 				query.order_by(:title, :asc) if params[:adv_search].nil? or params[:adv_search].eql?('')
-				query.keywords params[:adv_search], :fields => fields
+				query.keywords params[:adv_search], :fields => fields, :highlight => true
 				query.paginate :page => params[:page], :per_page => @per_page
 				# Query facet setting
 				query.facet(:author)

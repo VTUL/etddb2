@@ -39,7 +39,7 @@ class Etd < ActiveRecord::Base
     text :committee
     text :urn
     text :file_type
-    text :etd_attachment
+    text :etd_attachment, :stored => true
     integer :document_type_id
     integer :department, :multiple => true
     string :title

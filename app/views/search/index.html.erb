@@ -86,16 +86,23 @@
     <div class="clear"></div>
   </div>
   <div id="results_list" >
-    <% last_etd = @result.pop %>
-    <% @result.each do |etd| %>
+    <% i = 1 %>
+    <% @search.each_hit_with_result do |hit, etd| %>
       <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
-      <div class="list_entry">
-        <%= render '/search/display_etd', :etd => etd %>
-      </div>
+      <% if i == @result.size %>
+      <!-- Avoids border on bottom -->
+        <div class="list_entry_last">
+      <% else %>
+        <div class="list_entry">
+      <% end %>
+        <%= render '/search/display_etd', :etd => etd, :iteration => i %>
+        <% if !hit.highlight(:etd_attachment).nil? %>
+          <% highlighted = hit.highlight(:etd_attachment).format { |fragment| content_tag(:em, fragment) } %>
+          <p class="etd_fulltext"><%= "\"#{highlighted}\"".html_safe %></p>
+        <% end %>
+        </div>
+      <% i += 1 %>
     <% end %>
-    <div class="list_entry_last">
-      <%= render '/search/display_etd', :etd => last_etd %>
-    </div>
   </div>
   <br />
   <div id="paginate_outer">

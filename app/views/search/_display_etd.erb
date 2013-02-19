@@ -1,5 +1,5 @@
 <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
-<%= link_to etd.title, etd %>
+<h3><%="#{iteration + @result.offset}" + "."%> <%= link_to etd.title, etd %></h3>
 <dl>
 	<dt>Author</dt> 
 	<dd> <%= creators.map { |o| o.name } .join(", ") %> </dd>

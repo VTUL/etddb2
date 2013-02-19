@@ -93,11 +93,13 @@ dd {
 .etd_option_links {
 	font-size: 0.85em;
     margin-bottom: 1em;
+    margin-left: 1.5em;
 }
 
 .list_entry a{
 	color: #00388E;
     text-decoration: none;
+    background: #FFFFFF;
 }
 
 .list_entry_last {
@@ -107,4 +109,26 @@ dd {
 .list_entry_last a{
 	color: #00388E;
     text-decoration: none;
+}
+
+.list_entry h3{
+	font-size: 1em;
+	color: #656565;
+}
+
+.list_entry_last h3{
+	font-size: 1em;
+	color: #656565;
+}
+
+.etd_fulltext {
+	margin: 0 1em 1em;
+	text-align: left;
+	background: #F2F5A4;
+	border-radius: 3px 3px 3px 3px;
+}
+
+.etd_fulltext em {
+	background: #F7FE2E;
+	font-style: normal;
 }
