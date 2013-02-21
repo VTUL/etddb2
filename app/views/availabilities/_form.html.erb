@@ -35,6 +35,10 @@
     <%= f.check_box(:retired, {}, true, false) %>
   </div>
   <div class="field">
+    <%= f.label(:access_restriction) %><br />
+    <%= f.select(:access_restriction, options_for_select(@restriction_options, @availability.access_restriction)) %>
+  </div>
+  <div class="field">
     <%= f.label(:etd_only, "Only allow for ETDs?") %><br />
     <%= f.check_box(:etd_only, {}, true, false) %>
   </div>
@@ -49,10 +53,6 @@
   <div class="field">
     <%= f.label(:allows_reasons, "Allow other release schedules?") %><br />
     <%= f.check_box(:allows_reasons, {}, true, false) %>
-  </div>
-  <div class="field">
-    <%= label(:reason, :warn_before_approval) %><br />
-    <%= check_box(:reason, :warn_before_approval, {}, true, false) %>
   </div>
 
   <div class="actions">
