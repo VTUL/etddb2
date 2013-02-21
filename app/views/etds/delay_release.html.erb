@@ -1,5 +1,6 @@
 <h1>Delay Release</h1>
 <%= form_tag(url: process_delay_release_path) do %>
+  <p> This ETD will be released on <%= @etd.release_date.strftime('%B %-d, %Y') %>.</p>
   <div class="field">
     <%= label_tag(:months, 'Delay by this many months:') %>
     <%= number_field_tag(:months, nil, in: 1..120, step: 1) %>
@@ -11,5 +12,6 @@
   <br />
   <div class="actions">
     <%= submit_tag('Delay') %>
+    <%= link_to("Cancel", etd_path(@etd)) %>
   </div>
 <% end %>
