@@ -56,7 +56,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
-  # TODO: implement next two paths.
   get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
   post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy

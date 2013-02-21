@@ -471,7 +471,7 @@ class EtdsController < ApplicationController
         if !@etd.availability.etd_only?
           format.html # delay_release.html.erb
         else
-          # Redirect... somewhere.
+          # TODO: Redirect somewhere else?
           format.html { redirect_to(etd_content_path(@etd), notice: "You must delay the release of this ETD's content individually.") }
         end
       else
