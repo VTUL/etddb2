@@ -44,7 +44,7 @@
     <% else %>
       <ul>
     <% end %>
-    <% for row in search.facet(:department).rows %>
+    <% for row in search.facet(:department).rows.sort{|x, y| Department.find_by_id(x.value).name <=> Department.find_by_id(y.value).name} %>
       <% if !Department.exists?(:id => row.value) %>
         <% next %>
       <% end %>
