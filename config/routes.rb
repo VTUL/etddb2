@@ -48,7 +48,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
-  # TODO: implement next two paths.
   get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason_for_etd
   post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason_to_etd
   get '/etds/:id/survey', :to => 'etds#survey', :as => :survey
@@ -57,7 +56,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/:id/unsubmit', :to => 'etds#unsubmit', :as => :unsubmit_etd
   get '/etds/:id/reviewboard', :to => 'etds#reviewboard', :as => :etd_reviewboard
   post '/etds/:id/approve', :to => 'etds#approve', :as => :approve_etd
-  # TODO: implement next two paths.
   get '/etds/:id/delay_release', :to => 'etds#delay_release', :as => :delay_release
   post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy

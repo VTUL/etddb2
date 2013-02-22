@@ -47,11 +47,7 @@
   <% else %>
     None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
-  <% if @creators.include?(current_person) %>
-    <%= form_tag(add_collaborator_to_etd_path(@etd), method: :get) do %>
-      <%= submit_tag "Add New Committee Member" %>
-    <% end %>
-  <% end %>
+  <%= button_to("Add New Committee Member", add_collaborator_to_etd_path(@etd), method: :get) if @creators.include?(current_person) %>
 </p>
 <p>
   <b>Keywords:</b>
