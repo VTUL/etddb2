@@ -48,7 +48,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   get '/etds/:id/contents', :to => 'etds#contents', :as => :etd_contents
   get '/etds/:id/add_contents', :to => 'etds#add_contents', :as => :add_contents_to_etd
   put '/etds/:id/contents', :to => 'etds#save_contents', :as => :save_contents_to_etd
-  # TODO: implement next two paths.
   get '/etds/:id/add_reason', :to => 'etds#pick_reason', :as => :pick_reason_for_etd
   post '/etds/:id/add_reason', :to => 'etds#add_reason', :as => :add_reason_to_etd
   post '/etds/:id/submit', :to => 'etds#submit', :as => :submit_etd

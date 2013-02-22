@@ -1,7 +1,7 @@
 <%= form_for @etd, url: add_reason_path(@etd) do |f| %>
   <% if @etd.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this ETD from being saved:</h2>
+      <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this change from being saved:</h2>
 
       <ul>
       <% @etd.errors.full_messages.each do |msg| %>
