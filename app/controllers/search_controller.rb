@@ -50,7 +50,7 @@ class SearchController < ApplicationController
 				query.with(:release_date).greater_than(stripDate(params[:release_date_after])) if params[:release_date_after].present?
 				if params[:doc_info].present? 
 					if params[:doc_info][:department].present?
-						query.with(:department, params[:doc_info][:department])
+						query.with(:department).all_of(params[:doc_info][:department])
 					end
 
 					if params[:doc_info][:document_type_id].present?
