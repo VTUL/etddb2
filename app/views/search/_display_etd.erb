@@ -7,5 +7,5 @@
 	<dd> <%= etd.departments.pluck(:name).join(", ") %> </dd>
 </dl>
 <div class="etd_option_links">
-<%= link_to 'Edit', edit_etd_path(etd) %> | <%= link_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %>
+<%= link_to 'Edit', edit_etd_path(etd) %> | <%= link_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'}, :method => :post %>
 </div>
