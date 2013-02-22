@@ -48,11 +48,11 @@ class Etd < ActiveRecord::Base
 
     # 7 - Needs creator.
     if Redis.current.getbit("created:#{self.id}", 7) == 0
-      return url_helpers.add_creator_to_etd_path(self)
+      return [url_helpers.add_creator_to_etd_path(self), "add an author"]
     end
     # 6 - Needs content
     if Redis.current.getbit("created:#{self.id}", 6) == 0
-      return url_helpers.etd_contents_path(self)
+      return [url_helpers.etd_contents_path(self), "add content"]
     end
 
     if self.bound?
@@ -62,19 +62,19 @@ class Etd < ActiveRecord::Base
 
     # 5 - Needs collaborator(s)
     if Redis.current.getbit("created:#{self.id}", 5) == 0
-      return url_helpers.add_collaborator_to_etd_path(self)
+      return [url_helpers.add_collaborator_to_etd_path(self), "add your committee"]
     end
     # 4 - Needs a release review.
     if Redis.current.getbit("created:#{self.id}", 4) == 0 && self.availability.allows_reasons?
-      return url_helpers.pick_reason_for_etd_path(self)
+      return [url_helpers.pick_reason_for_etd_path(self), "review your release schedule"]
     end
     # 3 - Needs to take the survey.
     # 2 - Needs to return from the survey.
     if Redis.current.getbit("created:#{self.id}", 2) == 0
-      return url_helpers.survey_path(self)
+      return [url_helpers.survey_path(self), "take the survey"]
     end
 
-    nil
+    return nil
   end
 
   def create_archive()
