@@ -79,11 +79,11 @@
   </div>
   <% if @admin %>
     <div class="field">
-      <%= f.check_box(:bound, {}, true, false) %>
+      <%= f.check_box(:bound) %>
       <%= f.label(:bound, 'This ETD was bound.') %>
     </div>
   <% else %>
-    <%= f.hidden_field(:bound, {value: false}) %>
+    <%= f.hidden_field(:bound, {value: 0}) %>
   <% end %>
 
   <div class='actions'>

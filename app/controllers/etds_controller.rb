@@ -99,11 +99,14 @@ class EtdsController < ApplicationController
   # POST /etds.xml
   def create
     @etd = Etd.new(params[:etd].except(:department_ids))
+    @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
+    @availabilities = @admin ? Availability.all : Availability.where(retired: false)
 
     #Add implied params.
     @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
+    @etd.bound = params[:etd][:bound] == 1 ? true : false
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
