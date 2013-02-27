@@ -1,4 +1,37 @@
 <h1>Add Contents to ETD</h1>
+<% unless @etd.contents.empty? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Size (kb)</th>
+    </tr>
+  <% @etd.contents.each do |c| %>
+    <tr>
+      <td><%= c.content_file_name %></td>
+      <td><%= '%.2f' % (c.content_file_size / 1024.0) %></td>
+      <td style="font-variant: small-caps;"><%= link_to('[metadata]', content_path(c)) %></td>
+      <td style="font-variant: small-caps;"><%= link_to('[download]', c.content.url) %></td>
+      <% if @etd.status == "Created" %>
+        <% if @etd.availability.etd_only? %>
+          <td>
+            <%= form_tag(update_content_availability_path(c)) do %>
+              <%= select_tag(:availability_id, options_from_collection_for_select(@availabilities, :id, :name, c.availability_id)) %>
+              <%= select_tag(:reason_id, options_from_collection_for_select(@reasons, :id, :name, c.reason_id), prompt: 'None') if c.availability.allows_reasons? %>
+              <%= hidden_field_tag(:reason_id, "") if !c.availability.allows_reasons%>
+              <%= submit_tag('Change') %>
+            <% end %>
+          </td>
+        <% end %>
+        <td><%= button_to('Delete', destroy_content_path(c), data: {confirm: 'Are you sure you want to delete this content?'}) %></td>
+      <% elsif @etd.availability.etd_only? %>
+        <td><%= button_to(c.availability.name, '/', disabled: true) %></td>
+        <td><%= button_to(c.reason.name, '/', disabled: true) if c.availability.allows_reasons? %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+  <br />
+<% end %>
 <%= nested_form_for @etd, url: save_contents_to_etd_path(@etd), html: {multipart: true} do |f| %>
   <%= f.fields_for :contents do |cf| %>
     <% unless cf.object.content? %>
@@ -16,7 +49,7 @@
     <% end %>
   <% end %>
   <%= f.link_to_add "Add more content", :contents %><br />
-  <%= f.submit "Update Content" %>
+  <%= f.submit "Upload New Contents" %>
 <% end %>
 <br />
 <%= link_to 'View ETD', @etd %>
