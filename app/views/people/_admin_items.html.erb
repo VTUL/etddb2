@@ -1,7 +1,52 @@
 <% # TODO: What else needs to be added? %>
 <h3>Admin Items</h3>
-<p>
-  <%= link_to("Roles", roles_path) %><br />
-  <%= link_to("Permissions", permissions_path) %><br />
-  <%= link_to("Provenances", provenances_path) %><br />
-</p>
+<table>
+  <tr>
+    <td>Availabilities</td>
+    <td><%= link_to('List All', availabilities_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_availability_path) %></td>
+  </tr>
+  <tr>
+    <td>Copyright Statements</td>
+    <td><%= link_to('List All', copyright_statements_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_copyright_statement_path) %></td>
+  </tr>
+  <tr>
+    <td>Degrees</td>
+    <td><%= link_to('List All', degrees_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_degree_path) %></td>
+  </tr>
+  <tr>
+    <td>Departments</td>
+    <td><%= link_to('List All', departments_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_department_path) %></td>
+  </tr>
+  <tr>
+    <td>Document Types</td>
+    <td><%= link_to('List All', document_types_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_document_type_path) %></td>
+  </tr>
+  <tr>
+    <td>Privacy Statements</td>
+    <td><%= link_to('List All', privacy_statements_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_privacy_statement_path) %></td>
+  </tr>
+  <tr>
+    <td>Reasons</td>
+    <td><%= link_to('List All', reasons_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_reason_path) %></td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td><%= link_to('List All', roles_path) %></td>
+    <td>|</td>
+    <td><%= link_to('Add New', new_role_path) %></td>
+  </tr>
+</table>
