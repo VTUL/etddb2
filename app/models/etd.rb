@@ -83,7 +83,7 @@ class Etd < ActiveRecord::Base
       parser_path = Rails.root.join('parser').to_s
       tika_path = Rails.root.join('parser', 'tika-app-1.3.jar').to_s
       # execute script to parse pdf
-      parsed = `java -cp :#{tika_path}:#{parser_path} pdfparser #{content.content.path} #{exception_identifier}`
+      parsed = `java -cp :#{tika_path}:#{parser_path} FileParser #{content.content.path} #{exception_identifier}`
       if parsed.start_with?(exception_identifier)
         # Log here as desired.  Java exceptions printed to console.
         next nil
