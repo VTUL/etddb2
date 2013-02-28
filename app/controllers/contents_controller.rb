@@ -3,7 +3,7 @@ class ContentsController < ApplicationController
   # GET /contents/1.xml
   def show
     @content = Content.find(params[:id])
-    @etd = Etd.find(@content.etd_id)
+    @etd = @content.etd
 
     respond_to do |format|
       # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
@@ -33,8 +33,20 @@ class ContentsController < ApplicationController
       # TODO: Should redirect to the advanced search page?
       redirect_to(etds_path, notice: "I can't find that ETD, but you can search for it here.")
     end
+  end
 
-    #send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
+  # GET /contents/1/download
+  def download
+    @content = Content.find(params[:id])
+    @etd = @content.etd
+
+    # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
+    if Etd::ACCESS.matches?(request.ip, @etd.availability, @content.availability) or @etd.people.include?(current_person)
+      send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
+    else
+      # TODO: Perhaps log IPs that are hitting these pages?
+      redirect_to(etds_path, notice: 'Access to that ETD is restriced.')
+    end
   end
 
   # GET /contents/1/edit
