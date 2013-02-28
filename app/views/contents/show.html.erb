@@ -5,7 +5,7 @@
 <p>
   <b>Filename:</b>
   <%=h @content.content_file_name %><br />
-  <b><%= link_to 'Download', @content.content.url %></b>
+  <b><%= link_to 'Download', download_content_path(@content) %></b>
 </p>
 <p>
   <b>Type:</b>

@@ -60,6 +60,7 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/etds/:id/delay_release', :to => 'etds#process_delay_release', :as => :process_delay_release
   resources :etds, :except => :destroy
 
+  get '/contents/:id/download', :to => 'contents#download', :as => :download_content
   post '/contents/:id/delete', :to => 'contents#destroy', :as => :destroy_content
   post '/contents/:id/update_availability', :to => 'contents#update_availability', :as => :update_content_availability
   resources :contents, :only => [:edit, :update, :show]
