@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205221138) do
+ActiveRecord::Schema.define(:version => 20130301223241) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -189,9 +189,8 @@ ActiveRecord::Schema.define(:version => 20130205221138) do
     t.string   "description"
     t.integer  "months_to_release"
     t.integer  "months_to_warning"
-    t.boolean  "warn_before_approval"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "receipts", :force => true do |t|
