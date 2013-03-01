@@ -6,7 +6,9 @@ class SearchController < ApplicationController
 		@checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 							 "abstract" => "Abstract", "author" => "Author", 
 							 "urn" => "URN", "committee" => "Committee Members",
-							 "etd_attachment" => "Attachments"}
+							 "etd_attachment" => "Attachments", 
+							 "author_email" => "Email", "pid" => "PID"}
+		@checkbox_admin_only = ["author_email", "pid"]
 		# ETDs that non-admins can see
 		patron_availabilities = ['Unrestricted', 'Restricted']
 		@results_info = nil
@@ -33,12 +35,14 @@ class SearchController < ApplicationController
 				query.order_by(:title, :asc) if params[:adv_search].nil? or params[:adv_search].eql?('')
 				query.keywords params[:adv_search], :fields => fields, :highlight => true
 				query.paginate :page => params[:page], :per_page => @per_page
-				# Query facet setting
+				# Query facet settings
 				query.facet(:author)
 				query.facet(:document_type_id)
 				query.facet(:department)
 				query.facet(:defense_year)
 				query.facet(:release_year)
+				query.facet(:creation_year)
+				query.facet(:approval_year)
 				query.facet(:file_type)
 				# Query delimiters
 				query.with(:availability_status).any_of(patron_availabilities) if !isUserAdmin
@@ -48,25 +52,16 @@ class SearchController < ApplicationController
 				query.with(:defense_date).greater_than(stripDate(params[:defense_date_after])) if params[:defense_date_after].present?
 				query.with(:release_date).less_than(stripDate(params[:release_date_before])) if params[:release_date_before].present?
 				query.with(:release_date).greater_than(stripDate(params[:release_date_after])) if params[:release_date_after].present?
-				if params[:doc_info].present? 
+				query.with(:approval_date).less_than(stripDate(params[:approval_date_before])) if params[:approval_date_before].present?
+				query.with(:approval_date).greater_than(stripDate(params[:approval_date_after])) if params[:approval_date_after].present?
+				query.with(:created_at).less_than(stripDate(params[:created_at_before])) if params[:created_at_before].present?
+				query.with(:created_at).greater_than(stripDate(params[:created_at_after])) if params[:created_at_after].present?
+				if params[:doc_info].present?
+					params[:doc_info].each_key { |key|
+						query.with(key, params[:doc_info][key]) if params[:doc_info][key].present? and !key.eql?("department")
+					}
 					if params[:doc_info][:department].present?
 						query.with(:department).all_of(params[:doc_info][:department])
-					end
-
-					if params[:doc_info][:document_type_id].present?
-						query.with(:document_type_id, params[:doc_info][:document_type_id])
-					end
-
-					if params[:doc_info][:defense_year].present?
-						query.with(:defense_year, params[:doc_info][:defense_year])
-					end
-
-					if params[:doc_info][:release_year].present?
-						query.with(:release_year, params[:doc_info][:release_year])
-					end
-
-					if params[:doc_info][:file_type].present?
-						query.with(:file_type, params[:doc_info][:file_type])
 					end
 				end
 				if params[:type_etd].present? ^ params[:type_btd].present?

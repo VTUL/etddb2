@@ -9,6 +9,9 @@
     <div id = "options_list" >
       <table class="options_table">
         <% @checkbox_options.each_with_index do |(key, display_name), index| %>
+          <% if !isUserAdmin and @checkbox_admin_only.include?(key) %> 
+            <% next %>
+          <% end %>
           <tr>
             <td><%= label_tag display_name %>:</td>
             <td>
@@ -43,6 +46,26 @@
     <%= label_tag "After", nil %>
     <%= text_field_tag :release_date_after, params[:release_date_after], :class=>"date_range_input" %>
   </div>
+  <% if isUserAdmin %>
+    <div id="created_date_range_div">
+      <%= label_tag "Creation Date:" %>
+      <%= label_tag "Before ", nil, :id => 'before_label' %>
+      <%= text_field_tag :created_at_before, params[:created_at_before], :class=>"date_range_input" %> 
+
+      <%= label_tag "After", nil %>
+      <%= text_field_tag :created_at_after, params[:created_at_after], :class=>"date_range_input" %>
+    </div>
+
+    <div id="approval_date_range_div">
+      <%= label_tag "Approval Date:" %>
+      <%= label_tag "Before ", nil, :id => 'before_label' %>
+      <%= text_field_tag :approval_date_before, params[:approval_date_before], :class=>"date_range_input" %> 
+
+      <%= label_tag "After", nil %>
+      <%= text_field_tag :approval_date_after, params[:approval_date_after], :class=>"date_range_input" %>
+    </div>
+  <% end %>
+  <br/>
   </div>
     <%= label_tag "ETD:" %> <%= check_box_tag "type_etd", 1, params[:type_etd].present?, :class => 'etd_btd_check' %>
     <%= label_tag "BTD:" %> <%= check_box_tag "type_btd", 1, params[:type_btd].present?, :class => 'etd_btd_check' %>

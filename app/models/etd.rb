@@ -36,9 +36,11 @@ class Etd < ActiveRecord::Base
     text :keywords
     text :abstract
     text :author
+    text :author_email
     text :committee
     text :urn
     text :file_type
+    text :pid
     text :etd_attachment, :stored => true
     integer :document_type_id
     integer :department, :multiple => true
@@ -48,10 +50,14 @@ class Etd < ActiveRecord::Base
     string :committee, :multiple => true
     string :defense_year
     string :release_year
+    string :creation_year
+    string :approval_year
     string :file_type, :multiple => true
     string :availability_status
     date :defense_date
     date :release_date
+    date :approval_date
+    date :created_at
     boolean :bound
   end
 
@@ -59,6 +65,22 @@ class Etd < ActiveRecord::Base
     creators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id)).order('last_name ASC')
     creators.map { |o| o.name }
+  end
+
+  def author_email
+    authors = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
+        .pluck(:person_id))
+    authors.map { |o| o.email }
+  end
+
+  def pid
+    authors = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
+        .pluck(:person_id))
+    committee = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Collaborators'))
+        .pluck(:person_id))
+    auth = authors.map { |o| o.pid }
+    comm = committee.map { |o| o.pid }
+    return auth.concat(comm)
   end
 
   def availability_status
@@ -98,16 +120,27 @@ class Etd < ActiveRecord::Base
   end
 
   def defense_year
-    # Need to change to defense_date when merging with devel
     if !defense_date.nil?
       defense_date.strftime("%Y")
     end
   end
 
   def release_year
-    # Need to change to release_date when merging with devel
     if !release_date.nil?
       release_date.strftime("%Y")
+    end
+  end
+
+  def creation_year
+    # Theoretically should never be null, sanity check
+    if !created_at.nil?
+      created_at.strftime("%Y")
+    end
+  end
+
+  def approval_year
+    if !approval_date.nil?
+      approval_date.strftime("%Y")
     end
   end
 
