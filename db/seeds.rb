@@ -81,14 +81,14 @@ for reason in reasons do
 end
 
 availabilities = [
-  ['Unrestricted', 'Provide open and immediate access to the ETD.', 'None', false, false],
+  ['Unrestricted', 'Provide open and immediate access to the ETD.', 'Unrestricted', false, false],
   ['Restricted', 'Restrict access to the ETD for Virginia Tech only for a period of one year.', 'Restricted', true, false],
   ['Withheld', 'Withold access to the ETD for one year for patent, security, or another reason.', 'Withheld', true, false],
-  ['Mixed', 'Release the entire work for Virginia Tech access only, while at the same time releasing parts of the work for worldwide access. Parts of the work may also be completely withheld from access. You will be asked at a later point to specify the availability of each file you submit.', 'None', false, true]
+  ['Mixed', 'Release the entire work for Virginia Tech access only, while at the same time releasing parts of the work for worldwide access. Parts of the work may also be completely withheld from access. You will be asked at a later point to specify the availability of each file you submit.', 'Unrestricted', false, true]
 ]
 
 retired_availabilities = [
-  ['Available', 'Release the entire work immediately for access worldwide.', 'None', false, false],
+  ['Available', 'Release the entire work immediately for access worldwide.', 'Unrestricted', false, false],
   ['Semi-Available', 'Release the entire work for Virginia Tech access only.', 'Restricted', true, false],
   ['Unavailable', 'Secure the entire work for patent and/or proprietary purposes for a period of one year. During this period the copyright owner also agrees not to exercise their ownership rights, including public use in works, without prior authorization from Virginia Tech. At the end of the one year period, either they or VIrginia Tech may request an automatic extension for one additional year. At the end of the one year secure period, or its extension, if such is requested, the work will be handled under option 1 abovem unless we request option 2 or 4 in writing', 'Withheld', true, false]
 ]
