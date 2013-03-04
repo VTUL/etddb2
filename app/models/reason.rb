@@ -8,5 +8,4 @@ class Reason < ActiveRecord::Base
 
   validates_presence_of :name, :months_to_release, :months_to_warning
   validates :months_to_release, :months_to_warning, numericality: { only_integer: true }
-  validates :warn_before_approval, inclusion: {in: [true, false], message: "must be boolean"}
 end

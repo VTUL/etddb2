@@ -64,20 +64,20 @@ end
 # Add your reasons and availabilities here.
 # TODO: Better instructions.
 reasons = [
-  ['Unrestricted', 'The default release schedule for unrestricted ETDs.', 0, 0, false],
-  ['Restricted', 'The default release schedule for restricted ETDs.', 0, 18, false],
-  ['Mixed', 'The default release schedule for mixed ETDs. Note: Content will be released according to its own schedules', 0, 0, false],
-  ['Withheld', 'The default release schedule for withheld ETDs.', 0, 24, true],
-  ['Available', 'The default release schedule for available ETDs.', 0, 0, false],
-  ['Semi-Available', 'The default release schedule for semi-available ETDs.', 0, 18, false],
-  ['Unavailable', 'The default release schedule for unavailable ETDs.', 0, 24, true],
-  ['Security', 'This ETD cannot be released due to security reasons.', 0, -1, true],
-  ['Patent', 'This ETD cannot be released on time because of the patents it includes.', 24, 30, false],
-  ['Creative Writing', 'This ETD includes a creative writing story that prevents it from being released on time.', 0, 120, true],
-  ['Other', 'This ETD cannot be released in the default time for some other reason.', 0, 60, false]
+  ['Unrestricted', 'The default release schedule for unrestricted ETDs.', 0, 0],
+  ['Restricted', 'The default release schedule for restricted ETDs.', 0, 18],
+  ['Mixed', 'The default release schedule for mixed ETDs. Note: Content will be released according to its own schedules', 0, 0],
+  ['Withheld', 'The default release schedule for withheld ETDs.', 0, 24],
+  ['Available', 'The default release schedule for available ETDs.', 0, 0],
+  ['Semi-Available', 'The default release schedule for semi-available ETDs.', 0, 18],
+  ['Unavailable', 'The default release schedule for unavailable ETDs.', 0, 24],
+  ['Security', 'This ETD cannot be released due to security reasons.', 0, -1],
+  ['Patent', 'This ETD cannot be released on time because of the patents it includes.', 24, 30],
+  ['Creative Writing', 'This ETD includes a creative writing story that prevents it from being released on time.', 0, 120],
+  ['Other', 'This ETD cannot be released in the default time for some other reason.', 0, 60]
 ]
 for reason in reasons do
-  Reason.create(name: reason[0], description: reason[1], months_to_warning: reason[2], months_to_release: reason[3], warn_before_approval: reason[4])
+  Reason.create(name: reason[0], description: reason[1], months_to_warning: reason[2], months_to_release: reason[3])
 end
 
 availabilities = [
