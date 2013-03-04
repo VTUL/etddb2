@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301223241) do
+ActiveRecord::Schema.define(:version => 20130304162345) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20130301223241) do
     t.integer  "content_file_size"
     t.datetime "content_updated_at"
     t.integer  "reason_id"
+    t.string   "content_fingerprint"
   end
 
   create_table "conversations", :force => true do |t|
