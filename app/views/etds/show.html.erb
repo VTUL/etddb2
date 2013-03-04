@@ -87,7 +87,7 @@
           <td><%= c.content_file_name %></td>
           <td><%= c.content_file_size %></td>
           <td style="font-variant: small-caps;"><%= link_to('[metadata]', content_path(c)) %></td>
-          <td style="font-variant: small-caps;"><%= link_to('[download]', c.content.url) %></td>
+          <td style="font-variant: small-caps;"><%= link_to('[download]', download_content_path(c)) %></td>
         </tr>
       <% end %>
     </table>

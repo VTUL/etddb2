@@ -14,4 +14,8 @@ custom_styles: true
 # remote_whitelist: '/lib/RemoteWhitelist.ips'
 
 # Default email address
+# TODO: implement
 default_email: 'etddb@vt.edu'
+
+# Path to store uploaded content at
+upload_dir: ':rails_root/files'

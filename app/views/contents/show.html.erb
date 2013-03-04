@@ -5,7 +5,7 @@
 <p>
   <b>Filename:</b>
   <%=h @content.content_file_name %><br />
-  <b><%= link_to 'Download', @content.content.url %></b>
+  <b><%= link_to 'Download', download_content_path(@content) %></b>
 </p>
 <p>
   <b>Type:</b>
@@ -36,6 +36,6 @@
   <%=h @content.duration %>
 </p>
 <%= link_to 'Edit', edit_content_path(@content) %> |
-<%= link_to 'Back', contents_path %>
+<%= link_to 'Back to ETD', etd_path(@etd) %>
 <br />
 <%= render 'contents_in_etd' %>

@@ -17,27 +17,13 @@ class Content < ActiveRecord::Base
   validates_presence_of :availability_id, :etd_id, :reason_id
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
 
-  # These allow paperclip to generate the content's path and url dynamically.
-  Paperclip.interpolates :file_availability do |attachment, style|
-    attachment.instance.availability.name.downcase()
-  end
+  # Allow paperclip to generate the content's path dynamically.
   Paperclip.interpolates :urn do |attachment, style|
     attachment.instance.etd.urn
   end
-  Paperclip.interpolates :availability do |attachment, style|
-    if attachment.instance.etd.status == "Approved"
-      if attachment.instance.etd.availability.access_restriction == "Withheld"
-        return "withheld"
-      else
-        return "available"
-      end
-    else
-      return "submitted"
-    end
-  end
 
   # Paperclip mountings/validations
-  has_attached_file :content, storage: :filesystem, path: ":rails_root/files/:urn/:filename", url: "/:availability/:urn/:file_availability/:filename"
+  has_attached_file :content, storage: :filesystem, path: "#{Settings.upload_dir}/:urn/:id/:filename", url: "/contents/:id"
   validates_attachment_presence :content
   validates_attachment_size :content, less_than: 512.megabytes
 
