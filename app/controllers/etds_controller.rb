@@ -289,6 +289,7 @@ class EtdsController < ApplicationController
     else
       content = Content.new(content: params[:content], bound: params[:bound], availability_id: params[:availability_id], reason_id: params[:reason_id])
       @etd.contents << content
+      @etd.update_attribute(:updated_at, Time.now())
     end
     #if @etd.update_attributes(params[:etd])
     #  Provenance.create(person: current_person, action: "added contents to", model: @etd)
