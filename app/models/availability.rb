@@ -13,7 +13,7 @@ class Availability < ActiveRecord::Base
   belongs_to :reason, inverse_of: :availability
   belongs_to :release_availability, class_name: 'Availability', foreign_key: 'release_availability_id'
 
-  ACCESS_RESTRICTIONS = ['None', 'Restricted', 'Withheld']
+  ACCESS_RESTRICTIONS = ['Unrestricted', 'Restricted', 'Withheld']
   validates :access_restriction, inclusion: {in: ACCESS_RESTRICTIONS}
   validates :retired, inclusion: {in: [true, false], message: "must be boolean"}
   validates :etd_only, inclusion: {in: [true, false], message: "must be boolean"}
