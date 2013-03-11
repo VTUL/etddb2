@@ -25,7 +25,7 @@ gem 'execjs'
 gem 'libv8'
 gem 'therubyracer'
 
-gem 'ruby-ldap', '0.9.10'
+#gem 'ruby-ldap', '0.9.10'
 #gem 'ruby-ldap', '0.9.11'
 # For test,
 group :development do
