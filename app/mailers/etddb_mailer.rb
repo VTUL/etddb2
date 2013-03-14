@@ -5,7 +5,7 @@
 #########################################################
 
 class EtddbMailer < ActionMailer::Base
-  default from: 'etd@vt.edu'
+  default from: Settings.default_email
 
   def created_authors(etd)
     @etd = etd
@@ -22,8 +22,7 @@ class EtddbMailer < ActionMailer::Base
   def submitted_school(etd)
     @etd = etd
     @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    mail(to: 'cnbrittle@gmail.com', subject: 'New ETD Submitted.')
-    # TODO: Change email address for graduate school.
+    mail(to: Settings.grad_school_email, subject: 'New ETD Submitted.')
   end
 
   def submitted_committee(etd)
@@ -42,8 +41,7 @@ class EtddbMailer < ActionMailer::Base
   def approved_school(etd)
     @etd = etd
     @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    mail(to: 'cnbrittle@gmail.com', subject: 'A Committee has approved an ETD.')
-    # TODO: Change email address for graduate school.
+    mail(to: Settings.grad_school_email, subject: 'A Committee has approved an ETD.')
   end
 
   def approved_committee(etd)
@@ -56,8 +54,7 @@ class EtddbMailer < ActionMailer::Base
   def approved_proquest(etd)
     @etd = etd
     @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-    mail(to: 'email@proquest.vt.edu', subject: 'New Electronic Dissertation')
-    # TODO: the real proquest email address is 'dissepubl@proquest.com', but I don't want to send them anything by accident.
+    mail(to: Settings.proquest_email, subject: 'New Electronic Dissertation')
   end
 
   def warn_authors(klass)

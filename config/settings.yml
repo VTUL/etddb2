@@ -7,15 +7,22 @@
 survey_url: ''
 
 # Select whether or not to use custom styles
-# TODO: where are those files?
+# TODO: where are the custom styles?
 custom_styles: true
 
-# Path to IP address whitelist TODO: DOCUMENT
+# Path to IP address whitelist TODO: DOCUMENT IP Address whitelist
 # remote_whitelist: '/lib/RemoteWhitelist.ips'
 
 # Default email address
-# TODO: implement
 default_email: 'etddb@vt.edu'
+
+# Grad School email address
+# TODO: Change email address for graduate school.
+grad_school_email: 'cnbrittle@gmail.com'
+
+# Proquest email address
+# TODO: the real proquest email address is 'dissepubl@proquest.com'
+proquest_email: 'email@proquest.vt.edu'
 
 # Path to store uploaded content at
 upload_dir: ':rails_root/files'
