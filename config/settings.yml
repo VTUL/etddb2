@@ -7,15 +7,37 @@
 survey_url: ''
 
 # Select whether or not to use custom styles
-# TODO: where are those files?
+# TODO: where are the custom styles?
 custom_styles: true
 
-# Path to IP address whitelist TODO: DOCUMENT
+# Path to IP address whitelist TODO: DOCUMENT IP Address whitelist
 # remote_whitelist: '/lib/RemoteWhitelist.ips'
-
-# Default email address
-# TODO: implement
-default_email: 'etddb@vt.edu'
 
 # Path to store uploaded content at
 upload_dir: ':rails_root/files'
+
+# Default email address
+default_email: 'etddb@vt.edu'
+
+# Proquest email address
+# TODO: the real proquest email address is 'dissepubl@proquest.com'
+proquest_email: 'email@proquest.vt.edu'
+
+# Grad School email address
+# TODO: Change email address for graduate school.
+grad_school_email: 'cnbrittle@gmail.com'
+
+# Grad School email sig:
+grad_school_sig: 'Karen P. DePauw, Ph.D.
+Vice President for Graduate Studies
+and Dean of the Graduate School
+VPI & SU Graduate Life Center at
+Donaldson Brown
+Blacksburg, VA 24061'
+
+# Grad School Address
+grad_school_address: '    VT ETDs
+    Graduate School
+    Virginia Tech
+    120 GLC @ Donaldson Brown (0325)
+    Blacksburg, VA 24061'

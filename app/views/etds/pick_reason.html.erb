@@ -1,4 +1,4 @@
-<%= form_for @etd, url: add_reason_path(@etd) do |f| %>
+<%= form_for @etd, url: add_reason_to_etd_path(@etd) do |f| %>
   <% if @etd.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@etd.errors.count, "error") %> prohibited this change from being saved:</h2>
@@ -12,23 +12,21 @@
   <% end %>
 
   <div class="field">
-    <% # TODO: Better label text. %>
-    <%= f.label(:reason_id, "Reasons") %>
+    <%= f.label(:reason_id, "When should the ETD be released?") %>
     <table>
       <% for reason in @reasons do %>
         <tr>
           <td valign='top'><%= f.radio_button(:reason_id, reason.id) %></td>
-          <td valign='top' align='right'><%= reason.name %>:</td>
+          <td valign='top'><%= reason.description %></td>
           <% if reason.months_to_release > 0 %>
-            <td valign='top'>The ETD will be released in <%= reason.months_to_release %> <%= "months".pluralize(reason.months_to_release) %>.</td>
+            <td valign='top'>The ETD should be released in <%= reason.months_to_release %> <%= "months".pluralize(reason.months_to_release) %>.</td>
           <% else %>
             <% if reason.months_to_release < 0 %>
-              <td valign='top'>The ETD will never be released.</td>
+              <td valign='top'>The ETD should never be released.</td>
             <% else %>
-              <td valign='top'>The ETD will be released immediately.</td>
+              <td valign='top'>The ETD should be released immediately.</td>
             <% end %>
           <% end %>
-          <td valign='top'><%= reason.description %></td>
         </tr>
       <% end %>
     </table>
