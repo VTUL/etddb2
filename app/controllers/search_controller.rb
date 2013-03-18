@@ -10,7 +10,8 @@ class SearchController < ApplicationController
 							 "author_email" => "Email", "pid" => "PID"}
 		@checkbox_admin_only = ["author_email", "pid"]
 		# ETDs that non-admins can see
-		patron_availabilities = ['Unrestricted', 'Restricted']
+		all_patron_avail = ['Unrestricted', 'Restricted']
+		author_avail = ['Withheld', 'Mixed']
 		@results_info = nil
 	    if isInt(params[:per_page])
 	      @per_page = params[:per_page]
@@ -45,7 +46,20 @@ class SearchController < ApplicationController
 				query.facet(:approval_year)
 				query.facet(:file_type)
 				# Query delimiters
-				query.with(:availability_status).any_of(patron_availabilities) if !isUserAdmin
+				unless isUserAdmin
+					query.any_of do
+						# Include ETDs for patrons with visible availabilities and Withheld/Mixed 
+						# only if they are the author or a committee member
+						with(:availability_status).any_of(all_patron_avail)
+						all_of do
+							with(:availability_status).any_of(author_avail)
+							any_of do
+								with(:author, current_person.name)
+								with(:committee, current_person.name)
+							end
+						end
+					end
+				end
 				query.with(:author, params[:author]) if params[:author].present?
 				query.with(:urn, params[:urn]) if params[:urn].present?
 				query.with(:defense_date).less_than(stripDate(params[:defense_date_before])) if params[:defense_date_before].present?

@@ -111,15 +111,19 @@
   <div id="results_list" >
     <% i = 1 %>
     <% @search.each_hit_with_result do |hit, etd| %>
-      <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
       <% if i == @result.size %>
-      <!-- Avoids border on bottom -->
+        <!-- Avoid border on bottom -->
         <div class="list_entry_last">
       <% else %>
         <div class="list_entry">
       <% end %>
         <%= render '/search/display_etd', :etd => etd, :iteration => i %>
-        <% if !hit.highlight(:etd_attachment).nil? %>
+        <!-- For now block mixed results from showing text blurbs for anyone but admins, zip files are indexed as one
+             and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. -->
+        <% if !hit.highlight(:etd_attachment).nil? and 
+              ((etd.availability.name.eql?('Unrestricted') or etd.availability.name.eql?('Restricted')) or 
+              ((etd.people.include?(current_person) and etd.availability.name.eql?('Withheld')) or isUserAdmin)) 
+              %>
           <% highlighted = hit.highlight(:etd_attachment).format { |fragment| content_tag(:em, fragment) } %>
           <p class="etd_fulltext"><%= "\"#{highlighted}\"".html_safe %></p>
         <% end %>
