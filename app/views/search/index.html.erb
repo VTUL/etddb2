@@ -67,8 +67,9 @@
   <% end %>
   <br/>
   </div>
-    <%= label_tag "ETD:" %> <%= check_box_tag "type_etd", 1, params[:type_etd].present?, :class => 'etd_btd_check' %>
-    <%= label_tag "BTD:" %> <%= check_box_tag "type_btd", 1, params[:type_btd].present?, :class => 'etd_btd_check' %>
+    <% neither_types_present = !params[:type_etd].present? and !params[:type_btd].present? %>
+    <%= label_tag "ETD:" %> <%= check_box_tag "type_etd", 1, (params[:type_etd].present? or neither_types_present), :class => 'etd_btd_check' %>
+    <%= label_tag "BTD:" %> <%= check_box_tag "type_btd", 1, (params[:type_btd].present? or neither_types_present), :class => 'etd_btd_check' %>
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
 	<br>

@@ -11,6 +11,7 @@ class SearchController < ApplicationController
 		@checkbox_admin_only = ["author_email", "pid"]
 		# ETDs that non-admins can see
 		all_patron_avail = ['Unrestricted', 'Restricted']
+		# ETDs only authors/collaborators/admins can see
 		author_avail = ['Withheld', 'Mixed']
 		@results_info = nil
 	    if isInt(params[:per_page])
@@ -91,7 +92,7 @@ class SearchController < ApplicationController
 								#{@result.size + @result.offset} of #{@search.total}" 
 			end
 		rescue Exception => ex
-			# Catch exceptions, likely due to solr server being down
+			# Catch exceptions, possibly due to solr server being down
 			@result = "exception"
 			@exception_message = ex.message
 		end
