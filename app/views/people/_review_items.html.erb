@@ -2,13 +2,13 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Author</th>
+    <th>Authors</th>
   </tr>
 
 <% @reviewable_etds.each do |etd| %>
   <tr>
     <td><%= link_to(etd.title, etd_path(etd)) %></td>
-    <td><%= Person.find(etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).map { |p| p.name } .join(', ') %></td>
+    <td><%= Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC').map { |p| p.name } .join(', ') %></td>
     <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
     <td><%= button_to 'Approve', approve_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
     <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
