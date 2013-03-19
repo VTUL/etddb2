@@ -421,6 +421,7 @@ class EtdsController < ApplicationController
     respond_to do |format|
       if @etd.status == 'Submitted'
         # TODO: Limit access.
+        @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
         @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
         format.html
       else

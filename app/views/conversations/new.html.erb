@@ -14,22 +14,23 @@
   <% end %>
 
   <div class="field">
-    <%= label_tag :participants, "To" %><br />
-    <%= number_field_tag :participants %>
+    <%= label_tag(:participants, "To") %><br />
+    <%= text_field_tag(:participants) %>
+    <%= hidden_field_tag(:static_participants, 'false') %>
   </div>
+
   <div class="field">
-    <%= f.label :subject %><br />
-    <%= f.text_field :subject %>
+    <%= f.label(:subject) %><br />
+    <%= f.text_field(:subject) %>
   </div>
   <%= f.hidden_field(:model_type, {value: @conv.model_type}) %>
   <%= f.hidden_field(:model_id, {value: @conv.model_id}) %>
 
   <%= f.fields_for :messages do |m| %>
   <div class="field">
-    <%= m.label :msg, "Message" %><br />
-    <%= m.text_area :msg %>
+    <%= m.label(:msg, "Message") %><br />
+    <%= m.text_area(:msg) %>
   </div>
-  <%= m.hidden_field(:sender_id, {value: current_person.id}) %>
   <% end %>
 
   <div class="actions">

@@ -66,13 +66,26 @@ class ConversationsController < ApplicationController
   def confirm_new
     @conv = Conversation.new(params[:conversation])
 
+    # These are to allow messages that *know* their participants to bypass the new page, and set all the params.
+    if @conv.messages.empty?
+      @conv.messages << Message.new
+    end
+    if !params[:model_id].nil?
+      @conv.model_id = params[:model_id]
+      @conv.model_type = params[:model_type]
+    end
+
     @participants = []
-    params[:participants].split(',').each do |p|
-      p = p.strip().upcase()
-      if !Conversation::SPECIAL_CASES.include?(p)
-        @participants << Person.where("(UPPER(first_name) LIKE '%#{p}%' OR UPPER(last_name) LIKE '%#{p}%' OR UPPER(display_name) LIKE '%#{p}%') AND encrypted_password <> ''")
-      else
-        # TODO: Take care of special cases.
+    if params[:static_participants] == 'true'
+      @participants = Person.find(params[:participants])
+    else
+      params[:participants].split(',').each do |p|
+        p = p.strip().upcase()
+        if !Conversation::SPECIAL_CASES.include?(p)
+          @participants << Person.where("(UPPER(first_name) LIKE '%#{p}%' OR UPPER(last_name) LIKE '%#{p}%' OR UPPER(display_name) LIKE '%#{p}%') AND encrypted_password <> ''")
+        else
+          # TODO: Take care of special cases.
+        end
       end
     end
 
@@ -95,12 +108,16 @@ class ConversationsController < ApplicationController
         format.json { render json: @conv, status: :created, location: @conv }
       else
         @participants = []
-        params[:participants].split(',').each do |p|
-          p = p.strip().upcase()
-          if !Conversation::SPECIAL_CASES.include?(p)
-            @participants << Person.where("(UPPER(first_name) LIKE '%#{p}%' OR UPPER(last_name) LIKE '%#{p}%' OR UPPER(display_name) LIKE '%#{p}%') AND encrypted_password <> ''")
-          else
-            # TODO: Take care of special cases.
+        if params[:static_participants] == 'true'
+          @participants = Person.find(params[:participants])
+        else
+          params[:participants].split(',').each do |p|
+            p = p.strip().upcase()
+            if !Conversation::SPECIAL_CASES.include?(p)
+              @participants << Person.where("(UPPER(first_name) LIKE '%#{p}%' OR UPPER(last_name) LIKE '%#{p}%' OR UPPER(display_name) LIKE '%#{p}%') AND encrypted_password <> ''")
+            else
+              # TODO: Take care of special cases.
+            end
           end
         end
         format.html { render action: "confirm_new" }
