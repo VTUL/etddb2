@@ -42,7 +42,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.1)
+    coffee-script-source (1.6.2)
     daemons (1.1.9)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
@@ -75,7 +75,7 @@ GEM
     multi_json (1.0.4)
     nested_form (0.3.1)
     netaddr (1.5.0)
-    nokogiri (1.5.7)
+    nokogiri (1.5.9)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
@@ -118,7 +118,7 @@ GEM
     rcov (0.9.9)
     rdoc (3.12.2)
       json (~> 1.4)
-    ref (1.0.3)
+    ref (1.0.4)
     rsolr (1.0.8)
       builder (>= 2.1.2)
     ruby_parser (2.3.1)

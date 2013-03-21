@@ -13,13 +13,22 @@
     </div>
   <% end %>
 
-  <p>
-    <% @participants.each do |p| %>
-      <select name="conversation[participant_ids][]">
-        <%= options_from_collection_for_select(p, :id, :name) %>
-      </select>
+  <div class='field'>
+    <%= label_tag :participants, "To" %><br />
+    <% if params[:static_participants] == 'true' %>
+      <%= @participants.map { |p| p.name } .join(', ') %>
+      <% params[:participants].each do |id| %>
+        <%= hidden_field_tag("conversation[participant_ids][]", id) %>
+      <% end %>
+    <% else %>
+      <% @participants.each do |p| %>
+        <select name="conversation[participant_ids][]">
+          <%= options_from_collection_for_select(p, :id, :name) %>
+        </select>
+      <% end %>
     <% end %>
-  </p>
+    <%= hidden_field_tag(:static_participants, params[:static_participants]) %>
+  </div>
 
   <div class="field">
     <%= f.label :subject %><br />
@@ -27,7 +36,13 @@
   </div>
   <%= f.hidden_field(:model_type, {value: @conv.model_type}) %>
   <%= f.hidden_field(:model_id, {value: @conv.model_id}) %>
-  <%= hidden_field_tag(:participants, params[:participants]) %>
+  <% if params[:static_participants] == 'true' %>
+    <% params[:participants].each do |id| %>
+      <%= hidden_field_tag("participants[]", id) %>
+    <% end %>
+  <% else %>
+    <%= hidden_field_tag(:participants, params[:participants]) %>
+  <% end %>
 
   <%= f.fields_for :messages do |m| %>
   <div class="field">

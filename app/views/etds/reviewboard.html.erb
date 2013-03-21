@@ -1,5 +1,14 @@
 <h1><%= link_to(@etd.title, etd_path(@etd)) %></h1>
-By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators')).first.person_id).name %> <%# TODO: link to send author a message %>
+By <%= @creators.map { |o| o.name } .join(", ") %>
+<%= form_tag(controller: "conversations", action: "confirm_new") do %>
+  <% @creators.pluck(:id).each do |id| %>
+    <%= hidden_field_tag("participants[]", id) %>
+  <% end %>
+  <%= hidden_field_tag(:static_participants, 'true') %>
+  <%= hidden_field_tag(:model_type, @etd.class.name) %>
+  <%= hidden_field_tag(:model_id, @etd.id) %>
+  <%= submit_tag("Send Message") %>
+<% end %>
 <h3>Committee Members</h3>
 <table>
   <tr>
@@ -24,7 +33,15 @@ By <%= Person.find(@etd.people_roles.where(role_id: Role.where(group: 'Creators'
         <% end %>
       </td>
     <% else %>
-      <!--<td><%# TODO: Link to message member %></td>-->
+      <td>
+        <%= form_tag(controller: "conversations", action: "confirm_new") do %>
+          <%= hidden_field_tag("participants[]", member.person.id) %>
+          <%= hidden_field_tag(:static_participants, 'true') %>
+          <%= hidden_field_tag(:model_type, @etd.class.name) %>
+          <%= hidden_field_tag(:model_id, @etd.id) %>
+          <%= submit_tag("Send Message") %>
+        <% end %>
+      </td>
     <% end %>
   </tr>
   <% end %>
