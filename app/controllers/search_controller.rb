@@ -14,11 +14,7 @@ class SearchController < ApplicationController
 		# ETDs only authors/collaborators/admins can see
 		author_avail = ['Withheld', 'Mixed']
 		@results_info = nil
-	    if isInt(params[:per_page])
-	      @per_page = params[:per_page]
-	    else
-	      @per_page = 10
-	    end
+	    @per_page = isInt(params[:per_page]) ? params[:per_page] : @per_page = 10
 
 		begin
 			# query parameter needed here to expose DSL and allow use of instance
@@ -75,6 +71,7 @@ class SearchController < ApplicationController
 					params[:doc_info].each_key { |key|
 						query.with(key, params[:doc_info][key]) if params[:doc_info][key].present? and !key.eql?("department")
 					}
+					# Include separately as multiple departments can be selected necessitating all_of statement
 					if params[:doc_info][:department].present?
 						query.with(:department).all_of(params[:doc_info][:department])
 					end

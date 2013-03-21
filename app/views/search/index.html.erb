@@ -24,9 +24,9 @@
           </tr>
         <% end %>
     </table>
-  <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, {:class => "dropdowns"})%>
+  <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, :class => "dropdowns")%>
   </br>
-  <%=label_tag "Department: " %><%=collection_select(:doc_info, :department, Department.where(retired: false).order('name ASC'), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, {:class => "dropdowns"})%>
+  <%=label_tag "Department: " %><%=collection_select('doc_info[department]', '', Department.where(retired: false).order('name ASC'), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, :class => "dropdowns")%>
 </br>
 </br>
   <span id="date_format"> Date formats accepted: YYYY, YYYY-MM, YYYY-MM-DD </span>
