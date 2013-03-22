@@ -28,7 +28,7 @@
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to DocumentType.find(row.value).name, params.except(:page).merge({:doc_info => {:document_type_id => row.value}}) %> (<%= row.count %>)
-        <% elsif !params[:doc_info].blank? and params[:doc_info][:document_type_id].blank? %>
+        <% elsif params[:doc_info][:document_type_id].blank? %>
           <%= link_to DocumentType.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => row.value})}) %> (<%= row.count %>)
         <% else %>
           <strong><%= DocumentType.find(row.value).name %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => nil})}) %>)
@@ -39,7 +39,7 @@
 
     <h3 class="facet_title">Department</h3>
 
-    <% if params[:doc_info].blank? or params[:doc_info][:department].blank? %>
+    <% if params[:doc_info].blank? or params[:doc_info][:department].blank? or params[:doc_info][:department].eql?([''])  %>
       <ul style="display:none" >
     <% else %>
       <ul>
@@ -78,7 +78,7 @@
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => {:defense_year => row.value}}) %> (<%= row.count %>)
-        <% elsif !params[:doc_info].blank? and params[:doc_info][:defense_year].blank? %>
+        <% elsif params[:doc_info][:defense_year].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:defense_year => row.value})}) %> (<%= row.count %>)
         <% else %>
           <strong class="faceted" id="doc_info_defense_year" name="doc_info[defense_year]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:defense_year => nil})}) %>)
@@ -98,7 +98,7 @@
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => {:release_year => row.value}}) %> (<%= row.count %>)
-        <% elsif !params[:doc_info].blank? and params[:doc_info][:release_year].blank? %>
+        <% elsif params[:doc_info][:release_year].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:release_year => row.value})}) %> (<%= row.count %>)
         <% else %>
           <strong class="faceted" id="doc_info_release_year" name="doc_info[release_year]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:release_year => nil})}) %>)
@@ -119,7 +119,7 @@
         <li>
           <% if params[:doc_info].blank? %>
             <%= link_to row.value, params.except(:page).merge({:doc_info => {:creation_year => row.value}}) %> (<%= row.count %>)
-          <% elsif !params[:doc_info].blank? and params[:doc_info][:creation_year].blank? %>
+          <% elsif params[:doc_info][:creation_year].blank? %>
             <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:creation_year => row.value})}) %> (<%= row.count %>)
           <% else %>
             <strong class="faceted" id="doc_info_creation_year" name="doc_info[creation_year]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:creation_year => nil})}) %>)
@@ -139,7 +139,7 @@
         <li>
           <% if params[:doc_info].blank? %>
             <%= link_to row.value, params.except(:page).merge({:doc_info => {:approval_year => row.value}}) %> (<%= row.count %>)
-          <% elsif !params[:doc_info].blank? and params[:doc_info][:approval_year].blank? %>
+          <% elsif params[:doc_info][:approval_year].blank? %>
             <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:approval_year => row.value})}) %> (<%= row.count %>)
           <% else %>
             <strong class="faceted" id="doc_info_approval_year" name="doc_info[approval_year]"><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:approval_year => nil})}) %>)
@@ -160,7 +160,7 @@
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => {:file_type => row.value}}) %> (<%= row.count %>)
-        <% elsif !params[:doc_info].blank? and params[:doc_info][:file_type].blank? %>
+        <% elsif params[:doc_info][:file_type].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({:file_type => row.value})}) %> (<%= row.count %>)
         <% else %>
           <% if params[:doc_info][:file_type] == row.value %>

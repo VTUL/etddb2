@@ -72,7 +72,7 @@ class SearchController < ApplicationController
 						query.with(key, params[:doc_info][key]) if params[:doc_info][key].present? and !key.eql?("department")
 					}
 					# Include separately as multiple departments can be selected necessitating all_of statement
-					if params[:doc_info][:department].present?
+					if params[:doc_info][:department].present? and !params[:doc_info][:department].eql?([''])
 						query.with(:department).all_of(params[:doc_info][:department])
 					end
 				end

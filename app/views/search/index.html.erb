@@ -3,76 +3,7 @@
 <%= stylesheet_link_tag 'facets' %>
 <h1>Advanced Search</h1>
 <div id = "advance_search" class = "top_bar">
-	<%= form_tag search_index_path, :id => 'search_check_form', method: :get do %>
-	  <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search' %>
-	  <%= submit_tag "Search", name: nil %>
-    <div id = "options_list" >
-      <table class="options_table">
-        <% @checkbox_options.each_with_index do |(key, display_name), index| %>
-          <% if !isUserAdmin and @checkbox_admin_only.include?(key) %> 
-            <% next %>
-          <% end %>
-          <tr>
-            <td><%= label_tag display_name %>:</td>
-            <td>
-              <% if params[:search_using].nil? or (!params[:search_using][key].blank?) %>
-                <%= check_box_tag "search_using[#{key}]", 1, true %>
-              <% else %>
-                <%= check_box_tag "search_using[#{key}]", 1 %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-    </table>
-  <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, :class => "dropdowns")%>
-  </br>
-  <%=label_tag "Department: " %><%=collection_select('doc_info[department]', '', Department.where(retired: false).order('name ASC'), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, :class => "dropdowns")%>
-</br>
-</br>
-  <span id="date_format"> Date formats accepted: YYYY, YYYY-MM, YYYY-MM-DD </span>
-  <div id="defense_date_range_div">
-    <%= label_tag "Defense Date:" %>
-    <%= label_tag "Before ", nil, :id => 'before_label' %>
-    <%= text_field_tag :defense_date_before, params[:defense_date_before], :class=>"date_range_input" %> 
-
-    <%= label_tag "After", nil %>
-    <%= text_field_tag :defense_date_after, params[:defense_date_after], :class=>"date_range_input" %>
-  </div>
-  <div id="release_date_range_div">
-    <%= label_tag "Release Date:" %>
-    <%= label_tag "Before ", nil, :id => 'before_label' %>
-    <%= text_field_tag :release_date_before, params[:release_date_before], :class=>"date_range_input" %> 
-
-    <%= label_tag "After", nil %>
-    <%= text_field_tag :release_date_after, params[:release_date_after], :class=>"date_range_input" %>
-  </div>
-  <% if isUserAdmin %>
-    <div id="created_date_range_div">
-      <%= label_tag "Creation Date:" %>
-      <%= label_tag "Before ", nil, :id => 'before_label' %>
-      <%= text_field_tag :created_at_before, params[:created_at_before], :class=>"date_range_input" %> 
-
-      <%= label_tag "After", nil %>
-      <%= text_field_tag :created_at_after, params[:created_at_after], :class=>"date_range_input" %>
-    </div>
-
-    <div id="approval_date_range_div">
-      <%= label_tag "Approval Date:" %>
-      <%= label_tag "Before ", nil, :id => 'before_label' %>
-      <%= text_field_tag :approval_date_before, params[:approval_date_before], :class=>"date_range_input" %> 
-
-      <%= label_tag "After", nil %>
-      <%= text_field_tag :approval_date_after, params[:approval_date_after], :class=>"date_range_input" %>
-    </div>
-  <% end %>
-  <br/>
-  </div>
-    <% neither_types_present = !params[:type_etd].present? and !params[:type_btd].present? %>
-    <%= label_tag "ETD:" %> <%= check_box_tag "type_etd", 1, (params[:type_etd].present? or neither_types_present), :class => 'etd_btd_check' %>
-    <%= label_tag "BTD:" %> <%= check_box_tag "type_btd", 1, (params[:type_btd].present? or neither_types_present), :class => 'etd_btd_check' %>
-	  <%= hidden_field_tag :per_page, params[:per_page] %>
-  <% end %>
-	<br>
+	<%= render '/search/advanced_options_box' %>
 </div>
 <div id="page_pref" class="top_bar"> 
 	<%= form_tag search_index_path, :id => 'page_pref_form', :method => 'get' do %> 
@@ -88,7 +19,7 @@
 </div>
 
 <!-- Render the facets -->
-<%= render '/search/facets', :search => @search %>
+<%= render '/shared/facets', :search => @search %>
 
 <div id="results">
 <% if @result == "no_search" %>
@@ -118,7 +49,7 @@
       <% else %>
         <div class="list_entry">
       <% end %>
-        <%= render '/search/display_etd', :etd => etd, :iteration => i %>
+        <%= render '/shared/display_etd', :etd => etd, :iteration => i %>
         <!-- For now block mixed results from showing text blurbs for anyone but admins, zip files are indexed as one
              and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. -->
         <% if !hit.highlight(:etd_attachment).nil? and 
