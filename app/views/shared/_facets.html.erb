@@ -58,7 +58,7 @@
           <% temp_params = Array.new(params[:doc_info][:department]) %>
           <% if params[:doc_info][:department].include?(row.value.to_s) %>
             <% temp_params.delete(row.value.to_s) %>
-            <strong><%= Department.find(row.value).name %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params})}) %>)
+            <%=content_tag(:strong, Department.find(row.value).name, {:class=>"multi_selectable", :id=>row.value, :name=>"doc_info[department][]"})%> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params})}) %>)
           <% else %>
             <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params.push(row.value)})}) %> (<%= row.count %>)
           <% end %>

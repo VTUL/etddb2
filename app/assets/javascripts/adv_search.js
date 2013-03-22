@@ -1,3 +1,5 @@
+var containingName = "doc_info";
+
 function submit_form() {
 	// Remove all inputs from page pref dropdown
 	$('.pref_removable').remove();
@@ -12,9 +14,20 @@ function submit_form() {
 	// Add dropdown values to form before submitting page pref
 	$dropdowns = $("select.dropdowns");
 	$dropdowns.each(function() {
-		var $name = getName("doc_info", $(this).attr("name"));
-		if($name != -1)
+		var $name = getName(containingName, $(this).attr("name"));
+		if($name != -1 && $name != "department")
 			appendWithValue($(this));
+	});
+
+	/** 
+	 *  Add in facets or objects that can have multiple selections
+	 *  To use add "multi_selectable" as the element's class and the 
+	 *  id as that element's value.  Element name functions the same as other
+	 *  input types
+	 */
+	$multi_selectables = $(".multi_selectable");
+	$multi_selectables.each(function() {
+		appendWithManualID($(this));
 	});
 
 	// All facets that aren't included in dropdowns
@@ -55,4 +68,10 @@ function appendWithValue($value) {
 function appendWithText($value) {
 	$('<input type="hidden" value="' + $value.text() + '" name="' + $value.attr("name") + '"' 
 			+ ' id="' + $value.attr("id") + '" class="pref_removable">').appendTo('#page_pref_form');
+}
+
+function appendWithManualID($value) {
+	var generatedID = containingName + getName(containingName, $value.attr("name")) + "_";
+	$('<input type="hidden" value="' + $value.attr("id") + '" name="' + $value.attr("name") + '"' 
+			+ ' id="' + generatedID + '" class="pref_removable">').appendTo('#page_pref_form');
 }
