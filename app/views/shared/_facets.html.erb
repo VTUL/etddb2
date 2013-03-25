@@ -31,7 +31,7 @@
         <% elsif params[:doc_info][:document_type_id].blank? %>
           <%= link_to DocumentType.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => row.value})}) %> (<%= row.count %>)
         <% else %>
-          <strong><%= DocumentType.find(row.value).name %></strong> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => nil})}) %>)
+          <%= content_tag(:strong, DocumentType.find(row.value).name, {:class=>"faceted_if_no_dropdown", :id=>row.value, :name=>"doc_info[document_type_id]"}) %> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:document_type_id => nil})}) %>)
         <% end %>
       </li>
     <% end %>

@@ -1,47 +1,26 @@
 <%= stylesheet_link_tag 'paginate' %>
+<%= stylesheet_link_tag 'advanced_search' %>
+<%= stylesheet_link_tag 'facets' %>
 <h1>ETDs</h1>
 <div id="special_search" class="top_bar">
   <%= form_tag etds_path, :method => 'get' do %>
-    <%= text_field_tag :keywords, params[:keywords], :placeholder => 'Search ETDs' %>
+    <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search ETDs' %>
     <%= submit_tag 'Go', :name => nil %>
     <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
   <br />
 </div>
-  <div id="page_pref" class="top_bar">
-    <%= form_tag etds_path, :method => 'get' do %>
+<div id="page_pref" class="top_bar">
+  <%= form_tag etds_path, :id => 'page_pref_form', :method => 'get' do %>
     Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
-           :onchange => "this.form.submit();" %>
-           <%= hidden_field_tag :keywords, params[:keywords] if params[:keywords] %>
-    <% end %>
-  </div>
-  <%= will_paginate %>
-<% if @etds.empty? %>
-  <br />
-  <br />
-  <h3 class="clear_left"> No Records Found </h3>
-<% else %>
-  <table class="clear_left">
-    <tr>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Department</th>
-    </tr>
-
-  <br />
-  <% @etds.each do |etd| %>
-    <% creators = Person.where(id: etd.people_roles.where(role_id: @creator_roles).pluck(:person_id)).order('last_name ASC') %>
-    <tr>
-      <td><%= creators.map { |o| o.name } .join(", ") %></td>
-      <td><%= etd.title %></td>
-      <td><%= etd.departments.pluck(:name).join(", ") %></td>
-      <td><%= link_to 'Show', etd %></td>
-      <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-      <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
-    </tr>
+           :onchange => "submit_form()" %>
+    <%= hidden_field_tag :adv_search, params[:adv_search] %>
+    <% if !params[:search_using].blank? %>
+      <% params[:search_using].each do |k, v| %>
+        <%= hidden_field_tag "search_using[#{k}]", v, :class => 'pref_removable' %>
+      <%end%>
+    <%end%>
   <% end %>
+</div>
 
-  </table>
-<% end %>
-<br />
-<%= will_paginate %>
+<%= render '/shared/etd_list' %>

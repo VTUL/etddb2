@@ -1,37 +1,7 @@
-class EtdsController < ApplicationController
+class EtdsController < SunspotSearchableController
   skip_before_filter :authenticate_person!, only: [:show, :index]
 
-  # GET /etds
-  # GET /etds.xml
-  def index
-    @creator_roles = Role.where(group: 'Creators').pluck(:id)
-    @per_page = (params[:per_page] =~ /^\d+$/) ? params[:per_page] : 10
-
-    # This is a bit of black magic.
-    @etds = []
-    case params[:orderby]
-    when "department"
-      # Previous query
-      #@etds = Etd.find(:all, include: :departments, order: 'departments.name')
-      # Updated query for pagination
-      @etds = Etd.paginate(page: params[:page], per_page: @per_page, include: :departments, order: 'departments.name')
-    when "title"
-      # Previous query
-      #@etds = Etd.find(:all, order: 'title')
-      # Updated query for pagination
-      @etds = Etd.paginate(page: params[:page], per_page: @per_page, order: 'title')
-    else
-      # Previous query
-      #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
-      # Updated query for pagination
-      @etds = Etd.search_quick(params[:keywords]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render(xml: @etds) }
-    end
-  end
+  # Index is controlled by SunspotSearchableController
 
   # GET /etds/1
   # GET /etds/1.xml

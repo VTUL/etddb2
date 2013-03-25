@@ -13,11 +13,19 @@ function submit_form() {
 
 	// Add dropdown values to form before submitting page pref
 	$dropdowns = $("select.dropdowns");
-	$dropdowns.each(function() {
-		var $name = getName(containingName, $(this).attr("name"));
-		if($name != -1 && $name != "department")
-			appendWithValue($(this));
-	});
+	if ($dropdowns.length > 0) {
+		$dropdowns.each(function() {
+			var $name = getName(containingName, $(this).attr("name"));
+			if($name != -1 && $name != "department")
+				appendWithValue($(this));
+		});
+	} else {
+		// Page contains no dropdowns, look for faceted_if_no_dropdown class
+		$absentDropdownFacets = $(".faceted_if_no_dropdown");
+		$absentDropdownFacets.each(function() {
+			appendWithManualID($(this));
+		});
+	}
 
 	/** 
 	 *  Add in facets or objects that can have multiple selections
