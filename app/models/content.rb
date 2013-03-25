@@ -30,6 +30,13 @@ class Content < ActiveRecord::Base
   has_attached_file :content, storage: :filesystem, path: "#{Settings.upload_dir}/:urn/:access_restriction/:filename", url: "/contents/:id"
   validates_attachment_presence :content
   #validates_attachment_size :content, less_than: 512.megabytes
+
+  after_save :change_mode
+
+  protected
+  def change_mode
+    File.chmod(644, self.content.path)
+  end
 end
 
 class Audio < Content
