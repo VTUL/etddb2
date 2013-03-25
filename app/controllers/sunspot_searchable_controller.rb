@@ -56,13 +56,15 @@ class SunspotSearchableController < ApplicationController
 	            # Include ETDs for patrons with visible availabilities and Withheld/Mixed 
 	            # only if they are the author or a committee member
 	            with(:availability_status).any_of(all_patron_avail)
-	            all_of do
-	              with(:availability_status).any_of(author_avail)
-	              any_of do
-	                with(:author, current_person.name)
-	                with(:committee, current_person.name)
-	              end
-	            end
+	            unless current_person.nil?
+		            all_of do
+		              with(:availability_status).any_of(author_avail)
+		              any_of do
+		                with(:author, current_person.name)
+		                with(:committee, current_person.name)
+		              end
+		            end
+		        	end
 	          end
 	        end
 	        query.with(:author, params[:author]) if params[:author].present?
@@ -135,7 +137,7 @@ class SunspotSearchableController < ApplicationController
 	end
 
 	def isUserAdmin
-		return !current_person.roles.where(group: 'Administration').empty?
+		return (!current_person.nil? and !current_person.roles.where(group: 'Administration').empty?)
 	end
 	helper_method :isUserAdmin
 end
