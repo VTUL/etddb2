@@ -1,0 +1,17 @@
+<% if params[:doc_info].blank? or params[:doc_info][facet_type].blank? %>
+      <ul style="display:none" >
+    <% else %>
+      <ul>
+    <% end %>
+    <% for row in search.facet(facet_type).rows.sort{|x, y| y.value <=> x.value} %>
+      <li>
+        <% if params[:doc_info].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => {facet_type => row.value}}) %> (<%= row.count %>)
+        <% elsif params[:doc_info][facet_type].blank? %>
+          <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({facet_type => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <%= content_tag(:strong, row.value, {:class=>"faceted", :id=>"doc_info_#{facet_type.to_s}", :name=>"doc_info[#{facet_type.to_s}]"}) %> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({facet_type => nil})}) %>)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
