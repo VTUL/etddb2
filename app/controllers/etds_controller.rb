@@ -332,9 +332,9 @@ class EtdsController < ApplicationController
   # POST /etd/1/submit
   def submit
     respond_to do |format|
+      @etd = Etd.find(params[:id])
       # ETD must have atleast one committee member, and one piece of content.
       if @etd.contents.length > 0 && @etd.people_roles.where(role_id: Role.where(group: 'Collaborators').pluck(:id)).pluck(:person_id).uniq.count > 0
-        @etd = Etd.find(params[:id])
         @etd.status = "Submitted"
         @etd.submission_date = Time.now()
         @etd.save()
