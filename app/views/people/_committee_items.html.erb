@@ -1,4 +1,7 @@
+
+<%= stylesheet_link_tag 'paginate' %>
 <h3>Committee Etds</h3>
+<%= will_paginate @committee_etds, :param_name=>'page_committee' %>
 <table>
   <tr>
     <th>Title</th>

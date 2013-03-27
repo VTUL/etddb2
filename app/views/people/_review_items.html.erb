@@ -1,4 +1,6 @@
+<%= stylesheet_link_tag 'paginate' %>
 <h3>Review Items</h3>
+<%= will_paginate @reviewable_etds, :param_name=>'page_reviews' %>
 <table>
   <tr>
     <th>Title</th>
