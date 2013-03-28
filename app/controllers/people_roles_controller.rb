@@ -48,8 +48,13 @@ class PeopleRolesController < ApplicationController
       if @people_role.save
         Provenance.create(person: current_person, action: "made #{@people_role.person.name} a #{@people_role.role.name}. See ", model: @people_role)
 
-        format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully created.') }
-        format.xml  { render(xml: @people_role, status: :created, location: @people_role) }
+        if params[:return_to_profile].nil?
+          format.html { redirect_to(@people_role, notice: 'PeopleRole was successfully created.') }
+          format.xml  { render(xml: @people_role, status: :created, location: @people_role) }
+        else
+          format.html { redirect_to(current_person, notice: 'Claimed ETD.') }
+          format.xml  { render(xml: @people_role, status: :created, location: current_person) }
+        end
       else
         format.html { render(action: "new") }
         format.xml  { render(xml: @people_role.errors, status: :unprocessable_entity) }

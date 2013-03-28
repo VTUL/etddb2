@@ -33,7 +33,17 @@ class PeopleController < ApplicationController
     @my_etds = Etd.paginate(page: params[:page], per_page: @per_page, include: [:people_roles],
                             conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
     @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))
-    @reviewable_etds = Etd.where(status: "Submitted")
+    @my_reviewable_etds = Etd.where(status: "Submitted",
+                                    id: PeopleRole.where(role_id: Role.where(group: "Graduate School"), person_id: current_person.id).pluck(:etd_id).compact)
+    @reviewable_etds = nil
+    Etd.where(status: "Submitted").scoping do
+      claimed = PeopleRole.where(role_id: Role.where(group: "Graduate School")).pluck(:etd_id).compact
+      if !claimed.empty?
+        @reviewable_etds = Etd.where("id not in (?)", claimed)
+      else
+        @reviewable_etds = Etd.all
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb
