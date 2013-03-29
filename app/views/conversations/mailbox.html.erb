@@ -1,13 +1,21 @@
-<h1>Listing Conversations</h1>
+<%= stylesheet_link_tag 'paginate' %>
+<h1 style='width: 40%; float: left;'>Listing Conversations</h1>
+<div id="page_pref" class ="top_bar" style="margin-top:28px">
+  <%= form_tag request.path, :method => 'get' do %>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
+  <% end %>
+</div>
 
-<p>
-  <%= params[:box] == 'inbox' ? 'Inbox' : link_to('Inbox', conversations_path) %> |
-  <%= params[:box] == 'unread' ? 'Unread' : link_to('Unread', conversations_path('unread')) %> |
-  <%= params[:box] == 'outbox' ? 'Outbox' : link_to('Outbox', conversations_path('outbox')) %> |
-  <%= params[:box] == 'archived' ? 'Archived' : link_to('Archived', conversations_path('archived')) %> |
-  <%= params[:box] == 'all' ? 'All' : link_to('All', conversations_path('all')) %>
+<p style="clear: both;">
+  <%= params[:box] == 'inbox' ? 'Inbox' : link_to('Inbox', conversations_path(:per_page=>@per_page)) %> |
+  <%= params[:box] == 'unread' ? 'Unread' : link_to('Unread', conversations_path('unread', :per_page=>@per_page)) %> |
+  <%= params[:box] == 'outbox' ? 'Outbox' : link_to('Outbox', conversations_path('outbox', :per_page=>@per_page)) %> |
+  <%= params[:box] == 'archived' ? 'Archived' : link_to('Archived', conversations_path('archived', :per_page=>@per_page)) %> |
+  <%= params[:box] == 'all' ? 'All' : link_to('All', conversations_path('all', :per_page=>@per_page)) %>
 </p>
-
+<%= will_paginate @convs %>
+</br>
 <table>
   <tr>
     <th>Subject</th>

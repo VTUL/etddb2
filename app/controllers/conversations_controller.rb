@@ -1,7 +1,14 @@
 class ConversationsController < ApplicationController
+  require 'will_paginate/array'
   # GET /conversations
   # GET /conversations.json
   def mailbox
+    if params[:per_page] =~ /^\d+$/
+      @per_page = params[:per_page]
+    else
+      @per_page = 10
+    end
+
     @convs = []
     @box = params[:box]
     case @box
@@ -20,7 +27,7 @@ class ConversationsController < ApplicationController
       params[:box] = 'inbox'
       @convs = current_person.conversations.order('updated_at DESC').select { |c| !c.archived_by?(current_person) }
     end
-
+    @convs = @convs.paginate(page: params[:page], per_page: @per_page)
     respond_to do |format|
       format.html # mailbox.html.erb
       format.json { render json: @convs }
