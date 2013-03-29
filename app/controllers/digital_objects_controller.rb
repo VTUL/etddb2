@@ -2,7 +2,12 @@ class DigitalObjectsController < ApplicationController
   # GET /digital_objects
   # GET /digital_objects.xml
   def index
-    @digital_objects = DigitalObject.all
+    if params[:per_page] =~ /^\d+$/
+      @per_page = params[:per_page]
+    else
+      @per_page = 10
+    end
+    @digital_objects = DigitalObject.paginate(page: params[:page], per_page: @per_page).order('name ASC')
 
     respond_to do |format|
       format.html # index.html.erb
