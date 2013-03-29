@@ -1,13 +1,10 @@
 class ConversationsController < ApplicationController
   require 'will_paginate/array'
+  require 'pagination_helpers'
   # GET /conversations
   # GET /conversations.json
   def mailbox
-    if params[:per_page] =~ /^\d+$/
-      @per_page = params[:per_page]
-    else
-      @per_page = 10
-    end
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
 
     @convs = []
     @box = params[:box]

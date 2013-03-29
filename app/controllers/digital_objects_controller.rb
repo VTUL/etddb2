@@ -1,12 +1,9 @@
 class DigitalObjectsController < ApplicationController
+  require 'pagination_helpers'
   # GET /digital_objects
   # GET /digital_objects.xml
   def index
-    if params[:per_page] =~ /^\d+$/
-      @per_page = params[:per_page]
-    else
-      @per_page = 10
-    end
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
     @digital_objects = DigitalObject.paginate(page: params[:page], per_page: @per_page).order('name ASC')
 
     respond_to do |format|
