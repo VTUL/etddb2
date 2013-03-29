@@ -1,8 +1,10 @@
 class DocumentTypesController < ApplicationController
+  require 'pagination_helpers'
   # GET /document_types
   # GET /document_types.json
   def index
-    @document_types = DocumentType.all
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
+    @document_types = DocumentType.paginate(page: params[:page], per_page: @per_page).order('name ASC')
 
     respond_to do |format|
       format.html # index.html.erb
