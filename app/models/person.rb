@@ -17,11 +17,15 @@ class LegacyPerson < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
 
-  def name
+  def name()
     if self.display_name.to_s.empty?
       return "#{self.first_name} #{self.last_name}"
     end
     return self.display_name
+  end
+
+  def in_role_group?(role_group)
+    return !self.people_roles.where(role_id: Role.where(group: role_group).pluck(:id)).empty?
   end
 end
 
