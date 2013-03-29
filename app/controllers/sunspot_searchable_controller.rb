@@ -1,4 +1,5 @@
 class SunspotSearchableController < ApplicationController
+	require 'pagination_helpers'
 
 	def new
 		super 
@@ -22,7 +23,7 @@ class SunspotSearchableController < ApplicationController
 	    # ETDs only authors/collaborators/admins can see
 	    author_avail = ['Withheld', 'Mixed']
 	    @results_info = nil
-	      @per_page = isInt(params[:per_page]) ? params[:per_page] : @per_page = 10
+	    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
 
 	    begin
 	      # query parameter needed here to expose DSL and allow use of instance
@@ -125,14 +126,6 @@ class SunspotSearchableController < ApplicationController
 			else
 				raise "Please Check Your Dates"
 			end
-		end
-	end
-
-	def isInt(strToMatch)
-		if strToMatch =~ /^\d+$/
-			return true
-		else
-			return false
 		end
 	end
 

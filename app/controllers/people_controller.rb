@@ -1,15 +1,12 @@
 class PeopleController < ApplicationController
+  require 'pagination_helpers'
   respond_to :html, :json, :js
 
   # GET /people
   # GET /people.xml
   def index
     # Make sure parameter exists and is an integer
-    if params[:per_page] =~ /^\d+$/
-      @per_page = params[:per_page]
-    else
-      @per_page = 10
-    end
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
     @people = Person.paginate(page: params[:page], per_page: @per_page)
 
     respond_to do |format|
