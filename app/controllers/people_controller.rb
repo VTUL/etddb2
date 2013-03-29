@@ -27,14 +27,22 @@ class PeopleController < ApplicationController
       @per_page = 10
     end
     @person = Person.find(params[:id])
-    # Previous query
-    #@my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))
-    # New query to take advantage of pagination
     @my_etds = Etd.paginate(page: params[:page_my_etds], per_page: @per_page, include: [:people_roles],
                             conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
     @committee_etds = Etd.paginate(page: params[:page_committee], per_page: @per_page, include: [:people_roles],
                             conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Collaborators')})
-    @reviewable_etds = Etd.where(status: "Submitted").paginate(:page => params[:page_reviews], per_page: @per_page)
+    @my_reviewable_etds = Etd.where(status: "Submitted",
+                                    id: PeopleRole.where(role_id: Role.where(group: "Graduate School"), 
+                                    person_id: current_person.id).pluck(:etd_id).compact).paginate(:page => params[:page_my_reviews], per_page: @per_page)
+    @reviewable_etds = nil
+    Etd.where(status: "Submitted").scoping do
+      claimed = PeopleRole.where(role_id: Role.where(group: "Graduate School")).pluck(:etd_id).compact
+      if !claimed.empty?
+        @reviewable_etds = Etd.where("id not in (?)", claimed).paginate(:page => params[:page_reviews], per_page: @per_page)
+      else
+        @reviewable_etds = Etd.paginate(:page => params[:page_reviews], per_page: @per_page)
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

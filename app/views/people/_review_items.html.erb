@@ -1,20 +1,53 @@
-<%= stylesheet_link_tag 'paginate' %>
-<h3>Review Items</h3>
-<%= will_paginate @reviewable_etds, :param_name=>'page_reviews' %>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Authors</th>
-  </tr>
 
-<% @reviewable_etds.each do |etd| %>
-  <tr>
-    <td><%= link_to(etd.title, etd_path(etd)) %></td>
-    <td><%= Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC').map { |p| p.name } .join(', ') %></td>
-    <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
-    <td><%= button_to 'Approve', approve_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
-    <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
-  </tr>
+<%= stylesheet_link_tag 'paginate' %>
+<% unless @my_reviewable_etds.empty? %>
+  <h3>My Claimed Review Items</h3>
+  <%= will_paginate @my_reviewable_etds, :param_name=>'page_my_reviews' %>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Authors</th>
+    </tr>
+
+  <% @my_reviewable_etds.each do |etd| %>
+    <tr>
+      <td><%= link_to(etd.title, etd_path(etd)) %></td>
+      <td><%= Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC').map { |p| p.name } .join(', ') %></td>
+      <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
+      <td><%= button_to 'Approve', approve_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+      <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>
+
+<% unless @reviewable_etds.empty? %>
+  <h3>Unclaimed Review Items</h3>
+  <%= will_paginate @reviewable_etds, :param_name=>'page_reviews' %>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Authors</th>
+    </tr>
+
+  <% @reviewable_etds.each do |etd| %>
+    <tr>
+      <td><%= link_to(etd.title, etd_path(etd)) %></td>
+      <td><%= Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC').map { |p| p.name } .join(', ') %></td>
+      <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
+      <td>
+        <%= form_for PeopleRole.new() do |pr| %>
+          <%= pr.hidden_field(:etd_id, {value: etd.id}) %>
+          <%= pr.hidden_field(:person_id, {value: current_person.id}) %>
+          <%= pr.hidden_field(:role_id, {value: current_person.people_roles.where(role_id: Role.where(group: "Graduate School")).last.role_id}) %>
+          <%= hidden_field_tag(:return_to_profile, "true") %>
+          <%= pr.submit("Claim") %>
+        <% end %>
+      </td>
+      <td><%= button_to 'Approve', approve_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+      <td><%= button_to 'Unsubmit', unsubmit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
 <br />
