@@ -1,13 +1,15 @@
-<h1>Listing provenances</h1>
+<h1>Provenances</h1>
+<%= link_to('Create New Provenance', new_provenance_path) if @person_is_admin %>
+<br />
 <table>
   <% @provenances.each do |prov| %>
     <tr>
       <td><%= prov.person.name %> <%= prov.action %> <%= prov.model_type %> <%= prov.model_id %> at <%= prov.created_at.strftime("%H:%M:%S on %b %d %Y") %></td>
       <td><%= link_to 'Show', prov %></td>
-      <td><%= link_to 'Edit', edit_provenance_path(prov) %></td>
-      <td><%= button_to 'Destroy', destroy_provenance_path(prov), data: {confirm: 'Are you sure?'} %></td>
+      <% if @person_is_admin %>
+        <td><%= link_to 'Edit', edit_provenance_path(prov) %></td>
+        <td><%= button_to 'Destroy', destroy_provenance_path(prov), data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
-<br />
-<%= link_to 'New provenance', new_provenance_path %>
