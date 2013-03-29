@@ -2,7 +2,12 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.xml
   def index
-    @departments = Department.all
+    if params[:per_page] =~ /^\d+$/
+      @per_page = params[:per_page]
+    else
+      @per_page = 10
+    end
+    @departments = Department.paginate(page: params[:page], per_page: @per_page).order('name ASC')
 
     respond_to do |format|
       format.html # index.html.erb

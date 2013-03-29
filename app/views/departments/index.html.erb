@@ -1,6 +1,14 @@
-<h1>Listing departments</h1>
-
-<table>
+<%= stylesheet_link_tag 'paginate' %>
+<h1 style="float:left;">Listing departments</h1>
+<div id="page_pref" class ="top_bar" style="margin-top:28px">
+  <%= form_tag departments_path, :method => 'get' do %>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
+  <% end %>
+</div>
+<%= will_paginate @departments %>
+</br>
+<table style="clear: both;">
   <tr>
     <th>Name</th>
     <th>Retired?</th>
