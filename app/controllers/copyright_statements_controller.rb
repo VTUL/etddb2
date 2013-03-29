@@ -2,7 +2,12 @@ class CopyrightStatementsController < ApplicationController
   # GET /copyright_statements
   # GET /copyright_statements.xml
   def index
-    @copyright_statements = CopyrightStatement.all
+    if params[:per_page] =~ /^\d+$/
+      @per_page = params[:per_page]
+    else
+      @per_page = 10
+    end
+    @copyright_statements = CopyrightStatement.paginate(:page => params[:page], per_page: @per_page)
 
     respond_to do |format|
       format.html # index.html.erb
