@@ -2,7 +2,8 @@ class PrivacyStatementsController < ApplicationController
   # GET /privacy_statements
   # GET /privacy_statements.json
   def index
-    @privacy_statements = PrivacyStatement.all
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
+    @privacy_statements = PrivacyStatement.paginate(:page => params[:page], per_page: @per_page)
 
     respond_to do |format|
       format.html # index.html.erb

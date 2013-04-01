@@ -1,6 +1,13 @@
-<h1>Listing privacy_statements</h1>
-
-<table>
+<%= stylesheet_link_tag 'paginate' %>
+<h1 style="float:left;">Listing privacy_statements</h1>
+<div id="page_pref" class ="top_bar" style="margin-top:28px">
+  <%= form_tag privacy_statements_path, :method => 'get' do %>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
+  <% end %>
+</div>
+<%= will_paginate @privacy_statements %>
+<table style="clear: both;">
   <tr>
     <th>Statement</th>
     <th>Retired?</th>
