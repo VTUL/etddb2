@@ -1,15 +1,11 @@
 module Pagination_Helper
 
-	def isInt(strToMatch)
-		if strToMatch =~ /^\d+$/
-			return true
-		else
-			return false
-		end
-	end
-
 	def sanitize_per_page(per_page)
-		return isInt(per_page) ? per_page : per_page = 10
+		if per_page =~ /^\d+$/
+			return per_page
+		else
+			return 10
+		end
 	end
 
 	module_function :sanitize_per_page

@@ -1,10 +1,13 @@
 class PeopleRolesController < ApplicationController
+  require 'pagination_helpers'
   respond_to :html, :json, :js
 
   # GET /people_roles
   # GET /people_roles.xml
   def index
-    @people_roles = PeopleRole.all
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
+    @people_roles = PeopleRole.paginate(page: params[:page], per_page: @per_page, 
+                                        include: [:person, :role], order: ['people.last_name ASC', 'roles.name ASC'])
 
     respond_to do |format|
       format.html # index.html.erb

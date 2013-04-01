@@ -1,7 +1,14 @@
-
-<h1>Listing people_roles</h1>
-
-<table>
+<%= stylesheet_link_tag 'paginate' %>
+<h1 style="float:left;">Listing people_roles</h1>
+<div id="page_pref" class ="top_bar" style="margin-top:28px">
+  <%= form_tag people_roles_path, :method => 'get' do %>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
+  <% end %>
+</div>
+<%= will_paginate @people_roles %>
+</br>
+<table style="clear: both;">
   <tr>
     <th>Person</th>
     <th>Role</th>
