@@ -1,8 +1,10 @@
 class ReasonsController < ApplicationController
+  require 'pagination_helpers'
   # GET /reasons
   # GET /reasons.json
   def index
-    @reasons = Reason.where("name NOT IN (?)", Availability.pluck(:name))
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
+    @reasons = Reason.paginate(:page => params[:page], per_page: @per_page, conditions: ["name NOT IN (?)", Availability.pluck(:name)])
 
     respond_to do |format|
       format.html # index.html.erb
