@@ -2,11 +2,17 @@ class ProvenancesController < ApplicationController
   # GET /provenances
   # GET /provenances.xml
   def index
-    @provenances = []
-    if params[:type].nil?
-      @provenances = Provenance.find(:all, order: 'id DESC')
+    @person_is_admin = current_person.in_role_group?('Administration')
+    @provenances = nil
+    if @person_is_admin
+      @provenances = Provenance.where('id not null')
     else
-      @provenances = Provenance.where(model_type: params[:type]).order('id DESC')
+      @provenances = Provenance.where(person_id: current_person.id)
+    end
+    if params[:type].nil?
+      @provenances = @provenances.order('id DESC')
+    else
+      @provenances = @provenances.where(model_type: params[:type]).order('id DESC')
     end
 
     respond_to do |format|
