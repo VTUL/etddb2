@@ -1,8 +1,10 @@
 class RolesController < ApplicationController
+  require 'pagination_helpers'
   # GET /roles
   # GET /roles.xml
   def index
-    @roles = Role.all
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
+    @roles = Role.paginate(:page => params[:page], per_page: @per_page)
 
     respond_to do |format|
       format.html # index.html.erb
