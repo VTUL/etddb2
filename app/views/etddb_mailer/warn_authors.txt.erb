@@ -1,1 +1,10 @@
-<% # TODO %>
+The ETD (or a piece of it's content) submitted by <%= @authors.pluck(:Last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
+will soon be released for open access.
+
+You may request an extension of the current availability by logging into ETDDB, emailing <%= Settings.grad_school_email %>,
+calling, or mailing the Graduate School at
+<%= Settings.grad_school_address %>
+
+Sincerely,
+
+<%= Settings.grad_school_sig %>

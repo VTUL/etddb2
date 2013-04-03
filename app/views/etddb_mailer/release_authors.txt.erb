@@ -1,1 +1,6 @@
-<% # TODO %>
+The ETD (or a piece of it's content) submitted by <%= @authors.pluck(:Last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
+has been released.
+
+Sincerely,
+
+<%= Settings.grad_school_sig %>
