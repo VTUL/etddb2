@@ -1,5 +1,6 @@
 class SunspotSearchableController < ApplicationController
 	require 'pagination_helpers'
+	require 'Department_Info'
 
 	def new
 		super 
@@ -132,5 +133,28 @@ class SunspotSearchableController < ApplicationController
 	def isUserAdmin
 		return (!current_person.nil? and !current_person.roles.where(group: 'Administration').empty?)
 	end
+
+	def loadDepartments(id_array)
+		hash = Hash.new
+		id_array.each { |facet|
+			id = facet.value
+			count = facet.count
+			if Department.exists?(:id => id)
+				dept_name = Department.find(id).name
+				letter = dept_name.slice(0).upcase
+				selected = (!params[:doc_info].blank? and !params[:doc_info][:department].blank? and params[:doc_info][:department].include?(id.to_s))
+				info = Department_Info.new(id, dept_name, count, selected)
+				if hash.has_key?(letter)
+					hash[letter].push(info)
+				else
+					arr = Array.new
+					arr.push(info)
+					hash.store(letter, arr)
+				end
+			end
+		}
+		return hash.sort_by{ |letter, ids|  letter}
+	end
 	helper_method :isUserAdmin
+	helper_method :loadDepartments
 end

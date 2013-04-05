@@ -37,32 +37,43 @@
     <% end %>
   </ul>
 
-    <h3 class="facet_title">Department</h3>
+  <h3 class="facet_title">Department</h3>
 
     <% if params[:doc_info].blank? or params[:doc_info][:department].blank? or params[:doc_info][:department].eql?([''])  %>
       <ul style="display:none" >
     <% else %>
       <ul>
     <% end %>
-    <% for row in search.facet(:department).rows.sort{|x, y| Department.find_by_id(x.value).name <=> Department.find_by_id(y.value).name} %>
-      <% if !Department.exists?(:id => row.value) %>
-        <% next %>
-      <% end %>
+    <%# Loop through letter groups with departments listed under them %>
+    <% for group in loadDepartments(@search.facet(:department).rows) %>
       <li>
-        <% if params[:doc_info].blank? %>
-          <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => {:department => [row.value]}}) %> (<%= row.count %>)
-        <% elsif params[:doc_info][:department].blank? %>
-          <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => [row.value]})}) %> (<%= row.count %>)
+        <h4 class="facet_title"><%= "#{group[0]}" %></h4>
+        <% if group[1].reject{|dept| dept.selected.eql?(false)}.length > 0 %> 
+          <ul>
         <% else %>
-          <%# Something exists in params[:doc_info][:department] %>
-          <% temp_params = Array.new(params[:doc_info][:department]) %>
-          <% if params[:doc_info][:department].include?(row.value.to_s) %>
-            <% temp_params.delete(row.value.to_s) %>
-            <%=content_tag(:strong, Department.find(row.value).name, {:class=>"multi_selectable", :id=>row.value, :name=>"doc_info[department][]"})%> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params})}) %>)
-          <% else %>
-            <%= link_to Department.find(row.value).name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params.push(row.value)})}) %> (<%= row.count %>)
-          <% end %>
+          <ul style="display:none" >
         <% end %>
+        
+        <%# Loop through departments for each letter %>
+        <% for dept in group[1].sort{|x, y| x.name <=> y.name} %>
+          <li class="indented_list_elem">
+            <% if params[:doc_info].blank? %>
+              <%= link_to dept.name, params.except(:page).merge({:doc_info => {:department => [dept.id]}}) %> (<%= dept.count %>)
+            <% elsif params[:doc_info][:department].blank? %>
+              <%= link_to dept.name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => [dept.id]})}) %> (<%= dept.count %>)
+            <% else %>
+              <%# Something exists in params[:doc_info][:department] %>
+              <% temp_params = Array.new(params[:doc_info][:department]) %>
+              <% if dept.selected %>
+                <% temp_params.delete(dept.id.to_s) %>
+                <%=content_tag(:strong, dept.name, {:class=>"multi_selectable", :id=>dept.id, :name=>"doc_info[department][]"})%> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params})}) %>)
+              <% else %>
+                <%= link_to dept.name, params.except(:page).merge({:doc_info => params[:doc_info].merge({:department => temp_params.push(dept.id)})}) %> (<%= dept.count %>)
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
       </li>
     <% end %>
   </ul>
