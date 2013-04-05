@@ -1,15 +1,26 @@
-<h1>Provenances</h1>
-<%= link_to('Create New Provenance', new_provenance_path) if @person_is_admin %>
-<br />
-<table>
-  <% @provenances.each do |prov| %>
-    <tr>
-      <td><%= prov.person.name %> <%= prov.action %> <%= prov.model_type %> <%= prov.model_id %> at <%= prov.created_at.strftime("%H:%M:%S on %b %d %Y") %></td>
-      <td><%= link_to 'Show', prov %></td>
-      <% if @person_is_admin %>
-        <td><%= link_to 'Edit', edit_provenance_path(prov) %></td>
-        <td><%= button_to 'Destroy', destroy_provenance_path(prov), data: {confirm: 'Are you sure?'} %></td>
-      <% end %>
-    </tr>
+<%= stylesheet_link_tag 'paginate' %>
+<h1 style="float:left;">Provenances</h1>
+<div id="page_pref" class ="top_bar" style="margin-top:28px">
+  <%= form_tag provenances_path, :method => 'get' do %>
+    Results Per Page: <%= select_tag :per_page, options_for_select(%w[10 20 50 100], @per_page),
+         :onchange => "this.form.submit();" %>
   <% end %>
-</table>
+</div>
+<%= will_paginate @provenances %>
+<br/>
+<div style="clear: both;">
+  <%= link_to('Create New Provenance', new_provenance_path) if @person_is_admin %>
+  <br />
+  <table>
+    <% @provenances.each do |prov| %>
+      <tr>
+        <td><%= prov.person.name %> <%= prov.action %> <%= prov.model_type %> <%= prov.model_id %> at <%= prov.created_at.strftime("%H:%M:%S on %b %d %Y") %></td>
+        <td><%= link_to 'Show', prov %></td>
+        <% if @person_is_admin %>
+          <td><%= link_to 'Edit', edit_provenance_path(prov) %></td>
+          <td><%= button_to 'Destroy', destroy_provenance_path(prov), data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

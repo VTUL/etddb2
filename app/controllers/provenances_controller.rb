@@ -1,7 +1,10 @@
 class ProvenancesController < ApplicationController
+  require 'pagination_helpers'
   # GET /provenances
   # GET /provenances.xml
   def index
+    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
+
     @person_is_admin = current_person.in_role_group?('Administration')
     @provenances = nil
     if @person_is_admin
@@ -10,9 +13,9 @@ class ProvenancesController < ApplicationController
       @provenances = Provenance.where(person_id: current_person.id)
     end
     if params[:type].nil?
-      @provenances = @provenances.order('id DESC')
+      @provenances = @provenances.paginate(:page => params[:page], per_page: @per_page, order: ['id DESC'])
     else
-      @provenances = @provenances.where(model_type: params[:type]).order('id DESC')
+      @provenances = @provenances.where(model_type: params[:type]).paginate(:page => params[:page], per_page: @per_page, order: ['id DESC'])
     end
 
     respond_to do |format|
