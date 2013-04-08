@@ -51,3 +51,7 @@
 #yield {
 	width: 81%;
 }
+
+#facets ul:last-child {
+    border: none;
+}
