@@ -76,3 +76,8 @@
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+#no_record_found_message {
+    text-align: center;
+    margin-top: 105px;
+}

@@ -7,9 +7,7 @@
 <% elsif @result == "exception" %>
   <h3 class="clear_left"> Could Not Complete Request - <%= @exception_message %> </h3>
 <% elsif @result == "none_found" %>
-  <br>
-  <br>
-  <h3 class="clear_left"> No Records Found </h3>
+  <h3 id="no_record_found_message" class="clear_left"> No Records Found </h3>
 <% else %>
   <% if !@results_info.blank? %>
   <h5 id="total" class="clear_left"><%= @results_info %></h5>
