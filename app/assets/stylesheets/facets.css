@@ -2,7 +2,7 @@
 	display: inline;
     float: left;
     margin-right: 0.6993%;
-    margin-top: 68px;
+    margin-top: 105px;
     padding: 5px;
     overflow: hidden;
     width: 13em;
@@ -49,7 +49,7 @@
 }
 
 #yield {
-	width: 81%;
+	width: 80%;
 }
 
 #facets ul:last-child {
