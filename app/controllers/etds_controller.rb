@@ -99,8 +99,8 @@ class EtdsController < ApplicationController
   # POST /etds.xml
   def create
     @etd = Etd.new(params[:etd].except(:department_ids))
-    @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
-    @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+    @is_admin = current_person.in_role_group?("Administration")
+    @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
 
     #Add implied params.
     @etd.status = "Created"
@@ -120,7 +120,7 @@ class EtdsController < ApplicationController
       if @etd.save
         Provenance.create(person: current_person, action: "created", model: @etd)
 
-        if !(current_person.roles & Role.where(group: "Administration")).empty?
+        if @is_admin
           # Defer creating the author.
           # Don't email, or warn about the availability
           format.html { redirect_to(add_creator_to_etd_path(@etd)) }
