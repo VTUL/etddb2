@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304162345) do
+ActiveRecord::Schema.define(:version => 20130404163716) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130304162345) do
     t.boolean  "retired"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "retired_at"
   end
 
   create_table "degrees", :force => true do |t|
@@ -173,6 +174,7 @@ ActiveRecord::Schema.define(:version => 20130304162345) do
     t.boolean  "retired"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "retired_at"
   end
 
   create_table "provenances", :force => true do |t|
