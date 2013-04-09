@@ -5,6 +5,8 @@
 	<dd> <%= creators.map { |o| o.name } .join(", ") %> </dd>
 	<dt>Department</dt> 
 	<dd> <%= etd.departments.pluck(:name).join(", ") %> </dd>
+	<dt>URN</dt> 
+	<dd> <%= etd.urn %> </dd>
 </dl>
 <div class="etd_option_links">
 <%= link_to 'Edit', edit_etd_path(etd) %> | <%= link_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'}, :method => :post %>

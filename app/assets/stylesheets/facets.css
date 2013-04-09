@@ -44,7 +44,7 @@
 }
 
 .indented_list_elem {
-    margin-left: 10px;
+    margin-left: 13px;
     font-size: 1.2em;
 }
 
@@ -54,4 +54,9 @@
 
 #facets ul:last-child {
     border: none;
+}
+
+#facets li {
+    list-style-type: disc;
+    margin-left: 16px;
 }

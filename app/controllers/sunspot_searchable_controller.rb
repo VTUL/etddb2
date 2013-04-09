@@ -66,7 +66,7 @@ class SunspotSearchableController < ApplicationController
 		                with(:committee, current_person.name)
 		              end
 		            end
-		        	end
+		        end
 	          end
 	        end
 	        query.with(:author, params[:author]) if params[:author].present?
