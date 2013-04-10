@@ -129,7 +129,7 @@ for copyright in copyrights do
 end
 
 for copyright in retired_copyrights do
-  CopyrightStatement.create(statement: copyright, retired: true)
+  CopyrightStatement.create(statement: copyright, retired: true, retired_at: Time.now())
 end
 
 # Add your privacy statements here.
@@ -142,7 +142,7 @@ for privacy in privacies do
 end
 
 for privacy in retired_privacies do
-  PrivacyStatement.create(statement: privacy, retired: true)
+  PrivacyStatement.create(statement: privacy, retired: true, retired_at: Time.now())
 end
 
 #! Beyond this point, you should not need to edit this file.
@@ -186,9 +186,10 @@ PeopleRole.create(person: Person.first, role: Role.where(group: "Administration"
 # These are just for ease of use in development.
 
 # Create an ETD for Super User.
-Etd.create(title: "Super Secret Stuff", abstract: "Oh man, this better not get released for ten years.", availability: Availability.where(retired: false, etd_only: false).last, copyright_statement: CopyrightStatement.first, degree: Degree.first, privacy_statement: PrivacyStatement.first,
+e = Etd.new(title: "Super Secret Stuff", abstract: "Oh man, this better not get released for ten years.", availability: Availability.where(retired: false, etd_only: false).last, copyright_statement: CopyrightStatement.first, degree: Degree.first, privacy_statement: PrivacyStatement.first,
            document_type: DocumentType.find(:first, offset: rand(DocumentType.count)), reason: Reason.where(name: 'Creative Writing').first, bound: false, urn: "etd-20120101-00000001", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000001/", status: "Created")
-Etd.first.departments = [Department.first, Department.last]
+e.departments = [Department.first, Department.last]
+e.save!
 PeopleRole.create(person: Person.first, etd: Etd.first, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.first, action: "created", model: Etd.first)
 Content.create(etd: Etd.first, availability: Availability.where(retired: false, etd_only: false).last, reason: Reason.where(name: 'Creative Writing').first, content: File.new('app/models/degree.rb'), bound: false, page_count: 0)
@@ -215,9 +216,10 @@ Provenance.create(person: Person.last, action: "approved", model: Etd.first)
 #Resque.enqueue_at(Etd.first.release_date.to_time, Release, Etd.first.class.name, Etd.first.id)
 
 # SU gets another ETD. This one is just submitted.
-Etd.create(title: "My Other ETD", abstract: "This is another ETD.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.find(:first, offset: rand(DocumentType.count)),
+e = Etd.new(title: "My Other ETD", abstract: "This is another ETD.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.last, document_type: DocumentType.find(:first, offset: rand(DocumentType.count)),
            privacy_statement: PrivacyStatement.last, reason: Reason.where(name: Availability.where(retired: false).last.name).first, bound: false, urn: "etd-20120101-00000003", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000003/", status: "Created")
-Etd.last.departments << Department.find(:first, offset: rand(Department.count))
+e.departments << Department.find(:first, offset: rand(Department.count))
+e.save!
 PeopleRole.create(person: Person.where(pid: 'suser').first, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.where(pid: 'suser').first, action: "created", model: Etd.last)
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Collaborators").last)
@@ -226,9 +228,10 @@ Etd.last.update_attributes(status: 'Submitted', submission_date: Time.now)
 
 # Add nine more ETDs and People, so their index pages will paginate.
 Person.create(first_name: "John", last_name: "Muir", pid: "trailhead", email: "trailhead@vt.edu", password: "123456", password_confirmation: "123456", show_email: false)
-Etd.create(title: "The Origin of Yosemite's Valleys", abstract: "It's glaciers!", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "The Origin of Yosemite's Valleys", abstract: "It's glaciers!", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.first, bound: false, urn: "etd-20120101-00000004", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000004/", status: "Created")
-Etd.last.departments << Department.first
+e.departments << Department.first
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 Content.create(etd: Etd.last, availability: Availability.first, reason: Reason.first, content: File.new('Gemfile'), bound: false)
@@ -241,67 +244,76 @@ Etd.last.update_attributes(status: 'Submitted', submission_date: Time.now())
 Provenance.create(person: Person.last, action: "submitted", model: Etd.last)
 
 Person.create(first_name: "Stephen", last_name: "Mahler", pid: "npschief", email: "npschief@vt.edu", password: "123456", password_confirmation: "123456", show_email: false)
-Etd.create(title: "A National Park Service", abstract: "Why we need one.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "A National Park Service", abstract: "Why we need one.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.first, bound: false, urn: "etd-20120101-00000005", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000005/", status: "Created")
-Etd.last.departments << Department.first
+e.departments << Department.first
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "John", last_name: "Rockefeller", pid: "junior", email: "junior@vt.edu", password: "123456", password_confirmation: "123456", display_name: 'John T. Rockefeller, Jr.')
-Etd.create(title: "How To Buy Land", abstract: "Two Words: Shell Company.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "How To Buy Land", abstract: "Two Words: Shell Company.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.first, bound: false, urn: "etd-20120101-00000006", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000006/", status: "Created")
-Etd.last.departments = [Department.where(name: 'Business Administration').first, Department.first]
+e.departments = [Department.where(name: 'Business Administration').first, Department.first]
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "James", last_name: "Cameron", pid: "mycanyon", email: "mycanyon@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "NPS Failures", abstract: "Oh, I guess there aren't any...", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "NPS Failures", abstract: "Oh, I guess there aren't any...", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.where(name: Availability.where(retired: false).last.name).first, bound: false, urn: "etd-20120101-00000007", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000007/", status: "Created")
-Etd.last.departments << Department.where(name: 'Numerology').first
+e.departments << Department.where(name: 'Numerology').first
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "Teddy", last_name: "Roosevelt", pid: "roughrider", email: "roughrider@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "Nature", abstract: "I wanna shoot it.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "Nature", abstract: "I wanna shoot it.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.where(name: Availability.where(retired: false).last.name).first, bound: false, urn: "etd-20120101-00000008", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000008/", status: "Created")
-Etd.last.departments << Department.where(name: 'Near Environments').first
+e.departments << Department.where(name: 'Near Environments').first
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "George", last_name: "Washington", pid: "gwash", email: "gwash@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "Let Me Retire", abstract: "Please, people, let me be.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "Let Me Retire", abstract: "Please, people, let me be.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.first, bound: false, urn: "etd-20120101-00000010", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000010/", status: "Created")
-Etd.last.departments << Department.where(name: 'Management')
+e.departments << Department.where(name: 'Management')
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "Thomas", last_name: "Jefferson", pid: "tj_prez", email: "tj_prez@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "Manifest Destiny", abstract: "It's happening.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "Manifest Destiny", abstract: "It's happening.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.where(name: Availability.where(retired: false).last.name).first, bound: false, urn: "etd-20120101-00000009", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000009/", status: "Created")
-Etd.last.departments << Department.where(name: 'Public Administration/Public Affairs').first
+e.departments << Department.where(name: 'Public Administration/Public Affairs').first
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "Zeke", last_name: "Zed", pid: "double_zed", email: "double_zed@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "zLast", abstract: "This should sort last.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.last,
+e = Etd.new(title: "zLast", abstract: "This should sort last.", availability: Availability.where(retired: false).last, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.last,
            privacy_statement: PrivacyStatement.last, reason: Reason.where(name: Availability.where(retired: false).last.name).first, bound: false, urn: "etd-20120101-00000002", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000002/", status: "Created")
-Etd.last.departments << Department.find(:first, offset: rand(Department.count))
+e.departments << Department.find(:first, offset: rand(Department.count))
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 Person.create(first_name: "Alex", last_name: "Aaronson", pid: "double_aye", email: "double_aye@vt.edu", password: "123456", password_confirmation: "123456")
-Etd.create(title: "zLast", abstract: "This should sort before Zeke Zed's zLast ETD.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
+e = Etd.new(title: "zLast", abstract: "This should sort before Zeke Zed's zLast ETD.", availability: Availability.first, copyright_statement: CopyrightStatement.last, degree: Degree.first, document_type: DocumentType.first,
            privacy_statement: PrivacyStatement.last, reason: Reason.first, bound: false, urn: "etd-20120101-00000011", url: "http://scholar.lib.vt.edu/theses/etd-20120101-00000011/", status: "Created")
-Etd.last.departments << Department.find(:first, offset: rand(Department.count))
+e.departments << Department.find(:first, offset: rand(Department.count))
+e.save!
 PeopleRole.create(person: Person.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.last, action: "created", model: Etd.last)
 
 # Create a BTD with a LegacyPerson. It is released.
 LegacyPerson.create(first_name: "Martin", last_name: "Luther")
 Provenance.create(person: Person.first, action: "created", model: LegacyPerson.last)
-Etd.create(title: "Ye Olde Paper BTD", abstract: "A study in effective posting techniques for books, without making them unreadable.", availability: Availability.last, copyright_statement: CopyrightStatement.first, degree: Degree.first, document_type: DocumentType.where(name: "Master's Thesis").first,
+e = Etd.new(title: "Ye Olde Paper BTD", abstract: "A study in effective posting techniques for books, without making them unreadable.", availability: Availability.last, copyright_statement: CopyrightStatement.first, degree: Degree.first, document_type: DocumentType.where(name: "Master's Thesis").first,
            privacy_statement: PrivacyStatement.first, reason: Reason.where(name: Availability.last.name).first, bound: true, urn: "etd-19120101-00000012", url: "http://scholar.lib.vt.edu/theses/etd-19120101-00000012/", status: "Created")
-Etd.last.departments << Department.where(name: "Philosophy").first
+e.departments << Department.where(name: "Philosophy").first
+e.save!
 Provenance.create(person: Person.first, action: "created", model: Etd.last)
 PeopleRole.create(person: LegacyPerson.last, etd: Etd.last, role: Role.where(group: "Creators").first)
 Provenance.create(person: Person.first, action: "made #{LegacyPerson.last.name} a #{Role.where(group: "Creators").first.name}. See ", model: PeopleRole.last)

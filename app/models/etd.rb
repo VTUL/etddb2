@@ -3,6 +3,13 @@
 # Digital Library and Archive at Virginia Tech.
 # Last updated: Mar-15-2011
 #########################################################
+class DepartmentValidator < ActiveModel::Validator
+  def validate(record)
+    if record.departments.empty?
+      record.errors[:base] << "Must have at least one department."
+    end
+  end
+end
 
 class Etd < ActiveRecord::Base
   belongs_to :copyright_statement, inverse_of: :etds
@@ -27,6 +34,7 @@ class Etd < ActiveRecord::Base
   validates :bound, inclusion: {in: [true, false], message: "must be boolean"}
   validates_presence_of :availability_id, :copyright_statement_id, :degree_id, :document_type_id, :privacy_statement_id, :reason_id
   validates_presence_of :abstract, :title, :urn, :url
+  validates_with DepartmentValidator
   validates_uniqueness_of :urn
 
   ACCESS = AccessConstraint.new()

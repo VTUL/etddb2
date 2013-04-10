@@ -42,6 +42,10 @@ class PrivacyStatementsController < ApplicationController
   # POST /privacy_statements.json
   def create
     @privacy_statement = PrivacyStatement.new(params[:privacy_statement])
+    @privacy_statement.retired = @privacy_statement.retired == 1 ? true : false
+    unless @privacy_statement.retired
+      @privacy_statement.retired_at = nil
+    end
 
     respond_to do |format|
       if @privacy_statement.save
@@ -60,6 +64,10 @@ class PrivacyStatementsController < ApplicationController
   # PUT /privacy_statements/1.json
   def update
     @privacy_statement = PrivacyStatement.find(params[:id])
+    @privacy_statement.retired = @privacy_statement.retired == 1 ? true : false
+    unless @privacy_statement.retired
+      @privacy_statement.retired_at = nil
+    end
 
     respond_to do |format|
       if @privacy_statement.update_attributes(params[:privacy_statement])
