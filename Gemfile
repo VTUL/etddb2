@@ -25,10 +25,9 @@ gem 'execjs'
 gem 'libv8'
 gem 'therubyracer'
 
-#gem 'ruby-ldap', '0.9.10'
-#gem 'ruby-ldap', '0.9.11'
 # For test,
 group :development do
+  gem 'ruby-ldap', '~> 0.9.12'
   #gem 'rspec-rails','2.5.0'
   gem "rails_code_qa", "~> 0.5.1"
   gem 'thin'
