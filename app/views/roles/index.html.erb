@@ -4,12 +4,14 @@
   <tr>
     <th>Name</th>
     <th>Group</th>
+    <th>Priority</th>
   </tr>
 
 <% @roles.each do |role| %>
   <tr>
-    <td><%=h role.name %></td>
-    <td><%=h role.group %></td>
+    <td><%= role.name %></td>
+    <td><%= role.group %></td>
+    <td><%= role.priority %></td>
     <td><%= link_to 'Show', role %></td>
     <td><%= link_to 'Edit', edit_role_path(role) %></td>
     <td><%= button_to 'Destroy', destroy_role_path(role), data: {confirm: 'Are you sure?'} %></td>

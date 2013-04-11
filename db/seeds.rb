@@ -157,7 +157,7 @@ roles = [
 ]
 
 for role in roles do
-  Role.create(name: role[0], group: role[1])
+  Role.create!(name: role[0], group: role[1], priority: role[2])
 end
 
 digital_objects = ["Etd", "Content", "Role", "Department", "Degree",

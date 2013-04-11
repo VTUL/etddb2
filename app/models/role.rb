@@ -15,7 +15,9 @@ class Role < ActiveRecord::Base
   has_many :conversations, as: :model
 
   GROUPS = ["Creators", "Collaborators", "Graduate School", "Administration"]
-  validates_presence_of :name, :group
+
+  validates_presence_of :name, :group, :priority
   validates :group, inclusion: {in: GROUPS, message: "must be one of our groups."}
+  validates :priority, numericality: { only_interger: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
 
 end
