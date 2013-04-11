@@ -71,8 +71,8 @@ class EtdsController < ApplicationController
   def new
     respond_to do |format|
       @etd = Etd.new
-      @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
-      @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+      @is_admin = current_person.in_role_group?("Administration")
+      @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
 
       format.html # new.html.erb
       format.xml  { render(xml: @etd) }
@@ -83,8 +83,8 @@ class EtdsController < ApplicationController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
-      @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
-      @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+      @is_admin = current_person.in_role_group?("Administration")
+      @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
 
       # BUG: This works, but is only a hack, we should use Cancan.
       if current_person.etds.include?(@etd) || @admin
@@ -398,7 +398,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       if @etd.status == "Submitted"
-        if !current_person.roles.where(group: 'Graduate School').empty?
+        if current_person.in_role_group?("Graduate School")
           @etd.status = "Created"
           @etd.save
 
