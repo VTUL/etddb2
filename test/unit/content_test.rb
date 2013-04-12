@@ -14,7 +14,6 @@ class ContentTest < ActiveSupport::TestCase
     content = Content.new
     assert content.invalid?
     assert content.errors[:bound].any?
-    assert content.errors[:release_manager_id].any?
   end
 
   test "invalid with non-boolean bound attribute." do
