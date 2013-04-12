@@ -19,6 +19,10 @@
     <%= f.label :group %><br />
     <%= f.select(:group, options_for_select(Role::GROUPS)) %>
   </div>
+  <div class="field">
+    <%= f.label :priority %><br />
+    <%= f.number_field :priority %>
+  </div> 
 
   <div class="actions">
     <%= f.submit 'Submit' %>

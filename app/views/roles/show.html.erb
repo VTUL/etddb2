@@ -1,10 +1,14 @@
 <p>
   <b>Name:</b>
-  <%=h @role.name %>
+  <%= @role.name %>
 </p>
 <p>
   <b>Group:</b>
-  <%=h @role.group %>
+  <%= @role.group %>
+</p>
+<p>
+  <b>Priority:</b>
+  <%= @role.priority %>
 </p>
 
 <%= link_to 'Edit', edit_role_path(@role) %> |

@@ -7,10 +7,10 @@
   <% if !@committee_etds.empty? %>
     <%= render 'committee_items' %>
   <% end %>
-  <% if !@person.roles.where(group: 'Graduate School').empty? %>
+  <% if @person.in_role_group?("Graduate School") %>
     <%= render 'review_items' %>
   <% end %>
-  <% if !@person.roles.where(group: 'Administration').empty? %>
+  <% if @person.in_role_group?("Administration") %>
     <%= render 'admin_items' %>
   <% end %>
 <% end %>

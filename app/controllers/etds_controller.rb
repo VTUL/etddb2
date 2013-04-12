@@ -41,8 +41,8 @@ class EtdsController < SunspotSearchableController
   def new
     respond_to do |format|
       @etd = Etd.new
-      @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
-      @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+      @is_admin = current_person.in_role_group?("Administration")
+      @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
 
       format.html # new.html.erb
       format.xml  { render(xml: @etd) }
@@ -53,8 +53,8 @@ class EtdsController < SunspotSearchableController
   def edit
     respond_to do |format|
       @etd = Etd.find(params[:id])
-      @admin = !(current_person.roles & Role.where(group: "Administration")).empty?
-      @availabilities = @admin ? Availability.all : Availability.where(retired: false)
+      @is_admin = current_person.in_role_group?("Administration")
+      @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
 
       # BUG: This works, but is only a hack, we should use Cancan.
       if current_person.etds.include?(@etd) || @admin
@@ -368,7 +368,7 @@ class EtdsController < SunspotSearchableController
 
     respond_to do |format|
       if @etd.status == "Submitted"
-        if !current_person.roles.where(group: 'Graduate School').empty?
+        if current_person.in_role_group?("Graduate School")
           @etd.status = "Created"
           @etd.save
 
@@ -392,7 +392,7 @@ class EtdsController < SunspotSearchableController
       if @etd.status == 'Submitted'
         # TODO: Limit access.
         @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
-        @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.name] }
+        @collabs = @etd.people_roles.where(role_id: Role.where(group: "Collaborators")).sort_by { |pr| [pr.role.priority] }
         format.html
       else
         format.html { redirect_to(etd_path(@etd), notice: "This ETD doesn't currently have a review board.") }
