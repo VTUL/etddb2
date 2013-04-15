@@ -2,7 +2,7 @@
   <div id="facets" class="clear_left">
     <h3 class="facet_title">Author</h3>
     <ul <% if params[:author].blank? %>
-          style="display:none"
+          class = "minified"
         <% end %>> 
       <% for row in search.facet(:author).rows %>
         <li>
@@ -17,7 +17,7 @@
     <h3 class="facet_title">Document Type</h3>
 
     <% if params[:doc_info].blank? or params[:doc_info][:document_type_id].blank? %>
-      <ul style="display:none" >
+      <ul class = "minified" >
     <% else %>
       <ul>
     <% end %>
@@ -40,7 +40,7 @@
   <h3 class="facet_title">Department</h3>
 
     <% if params[:doc_info].blank? or params[:doc_info][:department].blank? or params[:doc_info][:department].eql?([''])  %>
-      <ul style="display:none" >
+      <ul class = "minified" >
     <% else %>
       <ul>
     <% end %>
