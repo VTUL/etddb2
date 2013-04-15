@@ -3,7 +3,12 @@
     <% else %>
       <ul>
     <% end %>
-    <% for row in search.facet(facet_type).rows.sort{|x, y| y.value <=> x.value} %>
+    <% if sort.eql?('ASC') %> 
+      <% block = Proc.new {|x, y| x.value <=> y.value} %>
+    <% else %>
+      <% block = Proc.new {|x, y| y.value <=> x.value} %>
+    <% end %>
+    <% for row in search.facet(facet_type).rows.sort{|x, y| block.call(x, y)} %>
       <li>
         <% if params[:doc_info].blank? %>
           <%= link_to row.value, params.except(:page).merge({:doc_info => {facet_type => row.value}}) %> (<%= row.count %>)

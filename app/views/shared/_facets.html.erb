@@ -80,21 +80,21 @@
   </ul>
 
   <h3 class="facet_title">Defense Year</h3>
-  <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:defense_year %>
+  <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:defense_year, :sort => 'DESC' %>
 
   <h3 class="facet_title">Release Year</h3>
-  <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:release_year %>
+  <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:release_year, :sort => 'DESC' %>
 
   <% if isUserAdmin %>
     <h3 class="facet_title">Creation Year</h3>
-    <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:creation_year %>
+    <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:creation_year, :sort => 'DESC' %>
 
     <h3 class="facet_title">Approval Year</h3>
-    <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:approval_year %>
+    <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:approval_year, :sort => 'DESC' %>
   <% end %>
 
   <h3 class="facet_title">File Type</h3>
-  <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:file_type %>
+  <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:file_type, :sort => 'ASC' %>
 
   </div>
 <% end %>
