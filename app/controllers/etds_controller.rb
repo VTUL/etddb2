@@ -112,7 +112,7 @@ class EtdsController < ApplicationController
     @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
-    @etd.bound = params[:etd][:bound] == 1 ? true : false
+    @etd.bound = params[:etd][:bound] == '1' ? true : false
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
@@ -160,6 +160,9 @@ class EtdsController < ApplicationController
     d = [params[:etd][:department_ids][:id_1]]
     d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
+
+    # Make sure bound is really boolean
+    @etd.bound = params[:etd][:bound] == '1' ? true : false
 
     # Update the reason if the availability changes.
     if @etd.availability_id != Integer(params[:etd][:availability_id])
