@@ -112,7 +112,7 @@ class SunspotSearchableController < ApplicationController
 			arr = dateString.split("-")
 
 			arr.each do |i|
-				if !isInt(i)
+				if !Pagination_Helper.isInt(i)
 					raise "Please Check Your Dates"
 				end
 			end
