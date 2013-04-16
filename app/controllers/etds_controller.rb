@@ -73,6 +73,8 @@ class EtdsController < ApplicationController
       @etd = Etd.new
       @is_admin = current_person.in_role_group?("Administration")
       @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+      @copyright = CopyrightStatement.where(retired: false).last
+      @privacy = PrivacyStatement.where(retired: false).last
 
       format.html # new.html.erb
       format.xml  { render(xml: @etd) }
@@ -85,6 +87,8 @@ class EtdsController < ApplicationController
       @etd = Etd.find(params[:id])
       @is_admin = current_person.in_role_group?("Administration")
       @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+      @copyright = CopyrightStatement.where(retired: false).last
+      @privacy = PrivacyStatement.where(retired: false).last
 
       # BUG: This works, but is only a hack, we should use Cancan.
       if current_person.etds.include?(@etd) || @admin
@@ -101,6 +105,8 @@ class EtdsController < ApplicationController
     @etd = Etd.new(params[:etd].except(:department_ids))
     @is_admin = current_person.in_role_group?("Administration")
     @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+    @copyright = CopyrightStatement.where(retired: false).last
+    @privacy = PrivacyStatement.where(retired: false).last
 
     #Add implied params.
     @etd.status = "Created"
@@ -147,6 +153,8 @@ class EtdsController < ApplicationController
   # PUT /etds/1.xml
   def update
     @etd = Etd.find(params[:id])
+    @copyright = CopyrightStatement.where(retired: false).last
+    @privacy = PrivacyStatement.where(retired: false).last
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
