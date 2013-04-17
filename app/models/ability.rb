@@ -28,7 +28,7 @@ class Ability
     #end
     # Give the user all their permissions.
     for role in user.roles
-      for permission in role.permission
+      for permission in role.permissions
         can permission.user_action.name.to_sym, permission.digital_object.name.to_sym
       end
     end

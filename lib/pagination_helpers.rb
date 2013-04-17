@@ -8,7 +8,13 @@ module Pagination_Helper
 		end
 	end
 
-	def isInt(strToMatch) 
+	def isInt(strToMatch)
+		if strToMatch.nil?
+			return false
+		end
+		if !strToMatch.is_a? String 
+			raise 'Must be a string'
+		end
 		if strToMatch =~ /^\d+$/
 			return true
 		else
