@@ -43,6 +43,8 @@ class EtdsController < SunspotSearchableController
       @etd = Etd.new
       @is_admin = current_person.in_role_group?("Administration")
       @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+      @copyright = CopyrightStatement.where(retired: false).last
+      @privacy = PrivacyStatement.where(retired: false).last
 
       format.html # new.html.erb
       format.xml  { render(xml: @etd) }
@@ -55,6 +57,8 @@ class EtdsController < SunspotSearchableController
       @etd = Etd.find(params[:id])
       @is_admin = current_person.in_role_group?("Administration")
       @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+      @copyright = CopyrightStatement.where(retired: false).last
+      @privacy = PrivacyStatement.where(retired: false).last
 
       # BUG: This works, but is only a hack, we should use Cancan.
       if current_person.etds.include?(@etd) || @admin
@@ -71,12 +75,14 @@ class EtdsController < SunspotSearchableController
     @etd = Etd.new(params[:etd].except(:department_ids))
     @is_admin = current_person.in_role_group?("Administration")
     @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+    @copyright = CopyrightStatement.where(retired: false).last
+    @privacy = PrivacyStatement.where(retired: false).last
 
     #Add implied params.
     @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
-    @etd.bound = params[:etd][:bound] == 1 ? true : false
+    @etd.bound = params[:etd][:bound] == '1' ? true : false
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
@@ -117,11 +123,16 @@ class EtdsController < SunspotSearchableController
   # PUT /etds/1.xml
   def update
     @etd = Etd.find(params[:id])
+    @copyright = CopyrightStatement.where(retired: false).last
+    @privacy = PrivacyStatement.where(retired: false).last
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
     d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
+
+    # Make sure bound is really boolean
+    @etd.bound = params[:etd][:bound] == '1' ? true : false
 
     # Update the reason if the availability changes.
     if @etd.availability_id != Integer(params[:etd][:availability_id])

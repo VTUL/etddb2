@@ -43,7 +43,7 @@ class CopyrightStatementsController < ApplicationController
   # POST /copyright_statements.xml
   def create
     @copyright_statement = CopyrightStatement.new(params[:copyright_statement])
-    @copyright_statement.retired = @copyright_statement.retired == 1 ? true : false
+    @copyright_statement.retired = params[:copyright_statement][:retired] == '1' ? true : false
     unless @copyright_statement.retired
       @copyright_statement.retired_at = nil
     end
@@ -65,7 +65,7 @@ class CopyrightStatementsController < ApplicationController
   # PUT /copyright_statements/1.xml
   def update
     @copyright_statement = CopyrightStatement.find(params[:id])
-    @copyright_statement.retired = @copyright_statement.retired == 1 ? true : false
+    @copyright_statement.retired = params[:copyright_statement][:retired] == '1' ? true : false
     unless @copyright_statement.retired
       @copyright_statement.retired_at = nil
     end

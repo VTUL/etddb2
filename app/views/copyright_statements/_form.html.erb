@@ -12,24 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :statement %><br />
-    <%= f.text_field :statement %>
+    <%= f.label :statement, "Copyright statement:" %><br />
+    <%= f.text_area :statement %>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :retired %><br />
-    <%= f.check_box :retired %>
-  </div>
-  <div class="field">
-    <%= f.label :created_at %><br />
+    <%= f.label :created_at, "Created on: "%><br />
     <%= f.date_select :created_at %>
   </div>
+  <br />
+  <br />
   <div class="field">
-    <%= f.label :retired_at %><br />
+    <%= f.check_box :retired %>
+    <%= f.label :retired %>
+  </div>
+  <div class="field">
+    <%= f.label :retired_at, "Retired on:" %><br />
     <%= f.date_select :retired_at %>
   </div>
-
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-
