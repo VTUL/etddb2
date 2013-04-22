@@ -34,7 +34,6 @@
         <td>Immediately</td>
       <% end %>
     <% end %>
-    <td><%= reason.warn_before_approval ? 'Yes' : 'No' %></td>
     <td><%= link_to 'Show', reason %></td>
     <td><%= link_to 'Edit', edit_reason_path(reason) %></td>
     <td><%= link_to 'Destroy', reason, method: :delete, data: { confirm: 'Are you sure?' } %></td>
