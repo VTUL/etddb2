@@ -1,4 +1,6 @@
 class ProvenancesController < ApplicationController
+  before_filter :admin_only
+
   # GET /provenances
   # GET /provenances.xml
   def index

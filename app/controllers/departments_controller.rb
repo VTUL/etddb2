@@ -1,4 +1,6 @@
 class DepartmentsController < ApplicationController
+  before_filter :admin_only
+
   # GET /departments
   # GET /departments.xml
   def index

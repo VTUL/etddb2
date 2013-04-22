@@ -1,4 +1,6 @@
 class ReasonsController < ApplicationController
+  before_filter :admin_only
+
   # GET /reasons
   # GET /reasons.json
   def index

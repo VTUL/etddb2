@@ -1,4 +1,6 @@
 class CopyrightStatementsController < ApplicationController
+  before_filter :admin_only
+
   # GET /copyright_statements
   # GET /copyright_statements.xml
   def index

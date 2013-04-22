@@ -1,4 +1,6 @@
 class AvailabilitiesController < ApplicationController
+  before_filter :admin_only
+
   # GET /availabilities
   # GET /availabilities.json
   def index

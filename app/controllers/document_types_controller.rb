@@ -1,4 +1,6 @@
 class DocumentTypesController < ApplicationController
+  before_filter :admin_only
+
   # GET /document_types
   # GET /document_types.json
   def index

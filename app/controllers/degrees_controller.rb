@@ -1,4 +1,6 @@
 class DegreesController < ApplicationController
+  before_filter :admin_only
+
   # GET /degrees
   # GET /degrees.json
   def index
