@@ -10,12 +10,17 @@
     <% end %>
     <% for row in search.facet(facet_type).rows.sort{|x, y| block.call(x, y)} %>
       <li>
-        <% if params[:doc_info].blank? %>
-          <%= link_to row.value, params.except(:page).merge({:doc_info => {facet_type => row.value}}) %> (<%= row.count %>)
-        <% elsif params[:doc_info][facet_type].blank? %>
-          <%= link_to row.value, params.except(:page).merge({:doc_info => params[:doc_info].merge({facet_type => row.value})}) %> (<%= row.count %>)
+        <% if facet_type.eql?(:file_type) %>
+          <% display_text = row.value.sub('application/', '') %>
         <% else %>
-          <%= content_tag(:strong, row.value, {:class=>"faceted", :id=>"doc_info_#{facet_type.to_s}", :name=>"doc_info[#{facet_type.to_s}]"}) %> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({facet_type => nil})}) %>)
+          <% display_text = row.value %>
+        <% end %>
+        <% if params[:doc_info].blank? %>
+          <%= link_to display_text, params.except(:page).merge({:doc_info => {facet_type => row.value}}) %> (<%= row.count %>)
+        <% elsif params[:doc_info][facet_type].blank? %>
+          <%= link_to display_text, params.except(:page).merge({:doc_info => params[:doc_info].merge({facet_type => row.value})}) %> (<%= row.count %>)
+        <% else %>
+          <%= content_tag(:strong, display_text, {:class=>"faceted", :id=>"doc_info_#{facet_type.to_s}", :name=>"doc_info[#{facet_type.to_s}]"}) %> (<%= link_to "remove", params.except(:page).merge({:doc_info => params[:doc_info].merge({facet_type => nil})}) %>)
         <% end %>
       </li>
     <% end %>
