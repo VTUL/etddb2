@@ -9,6 +9,7 @@
 
 #options_list {
 	margin-top: 13px;
+	margin-bottom: 10px;
 }
 
 #sort_by_div {
@@ -131,4 +132,23 @@ dd {
 .etd_fulltext em {
 	background: #F7FE2E;
 	font-style: normal;
+}
+
+#clear_button {
+	margin-right: 1em;
+	margin-top: 6em;
+}
+
+#options_table_div {
+	float: left;
+	width: 39%;
+}
+
+#button_div {
+	float: right;
+}
+
+#options_bottom_section {
+	clear: both;
+	padding-top: 1em;
 }

@@ -1,5 +1,12 @@
 var containingName = "doc_info";
 
+function clear_selections() {
+	$checks = $(".option_checks").filter(":checked");
+	$checks.each(function() {
+		$(this).attr("checked", false);
+	});
+}
+
 function submit_form() {
 	// Remove all inputs from page pref dropdown
 	$('.pref_removable').remove();

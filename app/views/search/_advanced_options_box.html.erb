@@ -2,6 +2,7 @@
 	  <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search' %>
 	  <%= submit_tag "Search", name: nil %>
     <div id = "options_list" >
+      <div id="options_table_div">
       <table class="options_table">
         <% @checkbox_options.each_with_index do |(key, display_name), index| %>
           <% if !isUserAdmin and @checkbox_admin_only.include?(key) %> 
@@ -11,14 +12,17 @@
             <td><%= label_tag display_name %>:</td>
             <td>
               <% if params[:search_using].nil? or (!params[:search_using][key].blank?) %>
-                <%= check_box_tag "search_using[#{key}]", 1, true %>
+                <%= check_box_tag "search_using[#{key}]", 1, true, :class => "option_checks" %>
               <% else %>
-                <%= check_box_tag "search_using[#{key}]", 1 %>
+                <%= check_box_tag "search_using[#{key}]", 1, false, :class => "option_checks" %>
               <% end %>
             </td>
           </tr>
         <% end %>
     </table>
+  </div>
+  <div id="button_div"><%= button_tag "Clear Selections", :id => "clear_button", :onclick => "clear_selections();return false;" %></div>
+  <div id="options_bottom_section">
   <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, :class => "dropdowns")%>
   </br>
   <%=label_tag "Department: " %><%=collection_select('doc_info[department]', '', Department.where(retired: false).order('name ASC'), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, :class => "dropdowns")%>
@@ -68,3 +72,4 @@
 	  <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
 	<br>
+</div>
