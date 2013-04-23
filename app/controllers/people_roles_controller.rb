@@ -1,6 +1,6 @@
 class PeopleRolesController < ApplicationController
   respond_to :html, :json, :js
-  before_filter :admin_only
+  before_filter :admin_only, except: [:create]
 
   # GET /people_roles
   # GET /people_roles.xml
