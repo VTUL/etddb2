@@ -8,9 +8,6 @@ class Role < ActiveRecord::Base
   has_many :people_roles, inverse_of: :role
   has_many :people, through: :people_roles
   has_many :etds, through: :people_roles
-  has_many :permissions, inverse_of: :role
-  has_many :user_actions, through: :permission
-  has_many :digital_objects, through: :permission
   has_many :provenances, as: :model
   has_many :conversations, as: :model
 

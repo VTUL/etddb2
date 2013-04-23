@@ -86,14 +86,6 @@ NewVtEtdUpgrd::Application.routes.draw do
   post '/people_roles/:id/delete', :to => 'people_roles#destroy', :as => :destroy_people_role
   resources :people_roles, :except => :destroy
 
-  post '/user_actions/:id/delete', :to => 'user_actions#destroy', :as => :destroy_user_action
-  resources :user_actions, :except => :destroy
-  post '/digital_objects/:id/delete', :to => 'digital_objects#destroy', :as => :destroy_digital_object
-  resources :digital_objects, :except => :destroy
-  get '/permissions', :to => 'permissions#index', :as => :permissions
-  get '/permissions/edit', :to => 'permissions#edit', :as => :edit_permissions
-  post '/permissions/edit', :to => 'permissions#update', :as => :update_permissions
-
   get '/conversations/:id/show', :to => 'conversations#show', :as => :conversation
   get '/conversations/:id/read', :to => 'conversations#read', :as => :read_conversation
   get '/conversations/:id/unread', :to => 'conversations#unread', :as => :unread_conversation

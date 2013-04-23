@@ -160,24 +160,6 @@ for role in roles do
   Role.create!(name: role[0], group: role[1], priority: role[2])
 end
 
-digital_objects = ["Etd", "Content", "Role", "Department", "Degree",
-  "Availability", "CopyrightStatement", "PrivacyStatement", "Provenance"]
-for object in digital_objects do
-  DigitalObject.create!(name: object)
-end
-
-user_actions = ["Create", "Read", "Update", "Delete"]
-for action in user_actions do
-  UserAction.create!(name: action)
-end
-
-# Give Admin all permissions.
-for action in UserAction.select(:id)
-  for object in DigitalObject.select(:id)
-    Permission.create!(user_action: action, digital_object: object, role: Role.where(group: 'Administration').first)
-  end
-end
-
 # Make the super user an admin.
 PeopleRole.create!(person: Person.first, role: Role.where(group: "Administration").first)
 
