@@ -12,6 +12,18 @@ class ApplicationController < ActionController::Base
     session[:previous_urls].pop if session[:previous_urls].count > 2
   end
 
+  # Some controllers are only available to admins.
+  def admin_only
+    unless current_person.in_role_group?("Administration")
+      flash[:error] = "Sorry, that page is for administrators only."
+
+      if session[:previous_urls].last.end_with?('/people/sign_in', '/people/sign_up', '/login')
+        redirect_to person_path(current_person.id)
+      end
+      redirect_to session[:previous_urls].last
+    end
+  end
+
   # Overwriting the login redirect.
   def after_sign_in_path_for(resource_or_scope)
     redirect = session[:previous_urls].last

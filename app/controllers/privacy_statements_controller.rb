@@ -1,4 +1,6 @@
 class PrivacyStatementsController < ApplicationController
+  before_filter :admin_only
+
   # GET /privacy_statements
   # GET /privacy_statements.json
   def index

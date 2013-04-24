@@ -1,5 +1,8 @@
 class RolesController < ApplicationController
+
   require 'pagination_helpers'
+  before_filter :admin_only
+
   # GET /roles
   # GET /roles.xml
   def index

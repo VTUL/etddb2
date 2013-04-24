@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404163716) do
+ActiveRecord::Schema.define(:version => 20130422204549) do
 
   create_table "availabilities", :force => true do |t|
     t.string   "name"
@@ -78,12 +78,6 @@ ActiveRecord::Schema.define(:version => 20130404163716) do
   create_table "departments_etds", :id => false, :force => true do |t|
     t.integer "etd_id"
     t.integer "department_id"
-  end
-
-  create_table "digital_objects", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "document_types", :force => true do |t|
@@ -161,14 +155,6 @@ ActiveRecord::Schema.define(:version => 20130404163716) do
   add_index "people_roles", ["person_id", "role_id", "etd_id"], :name => "index_people_roles_on_person_id_and_role_id_and_etd_id", :unique => true
   add_index "people_roles", ["role_id"], :name => "index_people_roles_on_role_id"
 
-  create_table "permissions", :force => true do |t|
-    t.integer  "user_action_id"
-    t.integer  "role_id"
-    t.integer  "digital_object_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
   create_table "privacy_statements", :force => true do |t|
     t.string   "statement"
     t.boolean  "retired"
@@ -211,12 +197,6 @@ ActiveRecord::Schema.define(:version => 20130404163716) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "priority"
-  end
-
-  create_table "user_actions", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
 end

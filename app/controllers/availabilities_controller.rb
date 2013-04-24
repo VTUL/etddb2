@@ -1,5 +1,8 @@
 class AvailabilitiesController < ApplicationController
+
   require 'pagination_helpers'
+  before_filter :admin_only
+
   # GET /availabilities
   # GET /availabilities.json
   def index

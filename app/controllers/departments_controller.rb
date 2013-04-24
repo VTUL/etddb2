@@ -1,5 +1,8 @@
 class DepartmentsController < ApplicationController
+
   require 'pagination_helpers'
+  before_filter :admin_only
+
   # GET /departments
   # GET /departments.xml
   def index

@@ -1,6 +1,7 @@
 class PeopleRolesController < ApplicationController
   require 'pagination_helpers'
   respond_to :html, :json, :js
+  before_filter :admin_only, except: [:create]
 
   # GET /people_roles
   # GET /people_roles.xml

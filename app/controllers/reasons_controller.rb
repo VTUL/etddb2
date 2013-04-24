@@ -1,5 +1,8 @@
 class ReasonsController < ApplicationController
+
   require 'pagination_helpers'
+  before_filter :admin_only
+
   # GET /reasons
   # GET /reasons.json
   def index

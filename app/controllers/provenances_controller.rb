@@ -1,5 +1,8 @@
 class ProvenancesController < ApplicationController
+
   require 'pagination_helpers'
+  before_filter :admin_only
+
   # GET /provenances
   # GET /provenances.xml
   def index

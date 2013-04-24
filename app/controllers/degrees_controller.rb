@@ -1,5 +1,8 @@
 class DegreesController < ApplicationController
+
   require 'pagination_helpers'
+  before_filter :admin_only
+
   # GET /degrees
   # GET /degrees.json
   def index
