@@ -2,40 +2,32 @@ class SunspotSearchableController < ApplicationController
 	require 'pagination_helpers'
 	require 'Department_Info'
 
-	def new
-		super 
-	end
-
-	def update
-		super
-	end
-
 	def index
         @etds = []
-	    # Keys here must match model attributes
+	    # Keys here must match model attributes by name
 	    @checkbox_options = {"title" => "Title", "keywords" => "Keywords", 
 	               "abstract" => "Abstract", "author" => "Author", 
 	               "urn" => "URN", "committee" => "Committee Members",
 	               "etd_attachment" => "Attachments", 
 	               "author_email" => "Email", "pid" => "PID"}
 	    @checkbox_admin_only = ["author_email", "pid"]
+	    @results_info = nil
+	    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
 	    # ETDs that non-admins can see
 	    all_patron_avail = ['Unrestricted', 'Restricted']
 	    # ETDs only authors/collaborators/admins can see
 	    author_avail = ['Withheld', 'Mixed']
-	    @results_info = nil
-	    @per_page = Pagination_Helper.sanitize_per_page(params[:per_page])
 
 	    begin
 	      # query parameter needed here to expose DSL and allow use of instance
-	      # variable @per_page
+	      # variables
 	      @search = Etd.search do |query|
 	        if params[:search_using].blank?
 	          # User has no checkboxes set to delimit search, 
 	          # default search fields in this case goes here
 	          fields = "keywords"
 	        else
-	          # Grab selected keys (for all options, see @checkbox_options), 
+	          # Grab selected keys (for all possible options, see @checkbox_options), 
 	          # use as fields to search through
 	          fields = params[:search_using].keys
 	        end
@@ -107,6 +99,7 @@ class SunspotSearchableController < ApplicationController
 	    end
  	end
 
+ 	# Given a string that represents a date, parse it and return an approriate Date object 
 	def stripDate(dateString)
 		if !dateString.nil?
 			arr = dateString.split("-")
@@ -130,10 +123,14 @@ class SunspotSearchableController < ApplicationController
 		end
 	end
 
+	# Verify if the current user is an admin
 	def isUserAdmin
 		return (!current_person.nil? and !current_person.roles.where(group: 'Administration').empty?)
 	end
 
+	# Given an array of facets containing Department IDs populate a Hash containing 
+	# each letter of the alphabet and for each letter an array of deparments that start
+	# with that letter
 	def loadDepartments(id_array)
 		hash = Hash.new
 		id_array.each { |facet|

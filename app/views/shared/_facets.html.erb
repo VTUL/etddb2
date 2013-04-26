@@ -44,8 +44,8 @@
     <% else %>
       <ul>
     <% end %>
-    <%# Loop through letter groups with departments listed under them %>
-    <%# loadDepartments found in sunspot_searchable controller %>
+    <%# Loop through letter groups with departments listed under them. %>
+    <%# loadDepartments found in sunspot_searchable controller. %>
     <% for group in loadDepartments(@search.facet(:department).rows) %>
       <li>
         <h4 class="facet_title"><%= "#{group[0]}" %></h4>

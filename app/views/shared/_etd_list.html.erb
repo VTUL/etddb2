@@ -1,9 +1,10 @@
 <!-- Render the facets -->
 <%= render '/shared/facets', :search => @search %>
 
+<!-- Render the ETD results list -->
 <div id="results">
 <% if @result == "no_search" %>
-  <!-- Render nothing below search params if they haven't searched anything -->
+  <%# Render nothing below search params if they haven't searched anything %>
 <% elsif @result == "exception" %>
   <h3 id="error_message" class="clear_left"> Could Not Complete Request - <%= @exception_message %> </h3>
 <% elsif @result == "none_found" %>
@@ -22,14 +23,14 @@
     <% i = 1 %>
     <% @search.each_hit_with_result do |hit, etd| %>
       <% if i == @result.size %>
-        <!-- Avoid border on bottom -->
+        <%# Avoid border on bottom %>
         <div class="list_entry_last">
       <% else %>
         <div class="list_entry">
       <% end %>
         <%= render '/shared/display_etd', :etd => etd, :iteration => i %>
-        <!-- For now block mixed results from showing text blurbs for anyone but admins, zip files are indexed as one
-             and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. -->
+        <%# For now block mixed results from showing text blurbs for anyone but admins, zip files are indexed as one
+             and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. %>
         <% if !hit.highlight(:etd_attachment).nil? and 
               ((etd.availability.name.eql?('Unrestricted') or etd.availability.name.eql?('Restricted')) or 
               ((etd.people.include?(current_person) and etd.availability.name.eql?('Withheld')) or isUserAdmin)) 

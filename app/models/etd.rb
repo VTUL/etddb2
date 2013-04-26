@@ -39,6 +39,7 @@ class Etd < ActiveRecord::Base
 
   ACCESS = AccessConstraint.new()
 
+  # Block telling Sunspot how to index this ETD
   searchable do
     text :title, :boost => 5
     text :keywords
@@ -69,18 +70,24 @@ class Etd < ActiveRecord::Base
     boolean :bound
   end
 
+  # Get array of all author names associated with this ETD
+  private
   def author
     creators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id)).order('last_name ASC')
     creators.map { |o| o.name }
   end
 
+  # Get array of all author emails associated with this ETD
+  private
   def author_email
     authors = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id))
     authors.map { |o| o.email }
   end
 
+  # Get an array of all PIDS from both the authors and collaborators
+  private
   def pid
     authors = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Creators'))
         .pluck(:person_id))
@@ -91,21 +98,30 @@ class Etd < ActiveRecord::Base
     return auth.concat(comm)
   end
 
+  # Get the vailability status of this ETD
+  private
   def availability_status
     self.availability.name
   end
 
+  # Get an array of the names of all committee members of this ETD
+  private
   def committee
     collaborators = Person.where(id: self.people_roles.where(role_id: Role.where(group: 'Collaborators'))
         .pluck(:person_id)).order('last_name ASC')
     collaborators.map { |o| o.name }
   end
 
+  # Get an array of all department ID's for this ETD
+  private
   def department
     dept = Department.where(id: self.departments)
     dept.map { |e| e.id }
   end
 
+  # For each document associated with this ETD parse it with Tika, the text
+  # of each document will be read in through STDOUT
+  private
   def etd_attachment
     cont = self.contents
     exception_identifier = 'EXCEPTION_IN_SCRIPT'
@@ -122,23 +138,31 @@ class Etd < ActiveRecord::Base
     }
   end
 
+  # Get an array of all file types of associated documents
+  private
   def file_type
     cont = self.contents
     cont.map { |e| e.content_content_type }
   end
 
+  # Get the defense year as a string
+  private
   def defense_year
     if !defense_date.nil?
       defense_date.strftime("%Y")
     end
   end
 
+  # Get the release year as a string
+  private
   def release_year
     if !release_date.nil?
       release_date.strftime("%Y")
     end
   end
 
+  # Get the creation year as a string
+  private
   def creation_year
     # Theoretically should never be null, sanity check
     if !created_at.nil?
@@ -146,17 +170,11 @@ class Etd < ActiveRecord::Base
     end
   end
 
+  # Get the approval year as a string
+  private
   def approval_year
     if !approval_date.nil?
       approval_date.strftime("%Y")
-    end
-  end
-
-  def self.search_quick(search)
-    if search 
-      where('etds.title LIKE ?', "%#{search}%")
-    else
-      scoped
     end
   end
 

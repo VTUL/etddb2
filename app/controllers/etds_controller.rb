@@ -1,7 +1,9 @@
 class EtdsController < SunspotSearchableController
   skip_before_filter :authenticate_person!, only: [:show, :index]
 
-  # Index is controlled by SunspotSearchableController
+  ######################################################
+  # Index is controlled by SunspotSearchableController #
+  ######################################################
 
   # GET /etds/1
   # GET /etds/1.xml
