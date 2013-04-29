@@ -4,7 +4,7 @@ class AccessConstraint
     @ipv6 = []
 
     File.open("#{Rails.root}/lib/RemoteWhitelist.ips") do |f|
-      ips = f.lines.to_a.map { |l| l.strip } .delete_if { |ip| ip.empty? or ip.start_with?('#') }
+      ips = f.lines.to_a.map { |l| l.strip } .delete_if { |ip| ip.empty? || ip.start_with?('#') }
       ips.each do |ip|
         ip = NetAddr::CIDR.create(ip)
         if ip.version == 4
@@ -29,15 +29,15 @@ class AccessConstraint
       withheld_access = Rails.env == 'development' and ip.matches?('::1')
     end
 
-    result = availability.access_restriction == 'None'
-    result |= availability.access_restriction == 'Restricted' and (restricted_access or withheld_access)
-    result |= availability.access_restriction == 'Withheld' and withheld_access
+    result = availability.access_restriction == 'Unrestricted'
+    result |= availability.access_restriction == 'Restricted' && (restricted_access || withheld_access)
+    result |= availability.access_restriction == 'Withheld' && withheld_access
 
     # This block would not be necessary except for the mixed case.
     if !file_availability.nil? and result
-      result = file_availability.access_restriction == 'None'
-      result |= file_availability.access_restriction == 'Restricted' and (restricted_access or withheld_access)
-      result |= file_availability.access_restriction == 'Withheld' and withheld_access
+      result = file_availability.access_restriction == 'Unrestricted'
+      result |= file_availability.access_restriction == 'Restricted' && (restricted_access || withheld_access)
+      result |= file_availability.access_restriction == 'Withheld' && withheld_access
     end
 
     return result

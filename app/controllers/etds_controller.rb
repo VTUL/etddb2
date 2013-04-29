@@ -40,7 +40,7 @@ class EtdsController < ApplicationController
 
     respond_to do |format|
       # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
-      if Etd::ACCESS.matches?(request.ip, @etd.availability) or @etd.people.include?(current_person)
+      if Etd::ACCESS.matches?(request.ip, @etd.availability) || @etd.people.include?(current_person)
         @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
         @emails = @creators.where(show_email: true).pluck(:email).join(', ')
         @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
@@ -48,7 +48,7 @@ class EtdsController < ApplicationController
         format.xml  { render(xml: @etd) }
       else
         # TODO: Perhaps log IPs that are hitting these pages?
-        redirect_to(etds_path, notice: 'Access to that ETD is restricted.')
+        format.html { redirect_to(etds_path, notice: 'Access to that ETD is restricted.') }
       end
     end
   end
