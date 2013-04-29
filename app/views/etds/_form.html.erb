@@ -34,14 +34,14 @@
     <%= f.label(:department_ids, "Departments") %><br />
     <%= f.fields_for :department_ids do |df| %>
       <% if @is_admin  %>
-        <%= df.collection_select(:id_1, Department.all, :id, :name, {selected: @etd.department_ids[0],
+        <%= df.collection_select(:id_1, Department.find(:all, order: "name ASC"), :id, :name, {selected: @etd.department_ids[0],
                                  prompt: "Please pick your primary department."}) %><br />
-        <%= df.collection_select(:id_2, Department.all, :id, :name, {selected: @etd.department_ids[1],
+        <%= df.collection_select(:id_2, Department.find(:all, order: "name ASC"), :id, :name, {selected: @etd.department_ids[1],
                                  prompt: "I do not have a secondary department."}) %>
       <% else %>
-        <%= df.collection_select(:id_1, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[0],
+        <%= df.collection_select(:id_1, Department.where(retired: false).order("name ASC"), :id, :name, {selected: @etd.department_ids[0],
                                  prompt: "Please pick your primary department."}) %><br />
-        <%= df.collection_select(:id_2, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[1],
+        <%= df.collection_select(:id_2, Department.where(retired: false).order("name ASC"), :id, :name, {selected: @etd.department_ids[1],
                                  prompt: "I do not have a secondary department."}) %>
       <% end %>
     <% end %>
