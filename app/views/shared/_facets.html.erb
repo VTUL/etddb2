@@ -1,14 +1,20 @@
 <% if !search.nil? %>
   <div id="facets" class="clear_left">
+
+    <%# Facets that need unique modifications to the params hash %>
+
     <h3 class="facet_title">Author</h3>
     <ul <% if params[:author].blank? %>
+          <%# List to be hidden by javascript on page load %>
           class = "minified"
         <% end %>> 
       <% for row in search.facet(:author).rows %>
         <li>
           <% if params[:author].blank? %>
+            <%# Reload page with the given author ID %>
             <%= link_to row.value, params.merge({:author => row.value}) %> (<%= row.count %>)
           <% else %>
+            <%# Remove this author ID from the params and resubmit %>
             <strong><%= row.value %></strong> (<%= link_to "remove", params.merge({:author => nil}) %>)
           <% end %>
         </li>
@@ -17,6 +23,7 @@
     <h3 class="facet_title">Document Type</h3>
 
     <% if params[:doc_info].blank? or params[:doc_info][:document_type_id].blank? %>
+      <%# List to be hidden by javascript %>
       <ul class = "minified" >
     <% else %>
       <ul>
@@ -46,17 +53,17 @@
     <% end %>
     <%# Loop through letter groups with departments listed under them. %>
     <%# loadDepartments found in sunspot_searchable controller. %>
-    <% for group in loadDepartments(@search.facet(:department).rows) %>
+    <% for letter_group in loadDepartments(@search.facet(:department).rows) %>
       <li>
-        <h4 class="facet_title"><%= "#{group[0]}" %></h4>
-        <% if group[1].reject{|dept| dept.selected.eql?(false)}.length > 0 %> 
+        <h4 class="facet_title"><%= "#{letter_group[0]}" %></h4>
+        <% if letter_group[1].reject{|dept| dept.selected.eql?(false)}.length > 0 %> 
           <ul>
         <% else %>
           <ul class = "minified" >
         <% end %>
         
         <%# Loop through departments for each letter %>
-        <% for dept in group[1].sort{|x, y| x.name <=> y.name} %>
+        <% for dept in letter_group[1].sort{|x, y| x.name <=> y.name} %>
           <li class="indented_list_elem">
             <% if params[:doc_info].blank? %>
               <%= link_to dept.name, params.except(:page).merge({:doc_info => {:department => [dept.id]}}) %> (<%= dept.count %>)
@@ -78,6 +85,8 @@
       </li>
     <% end %>
   </ul>
+
+  <%# Facets that require no unique modifications to params hash %>
 
   <h3 class="facet_title">Defense Year</h3>
   <%= render '/shared/facets_regular_display', :search=>search, :facet_type=>:defense_year, :sort => 'DESC' %>

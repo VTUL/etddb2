@@ -28,9 +28,12 @@
       <% else %>
         <div class="list_entry">
       <% end %>
+        <%# Display Etd basic info %>
         <%= render '/shared/display_etd', :etd => etd, :iteration => i %>
+
+        <%# Display any full text search hits if they exist %>
         <%# For now block mixed results from showing text blurbs for anyone but admins, zip files are indexed as one
-             and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. %>
+             document and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. %>
         <% if !hit.highlight(:etd_attachment).nil? and 
               ((etd.availability.name.eql?('Unrestricted') or etd.availability.name.eql?('Restricted')) or 
               ((etd.people.include?(current_person) and etd.availability.name.eql?('Withheld')) or isUserAdmin)) 

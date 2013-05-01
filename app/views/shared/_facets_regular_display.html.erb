@@ -3,14 +3,19 @@
     <% else %>
       <ul>
     <% end %>
+
+    <%# Set up sorting for facets %>
     <% if sort.eql?('ASC') %> 
       <% block = Proc.new {|x, y| x.value <=> y.value} %>
     <% else %>
       <% block = Proc.new {|x, y| y.value <=> x.value} %>
     <% end %>
+
+    <%# Display the facets %>
     <% for row in search.facet(facet_type).rows.sort{|x, y| block.call(x, y)} %>
       <li>
         <% if facet_type.eql?(:file_type) %>
+          <%# Remove verbose application header on content types %>
           <% display_text = row.value.sub('application/', '') %>
         <% else %>
           <% display_text = row.value %>

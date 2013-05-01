@@ -8,6 +8,7 @@ $(document).ready(function () {
         $(this).css('display', 'none');
     });
 
+    // Attach collapser actions to all facet titles  
     $('.facet_title').collapser({
         target: 'next',
         targetOnly: 'ul',
