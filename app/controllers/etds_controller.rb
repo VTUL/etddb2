@@ -119,6 +119,10 @@ class EtdsController < ApplicationController
     d << params[:etd][:department_ids][:id_2] unless params[:etd][:department_ids][:id_2].empty?
     @etd.department_ids = d
 
+    # Sanitize title and abstract
+    @etd.title = Sanitize.clean(params[:etd][:title], Sanitize::Config::BASIC)
+    @etd.abstract = Sanitize.clean(params[:etd][:abstract], Sanitize::Config::RELAXED)
+
     # Add the default reason.
     @etd.reason = @etd.availability.reason
 
@@ -170,8 +174,12 @@ class EtdsController < ApplicationController
       @etd.save
     end
 
+    # Sanitize title and abstract
+    @etd.title = Sanitize.clean(params[:etd][:title], Sanitize::Config::BASIC)
+    @etd.abstract = Sanitize.clean(params[:etd][:abstract], Sanitize::Config::RELAXED)
+
     respond_to do |format|
-      if @etd.update_attributes(params[:etd].except(:department_ids))
+      if @etd.update_attributes(params[:etd].except(:department_ids, :title, :abstract))
         Provenance.create(person: current_person, action: "updated", model: @etd)
 
         # Change the availability of all the ETD's contents, if the availability isn't mixed.

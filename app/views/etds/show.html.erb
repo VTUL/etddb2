@@ -18,7 +18,7 @@
 </p>
 <p>
   <b>Title:</b>
-  <%= @etd.title %>
+  <%= @etd.title.html_safe %>
 </p>
 <p>
   <b>Degree:</b>
@@ -54,7 +54,7 @@
   <ul>
   <% for word in @etd.keywords.to_s.split(",").uniq do %>
     <% unless word.squish.empty? %>
-      <li><%= word.squish %></li>
+      <li><%= Sanitize.clean(word.squish, Sanitize::Config::KEYWORDS).html_safe %></li>
     <% end %>
   <% end %>
   </ul>
@@ -70,7 +70,7 @@
 </p>
 <p>
   <b>Abstract:</b>
-  <%= @etd.abstract %>
+  <%= @etd.abstract.html_safe %>
 </p>
 <p>
   <b>Files:</b>

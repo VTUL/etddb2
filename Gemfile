@@ -68,6 +68,9 @@ gem 'netaddr'
 # For configuration,
 gem 'rails_config'
 
+# For sanitization
+gem 'sanitize'
+
 # For Pure ruby ldap, one day test
 #gem 'rubygem-net-ldap', '0.1.1'
 
