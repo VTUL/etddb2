@@ -6,7 +6,7 @@
   <b><%= "Author".pluralize(@creators.size) %>:</b>
   <%= @creators.pluck(:last_name).zip(@creators.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
 </p>
-<% if !@emails.nil? %>
+<% unless @emails.empty? %>
 <p>
   <b>Author's <%= "Email".pluralize(@creators.size) %>:</b>
   <%= @emails %>
@@ -49,6 +49,7 @@
   <% end %>
   <%= button_to("Add New Committee Member", add_collaborator_to_etd_path(@etd), method: :get) if @creators.include?(current_person) %>
 </p>
+<% unless @etd.keywords.empty? %>
 <p>
   <b>Keywords:</b>
   <ul>
@@ -59,6 +60,7 @@
   <% end %>
   </ul>
 </p>
+<% end %>
 <p>
   <b>Defense Date:</b>
   <%= @etd.defense_date %>
