@@ -7,7 +7,7 @@
 
 <% @committee_etds.each do |etd| %>
   <tr>
-    <td><%= link_to(etd.title, etd_path(etd)) %></td>
+    <td><%= link_to(etd.title.html_safe, etd_path(etd)) %></td>
     <td><%= Person.where(id: etd.people_roles.where(role_id: Role.where(group: "Creators")).pluck(:person_id)).order('last_name ASC').map { |p| p.name } .join(', ') %></td>
     <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
     <td>

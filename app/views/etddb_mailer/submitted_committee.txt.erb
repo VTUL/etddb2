@@ -1,7 +1,7 @@
 Good news, committee members!
 
 <%= @authors.pluck(:last_name).zip(@authors.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %> just submitted their ETD!
-You are recieving this email because you are on their committee for the ETD "<%= @etd.title %>".
+You are recieving this email because you are on their committee for the ETD "<%= Sanitize.clean(@etd.title).squish %>".
 Once you review the ETD, which is here: <%= etd_url(@etd) %>,
 you can vote on it on the reviewboard page, which is here: <%= etd_reviewboard_url(@etd) %>.
 

@@ -1,39 +1,39 @@
 <p>
   <b>ETD:</b>
-  <%=h link_to @etd.title, etd_path(@etd) %>
+  <%= link_to @etd.title.html_safe, etd_path(@etd) %>
 </p>
 <p>
   <b>Filename:</b>
-  <%=h @content.content_file_name %><br />
+  <%= @content.content_file_name %><br />
   <b><%= link_to 'Download', download_content_path(@content) %></b>
 </p>
 <p>
   <b>Type:</b>
-  <%=h @content.content_content_type %>
+  <%= @content.content_content_type %>
 </p>
 <p>
   <b>Size:</b>
-  <%=h @content.content_file_size %>
+  <%= @content.content_file_size %>
 </p>
 <p>
   <b>Availability:</b>
-  <%=h @content.availability.name %>
+  <%= @content.availability.name %>
 </p>
 <p>
   <b>Bound:</b>
-  <%=h @content.bound %>
+  <%= @content.bound %>
 </p>
 <p>
   <b>Page Count:</b>
-  <%=h @content.page_count %>
+  <%= @content.page_count %>
 </p>
 <p>
   <b>Dimensions:</b>
-  <%=h @content.dimensions %>
+  <%= @content.dimensions %>
 </p>
 <p>
   <b>Duration:</b>
-  <%=h @content.duration %>
+  <%= @content.duration %>
 </p>
 <%= link_to 'Edit', edit_content_path(@content) %> |
 <%= link_to 'Back to ETD', etd_path(@etd) %>

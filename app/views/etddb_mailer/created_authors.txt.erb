@@ -1,6 +1,6 @@
 Hello, <%= @authors.map { |a| a.first_name } .join(', ') %>!
 
-You have successfully created your ETD, "<%= @etd.title %>".
+You have successfully created your ETD, "<%= Sanitize.clean(@etd.title).squish %>".
 I can't wait for it to be submitted.
 
 Yours,

@@ -1,6 +1,6 @@
 Congratulations, <%= @authors.map { |a| a.first_name } .join(', ') %>!
 
-You have successfully submitted your ETD, "<%= @etd.title %>".
+You have successfully submitted your ETD, "<%= Sanitize.clean(@etd.title).squish %>".
 We have also emailed your committee, and the graduate school.
 
 Yours,

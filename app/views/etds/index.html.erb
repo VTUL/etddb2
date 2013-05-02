@@ -33,7 +33,7 @@
     <% creators = Person.where(id: etd.people_roles.where(role_id: @creator_roles).pluck(:person_id)).order('last_name ASC') %>
     <tr>
       <td><%= creators.map { |o| o.name } .join(", ") %></td>
-      <td><%= etd.title %></td>
+      <td><%= etd.title.html_safe %></td>
       <td><%= etd.departments.pluck(:name).join(", ") %></td>
       <td><%= link_to 'Show', etd %></td>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
