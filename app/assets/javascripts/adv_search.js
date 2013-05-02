@@ -1,10 +1,49 @@
 var containingName = "doc_info";
 
-function clear_selections() {
+$(document).ready(function () {
+	/** 
+	 *	On page load attach a listener to ensure the correct label
+	 *  is placed on the selections button
+	 */
+	$(".option_checks").bind("change", function() {
+		setSelectionButtonName();
+    });
+
+	// Perform an initial check
+    setSelectionButtonName();
+});
+
+/**
+ *	Called from advanced search form
+ */
+function set_selections() {
+	// All checked boxes for advanced search
 	$checks = $(".option_checks").filter(":checked");
-	$checks.each(function() {
-		$(this).attr("checked", false);
-	});
+	if ($checks.length < 1) {
+		// Reset all checkboxes to true
+		$(".option_checks").each(function() {
+			$(this).prop("checked", true);
+		});
+		$("#clear_button").html('Clear Selections');
+	} else {
+		// Uncheck all boxes
+		$checks.each(function() {
+			$(this).prop("checked", false);
+		});
+		$("#clear_button").html('Select All');
+	}
+}
+
+function setSelectionButtonName() {
+	// All checked boxes for advanced search
+	$checks = $(".option_checks").filter(":checked");
+    if ($checks.length < 1) {
+    	// No checkboxes checked
+    	$("#clear_button").html('Select All');
+    } else {
+    	// Selctions can be cleared
+    	$("#clear_button").html('Clear Selections');
+    }
 }
 
 function submit_form() {

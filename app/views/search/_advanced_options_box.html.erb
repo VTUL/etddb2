@@ -21,7 +21,7 @@
         <% end %>
     </table>
   </div>
-  <div id="button_div"><%= button_tag "Clear Selections", :id => "clear_button", :onclick => "clear_selections();return false;" %></div>
+  <div id="button_div"><%= button_tag "Clear Selections", :id => "clear_button", :onclick => "set_selections();return false;" %></div>
   <div id="options_bottom_section">
   <%=label_tag "Document Type: " %><%=collection_select(:doc_info, :document_type_id, DocumentType.where(retired: false), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:document_type_id], :include_blank => 'All'}, :class => "dropdowns")%>
   </br>
