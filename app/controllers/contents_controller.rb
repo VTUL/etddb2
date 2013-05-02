@@ -41,7 +41,7 @@ class ContentsController < ApplicationController
     @etd = @content.etd
 
     # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
-    if Etd::ACCESS.matches?(request.ip, @etd.availability, @content.availability) or @etd.people.include?(current_person)
+    if Etd::ACCESS.matches?(request.ip, @etd.availability, @content.availability) || @etd.people.include?(current_person)
       send_file(@content.content.path, filename: @content.content_file_name, type: @content.content_content_type)
     else
       # TODO: Perhaps log IPs that are hitting these pages?
