@@ -86,13 +86,13 @@ class EtdsController < ApplicationController
     respond_to do |format|
       @etd = Etd.find(params[:id])
       @is_admin = current_person.in_role_group?("Administration")
-      @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
-      @copyright = CopyrightStatement.where(retired: false).last
-      @privacy = PrivacyStatement.where(retired: false).last
 
-      # BUG: This works, but is only a hack, we should use Cancan.
-      if current_person.etds.include?(@etd) || @admin
-        format.html { render(action: "edit") }
+      if current_person.etds.include?(@etd) || @is_admin
+        @availabilities = @is_admin ? Availability.all : Availability.where(retired: false)
+        @copyright = CopyrightStatement.where(retired: false).last
+        @privacy = PrivacyStatement.where(retired: false).last
+
+        format.html #{ render(action: "edit") }
       else
         format.html { redirect_to(etds_path, notice: "You cannot edit that ETD.") }
       end
