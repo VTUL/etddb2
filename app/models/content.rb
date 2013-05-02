@@ -35,7 +35,7 @@ class Content < ActiveRecord::Base
 
   protected
   def change_mode
-    File.chmod(644, self.content.path)
+    File.chmod(0644, self.content.path)
   end
 end
 
