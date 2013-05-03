@@ -6,7 +6,7 @@
   <b><%= "Author".pluralize(@creators.size) %>:</b>
   <%= @creators.pluck(:last_name).zip(@creators.pluck(:first_name)).map { |o| o.join(", ") } .join("; ") %>
 </p>
-<% if !@emails.nil? %>
+<% unless @emails.empty? %>
 <p>
   <b>Author's <%= "Email".pluralize(@creators.size) %>:</b>
   <%= @emails %>
@@ -18,7 +18,7 @@
 </p>
 <p>
   <b>Title:</b>
-  <%= @etd.title %>
+  <%= @etd.title.html_safe %>
 </p>
 <p>
   <b>Degree:</b>
@@ -49,16 +49,18 @@
   <% end %>
   <%= button_to("Add New Committee Member", add_collaborator_to_etd_path(@etd), method: :get) if @creators.include?(current_person) %>
 </p>
+<% unless @etd.keywords.empty? %>
 <p>
   <b>Keywords:</b>
   <ul>
   <% for word in @etd.keywords.to_s.split(",").uniq do %>
     <% unless word.squish.empty? %>
-      <li><%= word.squish %></li>
+      <li><%= Sanitize.clean(word.squish, Sanitize::Config::KEYWORDS).html_safe %></li>
     <% end %>
   <% end %>
   </ul>
 </p>
+<% end %>
 <p>
   <b>Defense Date:</b>
   <%= @etd.defense_date %>
@@ -70,7 +72,7 @@
 </p>
 <p>
   <b>Abstract:</b>
-  <%= @etd.abstract %>
+  <%= @etd.abstract.html_safe %>
 </p>
 <p>
   <b>Files:</b>

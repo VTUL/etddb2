@@ -1,6 +1,6 @@
 The dissertation
 
-"<%= @etd.title %>"
+"<%= Sanitize.clean(@etd.title).squish %>"
 
 by
 
@@ -13,4 +13,4 @@ and is available at the URL below.
 
 Sincerely,
 
-<%= Settings.gard_school_sig %>
+<%= Settings.grad_school_sig %>

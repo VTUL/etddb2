@@ -1,4 +1,4 @@
-<h1><%= link_to(@etd.title, etd_path(@etd)) %></h1>
+<h1><%= link_to(@etd.title.html_safe, etd_path(@etd)) %></h1>
 By <%= @creators.map { |o| o.name } .join(", ") %>
 <%= form_tag(controller: "conversations", action: "confirm_new") do %>
   <% @creators.pluck(:id).each do |id| %>

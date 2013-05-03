@@ -18,7 +18,7 @@
 
 <% @my_etds.each do |etd| %>
   <tr>
-    <td><%= link_to(etd.title, etd_path(etd)) %></td>
+    <td><%= link_to(etd.title.html_safe, etd_path(etd)) %></td>
     <td><%= Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
     <td><%= etd.submission_date %></td>
     <% if current_person.id == @person.id %>

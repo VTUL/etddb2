@@ -11,51 +11,56 @@
   <% end %>
 
   <div class="field">
-    <%= f.label(:document_type_id, "Document Type") %><br />
+    <%= f.label(:document_type_id, "Document Type") %>:<br />
     <% if @is_admin %>
       <%= f.collection_select(:document_type_id, DocumentType.all, :id, :name) %>
     <% else %>
       <%= f.collection_select(:document_type_id, DocumentType.where(retired: false), :id, :name) %>
     <% end %>
-  </div>
+  </div><br />
   <div class="field">
-    <%= f.label(:title) %><br />
+    <%= f.label(:title) %>:<br />
     <%= f.text_field(:title) %>
-  </div>
+  </div><br />
   <div class="field">
-    <%= f.label(:degree_id, "Degree") %><br />
+    <%= f.label(:degree_id, "Degree") %>:<br />
     <% if @is_admin %>
       <%= f.collection_select(:degree_id, Degree.all, :id, :name) %>
     <% else %>
       <%= f.collection_select(:degree_id, Degree.where(retired: false), :id, :name) %>
     <% end %>
-  </div>
+  </div><br />
   <div class="field">
-    <%= f.label(:department_ids, "Departments") %><br />
+    <%= f.label(:department_ids, "Departments") %>:<br />
     <%= f.fields_for :department_ids do |df| %>
       <% if @is_admin  %>
-        <%= df.collection_select(:id_1, Department.all, :id, :name, {selected: @etd.department_ids[0],
+        <%= df.collection_select(:id_1, Department.find(:all, order: "name ASC"), :id, :name, {selected: @etd.department_ids[0],
                                  prompt: "Please pick your primary department."}) %><br />
-        <%= df.collection_select(:id_2, Department.all, :id, :name, {selected: @etd.department_ids[1],
+        <%= df.collection_select(:id_2, Department.find(:all, order: "name ASC"), :id, :name, {selected: @etd.department_ids[1],
                                  prompt: "I do not have a secondary department."}) %>
       <% else %>
-        <%= df.collection_select(:id_1, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[0],
+        <%= df.collection_select(:id_1, Department.where(retired: false).order("name ASC"), :id, :name, {selected: @etd.department_ids[0],
                                  prompt: "Please pick your primary department."}) %><br />
-        <%= df.collection_select(:id_2, Department.where(retired: false), :id, :name, {selected: @etd.department_ids[1],
+        <%= df.collection_select(:id_2, Department.where(retired: false).order("name ASC"), :id, :name, {selected: @etd.department_ids[1],
                                  prompt: "I do not have a secondary department."}) %>
       <% end %>
     <% end %>
-  </div>
+  </div><br />
   <div class="field">
-    <%= f.label(:keywords) %><br />
+    <%= f.label(:keywords) %>:<br />
+    <span>Your keywords should be separated by commas.</span><br />
     <%= f.text_area(:keywords, rows: 5) %>
-  </div>
+  </div><br />
   <div class="field">
-    <%= f.label(:defense_date, "Defense Date") %><br />
-    <%= f.date_select(:defense_date, {end_year: Time.now.year + 1}) %>
-  </div>
+    <%= f.label(:defense_date, "Defense Date") %>:<br />
+    <% if @is_admin %>
+     <%= f.date_select(:defense_date, {start_year: 1880}) %>
+    <% else %>
+     <%= f.date_select(:defense_date) %>
+    <% end %>
+  </div><br />
   <div class="field">
-    <%= f.label(:availability_id, "Availability") %>
+    <%= f.label(:availability_id, "Availability") %>:
     <table>
       <% for avail in @availabilities.each do %>
         <tr>
@@ -67,9 +72,12 @@
     </table>
   </div>
   <div class="field">
+    <% # TODO: Reasons %>
+  </div><br />
+  <div class="field">
     <%= f.label(:abstract) %><br />
     <%= f.text_area(:abstract) %>
-  </div>
+  </div><br />
   <% if @is_admin %>
     <div class="field">
       <%= f.label(:copyright_statement_id, "Select a copyright statement:") %>
@@ -89,7 +97,7 @@
           </tr>
         <% end %>
       </table>
-    </div>
+    </div><br />
     <div class="field">
       <%= f.label(:privacy_statement_id, "Select a privacy statement:") %>
       <table>
@@ -108,22 +116,20 @@
           </tr>
         <% end %>
       </table>
-    </div>
+    </div><br />
     <div class="field">
       <%= f.check_box(:bound) %>
       <%= f.label(:bound, 'This ETD was bound.') %>
-    </div>
+    </div><br />
   <% else %>
     <div class="field">
-      <%= @copyright.statement %><br />
       <%= f.check_box(:copyright_statement_id, {}, @copyright.id, nil)%>
-      <%= f.label(:copyright_statement_id, "I have read the above and agreed to it.")%>
-    </div>
+      <%= @copyright.statement %>
+    </div><br />
     <div class="field">
-      <%= @privacy.statement %><br />
       <%= f.check_box(:privacy_statement_id, {}, @privacy.id, nil)%>
-      <%= f.label(:privacy_statement_id, "I have read the above and agreed to it.")%>
-    </div>
+      <%= @privacy.statement %>
+    </div><br />
     <%= f.hidden_field(:bound, {value: 0}) %>
   <% end %>
 

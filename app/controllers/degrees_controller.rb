@@ -46,6 +46,7 @@ class DegreesController < ApplicationController
   # POST /degrees.json
   def create
     @degree = Degree.new(params[:degree])
+    @degree.retired = params[:degree][:retired] == '1' ? true : false
 
     respond_to do |format|
       if @degree.save
@@ -64,6 +65,7 @@ class DegreesController < ApplicationController
   # PUT /degrees/1.json
   def update
     @degree = Degree.find(params[:id])
+    @degree.retired = params[:degree][:retired] == '1' ? true : false
 
     respond_to do |format|
       if @degree.update_attributes(params[:degree])
