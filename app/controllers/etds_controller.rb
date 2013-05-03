@@ -454,7 +454,7 @@ class EtdsController < ApplicationController
     @etd = Etd.find(params[:id])
     @etd.approval_date = Time.now()
     @etd.release_date = @etd.reason.months_to_release.months.from_now if @etd.reason.months_to_release >= 0
-    @etd.status = (@etd.months.reason.months_to_release == 0 && !@etd.availability.etd_only?) ? 'Released' : 'Approved'
+    @etd.status = (@etd.reason.months_to_release == 0 && !@etd.availability.etd_only?) ? 'Released' : 'Approved'
     @etd.save()
 
     Provenance.create(person: current_person, action: 'approved', model: @etd)
