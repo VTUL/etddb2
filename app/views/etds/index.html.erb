@@ -33,11 +33,12 @@
     <% creators = Person.where(id: etd.people_roles.where(role_id: @creator_roles).pluck(:person_id)).order('last_name ASC') %>
     <tr>
       <td><%= creators.map { |o| o.name } .join(", ") %></td>
-      <td><%= etd.title.html_safe %></td>
+      <td><%= link_to(etd.title.html_safe, etd_path(etd)) %></td>
       <td><%= etd.departments.pluck(:name).join(", ") %></td>
-      <td><%= link_to 'Show', etd %></td>
-      <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
-      <td><%= button_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>
+      <% if current_person && current_person.in_role_group?("Administration") %>
+        <td><%= button_to('Edit', edit_etd_path(etd), method: :get) %></td>
+        <td><%= button_to('Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'}) %></td>
+      <% end %>
     </tr>
   <% end %>
 
