@@ -14,17 +14,17 @@ class EtdsController < ApplicationController
       # Previous query
       #@etds = Etd.find(:all, include: :departments, order: 'departments.name')
       # Updated query for pagination
-      @etds = Etd.paginate(page: params[:page], per_page: @per_page, include: :departments, order: 'departments.name')
+      @etds = Etd.where(status: ["Approved", "Released"]).paginate(page: params[:page], per_page: @per_page, include: :departments, order: 'departments.name')
     when "title"
       # Previous query
       #@etds = Etd.find(:all, order: 'title')
       # Updated query for pagination
-      @etds = Etd.paginate(page: params[:page], per_page: @per_page, order: 'title')
+      @etds = Etd.where(status: ["Approved", "Released"]).paginate(page: params[:page], per_page: @per_page, order: 'title')
     else
       # Previous query
       #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
       # Updated query for pagination
-      @etds = Etd.search(params[:keywords]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
+      @etds = Etd.search(params[:keywords]).where(status: ["Approved", "Released"]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
     end
 
     respond_to do |format|
