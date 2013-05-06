@@ -525,4 +525,30 @@ class EtdsController < ApplicationController
       format.html { redirect_to(etd_path(@etd), notice: "Successfully delayed release.") }
     end
   end
+
+  # GET /etds/new_legacy_person
+  def new_legacy_person
+    respond_to do |format|
+      if current_person.in_role_group?("Administration")
+        @person = LegacyPerson.new
+        format.html #new_legacy_person.html.erb
+      else
+        format.html { redirect_to(etds_path, notice: "That function is restricted.") }
+      end
+    end
+  end
+
+  # POST /etds/new_legacy_person
+  def create_legacy_person
+    @person = LegacyPerson.new(params[:legacy_person])
+    respond_to do |format|
+      if @person.save
+        Provenance.create(person: current_person, action: "created", model: @person)
+
+        format.html { redirect_to(person_path(current_person), notice: "#{@person.name} created.") }
+      else
+        format.html { render(action: "new_legacy_person", notice: "You have errors.") }
+      end
+    end
+  end
 end
