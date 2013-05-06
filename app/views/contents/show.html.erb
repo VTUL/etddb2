@@ -13,29 +13,36 @@
 </p>
 <p>
   <b>Size:</b>
-  <%= @content.content_file_size %>
+  <%= @content.content_file_size %> bytes
 </p>
 <p>
   <b>Availability:</b>
   <%= @content.availability.name %>
 </p>
-<p>
-  <b>Bound:</b>
-  <%= @content.bound %>
-</p>
+<% unless @content.page_count.nil? %>
 <p>
   <b>Page Count:</b>
   <%= @content.page_count %>
 </p>
+<% end %>
+<% unless @content.dimensions.nil? %>
 <p>
   <b>Dimensions:</b>
   <%= @content.dimensions %>
 </p>
+<% end %>
+<% unless @content.duration.nil? %>
 <p>
   <b>Duration:</b>
   <%= @content.duration %>
 </p>
-<%= link_to 'Edit', edit_content_path(@content) %> |
-<%= link_to 'Back to ETD', etd_path(@etd) %>
+<% end %>
+<% if current_person && (current_person.in_role_group?("Administration") || @etd.people.include?(current_person)) %>
+  <%= button_to('Edit', edit_content_path(@content), method: :get) %>
+<% end %>
 <br />
-<%= render 'contents_in_etd' %>
+<%= link_to('Back to ETD', etd_path(@etd)) %>
+<br />
+<% if @etd.contents.count > 1 %>
+  <%= render 'contents_in_etd' %>
+<% end %>
