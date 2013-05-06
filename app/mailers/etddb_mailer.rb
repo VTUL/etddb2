@@ -32,6 +32,12 @@ class EtddbMailer < ActionMailer::Base
     mail(to: committee.pluck(:email), subject: 'New ETD Submitted.')
   end
 
+  def unsubmitted_authors(etd)
+    @etd = etd
+    @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
+    mail(to: @authors.pluck(:email), subject: 'There is a problem with your ETD.')
+  end
+
   def approved_authors(etd)
     @etd = etd
     @authors = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')

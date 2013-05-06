@@ -423,6 +423,8 @@ class EtdsController < ApplicationController
 
           Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
 
+          EtddbMailer.unsubmitted_authors(@etd).deliver
+
           format.html { redirect_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.") }
         else
           format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }
