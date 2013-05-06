@@ -16,18 +16,18 @@ class AccessConstraint
     end
   end
 
-  def matches?(ip, availability, file_availability = nil)
+  def matches?(ip, availability, file_availability = nil, current_person = nil)
     ip = NetAddr::CIDR.create(ip)
     restricted_access = false
     withheld_access = false
 
     if ip.version == 4
       restricted_access = @ipv4.map { |subnet| subnet.matches?(ip) } .include?(true)
-      withheld_access = Rails.env == 'development' and ip.matches?('127.0.0.1')
     elsif ip.version == 6
       restricted_access = @ipv6.map { |subnet| subnet.matches?(ip) } .include?(true)
-      withheld_access = Rails.env == 'development' and ip.matches?('::1')
     end
+
+    withheld_access = !current_person.nil? && current_person.in_role_group?("Administration")
 
     result = availability.access_restriction == 'Unrestricted'
     result |= availability.access_restriction == 'Restricted' && (restricted_access || withheld_access)
