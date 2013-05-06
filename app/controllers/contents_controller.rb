@@ -1,4 +1,6 @@
 class ContentsController < ApplicationController
+  skip_before_filter :authenticate_person!, only: [:old_show, :show, :download]
+
   # GET /contents/1
   # GET /contents/1.xml
   def show

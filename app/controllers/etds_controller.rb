@@ -1,5 +1,5 @@
 class EtdsController < ApplicationController
-  skip_before_filter :authenticate_person!, only: [:show, :index]
+  skip_before_filter :authenticate_person!, only: [:old_show, :show, :index]
 
   # GET /etds
   # GET /etds.xml
