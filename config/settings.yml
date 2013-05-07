@@ -11,10 +11,13 @@ survey_url: ''
 custom_styles: true
 
 # Path to IP address whitelist TODO: DOCUMENT IP Address whitelist
-# remote_whitelist: '/lib/RemoteWhitelist.ips'
+#remote_whitelist: '/lib/RemoteWhitelist.ips'
 
 # Path to store uploaded content at
 upload_dir: ':rails_root/files'
+
+# Age of oldest thesis or dissertation:
+start_year: 1880
 
 # Default email address
 default_email: 'etddb@vt.edu'

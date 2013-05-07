@@ -54,7 +54,7 @@
   <div class="field">
     <%= f.label(:defense_date, "Defense Date") %>:<br />
     <% if @is_admin %>
-     <%= f.date_select(:defense_date, {start_year: 1880}) %>
+     <%= f.date_select(:defense_date, {start_year: Settings.start_year}) %>
     <% else %>
      <%= f.date_select(:defense_date) %>
     <% end %>
