@@ -12,13 +12,28 @@
   <% end %>
 
   <div class='field'>
-    <%= f.label(:first_name) %>:<br />
+    <%= f.label(:title) %>:<br />
+    <%= f.text_field(:title) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:first_name) %> (required):<br />
     <%= f.text_field(:first_name) %>
   </div>
 
   <div class='field'>
-    <%= f.label(:last_name) %>:<br />
+    <%= f.label(:middle_name) %>:<br />
+    <%= f.text_field(:middle_name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:last_name) %> (required):<br />
     <%= f.text_field(:last_name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:suffix) %>:<br />
+    <%= f.text_field(:suffix) %>
   </div>
 
   <div class='field'>
