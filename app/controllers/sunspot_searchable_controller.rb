@@ -17,6 +17,8 @@ class SunspotSearchableController < ApplicationController
 	    all_patron_avail = ['Unrestricted', 'Restricted']
 	    # ETDs only authors/collaborators/admins can see
 	    author_avail = ['Withheld', 'Mixed']
+	    # ETD statuses a non-admin user can see
+	    non_admin_etds = ["Approved", "Released"]
 
 	    begin
 	      # query parameter needed here to expose DSL and allow use of instance
@@ -60,6 +62,10 @@ class SunspotSearchableController < ApplicationController
 		            end
 		        end
 	          end
+
+	          # Include only etds with acceptable progress statuses if the user isn't an 
+	          # admin or signed in
+	          query.with(:status).any_of(non_admin_etds)
 	        end
 	        query.with(:author, params[:author]) if params[:author].present?
 	        query.with(:urn, params[:urn]) if params[:urn].present?

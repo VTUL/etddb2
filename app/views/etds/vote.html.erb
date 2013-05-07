@@ -1,6 +1,6 @@
 <%# TODO: Real Wording. %>
 <p>
-  Thank you for voting to <%= params[:vote] == 'true' ? 'approve' : 'disapprove' %> the ETD "<%= @etd.title.html_safe) %>".<br />
+  Thank you for voting to <%= params[:vote] == 'true' ? 'approve' : 'disapprove' %> the ETD "<%= @etd.title.html_safe %>".<br />
   <% if @nonapproved == 0 %>
     The committee has reached consensus, and the graduate school has been instructed to approve this ETD.
   <% else %>

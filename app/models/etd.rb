@@ -63,6 +63,7 @@ class Etd < ActiveRecord::Base
     string :approval_year
     string :file_type, :multiple => true
     string :availability_status
+    string :status
     date :defense_date
     date :release_date
     date :approval_date
