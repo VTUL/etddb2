@@ -9,22 +9,20 @@ class EtdsController < ApplicationController
 
     # This is a bit of black magic.
     @etds = []
+    statuses = (current_person && current_person.in_role_group?("Administration")) ? Etd::STATUSES : ["Approved", "Released"]
     case params[:orderby]
     when "department"
       # Previous query
       #@etds = Etd.find(:all, include: :departments, order: 'departments.name')
-      # Updated query for pagination
-      @etds = Etd.where(status: ["Approved", "Released"]).paginate(page: params[:page], per_page: @per_page, include: :departments, order: 'departments.name')
+      @etds = Etd.where(status: statuses).paginate(page: params[:page], per_page: @per_page, include: :departments, order: 'departments.name')
     when "title"
       # Previous query
       #@etds = Etd.find(:all, order: 'title')
-      # Updated query for pagination
-      @etds = Etd.where(status: ["Approved", "Released"]).paginate(page: params[:page], per_page: @per_page, order: 'title')
+      @etds = Etd.where(status: statuses).paginate(page: params[:page], per_page: @per_page, order: 'title')
     else
       # Previous query
       #@etds = Etd.find(:all, include: [:people, :people_roles], order: 'people.last_name', conditions: ["people_roles.role_id = ?", Role.where(group: "Creators").pluck(:id)])
-      # Updated query for pagination
-      @etds = Etd.search(params[:keywords]).where(status: ["Approved", "Released"]).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
+      @etds = Etd.search(params[:keywords]).where(status: statuses).paginate(page: params[:page], :per_page => @per_page, include: :people, order: 'people.last_name')
     end
 
     respond_to do |format|
