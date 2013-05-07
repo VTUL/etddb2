@@ -109,10 +109,10 @@ class EtdsController < ApplicationController
     @privacy = PrivacyStatement.where(retired: false).last
 
     #Add implied params.
-    @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
     @etd.bound = params[:etd][:bound] == '1' ? true : false
+    @etd.status = @etd.bound? ? "Approved" : "Created"
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
