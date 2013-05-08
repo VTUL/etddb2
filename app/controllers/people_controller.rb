@@ -34,7 +34,7 @@ class PeopleController < ApplicationController
                             conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
     @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))
     @my_reviewable_etds = Etd.where(status: "Submitted",
-                                    id: PeopleRole.where(role_id: Role.where(group: "Graduate School"), person_id: current_person.id).pluck(:etd_id).compact)
+                                    id: PeopleRole.where(role_id: Role.where(group: "Graduate School"), person_id: @person.id).pluck(:etd_id).compact)
     @reviewable_etds = nil
     Etd.where(status: "Submitted").scoping do
       claimed = PeopleRole.where(role_id: Role.where(group: "Graduate School")).pluck(:etd_id).compact
