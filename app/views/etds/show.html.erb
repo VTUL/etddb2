@@ -31,19 +31,16 @@
 <p>
   <b>Advisory Committee:</b>
   <% if !@collabs.empty? %>
-    <table class="outlined">
-      <tr>
-        <th>Advisor:</th>
-        <th>Role:</th>
-      </tr>
+    <ul>
       <% for collab in @collabs do %>
-        <tr>
-          <td><%= collab.person.name %></td>
-          <td><%= collab.role.name %></td>
-          <td><%= link_to 'Remove', destroy_people_role_path(collab), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %></td>
-        </tr>
+        <li>
+          <%= collab.person.name %> - <%= collab.role.name %>
+          <% if !current_person.nil? && (@creators.include?(current_person) || current_person.in_role_group?("Administration")) %>
+            (<%= link_to 'Remove', destroy_people_role_path(collab), data: {confirm: 'Are you sure?'}, method: :post, remote: true, class: "del_pr" %>)
+          <% end %>
+        </li>
       <% end %>
-    </table>
+    </ul>
   <% else %>
     None yet.<%= ' Go add one!' if @creators.include?(current_person) %>
   <% end %>
@@ -117,6 +114,6 @@
   <% end %>
 <script>
 $('.del_pr').bind('ajax:success', function() {
-    $(this).closest('tr').fadeOut();
+    $(this).closest('li').fadeOut();
 });
 </script>
