@@ -12,10 +12,10 @@
         <li>
           <% if params[:author].blank? %>
             <%# Reload page with the given author ID %>
-            <%= link_to row.value, params.merge({:author => row.value}) %> (<%= row.count %>)
+            <%= link_to row.value, params.except(:page).merge({:author => row.value}) %> (<%= row.count %>)
           <% else %>
             <%# Remove this author ID from the params and resubmit %>
-            <strong><%= row.value %></strong> (<%= link_to "remove", params.merge({:author => nil}) %>)
+            <strong><%= row.value %></strong> (<%= link_to "remove", params.except(:page).merge({:author => nil}) %>)
           <% end %>
         </li>
       <% end %>
