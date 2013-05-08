@@ -1,0 +1,49 @@
+<h1>New Legacy Person</h1>
+<%= form_for(@person, url: create_legacy_person_path) do |f| %>
+  <% if @person.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this ETD from being saved:</h2>
+      <ul>
+      <% @person.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='field'>
+    <%= f.label(:title) %>:<br />
+    <%= f.text_field(:title) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:first_name) %> (required):<br />
+    <%= f.text_field(:first_name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:middle_name) %>:<br />
+    <%= f.text_field(:middle_name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:last_name) %> (required):<br />
+    <%= f.text_field(:last_name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:suffix) %>:<br />
+    <%= f.text_field(:suffix) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label(:display_name) %>:<br />
+    <%= f.text_field(:display_name) %>
+  </div>
+
+  <div class = 'actions'>
+    <%= f.submit %>
+  </div>
+<% end %>
+<br />
+<%= link_to('Back to your profile', person_path(current_person)) %>

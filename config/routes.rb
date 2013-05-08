@@ -40,6 +40,10 @@ NewVtEtdUpgrd::Application.routes.draw do
   # However, this route never needs to resolve, it is absorbed by the resources route above it. It just needs to be named.
   get '/people/:id', :to => 'people#show', :as => :legacy_person
 
+  # These routes belong elsewhere, but I don't want to try inheriting from Devise.
+  get '/etds/new_legacy_person', :to => 'etds#new_legacy_person', :as => :new_legacy_person
+  post '/etds/new_legacy_person', :to => 'etds#create_legacy_person', :as => :create_legacy_person
+
   post '/etds/:id/delete', :to => 'etds#destroy', :as => :destroy_etd
   get '/etds/:id/add_creator', :to => 'etds#add_creator', :as => :add_creator_to_etd
   get '/etds/:id/add_collaborator', :to => 'etds#add_collaborator', :as => :add_collaborator_to_etd

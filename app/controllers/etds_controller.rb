@@ -1,5 +1,5 @@
 class EtdsController < SunspotSearchableController
-  skip_before_filter :authenticate_person!, only: [:show, :index]
+  skip_before_filter :authenticate_person!, only: [:old_show, :show, :index]
 
   ######################################################
   # Index is controlled by SunspotSearchableController #
@@ -12,7 +12,7 @@ class EtdsController < SunspotSearchableController
 
     respond_to do |format|
       # TODO: Should anyone associated with the ETD have unfettered access, or just the creators and collaborators?
-      if Etd::ACCESS.matches?(request.ip, @etd.availability) || @etd.people.include?(current_person)
+      if Etd::ACCESS.matches?(request.ip, @etd.availability, nil, current_person) || @etd.people.include?(current_person)
         @creators = Person.where(id: @etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC')
         @emails = @creators.where(show_email: true).pluck(:email).join(', ')
         @collabs = @etd.people_roles.where(role_id: Role.where(group: 'Collaborators')).sort_by { |pr| [pr.role.name] }
@@ -81,10 +81,10 @@ class EtdsController < SunspotSearchableController
     @privacy = PrivacyStatement.where(retired: false).last
 
     #Add implied params.
-    @etd.status = "Created"
     @etd.urn = Time.now().strftime("etd-%Y%m%d-%H%M%S%2L")
     @etd.url = "http://scholar.lib.vt.edu/theses/submitted/#{@etd.urn}/"
     @etd.bound = params[:etd][:bound] == '1' ? true : false
+    @etd.status = @etd.bound? ? "Approved" : "Created"
 
     # Don't add a blank second department.
     d = [params[:etd][:department_ids][:id_1]]
@@ -395,6 +395,8 @@ class EtdsController < SunspotSearchableController
 
           Provenance.create(person: current_person, action: "unsubmitted", model: @etd)
 
+          EtddbMailer.unsubmitted_authors(@etd).deliver
+
           format.html { redirect_to(etd_path(@etd), notice: "Successfully unsubmitted this ETD.") }
         else
           format.html { redirect_to(person_path(current_person), notice: "You cannot unsubmit ETDs.") }
@@ -493,6 +495,32 @@ class EtdsController < SunspotSearchableController
 
     respond_to do |format|
       format.html { redirect_to(etd_path(@etd), notice: "Successfully delayed release.") }
+    end
+  end
+
+  # GET /etds/new_legacy_person
+  def new_legacy_person
+    respond_to do |format|
+      if current_person.in_role_group?("Administration")
+        @person = LegacyPerson.new
+        format.html #new_legacy_person.html.erb
+      else
+        format.html { redirect_to(etds_path, notice: "That function is restricted.") }
+      end
+    end
+  end
+
+  # POST /etds/new_legacy_person
+  def create_legacy_person
+    @person = LegacyPerson.new(params[:legacy_person])
+    respond_to do |format|
+      if @person.save
+        Provenance.create(person: current_person, action: "created", model: @person)
+
+        format.html { redirect_to(person_path(current_person), notice: "#{@person.name} created.") }
+      else
+        format.html { render(action: "new_legacy_person", notice: "You have errors.") }
+      end
     end
   end
 end

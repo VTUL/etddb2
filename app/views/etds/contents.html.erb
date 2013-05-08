@@ -31,7 +31,7 @@
   <% end %>
   </table>
   <br />
-  <% if @etd.status == 'Created' %>
+  <% if @etd.status == 'Created' || current_person.in_role_group?("Administration") %>
     <% if @etd.availability.etd_only? %>
       <div>
         <p>Here's some more info on those availabilities:</p>
@@ -87,7 +87,7 @@
     <% end %>
   <% end %>
 <% end %>
-<% if @etd.status == 'Created' %>
+<% if @etd.status == 'Created' || current_person.in_role_group?("Administration") %>
   <div>
     <p>Add files one at a time below, or in a batch on the <%= link_to('batch upload page', add_contents_to_etd_path(@etd)) %>.</p>
     <%= form_tag(save_contents_to_etd_path(@etd), method: 'put', multipart: true) do %>

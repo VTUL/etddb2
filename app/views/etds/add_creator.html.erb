@@ -11,17 +11,17 @@
 </div>
 <br />
 <div>
+<%= form_tag(save_person_to_etd_path(@etd), id: "person_add") do %>
+  <div id="candidates">
+  </div>
+<% end %>
+</div>
+<br />
+<div>
   <p>If you are the author, you don't have to search for yourself, just click the button below.</p>
 <%= form_tag(save_person_to_etd_path(@etd), id: 'save_person') do %>
   <%= hidden_field_tag(:role_id, Role.where(group: 'Creators').first.id) %>
   <%= hidden_field_tag(:candidate_id, current_person.id) %>
   <%= submit_tag('I am the author') %>
-<% end %>
-</div>
-<br />
-<div>
-<%= form_tag(save_person_to_etd_path(@etd), id: "person_add") do %>
-  <div id="candidates">
-  </div>
 <% end %>
 </div>
