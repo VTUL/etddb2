@@ -10,30 +10,17 @@
 <%=will_paginate @people %>
 <br/>
 <table class="clear_left">
-  <tr>
-    <th>First name</th>
-    <th>Middle name</th>
-    <th>Last name</th>
-    <th>Suffix</th>
-    <th>Email</th>
-    <th>Pid</th>
-  </tr>
-
 <% @people.each do |person| %>
   <tr>
-    <td><%=h person.first_name %></td>
-    <td><%=h person.middle_name %></td>
-    <td><%=h person.last_name %></td>
-    <td><%=h person.suffix %></td>
-    <td><%=h person.email %></td>
-    <td><%=h person.pid %></td>
-    <td><%= link_to 'Show', person %></td>
-    <% if person.valid? %>
-      <td><%= link_to 'Edit', edit_person_registration_path %></td>
-      <td><%= button_to 'Destroy', destroy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
-    <% else %>
-      <td><%= link_to 'Edit', edit_legacy_person_path(person) %></td>
-      <td><%= button_to 'Destroy', destroy_legacy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
+    <td><%= link_to(person.name, person_path(person)) %></td>
+    <% if !current_person.nil? && current_person.in_role_gorup?("Administration") %>
+      <% if person.valid?  %>
+        <td><%= link_to 'Edit', edit_person_registration_path %></td>
+        <td><%= button_to 'Destroy', destroy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
+      <% else %>
+        <td><%= link_to 'Edit', edit_legacy_person_path(person) %></td>
+        <td><%= button_to 'Destroy', destroy_legacy_person_path(person), data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
     <% end %>
   </tr>
 <% end %>

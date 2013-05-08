@@ -21,7 +21,7 @@
     <td><%= link_to(etd.title.html_safe, etd_path(etd)) %></td>
     <td><%= Department.where(id: etd.departments).pluck(:name).join(", ") %></td>
     <td><%= etd.submission_date %></td>
-    <% if current_person.id == @person.id %>
+    <% if !current_person.nil? && current_person.id == @person.id %>
       <td><%= link_to 'Edit', edit_etd_path(etd) %></td>
       <% if etd.status == 'Created' %>
         <td><%= button_to 'Submit', submit_etd_path(etd), data: {confirm: 'Are you sure?'} %></td>

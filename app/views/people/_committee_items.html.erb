@@ -9,13 +9,15 @@
   <tr>
     <td><%= link_to(etd.title.html_safe, etd_path(etd)) %></td>
     <td><%= Person.where(id: etd.people_roles.where(role_id: Role.where(group: "Creators")).pluck(:person_id)).order('last_name ASC').map { |p| p.name } .join(', ') %></td>
-    <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
-    <td>
-      <%= form_tag(vote_for_etd_path(etd)) do %>
-        <%= select_tag(:vote, options_for_select([['Approve', true], ['Disapprove', false]])) %>
-        <%= submit_tag('Vote') %>
-      <% end %>
-    </td>
+    <% if !current_person.nil? && current_person.in_role_group("Administration") %>
+      <td style="font-variant: small-caps"><%= link_to("[reviewboard]", etd_reviewboard_path(etd)) %></td>
+      <td>
+        <%= form_tag(vote_for_etd_path(etd)) do %>
+          <%= select_tag(:vote, options_for_select([['Approve', true], ['Disapprove', false]])) %>
+          <%= submit_tag('Vote') %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
 <% end %>
 </table>

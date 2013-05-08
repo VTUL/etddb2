@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   respond_to :html, :json, :js
+  skip_before_filter :authenticate_person!, only: [:show, :index]
 
   # GET /people
   # GET /people.xml
@@ -10,7 +11,7 @@ class PeopleController < ApplicationController
     else
       @per_page = 10
     end
-    @people = Person.paginate(page: params[:page], per_page: @per_page)
+    @people = Person.paginate(page: params[:page], per_page: @per_page, order: "last_name ASC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,9 +30,9 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     # Previous query
     #@my_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:etd_id))
-    # New query to take advantage of pagination
-    @my_etds = Etd.paginate(page: params[:page], per_page: @per_page, include: [:people_roles],
-                            conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
+    statuses = (!current_person.nil? && (current_person.id == @person.id || current_person.in_role_group?("Administration"))) ? Etd::STATUSES : ["Approved", "Released"]
+    @my_etds = Etd.where(status: statuses).paginate(page: params[:page], per_page: @per_page, include: [:people_roles],
+                                                    conditions: {"people_roles.person_id" => params[:id], "people_roles.role_id" => Role.where(group: 'Creators')})
     @committee_etds = Etd.find(@person.people_roles.where(role_id: Role.where(group: 'Collaborators')).pluck(:etd_id))
     @my_reviewable_etds = Etd.where(status: "Submitted",
                                     id: PeopleRole.where(role_id: Role.where(group: "Graduate School"), person_id: @person.id).pluck(:etd_id).compact)
