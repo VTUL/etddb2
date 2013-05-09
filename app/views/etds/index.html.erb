@@ -4,7 +4,7 @@
 <h1>ETDs</h1>
 <div id="special_search" class="top_bar">
   <%= form_tag etds_path, :method => 'get' do %>
-    <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search ETDs' %>
+    <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search Keywords' %>
     <%= submit_tag 'Go', :name => nil %>
     <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>
