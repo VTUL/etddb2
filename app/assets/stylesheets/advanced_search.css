@@ -37,8 +37,9 @@
 }
 
 #date_format {
-	font-style: italic;
-	color: #808080;
+	color: #D80000;
+    font-style: italic;
+    height: 2em;
 }
 
 dl { 

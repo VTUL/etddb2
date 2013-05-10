@@ -28,7 +28,7 @@
   <%=label_tag "Department: " %><%=collection_select('doc_info[department]', '', Department.where(retired: false).order('name ASC'), :id, :name, params[:doc_info].nil? ? {:include_blank => 'All'} : {:selected => params[:doc_info][:department], :include_blank => 'All'}, :class => "dropdowns")%>
 </br>
 </br>
-  <span id="date_format"> Date formats accepted: YYYY, YYYY-MM, YYYY-MM-DD </span>
+  <span id="date_format" style="display: none;"> Date formats accepted: YYYY, YYYY-MM, YYYY-MM-DD </span>
   <div id="defense_date_range_div">
     <%= label_tag "Defense Date:" %>
     <%= label_tag "Before ", nil, :id => 'before_label' %>

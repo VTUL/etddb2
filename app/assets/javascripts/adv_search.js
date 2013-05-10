@@ -1,13 +1,19 @@
 var containingName = "doc_info";
+var timer;
 
 $(document).ready(function () {
 	/** 
 	 *	On page load attach a listener to ensure the correct label
 	 *  is placed on the selections button
 	 */
-	$(".option_checks").bind("change", function() {
+	$(".option_checks").on("change", function() {
 		setSelectionButtonName();
     });
+
+	$(".date_range_input").keyup(function() {
+		clearTimeout(timer);
+		timer = setTimeout(checkDateRanges, 750);
+	});
 
 	// Perform an initial check
     setSelectionButtonName();
@@ -44,6 +50,55 @@ function setSelectionButtonName() {
     	// Selctions can be cleared
     	$("#clear_button").html('Clear Selections');
     }
+}
+
+function checkDateRanges() {
+	$flag = true;
+	$(".date_range_input").each(function() {
+		// Input has text
+		if ($(this).val().length > 0) {
+			// If invalid show the formatting prompt
+			if (!isValidDate($(this).val())) {
+				$('#date_format').slideDown('fast');
+				$('#date_format').css("display", "inline-block");
+				$flag = false;
+				return false;
+			}
+		}
+	});
+	// If no invalid dates are found remove the prompt
+	if ($flag) $('#date_format').slideUp('fast');
+}
+
+function isValidDate($dateStr) {
+	// Match 4 integers in a row
+	$yearReg = /^\d{4}$/;
+	// Match 2 integers in a row
+	$monReg = /^\d{2}$/;
+
+	switch ($dateStr.length) {
+		// Case for a year only
+		case 4:
+			return $yearReg.test($dateStr);
+		// Year and month
+		case 7:
+			$split = $dateStr.split("-");
+			if ($split.length == 2) {
+				return ($yearReg.test($split[0]) && $monReg.test($split[1]))
+			}
+			break;
+		// Year, month, and day
+		case 10:
+			$split = $dateStr.split("-");
+			if ($split.length == 3) {
+				return ($yearReg.test($split[0]) && $monReg.test($split[1])
+												 && $monReg.test($split[2]))
+			}
+			break;
+		default:
+			return false;
+	}
+	return false;
 }
 
 function submit_form() {
