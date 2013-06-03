@@ -5,10 +5,12 @@
 <div id="special_search" class="top_bar">
   <%= form_tag etds_path, :method => 'get' do %>
     <%= text_field_tag :adv_search, params[:adv_search], :placeholder => 'Search Keywords' %>
-    <%= submit_tag 'Go', :name => nil %>
     <%= hidden_field_tag :per_page, params[:per_page] %>
+    <%= submit_tag 'Go', :name => nil %>
   <% end %>
-  <br />
+</div>
+<div id="page_pref" class="top_bar">
+  <%= button_to('Advanced Search', search_path, method: :get) %>
 </div>
 <div id="page_pref" class="top_bar">
   <%= form_tag etds_path, :id => 'page_pref_form', :method => 'get' do %>
