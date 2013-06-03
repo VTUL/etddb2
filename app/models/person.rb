@@ -19,7 +19,7 @@ class LegacyPerson < ActiveRecord::Base
 
   def name()
     if self.display_name.to_s.empty?
-      return "#{self.first_name} #{self.last_name}"
+      return "#{self.last_name}, #{self.first_name} #{self.middle_name} #{self.suffix}"
     end
     return self.display_name
   end

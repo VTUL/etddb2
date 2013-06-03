@@ -34,9 +34,9 @@
         <%# Display any full text search hits if they exist %>
         <%# For now block mixed results from showing text blurbs for anyone but admins, zip files are indexed as one
              document and permissions for mixed change by ETD.  No way of knowing what should/shouldn't be shown. %>
-        <% if !hit.highlight(:etd_attachment).nil? and 
-              ((etd.availability.name.eql?('Unrestricted') or etd.availability.name.eql?('Restricted')) or 
-              ((etd.people.include?(current_person) and etd.availability.name.eql?('Withheld')) or isUserAdmin)) 
+        <% if !hit.highlight(:etd_attachment).nil? and
+              ((etd.availability.name.eql?('Unrestricted') or etd.availability.name.eql?('Restricted')) or
+              ((etd.people.include?(current_person) and etd.availability.name.eql?('Withheld')) or isUserAdmin))
               %>
           <% highlighted = hit.highlight(:etd_attachment).format { |fragment| content_tag(:em, fragment) } %>
           <p class="etd_fulltext"><%= "\"#{highlighted}\"".html_safe %></p>

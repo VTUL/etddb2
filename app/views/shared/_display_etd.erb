@@ -1,13 +1,15 @@
 <% creators = Person.where(id: etd.people_roles.where(role_id: Role.where(group: 'Creators')).pluck(:person_id)).order('last_name ASC') %>
-<h3><%="#{iteration + @result.offset}" + "."%> <%= link_to etd.title, etd %></h3>
+<h3><%="#{iteration + @result.offset}" + "."%> <%= link_to(etd.title.html_safe, etd) %></h3>
 <dl>
-	<dt>Author</dt> 
-	<dd> <%= creators.map { |o| o.name } .join(", ") %> </dd>
-	<dt>Department</dt> 
-	<dd> <%= etd.departments.pluck(:name).join(", ") %> </dd>
-	<dt>URN</dt> 
-	<dd> <%= etd.urn %> </dd>
+  <dt>Author</dt>
+  <dd> <%= creators.map { |o| o.name } .join(", ") %> </dd>
+  <dt>Department</dt>
+  <dd> <%= etd.departments.pluck(:name).join(", ") %> </dd>
+  <dt>URN</dt>
+  <dd> <%= etd.urn %> </dd>
 </dl>
 <div class="etd_option_links">
-<%= link_to 'Edit', edit_etd_path(etd) %> | <%= link_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'}, :method => :post %>
+<% if !current_person.nil? && current_person.in_role_group?("Administration") %>
+  <%= link_to 'Edit', edit_etd_path(etd) %> | <%= link_to 'Destroy', destroy_etd_path(etd), data: {confirm: 'Are you sure?'}, :method => :post %>
+<% end %>
 </div>
