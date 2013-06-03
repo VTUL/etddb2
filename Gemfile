@@ -22,8 +22,8 @@ gem 'jquery-rails'
 
 #JS requirements
 gem 'execjs'
-gem 'libv8'
-gem 'therubyracer'
+gem 'libv8', '~> 3.11'
+gem 'therubyracer', '~> 0.11'
 
 # For test,
 group :development do
