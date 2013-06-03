@@ -36,6 +36,7 @@ files/*
 *.rdb
 *.core
 *.pid
+solr/data/*/index/
 
 # Configuration Files #
 #######################
